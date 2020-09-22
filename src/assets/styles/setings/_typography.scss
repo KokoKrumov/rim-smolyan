@@ -1,0 +1,10 @@
+.display {
+  font-family: $font-cormorant-regular;
+  font-weight: 500;
+  @include font-size(95px);
+  @include line-height(70px);
+
+  /* identical to box height, or 74% */
+  letter-spacing: -1px;
+  text-transform: uppercase;
+}

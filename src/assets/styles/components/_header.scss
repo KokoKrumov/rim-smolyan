@@ -1,0 +1,165 @@
+.header {
+  @include padding(4px, 0px, 4px, 0px);
+  background: $dark;
+
+  .navbar-brand {
+    @include margin(0px, 100px, 0px, 0px);
+    padding: 0;
+    white-space: pre-wrap;
+  }
+
+  @include media-breakpoint-down(lg) {
+    .navbar-brand {
+      margin: 0;
+    }
+  }
+
+  .navbar {
+    padding: 0;
+  }
+
+  &-logo {
+    &__wrap {
+      display: flex;
+      align-content: center;
+      @include width(38px);
+      @include height(52px);
+    }
+  }
+
+  &-text {
+    color: $white;
+    font-family: $font-fira-bold;
+    @include font-size(14px);
+    @include line-height(19px);
+    @include width(183px);
+    text-transform: uppercase;
+  }
+
+  &-brand {
+    &__wrap {
+      display: flex;
+      align-content: center;
+      justify-content: flex-start;
+
+      .header-logo__wrap {
+        @include margin(0px, 15px, 0px, 0px)
+      }
+    }
+  }
+
+  &-navigation {
+    &__wrap {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    &__inner {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      &__child {
+        &:first-child {
+          flex: 1;
+        }
+        &:last-child {
+          flex: 1.25;
+          align-items: center;
+        }
+      }
+    }
+
+    &__nav {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+  }
+
+  .navbar-dark .navbar-nav .nav-link {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .navbar-nav {
+    @include media-breakpoint-up(lg) {
+      justify-content: space-between;
+    }
+  }
+
+  .navbar-nav .nav {
+    &__main-link {
+      @include padding(14px, 0px, 14px, 0px);
+      font-family: $font-acari-regular;
+      font-weight: 500;
+      @include font-size(14px);
+      @include line-height(14px);
+      text-align: center;
+      letter-spacing: 0.01em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.85);
+
+      .nav-link {
+        padding: 0;
+      }
+
+      &:hover,
+      &.show.dropdown > a{
+        color: $gray-hover;
+      }
+
+      &:active,
+      &:active > a {
+        color: $red;
+      }
+    }
+  }
+
+  .navbar-nav .nav {
+    &__secondary-link {
+      @include padding(14px, 0px, 14px, 0px);
+      font-family: $font-acari-regular;
+      font-weight: 500;
+      @include font-size(13px);
+      @include line-height(14px);
+      text-align: right;
+      color: rgba(255, 255, 255, 0.7);
+
+      .nav-link {
+        padding: 0;
+      }
+
+      &:hover {
+        color: $gray-hover;
+      }
+
+      &:active,
+      &:active > a {
+        color: $red;
+      }
+    }
+  }
+
+  .input-group {
+    @include padding(0px, 0px, 3px, 0px);
+    align-items: center;
+  }
+
+  .form-control,
+  .form-control:active,
+  .form-control:hover {
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    box-shadow: none;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .nav__main-link.dropdown {
+    .nav-link {
+      display: flex;
+      align-items: center;
+
+      & > div {
+        line-height: 0;
+      }
+    }
+  }
+}

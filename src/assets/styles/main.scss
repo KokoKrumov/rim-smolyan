@@ -1,2 +1,8 @@
 @import "vendors/bootstrap/bootstrap-imports";
+@import "setings/mixins";
+@import "setings/colors";
 @import "setings/reset";
+@import "setings/fonts";
+@import "setings/typography";
+@import "components/header";
+@import "components/input-group";
