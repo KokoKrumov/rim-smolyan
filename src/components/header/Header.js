@@ -17,11 +17,11 @@ function Header() {
             <Container>
                 <Navbar collapseOnSelect expand="xl" variant="dark">
                     <Navbar.Brand href="#home">
-                        <div className="header-brand__wrap">
-                            <div className='header-logo__wrap'>
+                        <div className="brand__wrap">
+                            <div className='brand-logo__wrap'>
                                 <Image src={rimLogo} fluid/>
                             </div>
-                            <p className='header-text'>
+                            <p className='brand-text'>
                                 Регионален Исторически
                                 Музей “Стою Шишков” -
                                 Смолян
@@ -35,7 +35,7 @@ function Header() {
                                 <InputGroup className="header-navigation__inner__child">
                                     <InputGroup.Prepend>
                                         <InputGroup.Text id="basic-addon1">
-                                            <img className="" src={searchIcon} alt="" itemprop="image"/>
+                                            <img className="" src={searchIcon} alt="" itemProp="image"/>
                                         </InputGroup.Text>
                                     </InputGroup.Prepend>
                                     <FormControl
@@ -60,10 +60,10 @@ function Header() {
                                         } className='nav__main-link dropdown-lang'
                                         id="collasible-nav-dropdown">
                                         <NavDropdown.Item href="#action/3.1">
-                                            <img className="thumbnail-image" src={BG} alt="" itemprop="image"/>
+                                            <img className="thumbnail-image" src={BG} alt="" itemProp="image"/>
                                         </NavDropdown.Item>
                                         <NavDropdown.Item href="#action/3.2">
-                                            <img className="thumbnail-image" src={BG} alt="" itemprop="image"/>
+                                            <img className="thumbnail-image" src={BG} alt="" itemProp="image"/>
                                         </NavDropdown.Item>
                                     </NavDropdown>
                                 </Nav>

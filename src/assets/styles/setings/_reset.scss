@@ -1,6 +1,26 @@
 body {
   font-size: 100%;
 }
+
+html, body, #root {
+  height: 100%;
+}
+
+.wrapper {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
 p {
   margin: 0;
+}
+
+main {
+  flex-grow: 1;
+}
+
+header, main, footer {
+  flex-shrink: 0;
 }

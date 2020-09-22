@@ -1,0 +1,57 @@
+.footer {
+  &__top {
+    @include padding(75px, 0px, 35px, 0px);
+  }
+
+  .navbar-brand {
+    @include margin(0px, 145px, 0px, 0px)
+  }
+
+  &__main-nav {
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  .navbar-nav {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .navbar-expand-xl .navbar-nav .nav__main-link,
+  .navbar-expand-xl .navbar-nav .nav__secondary-link {
+
+    @include padding(6px, 0px, 6px, 0px);
+  }
+
+  .socials {
+    margin-top: auto;
+    display: flex;
+    flex-direction: row;
+
+    &-item {
+      @include margin(0px, 8px, 0px, 0px);
+    }
+  }
+
+  .navbar {
+    align-items: stretch;
+  }
+
+  &__bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    @include padding(17px, 0px, 25px, 0px);
+
+    .nav__secondary-link {
+      color: rgba(255, 255, 255, 0.4);
+      font-family: $font-acari-regular;
+      @include font-size(13px);
+      @include line-height(14px);
+    }
+
+    &__inner {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+}

@@ -6,12 +6,17 @@ import Col from 'react-bootstrap/Col'
 import history from "../history";
 import {BrowserRouter, Router, Route} from "react-router-dom";
 import Header from "../components/header/Header";
+import Footer from "../components/footer/Footer";
 
 function App() {
     return (
         <Router history={history}>
-            <div className="">
+            <div className="wrapper">
                 <Header/>
+                <main>
+
+                </main>
+                <Footer/>
                 {/*<Route path='/' exact component={StreamList}/>*/}
                 {/*<Route path='/streams/new' exact component={StreamCreate}/>*/}
                 {/*<Route path='/streams/edit/:id' exact component={StreamEdit}/>*/}

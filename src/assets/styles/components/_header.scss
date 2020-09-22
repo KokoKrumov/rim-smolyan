@@ -1,52 +1,5 @@
 .header {
   @include padding(4px, 0px, 4px, 0px);
-  background: $dark;
-
-  .navbar-brand {
-    @include margin(0px, 100px, 0px, 0px);
-    padding: 0;
-    white-space: pre-wrap;
-  }
-
-  @include media-breakpoint-down(lg) {
-    .navbar-brand {
-      margin: 0;
-    }
-  }
-
-  .navbar {
-    padding: 0;
-  }
-
-  &-logo {
-    &__wrap {
-      display: flex;
-      align-content: center;
-      @include width(38px);
-      @include height(52px);
-    }
-  }
-
-  &-text {
-    color: $white;
-    font-family: $font-fira-bold;
-    @include font-size(14px);
-    @include line-height(19px);
-    @include width(183px);
-    text-transform: uppercase;
-  }
-
-  &-brand {
-    &__wrap {
-      display: flex;
-      align-content: center;
-      justify-content: flex-start;
-
-      .header-logo__wrap {
-        @include margin(0px, 15px, 0px, 0px)
-      }
-    }
-  }
 
   &-navigation {
     &__wrap {
@@ -54,6 +7,7 @@
       display: flex;
       flex-direction: column;
     }
+
     &__inner {
       display: flex;
       flex-direction: row;
@@ -63,6 +17,7 @@
         &:first-child {
           flex: 1;
         }
+
         &:last-child {
           flex: 1.25;
           align-items: center;

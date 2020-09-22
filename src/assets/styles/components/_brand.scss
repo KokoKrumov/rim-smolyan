@@ -1,0 +1,41 @@
+.navbar-brand {
+  @include margin(0px, 100px, 0px, 0px);
+  padding: 0;
+  white-space: pre-wrap;
+}
+
+@include media-breakpoint-down(lg) {
+  .navbar-brand {
+    margin: 0;
+  }
+}
+
+.brand {
+  &-logo {
+    &__wrap {
+      display: flex;
+      align-content: center;
+      @include width(38px);
+      @include height(52px);
+    }
+  }
+
+  &-text {
+    color: $white;
+    font-family: $font-fira-bold;
+    @include font-size(14px);
+    @include line-height(19px);
+    @include width(183px);
+    text-transform: uppercase;
+  }
+
+  &__wrap {
+    display: flex;
+    align-content: center;
+    justify-content: flex-start;
+
+    .brand-logo__wrap {
+      @include margin(0px, 15px, 0px, 0px)
+    }
+  }
+}
