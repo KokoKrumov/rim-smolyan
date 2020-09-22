@@ -57,13 +57,13 @@ function Header() {
                                                      alt="lang"
                                                 />
                                             </div>
-                                        } className='nav__main-link'
+                                        } className='nav__main-link dropdown-lang'
                                         id="collasible-nav-dropdown">
                                         <NavDropdown.Item href="#action/3.1">
-                                            <img className="" src={BG} alt="" itemprop="image"/>
+                                            <img className="thumbnail-image" src={BG} alt="" itemprop="image"/>
                                         </NavDropdown.Item>
                                         <NavDropdown.Item href="#action/3.2">
-                                            <img className="" src={BG} alt="" itemprop="image"/>
+                                            <img className="thumbnail-image" src={BG} alt="" itemprop="image"/>
                                         </NavDropdown.Item>
                                     </NavDropdown>
                                 </Nav>

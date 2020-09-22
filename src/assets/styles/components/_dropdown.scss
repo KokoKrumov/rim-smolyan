@@ -1,7 +1,33 @@
 .dropdown {
   .dropdown-menu {
+    @include padding(7.5px, 0px, 15px, 0px);
     background: $white;
     border: 1px solid rgba(0, 0, 0, 0.5);
     border-radius: 1px;
+
+
+    .dropdown-item.nav__secondary-link {
+      @include padding(7.5px, 20px, 7.5px, 20px);
+
+      &:hover {
+        background: transparent;
+        color: $red !important;
+      }
+    }
+  }
+
+  &-lang {
+    .dropdown-menu {
+      padding: 0;
+      min-width: auto;
+
+      .dropdown-item {
+        @include padding(10px, 15px, 10px, 15px);
+      }
+
+      .thumbnail-image {
+        @include width(25px)
+      }
+    }
   }
 }

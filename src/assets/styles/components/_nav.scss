@@ -34,15 +34,11 @@
 
 .navbar-nav .nav {
   &__main-link {
-    padding-top: 0.875rem !important;
-    padding-right: 0 !important;
-    padding-bottom: 0.875rem !important;
-    padding-left: 0 !important;
+    @include padding(14px, 0px, 14px, 0px);
     font-family: $font-acari-regular;
     font-weight: 500;
     @include font-size(14px);
     @include line-height(14px);
-    text-align: center;
     letter-spacing: 0.01em;
     text-transform: uppercase;
 
@@ -52,18 +48,24 @@
   }
 
   &__secondary-link {
-    padding-top: 0.875rem !important;
-    padding-right: 0 !important;
-    padding-bottom: 0.875rem !important;
-    padding-left: 0 !important;
+    @include padding(14px, 0px, 14px, 0px);
     font-family: $font-acari-regular;
     font-weight: 500;
     @include font-size(13px);
     @include line-height(14px);
-    text-align: right;
 
     .nav-link {
       padding: 0;
+    }
+  }
+}
+
+
+.navbar-expand-xl {
+  .navbar-nav .nav {
+    &__main-link,
+    &__secondary-link {
+      @include padding(14px, 0px, 14px, 0px);
     }
   }
 }
