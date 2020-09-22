@@ -1,0 +1,69 @@
+.navbar-dark {
+  .navbar-nav .nav {
+    &__main-link,
+    &__main-link > .nav-link, {
+      color: rgba(255, 255, 255, 0.85);
+
+      &:hover,
+      &.show.dropdown > a {
+        color: $gray-hover;
+      }
+
+      &:active,
+      &:active > a {
+        color: $red;
+      }
+    }
+
+    &__secondary-link,
+    &__secondary-link > .nav-link, {
+      color: rgba(255, 255, 255, 0.7);
+
+      &:hover {
+        color: $gray-hover;
+      }
+
+      &:active,
+      &:active > a {
+        color: $red;
+      }
+    }
+  }
+}
+
+
+.navbar-nav .nav {
+  &__main-link {
+    padding-top: 0.875rem !important;
+    padding-right: 0 !important;
+    padding-bottom: 0.875rem !important;
+    padding-left: 0 !important;
+    font-family: $font-acari-regular;
+    font-weight: 500;
+    @include font-size(14px);
+    @include line-height(14px);
+    text-align: center;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+
+    .nav-link {
+      padding: 0;
+    }
+  }
+
+  &__secondary-link {
+    padding-top: 0.875rem !important;
+    padding-right: 0 !important;
+    padding-bottom: 0.875rem !important;
+    padding-left: 0 !important;
+    font-family: $font-acari-regular;
+    font-weight: 500;
+    @include font-size(13px);
+    @include line-height(14px);
+    text-align: right;
+
+    .nav-link {
+      padding: 0;
+    }
+  }
+}

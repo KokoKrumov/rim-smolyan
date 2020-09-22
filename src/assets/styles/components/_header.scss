@@ -75,66 +75,9 @@
     }
   }
 
-  .navbar-dark .navbar-nav .nav-link {
-    color: rgba(255, 255, 255, 0.85);
-  }
-
   .navbar-nav {
     @include media-breakpoint-up(lg) {
       justify-content: space-between;
-    }
-  }
-
-  .navbar-nav .nav {
-    &__main-link {
-      @include padding(14px, 0px, 14px, 0px);
-      font-family: $font-acari-regular;
-      font-weight: 500;
-      @include font-size(14px);
-      @include line-height(14px);
-      text-align: center;
-      letter-spacing: 0.01em;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.85);
-
-      .nav-link {
-        padding: 0;
-      }
-
-      &:hover,
-      &.show.dropdown > a{
-        color: $gray-hover;
-      }
-
-      &:active,
-      &:active > a {
-        color: $red;
-      }
-    }
-  }
-
-  .navbar-nav .nav {
-    &__secondary-link {
-      @include padding(14px, 0px, 14px, 0px);
-      font-family: $font-acari-regular;
-      font-weight: 500;
-      @include font-size(13px);
-      @include line-height(14px);
-      text-align: right;
-      color: rgba(255, 255, 255, 0.7);
-
-      .nav-link {
-        padding: 0;
-      }
-
-      &:hover {
-        color: $gray-hover;
-      }
-
-      &:active,
-      &:active > a {
-        color: $red;
-      }
     }
   }
 
@@ -160,6 +103,13 @@
       & > div {
         line-height: 0;
       }
+    }
+  }
+
+  .navbar-nav .dropdown .nav {
+    &__secondary-link {
+      text-transform: uppercase;
+      color: $dark;
     }
   }
 }

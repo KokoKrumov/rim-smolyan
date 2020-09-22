@@ -72,11 +72,8 @@ function Header() {
                                 <Nav className="">
                                     <NavDropdown title="Фондове" className='nav__main-link'
                                                  id="collasible-nav-dropdown">
-                                        <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                                        <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                                        <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                                        <NavDropdown.Divider/>
-                                        <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+                                        <NavDropdown.Item className="nav__secondary-link" href="#action/3.2">Основни Фондове</NavDropdown.Item>
+                                        <NavDropdown.Item className="nav__secondary-link" href="#action/3.1">Виртуални фондове</NavDropdown.Item>
                                     </NavDropdown>
                                     <Nav.Link href="#features" className='nav__main-link'>Експозиции</Nav.Link>
                                     <Nav.Link href="#pricing" className='nav__main-link'>новини</Nav.Link>
