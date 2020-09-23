@@ -1,12 +1,11 @@
 import React from 'react';
 import '../assets/styles/main.scss';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
+import Hero from "../components/hero/Hero";
 import history from "../history";
 import {BrowserRouter, Router, Route} from "react-router-dom";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
+import heroImage from '../../src/assets/images/baseHero.png';
 
 function App() {
     return (
@@ -14,7 +13,13 @@ function App() {
             <div className="wrapper">
                 <Header/>
                 <main>
-
+                    <Hero
+                        Image={heroImage}
+                        isMainHero={true}
+                        title={'Средните Родопи'}
+                        subtitle={'от праисторическите времена до съвременността'}
+                        subtitleSm={'Рaзгледайте нашите фондове'}
+                    />
                 </main>
                 <Footer/>
                 {/*<Route path='/' exact component={StreamList}/>*/}

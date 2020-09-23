@@ -5,3 +5,20 @@
     padding: 0;
   }
 }
+
+.bordered {
+  &__light {
+    position: relative;
+
+    &::after {
+      content: ' ';
+      position: absolute;
+      background: $white;
+      height: 2px;
+      width: 25%;
+      bottom: -7px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+}
