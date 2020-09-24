@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import heroImage from "../../assets/images/baseHero.png";
 import Hero from "../hero/Hero";
 import WorkInfoLine from "../workInfoLine/WorkInfoLine"
+import NewsAndEventsList from "../newsAndEventsList/NewsAndEventsList";
+import Container from "react-bootstrap/cjs/Container";
 
 class HomePage extends Component {
 
@@ -15,7 +17,19 @@ class HomePage extends Component {
                     subtitle={'от праисторическите времена до съвременността'}
                     subtitleSm={'Рaзгледайте нашите фондове'}
                 />
-                <WorkInfoLine />
+                <WorkInfoLine/>
+                <div className='nae-container'>
+                    <Container>
+                        <div>
+                            <h1 className='h1'>
+                                Новини и Събития
+                            </h1>
+                            <div>
+                                <NewsAndEventsList/>
+                            </div>
+                        </div>
+                    </Container>
+                </div>
             </div>
         )
     }

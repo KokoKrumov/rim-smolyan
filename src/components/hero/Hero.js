@@ -13,7 +13,7 @@ class Hero extends Component {
                             backgroundImage: `url(${this.props.Image})`
                         }}
                     >
-                        <h1 className='h1'>
+                        <h1 className='display'>
                             {this.props.title}
                         </h1>
                         <p className='subtitle'>

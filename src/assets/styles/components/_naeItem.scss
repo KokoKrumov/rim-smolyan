@@ -1,0 +1,61 @@
+.nae-item {
+
+  &__img__wrap {
+    @include margin(0px, 0px, 15px, 0px);
+    position: relative;
+  }
+
+  .h5 {
+    color: $dark;
+  }
+
+  &__date {
+
+    &__wrap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: auto;
+      @include padding(35px, 28px, 24px, 12px);
+      background-color: $dark;
+      z-index: 1;
+    }
+    &-day {
+      font-family: $font-acari-regular;
+      font-weight: 300;
+      @include font-size(54px);
+      @include line-height(54px);
+      letter-spacing: -0.02rem;
+      color: $white;
+    }
+
+    &-month {
+      font-family: $font-acari-bold;
+      @include font-size(11px);
+      @include line-height(14px);
+      letter-spacing: 0.05rem;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.8);
+    }
+  }
+
+  &:hover {
+    .nae-item__img:before {
+      content: ' ';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+       background: linear-gradient(0deg, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35));
+    }
+
+    .nae-item__date__wrap {
+      background-color: $red;
+    }
+
+    .h5 {
+      text-decoration: underline;
+    }
+  }
+}
