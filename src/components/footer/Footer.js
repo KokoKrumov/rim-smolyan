@@ -68,7 +68,7 @@ function Footer() {
                             © 2020 Регионален исторически музей - Смолян
                         </p>
                         <p className='nav__secondary-link'>
-                            Дизайн <img className="" style={{marginLeft: '5px'}} src={jltLogo} alt="" itemprop="image"/>
+                            Дизайн <img className="" style={{marginLeft: '5px'}} src={jltLogo} alt="" itemProp="image"/>
                         </p>
                     </div>
                 </Container>

@@ -12,11 +12,11 @@ function App() {
         <Router history={history}>
             <div className="wrapper">
                 <Header/>
-                <Switch>
-                    <main>
+                <main>
+                    <Switch>
                         <Route path='/' exact component={HomePage}/>
-                    </main>
-                </Switch>
+                    </Switch>
+                </main>
                 <Footer/>
                 {/*<Route path='/streams/new' exact component={StreamCreate}/>*/}
                 {/*<Route path='/streams/edit/:id' exact component={StreamEdit}/>*/}

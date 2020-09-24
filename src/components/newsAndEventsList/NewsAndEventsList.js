@@ -36,8 +36,8 @@ class NewsAndEventsList extends Component {
 
         return this.listOfNewsAndEvents.map(event => {
             return (
-                <Col lg={4}>
-                    <div className='nae-item' key={event.id}>
+                <Col lg={4} key={event.id}>
+                    <div className='nae-item' >
                         <a href=''>
                             <div className='nae-item__img__wrap'>
                                 {event.dateD ?
