@@ -1,0 +1,35 @@
+.info-line {
+  @include padding(18px, 0px, 18px, 0px);
+
+  &__red {
+    background-color: $red;
+
+    .info-line__text {
+      color: $white;
+    }
+  }
+
+  &__content-wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @include media-breakpoint-down(lg) {
+      flex-direction: column;
+
+      .info-line__item +.info-line__item {
+        margin-top: 1rem;
+      }
+    }
+  }
+
+  &__text {
+    @include font-size(15px);
+    @include line-height(16px);
+    font-family: $font-acari-regular;
+
+    &-bold {
+      font-family: $font-acari-bold;
+    }
+  }
+}
