@@ -1,6 +1,7 @@
 .nae-container {
   @include padding(150px, 0px, 140px, 0px);
-  .h1 {
+
+  .nae__title-line {
     @include margin(0px, 0px, 40px, 0px);
   }
 }

@@ -22,3 +22,13 @@
     }
   }
 }
+
+.nae-item__img:before,
+.nae-item__date__wrap,
+.nae-item .h5 {
+  transition: all 0.3s ease-in-out;
+}
+
+[class$="link"] {
+  transition: all 0.1s ease-in-out;
+}

@@ -3,6 +3,7 @@
   &__img__wrap {
     @include margin(0px, 0px, 15px, 0px);
     position: relative;
+    overflow: hidden;
   }
 
   .h5 {
@@ -39,15 +40,19 @@
     }
   }
 
+  &__img:before {
+    content: ' ';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35));
+  }
+
   &:hover {
     .nae-item__img:before {
-      content: ' ';
-      position: absolute;
       top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-       background: linear-gradient(0deg, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35));
     }
 
     .nae-item__date__wrap {

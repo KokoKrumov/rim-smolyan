@@ -21,9 +21,17 @@ class HomePage extends Component {
                 <div className='nae-container'>
                     <Container>
                         <div>
-                            <h1 className='h1'>
-                                Новини и Събития
-                            </h1>
+                            <div className='nae__title-line'>
+                                <h1 className='h1'>
+                                    Новини и Събития
+                                </h1>
+                                <div className='nae__title-line__link'>
+                                    <a className="link" href="#" itemProp="url" target=""
+                                       rel="noopener nofollow noreferrer">
+                                    </a>
+
+                                </div>
+                            </div>
                             <div>
                                 <NewsAndEventsList/>
                             </div>
