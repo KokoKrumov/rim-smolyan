@@ -45,3 +45,16 @@
   margin-bottom: calculateRem($bottom);
   margin-left: calculateRem($left);
 }
+
+
+$columns: 12;
+
+@mixin col-x-list {
+  @for $i from 1 through $columns {
+    .col-count-#{$i} {
+      column-count: #{$i};
+      column-gap: calc(190px / #{$i});
+    }
+  }
+}
+

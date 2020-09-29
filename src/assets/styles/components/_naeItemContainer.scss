@@ -7,4 +7,11 @@
     justify-content: space-between;
     @include margin(0px, 0px, 40px, 0px);
   }
+
+  &_content-dark {
+    .h1,
+    .paragraph-2 {
+      color: $dark;
+    }
+  }
 }
