@@ -1,3 +1,21 @@
-.btn {
+.cta_outline {
+  font-family: $font-acari-bold;
+  @include font-size(14px);
+  @include line-height(26px);
+  /* identical to box height, or 114% */
 
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+
+  &__dark {
+    color: $dark;
+
+    &::before {
+      background: $dark;
+    }
+  }
+
+  &__left-line::before {
+
+  }
 }
