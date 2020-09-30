@@ -31,6 +31,14 @@
   opacity: 0.9;
 }
 
+.paragraph-3 {
+  font-family: $font-acari-regular;
+  @include font-size(15px);
+  @include line-height(24px);
+  letter-spacing: 0.01em;
+  opacity: 0.9;
+}
+
 .subtitle {
   font-family: $font-acari-bold;
   @include font-size(18px);

@@ -15,6 +15,14 @@
     }
   }
 
+  &__light {
+    color: $white;
+
+    &::before {
+      background: $white;
+    }
+  }
+
   &__left-line::before {
 
   }

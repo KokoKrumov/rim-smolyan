@@ -1,8 +1,7 @@
 import React from 'react';
 import '../assets/styles/main.scss';
-import Hero from "../components/hero/Hero";
 import history from "../history";
-import {BrowserRouter, Router, Route, Switch} from "react-router-dom";
+import { Router, Route, Switch} from "react-router-dom";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
 import HomePage from "./homePage/HomePage";

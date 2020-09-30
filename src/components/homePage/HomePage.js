@@ -6,17 +6,90 @@ import WorkInfoLine from "../workInfoLine/WorkInfoLine"
 import NewsAndEventsList from "../newsAndEventsList/NewsAndEventsList";
 import Container from "react-bootstrap/cjs/Container";
 import {Link} from "react-router-dom";
+import Row from "react-bootstrap/cjs/Row";
+import imageEvent_1 from "../../assets/images/imageEvent.png";
+import imageEvent_2 from "../../assets/images/imageEvent2.png";
+import imageEvent_3 from "../../assets/images/imageEvent3.png";
+import bgCarousel from "../../assets/images/bg-shlem.png";
+import CarouselMegatron from "../carousel/carouselMegatron";
+
+let listOfNewsAndEvents = [
+    {
+        id: 1,
+        dateM: 'Октомври',
+        dateD: '18',
+        image: imageEvent_1,
+        title: 'На пататнки и песни в музея'
+    },
+    {
+        id: 2,
+        dateM: 'декември',
+        dateD: '20',
+        image: imageEvent_2,
+        title: 'Празника на Община Смолян и честване на 107 от освобождението на...'
+    },
+    {
+        id: 3,
+        dateM: '',
+        dateD: '',
+        image: imageEvent_3,
+        title: 'РИМ “Стою Шишков” - Смолян се включва в празника Никлуден'
+    }
+]
+
+let listMegatronCarousel = [
+    {
+        id: 1,
+        title: 'Шлем',
+        type: 'Бронз',
+        description: 'Изработен от две части - епикранион и горна завита напред приставка. Двата набузника са окачени подвижно към епикраниона и отпред са закопчавани с ремък. Украсени са с пластична, ниско-релефна украса, представляваща стилизирана къдрава брада и мустаци.',
+        width: 'макс. височина - 39 см.',
+        height: 'макс. широчина - 23/18 см.',
+        Dating: 'VI - III век пр.Хр.',
+        settlement: 'с. Беден',
+        number: 'A837',
+        bgImage: bgCarousel
+    },
+    {
+        id: 1,
+        title: 'Шлем',
+        type: 'Бронз',
+        description: 'Изработен от две части - епикранион и горна завита напред приставка. Двата набузника са окачени подвижно към епикраниона и отпред са закопчавани с ремък. Украсени са с пластична, ниско-релефна украса, представляваща стилизирана къдрава брада и мустаци.',
+        width: 'макс. височина - 39 см.',
+        height: 'макс. широчина - 23/18 см.',
+        Dating: 'VI - III век пр.Хр.',
+        settlement: 'с. Беден',
+        number: 'A837',
+        bgImage: bgCarousel
+    },
+    {
+        id: 1,
+        title: 'Шлем',
+        type: 'Бронз',
+        description: 'Изработен от две части - епикранион и горна завита напред приставка. Двата набузника са окачени подвижно към епикраниона и отпред са закопчавани с ремък. Украсени са с пластична, ниско-релефна украса, представляваща стилизирана къдрава брада и мустаци.',
+        width: 'макс. височина - 39 см.',
+        height: 'макс. широчина - 23/18 см.',
+        Dating: 'VI - III век пр.Хр.',
+        settlement: 'с. Беден',
+        number: 'A837',
+        bgImage: bgCarousel
+    }
+]
 
 class HomePage extends Component {
 
     state = {
         bgHero: null,
-        bgAboutUs: null
+        bgAboutUs: null,
+        listOfNewsAndEvents: null,
+        listMegatronCarousel: null
     }
 
     componentDidMount() {
         this.setState({bgHero: heroImage})
         this.setState({bgAboutUs: aboutUsImage})
+        this.setState({listOfNewsAndEvents: listOfNewsAndEvents})
+        this.setState({listMegatronCarousel: listMegatronCarousel})
     }
 
     render() {
@@ -51,15 +124,15 @@ class HomePage extends Component {
                                 </div>
                             </div>
                             <div>
-                                <NewsAndEventsList/>
+                                <Row>
+                                    <NewsAndEventsList listOfNewsAndEvents={this.state.listOfNewsAndEvents}/>
+                                </Row>
                             </div>
                         </div>
                     </Container>
                 </div>
 
-                <div className='carousel carousel__megatron'>
-                    
-                </div>
+                        <CarouselMegatron listMegatronCarousel={this.state.listMegatronCarousel}/>
 
                 <div
                     className='nae-container nae-container_content-dark hero-bg'
@@ -84,16 +157,16 @@ class HomePage extends Component {
                                     Помещава се в специално построена сграда, ситуирана в модерния административен
                                     център на града и разполага с богати и разнообразни колекции, възлизащи над 150 хил.
                                     единици.
-                                    <div style={{marginTop: '2rem'}}>
-                                        <Link
-                                            className="link cta_outline cta_outline__dark hvr-underline-from-left"
-                                            to="#"
-                                            itemProp="url"
-                                            target=""
-                                            rel="noopener nofollow noreferrer">
-                                            вижте повече
-                                        </Link>
-                                    </div>
+                                    <br/>
+                                    <Link
+                                        style={{marginTop: '2rem'}}
+                                        className="link cta_outline cta_outline__dark hvr-underline-from-left"
+                                        to="#"
+                                        itemProp="url"
+                                        target=""
+                                        rel="noopener nofollow noreferrer">
+                                        вижте повече
+                                    </Link>
                                 </p>
                             </div>
                         </div>

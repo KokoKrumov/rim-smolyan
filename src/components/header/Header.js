@@ -1,5 +1,4 @@
 import React from 'react';
-import {Link} from "react-router-dom";
 import rimLogo from '../../assets/images/rim-logo.svg'
 import searchIcon from '../../assets/images/search-icon.svg'
 import BG from '../../assets/images/BG.svg'

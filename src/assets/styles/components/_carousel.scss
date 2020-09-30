@@ -1,0 +1,10 @@
+.carousel {
+  @include padding(115px, 0px, 90px, 0px);
+
+  &__dark {
+    color: $white;
+    .link {
+
+    }
+  }
+}
