@@ -10,6 +10,9 @@ import Row from "react-bootstrap/cjs/Row";
 import imageEvent_1 from "../../assets/images/imageEvent.png";
 import imageEvent_2 from "../../assets/images/imageEvent2.png";
 import imageEvent_3 from "../../assets/images/imageEvent3.png";
+import imageItem_1 from "../../assets/images/img-money.png";
+import imageItem_2 from "../../assets/images/img-weapon.png";
+import imageItem_3 from "../../assets/images/img-shlem.png";
 import bgCarousel from "../../assets/images/bg-shlem.png";
 import CarouselMegatron from "../carousel/carouselMegatron";
 
@@ -45,10 +48,11 @@ let listMegatronCarousel = [
         description: 'Изработен от две части - епикранион и горна завита напред приставка. Двата набузника са окачени подвижно към епикраниона и отпред са закопчавани с ремък. Украсени са с пластична, ниско-релефна украса, представляваща стилизирана къдрава брада и мустаци.',
         width: 'макс. височина - 39 см.',
         height: 'макс. широчина - 23/18 см.',
-        Dating: 'VI - III век пр.Хр.',
+        dating: 'VI - III век пр.Хр.',
         settlement: 'с. Беден',
         number: 'A837',
-        bgImage: bgCarousel
+        bgImage: bgCarousel,
+        image: imageItem_1
     },
     {
         id: 1,
@@ -57,10 +61,11 @@ let listMegatronCarousel = [
         description: 'Изработен от две части - епикранион и горна завита напред приставка. Двата набузника са окачени подвижно към епикраниона и отпред са закопчавани с ремък. Украсени са с пластична, ниско-релефна украса, представляваща стилизирана къдрава брада и мустаци.',
         width: 'макс. височина - 39 см.',
         height: 'макс. широчина - 23/18 см.',
-        Dating: 'VI - III век пр.Хр.',
+        dating: 'VI - III век пр.Хр.',
         settlement: 'с. Беден',
         number: 'A837',
-        bgImage: bgCarousel
+        bgImage: bgCarousel,
+        image: imageItem_2
     },
     {
         id: 1,
@@ -69,10 +74,11 @@ let listMegatronCarousel = [
         description: 'Изработен от две части - епикранион и горна завита напред приставка. Двата набузника са окачени подвижно към епикраниона и отпред са закопчавани с ремък. Украсени са с пластична, ниско-релефна украса, представляваща стилизирана къдрава брада и мустаци.',
         width: 'макс. височина - 39 см.',
         height: 'макс. широчина - 23/18 см.',
-        Dating: 'VI - III век пр.Хр.',
+        dating: 'VI - III век пр.Хр.',
         settlement: 'с. Беден',
         number: 'A837',
-        bgImage: bgCarousel
+        bgImage: bgCarousel,
+        image: imageItem_3
     }
 ]
 

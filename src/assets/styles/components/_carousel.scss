@@ -3,8 +3,75 @@
 
   &__dark {
     color: $white;
-    .link {
+  }
 
+  &__title {
+    font-family: $font-cormorant-light;
+    @include font-size(74px);
+    @include line-height(60px);
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+  }
+
+  &__type {
+    margin-top: 5px;
+    font-family: $font-cormorant-regular;
+    @include font-size(17px);
+    @include line-height(30px);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  &__data-info {
+    &__bordered {
+      @include margin(80px, 0px, 0px, 0px);
+      border-left: 1px solid rgba(255, 255, 255, 0.3);
+      @include padding(0px, 0px, 0px, 15px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    &__wrap + &__wrap {
+      margin: 0;
+      @include padding(25px, 0px, 0px, 0px);
+    }
+
+    &__title {
+      @include margin(0px, 0px, 5px, 0px);
+      font-family: $font-acari-regular;
+      font-weight: 600;
+      @include font-size(15px);
+      @include line-height(15px);
+      letter-spacing: 0.055em;
+      text-transform: uppercase;
+      color: #FFFFFF;
+      opacity: 0.5;
+    }
+
+    &__description {
+      font-family: $font-acari-regular;
+      font-weight: 500;
+      @include font-size(15px);
+      @include line-height(21px);
+    }
+  }
+
+  &__data-link {
+    @include margin(50px, 0px, 0px, 0px);
+  }
+
+  &-megatron {
+    &__row {
+      justify-content: space-between;
+    }
+
+    &__description {
+      @include margin(35px, 0px, 0px, 0px);
+    }
+
+    &__img-wrap {
+      border: 10px solid $light;
     }
   }
 }
