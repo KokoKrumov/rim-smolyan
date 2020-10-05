@@ -30,13 +30,19 @@ function Footer() {
                             </Navbar.Brand>
                             <div className='socials'>
                                 <div className='socials-item'>
-                                    <img className="" src={fbLogo} alt="" itemProp="image"/>
+                                    <a href="https://www.facebook.com/museum.smolyan" target="_blank" rel="noopener noreferrer">
+                                        <img className="" src={fbLogo} alt="" itemProp="image"/>
+                                    </a>
                                 </div>
                                 <div className='socials-item'>
-                                    <img className="" src={twitterLogo} alt="" itemProp="image"/>
+                                    <a href="https://twitter.com/museum_sm" target="_blank" rel="noopener noreferrer">
+                                        <img className="" src={twitterLogo} alt="" itemProp="image"/>
+                                    </a>
                                 </div>
                                 <div className='socials-item'>
-                                    <img className="" src={instagramLogo} alt="" itemProp="image"/>
+                                    <a href="https://www.instagram.com/museumsmolyan/" target="_blank" rel="noopener noreferrer">
+                                        <img className="" src={instagramLogo} alt="" itemProp="image"/>
+                                    </a>
                                 </div>
                             </div>
                         </div>
