@@ -9,8 +9,15 @@ import Nav from 'react-bootstrap/Nav'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import InputGroup from 'react-bootstrap/InputGroup'
 import FormControl from 'react-bootstrap/FormControl'
+import { FormattedMessage } from 'react-intl'
 
 function Header() {
+    function setLanguage(lang, e) {
+        e.preventDefault();
+        localStorage.setItem('lang', lang);
+        window.location.reload();
+    }
+
     return (
         <header className="header">
             <Container>
@@ -58,11 +65,13 @@ function Header() {
                                             </div>
                                         } className='nav__main-link dropdown-lang'
                                         id="collasible-nav-dropdown">
-                                        <NavDropdown.Item href="#action/3.1">
-                                            <img className="thumbnail-image" src={BG} alt="" itemProp="image"/>
+                                        <NavDropdown.Item>
+                                            <img className="thumbnail-image" src={BG} alt="" itemProp="image"
+                                                onClick={(e) => setLanguage('bg', e)} />
                                         </NavDropdown.Item>
-                                        <NavDropdown.Item href="#action/3.2">
-                                            <img className="thumbnail-image" src={BG} alt="" itemProp="image"/>
+                                        <NavDropdown.Item>
+                                            <img className="thumbnail-image" src={BG} alt="" itemProp="image"
+                                            onClick={(e) => setLanguage('en', e)} />
                                         </NavDropdown.Item>
                                     </NavDropdown>
                                 </Nav>
@@ -75,8 +84,12 @@ function Header() {
                                         <NavDropdown.Item className="nav__secondary-link" href="#action/3.1">Виртуални фондове</NavDropdown.Item>
                                     </NavDropdown>
                                     <Nav.Link href="#features" className='nav__main-link'>Експозиции</Nav.Link>
-                                    <Nav.Link href="#pricing" className='nav__main-link'>новини</Nav.Link>
-                                    <Nav.Link href="#pricing" className='nav__main-link'>за нас</Nav.Link>
+                                    <Nav.Link href="#pricing" className='nav__main-link'>
+                                        <FormattedMessage id="header.menu.news" />
+                                    </Nav.Link>
+                                    <Nav.Link href="#pricing" className='nav__main-link'>
+                                        <FormattedMessage id="header.menu.about-us" />
+                                    </Nav.Link>
                                     <Nav.Link href="#pricing" className='nav__main-link'>контакти</Nav.Link>
                                     <p className='nav__main-link'>|</p>
                                     <Nav.Link href="#pricing" className='nav__main-link'>Къща музей Ласло
