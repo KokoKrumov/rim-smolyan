@@ -12,6 +12,12 @@ import FormControl from 'react-bootstrap/FormControl'
 import { FormattedMessage } from 'react-intl'
 
 function Header() {
+    function setLanguage(lang, e) {
+        e.preventDefault();
+        localStorage.setItem('lang', lang);
+        window.location.reload();
+    }
+
     return (
         <header className="header">
             <Container>
@@ -59,11 +65,13 @@ function Header() {
                                             </div>
                                         } className='nav__main-link dropdown-lang'
                                         id="collasible-nav-dropdown">
-                                        <NavDropdown.Item href="#action/3.1">
-                                            <img className="thumbnail-image" src={BG} alt="" itemProp="image"/>
+                                        <NavDropdown.Item>
+                                            <img className="thumbnail-image" src={BG} alt="" itemProp="image"
+                                                onClick={(e) => setLanguage('bg', e)} />
                                         </NavDropdown.Item>
-                                        <NavDropdown.Item href="#action/3.2">
-                                            <img className="thumbnail-image" src={BG} alt="" itemProp="image"/>
+                                        <NavDropdown.Item>
+                                            <img className="thumbnail-image" src={BG} alt="" itemProp="image"
+                                            onClick={(e) => setLanguage('en', e)} />
                                         </NavDropdown.Item>
                                     </NavDropdown>
                                 </Nav>
