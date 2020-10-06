@@ -4,7 +4,7 @@ import history from "../history";
 import { Router, Route, Switch} from "react-router-dom";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
-import HomePage from "./homePage/HomePage";
+import HomePage from "./pages/homePage/HomePage";
 
 function App() {
     return (
@@ -14,6 +14,7 @@ function App() {
                 <main>
                     <Switch>
                         <Route path='/' exact component={HomePage}/>
+                        <Route path='/news' exact component={HomePage}/>
                     </Switch>
                 </main>
                 <Footer/>

@@ -15,7 +15,7 @@ function Header() {
         <header className="header">
             <Container>
                 <Navbar collapseOnSelect expand="xl" variant="dark">
-                    <Navbar.Brand href="#home">
+                    <Navbar.Brand href="/">
                         <div className="brand__wrap">
                             <div className='brand-logo__wrap'>
                                 <Image src={rimLogo} fluid/>
@@ -74,12 +74,12 @@ function Header() {
                                         <NavDropdown.Item className="nav__secondary-link" href="#action/3.2">Основни Фондове</NavDropdown.Item>
                                         <NavDropdown.Item className="nav__secondary-link" href="#action/3.1">Виртуални фондове</NavDropdown.Item>
                                     </NavDropdown>
-                                    <Nav.Link href="#features" className='nav__main-link'>Експозиции</Nav.Link>
-                                    <Nav.Link href="#pricing" className='nav__main-link'>новини</Nav.Link>
-                                    <Nav.Link href="#pricing" className='nav__main-link'>за нас</Nav.Link>
-                                    <Nav.Link href="#pricing" className='nav__main-link'>контакти</Nav.Link>
+                                    <Nav.Link href="/features" className='nav__main-link'>Експозиции</Nav.Link>
+                                    <Nav.Link href="/news" className='nav__main-link'>новини</Nav.Link>
+                                    <Nav.Link href="/pricing" className='nav__main-link'>за нас</Nav.Link>
+                                    <Nav.Link href="/pricing" className='nav__main-link'>контакти</Nav.Link>
                                     <p className='nav__main-link'>|</p>
-                                    <Nav.Link href="#pricing" className='nav__main-link'>Къща музей Ласло
+                                    <Nav.Link href="/pricing" className='nav__main-link'>Къща музей Ласло
                                         Наги</Nav.Link>
                                 </Nav>
                             </div>
