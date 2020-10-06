@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App';
 import { IntlProvider } from "react-intl";
-import messages_bg from "./translations/bg.json";
-import messages_en from "./translations/en.json";
+import App from 'components/App';
+import { isMobileScreen } from 'utilities/browser';
+import messages_bg from "translations/bg.json";
+import messages_en from "translations/en.json";
 // import {Provider} from "react-redux";
 // import {createStore, applyMiddleware, compose} from 'redux';
 // import reducers from './reducers';
@@ -20,13 +21,16 @@ const language = localStorage.getItem('lang') ??
 	'bg' ??
 	navigator.languages[0].split(/[-_]/)[0];  // language without region code
 
+if (isMobileScreen()) {
+    console.log('Mobile screen');
+}
+
 ReactDOM.render(
     // <Provider store={store}>
     //
     // </Provider>,
     <IntlProvider locale={language} messages={messages[language]}>
-    	<App />
+        <App />
    	</IntlProvider>,
     document.getElementById('root')
 );
-
