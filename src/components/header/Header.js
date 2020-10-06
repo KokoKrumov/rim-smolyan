@@ -1,15 +1,15 @@
 import React from 'react';
-import rimLogo from '../../assets/images/rim-logo.svg'
-import searchIcon from '../../assets/images/search-icon.svg'
-import BG from '../../assets/images/BG.svg'
-import Image from 'react-bootstrap/Image'
-import Container from 'react-bootstrap/Container'
-import Navbar from 'react-bootstrap/Navbar'
-import Nav from 'react-bootstrap/Nav'
-import NavDropdown from 'react-bootstrap/NavDropdown'
-import InputGroup from 'react-bootstrap/InputGroup'
-import FormControl from 'react-bootstrap/FormControl'
-import { FormattedMessage } from 'react-intl'
+import rimLogo from '../../assets/images/rim-logo.svg';
+import searchIcon from '../../assets/images/search-icon.svg';
+import BG from '../../assets/images/BG.svg';
+import Image from 'react-bootstrap/Image';
+import Container from 'react-bootstrap/Container';
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+import InputGroup from 'react-bootstrap/InputGroup';
+import FormControl from 'react-bootstrap/FormControl';
+import { FormattedMessage } from 'react-intl';
 
 function Header() {
     function setLanguage(lang, e) {
