@@ -10,6 +10,8 @@
       }
 
       &:active,
+      &.active,
+      &.active > a,
       &:active > a {
         color: $red;
       }

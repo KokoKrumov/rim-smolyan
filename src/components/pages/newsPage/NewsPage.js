@@ -108,7 +108,7 @@ let listMegatronCarousel = [
     }
 ]
 
-class HomePage extends Component {
+class NewsPage extends Component {
 
     state = {
         bgHero: null,
@@ -209,4 +209,4 @@ class HomePage extends Component {
     }
 }
 
-export default HomePage;
+export default NewsPage;

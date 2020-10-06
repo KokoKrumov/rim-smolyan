@@ -22,7 +22,7 @@ function Header() {
         <header className="header">
             <Container>
                 <Navbar collapseOnSelect expand="xl" variant="dark">
-                    <Navbar.Brand href="#home">
+                    <Navbar.Brand href="/">
                         <div className="brand__wrap">
                             <div className='brand-logo__wrap'>
                                 <Image src={rimLogo} fluid/>
