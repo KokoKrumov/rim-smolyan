@@ -1,20 +1,20 @@
 import React, {Component} from 'react';
-import heroImage from "../../assets/images/baseHero.png";
-import aboutUsImage from "../../assets/images/about_us_section_bg.png";
-import Hero from "../hero/Hero";
-import WorkInfoLine from "../workInfoLine/WorkInfoLine"
-import NewsAndEventsList from "../newsAndEventsList/NewsAndEventsList";
+import heroImage from "../../../assets/images/baseHero.png";
+import aboutUsImage from "../../../assets/images/about_us_section_bg.png";
+import Hero from "../../hero/Hero";
+import WorkInfoLine from "../../workInfoLine/WorkInfoLine"
+import NewsAndEventsList from "../../newsAndEventsList/NewsAndEventsList";
 import Container from "react-bootstrap/cjs/Container";
 import {Link} from "react-router-dom";
 import Row from "react-bootstrap/cjs/Row";
-import imageEvent_1 from "../../assets/images/imageEvent.png";
-import imageEvent_2 from "../../assets/images/imageEvent2.png";
-import imageEvent_3 from "../../assets/images/imageEvent3.png";
-import imageItem_1 from "../../assets/images/img-money.png";
-import imageItem_2 from "../../assets/images/img-weapon.png";
-import imageItem_3 from "../../assets/images/img-shlem.png";
-import bgCarousel from "../../assets/images/bg-shlem.png";
-import CarouselMegatron from "../carousel/carouselMegatron";
+import imageEvent_1 from "../../../assets/images/imageEvent.png";
+import imageEvent_2 from "../../../assets/images/imageEvent2.png";
+import imageEvent_3 from "../../../assets/images/imageEvent3.png";
+import imageItem_1 from "../../../assets/images/img-money.png";
+import imageItem_2 from "../../../assets/images/img-weapon.png";
+import imageItem_3 from "../../../assets/images/img-shlem.png";
+import bgCarousel from "../../../assets/images/bg-shlem.png";
+import CarouselMegatron from "../../carousel/carouselMegatron";
 
 let listOfNewsAndEvents = [
     {
@@ -129,7 +129,6 @@ class HomePage extends Component {
             <div className='home-page__wrap'>
                 <Hero
                     Image={this.state.bgHero}
-                    isMainHero={true}
                     title={'Средните Родопи'}
                     subtitle={'от праисторическите времена до съвременността'}
                     subtitleSm={'Рaзгледайте нашите фондове'}

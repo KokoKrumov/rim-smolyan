@@ -1,0 +1,12 @@
+.tab_list-container {
+  @include padding(60px, 0px, 100px, 0px);
+
+  &_content-dark {
+    .h1,
+    .h3,
+    .content,
+    .paragraph-2 {
+      color: $dark;
+    }
+  }
+}

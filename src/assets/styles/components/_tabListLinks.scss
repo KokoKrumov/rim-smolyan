@@ -1,0 +1,27 @@
+.tab_list {
+
+  &-container {
+    &__layout .row {
+      justify-content: space-between;
+    }
+  }
+
+  &-link {
+    @include padding(12px, 0px, 12px, 0px);
+    font-family: $font-acari-regular;
+    @include font-size(18px);
+    @include line-height(20px);
+    letter-spacing: 0.01em;
+    color: $dark;
+
+    &:hover,
+    &.active {
+      color: $red;
+    }
+
+  }
+
+  &-link + &-link {
+    border-top: 1px solid rgba(39,35,35, 0.2);
+  }
+}
