@@ -4,7 +4,6 @@ import vectors from '../../assets/images/Vector.png'
 class Hero extends Component {
 
     renderHero = () => {
-        if (this.props.isMainHero) {
             return (
                 <div className='hero__wrap'>
                     <div
@@ -28,13 +27,6 @@ class Hero extends Component {
 
                 </div>
             );
-        } else {
-            return (
-                <div className='hero'>
-
-                </div>
-            );
-        }
     }
 
     render() {

@@ -9,7 +9,7 @@ function NewsAndEventsList({listOfNewsAndEvents}) {
             listOfNewsAndEvents.map(event => {
                 return (
                     <Col lg={4} key={event.id}>
-                        <div className='nae-item'>
+                        <div className='nae-item nae-item__vertical'>
                             <a href=''>
                                 <div className='nae-item__img__wrap'>
                                     {event.dateD ?

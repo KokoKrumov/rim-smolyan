@@ -129,7 +129,6 @@ class HomePage extends Component {
             <div className='home-page__wrap'>
                 <Hero
                     Image={this.state.bgHero}
-                    isMainHero={true}
                     title={'Средните Родопи'}
                     subtitle={'от праисторическите времена до съвременността'}
                     subtitleSm={'Рaзгледайте нашите фондове'}

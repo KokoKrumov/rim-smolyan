@@ -77,14 +77,14 @@ function Header() {
                                 </Nav>
                             </div>
                             <div className='header-navigation__nav'>
-                                <Nav className="">
+                                <Nav className="" activeKey="/news">
                                     <NavDropdown title="Фондове" className='nav__main-link'
                                                  id="collasible-nav-dropdown">
                                         <NavDropdown.Item className="nav__secondary-link" href="#action/3.2">Основни Фондове</NavDropdown.Item>
                                         <NavDropdown.Item className="nav__secondary-link" href="#action/3.1">Виртуални фондове</NavDropdown.Item>
                                     </NavDropdown>
                                     <Nav.Link href="#features" className='nav__main-link'>Експозиции</Nav.Link>
-                                    <Nav.Link href="#pricing" className='nav__main-link'>
+                                    <Nav.Link href="/news" eventKey="news" className='nav__main-link'>
                                         <FormattedMessage id="header.menu.news" />
                                     </Nav.Link>
                                     <Nav.Link href="#pricing" className='nav__main-link'>

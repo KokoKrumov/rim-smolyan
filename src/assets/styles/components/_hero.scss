@@ -1,12 +1,26 @@
 .hero {
   @include padding(80px, 0px, 115px, 0px);
 
+  &-inner {
+    &__wrap {
+      @include padding(100px, 0px, 60px, 0px);
+      border-bottom: 1px solid $red;
+    }
+  }
+
   &__wrap {
     position: relative;
+    height: calc(100vh - (5.8125rem + 3.5625rem));
 
+    .hero-bg {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
 
     .display {
-      @include padding(140px, 15px, 20px, 15px);
+      @include padding(92px, 15px, 20px, 15px);
       position: relative;
       z-index: 1;
       color: $white;

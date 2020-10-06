@@ -1,20 +1,15 @@
 import React, {Component} from 'react';
-import heroImage from "../../assets/images/baseHero.png";
-import aboutUsImage from "../../assets/images/about_us_section_bg.png";
-import Hero from "../hero/Hero";
-import WorkInfoLine from "../workInfoLine/WorkInfoLine"
-import NewsAndEventsList from "../newsAndEventsList/NewsAndEventsList";
+import heroImage from "../../../assets/images/baseHero.png";
+import aboutUsImage from "../../../assets/images/about_us_section_bg.png";
+import HeroInner from "../../hero/HeroInner";
 import Container from "react-bootstrap/cjs/Container";
-import {Link} from "react-router-dom";
 import Row from "react-bootstrap/cjs/Row";
-import imageEvent_1 from "../../assets/images/imageEvent.png";
-import imageEvent_2 from "../../assets/images/imageEvent2.png";
-import imageEvent_3 from "../../assets/images/imageEvent3.png";
-import imageItem_1 from "../../assets/images/img-money.png";
-import imageItem_2 from "../../assets/images/img-weapon.png";
-import imageItem_3 from "../../assets/images/img-shlem.png";
-import bgCarousel from "../../assets/images/bg-shlem.png";
-import CarouselMegatron from "../carousel/carouselMegatron";
+import Col from "react-bootstrap/cjs/Col";
+import imageEvent_1 from "../../../assets/images/imageEvent.png";
+import imageEvent_2 from "../../../assets/images/imageEvent2.png";
+import imageEvent_3 from "../../../assets/images/imageEvent3.png";
+import Nav from "react-bootstrap/cjs/Nav";
+import NewsAndEventsListHorizontal from "../../newsAndEventsList/NewsAndEventsListHorizontal";
 
 let listOfNewsAndEvents = [
     {
@@ -22,89 +17,24 @@ let listOfNewsAndEvents = [
         dateM: 'Октомври',
         dateD: '18',
         image: imageEvent_1,
-        title: 'На пататнки и песни в музея'
+        title: 'На пататнки и песни в музея',
+        description: 'На 18.12.2019 г. от 18.00 часа в Регионален исторически музей „Стою Шишков“ – Смолян ще посрещнем публиката с почерпка, концерт и хоровод. Освен традиционното...'
     },
     {
         id: 2,
         dateM: 'декември',
         dateD: '20',
         image: imageEvent_2,
-        title: 'Празника на Община Смолян и честване на 107 от освобождението на...'
+        title: 'Празника на Община Смолян и честване на 107 от освобождението на...',
+        description: 'По повод 21 октомври – Празник на Община Смолян и честване 107 години от Освобождението на Родопите, Регионален исторически музей „Стою Шишков“ – Смолян...'
     },
     {
         id: 3,
         dateM: '',
         dateD: '',
         image: imageEvent_3,
-        title: 'РИМ “Стою Шишков” - Смолян се включва в празника Никлуден'
-    }
-]
-
-let listMegatronCarousel = [
-    {
-        id: 1,
-        title: 'Шлем',
-        type: 'Бронз',
-        description: 'Изработен от две части - епикранион и горна завита напред приставка. Двата набузника са окачени подвижно към епикраниона и отпред са закопчавани с ремък. Украсени са с пластична, ниско-релефна украса, представляваща стилизирана къдрава брада и мустаци.',
-        width: 'макс. височина - 39 см.',
-        height: 'макс. широчина - 23/18 см.',
-        dating: 'VI - III век пр.Хр.',
-        settlement: 'с. Беден',
-        number: 'A837',
-        bgImage: bgCarousel,
-        image: imageItem_1
-    },
-    {
-        id: 2,
-        title: 'Шлем',
-        type: 'Бронз',
-        description: 'Изработен от две части - епикранион и горна завита напред приставка. Двата набузника са окачени подвижно към епикраниона и отпред са закопчавани с ремък. Украсени са с пластична, ниско-релефна украса, представляваща стилизирана къдрава брада и мустаци.',
-        width: 'макс. височина - 39 см.',
-        height: 'макс. широчина - 23/18 см.',
-        dating: 'VI - III век пр.Хр.',
-        settlement: 'с. Беден',
-        number: 'A837',
-        bgImage: bgCarousel,
-        image: imageItem_2
-    },
-    {
-        id: 3,
-        title: 'Шлем',
-        type: 'Бронз',
-        description: 'Изработен от две части - епикранион и горна завита напред приставка. Двата набузника са окачени подвижно към епикраниона и отпред са закопчавани с ремък. Украсени са с пластична, ниско-релефна украса, представляваща стилизирана къдрава брада и мустаци.',
-        width: 'макс. височина - 39 см.',
-        height: 'макс. широчина - 23/18 см.',
-        dating: 'VI - III век пр.Хр.',
-        settlement: 'с. Беден',
-        number: 'A837',
-        bgImage: bgCarousel,
-        image: imageItem_3
-    },
-    {
-        id: 4,
-        title: 'Шлем',
-        type: 'Бронз',
-        description: 'Изработен от две части - епикранион и горна завита напред приставка. Двата набузника са окачени подвижно към епикраниона и отпред са закопчавани с ремък. Украсени са с пластична, ниско-релефна украса, представляваща стилизирана къдрава брада и мустаци.',
-        width: 'макс. височина - 39 см.',
-        height: 'макс. широчина - 23/18 см.',
-        dating: 'VI - III век пр.Хр.',
-        settlement: 'с. Беден',
-        number: 'A837',
-        bgImage: bgCarousel,
-        image: imageItem_3
-    },
-    {
-        id: 5,
-        title: 'Шлем',
-        type: 'Бронз',
-        description: 'Изработен от две части - епикранион и горна завита напред приставка. Двата набузника са окачени подвижно към епикраниона и отпред са закопчавани с ремък. Украсени са с пластична, ниско-релефна украса, представляваща стилизирана къдрава брада и мустаци.',
-        width: 'макс. височина - 39 см.',
-        height: 'макс. широчина - 23/18 см.',
-        dating: 'VI - III век пр.Хр.',
-        settlement: 'с. Беден',
-        number: 'A837',
-        bgImage: bgCarousel,
-        image: imageItem_3
+        title: 'РИМ “Стою Шишков” - Смолян се включва в празника Никлуден',
+        description: 'Регионален исторически музей „Стою Шишков“ – Смолян стартира музейна програма „Обредни хлябове за храмовите празници“. .'
     }
 ]
 
@@ -113,95 +43,39 @@ class NewsPage extends Component {
     state = {
         bgHero: null,
         bgAboutUs: null,
-        listOfNewsAndEvents: null,
-        listMegatronCarousel: null
+        listOfNewsAndEvents: null
     }
 
     componentDidMount() {
         this.setState({bgHero: heroImage})
         this.setState({bgAboutUs: aboutUsImage})
         this.setState({listOfNewsAndEvents: listOfNewsAndEvents})
-        this.setState({listMegatronCarousel: listMegatronCarousel})
     }
 
     render() {
         return (
             <div className='home-page__wrap'>
-                <Hero
-                    Image={this.state.bgHero}
-                    isMainHero={true}
-                    title={'Средните Родопи'}
-                    subtitle={'от праисторическите времена до съвременността'}
-                    subtitleSm={'Рaзгледайте нашите фондове'}
+                <HeroInner
+                    title={'Новини и Събития'}
+                    subtitle={''}
                 />
-                <WorkInfoLine/>
 
-                <div className='nae-container nae-container_content-dark'>
-                    <Container>
-                        <div>
-                            <div className='nae__title-line'>
-                                <h1 className='h1'>
-                                    Новини и Събития
-                                </h1>
-                                <div className='nae__title-line__link'>
-                                    <Link
-                                        className="link cta_outline cta_outline__dark hvr-underline-from-right"
-                                        to="#"
-                                        itemProp="url"
-                                        target=""
-                                        rel="noopener nofollow noreferrer">
-                                        вижте всички
-                                    </Link>
-
-                                </div>
-                            </div>
-                            <div>
+                <div className='tab_list-container tab_list-container_content-dark'>
+                    <Container className='tab_list-container__layout'>
+                        <Row>
+                            <Col lg={2}>
+                                <Nav defaultActiveKey="/home" className="flex-column">
+                                    <Nav.Link className='tab_list-link' eventKey="link-3">Събития</Nav.Link>
+                                    <Nav.Link className='tab_list-link' eventKey="link-1">Новини</Nav.Link>
+                                    <Nav.Link className='tab_list-link' eventKey="link-2">Всички</Nav.Link>
+                                </Nav>
+                            </Col>
+                            <Col lg={9}>
                                 <Row>
-                                    <NewsAndEventsList listOfNewsAndEvents={this.state.listOfNewsAndEvents}/>
+                                    <NewsAndEventsListHorizontal listOfNewsAndEvents={this.state.listOfNewsAndEvents}/>
                                 </Row>
-                            </div>
-                        </div>
-                    </Container>
-                </div>
-
-                        <CarouselMegatron listMegatronCarousel={this.state.listMegatronCarousel}/>
-
-                <div
-                    className='nae-container nae-container_content-dark hero-bg'
-                    style={{
-                        backgroundImage: `url(${this.state.bgAboutUs})`
-                    }}
-                >
-                    <Container>
-                        <div>
-                            <div className='nae__title-line'>
-                                <h1 className='h1'>
-                                    За нас
-                                </h1>
-
-                            </div>
-                            <div>
-                                <p className='paragraph-2 col-count-2'>
-                                    Регионален исторически музей „Стою Шишков” – Смолян е най-големият музей в Средните
-                                    Родопи. Съхранява веществената памет на обитателите на най-високите части на
-                                    планината през различните исторически периоди, от праисторическите времена до
-                                    съвременността.
-                                    Помещава се в специално построена сграда, ситуирана в модерния административен
-                                    център на града и разполага с богати и разнообразни колекции, възлизащи над 150 хил.
-                                    единици.
-                                    <br/>
-                                    <Link
-                                        style={{marginTop: '2rem'}}
-                                        className="link cta_outline cta_outline__dark hvr-underline-from-left"
-                                        to="#"
-                                        itemProp="url"
-                                        target=""
-                                        rel="noopener nofollow noreferrer">
-                                        вижте повече
-                                    </Link>
-                                </p>
-                            </div>
-                        </div>
+                            </Col>
+                        </Row>
                     </Container>
                 </div>
             </div>

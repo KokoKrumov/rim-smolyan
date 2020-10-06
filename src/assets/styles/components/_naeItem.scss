@@ -21,6 +21,7 @@
       background-color: $dark;
       z-index: 1;
     }
+
     &-day {
       font-family: $font-acari-regular;
       font-weight: 300;
@@ -50,7 +51,7 @@
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35));
   }
 
-  &:hover {
+  &__vertical:hover {
     .nae-item__img:before {
       top: 0;
     }
@@ -62,5 +63,34 @@
     .h5 {
       text-decoration: underline;
     }
+  }
+
+  &__horizontal {
+    .nae-item__wrap {
+      display: flex;
+      flex-direction: row;
+    }
+
+    .link-img:hover {
+      .nae-item__date__wrap {
+        background-color: $red;
+      }
+
+      .nae-item__img:before {
+        top: 0;
+      }
+    }
+
+    .link-title:hover {
+      text-decoration: none;
+
+      .h3 {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &__horizontal + &__horizontal {
+    @include margin(25px, 0px, 0px, 0px);
   }
 }
