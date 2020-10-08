@@ -10,6 +10,9 @@ import imageEvent_2 from "../../../assets/images/imageEvent2.png";
 import imageEvent_3 from "../../../assets/images/imageEvent3.png";
 import Nav from "react-bootstrap/cjs/Nav";
 import NewsAndEventsListHorizontal from "../../newsAndEventsList/NewsAndEventsListHorizontal";
+import fbLogo from "../../../assets/images/facebook1.svg";
+import twitterLogo from "../../../assets/images/twitter.svg";
+import instagramLogo from "../../../assets/images/instagram.svg";
 
 let listOfNewsAndEvents = [
     {
@@ -17,7 +20,6 @@ let listOfNewsAndEvents = [
         dateM: 'Октомври',
         dateD: '18',
         image: imageEvent_1,
-        type: 'event',
         title: 'На пататнки и песни в музея',
         description: 'На 18.12.2019 г. от 18.00 часа в Регионален исторически музей „Стою Шишков“ – Смолян ще посрещнем публиката с почерпка, концерт и хоровод. Освен традиционното...'
     },
@@ -25,7 +27,6 @@ let listOfNewsAndEvents = [
         id: 2,
         dateM: 'декември',
         dateD: '20',
-        type: 'event',
         image: imageEvent_2,
         title: 'Празника на Община Смолян и честване на 107 от освобождението на...',
         description: 'По повод 21 октомври – Празник на Община Смолян и честване 107 години от Освобождението на Родопите, Регионален исторически музей „Стою Шишков“ – Смолян...'
@@ -34,14 +35,13 @@ let listOfNewsAndEvents = [
         id: 3,
         dateM: '',
         dateD: '',
-        type: 'news',
         image: imageEvent_3,
         title: 'РИМ “Стою Шишков” - Смолян се включва в празника Никлуден',
         description: 'Регионален исторически музей „Стою Шишков“ – Смолян стартира музейна програма „Обредни хлябове за храмовите празници“. .'
     }
 ]
 
-class NewsPage extends Component {
+class NewsDetailPage extends Component {
 
     state = {
         bgHero: null,
@@ -66,18 +66,29 @@ class NewsPage extends Component {
                 <div className='tab_list-container tab_list-container_content-dark'>
                     <Container className='tab_list-container__layout'>
                         <Row>
-                            <Col lg={2}>
-                                <Nav defaultActiveKey="/home" className="flex-column">
-                                    <Nav.Link className='tab_list-link' eventKey="link-3">Събития</Nav.Link>
-                                    <Nav.Link className='tab_list-link' eventKey="link-1">Новини</Nav.Link>
-                                    <Nav.Link className='tab_list-link' eventKey="link-2">Всички</Nav.Link>
-                                </Nav>
-                            </Col>
                             <Col lg={9}>
-                                <Row>
-                                    <NewsAndEventsListHorizontal listOfNewsAndEvents={this.state.listOfNewsAndEvents}/>
-                                </Row>
+
                             </Col>
+                            <Col lg={2}>
+                                <div className='socials'>
+                                    <div className='socials-item'>
+                                        <a href="https://www.facebook.com/museum.smolyan" target="_blank" rel="noopener noreferrer">
+                                            <img className="" src={fbLogo} alt="" itemProp="image"/>
+                                        </a>
+                                    </div>
+                                    <div className='socials-item'>
+                                        <a href="https://twitter.com/museum_sm" target="_blank" rel="noopener noreferrer">
+                                            <img className="" src={twitterLogo} alt="" itemProp="image"/>
+                                        </a>
+                                    </div>
+                                    <div className='socials-item'>
+                                        <a href="https://www.instagram.com/museumsmolyan/" target="_blank" rel="noopener noreferrer">
+                                            <img className="" src={instagramLogo} alt="" itemProp="image"/>
+                                        </a>
+                                    </div>
+                                </div>
+                            </Col>
+
                         </Row>
                     </Container>
                 </div>
@@ -86,4 +97,4 @@ class NewsPage extends Component {
     }
 }
 
-export default NewsPage;
+export default NewsDetailPage;

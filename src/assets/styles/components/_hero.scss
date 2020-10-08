@@ -11,6 +11,7 @@
   &__wrap {
     position: relative;
     height: calc(100vh - (5.8125rem + 3.5625rem));
+    min-height: 25rem;
 
     .hero-bg {
       display: flex;

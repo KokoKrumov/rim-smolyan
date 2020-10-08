@@ -14,10 +14,10 @@ function NewsAndEventsListHorizontal({listOfNewsAndEvents}) {
 
                         <Row>
                             <Col lg={5}>
-                                <a className="link link-img" href="#" itemProp="url" target=""
+                                <Link className="link link-img" to={`/news/${event.id}`} itemProp="url" target=""
                                    rel="noopener nofollow noreferrer">
                                     <div className='nae-item__img__wrap'>
-                                        {event.dateD ?
+                                        {event.dateD && event.type === 'event' ?
                                             <div className='nae-item__date__wrap'>
                                                 <p className='nae-item__date-day'>{event.dateD}</p>
                                                 <p className='nae-item__date-month'>{event.dateM}</p>
@@ -29,24 +29,32 @@ function NewsAndEventsListHorizontal({listOfNewsAndEvents}) {
                                             <img className="img-fluid" src={event.image} alt="" itemProp="image"/>
                                         </div>
                                     </div>
-                                </a>
+                                </Link>
                             </Col>
 
                             <Col lg={7}>
                                 <div>
-                                    <a className="link-title" href="#" itemProp="url" target=""
+                                    {event.dateD && event.type === 'news' ?
+                                        <div className='nae-item__date__wrap'>
+                                            <p className='nae-item__date-day'>{event.dateD}</p>
+                                            <p className='nae-item__date-month'>{event.dateM}</p>
+                                        </div>
+                                        :
+                                        null
+                                    }
+                                    <Link className="link-title"  to={`/news/${event.id}`} itemProp="url" target=""
                                        rel="noopener nofollow noreferrer">
                                         <h3 className='h3'>
                                             {event.title}
                                         </h3>
-                                    </a>
+                                    </Link>
                                     <p className='paragraph-3'>
                                         {event.description}
                                     </p>
                                     <Link
                                         style={{marginTop: '2rem'}}
                                         className="link cta_outline cta_outline__dark hvr-underline-from-left"
-                                        to="#"
+                                        to={`/news/${event.id}`}
                                         itemProp="url"
                                         target=""
                                         rel="noopener nofollow noreferrer">
