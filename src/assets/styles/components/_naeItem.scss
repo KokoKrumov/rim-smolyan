@@ -93,4 +93,17 @@
   &__horizontal + &__horizontal {
     @include margin(25px, 0px, 0px, 0px);
   }
+
+  &__article-date {
+    font-family: $font-acari-bold;
+    @include font-size(12px);
+    @include line-height(16px);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: rgba(39,35,35, 0.5);
+
+    &__wrap {
+      @include margin(0px, 0px, 15px, 0px);
+    }
+  }
 }

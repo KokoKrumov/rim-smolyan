@@ -2,30 +2,30 @@ import React from 'react';
 import Col from "react-bootstrap/cjs/Col";
 
 
-function NewsAndEventsList({listOfNewsAndEvents}) {
+function NewsAndarticlesList({listOfNewsAndEvents}) {
 
     if (listOfNewsAndEvents) {
         return (
-            listOfNewsAndEvents.map(event => {
+            listOfNewsAndEvents.map((article, index) => {
                 return (
-                    <Col lg={4} key={event.id}>
+                    <Col lg={4} key={article.id}>
                         <div className='nae-item nae-item__vertical'>
-                            <a href=''>
+                            <a href={`/news/${index}`}>
                                 <div className='nae-item__img__wrap'>
-                                    {event.dateD ?
+                                    {article.dateD && article.type === 'event' ?
                                         <div className='nae-item__date__wrap'>
-                                            <p className='nae-item__date-day'>{event.dateD}</p>
-                                            <p className='nae-item__date-month'>{event.dateM}</p>
+                                            <p className='nae-item__date-day'>{article.dateD}</p>
+                                            <p className='nae-item__date-month'>{article.dateM}</p>
                                         </div>
                                         :
                                         null
                                     }
                                     <div className='nae-item__img'>
-                                        <img className="img-fluid" src={event.image} alt="" itemProp="image"/>
+                                        <img className="img-fluid" src={article.image} alt="" itemProp="image"/>
                                     </div>
                                 </div>
                                 <h5 className='h5'>
-                                    {event.title}
+                                    {article.title}
                                 </h5>
                             </a>
                         </div>
@@ -45,4 +45,4 @@ function NewsAndEventsList({listOfNewsAndEvents}) {
     }
 }
 
-export default NewsAndEventsList;
+export default NewsAndarticlesList;

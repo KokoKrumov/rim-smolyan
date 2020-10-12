@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import vectors from '../../assets/images/Vector.png'
+import {Link} from "react-router-dom";
 
 class Hero extends Component {
 
@@ -19,10 +20,16 @@ class Hero extends Component {
                             {this.props.subtitle}
                         </p>
                         <p className='subtitle subtitle__sm '>
-                            <span className='bordered__light'>
+                            <Link
+                                className="link cta_outline cta_outline__light hvr-underline-from-center"
+                                to="#"
+                                itemProp="url"
+                                target=""
+                                rel="noopener nofollow noreferrer">
                                 {this.props.subtitleSm}
-                            </span>
+                            </Link>
                         </p>
+
                     </div>
 
                 </div>
