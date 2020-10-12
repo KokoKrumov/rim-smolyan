@@ -10,49 +10,38 @@ import imageEvent_2 from "../../../assets/images/imageEvent2.png";
 import imageEvent_3 from "../../../assets/images/imageEvent3.png";
 import Nav from "react-bootstrap/cjs/Nav";
 import NewsAndEventsListHorizontal from "../../newsAndEventsList/NewsAndEventsListHorizontal";
-
-let listOfNewsAndEvents = [
-    {
-        id: 1,
-        dateM: 'Октомври',
-        dateD: '18',
-        image: imageEvent_1,
-        type: 'event',
-        title: 'На пататнки и песни в музея',
-        description: 'На 18.12.2019 г. от 18.00 часа в Регионален исторически музей „Стою Шишков“ – Смолян ще посрещнем публиката с почерпка, концерт и хоровод. Освен традиционното...'
-    },
-    {
-        id: 2,
-        dateM: 'декември',
-        dateD: '20',
-        type: 'event',
-        image: imageEvent_2,
-        title: 'Празника на Община Смолян и честване на 107 от освобождението на...',
-        description: 'По повод 21 октомври – Празник на Община Смолян и честване 107 години от Освобождението на Родопите, Регионален исторически музей „Стою Шишков“ – Смолян...'
-    },
-    {
-        id: 3,
-        dateM: '',
-        dateD: '',
-        type: 'news',
-        image: imageEvent_3,
-        title: 'РИМ “Стою Шишков” - Смолян се включва в празника Никлуден',
-        description: 'Регионален исторически музей „Стою Шишков“ – Смолян стартира музейна програма „Обредни хлябове за храмовите празници“. .'
-    }
-]
+import {connect} from 'react-redux'
+import {fetchNews} from "../../../actions";
 
 class NewsPage extends Component {
 
     state = {
         bgHero: null,
         bgAboutUs: null,
-        listOfNewsAndEvents: null
+        listOfNewsAndEvents: null,
+        news: null
+    }
+
+    fetchData = () => {
+        if(this.props && this.props.news  && this.props.news !== this.state.news){
+            this.props.fetchNews()
+                .then(() => {
+                    this.setState({news: this.props.news})
+                })
+
+        }
     }
 
     componentDidMount() {
+        this.fetchData()
+
         this.setState({bgHero: heroImage})
         this.setState({bgAboutUs: aboutUsImage})
-        this.setState({listOfNewsAndEvents: listOfNewsAndEvents})
+        // this.setState({listOfNewsAndEvents: this.props.news})
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        // console.log(this.props)
     }
 
     render() {
@@ -75,7 +64,7 @@ class NewsPage extends Component {
                             </Col>
                             <Col lg={9}>
                                 <Row>
-                                    <NewsAndEventsListHorizontal listOfNewsAndEvents={this.state.listOfNewsAndEvents}/>
+                                    <NewsAndEventsListHorizontal listOfNewsAndEvents={this.state.news}/>
                                 </Row>
                             </Col>
                         </Row>
@@ -86,4 +75,15 @@ class NewsPage extends Component {
     }
 }
 
-export default NewsPage;
+const mapStateToProps = (state) => {
+    return {
+        news: Object.values(state.news)
+    };
+}
+
+export default connect(
+    mapStateToProps,
+    {
+        fetchNews
+    }
+)(NewsPage);
