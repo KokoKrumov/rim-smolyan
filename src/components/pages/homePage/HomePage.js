@@ -121,7 +121,7 @@ class HomePage extends Component {
                                 <div className='nae__title-line__link'>
                                     <Link
                                         className="link cta_outline cta_outline__dark hvr-underline-from-right"
-                                        to="#"
+                                        to="/news"
                                         itemProp="url"
                                         target=""
                                         rel="noopener nofollow noreferrer">

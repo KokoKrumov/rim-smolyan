@@ -40,12 +40,14 @@ function NewsAndEventsListHorizontal({listOfNewsAndEvents}) {
                                         :
                                         null
                                     }
-                                    <a className="a-title"  href={`/news/${index}`} itemProp="url" target=""
-                                       rel="noopener nofollow noreferrer">
-                                        <h3 className='h3'>
+
+                                    <h3 className='h3'>
+                                        <a className="link a-title" href={`/news/${index}`} itemProp="url" target=""
+                                           rel="noopener nofollow noreferrer">
                                             {event.title}
-                                        </h3>
-                                    </a>
+                                        </a>
+                                    </h3>
+
                                     <p className='paragraph-3'>
                                         {event.description}
                                     </p>

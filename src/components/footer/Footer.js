@@ -51,7 +51,7 @@ function Footer() {
                             <Nav className="">
                                 <Nav.Link href="#features" className='nav__main-link'>Фондове</Nav.Link>
                                 <Nav.Link href="#pricing" className='nav__main-link'>Експозиции</Nav.Link>
-                                <Nav.Link href="#pricing" className='nav__main-link'>новини</Nav.Link>
+                                <Nav.Link href="/news" className='nav__main-link'>новини</Nav.Link>
                                 <Nav.Link href="#pricing" className='nav__main-link'>за нас</Nav.Link>
                                 <Nav.Link href="#pricing" className='nav__main-link'>контакти</Nav.Link>
                             </Nav>
