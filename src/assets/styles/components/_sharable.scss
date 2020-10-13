@@ -34,3 +34,42 @@
 }
 
 @include col-x-list;
+
+.additional {
+  &__content-title {
+    @include margin(60px, 0px, 40px, 0px);
+  }
+}
+
+.socials {
+  margin-top: auto;
+  display: flex;
+  flex-direction: row;
+
+  &-item {
+    @include margin(0px, 8px, 0px, 0px);
+
+    svg {
+      fill: $dark;
+    }
+
+    &:hover {
+      svg {
+        fill: $red;
+      }
+    }
+  }
+
+  &-label {
+    margin-bottom: 10px;
+    font-family: $font-acari-regular;
+    @include font-size(14px);
+    @include line-height(12px);
+    letter-spacing: -0.005em;
+    color: rgba(39, 35, 35, 0.7);
+  }
+
+  &__top-indent {
+    margin-top: 6.6rem;
+  }
+}

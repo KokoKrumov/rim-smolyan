@@ -1,0 +1,37 @@
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  margin-bottom: 0;
+  list-style: none;
+  background-color: transparent;
+  border-radius: .25rem;
+
+  &-item  {
+    display: flex;
+
+    &, .link{
+      font-family: $font-acari-bold;
+      @include font-size(12px);
+      @include line-height(16px);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: rgba(39, 35, 35, 0.5);
+
+      &.active {
+        color: rgba(39, 35, 35, 0.9);
+      }
+    }
+  }
+
+  &-item + &-item {
+    padding-left: .5rem;
+
+    &::before {
+      display: inline-block;
+      padding-right: .5rem;
+      color: #6c757d;
+      content: "/";
+    }
+  }
+}

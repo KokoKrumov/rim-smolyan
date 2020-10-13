@@ -88,6 +88,13 @@
         text-decoration: underline;
       }
     }
+
+    .h3, .h3 > .link {
+      color: $dark;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
 
   &__horizontal + &__horizontal {

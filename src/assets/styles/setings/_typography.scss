@@ -27,7 +27,7 @@
   color: $dark;
 }
 
-.h3 {
+.h3, .h3 > .link {
   font-family: $font-cormorant-bold;
   @include font-size(30px);
   @include line-height(34px);

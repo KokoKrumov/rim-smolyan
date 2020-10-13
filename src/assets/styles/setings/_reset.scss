@@ -24,3 +24,7 @@ main {
 header, main, footer {
   flex-shrink: 0;
 }
+
+a:hover {
+  text-decoration: none;
+}

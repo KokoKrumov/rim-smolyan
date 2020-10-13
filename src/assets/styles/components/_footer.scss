@@ -23,15 +23,7 @@
     @include padding(6px, 0px, 6px, 0px);
   }
 
-  .socials {
-    margin-top: auto;
-    display: flex;
-    flex-direction: row;
 
-    &-item {
-      @include margin(0px, 8px, 0px, 0px);
-    }
-  }
 
   .navbar {
     align-items: stretch;
