@@ -80,19 +80,19 @@ function Header() {
                                 <Nav className="" activeKey="/news">
                                     <NavDropdown title="Фондове" className='nav__main-link'
                                                  id="collasible-nav-dropdown">
-                                        <NavDropdown.Item className="nav__secondary-link" href="#action/3.2">Основни Фондове</NavDropdown.Item>
-                                        <NavDropdown.Item className="nav__secondary-link" href="#action/3.1">Виртуални фондове</NavDropdown.Item>
+                                        <NavDropdown.Item className="nav__secondary-link not-allowed " href="#">Основни Фондове</NavDropdown.Item>
+                                        <NavDropdown.Item className="nav__secondary-link not-allowed " href="#">Виртуални фондове</NavDropdown.Item>
                                     </NavDropdown>
-                                    <Nav.Link href="#features" className='nav__main-link'>Експозиции</Nav.Link>
+                                    <Nav.Link href="#" className='nav__main-link not-allowed '>Експозиции</Nav.Link>
                                     <Nav.Link href="/news" eventKey="news" className='nav__main-link'>
                                         <FormattedMessage id="header.menu.news" />
                                     </Nav.Link>
-                                    <Nav.Link href="#pricing" className='nav__main-link'>
+                                    <Nav.Link href="/about-us" className='nav__main-link'>
                                         <FormattedMessage id="header.menu.about-us" />
                                     </Nav.Link>
-                                    <Nav.Link href="#pricing" className='nav__main-link'>контакти</Nav.Link>
+                                    <Nav.Link href="/contacts" className='nav__main-link'>контакти</Nav.Link>
                                     <p className='nav__main-link'>|</p>
-                                    <Nav.Link href="#pricing" className='nav__main-link'>Къща музей Ласло
+                                    <Nav.Link href="#" className='nav__main-link not-allowed'>Къща музей Ласло
                                         Наги</Nav.Link>
                                 </Nav>
                             </div>

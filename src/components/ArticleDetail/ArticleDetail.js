@@ -6,10 +6,12 @@ function ArticleDetail({article}) {
 
     if (article) {
         return (
-            <div>
-                <h2 className='h2'>{article.title}</h2>
-                <p className='h-sup'>{article.place}</p>
-                <div className='nae-item__img__wrap image__article-detail'>
+            <article>
+                <header>
+                    <h2 className='h2'>{article.title}</h2>
+                    <p className='h-sup'>{article.place}</p>
+                </header>
+                <figure className='nae-item__img__wrap image__article-detail'>
                     {
                         article.dateD && article.type === 'event'
                             ?
@@ -23,13 +25,13 @@ function ArticleDetail({article}) {
                     }
 
                     <img className="img-fluid" src={article.imageDetail} alt="" itemprop="image"/>
-                </div>
+                </figure>
                 <div>
                     <p className='paragraph-2'>
                         {article.text}
                     </p>
                 </div>
-            </div>
+            </article>
         )
     } else {
         return (
