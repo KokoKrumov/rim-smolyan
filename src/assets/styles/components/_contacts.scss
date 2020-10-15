@@ -1,5 +1,39 @@
 .contacts {
   &__wrap {
-    @include margin(60px, 0px, 60px, 0px)
+    @include margin(60px, 0px, 60px, 0px);
+  }
+
+  &__address {
+    &-label {
+      @include margin(0px, 0px, 10px, 0px);
+    }
+
+    &-text, &-text .link {
+      font-family: $font-acari-regular;
+      @include font-size(17px);
+      @include line-height(24px);
+      color: $dark;
+    }
+
+    &-text .link:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .address__list-item + .address__list-item {
+    @include margin(30px, 0px, 0px, 0px);
+  }
+
+  .time-period {
+   &__wrap {
+
+   }
+
+    &__title {
+      font-family: $font-acari-regular;
+      @include font-size(14px);
+      @include line-height(20px);
+      color: $dark;
+    }
   }
 }

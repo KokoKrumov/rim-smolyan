@@ -22,26 +22,26 @@ class Contacts extends Component {
                     subtitle={''}
                 />
 
-                <div className='contacts__wrap'>
+                <div className='contacts contacts__wrap'>
                     <Container className=''>
                         <Row>
                             <Col lg={3}>
                                 <address className=''>
-                                    <ul>
-                                        <li>
-                                            <h4 className='h4 address-label'>
+                                    <ul className='address__list'>
+                                        <li className='address__list-item'>
+                                            <h4 className='h4 contacts__address-label'>
                                                 Адрес:
                                             </h4>
-                                            <p className='address-text'>
+                                            <p className='contacts__address-text'>
                                                 гр. Смолян 4700 <br/>
                                                 ул.”Дичо Петров” №5
                                             </p>
                                         </li>
-                                        <li>
-                                            <h4 className='h4 address-label'>
+                                        <li className='address__list-item'>
+                                            <h4 className='h4 contacts__address-label'>
                                                 Информация:
                                             </h4>
-                                            <p className='address-text'>
+                                            <p className='contacts__address-text'>
                                                 <ul>
                                                     <li>
                                                         <a className="link" href="tel:+030162727" itemProp="url"
@@ -67,21 +67,21 @@ class Contacts extends Component {
                                                 </ul>
                                             </p>
                                         </li>
-                                        <li>
-                                            <h4 className='h4 address-label'>
+                                        <li className='address__list-item'>
+                                            <h4 className='h4 contacts__address-label'>
                                                 Пишете ни на:
                                             </h4>
-                                            <p className='address-text'>
+                                            <p className='contacts__address-text'>
                                                 <ul>
                                                     <li>
-                                                        <a className="link" href="tel:+030162727" itemProp="url"
+                                                        <a className="link" href="mailto:museum-sm@mail.bg" itemProp="url"
                                                            target=""
                                                            rel="noopener nofollow noreferrer">
                                                             museum-sm@mail.bg
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a className="link" href="tel:+0879111915" itemProp="url"
+                                                        <a className="link" href="mailto:rim.smolyan@gmail.com" itemProp="url"
                                                            target=""
                                                            rel="noopener nofollow noreferrer">
                                                             rim.smolyan@gmail.com
@@ -90,23 +90,23 @@ class Contacts extends Component {
                                                 </ul>
                                             </p>
                                         </li>
-                                        <li>
+                                        <li className='address__list-item'>
                                             <Socials/>
                                         </li>
                                     </ul>
                                 </address>
                             </Col>
                             <Col lg={3}>
-                                <div>
-                                    <div>
-                                        <h4 className='h4 address-label'>
+                                <ul className='address__list'>
+                                    <li className='address__list-item'>
+                                        <h4 className='h4 contacts__address-label'>
                                             Работно време:
                                         </h4>
-                                        <p className='address-text__sm'>
+                                        <p className='contacts__address-text'>
                                             Вторник - Неделя
                                         </p>
-                                    </div>
-                                    <div className='time-period__wrap'>
+                                    </li>
+                                    <li className='address__list-item time-period__wrap'>
                                         <h6 className='time-period__title'>
                                             Май - Септември
                                         </h6>
@@ -120,19 +120,19 @@ class Contacts extends Component {
                                         <p className='time-period__text'>
                                             09:00 - 12:00 13:00 - 18:00
                                         </p>
-                                    </div>
-                                    <div>
+                                    </li>
+                                    <li className='address__list-item'>
                                         <p className='paragraph-3'>
                                             Понеделник е санитарен ден.
                                             Музеят не работи за посетители на официалните празници на Република
                                             България.
                                         </p>
-                                    </div>
-                                </div>
+                                    </li>
+                                </ul>
                             </Col>
                             <Col lg={4}>
                                 <div>
-                                    <h4 className='h4 address-label'>
+                                    <h4 className='h4 contacts__address-label'>
                                         Обратна връзка
                                     </h4>
                                     <p className='paragraph-3'>
