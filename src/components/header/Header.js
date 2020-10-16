@@ -69,10 +69,10 @@ function Header() {
                                             <img className="thumbnail-image" src={BG} alt="" itemProp="image"
                                                 onClick={(e) => setLanguage('bg', e)} />
                                         </NavDropdown.Item>
-                                        <NavDropdown.Item>
-                                            <img className="thumbnail-image" src={BG} alt="" itemProp="image"
-                                            onClick={(e) => setLanguage('en', e)} />
-                                        </NavDropdown.Item>
+                                        {/*<NavDropdown.Item>*/}
+                                        {/*    <img className="thumbnail-image" src={BG} alt="" itemProp="image"*/}
+                                        {/*    onClick={(e) => setLanguage('en', e)} />*/}
+                                        {/*</NavDropdown.Item>*/}
                                     </NavDropdown>
                                 </Nav>
                             </div>

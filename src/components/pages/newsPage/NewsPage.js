@@ -5,9 +5,6 @@ import HeroInner from "../../hero/HeroInner";
 import Container from "react-bootstrap/cjs/Container";
 import Row from "react-bootstrap/cjs/Row";
 import Col from "react-bootstrap/cjs/Col";
-import imageEvent_1 from "../../../assets/images/imageEvent.png";
-import imageEvent_2 from "../../../assets/images/imageEvent2.png";
-import imageEvent_3 from "../../../assets/images/imageEvent3.png";
 import Nav from "react-bootstrap/cjs/Nav";
 import NewsAndEventsListHorizontal from "../../newsAndEventsList/NewsAndEventsListHorizontal";
 import {connect} from 'react-redux'

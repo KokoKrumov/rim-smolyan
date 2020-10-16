@@ -17,6 +17,8 @@ import bgCarousell from "../../../assets/images/bg-shlem.png";
 import bgCarousel2 from "../../../assets/images/bg-diskos.png";
 import bgCarousel3 from "../../../assets/images/bg-nakit.png";
 import CarouselMegatron from "../../carousel/carouselMegatron";
+import {connect} from 'react-redux'
+import {fetchNews} from "../../../actions";
 
 let listOfNewsAndEvents = [
     {
@@ -93,10 +95,21 @@ class HomePage extends Component {
         listMegatronCarousel: null
     }
 
+    fetchData = () => {
+        if(this.props
+            && this.props.news
+            && this.props.news !== this.state.news){
+            this.props.fetchNews()
+                .then(() => {
+                    this.setState({listOfNewsAndEvents: this.props.news})
+                })
+
+        }
+    }
     componentDidMount() {
+        this.fetchData();
         this.setState({bgHero: heroImage})
         this.setState({bgAboutUs: aboutUsImage})
-        this.setState({listOfNewsAndEvents: listOfNewsAndEvents})
         this.setState({listMegatronCarousel: listMegatronCarousel})
     }
 
@@ -184,4 +197,15 @@ class HomePage extends Component {
     }
 }
 
-export default HomePage;
+const mapStateToProps = (state) => {
+    return {
+        news: Object.values(state.news)
+    };
+}
+
+export default connect(
+    mapStateToProps,
+    {
+        fetchNews
+    }
+)(HomePage);
