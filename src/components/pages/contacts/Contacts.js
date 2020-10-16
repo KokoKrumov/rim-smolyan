@@ -7,7 +7,7 @@ import {connect} from 'react-redux'
 import {fetchNews} from "../../../actions";
 import Socials from "../../socials/socials";
 import Form from 'react-bootstrap/Form'
-import Button from "react-bootstrap/Button";
+import mapShot from '../../../assets/images/map-shot.png'
 
 class Contacts extends Component {
 
@@ -24,7 +24,7 @@ class Contacts extends Component {
 
                 <div className='contacts contacts__wrap'>
                     <Container className=''>
-                        <Row>
+                        <Row className='contacts__row'>
                             <Col lg={3}>
                                 <address className=''>
                                     <ul className='address__list'>
@@ -74,14 +74,16 @@ class Contacts extends Component {
                                             <p className='contacts__address-text'>
                                                 <ul>
                                                     <li>
-                                                        <a className="link" href="mailto:museum-sm@mail.bg" itemProp="url"
+                                                        <a className="link" href="mailto:museum-sm@mail.bg"
+                                                           itemProp="url"
                                                            target=""
                                                            rel="noopener nofollow noreferrer">
                                                             museum-sm@mail.bg
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a className="link" href="mailto:rim.smolyan@gmail.com" itemProp="url"
+                                                        <a className="link" href="mailto:rim.smolyan@gmail.com"
+                                                           itemProp="url"
                                                            target=""
                                                            rel="noopener nofollow noreferrer">
                                                             rim.smolyan@gmail.com
@@ -139,12 +141,12 @@ class Contacts extends Component {
                                         Споделете вашите впечатления, препоръки или направете запитване.
                                     </p>
                                     <div>
-                                        <Form>
+                                        <Form className='form__wrap'>
                                             <Form.Group controlId="formBasicText">
                                                 <Form.Control
                                                     required
                                                     type="text"
-                                                    placeholder="Имена" />
+                                                    placeholder="Имена"/>
                                                 <Form.Text className="text-muted d-none d-error">
                                                     Това поле е задължително
                                                 </Form.Text>
@@ -153,17 +155,37 @@ class Contacts extends Component {
                                                 <Form.Control
                                                     required
                                                     type="email"
-                                                    placeholder="Имейл адрес" />
+                                                    placeholder="Имейл адрес"/>
                                                 <Form.Text className="text-muted d-none d-error">
                                                     Това поле е задължително
                                                 </Form.Text>
                                             </Form.Group>
-                                            <Button variant="primary" type="submit">
-                                                Submit
-                                            </Button>
+                                            <div className='text-right'>
+                                                <a className="link cta_outline cta_outline__dark hvr-underline-from-center"
+                                                   href="#" itemProp="url" target=""
+                                                   rel="noopener nofollow noreferrer">
+                                                    Изпрати
+                                                </a>
+                                            </div>
                                         </Form>
                                     </div>
                                 </div>
+                            </Col>
+                        </Row>
+                        <Row className='contacts__row'>
+                            <Col lg={7}>
+                                <div className='contacts__map__wrap'>
+                                    <a
+                                        className="link"
+                                        target='_blank'
+                                        href="https://www.google.com/maps/place/Regional+History+Museum+Stoyu+Shishkov/@41.5760979,24.7144959,18z/data=!4m5!3m4!1s0x14ac5a06dc1240f7:0x35e14604588eb47d!8m2!3d41.5762665!4d24.7147483?hl=en-GB"
+                                        rel="noopener nofollow noreferrer">
+                                        <img className="img-fluid" src={mapShot} alt="" itemProp="image"/>
+                                    </a>
+                                </div>
+                            </Col>
+                            <Col lg={4}>
+
                             </Col>
                         </Row>
                     </Container>

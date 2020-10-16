@@ -1,0 +1,18 @@
+.form {
+  &__wrap {
+    @include margin(34px, 0px, 0px,0px)
+  }
+
+  &-control {
+    color: $dark;
+    border: 1px solid rgba(39,35,35,0.35);
+    border-radius: 2px;
+    @include margin(0px, 0px, 20px,0px);
+
+    &:focus,
+    &:active {
+      border-color: rgba(39,35,35,0.8);
+      box-shadow: none;
+    }
+  }
+}
