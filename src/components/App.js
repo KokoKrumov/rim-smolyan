@@ -6,7 +6,9 @@ import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
 import HomePage from "./pages/homePage/HomePage";
 import NewsPage from "./pages/newsPage/NewsPage";
+import AboutUs from "./pages/aboutUs/AboutUs";
 import NewsDetailPage from "./pages/newsDetailPage/NewsDetailPage";
+import Contacts from "./pages/contacts/Contacts";
 
 function App() {
     return (
@@ -18,6 +20,8 @@ function App() {
                         <Route path='/' exact component={HomePage}/>
                         <Route path='/news' exact component={NewsPage}/>
                         <Route path='/news/:articleId' exact component={NewsDetailPage}/>
+                        <Route path='/about-us' exact component={AboutUs}/>
+                        <Route path='/contacts' exact component={Contacts}/>
                     </Switch>
                 </main>
                 <Footer/>

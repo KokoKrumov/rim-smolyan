@@ -1,5 +1,6 @@
 body {
   font-size: 100%;
+  color: $dark;
 }
 
 html, body, #root {
@@ -27,4 +28,11 @@ header, main, footer {
 
 a:hover {
   text-decoration: none;
+}
+
+
+ol, ul, li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
