@@ -19,30 +19,8 @@ import bgCarousel3 from "../../../assets/images/bg-nakit.png";
 import CarouselMegatron from "../../carousel/carouselMegatron";
 import {connect} from 'react-redux'
 import {fetchNews} from "../../../actions";
-
-let listOfNewsAndEvents = [
-    {
-        id: 1,
-        dateM: 'Октомври',
-        dateD: '18',
-        image: imageEvent_1,
-        title: 'На пататнки и песни в музея'
-    },
-    {
-        id: 2,
-        dateM: 'декември',
-        dateD: '20',
-        image: imageEvent_2,
-        title: 'Празника на Община Смолян и честване на 107 от освобождението на...'
-    },
-    {
-        id: 3,
-        dateM: '',
-        dateD: '',
-        image: imageEvent_3,
-        title: 'РИМ “Стою Шишков” - Смолян се включва в празника Никлуден'
-    }
-]
+import Modal from "../../modal/ModalComponent";
+import ModalComponent from "../../modal/ModalComponent";
 
 let listMegatronCarousel = [
     {
@@ -92,7 +70,8 @@ class HomePage extends Component {
         bgHero: null,
         bgAboutUs: null,
         listOfNewsAndEvents: null,
-        listMegatronCarousel: null
+        listMegatronCarousel: null,
+        modalIsOpen: false
     }
 
     fetchData = () => {
@@ -106,6 +85,16 @@ class HomePage extends Component {
 
         }
     }
+
+    showModal = (e) => {
+        e.preventDefault();
+        this.setState({ modalIsOpen: !this.state.modalIsOpen });
+        console.log(this.state.modalIsOpen)
+    };
+    closeModal = () => {
+        this.setState({ modalIsOpen: false });
+    };
+
     componentDidMount() {
         this.fetchData();
         this.setState({bgHero: heroImage})
@@ -122,8 +111,13 @@ class HomePage extends Component {
                     subtitle={'от праисторическите времена до съвременността'}
                     subtitleSm={'Рaзгледайте нашите фондове'}
                 />
-                <WorkInfoLine/>
+                <WorkInfoLine />
 
+                <a
+                    onClick={this.showModal}
+                    className="link" href="#" itemprop="url" target="" rel="noopener nofollow noreferrer">
+                click modal
+                </a>
                 <div className='nae-container nae-container_content-dark'>
                     <Container>
                         <div>
@@ -192,6 +186,7 @@ class HomePage extends Component {
                         </div>
                     </Container>
                 </div>
+                <ModalComponent isOpen={this.state.modalIsOpen}/>
             </div>
         )
     }

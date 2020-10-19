@@ -26,7 +26,7 @@ class WorkInfoLine extends Component {
 
                         <div className='info-line__item'>
                             <p className='info-line__text'>
-                                Април - Октомври
+                                Май  - Септември
                                 <span style={{marginLeft: '11px'}}><img className="" src={arrowRight} alt=""
                                                                         itemProp="image"/></span>
 

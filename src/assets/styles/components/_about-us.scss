@@ -1,0 +1,10 @@
+.about-us-page {
+  color: #ffffff;
+
+  &__text__bold {
+    font-family: $font-acari-bold;
+    @include font-size(19px);
+    @include line-height(28px);
+    letter-spacing: 0.005em;
+  }
+}

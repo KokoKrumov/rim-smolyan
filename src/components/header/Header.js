@@ -2,6 +2,7 @@ import React from 'react';
 import rimLogo from '../../assets/images/rim-logo.svg'
 import searchIcon from '../../assets/images/search-icon.svg'
 import BG from '../../assets/images/BG.svg'
+import EN from '../../assets/images/EN.png'
 import Image from 'react-bootstrap/Image'
 import Container from 'react-bootstrap/Container'
 import Navbar from 'react-bootstrap/Navbar'
@@ -69,10 +70,10 @@ function Header() {
                                             <img className="thumbnail-image" src={BG} alt="" itemProp="image"
                                                 onClick={(e) => setLanguage('bg', e)} />
                                         </NavDropdown.Item>
-                                        {/*<NavDropdown.Item>*/}
-                                        {/*    <img className="thumbnail-image" src={BG} alt="" itemProp="image"*/}
-                                        {/*    onClick={(e) => setLanguage('en', e)} />*/}
-                                        {/*</NavDropdown.Item>*/}
+                                        <NavDropdown.Item>
+                                            <img className="thumbnail-image" src={EN} alt="" itemProp="image"
+                                            onClick={(e) => setLanguage('en', e)} />
+                                        </NavDropdown.Item>
                                     </NavDropdown>
                                 </Nav>
                             </div>

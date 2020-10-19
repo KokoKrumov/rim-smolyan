@@ -144,6 +144,7 @@ class Contacts extends Component {
                                         <Form className='form__wrap'>
                                             <Form.Group controlId="formBasicText">
                                                 <Form.Control
+                                                    disabled
                                                     required
                                                     type="text"
                                                     placeholder="Имена"/>
@@ -153,6 +154,7 @@ class Contacts extends Component {
                                             </Form.Group>
                                             <Form.Group controlId="formBasicText">
                                                 <Form.Control
+                                                    disabled
                                                     required
                                                     type="email"
                                                     placeholder="Имейл адрес"/>
@@ -160,12 +162,17 @@ class Contacts extends Component {
                                                     Това поле е задължително
                                                 </Form.Text>
                                             </Form.Group>
+                                            <Form.Group controlId="exampleForm.ControlTextarea1">
+                                                <Form.Control
+                                                    disabled
+                                                    as="textarea"
+                                                    rows={3}/>
+                                            </Form.Group>
                                             <div className='text-right'>
-                                                <a className="link cta_outline cta_outline__dark hvr-underline-from-center"
-                                                   href="#" itemProp="url" target=""
-                                                   rel="noopener nofollow noreferrer">
+                                                <button className="link cta_outline cta_outline__dark hvr-underline-from-center"
+                                                   disabled>
                                                     Изпрати
-                                                </a>
+                                                </button>
                                             </div>
                                         </Form>
                                     </div>
