@@ -70,8 +70,7 @@ class HomePage extends Component {
         bgHero: null,
         bgAboutUs: null,
         listOfNewsAndEvents: null,
-        listMegatronCarousel: null,
-        modalIsOpen: false
+        listMegatronCarousel: null
     }
 
     fetchData = () => {
@@ -85,15 +84,6 @@ class HomePage extends Component {
 
         }
     }
-
-    showModal = (e) => {
-        e.preventDefault();
-        this.setState({ modalIsOpen: !this.state.modalIsOpen });
-        console.log(this.state.modalIsOpen)
-    };
-    closeModal = () => {
-        this.setState({ modalIsOpen: false });
-    };
 
     componentDidMount() {
         this.fetchData();
@@ -113,11 +103,11 @@ class HomePage extends Component {
                 />
                 <WorkInfoLine />
 
-                <a
-                    onClick={this.showModal}
-                    className="link" href="#" itemprop="url" target="" rel="noopener nofollow noreferrer">
-                click modal
-                </a>
+                {/*<a*/}
+                {/*    onClick={this.props.showModal}*/}
+                {/*    className="link" href="#" itemprop="url" target="" rel="noopener nofollow noreferrer">*/}
+                {/*click modal*/}
+                {/*</a>*/}
                 <div className='nae-container nae-container_content-dark'>
                     <Container>
                         <div>
@@ -186,7 +176,6 @@ class HomePage extends Component {
                         </div>
                     </Container>
                 </div>
-                <ModalComponent isOpen={this.state.modalIsOpen}/>
             </div>
         )
     }

@@ -1,4 +1,8 @@
 {
 	"header.menu.news": "news",
-  	"header.menu.about-us": "about us"
+  	"header.menu.about-us": "about us",
+	"modal.warning.title": "Внимание!",
+	"modal.warning.text": "This page is currently under construction. Do you want  to visit the old site?",
+	"text.yes": "Yes",
+	"text.cancel": "Cancel"
 }

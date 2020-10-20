@@ -1,4 +1,8 @@
 {
 	"header.menu.news": "новини",
-	"header.menu.about-us": "за нас"
+	"header.menu.about-us": "за нас",
+	"modal.warning.title": "Внимание!",
+	"modal.warning.text": "Тази страница вмомента се контруира. Искате ли да посетите стария сайт?",
+	"text.yes": "Да",
+	"text.cancel": "Отмени"
 }

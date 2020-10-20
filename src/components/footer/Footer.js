@@ -5,18 +5,18 @@ import Container from 'react-bootstrap/Container'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import fbLogo from '../../assets/images/facebook1.svg'
-import twitterLogo from  '../../assets/images/twitter.svg'
-import instagramLogo from  '../../assets/images/instagram.svg'
-import jltLogo from  '../../assets/images/JLTLogo.svg'
+import twitterLogo from '../../assets/images/twitter.svg'
+import instagramLogo from '../../assets/images/instagram.svg'
+import jltLogo from '../../assets/images/JLTLogo.svg'
 
-function Footer() {
+function Footer({showModal}) {
     return (
         <footer className="footer">
             <div className='footer__top'>
                 <Container>
                     <Navbar collapseOnSelect expand="xl" variant="dark">
                         <div className='d-flex flex-column'>
-                            <Navbar.Brand href="#home">
+                            <Navbar.Brand href="/">
                                 <div className="brand__wrap">
                                     <div className='brand-logo__wrap'>
                                         <Image src={rimLogo} fluid/>
@@ -30,7 +30,8 @@ function Footer() {
                             </Navbar.Brand>
                             <div className='socials'>
                                 <div className='socials-item'>
-                                    <a href="https://www.facebook.com/museum.smolyan" target="_blank" rel="noopener noreferrer">
+                                    <a href="https://www.facebook.com/museum.smolyan" target="_blank"
+                                       rel="noopener noreferrer">
                                         <img className="" src={fbLogo} alt="" itemProp="image"/>
                                     </a>
                                 </div>
@@ -40,7 +41,8 @@ function Footer() {
                                     </a>
                                 </div>
                                 <div className='socials-item'>
-                                    <a href="https://www.instagram.com/museumsmolyan/" target="_blank" rel="noopener noreferrer">
+                                    <a href="https://www.instagram.com/museumsmolyan/" target="_blank"
+                                       rel="noopener noreferrer">
                                         <img className="" src={instagramLogo} alt="" itemProp="image"/>
                                     </a>
                                 </div>
@@ -49,19 +51,76 @@ function Footer() {
                         <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
                         <Navbar.Collapse className="footer__main-nav" id="responsive-navbar-nav">
                             <Nav className="">
-                                <Nav.Link href="#features" className='nav__main-link'>Фондове</Nav.Link>
-                                <Nav.Link href="#pricing" className='nav__main-link'>Експозиции</Nav.Link>
-                                <Nav.Link href="/news" className='nav__main-link'>новини</Nav.Link>
-                                <Nav.Link href="#pricing" className='nav__main-link'>за нас</Nav.Link>
-                                <Nav.Link href="#pricing" className='nav__main-link'>контакти</Nav.Link>
+                                <Nav.Link
+                                    onClick={(e) => {
+                                        showModal(e)
+                                    }}
+                                    href="/collections"
+                                    className='nav__main-link'>
+                                    Фондове
+                                </Nav.Link>
+                                <Nav.Link
+                                    onClick={(e) => {
+                                        showModal(e)
+                                    }}
+                                    href="#"
+                                    className='nav__main-link'>
+                                    Експозиции
+                                </Nav.Link>
+                                <Nav.Link
+                                    href="/news"
+                                    className='nav__main-link'>
+                                    новини
+                                </Nav.Link>
+                                <Nav.Link
+                                    href="/about-us"
+                                    className='nav__main-link'>
+                                    за нас
+                                </Nav.Link>
+                                <Nav.Link
+                                    onClick={(e) => {
+                                        showModal(e)
+                                    }}
+                                    href="/contacts"
+                                    className='nav__main-link'>
+                                    контакти
+                                </Nav.Link>
                             </Nav>
                             <Nav className="">
-                                <Nav.Link href="#features" className='nav__secondary-link'>Подкрепете дейността ни</Nav.Link>
-                                <Nav.Link href="#pricing" className='nav__secondary-link'>Административни</Nav.Link>
-                                <Nav.Link href="#pricing" className='nav__secondary-link'>Условия за поверителност</Nav.Link>
+                                <Nav.Link
+                                    onClick={(e) => {
+                                        showModal(e)
+                                    }}
+                                    href="/support-us"
+                                    className='nav__secondary-link'>
+                                    Подкрепете
+                                    дейността ни</Nav.Link>
+                                <Nav.Link
+                                    onClick={(e) => {
+                                        showModal(e)
+                                    }}
+                                    href="/administration"
+                                    className='nav__secondary-link'>
+                                    Административни
+                                </Nav.Link>
+                                <Nav.Link
+                                    onClick={(e) => {
+                                        showModal(e)
+                                    }}
+                                    href="/policies"
+                                    className='nav__secondary-link'>
+                                    Условия
+                                    за поверителност</Nav.Link>
                             </Nav>
                             <Nav className="">
-                                <Nav.Link href="#features" className='nav__main-link'>Къща музей Ласло Наги</Nav.Link>
+                                <Nav.Link
+                                    onClick={(e) => {
+                                        showModal(e)
+                                    }}
+                                    href="/laslo"
+                                    className='nav__main-link'>
+                                    Къща
+                                    музей Ласло Наги</Nav.Link>
                             </Nav>
                         </Navbar.Collapse>
                     </Navbar>
