@@ -10,6 +10,7 @@ import AboutUs from "./pages/aboutUs/AboutUs";
 import NewsDetailPage from "./pages/newsDetailPage/NewsDetailPage";
 import Contacts from "./pages/contacts/Contacts";
 import ModalComponent from "./modal/ModalComponent";
+import {isMobileScreen} from "../utilities/browser";
 
 class App extends Component {
 
@@ -17,8 +18,18 @@ class App extends Component {
         modalIsOpen: false
     }
 
+    componentDidMount() {
+        if (isMobileScreen()) {
+            console.log('Mobile screen');
+            this.showModal()
+        }
+    }
+
+
     showModal = (e) => {
-        e.preventDefault();
+        if(e){
+            e.preventDefault();
+        }
         this.setState({ modalIsOpen: true });
     };
     closeModal = () => {

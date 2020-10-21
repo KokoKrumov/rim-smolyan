@@ -72,26 +72,6 @@ class AboutUs extends Component {
                     </div>
 
                 </div>
-                <WorkInfoLine/>
-
-                <div className='tab_list-container tab_list-container_content-dark'>
-                    <Container className='tab_list-container__layout'>
-                        <Row>
-                            <Col lg={2}>
-                                <Nav defaultActiveKey="/home" className="flex-column">
-                                    <Nav.Link className='tab_list-link' eventKey="link-3">Събития</Nav.Link>
-                                    <Nav.Link className='tab_list-link' eventKey="link-1">Новини</Nav.Link>
-                                    <Nav.Link className='tab_list-link' eventKey="link-2">Всички</Nav.Link>
-                                </Nav>
-                            </Col>
-                            <Col lg={9}>
-                                <Row>
-                                    <NewsAndEventsListHorizontal listOfNewsAndEvents={this.state.news}/>
-                                </Row>
-                            </Col>
-                        </Row>
-                    </Container>
-                </div>
             </div>
         )
     }

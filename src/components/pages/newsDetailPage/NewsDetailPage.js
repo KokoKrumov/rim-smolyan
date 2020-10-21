@@ -61,17 +61,7 @@ class NewsDetailPage extends Component {
                         ?
                         <div className='tab_list-container tab_list-container_content-dark'>
                             <Container className='tab_list-container__layout'>
-                                <Row>
-                                    <Col lg={8}>
-                                        <ArticleDetail article={this.state.article}/>
-                                    </Col>
-                                    <Col lg={2}>
-                                        <div className="socials__wrap socials__top-indent">
-                                            <p className='socials-label'>Споделете страницата</p>
-                                            <Socials/>
-                                        </div>
-                                    </Col>
-                                </Row>
+                                <ArticleDetail article={this.state.article}/>
                             </Container>
                         </div>
                         :

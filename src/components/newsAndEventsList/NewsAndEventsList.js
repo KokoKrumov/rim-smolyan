@@ -2,36 +2,52 @@ import React from 'react';
 import Col from "react-bootstrap/cjs/Col";
 
 
-function NewsAndarticlesList({listOfNewsAndEvents}) {
+function NewsAndEventsList({listOfNewsAndEvents}) {
+
+
+    function order(a, b) {
+        if (a && b) {
+            return b.key - a.key;
+        } else {
+            return null
+        }
+
+    }
+
+    const iterateOverNumber = 3;
 
     if (listOfNewsAndEvents) {
         return (
-            listOfNewsAndEvents.map((article, index) => {
-                return (
-                    <Col lg={4} key={article.id}>
-                        <div className='nae-item nae-item__vertical'>
-                            <a href={`/news/${index}`}>
-                                <div className='nae-item__img__wrap'>
-                                    {article.dateD && article.type === 'event' ?
-                                        <div className='nae-item__date__wrap'>
-                                            <p className='nae-item__date-day'>{article.dateD}</p>
-                                            <p className='nae-item__date-month'>{article.dateM}</p>
+            listOfNewsAndEvents.slice(-3, listOfNewsAndEvents.length).map((article, index) => {
+                if (index < iterateOverNumber) {
+                    return (
+                        <Col lg={4} key={article.id}>
+                            <div className='nae-item nae-item__vertical'>
+                                <a href={`/news/${index}`}>
+                                    <div className='nae-item__img__wrap'>
+                                        {article.dateD && article.type === 'event' ?
+                                            <div className='nae-item__date__wrap'>
+                                                <p className='nae-item__date-day'>{article.dateD}</p>
+                                                <p className='nae-item__date-month'>{article.dateM}</p>
+                                            </div>
+                                            :
+                                            null
+                                        }
+                                        <div className='nae-item__img'>
+                                            <img className="img-fluid" src={article.image} alt="" itemProp="image"/>
                                         </div>
-                                        :
-                                        null
-                                    }
-                                    <div className='nae-item__img'>
-                                        <img className="img-fluid" src={article.image} alt="" itemProp="image"/>
                                     </div>
-                                </div>
-                                <h5 className='h5'>
-                                    {article.title}
-                                </h5>
-                            </a>
-                        </div>
-                    </Col>
-                )
-            })
+                                    <h5 className='h5'>
+                                        {article.title}
+                                    </h5>
+                                </a>
+                            </div>
+                        </Col>
+                    )
+                } else {
+                    return null
+                }
+            }).sort(order)
 
         )
     } else {
@@ -45,4 +61,4 @@ function NewsAndarticlesList({listOfNewsAndEvents}) {
     }
 }
 
-export default NewsAndarticlesList;
+export default NewsAndEventsList;

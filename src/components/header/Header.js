@@ -53,7 +53,7 @@ function Header({showModal}) {
                                 </InputGroup>
                                 <Nav className="header-navigation__inner__child">
                                     <Nav.Link
-                                        href="#"
+                                        href="/support"
                                         onClick={(e) => {
                                             showModal(e)
                                         }}
@@ -61,7 +61,7 @@ function Header({showModal}) {
                                         Подкрепете дейността ни
                                     </Nav.Link>
                                     <p className='nav__main-link'>|</p>
-                                    <Nav.Link href="#"
+                                    <Nav.Link href="/admin"
                                               onClick={(e) => {
                                                   showModal(e)
                                               }}
@@ -99,7 +99,7 @@ function Header({showModal}) {
                                             onClick={(e) => {
                                                 showModal(e)
                                             }}
-                                            href="#">
+                                            href="/main">
                                             Основни Фондове
                                         </NavDropdown.Item>
                                         <NavDropdown.Item
@@ -107,7 +107,7 @@ function Header({showModal}) {
                                             onClick={(e) => {
                                                 showModal(e)
                                             }}
-                                            href="#">
+                                            href="/virtual">
                                             Виртуални фондове
                                         </NavDropdown.Item>
                                     </NavDropdown>
@@ -122,7 +122,11 @@ function Header({showModal}) {
                                     <Nav.Link href="/news" eventKey="news" className='nav__main-link'>
                                         <FormattedMessage id="header.menu.news"/>
                                     </Nav.Link>
-                                    <Nav.Link href="/about-us" className='nav__main-link'>
+                                    <Nav.Link href="/about-us"
+                                              onClick={(e) => {
+                                                  showModal(e)
+                                              }}
+                                              className='nav__main-link'>
                                         <FormattedMessage id="header.menu.about-us"/>
                                     </Nav.Link>
                                     <Nav.Link href="/contacts" className='nav__main-link'>

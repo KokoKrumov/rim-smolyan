@@ -5,6 +5,10 @@ import Row from "react-bootstrap/cjs/Row"
 
 function NewsAndEventsListHorizontal({listOfNewsAndEvents}) {
 
+    function order(a, b) {
+        return b.key - a.key;
+    }
+
     if (listOfNewsAndEvents) {
         return (
             listOfNewsAndEvents.map((event, index) => {
@@ -65,7 +69,7 @@ function NewsAndEventsListHorizontal({listOfNewsAndEvents}) {
                         </Row>
                     </div>
                 )
-            })
+            }).sort(order)
 
         )
     } else {

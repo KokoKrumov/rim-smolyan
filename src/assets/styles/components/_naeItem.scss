@@ -32,6 +32,7 @@
     }
 
     &-month {
+      text-align: center;
       font-family: $font-acari-bold;
       @include font-size(11px);
       @include line-height(14px);
