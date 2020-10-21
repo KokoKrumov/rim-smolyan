@@ -1,0 +1,9 @@
+SSLOptions +StrictRequire
+SSLRequireSSL
+SSLRequire %{HTTP_HOST} eq "beta.museumsmolyan.eu"
+ErrorDocument 403 https://beta.museumsmolyan.eu
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ /index.html [L]
