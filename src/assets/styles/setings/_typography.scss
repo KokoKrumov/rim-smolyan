@@ -5,7 +5,10 @@
   @include line-height(70px);
   letter-spacing: -1px;
   text-transform: uppercase;
-  word-break: break-all;
+
+  @media (max-width: 576px) {
+    word-break: break-word;
+  }
 }
 
 
@@ -16,7 +19,10 @@
   letter-spacing: -0.01em;
   text-transform: uppercase;
   margin: 0;
-  word-break: break-all;
+
+  @media (max-width: 576px) {
+    word-break: break-word;
+  }
 }
 
 .h2 {
@@ -27,7 +33,11 @@
   @include line-height(52px);
   letter-spacing: -0.01em;
   color: $dark;
-  word-break: break-all;
+
+  @media (max-width: 576px) {
+    word-break: break-word;
+  }
+
 }
 
 .h3, .h3 > .link {
