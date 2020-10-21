@@ -73,14 +73,14 @@ function Footer({showModal}) {
                                     новини
                                 </Nav.Link>
                                 <Nav.Link
+                                    onClick={(e) => {
+                                        showModal(e)
+                                    }}
                                     href="/about-us"
                                     className='nav__main-link'>
                                     за нас
                                 </Nav.Link>
                                 <Nav.Link
-                                    onClick={(e) => {
-                                        showModal(e)
-                                    }}
                                     href="/contacts"
                                     className='nav__main-link'>
                                     контакти
