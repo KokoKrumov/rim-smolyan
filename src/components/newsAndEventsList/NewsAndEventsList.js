@@ -23,7 +23,8 @@ function NewsAndEventsList({listOfNewsAndEvents}) {
                     return (
                         <Col lg={4} key={article.id}>
                             <div className='nae-item nae-item__vertical'>
-                                <a href={`/news/${index}`}>
+                                {/*MINUS 1 BECAUSE THE ARRAY STARTS WITH 0*/}
+                                <a href={`/news/${article.id-1}`}>
                                     <div className='nae-item__img__wrap'>
                                         {article.dateD && article.type === 'event' ?
                                             <div className='nae-item__date__wrap'>
