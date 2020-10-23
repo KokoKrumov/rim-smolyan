@@ -5,45 +5,28 @@ import infoIcon from "../../assets/images/info.svg";
 import Tooltip from 'react-bootstrap/Tooltip';
 import Overlay from 'react-bootstrap/Overlay'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
-import { FormattedMessage } from 'react-intl';
+import {FormattedMessage} from 'react-intl';
 
 class WorkInfoLine extends Component {
-    constructor(props) {
-        super(props);
-        this.date = new Date();
-    }
-
-    getWorkingHours() {
-        let result = '';
-        const month = this.date.getMonth();
+    getWorkingTime() {
+        let result = {};
+        const month = new Date().getMonth();
         if (month > 3 && month < 9) {
-            result = '09:00 - 18:00';
+            result = {
+                months: {
+                    active: 'working.months.summer',
+                    inactive: 'working.months.winter',
+                },
+                hours: '09:00 - 18:00',
+            };
         } else if (month < 4 || month > 8) {
-            result = '9:00 - 12:00 / 13:00 - 17:00';
-        }
-
-        return result;
-    }
-
-    getWorkingMonths() {
-        let result = [];
-        const month = this.date.getMonth();
-        if (month > 3 && month < 9) {
-            result = [4, 8];
-        } else if (month < 4 || month > 8) {
-            result = [9, 3];
-        }
-
-        return result;
-    }
-
-    getNonWorkingMonths() {
-        let result = [];
-        const month = this.date.getMonth();
-        if (month > 3 && month < 9) {
-            result = [4, 8];
-        } else if (month < 4 || month > 8) {
-            result = [9, 3];
+            result = {
+                months: {
+                    active: 'working.months.winter',
+                    inactive: 'working.months.summer',
+                },
+                hours: '09:00 - 12:00 / 13:00 - 17:00',
+            };
         }
 
         return result;
@@ -56,22 +39,23 @@ class WorkInfoLine extends Component {
                     <div className='info-line__content-wrap'>
                         <div className='info-line__item'>
                             <p className='info-line__text info-line__text-bold text-uppercase'>
-                                Работно време <span style={{marginLeft: '6px'}}>( Октомври - Април )</span>:
+                                <FormattedMessage id="working.time"/>
+                                <span style={{marginLeft: '6px'}}>( <FormattedMessage id={this.getWorkingTime().months.active}/> )</span>:
                             </p>
                         </div>
 
                         <div className='info-line__item'>
                             <p className='info-line__text info-line__text-bold'>
-                                Вторник - Неделя <span style={{marginLeft: '1rem'}}>{this.getWorkingHours()}</span>
+                                <FormattedMessage id="working.days"/>
+                                <span style={{marginLeft: '1rem'}}>{this.getWorkingTime().hours}</span>
                             </p>
                         </div>
 
                         <div className='info-line__item'>
                             <p className='info-line__text'>
-                                Май  - Септември
+                                <FormattedMessage id={this.getWorkingTime().months.inactive}/>
                                 <span style={{marginLeft: '11px'}}><img className="" src={arrowRight} alt=""
                                                                         itemProp="image"/></span>
-
                                 <OverlayTrigger
                                     key='top'
                                     placement='top'

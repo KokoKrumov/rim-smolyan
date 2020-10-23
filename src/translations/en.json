@@ -5,6 +5,8 @@
 	"modal.warning.text": "The link to the page you wish to access is not active for the reasons set out above. The content provided for this page can be viewed on the old site of the museum. Do you want to be redirected?",
 	"text.yes": "Redirect",
 	"text.cancel": "Cancel",
-	"months.full": ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"],
-	"days.full": ["monday", "tuesday", "wednesday", "thursday", "friday"]
+	"working.time": "Working time",
+	"working.months.summer": "May - September",
+	"working.months.winter": "October - April",
+	"working.days": "Tuesday - Sunday"
 }
