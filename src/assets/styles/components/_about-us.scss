@@ -1,0 +1,23 @@
+.about-us-page {
+  color: #ffffff;
+
+  &__text__bold {
+    font-family: $font-acari-bold;
+    @include font-size(19px);
+    @include line-height(28px);
+    letter-spacing: 0.005em;
+  }
+  &__text__bold, .paragraph-2 {
+    @include margin(36px, 0px, 0px, 0px);
+  }
+
+
+  .hero__wrap {
+    height: 100%;
+    min-height: auto;
+  }
+
+  .hero-bg {
+    min-height: calc(100vh - (5.8125rem + 3.5625rem));
+  }
+}

@@ -10,35 +10,17 @@ import Row from "react-bootstrap/cjs/Row";
 import imageEvent_1 from "../../../assets/images/imageEvent.png";
 import imageEvent_2 from "../../../assets/images/imageEvent2.png";
 import imageEvent_3 from "../../../assets/images/imageEvent3.png";
-import imageItem_1 from "../../../assets/images/img-money.png";
-import imageItem_2 from "../../../assets/images/img-weapon.png";
-import imageItem_3 from "../../../assets/images/img-shlem.png";
-import bgCarousel from "../../../assets/images/bg-shlem.png";
+import imageItem_1 from "../../../assets/images/img-shlem.png";
+import imageItem_2 from "../../../assets/images/img-diskos.png";
+import imageItem_3 from "../../../assets/images/img-nakit.png";
+import bgCarousell from "../../../assets/images/bg-shlem.png";
+import bgCarousel2 from "../../../assets/images/bg-diskos.png";
+import bgCarousel3 from "../../../assets/images/bg-nakit.png";
 import CarouselMegatron from "../../carousel/carouselMegatron";
-
-let listOfNewsAndEvents = [
-    {
-        id: 1,
-        dateM: 'Октомври',
-        dateD: '18',
-        image: imageEvent_1,
-        title: 'На пататнки и песни в музея'
-    },
-    {
-        id: 2,
-        dateM: 'декември',
-        dateD: '20',
-        image: imageEvent_2,
-        title: 'Празника на Община Смолян и честване на 107 от освобождението на...'
-    },
-    {
-        id: 3,
-        dateM: '',
-        dateD: '',
-        image: imageEvent_3,
-        title: 'РИМ “Стою Шишков” - Смолян се включва в празника Никлуден'
-    }
-]
+import {connect} from 'react-redux'
+import {fetchNews} from "../../../actions";
+import Modal from "../../modal/ModalComponent";
+import ModalComponent from "../../modal/ModalComponent";
 
 let listMegatronCarousel = [
     {
@@ -51,59 +33,33 @@ let listMegatronCarousel = [
         dating: 'VI - III век пр.Хр.',
         settlement: 'с. Беден',
         number: 'A837',
-        bgImage: bgCarousel,
+        bgImage: bgCarousell,
         image: imageItem_1
     },
     {
         id: 2,
-        title: 'Шлем',
-        type: 'Бронз',
-        description: 'Изработен от две части - епикранион и горна завита напред приставка. Двата набузника са окачени подвижно към епикраниона и отпред са закопчавани с ремък. Украсени са с пластична, ниско-релефна украса, представляваща стилизирана къдрава брада и мустаци.',
-        width: 'макс. височина - 39 см.',
-        height: 'макс. широчина - 23/18 см.',
-        dating: 'VI - III век пр.Хр.',
-        settlement: 'с. Беден',
-        number: 'A837',
-        bgImage: bgCarousel,
+        title: 'Дискос',
+        type: 'Мед, сребърно покритие',
+        description: 'Богослужебен съд с узчукана релефна украса. Ръчна изработка. Изобразени са дванадесетте апостола, а в центъра - Исус Христос Вседържаител. Чипровска златарска школа.',
+        width: 'диаметър - 16 см.',
+        height: '',
+        dating: 'края на XVII - началото на XVIII век',
+        settlement: '',
+        number: 'B417',
+        bgImage: bgCarousel2,
         image: imageItem_2
     },
     {
         id: 3,
-        title: 'Шлем',
-        type: 'Бронз',
-        description: 'Изработен от две части - епикранион и горна завита напред приставка. Двата набузника са окачени подвижно към епикраниона и отпред са закопчавани с ремък. Украсени са с пластична, ниско-релефна украса, представляваща стилизирана къдрава брада и мустаци.',
-        width: 'макс. височина - 39 см.',
-        height: 'макс. широчина - 23/18 см.',
-        dating: 'VI - III век пр.Хр.',
-        settlement: 'с. Беден',
-        number: 'A837',
-        bgImage: bgCarousel,
-        image: imageItem_3
-    },
-    {
-        id: 4,
-        title: 'Шлем',
-        type: 'Бронз',
-        description: 'Изработен от две части - епикранион и горна завита напред приставка. Двата набузника са окачени подвижно към епикраниона и отпред са закопчавани с ремък. Украсени са с пластична, ниско-релефна украса, представляваща стилизирана къдрава брада и мустаци.',
-        width: 'макс. височина - 39 см.',
-        height: 'макс. широчина - 23/18 см.',
-        dating: 'VI - III век пр.Хр.',
-        settlement: 'с. Беден',
-        number: 'A837',
-        bgImage: bgCarousel,
-        image: imageItem_3
-    },
-    {
-        id: 5,
-        title: 'Шлем',
-        type: 'Бронз',
-        description: 'Изработен от две части - епикранион и горна завита напред приставка. Двата набузника са окачени подвижно към епикраниона и отпред са закопчавани с ремък. Украсени са с пластична, ниско-релефна украса, представляваща стилизирана къдрава брада и мустаци.',
-        width: 'макс. височина - 39 см.',
-        height: 'макс. широчина - 23/18 см.',
-        dating: 'VI - III век пр.Хр.',
-        settlement: 'с. Беден',
-        number: 'A837',
-        bgImage: bgCarousel,
+        title: 'Накит мъжки',
+        type: 'Сребърна сплав (занаятчийско производство)',
+        description: 'Верижка за джобен часовник. Пет пластини с неправлина форма, свързани чрез верижки. Едната група пластини са украсени с релефно изработен във филигранна и гранулирана техника растителен и геометричен мотив, края на верижките има висулки. Върху другата група е положена украса от двете страни.',
+        width: 'дължина на верижката - 77 см.',
+        height: 'тегло - 406,64 гр.',
+        dating: 'XIX век',
+        settlement: 'Смолянско',
+        number: 'E5890',
+        bgImage: bgCarousel3,
         image: imageItem_3
     }
 ]
@@ -117,10 +73,22 @@ class HomePage extends Component {
         listMegatronCarousel: null
     }
 
+    fetchData = () => {
+        if(this.props
+            && this.props.news
+            && this.props.news !== this.state.news){
+            this.props.fetchNews()
+                .then(() => {
+                    this.setState({listOfNewsAndEvents: this.props.news})
+                })
+
+        }
+    }
+
     componentDidMount() {
+        this.fetchData();
         this.setState({bgHero: heroImage})
         this.setState({bgAboutUs: aboutUsImage})
-        this.setState({listOfNewsAndEvents: listOfNewsAndEvents})
         this.setState({listMegatronCarousel: listMegatronCarousel})
     }
 
@@ -133,8 +101,13 @@ class HomePage extends Component {
                     subtitle={'от праисторическите времена до съвременността'}
                     subtitleSm={'Рaзгледайте нашите фондове'}
                 />
-                <WorkInfoLine/>
+                <WorkInfoLine />
 
+                {/*<a*/}
+                {/*    onClick={this.props.showModal}*/}
+                {/*    className="link" href="#" itemprop="url" target="" rel="noopener nofollow noreferrer">*/}
+                {/*click modal*/}
+                {/*</a>*/}
                 <div className='nae-container nae-container_content-dark'>
                     <Container>
                         <div>
@@ -145,7 +118,7 @@ class HomePage extends Component {
                                 <div className='nae__title-line__link'>
                                     <Link
                                         className="link cta_outline cta_outline__dark hvr-underline-from-right"
-                                        to="#"
+                                        to="/news"
                                         itemProp="url"
                                         target=""
                                         rel="noopener nofollow noreferrer">
@@ -208,4 +181,15 @@ class HomePage extends Component {
     }
 }
 
-export default HomePage;
+const mapStateToProps = (state) => {
+    return {
+        news: Object.values(state.news)
+    };
+}
+
+export default connect(
+    mapStateToProps,
+    {
+        fetchNews
+    }
+)(HomePage);

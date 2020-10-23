@@ -3,7 +3,7 @@
   @include font-size(14px);
   @include line-height(26px);
   /* identical to box height, or 114% */
-
+  transition: 0.3s;
   letter-spacing: 0.5px;
   text-transform: uppercase;
 
@@ -23,7 +23,25 @@
     }
   }
 
+  &__dark,
+  &__light {
+    &:hover {
+      color: $red;
+
+      &::before {
+        background: $red;
+      }
+    }
+  }
+
   &__left-line::before {
 
   }
+}
+
+button.cta_outline {
+  background: none;
+  border: none;
+  padding: inherit;
+  margin: inherit;
 }

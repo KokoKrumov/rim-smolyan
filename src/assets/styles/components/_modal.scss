@@ -1,0 +1,53 @@
+.modal {
+
+  &-dialog {
+    @media (min-width: 576px) {
+      width: 100%;
+      max-width: 1055px;
+    }
+  }
+
+  &-body {
+    padding: 30px 5%;
+    @media (min-width: 576px) {
+      padding: 70px 11%;
+    }
+  }
+
+  &-text {
+    font-family: $font-acari-regular;
+    text-align: center;
+    color: rgba(39, 35, 35, 0.85);
+  }
+
+  &-title {
+    @include font-size(18px);
+    @include line-height(24px);
+
+    @media (min-width: 576px) {
+      @include font-size(24px);
+      @include line-height(30px);
+    }
+
+    letter-spacing: 0.015em;
+  }
+
+  &-paragraph {
+    @include margin(50px, 0px, 0px, 0px);
+    @include font-size(14px);
+    @include line-height(20px);
+
+    @media (min-width: 576px) {
+      @include font-size(16px);
+      @include line-height(22px);
+    }
+    letter-spacing: 0.01em;
+  }
+
+
+  &-content {
+    border-radius: 1px;
+  }
+
+
+}

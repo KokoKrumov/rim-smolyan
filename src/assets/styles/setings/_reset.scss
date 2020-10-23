@@ -1,5 +1,6 @@
 body {
   font-size: 100%;
+  color: $dark;
 }
 
 html, body, #root {
@@ -23,4 +24,15 @@ main {
 
 header, main, footer {
   flex-shrink: 0;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+
+ol, ul, li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }

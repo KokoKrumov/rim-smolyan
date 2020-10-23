@@ -5,6 +5,10 @@
   @include line-height(70px);
   letter-spacing: -1px;
   text-transform: uppercase;
+
+  @media (max-width: 576px) {
+    word-break: break-word;
+  }
 }
 
 
@@ -15,12 +19,38 @@
   letter-spacing: -0.01em;
   text-transform: uppercase;
   margin: 0;
+
+  @media (max-width: 576px) {
+    word-break: break-word;
+  }
 }
 
-.h3 {
+.h2 {
+  /* H2 */
+
+  font-family: $font-cormorant-regular;
+  @include font-size(48px);
+  @include line-height(52px);
+  letter-spacing: -0.01em;
+  color: $dark;
+
+  @media (max-width: 576px) {
+    word-break: break-word;
+  }
+
+}
+
+.h3, .h3 > .link {
   font-family: $font-cormorant-bold;
   @include font-size(30px);
   @include line-height(34px);
+  margin: 0;
+}
+
+.h4, .h4 > .link {
+  font-family: $font-cormorant-bold;
+  @include font-size(28px);
+  @include line-height(30px);
   margin: 0;
 }
 
@@ -57,8 +87,22 @@
 
   &__sm {
     @include font-size(14px);
-    @include line-height(16px);
+    @include line-height(42px);
     text-align: center;
     letter-spacing: 0.5px;
+
+    .link {
+      @include line-height(38px);
+    }
   }
+}
+
+
+.h-sup {
+  font-family: $font-acari-bold;
+  @include font-size(12px);
+  @include line-height(16px);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(39, 35, 35, 0.5);
 }
