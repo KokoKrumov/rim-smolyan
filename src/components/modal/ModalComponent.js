@@ -1,49 +1,61 @@
 import React, {Component} from 'react';
-import {Link} from "react-router-dom";
 import Modal from 'react-bootstrap/Modal';
-import {FormattedMessage} from 'react-intl'
-import Button from "react-bootstrap/Button";
+import ModalRedirectContent from "./ModalRedirectContent";
+import ModalNedelovContent from "./ModalNedelovContent";
 
 class ModalComponent extends Component {
+
+    state = {
+        modalIsOpen: false,
+        modalContent: ''
+    }
+
+    componentDidMount() {
+        console.log(this.props)
+    }
+
+    closeModal = () => {
+        console.log('close')
+        this.setState({
+            modalIsOpen: false,
+            modalContent: ''
+        })
+    }
+
+    componentDidUpdate() {
+        if(this.props.modal && this.state.modalContent !== this.props.modal.type){
+            console.log(this.props)
+            this.setState({
+                modalIsOpen: this.props.modal.modalIsOpen,
+                modalContent: this.props.modal.type
+            })
+            this.returnContent(this.state.modalContent)
+        }
+    }
+
+    returnContent = (content) => {
+        switch (content) {
+            case 'modal-redirect':
+                // code block
+                return <ModalRedirectContent closeModal={this.closeModal}/>
+            case 'modal-laslo':
+                // code block
+                return <ModalNedelovContent closeModal={this.closeModal}/>
+            default:
+                // code block
+                return <ModalRedirectContent closeModal={this.closeModal}/>
+        }
+    }
+
 
     render() {
         return (
             <div className='modal__wrap' onClick={() => {
-                this.props.closeModal()
+                this.closeModal()
             }}>
-                <Modal show={this.props.isOpen}>
+                <Modal show={this.state.modalIsOpen}>
                     <Modal.Body>
-                        <div className="modal-text modal-title">
-                            <FormattedMessage id="modal.warning.title"/>
-                        </div>
-                        <div className="modal-text modal-paragraph">
-                            <FormattedMessage id="modal.warning.text"/>
-                        </div>
-                        <div className='d-flex justify-content-center align-items-center mt-5'>
-                            <div className='mx-4'>
-                                <a
-                                    href='http://old.museumsmolyan.eu/'
-                                    className='link cta_outline cta_outline__dark hvr-underline-from-center'
-                                    variant="secondary"
-                                    onClick={() => {
-                                        this.props.closeModal()
-                                    }}
-                                >
-                                    <FormattedMessage id="text.yes"/>
-                                </a>
-                            </div>
-                            <div className='mx-4'>
-                                <button
-                                    className='link cta_outline cta_outline__dark hvr-underline-from-center m-0'
-                                    variant="primary"
-                                    onClick={() => {
-                                        this.props.closeModal()
-                                    }}
-                                >
-                                    <FormattedMessage id="text.cancel"/>
-                                </button>
-                            </div>
-                        </div>
+                        {this.returnContent(this.state.modalContent)}
                     </Modal.Body>
                 </Modal>
             </div>

@@ -74,9 +74,9 @@ class HomePage extends Component {
     }
 
     fetchData = () => {
-        if(this.props
+        if (this.props
             && this.props.news
-            && this.props.news !== this.state.news){
+            && this.props.news !== this.state.news) {
             this.props.fetchNews()
                 .then(() => {
                     this.setState({listOfNewsAndEvents: this.props.news})
@@ -87,9 +87,15 @@ class HomePage extends Component {
 
     componentDidMount() {
         this.fetchData();
-        this.setState({bgHero: heroImage})
-        this.setState({bgAboutUs: aboutUsImage})
-        this.setState({listMegatronCarousel: listMegatronCarousel})
+        this.setState({
+            bgHero: heroImage,
+            bgAboutUs: aboutUsImage,
+            listMegatronCarousel: listMegatronCarousel
+        })
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        // console.log(this.props)
     }
 
     render() {
@@ -101,7 +107,7 @@ class HomePage extends Component {
                     subtitle={'от праисторическите времена до съвременността'}
                     subtitleSm={'Рaзгледайте нашите фондове'}
                 />
-                <WorkInfoLine />
+                <WorkInfoLine/>
 
                 {/*<a*/}
                 {/*    onClick={this.props.showModal}*/}
@@ -136,7 +142,7 @@ class HomePage extends Component {
                     </Container>
                 </div>
 
-                        <CarouselMegatron listMegatronCarousel={this.state.listMegatronCarousel}/>
+                <CarouselMegatron listMegatronCarousel={this.state.listMegatronCarousel}/>
 
                 <div
                     className='nae-container nae-container_content-dark hero-bg'

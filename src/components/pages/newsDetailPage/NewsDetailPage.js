@@ -98,9 +98,4 @@ const mapStateToProps = (state) => {
     };
 }
 
-export default connect(
-    mapStateToProps,
-    {
-        fetchNews
-    }
-)(NewsDetailPage);
+export default connect(mapStateToProps, {fetchNews})(NewsDetailPage);

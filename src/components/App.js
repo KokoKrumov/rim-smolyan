@@ -11,11 +11,14 @@ import NewsDetailPage from "./pages/newsDetailPage/NewsDetailPage";
 import Contacts from "./pages/contacts/Contacts";
 import ModalComponent from "./modal/ModalComponent";
 import {isMobileScreen} from "../utilities/browser";
+import ModalContainer from "./modal/ModalContainer";
+import HeaderContainer from "./header/HeaderContainer";
 
 class App extends Component {
 
     state = {
-        modalIsOpen: false
+        modalIsOpen: false,
+        modalContent: ''
     }
 
     componentDidMount() {
@@ -25,15 +28,21 @@ class App extends Component {
         }
     }
 
-
-    showModal = (e) => {
-        if(e){
+    //optional content for modal
+    showModal = (e, type = 'modal-redirect') => {
+        if (e) {
             e.preventDefault();
         }
-        this.setState({ modalIsOpen: true });
+        this.setState({
+            modalIsOpen: true,
+            modalContent: type
+        });
     };
     closeModal = () => {
-        this.setState({ modalIsOpen: false });
+        this.setState({
+            modalIsOpen: false,
+            modalContent: ''
+        });
     };
 
 
@@ -52,7 +61,7 @@ class App extends Component {
         return (
             <Router history={history}>
                 <div className="wrapper">
-                    <Header showModal={this.showModal}/>
+                    <HeaderContainer />
                     <main>
                         <Switch>
                             <Route path='/' exact component={this.homePage}/>
@@ -63,11 +72,8 @@ class App extends Component {
                         </Switch>
                     </main>
                     <Footer showModal={this.showModal}/>
-                    <ModalComponent isOpen={this.state.modalIsOpen} closeModal={this.closeModal}/>
-                    {/*<Route path='/streams/new' exact component={StreamCreate}/>*/}
-                    {/*<Route path='/streams/edit/:id' exact component={StreamEdit}/>*/}
-                    {/*<Route path='/streams/delete' exact component={StreamDelete}/>*/}
-                    {/*<Route path='/streams/show' exact component={StreamShow}/>*/}
+                    {/*<ModalComponent modalContent={this.state.modalContent} isOpen={this.state.modalIsOpen} closeModal={this.closeModal}/>*/}
+                    <ModalContainer/>
                 </div>
             </Router>
         );

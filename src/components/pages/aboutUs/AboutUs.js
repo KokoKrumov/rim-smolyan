@@ -1,22 +1,10 @@
 import React, {Component} from 'react';
-import heroImage from "../../../assets/images/baseHero.png";
-import aboutUsImage from "../../../assets/images/about_us_section_bg.png";
-import HeroInner from "../../hero/HeroInner";
 import Container from "react-bootstrap/cjs/Container";
 import Row from "react-bootstrap/cjs/Row";
 import Col from "react-bootstrap/cjs/Col";
-import imageEvent_1 from "../../../assets/images/imageEvent.png";
-import imageEvent_2 from "../../../assets/images/imageEvent2.png";
-import imageEvent_3 from "../../../assets/images/imageEvent3.png";
-import Nav from "react-bootstrap/cjs/Nav";
-import NewsAndEventsListHorizontal from "../../newsAndEventsList/NewsAndEventsListHorizontal";
-import {connect} from 'react-redux'
+import {connect} from 'react-redux';
 import {fetchNews} from "../../../actions";
-import Hero from "../../hero/Hero";
-import WorkInfoLine from "../../workInfoLine/WorkInfoLine";
-import aboutUsBg from "../../../assets/images/about-us-page_bg.png"
-import Hero2Cols from "../../hero/Hero2Cols";
-import {Link} from "react-router-dom";
+import aboutUsBg from "../../../assets/images/about-us-page_bg.png";
 
 class AboutUs extends Component {
 
@@ -41,17 +29,17 @@ class AboutUs extends Component {
                                     </h1>
                                 </Col>
                             </Row>
-                            <Row>
-                                <Col>
+                            <Row className='justify-content-between'>
+                                <Col lg={4}>
                                     <p className='about-us-page__text__bold'>
-                                        Създаден през 1935 г. от Стою Неделев ШИШКОВ – родоповед, учител, издател,
+                                        Създаден през 1935 г. от <span className='color-red' onClick={()=>{}}>Стою Неделев ШИШКОВ</span> – родоповед, учител, издател,
                                         музеен деец и общественик с европейски измерения, Историческият музей в Смолян е
                                         най-големият музей, съхраняващ знаците на паметта на населението, обитавало
                                         централната част на Родопската област през различните исторически епохи.
                                     </p>
 
                                 </Col>
-                                <Col>
+                                <Col lg={6}>
                                     <p className='paragraph-2'>
                                         Регионален исторически музей “Стою Шишков” днес носи с достойнство името на своя
                                         основател и провежда политиката по издирване, изучаване, опазване и
@@ -68,9 +56,7 @@ class AboutUs extends Component {
                                 </Col>
                             </Row>
                         </Container>
-
                     </div>
-
                 </div>
             </div>
         )

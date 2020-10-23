@@ -19,6 +19,11 @@ function Header({showModal}) {
         window.location.reload();
     }
 
+    function handleShowModal(e, type){
+        e.preventDefault();
+        showModal(type)
+    }
+
     return (
         <header className="header">
             <Container>
@@ -55,7 +60,7 @@ function Header({showModal}) {
                                     <Nav.Link
                                         href="/support"
                                         onClick={(e) => {
-                                            showModal(e)
+                                            handleShowModal(e, 'modal-laslonagi')
                                         }}
                                         className='nav__secondary-link'>
                                         Подкрепете дейността ни
@@ -63,7 +68,7 @@ function Header({showModal}) {
                                     <p className='nav__main-link'>|</p>
                                     <Nav.Link href="/admin"
                                               onClick={(e) => {
-                                                  showModal(e)
+                                                  handleShowModal(e, 'modal-redirect')
                                               }}
                                               className='nav__secondary-link'>
                                         Административни
@@ -97,7 +102,7 @@ function Header({showModal}) {
                                         <NavDropdown.Item
                                             className="nav__secondary-link"
                                             onClick={(e) => {
-                                                showModal(e)
+                                                showModal(e, 'modal-redirect')
                                             }}
                                             href="/main">
                                             Основни Фондове
@@ -105,7 +110,7 @@ function Header({showModal}) {
                                         <NavDropdown.Item
                                             className="nav__secondary-link"
                                             onClick={(e) => {
-                                                showModal(e)
+                                                showModal(e, 'modal-redirect')
                                             }}
                                             href="/virtual">
                                             Виртуални фондове
@@ -114,7 +119,7 @@ function Header({showModal}) {
                                     <Nav.Link
                                         href="#"
                                         onClick={(e) => {
-                                            showModal(e)
+                                            showModal(e, 'modal-redirect')
                                         }}
                                         className='nav__main-link '>
                                         Експозиции
@@ -122,11 +127,12 @@ function Header({showModal}) {
                                     <Nav.Link href="/news" eventKey="news" className='nav__main-link'>
                                         <FormattedMessage id="header.menu.news"/>
                                     </Nav.Link>
-                                    <Nav.Link href="/about-us"
-                                              onClick={(e) => {
-                                                  showModal(e)
-                                              }}
-                                              className='nav__main-link'>
+                                    <Nav.Link
+                                        // href="/about-us"
+                                        onClick={(e) => {
+                                            handleShowModal(e, 'modal-redirect')
+                                        }}
+                                        className='nav__main-link'>
                                         <FormattedMessage id="header.menu.about-us"/>
                                     </Nav.Link>
                                     <Nav.Link href="/contacts" className='nav__main-link'>
@@ -136,7 +142,7 @@ function Header({showModal}) {
                                     <Nav.Link
                                         href="#"
                                         onClick={(e) => {
-                                            showModal(e)
+                                            handleShowModal(e, 'modal-laslo');
                                         }}
                                         className='nav__main-link'>
                                         Къща музей Ласло Наги
