@@ -1,6 +1,13 @@
 {
+	"header.headline": "Smolyan History Museum “Stoyu Shishkov“",
+	"header.menu.search": "Search",
+	"header.menu.search-in": "search in smolyan history museum website",
+	"header.menu.support": "Support our cause",
+	"header.menu.administrative": "Administrative",
 	"header.menu.news": "news",
   	"header.menu.about-us": "about us",
+  	"header.menu.contacts": "contacts",
+  	"header.menu.exposures": "exposures",
 	"modal.warning.title": "The updated site of the Regional Historical Museum \"Stoyu Shishkov\" - Smolyan is still functioning in its early version, which means that some of the pages are inaccessible because their construction is in progress.",
 	"modal.warning.text": "The link to the page you wish to access is not active for the reasons set out above. The content provided for this page can be viewed on the old site of the museum. Do you want to be redirected?",
 	"text.yes": "Redirect",

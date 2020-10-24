@@ -10,9 +10,10 @@ import Nav from 'react-bootstrap/Nav'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import InputGroup from 'react-bootstrap/InputGroup'
 import FormControl from 'react-bootstrap/FormControl'
-import {FormattedMessage} from 'react-intl'
+import {FormattedMessage, useIntl} from 'react-intl'
 
 function Header({showModal}) {
+    const intl = useIntl();
     function setLanguage(lang, e) {
         e.preventDefault();
         localStorage.setItem('lang', lang);
@@ -29,9 +30,7 @@ function Header({showModal}) {
                                 <Image src={rimLogo} fluid/>
                             </div>
                             <p className='brand-text'>
-                                Регионален Исторически
-                                Музей “Стою Шишков” -
-                                Смолян
+                                <FormattedMessage id="header.headline"/>
                             </p>
                         </div>
                     </Navbar.Brand>
@@ -46,9 +45,9 @@ function Header({showModal}) {
                                         </InputGroup.Text>
                                     </InputGroup.Prepend>
                                     <FormControl
-                                        placeholder="Търсене"
-                                        aria-label="Търсене"
-                                        aria-describedby="search in  rim website"
+                                        placeholder={intl.formatMessage({ id: 'header.menu.search'})}
+                                        aria-label={intl.formatMessage({ id: 'header.menu.search'})}
+                                        aria-describedby={intl.formatMessage({ id: 'header.menu.search-in'})}
                                     />
                                 </InputGroup>
                                 <Nav className="header-navigation__inner__child">
@@ -58,7 +57,7 @@ function Header({showModal}) {
                                             showModal(e)
                                         }}
                                         className='nav__secondary-link'>
-                                        Подкрепете дейността ни
+                                        <FormattedMessage id="header.menu.support"/>
                                     </Nav.Link>
                                     <p className='nav__main-link'>|</p>
                                     <Nav.Link href="/admin"
@@ -66,7 +65,7 @@ function Header({showModal}) {
                                                   showModal(e)
                                               }}
                                               className='nav__secondary-link'>
-                                        Административни
+                                        <FormattedMessage id="header.menu.administrative"/>
                                     </Nav.Link>
                                     <NavDropdown
                                         title={
@@ -117,7 +116,7 @@ function Header({showModal}) {
                                             showModal(e)
                                         }}
                                         className='nav__main-link '>
-                                        Експозиции
+                                        <FormattedMessage id="header.menu.exposures"/>
                                     </Nav.Link>
                                     <Nav.Link href="/news" eventKey="news" className='nav__main-link'>
                                         <FormattedMessage id="header.menu.news"/>
@@ -130,7 +129,7 @@ function Header({showModal}) {
                                         <FormattedMessage id="header.menu.about-us"/>
                                     </Nav.Link>
                                     <Nav.Link href="/contacts" className='nav__main-link'>
-                                        контакти
+                                        <FormattedMessage id="header.menu.contacts"/>
                                     </Nav.Link>
                                     <p className='nav__main-link'>|</p>
                                     <Nav.Link
