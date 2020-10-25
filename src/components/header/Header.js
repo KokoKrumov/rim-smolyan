@@ -10,9 +10,10 @@ import Nav from 'react-bootstrap/Nav'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import InputGroup from 'react-bootstrap/InputGroup'
 import FormControl from 'react-bootstrap/FormControl'
-import {FormattedMessage} from 'react-intl'
+import {FormattedMessage, useIntl} from 'react-intl'
 
 function Header({showModal}) {
+    const intl = useIntl();
     function setLanguage(lang, e) {
         e.preventDefault();
         localStorage.setItem('lang', lang);
@@ -29,9 +30,7 @@ function Header({showModal}) {
                                 <Image src={rimLogo} fluid/>
                             </div>
                             <p className='brand-text'>
-                                Регионален Исторически
-                                Музей “Стою Шишков” -
-                                Смолян
+                                <FormattedMessage id="headline"/>
                             </p>
                         </div>
                     </Navbar.Brand>
@@ -46,9 +45,9 @@ function Header({showModal}) {
                                         </InputGroup.Text>
                                     </InputGroup.Prepend>
                                     <FormControl
-                                        placeholder="Търсене"
-                                        aria-label="Търсене"
-                                        aria-describedby="search in  rim website"
+                                        placeholder={intl.formatMessage({ id: 'menu.search'})}
+                                        aria-label={intl.formatMessage({ id: 'menu.search'})}
+                                        aria-describedby={intl.formatMessage({ id: 'menu.search-in'})}
                                     />
                                 </InputGroup>
                                 <Nav className="header-navigation__inner__child">
@@ -58,7 +57,7 @@ function Header({showModal}) {
                                             showModal(e)
                                         }}
                                         className='nav__secondary-link'>
-                                        Подкрепете дейността ни
+                                        <FormattedMessage id="menu.support"/>
                                     </Nav.Link>
                                     <p className='nav__main-link'>|</p>
                                     <Nav.Link href="/admin"
@@ -66,7 +65,7 @@ function Header({showModal}) {
                                                   showModal(e)
                                               }}
                                               className='nav__secondary-link'>
-                                        Административни
+                                        <FormattedMessage id="menu.administrative"/>
                                     </Nav.Link>
                                     <NavDropdown
                                         title={
@@ -92,7 +91,7 @@ function Header({showModal}) {
                             </div>
                             <div className='header-navigation__nav'>
                                 <Nav className="" activeKey="/news">
-                                    <NavDropdown title="Фондове" className='nav__main-link'
+                                    <NavDropdown title={intl.formatMessage({ id: 'menu.collections'})} className='nav__main-link'
                                                  id="collasible-nav-dropdown">
                                         <NavDropdown.Item
                                             className="nav__secondary-link"
@@ -100,7 +99,7 @@ function Header({showModal}) {
                                                 showModal(e)
                                             }}
                                             href="/main">
-                                            Основни Фондове
+                                            <FormattedMessage id="menu.main-collections"/>
                                         </NavDropdown.Item>
                                         <NavDropdown.Item
                                             className="nav__secondary-link"
@@ -108,7 +107,7 @@ function Header({showModal}) {
                                                 showModal(e)
                                             }}
                                             href="/virtual">
-                                            Виртуални фондове
+                                            <FormattedMessage id="menu.virtual-collections"/>
                                         </NavDropdown.Item>
                                     </NavDropdown>
                                     <Nav.Link
@@ -117,20 +116,20 @@ function Header({showModal}) {
                                             showModal(e)
                                         }}
                                         className='nav__main-link '>
-                                        Експозиции
+                                        <FormattedMessage id="menu.exposures"/>
                                     </Nav.Link>
                                     <Nav.Link href="/news" eventKey="news" className='nav__main-link'>
-                                        <FormattedMessage id="header.menu.news"/>
+                                        <FormattedMessage id="menu.news"/>
                                     </Nav.Link>
                                     <Nav.Link href="/about-us"
                                               onClick={(e) => {
                                                   showModal(e)
                                               }}
                                               className='nav__main-link'>
-                                        <FormattedMessage id="header.menu.about-us"/>
+                                        <FormattedMessage id="menu.about-us"/>
                                     </Nav.Link>
                                     <Nav.Link href="/contacts" className='nav__main-link'>
-                                        контакти
+                                        <FormattedMessage id="menu.contacts"/>
                                     </Nav.Link>
                                     <p className='nav__main-link'>|</p>
                                     <Nav.Link
@@ -139,7 +138,7 @@ function Header({showModal}) {
                                             showModal(e)
                                         }}
                                         className='nav__main-link'>
-                                        Къща музей Ласло Наги
+                                        <FormattedMessage id="menu.house-museum"/>
                                     </Nav.Link>
                                 </Nav>
                             </div>
