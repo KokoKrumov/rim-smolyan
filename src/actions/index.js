@@ -2,7 +2,9 @@ import {
     FETCH_NEWS,
     FETCH_ARTICLE,
     FETCH_REDIRECT_MODAL,
-    FETCH_LASLO_MODAL
+    FETCH_NEDELOV_MODAL,
+    CLOSE_NEDELOV_MODAL,
+    CLOSE_REDIRECT_MODAL
 } from './types';
 
 import streams from "../api/streams";
@@ -25,13 +27,29 @@ export const showModal = (data) => {
                 type: FETCH_REDIRECT_MODAL,
                 data: data
             }
-        case 'modal-laslo':
+        case 'modal-nedelov':
             return {
-                type: FETCH_LASLO_MODAL,
+                type: FETCH_NEDELOV_MODAL,
                 data: data
             }
         default:
             return data;
     }
+}
 
+export const closeModal = (data) => {
+    switch (data) {
+        case 'modal-redirect':
+            return {
+                type: CLOSE_REDIRECT_MODAL,
+                data: data
+            }
+        case 'modal-nedelov':
+            return {
+                type: CLOSE_NEDELOV_MODAL,
+                data: data
+            }
+        default:
+            return data;
+    }
 }

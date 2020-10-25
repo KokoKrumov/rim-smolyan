@@ -7,9 +7,6 @@ import NewsAndEventsList from "../../newsAndEventsList/NewsAndEventsList";
 import Container from "react-bootstrap/cjs/Container";
 import {Link} from "react-router-dom";
 import Row from "react-bootstrap/cjs/Row";
-import imageEvent_1 from "../../../assets/images/imageEvent.png";
-import imageEvent_2 from "../../../assets/images/imageEvent2.png";
-import imageEvent_3 from "../../../assets/images/imageEvent3.png";
 import imageItem_1 from "../../../assets/images/img-shlem.png";
 import imageItem_2 from "../../../assets/images/img-diskos.png";
 import imageItem_3 from "../../../assets/images/img-nakit.png";
@@ -18,9 +15,7 @@ import bgCarousel2 from "../../../assets/images/bg-diskos.png";
 import bgCarousel3 from "../../../assets/images/bg-nakit.png";
 import CarouselMegatron from "../../carousel/carouselMegatron";
 import {connect} from 'react-redux'
-import {fetchNews} from "../../../actions";
-import Modal from "../../modal/ModalComponent";
-import ModalComponent from "../../modal/ModalComponent";
+import {fetchNews, showModal} from "../../../actions";
 
 let listMegatronCarousel = [
     {
@@ -94,8 +89,9 @@ class HomePage extends Component {
         })
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        // console.log(this.props)
+    handleShowModal(e, data){
+        e.preventDefault();
+        this.props.showModal(data)
     }
 
     render() {
@@ -109,11 +105,6 @@ class HomePage extends Component {
                 />
                 <WorkInfoLine/>
 
-                {/*<a*/}
-                {/*    onClick={this.props.showModal}*/}
-                {/*    className="link" href="#" itemprop="url" target="" rel="noopener nofollow noreferrer">*/}
-                {/*click modal*/}
-                {/*</a>*/}
                 <div className='nae-container nae-container_content-dark'>
                     <Container>
                         <div>
@@ -142,7 +133,9 @@ class HomePage extends Component {
                     </Container>
                 </div>
 
-                <CarouselMegatron listMegatronCarousel={this.state.listMegatronCarousel}/>
+                <CarouselMegatron
+                    listMegatronCarousel={this.state.listMegatronCarousel}
+                />
 
                 <div
                     className='nae-container nae-container_content-dark hero-bg'
@@ -174,6 +167,9 @@ class HomePage extends Component {
                                         to="#"
                                         itemProp="url"
                                         target=""
+                                        onClick={(e) => {
+                                            this.handleShowModal(e, 'modal-redirect')
+                                        }}
                                         rel="noopener nofollow noreferrer">
                                         вижте повече
                                     </Link>
@@ -196,6 +192,7 @@ const mapStateToProps = (state) => {
 export default connect(
     mapStateToProps,
     {
-        fetchNews
+        fetchNews,
+        showModal
     }
 )(HomePage);

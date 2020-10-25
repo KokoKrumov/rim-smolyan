@@ -3,13 +3,17 @@ import Container from "react-bootstrap/cjs/Container";
 import Row from "react-bootstrap/cjs/Row";
 import Col from "react-bootstrap/cjs/Col";
 import {connect} from 'react-redux';
-import {fetchNews} from "../../../actions";
+import {fetchNews, showModal} from "../../../actions";
 import aboutUsBg from "../../../assets/images/about-us-page_bg.png";
 
 class AboutUs extends Component {
 
     state = {}
 
+    handleShowModal = (e, data) => {
+        e.preventDefault();
+        this.props.showModal(data);
+    }
 
     render() {
         return (
@@ -32,7 +36,9 @@ class AboutUs extends Component {
                             <Row className='justify-content-between'>
                                 <Col lg={4}>
                                     <p className='about-us-page__text__bold'>
-                                        Създаден през 1935 г. от <span className='color-red' onClick={()=>{}}>Стою Неделев ШИШКОВ</span> – родоповед, учител, издател,
+                                        Създаден през 1935 г. от <span className='color-red cursor-pointer' onClick={(e) => {
+                                        this.handleShowModal(e, 'modal-nedelov')
+                                    }}>Стою Неделев ШИШКОВ</span> – родоповед, учител, издател,
                                         музеен деец и общественик с европейски измерения, Историческият музей в Смолян е
                                         най-големият музей, съхраняващ знаците на паметта на населението, обитавало
                                         централната част на Родопската област през различните исторически епохи.
@@ -72,6 +78,7 @@ const mapStateToProps = (state) => {
 export default connect(
     mapStateToProps,
     {
-        fetchNews
+        fetchNews,
+        showModal
     }
 )(AboutUs);

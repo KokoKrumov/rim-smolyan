@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import Modal from 'react-bootstrap/Modal';
 import ModalRedirectContent from "./ModalRedirectContent";
 import ModalNedelovContent from "./ModalNedelovContent";
+import {connect} from "react-redux";
+import {closeModal} from "../../actions";
 
 class ModalComponent extends Component {
 
@@ -10,21 +12,8 @@ class ModalComponent extends Component {
         modalContent: ''
     }
 
-    componentDidMount() {
-        console.log(this.props)
-    }
-
-    closeModal = () => {
-        console.log('close')
-        this.setState({
-            modalIsOpen: false,
-            modalContent: ''
-        })
-    }
-
     componentDidUpdate() {
-        if(this.props.modal && this.state.modalContent !== this.props.modal.type){
-            console.log(this.props)
+        if (this.props.modal && this.state.modalContent !== this.props.modal.type || this.state.modalIsOpen !== this.props.modal.modalIsOpen) {
             this.setState({
                 modalIsOpen: this.props.modal.modalIsOpen,
                 modalContent: this.props.modal.type
@@ -33,27 +22,26 @@ class ModalComponent extends Component {
         }
     }
 
+    handleCloseModal = () => {
+        this.props.closeModal(this.state.modalContent);
+    }
+
     returnContent = (content) => {
         switch (content) {
             case 'modal-redirect':
-                // code block
-                return <ModalRedirectContent closeModal={this.closeModal}/>
-            case 'modal-laslo':
-                // code block
-                return <ModalNedelovContent closeModal={this.closeModal}/>
+                return <ModalRedirectContent/>
+            case 'modal-nedelov':
+                return <ModalNedelovContent/>
             default:
-                // code block
-                return <ModalRedirectContent closeModal={this.closeModal}/>
+                return <ModalRedirectContent/>
         }
     }
 
 
     render() {
         return (
-            <div className='modal__wrap' onClick={() => {
-                this.closeModal()
-            }}>
-                <Modal show={this.state.modalIsOpen}>
+            <div className='modal__wrap'>
+                <Modal show={this.state.modalIsOpen} onHide={this.handleCloseModal}>
                     <Modal.Body>
                         {this.returnContent(this.state.modalContent)}
                     </Modal.Body>
@@ -63,4 +51,13 @@ class ModalComponent extends Component {
     }
 }
 
-export default ModalComponent;
+const mapStateToProps = state => ({
+            modal: state.modal
+        })
+
+const mapDispatchToProps = dispatch => ({
+    closeModal: data => dispatch(closeModal(data))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ModalComponent);
+

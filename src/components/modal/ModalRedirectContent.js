@@ -1,7 +1,14 @@
 import React, {Component} from 'react';
 import {FormattedMessage} from 'react-intl';
+import {closeModal} from "../../actions";
+import {connect} from "react-redux";
 
 class ModalRedirectContent extends Component {
+
+    handleCloseModal = (e, data) => {
+        e.preventDefault();
+        this.props.closeModal(data);
+    }
 
     render() {
         return (
@@ -18,8 +25,8 @@ class ModalRedirectContent extends Component {
                             href='http://old.museumsmolyan.eu/'
                             className='link cta_outline cta_outline__dark hvr-underline-from-center'
                             variant="secondary"
-                            onClick={() => {
-                                this.props.closeModal()
+                            onClick={(e) => {
+                                this.handleCloseModal(e, 'modal-redirect');
                             }}
                         >
                             <FormattedMessage id="text.yes"/>
@@ -29,8 +36,8 @@ class ModalRedirectContent extends Component {
                         <button
                             className='link cta_outline cta_outline__dark hvr-underline-from-center m-0'
                             variant="primary"
-                            onClick={() => {
-                                this.props.closeModal()
+                            onClick={(e) => {
+                                this.handleCloseModal(e, 'modal-redirect');
                             }}
                         >
                             <FormattedMessage id="text.cancel"/>
@@ -42,4 +49,10 @@ class ModalRedirectContent extends Component {
     }
 }
 
-export default ModalRedirectContent;
+const mapStateToProps = state => ({})
+
+const mapDispatchToProps = dispatch => ({
+    closeModal: data => dispatch(closeModal(data))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ModalRedirectContent);

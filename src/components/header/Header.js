@@ -11,6 +11,8 @@ import NavDropdown from 'react-bootstrap/NavDropdown'
 import InputGroup from 'react-bootstrap/InputGroup'
 import FormControl from 'react-bootstrap/FormControl'
 import {FormattedMessage} from 'react-intl'
+import {showModal} from "../../actions";
+import {connect} from "react-redux";
 
 function Header({showModal}) {
     function setLanguage(lang, e) {
@@ -19,9 +21,9 @@ function Header({showModal}) {
         window.location.reload();
     }
 
-    function handleShowModal(e, type){
+    function handleShowModal(e, data) {
         e.preventDefault();
-        showModal(type)
+        showModal(data)
     }
 
     return (
@@ -60,7 +62,7 @@ function Header({showModal}) {
                                     <Nav.Link
                                         href="/support"
                                         onClick={(e) => {
-                                            handleShowModal(e, 'modal-laslonagi')
+                                            handleShowModal(e, 'modal-redirect')
                                         }}
                                         className='nav__secondary-link'>
                                         Подкрепете дейността ни
@@ -102,7 +104,7 @@ function Header({showModal}) {
                                         <NavDropdown.Item
                                             className="nav__secondary-link"
                                             onClick={(e) => {
-                                                showModal(e, 'modal-redirect')
+                                                handleShowModal(e, 'modal-redirect')
                                             }}
                                             href="/main">
                                             Основни Фондове
@@ -110,7 +112,7 @@ function Header({showModal}) {
                                         <NavDropdown.Item
                                             className="nav__secondary-link"
                                             onClick={(e) => {
-                                                showModal(e, 'modal-redirect')
+                                                handleShowModal(e, 'modal-redirect')
                                             }}
                                             href="/virtual">
                                             Виртуални фондове
@@ -119,7 +121,7 @@ function Header({showModal}) {
                                     <Nav.Link
                                         href="#"
                                         onClick={(e) => {
-                                            showModal(e, 'modal-redirect')
+                                            handleShowModal(e, 'modal-redirect')
                                         }}
                                         className='nav__main-link '>
                                         Експозиции
@@ -142,7 +144,7 @@ function Header({showModal}) {
                                     <Nav.Link
                                         href="#"
                                         onClick={(e) => {
-                                            handleShowModal(e, 'modal-laslo');
+                                            handleShowModal(e, 'modal-redirect');
                                         }}
                                         className='nav__main-link'>
                                         Къща музей Ласло Наги
@@ -157,4 +159,9 @@ function Header({showModal}) {
     );
 }
 
-export default Header;
+export default connect(
+    null,
+    {
+        showModal
+    }
+)(Header);

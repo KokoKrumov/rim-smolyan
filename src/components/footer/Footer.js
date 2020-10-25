@@ -8,8 +8,16 @@ import fbLogo from '../../assets/images/facebook1.svg'
 import twitterLogo from '../../assets/images/twitter.svg'
 import instagramLogo from '../../assets/images/instagram.svg'
 import jltLogo from '../../assets/images/JLTLogo.svg'
+import {showModal} from "../../actions";
+import {connect} from "react-redux";
 
 function Footer({showModal}) {
+
+    function handleShowModal(e, data) {
+        e.preventDefault();
+        showModal(data)
+    }
+
     return (
         <footer className="footer">
             <div className='footer__top'>
@@ -53,7 +61,7 @@ function Footer({showModal}) {
                             <Nav className="">
                                 <Nav.Link
                                     onClick={(e) => {
-                                        showModal(e)
+                                        handleShowModal(e, 'modal-redirect')
                                     }}
                                     href="/collections"
                                     className='nav__main-link'>
@@ -61,7 +69,7 @@ function Footer({showModal}) {
                                 </Nav.Link>
                                 <Nav.Link
                                     onClick={(e) => {
-                                        showModal(e)
+                                        handleShowModal(e, 'modal-redirect')
                                     }}
                                     href="#"
                                     className='nav__main-link'>
@@ -74,7 +82,7 @@ function Footer({showModal}) {
                                 </Nav.Link>
                                 <Nav.Link
                                     onClick={(e) => {
-                                        showModal(e)
+                                        handleShowModal(e, 'modal-redirect')
                                     }}
                                     href="/about-us"
                                     className='nav__main-link'>
@@ -89,7 +97,7 @@ function Footer({showModal}) {
                             <Nav className="">
                                 <Nav.Link
                                     onClick={(e) => {
-                                        showModal(e)
+                                        handleShowModal(e, 'modal-redirect')
                                     }}
                                     href="/support-us"
                                     className='nav__secondary-link'>
@@ -97,7 +105,7 @@ function Footer({showModal}) {
                                     дейността ни</Nav.Link>
                                 <Nav.Link
                                     onClick={(e) => {
-                                        showModal(e)
+                                        handleShowModal(e, 'modal-redirect')
                                     }}
                                     href="/administration"
                                     className='nav__secondary-link'>
@@ -105,7 +113,7 @@ function Footer({showModal}) {
                                 </Nav.Link>
                                 <Nav.Link
                                     onClick={(e) => {
-                                        showModal(e)
+                                        handleShowModal(e, 'modal-redirect')
                                     }}
                                     href="/policies"
                                     className='nav__secondary-link'>
@@ -115,9 +123,9 @@ function Footer({showModal}) {
                             <Nav className="">
                                 <Nav.Link
                                     onClick={(e) => {
-                                        showModal(e)
+                                        handleShowModal(e, 'modal-redirect')
                                     }}
-                                    href="/laslo"
+                                    href="/NEDELOV"
                                     className='nav__main-link'>
                                     Къща
                                     музей Ласло Наги</Nav.Link>
@@ -142,4 +150,11 @@ function Footer({showModal}) {
     );
 }
 
-export default Footer;
+
+export default connect(
+    null,
+    {
+        showModal
+    }
+)(Footer);
+
