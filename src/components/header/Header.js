@@ -10,7 +10,6 @@ import Nav from 'react-bootstrap/Nav'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import InputGroup from 'react-bootstrap/InputGroup'
 import FormControl from 'react-bootstrap/FormControl'
-import {FormattedMessage} from 'react-intl'
 import {showModal} from "../../actions";
 import {connect} from "react-redux";
 import {FormattedMessage, useIntl} from 'react-intl'
@@ -135,7 +134,7 @@ function Header({showModal}) {
                                             handleShowModal(e, 'modal-redirect')
                                         }}
                                         className='nav__main-link'>
-                                        <FormattedMessage id="header.menu.about-us"/>
+                                        <FormattedMessage id="menu.about-us"/>
                                     </Nav.Link>
                                     <Nav.Link href="/contacts" className='nav__main-link'>
                                         <FormattedMessage id="menu.contacts"/>
