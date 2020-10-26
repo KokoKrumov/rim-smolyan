@@ -10,6 +10,7 @@ import instagramLogo from '../../assets/images/instagram.svg'
 import jltLogo from '../../assets/images/JLTLogo.svg'
 import {showModal} from "../../actions";
 import {connect} from "react-redux";
+import {FormattedMessage, useIntl} from 'react-intl'
 
 function Footer({showModal}) {
 
@@ -30,9 +31,7 @@ function Footer({showModal}) {
                                         <Image src={rimLogo} fluid/>
                                     </div>
                                     <p className='brand-text'>
-                                        Регионален Исторически
-                                        Музей “Стою Шишков” -
-                                        Смолян
+                                        <FormattedMessage id="headline"/>
                                     </p>
                                 </div>
                             </Navbar.Brand>
@@ -65,7 +64,7 @@ function Footer({showModal}) {
                                     }}
                                     href="/collections"
                                     className='nav__main-link'>
-                                    Фондове
+                                    <FormattedMessage id="menu.collections"/>
                                 </Nav.Link>
                                 <Nav.Link
                                     onClick={(e) => {
@@ -73,12 +72,12 @@ function Footer({showModal}) {
                                     }}
                                     href="#"
                                     className='nav__main-link'>
-                                    Експозиции
+                                    <FormattedMessage id="menu.exposures"/>
                                 </Nav.Link>
                                 <Nav.Link
                                     href="/news"
                                     className='nav__main-link'>
-                                    новини
+                                    <FormattedMessage id="menu.news"/>
                                 </Nav.Link>
                                 <Nav.Link
                                     onClick={(e) => {
@@ -86,12 +85,12 @@ function Footer({showModal}) {
                                     }}
                                     href="/about-us"
                                     className='nav__main-link'>
-                                    за нас
+                                    <FormattedMessage id="menu.about-us"/>
                                 </Nav.Link>
                                 <Nav.Link
                                     href="/contacts"
                                     className='nav__main-link'>
-                                    контакти
+                                    <FormattedMessage id="menu.contacts"/>
                                 </Nav.Link>
                             </Nav>
                             <Nav className="">
@@ -101,15 +100,15 @@ function Footer({showModal}) {
                                     }}
                                     href="/support-us"
                                     className='nav__secondary-link'>
-                                    Подкрепете
-                                    дейността ни</Nav.Link>
+                                    <FormattedMessage id="menu.support"/>
+                                </Nav.Link>
                                 <Nav.Link
                                     onClick={(e) => {
                                         handleShowModal(e, 'modal-redirect')
                                     }}
                                     href="/administration"
                                     className='nav__secondary-link'>
-                                    Административни
+                                    <FormattedMessage id="menu.administrative"/>
                                 </Nav.Link>
                                 <Nav.Link
                                     onClick={(e) => {
@@ -117,18 +116,18 @@ function Footer({showModal}) {
                                     }}
                                     href="/policies"
                                     className='nav__secondary-link'>
-                                    Условия
-                                    за поверителност</Nav.Link>
+                                    <FormattedMessage id="menu.privacy-policy"/>
+                                </Nav.Link>
                             </Nav>
                             <Nav className="">
                                 <Nav.Link
                                     onClick={(e) => {
                                         handleShowModal(e, 'modal-redirect')
                                     }}
-                                    href="/NEDELOV"
+                                    href="/laslo"
                                     className='nav__main-link'>
-                                    Къща
-                                    музей Ласло Наги</Nav.Link>
+                                    <FormattedMessage id="menu.house-museum"/>
+                                </Nav.Link>
                             </Nav>
                         </Navbar.Collapse>
                     </Navbar>
@@ -138,10 +137,11 @@ function Footer({showModal}) {
                 <Container>
                     <div className='footer__bottom__inner'>
                         <p className='nav__secondary-link'>
-                            © 2020 Регионален исторически музей - Смолян
+                            <FormattedMessage id="copyright"/>
                         </p>
                         <p className='nav__secondary-link'>
-                            Дизайн <img className="" style={{marginLeft: '5px'}} src={jltLogo} alt="" itemProp="image"/>
+                            <FormattedMessage id="design"/>
+                            <img className="" style={{marginLeft: '5px'}} src={jltLogo} alt="" itemProp="image"/>
                         </p>
                     </div>
                 </Container>
