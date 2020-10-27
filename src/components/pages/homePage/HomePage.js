@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import heroImage from "../../../assets/images/baseHero.png";
 import aboutUsImage from "../../../assets/images/about_us_section_bg.png";
 import Hero from "../../hero/Hero";
-import WorkInfoLine from "../../workInfoLine/WorkInfoLine"
+import WorkInfoLine from "../../infoLine/WorkInfoLine"
 import NewsAndEventsList from "../../newsAndEventsList/NewsAndEventsList";
 import Container from "react-bootstrap/cjs/Container";
 import {Link} from "react-router-dom";
