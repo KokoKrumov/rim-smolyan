@@ -8,9 +8,26 @@
   }
 
   &-body {
-    padding: 30px 5%;
-    @media (min-width: 576px) {
-      padding: 70px 11%;
+    &__redirect {
+      padding: 30px 5%;
+      @media (min-width: 576px) {
+        padding: 55px 7%;
+      }
+    }
+
+    &__default {
+      @include padding(40px, 50px, 40px, 50px);
+      @media (min-width: 576px) {
+        @include padding(40px, 50px, 40px, 50px);
+      }
+
+      .title {
+        &__wrap {
+          display: flex;
+          justify-content: space-between;
+          @include margin(0px, 0px, 20px, 0px);
+        }
+      }
     }
   }
 
@@ -49,5 +66,49 @@
     border-radius: 1px;
   }
 
+  &__barelef {
+    margin-right: 25%;
+
+    .img__wrap {
+      @include margin(0px, 0px, 10px, 0px);
+    }
+
+    &__text {
+      font-family: $font-acari-regular;
+      @include font-size(13px);
+      @include line-height(15px);
+      color: rgba(39, 35, 35, 0.5);
+    }
+
+    &__wrap {
+      .paragraph-2 {
+        color: rgba(39, 35, 35, 0.8);
+      }
+    }
+  }
+
+
+  .paragraph-sm + .paragraph-sm {
+    margin-top: 15px;
+  }
+
+  &__close {
+    @include margin(-15px, -15px, 0px, 0px);
+
+    .link {
+      display: flex;
+      align-items: center;
+
+      &:hover {
+        .icon-close {
+
+        }
+      }
+    }
+
+    .icon-close {
+      @include margin(0px, 0px, 0px, 10px);
+    }
+  }
 
 }

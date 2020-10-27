@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Modal from 'react-bootstrap/Modal';
 import ModalRedirectContent from "./ModalRedirectContent";
-import ModalNedelovContent from "./ModalNedelovContent";
+import ModalNedelovContent from "./ModalShishkovContent";
 import {connect} from "react-redux";
 import {closeModal} from "../../actions";
 

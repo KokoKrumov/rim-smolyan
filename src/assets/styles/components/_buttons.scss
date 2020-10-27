@@ -9,6 +9,7 @@
 
   &__dark {
     color: $dark;
+    fill: $dark;
 
     &::before {
       background: $dark;
@@ -17,6 +18,7 @@
 
   &__light {
     color: $white;
+    fill:  $white;
 
     &::before {
       background: $white;
@@ -27,6 +29,7 @@
   &__light {
     &:hover {
       color: $red;
+      fill:  $red;
 
       &::before {
         background: $red;
