@@ -5,10 +5,18 @@ import Col from "react-bootstrap/cjs/Col";
 import {connect} from 'react-redux';
 import {fetchNews, showModal} from "../../../actions";
 import aboutUsBg from "../../../assets/images/about-us-page_bg.png";
+import AboutInfoLine from "../../infoLine/aboutInfoLine";
+import InfoColumn from "../../infoColumn/InfoColumn";
+import aboutUsHistoryBg from "../../../assets/images/about_us_history-bg.jpg";
 
 class AboutUs extends Component {
 
-    state = {}
+    state = {
+        infoColumn: {
+            title: "about-us.history.title",
+            text: "about-us.history.text"
+        }
+    }
 
     handleShowModal = (e, data) => {
         e.preventDefault();
@@ -64,6 +72,15 @@ class AboutUs extends Component {
                         </Container>
                     </div>
                 </div>
+                <main>
+                    <Container className='position-relative'>
+                        <div className='about-us__info-line__wrap'>
+                            <AboutInfoLine />
+                        </div>
+                    </Container>
+                    <InfoColumn title={this.state.infoColumn.title} text={this.state.infoColumn.text}
+                                backgroundIMage={aboutUsHistoryBg} showRulesForActivity={true}/>
+                </main>
             </div>
         )
     }

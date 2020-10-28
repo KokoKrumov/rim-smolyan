@@ -27,8 +27,7 @@ class ModalShishkovContent extends Component {
                                     <img className="img-fluid" src={StShishkovBarelef} alt="StShishkovBarelef" itemProp="image"/>
                                 </div>
                                 <figcaption className='modal__barelef__text'>
-                                    <p className="paragraph-sm">
-                                        <FormattedMessage id="about-us.shishkov.modal.figcaption"/>
+                                    <p className="paragraph-sm"  dangerouslySetInnerHTML={{ __html: intl.formatMessage({ id: 'about-us.shishkov.modal.figcaption'}) }} >
                                     </p>
                                 </figcaption>
                             </figure>
@@ -61,7 +60,6 @@ class ModalShishkovContent extends Component {
                             <Col lg={12}>
                                 <p className='paragraph-2 col-count-2'>
                                     <div dangerouslySetInnerHTML={{ __html: intl.formatMessage({ id: 'about-us.shishkov.modal.text' }) }}>
-
                                     </div>
                                 </p>
                             </Col>

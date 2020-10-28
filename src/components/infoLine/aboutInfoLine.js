@@ -7,7 +7,7 @@ import Overlay from 'react-bootstrap/Overlay'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import {FormattedMessage} from 'react-intl';
 
-class aboutInfoLine extends Component {
+class AboutInfoLine extends Component {
 
     render() {
         return (
@@ -16,37 +16,7 @@ class aboutInfoLine extends Component {
                     <div className='info-line__content-wrap'>
                         <div className='info-line__item'>
                             <p className='info-line__text info-line__text-bold text-uppercase'>
-                                <FormattedMessage id="working.time"/>
-                                <span style={{marginLeft: '6px'}}>( <FormattedMessage id={this.getWorkingTime().months.active}/> )</span>:
-                            </p>
-                        </div>
-
-                        <div className='info-line__item'>
-                            <p className='info-line__text info-line__text-bold'>
-                                <FormattedMessage id="working.days"/>
-                                <span style={{marginLeft: '1rem'}}>{this.getWorkingTime().hours}</span>
-                            </p>
-                        </div>
-
-                        <div className='info-line__item'>
-                            <p className='info-line__text'>
-                                <FormattedMessage id={this.getWorkingTime().months.inactive}/>
-                                <span style={{marginLeft: '11px'}}><img className="" src={arrowRight} alt=""
-                                                                        itemProp="image"/></span>
-                                <OverlayTrigger
-                                    key='top'
-                                    placement='top'
-                                    overlay={
-                                        <Tooltip id={`tooltip-top`}>
-                                            Понеделник е санитарен ден. (Можете да посетите музея, но предварително
-                                            молим да ни извините, ако в момента на Вашето посещение се пренареждат и
-                                            почистват зали.)
-                                        </Tooltip>
-                                    }
-                                >
-                                    <span style={{marginLeft: '2rem', cursor: 'pointer'}}><img className="" src={infoIcon} alt=""
-                                                                            itemProp="image"/></span>
-                                </OverlayTrigger>
+                                <FormattedMessage id="about-us.info-line.support"/>
                             </p>
                         </div>
                     </div>
@@ -56,4 +26,4 @@ class aboutInfoLine extends Component {
     }
 }
 
-export default aboutInfoLine;
+export default AboutInfoLine;

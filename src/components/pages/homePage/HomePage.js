@@ -16,6 +16,8 @@ import bgCarousel3 from "../../../assets/images/bg-nakit.png";
 import CarouselMegatron from "../../carousel/carouselMegatron";
 import {connect} from 'react-redux'
 import {fetchNews, showModal} from "../../../actions";
+import InfoLine from "../../infoColumn/InfoColumn";
+import InfoColumn from "../../infoColumn/InfoColumn";
 
 let listMegatronCarousel = [
     {
@@ -65,7 +67,11 @@ class HomePage extends Component {
         bgHero: null,
         bgAboutUs: null,
         listOfNewsAndEvents: null,
-        listMegatronCarousel: null
+        listMegatronCarousel: null,
+        infoColumn: {
+            title: "about-us",
+            text: "home-page.about-us.text"
+        }
     }
 
     fetchData = () => {
@@ -89,7 +95,7 @@ class HomePage extends Component {
         })
     }
 
-    handleShowModal(e, data){
+    handleShowModal(e, data) {
         e.preventDefault();
         this.props.showModal(data)
     }
@@ -137,47 +143,9 @@ class HomePage extends Component {
                     listMegatronCarousel={this.state.listMegatronCarousel}
                 />
 
-                <div
-                    className='nae-container nae-container_content-dark hero-bg'
-                    style={{
-                        backgroundImage: `url(${this.state.bgAboutUs})`
-                    }}
-                >
-                    <Container>
-                        <div>
-                            <div className='nae__title-line'>
-                                <h1 className='h1'>
-                                    За нас
-                                </h1>
+                <InfoColumn title={this.state.infoColumn.title} text={this.state.infoColumn.text}
+                            backgroundIMage={this.state.bgAboutUs} showMoreLink={true}/>
 
-                            </div>
-                            <div>
-                                <p className='paragraph-2 col-count-2'>
-                                    Регионален исторически музей „Стою Шишков” – Смолян е най-големият музей в Средните
-                                    Родопи. Съхранява веществената памет на обитателите на най-високите части на
-                                    планината през различните исторически периоди, от праисторическите времена до
-                                    съвременността.
-                                    Помещава се в специално построена сграда, ситуирана в модерния административен
-                                    център на града и разполага с богати и разнообразни колекции, възлизащи над 150 хил.
-                                    единици.
-                                    <br/>
-                                    <Link
-                                        style={{marginTop: '2rem'}}
-                                        className="link cta_outline cta_outline__dark hvr-underline-from-left"
-                                        to="#"
-                                        itemProp="url"
-                                        target=""
-                                        onClick={(e) => {
-                                            this.handleShowModal(e, 'modal-redirect')
-                                        }}
-                                        rel="noopener nofollow noreferrer">
-                                        вижте повече
-                                    </Link>
-                                </p>
-                            </div>
-                        </div>
-                    </Container>
-                </div>
             </div>
         )
     }
