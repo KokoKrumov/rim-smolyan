@@ -1,16 +1,11 @@
 import React, {Component} from 'react';
-import Breadcrumb from 'react-bootstrap/Breadcrumb'
 import Container from "react-bootstrap/cjs/Container";
 import Row from "react-bootstrap/cjs/Row";
 import Col from "react-bootstrap/cjs/Col";
-import fbLogo from "../../../assets/images/facebook1-dark.svg";
-import twitterLogo from "../../../assets/images/twitter-dark.svg";
-import instagramLogo from "../../../assets/images/instagram-dark.svg";
 import {connect} from "react-redux";
 import {fetchNews} from "../../../actions";
 import NewsAndEventsList from "../../newsAndEventsList/NewsAndEventsList";
 import ArticleDetail from "../../ArticleDetail/ArticleDetail";
-import Socials from "../../socials/socials";
 
 class NewsDetailPage extends Component {
 

@@ -45,8 +45,8 @@ function ArticleDetail({article}) {
                             <img className="img-fluid" src={article.imageDetail} alt="" itemProp="image"/>
                         </figure>
                         <div>
-                            <p className='paragraph-2'>
-                                {article.text}
+                            <p className='paragraph-2' dangerouslySetInnerHTML={{__html: `${article.text}`}}>
+
                             </p>
                         </div>
                     </Col>
