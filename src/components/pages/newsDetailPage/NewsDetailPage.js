@@ -38,7 +38,7 @@ class NewsDetailPage extends Component {
                     <div className='breadcrumb__wrap'>
                         <ol className='breadcrumb'>
                             <li className='breadcrumb-item'>
-                                <a className="link" href="/news" itemprop="url" target=""
+                                <a className="link" href="/news" itemProp="url" target=""
                                    rel="noopener nofollow noreferrer">
                                     Новини
                                 </a>
