@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
-import {FormattedMessage} from 'react-intl';
+import {FormattedMessage, injectIntl} from 'react-intl';
 import {closeModal} from "../../actions";
 import {connect} from "react-redux";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import StShishkovBarelef from '../../assets/images/St_Shishkov_barelef.png'
+import StShishkovBarelef from '../../assets/images/St_Shishkov_barelef.png';
+
 
 class ModalShishkovContent extends Component {
 
@@ -14,6 +15,8 @@ class ModalShishkovContent extends Component {
     }
 
     render() {
+
+        const {intl} = this.props;
         return (
             <React.Fragment>
                 <Row  className="modal-body__default modal__barelef__wrap">
@@ -57,7 +60,9 @@ class ModalShishkovContent extends Component {
                         <Row>
                             <Col lg={12}>
                                 <p className='paragraph-2 col-count-2'>
-                                    <FormattedMessage id="about-us.shishkov.modal.text"/>
+                                    <div dangerouslySetInnerHTML={{ __html: intl.formatMessage({ id: 'about-us.shishkov.modal.text' }) }}>
+
+                                    </div>
                                 </p>
                             </Col>
                         </Row>
@@ -74,4 +79,4 @@ const mapDispatchToProps = dispatch => ({
     closeModal: data => dispatch(closeModal(data))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(ModalShishkovContent);
+export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(ModalShishkovContent));

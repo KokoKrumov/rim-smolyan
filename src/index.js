@@ -28,7 +28,7 @@ if (isMobileScreen()) {
 ReactDOM.render(
     <IntlProvider locale={language} messages={messages[language]}>
         <Provider store={store}>
-            <App/>
+            <App />
         </Provider>
     </IntlProvider>,
 
