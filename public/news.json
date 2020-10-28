@@ -48,5 +48,17 @@
     "title": "С балон над музея в Смолян",
     "description": "С балон над музея в Смолян",
     "text": "<a href='https://bnt.bg/news/s-balon-nad-muzeya-v-smolyan-v276518-285144news.html' target='_blank' rel='noopener noreferrer'>С балон над музея в Смолян</a>"
+  },
+  {
+    "id": 5,
+    "type": "article",
+    "dateM": "Октомври",
+    "dateD": "28",
+    "dateY": "2020",
+    "image": "../images/rim-85-thumb.png",
+    "imageDetail": "../images/pozdravitelen-adres.jpg",
+    "title": "Поздравителен адрес от името на заместник-министър Румен Димитров",
+    "description": "Поздравителен адрес от името на заместник-министър Румен Димитров",
+    "text": ""
   }
 ]
