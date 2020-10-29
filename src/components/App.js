@@ -11,13 +11,16 @@ import NewsDetailPage from "./pages/newsDetailPage/NewsDetailPage";
 import Contacts from "./pages/contacts/Contacts";
 import ModalComponent from "./modal/ModalComponent";
 import {isMobileScreen} from "../utilities/browser";
+import {injectIntl} from "react-intl";
+import {connect} from "react-redux";
+import {showModal} from "../actions";
 
 class App extends Component {
 
     componentDidMount() {
         if (isMobileScreen()) {
             console.log('Mobile screen');
-            this.showModal()
+            this.props.showModal('modal-redirect')
         }
     }
 
@@ -44,4 +47,9 @@ class App extends Component {
 
 }
 
-export default App;
+export default injectIntl(connect(
+    null,
+    {
+        showModal
+    }
+)(App));

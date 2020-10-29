@@ -16,7 +16,6 @@ import bgCarousel3 from "../../../assets/images/bg-nakit.png";
 import CarouselMegatron from "../../carousel/carouselMegatron";
 import {connect} from 'react-redux'
 import {fetchNews, showModal} from "../../../actions";
-import InfoLine from "../../infoColumn/InfoColumn";
 import InfoColumn from "../../infoColumn/InfoColumn";
 
 let listMegatronCarousel = [
