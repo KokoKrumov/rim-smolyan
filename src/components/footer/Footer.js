@@ -10,7 +10,7 @@ import instagramLogo from '../../assets/images/instagram.svg'
 import jltLogo from '../../assets/images/JLTLogo.svg'
 import {showModal} from "../../actions";
 import {connect} from "react-redux";
-import {FormattedMessage, useIntl} from 'react-intl'
+import {FormattedMessage} from 'react-intl'
 
 function Footer({showModal}) {
 

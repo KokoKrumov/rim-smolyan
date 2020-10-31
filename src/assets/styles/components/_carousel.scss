@@ -1,5 +1,5 @@
 .carousel {
-  @include padding(115px, 0px, 90px, 0px);
+
 
   &__dark {
     color: $white;
@@ -63,10 +63,12 @@
   }
 
   &-megatron {
+    @include padding(115px, 0px, 90px, 0px);
+
     &__wrap {
       position: relative;
     }
-    
+
     &__row {
       justify-content: space-between;
     }
@@ -125,7 +127,13 @@
       }
     }
   }
-}
 
-.alice-carousel__next-btn {
+  &-images {
+    &__controls-wrap {
+      margin-bottom: 40px;
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+
 }

@@ -69,7 +69,10 @@ class HomePage extends Component {
         listMegatronCarousel: null,
         infoColumn: {
             title: "about-us",
-            text: "home-page.about-us.text"
+            text: "home-page.about-us.text",
+            showMoreLink: true,
+            bgAboutUs: aboutUsImage,
+            columns: 2
         }
     }
 
@@ -89,7 +92,6 @@ class HomePage extends Component {
         this.fetchData();
         this.setState({
             bgHero: heroImage,
-            bgAboutUs: aboutUsImage,
             listMegatronCarousel: listMegatronCarousel
         })
     }
@@ -142,8 +144,13 @@ class HomePage extends Component {
                     listMegatronCarousel={this.state.listMegatronCarousel}
                 />
 
-                <InfoColumn title={this.state.infoColumn.title} text={this.state.infoColumn.text}
-                            backgroundIMage={this.state.bgAboutUs} showMoreLink={true}/>
+                <InfoColumn
+                    title={this.state.infoColumn.title}
+                    text={this.state.infoColumn.text}
+                    backgroundIMage={this.state.infoColumn.bgAboutUs}
+                    showMoreLink={this.state.infoColumn.showMoreLink}
+                    columns={this.state.infoColumn.columns}
+                />
 
             </div>
         )

@@ -3,8 +3,7 @@ import Container from "react-bootstrap/cjs/Container";
 import arrowRight from "../../assets/images/arrow-right.svg";
 import infoIcon from "../../assets/images/info.svg";
 import Tooltip from 'react-bootstrap/Tooltip';
-import Overlay from 'react-bootstrap/Overlay'
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import {FormattedMessage} from 'react-intl';
 
 class WorkInfoLine extends Component {

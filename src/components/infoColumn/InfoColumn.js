@@ -1,14 +1,9 @@
 import React, {Component} from 'react';
 import Container from "react-bootstrap/cjs/Container";
-import arrowRight from "../../assets/images/arrow-right.svg";
-import infoIcon from "../../assets/images/info.svg";
-import Tooltip from 'react-bootstrap/Tooltip';
-import Overlay from 'react-bootstrap/Overlay'
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
-import {FormattedMessage, injectIntl} from 'react-intl';
+import {injectIntl} from 'react-intl';
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
-import {fetchNews, showModal} from "../../actions";
+import {showModal} from "../../actions";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
@@ -17,6 +12,7 @@ class InfoColumn extends Component {
     state = {
         showMoreLink: this.props.showMoreLink,
         showRulesForActivity: this.props.showRulesForActivity,
+        columns: this.props.columns,
         rulesForActivity: "rules-for-activity",
         seeMore: "see-more"
     }
@@ -44,7 +40,7 @@ class InfoColumn extends Component {
 
                         </div>
                         <div>
-                            <p className='paragraph-2 col-count-2'
+                            <p className={`paragraph-2 col-count-${this.state.columns}`}
                                dangerouslySetInnerHTML={{__html: intl.formatMessage({id: this.props.text})}}>
                             </p>
                             <Row>

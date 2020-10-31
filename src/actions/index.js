@@ -4,7 +4,8 @@ import {
     FETCH_REDIRECT_MODAL,
     FETCH_NEDELOV_MODAL,
     CLOSE_NEDELOV_MODAL,
-    CLOSE_REDIRECT_MODAL
+    CLOSE_REDIRECT_MODAL,
+    FETCH_RIM_BUILDING_IMAGES
 } from './types';
 
 import streams from "../api/streams";
@@ -13,6 +14,11 @@ import streams from "../api/streams";
 export const fetchNews = () => async dispatch => {
     const response = await streams.get('/news.json');
     dispatch({type: FETCH_NEWS, payload: response.data})
+}
+
+export const fetchRimBuildingImages = () => async dispatch => {
+    const response = await streams.get('/rim-building-images.json');
+    dispatch({type: FETCH_RIM_BUILDING_IMAGES, payload: response.data})
 }
 
 export const fetchArticle = (id) => async dispatch => {

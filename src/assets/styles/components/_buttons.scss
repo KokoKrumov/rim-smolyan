@@ -40,6 +40,15 @@
   &__left-line::before {
 
   }
+
+  &__border-overflow {
+    border-bottom: 2px solid;
+    @include padding(0px, 0px, 0px, 50px);
+
+    &__light {
+      border-color: $light;
+    }
+  }
 }
 
 button.cta_outline {

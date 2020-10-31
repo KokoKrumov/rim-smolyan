@@ -3,18 +3,40 @@ import Container from "react-bootstrap/cjs/Container";
 import Row from "react-bootstrap/cjs/Row";
 import Col from "react-bootstrap/cjs/Col";
 import {connect} from 'react-redux';
-import {fetchNews, showModal} from "../../../actions";
+import {fetchNews, fetchRimBuildingImages, showModal} from "../../../actions";
 import aboutUsBg from "../../../assets/images/about-us-page_bg.png";
 import AboutInfoLine from "../../infoLine/aboutInfoLine";
 import InfoColumn from "../../infoColumn/InfoColumn";
 import aboutUsHistoryBg from "../../../assets/images/about_us_history-bg.jpg";
+import CarouselImages from "../../carousel/carouselImages";
 
 class AboutUs extends Component {
 
     state = {
         infoColumn: {
-            title: "about-us.history.title",
-            text: "about-us.history.text"
+            listBuildingImagesCarousel: null,
+            history: {
+                title: "about-us.history.title",
+                text: "about-us.history.text",
+                showRulesForActivity: true,
+                aboutUsHistoryBg: aboutUsHistoryBg,
+                columns: 2
+            },
+            building: {
+                title: "about-us.building.title",
+                text: "about-us.building.text",
+                columns: 1
+            }
+        }
+    }
+
+    componentDidMount() {
+        if (this.props && this.props.rimBuildingImages && this.state.listBuildingImagesCarousel !== this.props.rimBuildingImages) {
+            this.props.fetchRimBuildingImages()
+                .then(() => {
+                    this.setState({listBuildingImagesCarousel: this.props.rimBuildingImages})
+                    console.log(this.props.rimBuildingImages)
+                })
         }
     }
 
@@ -44,9 +66,11 @@ class AboutUs extends Component {
                             <Row className='justify-content-between'>
                                 <Col lg={4}>
                                     <p className='about-us-page__text__bold'>
-                                        Създаден през 1935 г. от <span className='color-red cursor-pointer' onClick={(e) => {
-                                        this.handleShowModal(e, 'modal-nedelov')
-                                    }}>Стою Неделев ШИШКОВ</span> – родоповед, учител, издател,
+                                        Създаден през 1935 г. от <span className='color-red cursor-pointer'
+                                                                       onClick={(e) => {
+                                                                           this.handleShowModal(e, 'modal-nedelov')
+                                                                       }}>Стою Неделев ШИШКОВ</span> – родоповед,
+                                        учител, издател,
                                         музеен деец и общественик с европейски измерения, Историческият музей в Смолян е
                                         най-големият музей, съхраняващ знаците на паметта на населението, обитавало
                                         централната част на Родопската област през различните исторически епохи.
@@ -73,13 +97,45 @@ class AboutUs extends Component {
                     </div>
                 </div>
                 <main>
-                    <Container className='position-relative'>
-                        <div className='about-us__info-line__wrap'>
-                            <AboutInfoLine />
-                        </div>
+                    <Container className='container position-relative'>
+                               <Col>
+                                   <div className='about-us__info-line__wrap'>
+                                       <AboutInfoLine/>
+                                   </div>
+                               </Col>
                     </Container>
-                    <InfoColumn title={this.state.infoColumn.title} text={this.state.infoColumn.text}
-                                backgroundIMage={aboutUsHistoryBg} showRulesForActivity={true}/>
+                    <InfoColumn
+                        title={this.state.infoColumn.history.title}
+                        text={this.state.infoColumn.history.text}
+                        backgroundIMage={this.state.infoColumn.history.aboutUsHistoryBg}
+                        showRulesForActivity={this.state.infoColumn.history.showRulesForActivity}
+                        columns={this.state.infoColumn.history.columns}
+                    />
+
+                    <Container>
+                        <Row className='justify-content-between'>
+                            <Col lg={5}>
+                                <Row>
+                                    <InfoColumn
+                                        title={this.state.infoColumn.building.title}
+                                        text={this.state.infoColumn.building.text}
+                                        columns={this.state.infoColumn.building.columns}
+                                    />
+                                </Row>
+                            </Col>
+                            <Col lg={6}>
+                                <Row>
+                                    <Col>
+                                        <div className="about-us-page__building-carousel nae-container">
+                                            <CarouselImages
+                                                listImages={this.state.listBuildingImagesCarousel}
+                                            />
+                                        </div>
+                                    </Col>
+                                </Row>
+                            </Col>
+                        </Row>
+                    </Container>
                 </main>
             </div>
         )
@@ -88,7 +144,7 @@ class AboutUs extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        news: Object.values(state.news)
+        rimBuildingImages: Object.values(state.rimBuildingImages)
     };
 }
 
@@ -96,6 +152,7 @@ export default connect(
     mapStateToProps,
     {
         fetchNews,
-        showModal
+        showModal,
+        fetchRimBuildingImages
     }
 )(AboutUs);
