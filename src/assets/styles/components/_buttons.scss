@@ -15,6 +15,14 @@
       background: $dark;
     }
   }
+  &__red {
+    color: $red;
+    fill: $red;
+
+    &::before {
+      background: $red;
+    }
+  }
 
   &__light {
     color: $white;
@@ -33,6 +41,17 @@
 
       &::before {
         background: $red;
+      }
+    }
+  }
+
+  &__red {
+    &:hover {
+      color: $dark;
+      fill:  $dark;
+
+      &::before {
+        background: $dark;
       }
     }
   }

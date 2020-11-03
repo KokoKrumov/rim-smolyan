@@ -5,7 +5,11 @@ import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import {showModal} from "../../actions";
 
-class AboutInfoLine extends Component {
+class CardInfoLine extends Component {
+
+    state = {
+        title: this.props.title
+    }
 
     handleShowModal(e, data) {
         e.preventDefault();
@@ -16,17 +20,18 @@ class AboutInfoLine extends Component {
 
         const {intl} = this.props;
         return (
-            <div className='info-line info-line__red info-line__titled'>
-                <Container>
+            <div className='info-line info-line__card info-line__bordered__white info-line__titled'>
                     <div className='info-line__content-wrap'>
                         <div className='info-line__titled__item'>
-                            <p className='info-line__titled__text info-line__text-bold'>
-                                <FormattedMessage id="about-us.info-line.support"/>
-                            </p>
+                            <h2 className='h2'
+                               dangerouslySetInnerHTML={{__html: intl.formatMessage({id: this.state.title})}}
+                            >
+
+                            </h2>
                             <p className='info-line__titled__text info-line__text-bold'>
                                 <Link
 
-                                    className="link cta_outline cta_outline__light cta_outline__border-overflow"
+                                    className="link cta_outline cta_outline__red cta_outline__border-overflow"
                                     to="#"
                                     itemProp="url"
                                     target=""
@@ -39,7 +44,6 @@ class AboutInfoLine extends Component {
                             </p>
                         </div>
                     </div>
-                </Container>
             </div>
         )
     }
@@ -50,4 +54,4 @@ export default injectIntl(connect(
     {
         showModal
     }
-)(AboutInfoLine));
+)(CardInfoLine));
