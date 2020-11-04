@@ -8,11 +8,12 @@ import aboutUsBg from "../../../assets/images/about-us-page_bg.png";
 import AboutInfoLine from "../../infoLine/aboutInfoLine";
 import InfoColumn from "../../infoColumn/InfoColumn";
 import aboutUsHistoryBg from "../../../assets/images/about_us_history-bg.jpg";
-import accessibilityIcon from "../../../assets/images/accessibility.svg";
-import brailleIcon from "../../../assets/images/braille.svg";
+import ValentinaVasilevaImage from "../../../assets/images/team/valentina_vasileva.png";
 import CarouselImages from "../../carousel/carouselImages";
 import CardMediaHorizontal from "../../cards/cardMediaHorizontal";
 import CardInfoLine from "../../infoLine/CardInfoLine";
+import CardHeadmaster from "../../cards/cardHeadmaster";
+import {FormattedMessage} from "react-intl";
 
 class AboutUs extends Component {
 
@@ -68,6 +69,14 @@ class AboutUs extends Component {
                 </svg>,
                 text: "about-us.building.braille.text"
             }
+        },
+        rimTeam: {
+            headmaster: {
+                avatar: ValentinaVasilevaImage,
+                title: "rimTeam.headmaster.title",
+                label: "rimTeam.headmaster.label",
+                email: "rimTeam.headmaster.email"
+            },
         }
     }
 
@@ -191,6 +200,25 @@ class AboutUs extends Component {
                                 </Col>
                             </Row>
                             <CardInfoLine title={"permanent-programs"}/>
+                        </Container>
+                    </section>
+                    <section className='section-team'>
+                        <Container>
+                            <div className="section-team__title__wrap">
+                                <h1
+                                    className='h1'
+                                >
+                                    <FormattedMessage id="team"/>
+                                </h1>
+                            </div>
+                            <div className='section-team__headmaster-wrap'>
+                                <CardHeadmaster
+                                    avatar={this.state.rimTeam.headmaster.avatar}
+                                    title={this.state.rimTeam.headmaster.title}
+                                    label={this.state.rimTeam.headmaster.label}
+                                    email={this.state.rimTeam.headmaster.email}
+                                />
+                            </div>
                         </Container>
                     </section>
                 </main>

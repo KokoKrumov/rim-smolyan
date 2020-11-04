@@ -11,6 +11,10 @@
     align-items: flex-start;
     justify-content: center;
     flex-direction: row;
+
+    &__end {
+      align-items: flex-end;
+    }
   }
 
   &__icon-text {
@@ -19,6 +23,7 @@
 
     &__wrap {
       @include padding(30px, 0px, 0px, 0px);
+      height: 100%;
     }
 
 
@@ -26,6 +31,7 @@
       padding-top: 7px;
       width: 25px;
     }
+
     &__text__wrap {
       padding-left: 1rem;
       -webkit-box-flex: 1;
@@ -35,6 +41,62 @@
 
     &__text {
       color: $dark;
+    }
+  }
+
+  &__headmaster {
+
+    &__main-info {
+      display: flex;
+      align-items: center;
+    }
+
+    &-body {
+      &__title {
+        color: $dark;
+      }
+
+      &__label {
+        color: $dark-06;
+      }
+      &__email {
+        font-family: $font-acari-bold;
+        @include font-size(16px);
+        @include line-height(22px);
+
+        color: $dark-08;
+      }
+
+      &__wrap {
+        @include padding(0px, 0px, 0px, 65px);
+
+        .link-wrap {
+          margin-top: 15px;
+        }
+      }
+    }
+
+    &__wrap {
+
+
+
+      .card {
+        @include padding(50px, 65px, 60px, 55px);
+
+        &__media-horizontal {
+          justify-content: space-between;
+          align-items: flex-end;
+        }
+
+      }
+    }
+
+    &-avatar {
+      &__wrap {
+        @include width(125px);
+        @include height(125px);
+        border-radius: 50%;
+      }
     }
   }
 }

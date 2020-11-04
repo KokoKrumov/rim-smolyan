@@ -6,7 +6,7 @@ import {connect} from "react-redux";
 class ModalRedirectContent extends Component {
 
     handleCloseModal = (e, data) => {
-        e.preventDefault();
+        // e.preventDefault();
         this.props.closeModal(data);
     }
 
