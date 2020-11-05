@@ -90,7 +90,7 @@ function Footer({showModal}) {
                                 <Nav.Link
                                     href="/contacts"
                                     className='nav__main-link'>
-                                    <FormattedMessage id="menu.contacts"/>
+                                    <FormattedMessage id="menu.contact-us"/>
                                 </Nav.Link>
                             </Nav>
                             <Nav className="">
