@@ -5,7 +5,9 @@ import {
     FETCH_NEDELOV_MODAL,
     CLOSE_NEDELOV_MODAL,
     CLOSE_REDIRECT_MODAL,
-    FETCH_RIM_BUILDING_IMAGES
+    FETCH_RIM_BUILDING_IMAGES,
+    FETCH_TEAM_MODAL, CLOSE_TEAM_MODAL,
+    FETCH_TEAM
 } from './types';
 
 import streams from "../api/streams";
@@ -19,6 +21,11 @@ export const fetchNews = () => async dispatch => {
 export const fetchRimBuildingImages = () => async dispatch => {
     const response = await streams.get('/rim-building-images.json');
     dispatch({type: FETCH_RIM_BUILDING_IMAGES, payload: response.data})
+}
+
+export const fetchTeam = () => async dispatch => {
+    const response = await streams.get('/team.json');
+    dispatch({type: FETCH_TEAM, payload: response.data})
 }
 
 export const fetchArticle = (id) => async dispatch => {
@@ -38,6 +45,11 @@ export const showModal = (data) => {
                 type: FETCH_NEDELOV_MODAL,
                 data: data
             }
+        case 'modal-team':
+            return {
+                type: FETCH_TEAM_MODAL,
+                data: data
+            }
         default:
             return data;
     }
@@ -53,6 +65,11 @@ export const closeModal = (data) => {
         case 'modal-nedelov':
             return {
                 type: CLOSE_NEDELOV_MODAL,
+                data: data
+            }
+        case 'modal-team':
+            return {
+                type: CLOSE_TEAM_MODAL,
                 data: data
             }
         default:

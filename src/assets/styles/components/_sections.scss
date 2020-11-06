@@ -1,11 +1,18 @@
 .section {
   &-team {
-    @include padding(130px, 0px, 100px, 0px);
+    @include padding(70px, 0px, 40px, 0px);
     background-color: $gray;
 
     &__title__wrap {
       @include margin(0px, 0px, 40px, 0px);
       color: $dark;
+    }
+
+    &__container {
+      &-wrap {
+        @include padding(60px, 0px, 90px, 0px);
+        border-bottom: 1px solid $dark-02;
+      }
     }
   }
 }

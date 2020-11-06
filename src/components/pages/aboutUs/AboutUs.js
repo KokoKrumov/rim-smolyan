@@ -3,7 +3,7 @@ import Container from "react-bootstrap/cjs/Container";
 import Row from "react-bootstrap/cjs/Row";
 import Col from "react-bootstrap/cjs/Col";
 import {connect} from 'react-redux';
-import {fetchNews, fetchRimBuildingImages, showModal} from "../../../actions";
+import {fetchNews, fetchRimBuildingImages, fetchTeam, showModal} from "../../../actions";
 import aboutUsBg from "../../../assets/images/about-us-page_bg.png";
 import AboutInfoLine from "../../infoLine/aboutInfoLine";
 import InfoColumn from "../../infoColumn/InfoColumn";
@@ -12,8 +12,9 @@ import ValentinaVasilevaImage from "../../../assets/images/team/valentina_vasile
 import CarouselImages from "../../carousel/carouselImages";
 import CardMediaHorizontal from "../../cards/cardMediaHorizontal";
 import CardInfoLine from "../../infoLine/CardInfoLine";
-import CardHeadmaster from "../../cards/cardHeadmaster";
+import CardTeamHeadmaster from "../../cards/cardTeamHeadmaster";
 import {FormattedMessage} from "react-intl";
+import CardTeamMember from "../../cards/cardTeamMember";
 
 class AboutUs extends Component {
 
@@ -70,21 +71,26 @@ class AboutUs extends Component {
                 text: "about-us.building.braille.text"
             }
         },
-        rimTeam: {
-            headmaster: {
-                avatar: ValentinaVasilevaImage,
-                title: "rimTeam.headmaster.title",
-                label: "rimTeam.headmaster.label",
-                email: "rimTeam.headmaster.email"
-            },
-        }
+        team: null
     }
 
     componentDidMount() {
-        if (this.props && this.props.rimBuildingImages && this.state.listBuildingImagesCarousel !== this.props.rimBuildingImages) {
+        if (this.props
+            && this.props.rimBuildingImages
+            && this.state.listBuildingImagesCarousel !== this.props.rimBuildingImages
+            && this.props.team
+            && this.state.team !== this.props.team
+        ) {
             this.props.fetchRimBuildingImages()
                 .then(() => {
                     this.setState({listBuildingImagesCarousel: this.props.rimBuildingImages})
+                })
+            this.props.fetchTeam()
+                .then(()=>{
+                    this.setState({team: this.props.team})
+                })
+                .then(()=>{
+                    console.log(this.props.team)
                 })
         }
     }
@@ -203,6 +209,7 @@ class AboutUs extends Component {
                         </Container>
                     </section>
                     <section className='section-team'>
+                        <div  className='section-team__container-wrap'>
                         <Container>
                             <div className="section-team__title__wrap">
                                 <h1
@@ -212,14 +219,56 @@ class AboutUs extends Component {
                                 </h1>
                             </div>
                             <div className='section-team__headmaster-wrap'>
-                                <CardHeadmaster
-                                    avatar={this.state.rimTeam.headmaster.avatar}
-                                    title={this.state.rimTeam.headmaster.title}
-                                    label={this.state.rimTeam.headmaster.label}
-                                    email={this.state.rimTeam.headmaster.email}
-                                />
+                                {/*<CardTeamHeadmaster*/}
+                                {/*    avatar={this.state.rimTeam.headmaster.avatar}*/}
+                                {/*    title={this.state.rimTeam.headmaster.title}*/}
+                                {/*    label={this.state.rimTeam.headmaster.label}*/}
+                                {/*    email={this.state.rimTeam.headmaster.email}*/}
+                                {/*/>*/}
                             </div>
                         </Container>
+                        </div>
+
+                        <div  className='section-team__container-wrap'>
+                        <Container>
+                            <div className="section-team__title__wrap">
+                                <h1
+                                    className='h1'
+                                >
+                                    <FormattedMessage id="archeology"/>
+                                </h1>
+                            </div>
+                            <div className='section-team__headmaster-wrap'>
+                                <Row>
+                                    <Col>
+                                        {/*<CardTeamMember*/}
+                                        {/*    avatar={this.state.rimTeam.headmaster.avatar}*/}
+                                        {/*    title={this.state.rimTeam.headmaster.title}*/}
+                                        {/*    label={this.state.rimTeam.headmaster.label}*/}
+                                        {/*    email={this.state.rimTeam.headmaster.email}*/}
+                                        {/*/>*/}
+                                    </Col>
+                                    <Col>
+                                        {/*<CardTeamMember*/}
+                                        {/*    avatar={this.state.rimTeam.headmaster.avatar}*/}
+                                        {/*    title={this.state.rimTeam.headmaster.title}*/}
+                                        {/*    label={this.state.rimTeam.headmaster.label}*/}
+                                        {/*    email={this.state.rimTeam.headmaster.email}*/}
+                                        {/*/>*/}
+                                    </Col>
+                                    <Col>
+                                        {/*<CardTeamMember*/}
+                                        {/*    avatar={this.state.rimTeam.headmaster.avatar}*/}
+                                        {/*    title={this.state.rimTeam.headmaster.title}*/}
+                                        {/*    label={this.state.rimTeam.headmaster.label}*/}
+                                        {/*    email={this.state.rimTeam.headmaster.email}*/}
+                                        {/*/>*/}
+                                    </Col>
+                                </Row>
+                            </div>
+                        </Container>
+                        </div>
+
                     </section>
                 </main>
             </div>
@@ -229,14 +278,15 @@ class AboutUs extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        rimBuildingImages: Object.values(state.rimBuildingImages)
+        rimBuildingImages: Object.values(state.rimBuildingImages),
+        team: state.team
     };
 }
 
 export default connect(
     mapStateToProps,
     {
-        fetchNews,
+        fetchTeam,
         showModal,
         fetchRimBuildingImages
     }

@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import {showModal} from "../../actions";
 
-class CardHeadmaster extends Component {
+class CardTeamHeadmaster extends Component {
 
     state = {
         avatar: this.props.avatar,
@@ -22,23 +22,23 @@ class CardHeadmaster extends Component {
     render() {
         const {intl} = this.props;
         return (
-            <div className='card__headmaster__wrap'>
+            <div className='card__wrap'>
                 <div className='card  card__white-bordered card__media-horizontal'>
-                    <div  className='card__headmaster__main-info'>
-                        <div className='card__headmaster-avatar__wrap'>
+                    <div  className='card__main-info'>
+                        <div className='card-avatar__wrap'>
                             <img className="img-fluid" src={this.state.avatar} alt="" itemProp="image"/>
                         </div>
-                        <div  className='card__headmaster-body__wrap'>
-                            <h3 className='card__headmaster-body__title h3'
+                        <div  className='card-body__wrap'>
+                            <h3 className='card-body__title h3'
                                 dangerouslySetInnerHTML={{__html: intl.formatMessage({id: this.state.title})}}
                             >
                             </h3>
-                            <p className='card__headmaster-body__label paragraph-3'
+                            <p className='card-body__label paragraph-3'
                                dangerouslySetInnerHTML={{__html: intl.formatMessage({id: this.state.label})}}
                             >
                             </p>
                             <p className='link-wrap'>
-                                <a className="link card__headmaster-body__email" href={`mailto:${intl.formatMessage({id: this.state.email})}`} itemProp="url" target="" rel="noopener nofollow noreferrer">
+                                <a className="link card-body__email" href={`mailto:${intl.formatMessage({id: this.state.email})}`} itemProp="url" target="" rel="noopener nofollow noreferrer">
                                     <FormattedMessage id={this.props.email}/>
                                 </a>
                             </p>
@@ -72,5 +72,5 @@ export default injectIntl(connect(
     {
         showModal
     }
-)(CardHeadmaster));
+)(CardTeamHeadmaster));
 

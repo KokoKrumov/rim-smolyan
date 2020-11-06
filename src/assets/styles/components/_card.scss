@@ -17,6 +17,28 @@
     }
   }
 
+  &__media-vertical {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+
+    .card__main-info {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .card-avatar__wrap {
+      margin: 0 auto;
+    }
+
+
+    .card-body__wrap {
+      @include margin(28px, 0px, 0px, 0px);
+    }
+  }
+
   &__icon-text {
     @include padding(20px, 65px, 24px, 23px);
     height: 100%;
@@ -44,59 +66,78 @@
     }
   }
 
-  &__headmaster {
 
-    &__main-info {
-      display: flex;
-      align-items: center;
+  &__main-info {
+    display: flex;
+    align-items: center;
+  }
+
+  &-body {
+    &__title {
+      color: $dark;
     }
 
-    &-body {
-      &__title {
-        color: $dark;
-      }
+    &__label {
+      color: $dark-06;
+    }
 
-      &__label {
-        color: $dark-06;
-      }
-      &__email {
-        font-family: $font-acari-bold;
-        @include font-size(16px);
-        @include line-height(22px);
+    &__email {
+      font-family: $font-acari-bold;
+      @include font-size(16px);
+      @include line-height(22px);
 
-        color: $dark-08;
-      }
-
-      &__wrap {
-        @include padding(0px, 0px, 0px, 65px);
-
-        .link-wrap {
-          margin-top: 15px;
-        }
-      }
+      color: $dark-08;
     }
 
     &__wrap {
-
-
-
-      .card {
-        @include padding(50px, 65px, 60px, 55px);
-
-        &__media-horizontal {
-          justify-content: space-between;
-          align-items: flex-end;
-        }
-
+      .link-wrap {
+        margin-top: 15px;
       }
     }
+  }
 
-    &-avatar {
-      &__wrap {
-        @include width(125px);
-        @include height(125px);
-        border-radius: 50%;
+  &__wrap {
+
+    .card {
+
+      &__media-horizontal {
+        @include padding(50px, 65px, 60px, 55px);
+        justify-content: space-between;
+        align-items: flex-end;
+
+        .card-body__wrap {
+          @include padding(0px, 0px, 0px, 65px);
+        }
       }
+
+      &__media-vertical {
+        @include padding(50px, 25px, 40px, 25px);
+
+        .card__link-label {
+          @include margin(35px, 0px, 0px, 0px);
+        }
+
+        .link-wrap {
+          margin-top: 0;
+        }
+      }
+
+    }
+  }
+
+  &__link-label {
+    font-family: $font-acari-regular;
+    @include font-size(16px);
+    @include line-height(22px);
+    text-align: center;
+    color: $dark-08;
+  }
+
+  &-avatar {
+    &__wrap {
+      @include width(125px);
+      @include height(125px);
+      border-radius: 50%;
     }
   }
 }
