@@ -136,7 +136,7 @@ function Header({showModal}) {
                                         className='nav__main-link'>
                                         <FormattedMessage id="menu.about-us"/>
                                     </Nav.Link>
-                                    <Nav.Link href="/contacts" className='nav__main-link'>
+                                    <Nav.Link href="/contact-us" className='nav__main-link'>
                                         <FormattedMessage id="menu.contact-us"/>
                                     </Nav.Link>
                                     <p className='nav__main-link'>|</p>

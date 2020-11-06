@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import '../assets/styles/main.scss';
 import history from "../history";
-import {Router, Route, Switch} from "react-router-dom";
+import {Router, Route, Switch, Redirect} from "react-router-dom";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
 import HomePage from "./pages/homePage/HomePage";
@@ -10,6 +10,7 @@ import AboutUs from "./pages/aboutUs/AboutUs";
 import NewsDetailPage from "./pages/newsDetailPage/NewsDetailPage";
 import Contacts from "./pages/contacts/Contacts";
 import ModalComponent from "./modal/ModalComponent";
+import NotFound from "./pages/NotFound";
 import {isMobileScreen} from "../utilities/browser";
 import {injectIntl} from "react-intl";
 import {connect} from "react-redux";
@@ -35,7 +36,8 @@ class App extends Component {
                             <Route path='/news' exact component={NewsPage}/>
                             <Route path='/news/:articleId' exact component={NewsDetailPage}/>
                             <Route path='/about-us' exact component={AboutUs}/>
-                            <Route path='/contacts' exact component={Contacts}/>
+                            <Route path='/contact-us' exact component={Contacts}/>
+                            <Route path='*' exact component={NotFound}/>
                         </Switch>
                     </main>
                     <Footer />
