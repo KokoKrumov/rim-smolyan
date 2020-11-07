@@ -1,7 +1,7 @@
 import React from 'react';
 import Col from "react-bootstrap/cjs/Col";
-import Row from "react-bootstrap/cjs/Row"
-
+import Row from "react-bootstrap/cjs/Row";
+import {FormattedMessage} from 'react-intl';
 
 function NewsAndEventsListHorizontal({listOfNewsAndEvents}) {
 
@@ -62,7 +62,7 @@ function NewsAndEventsListHorizontal({listOfNewsAndEvents}) {
                                         itemProp="url"
                                         target=""
                                         rel="noopener nofollow noreferrer">
-                                        вижте повече
+                                        <FormattedMessage id="see-more"/>
                                     </a>
                                 </div>
                             </Col>

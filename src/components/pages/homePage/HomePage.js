@@ -17,6 +17,7 @@ import CarouselMegatron from "../../carousel/carouselMegatron";
 import {connect} from 'react-redux'
 import {fetchNews, showModal} from "../../../actions";
 import InfoColumn from "../../infoColumn/InfoColumn";
+import {FormattedMessage} from 'react-intl';
 
 let listMegatronCarousel = [
     {
@@ -126,7 +127,7 @@ class HomePage extends Component {
                                         itemProp="url"
                                         target=""
                                         rel="noopener nofollow noreferrer">
-                                        вижте всички
+                                        <FormattedMessage id="see-all"/>
                                     </Link>
 
                                 </div>
