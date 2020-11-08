@@ -1,9 +1,19 @@
+AddDefaultCharset utf-8
+
 SSLOptions +StrictRequire
 SSLRequireSSL
-SSLRequire %{HTTP_HOST} eq "beta.museumsmolyan.eu"
-ErrorDocument 403 https://beta.museumsmolyan.eu
+SSLRequire %{HTTP_HOST} eq "museumsmolyan.eu"
+ErrorDocument 403 https://museumsmolyan.eu
 
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^ /index.html [L]
+
+Redirect 301 /contacts https://museumsmolyan.eu/contact-us
+
+Header set Cache-Control "max-age=3600, public"
+
+<filesMatch ".(json)$">
+Header set Cache-Control "max-age=1800, public"
+</filesMatch>

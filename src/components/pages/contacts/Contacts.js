@@ -41,56 +41,52 @@ class Contacts extends Component {
                                             <h4 className='h4 contacts__address-label'>
                                                 Информация:
                                             </h4>
-                                            <p className='contacts__address-text'>
-                                                <ul>
-                                                    <li>
-                                                        <a className="link" href="tel:+030162727" itemProp="url"
-                                                           target=""
-                                                           rel="noopener nofollow noreferrer">
-                                                            0301/6 27 27
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a className="link" href="tel:+0879111915" itemProp="url"
-                                                           target=""
-                                                           rel="noopener nofollow noreferrer">
-                                                            0879 111 915
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a className="link" href="tel:+0879111913" itemProp="url"
-                                                           target=""
-                                                           rel="noopener nofollow noreferrer">
-                                                            0879 111 913
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </p>
+                                            <ul className='contacts__address-text'>
+                                                <li>
+                                                    <a className="link" href="tel:+030162727" itemProp="url"
+                                                       target=""
+                                                       rel="noopener nofollow noreferrer">
+                                                        0301/6 27 27
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a className="link" href="tel:+0879111915" itemProp="url"
+                                                       target=""
+                                                       rel="noopener nofollow noreferrer">
+                                                        0879 111 915
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a className="link" href="tel:+0879111913" itemProp="url"
+                                                       target=""
+                                                       rel="noopener nofollow noreferrer">
+                                                        0879 111 913
+                                                    </a>
+                                                </li>
+                                            </ul>
                                         </li>
                                         <li className='address__list-item'>
                                             <h4 className='h4 contacts__address-label'>
                                                 Пишете ни на:
                                             </h4>
-                                            <p className='contacts__address-text'>
-                                                <ul>
-                                                    <li>
-                                                        <a className="link" href="mailto:museum-sm@mail.bg"
-                                                           itemProp="url"
-                                                           target=""
-                                                           rel="noopener nofollow noreferrer">
-                                                            museum-sm@mail.bg
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a className="link" href="mailto:rim.smolyan@gmail.com"
-                                                           itemProp="url"
-                                                           target=""
-                                                           rel="noopener nofollow noreferrer">
-                                                            rim.smolyan@gmail.com
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </p>
+                                            <ul className='contacts__address-text'>
+                                                <li>
+                                                    <a className="link" href="mailto:museum-sm@mail.bg"
+                                                       itemProp="url"
+                                                       target=""
+                                                       rel="noopener nofollow noreferrer">
+                                                        museum-sm@mail.bg
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a className="link" href="mailto:rim.smolyan@gmail.com"
+                                                       itemProp="url"
+                                                       target=""
+                                                       rel="noopener nofollow noreferrer">
+                                                        rim.smolyan@gmail.com
+                                                    </a>
+                                                </li>
+                                            </ul>
                                         </li>
                                         <li className='address__list-item'>
                                             <Socials/>
@@ -142,7 +138,7 @@ class Contacts extends Component {
                                     </p>
                                     <div>
                                         <Form className='form__wrap'>
-                                            <Form.Group controlId="formBasicText">
+                                            <Form.Group controlId="form-names">
                                                 <Form.Control
                                                     disabled
                                                     required
@@ -152,7 +148,7 @@ class Contacts extends Component {
                                                     Това поле е задължително
                                                 </Form.Text>
                                             </Form.Group>
-                                            <Form.Group controlId="formBasicText">
+                                            <Form.Group controlId="form-email">
                                                 <Form.Control
                                                     disabled
                                                     required
@@ -162,7 +158,7 @@ class Contacts extends Component {
                                                     Това поле е задължително
                                                 </Form.Text>
                                             </Form.Group>
-                                            <Form.Group controlId="exampleForm.ControlTextarea1">
+                                            <Form.Group controlId="form-text">
                                                 <Form.Control
                                                     disabled
                                                     as="textarea"
