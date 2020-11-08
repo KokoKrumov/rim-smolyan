@@ -44,5 +44,14 @@
 	"team": "Team",
 	"page-not-found": "This page doesn't exist.",
 	"archeology": "Archeology",
-	"email-address": "Имейл адрес:"
+	"email-address": "Имейл адрес:",
+	"publications": "Publications",
+	"interests": "Interests",
+	"biography": "Biography",
+	"education-and-professions":"Education and professional qualification",
+	"professional-development": "Professional Development",
+	"main-interests": "Main Interests",
+	"research-projects" : "Research projects",
+	"museum-exhibitions" : "Museum exhibitions",
+	"participation": "Participation in national and international forums"
 }

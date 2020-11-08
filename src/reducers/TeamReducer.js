@@ -3,7 +3,7 @@ import {FETCH_TEAM} from '../actions/types'
 
 let INITIAL_STATE = {
     headmaster: [],
-    archaeology: [],
+    archeology: [],
     history: [],
     ethnography: [],
     scientific: [],

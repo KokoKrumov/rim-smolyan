@@ -4,6 +4,7 @@ import ModalRedirectContent from "./ModalRedirectContent";
 import ModalNedelovContent from "./ModalShishkovContent";
 import {connect} from "react-redux";
 import {closeModal} from "../../actions";
+import ModalTeamContent from "./ModalTeamContent";
 
 class ModalComponent extends Component {
 
@@ -32,6 +33,8 @@ class ModalComponent extends Component {
                 return <ModalRedirectContent/>
             case 'modal-nedelov':
                 return <ModalNedelovContent/>
+            case 'modal-team':
+                return <ModalTeamContent/>
             default:
                 return <ModalRedirectContent/>
         }

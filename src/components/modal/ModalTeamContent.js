@@ -1,0 +1,159 @@
+import React, {Component} from 'react';
+import {FormattedMessage, injectIntl} from 'react-intl';
+import {closeModal} from "../../actions";
+import {connect} from "react-redux";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import StShishkovBarelef from '../../assets/images/St_Shishkov_barelef.png';
+import Tabs from "react-bootstrap/Tabs";
+import Tab from "react-bootstrap/Tab";
+import Nav from "react-bootstrap/Nav";
+
+
+class ModalTeamContent extends Component {
+
+    handleCloseModal = (e, data) => {
+        e.preventDefault();
+        this.props.closeModal(data);
+    }
+
+    render() {
+
+        const {intl} = this.props;
+        return (
+            <React.Fragment>
+                <Row  className="modal-body__default modal-team">
+                    <Col lg={3}>
+                        <div>
+                            <figure className='figure'>
+                                <div className="img__wrap">
+                                    <img className="img-fluid" src={this.props.user.avatar} alt="StShishkovBarelef" itemProp="image"/>
+                                </div>
+                            </figure>
+                        </div>
+                    </Col>
+                    <Col lg={9}>
+                        <div className='title__wrap'>
+                           <div>
+                               <h3 className='h3'>
+                                   {this.props.user.name}
+                               </h3>
+                               <p className='card__link-label'>
+                                   {this.props.user.profession}
+                               </p>
+                               <p className='card-body__email'>
+                                   {this.props.user.email}
+                               </p>
+                           </div>
+
+                            <div className='modal__close'>
+                                <button
+                                    className='link cta_outline cta_outline__dark hvr-underline-from-center m-0'
+                                    variant="primary"
+                                    onClick={(e) => {
+                                        this.handleCloseModal(e, 'modal-team');
+                                    }}
+                                >
+                                    <FormattedMessage id="text.close"/>
+                                    <div className="icon-close">
+                                        <svg width="10" height="11" viewBox="0 0 10 11" fill="inherit" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M5.91603 5.50007L9.80991 1.60608C10.0633 1.35279 10.0633 0.943255 9.80991 0.689966C9.55662 0.436678 9.14709 0.436678 8.8938 0.689966L4.9998 4.58396L1.10592 0.689966C0.852513 0.436678 0.4431 0.436678 0.189811 0.689966C-0.0635959 0.943255 -0.0635959 1.35279 0.189811 1.60608L4.08369 5.50007L0.189811 9.39407C-0.0635959 9.64736 -0.0635959 10.0569 0.189811 10.3102C0.31604 10.4365 0.482012 10.5 0.647866 10.5C0.813719 10.5 0.979573 10.4365 1.10592 10.3102L4.9998 6.41618L8.8938 10.3102C9.02015 10.4365 9.186 10.5 9.35185 10.5C9.51771 10.5 9.68356 10.4365 9.80991 10.3102C10.0633 10.0569 10.0633 9.64736 9.80991 9.39407L5.91603 5.50007Z" fill="inherit"/>
+                                        </svg>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                        <Row>
+                            <Col lg={12}>
+                               <div className='modal_tabs-wrap'>
+                                   <Tab.Container id="uncontrolled-tab-example" defaultActiveKey="biography">
+                                       <Nav className="nav-tabs">
+                                           <Nav.Item>
+                                               <Nav.Link eventKey="biography"  className='tab-item'>
+                                                   <FormattedMessage id="biography"/>
+                                               </Nav.Link>
+                                           </Nav.Item>
+                                           <Nav.Item>
+                                               <Nav.Link eventKey="interests"  className='tab-item'>
+                                                   <FormattedMessage id="interests"/>
+                                               </Nav.Link>
+                                           </Nav.Item>
+                                           <Nav.Item>
+                                               <Nav.Link eventKey="publications"  className='tab-item'>
+                                                   <FormattedMessage id="publications"/>
+                                               </Nav.Link>
+                                           </Nav.Item>
+                                       </Nav>
+                                       <Tab.Content>
+                                           <Tab.Pane eventKey="biography">
+                                               <h3 className='h3'>
+                                                   <FormattedMessage id="biography"/>
+                                                   <p className='paragraph-2 mt-3'>
+                                                       {this.props.user.year}
+                                                   </p>
+                                                   <p className='sub-titles'>
+                                                       <FormattedMessage id="education-and-professions"/>:
+                                                   </p>
+                                                   <div className='modal-team__main-text mt-3'  dangerouslySetInnerHTML={{ __html: this.props.user.education}}>
+                                                   </div>
+                                                   <p className='sub-titles'>
+                                                       <FormattedMessage id="professional-development"/>:
+                                                   </p>
+                                                   <div className='modal-team__main-text mt-3'  dangerouslySetInnerHTML={{ __html: this.props.user.past_professions}}>
+                                                   </div>
+                                               </h3>
+                                           </Tab.Pane>
+                                           <Tab.Pane eventKey="interests">
+                                               <h3 className='h3'>
+                                                   <FormattedMessage id="interests"/>
+                                                   <p className='sub-titles'>
+                                                       <FormattedMessage id="main-interests"/>:
+                                                   </p>
+                                                   <div className='modal-team__main-text mt-3'  dangerouslySetInnerHTML={{ __html: this.props.user.interests.main}}>
+                                                   </div>
+                                                   <p className='sub-titles'>
+                                                       <FormattedMessage id="research-projects"/>:
+                                                   </p>
+                                                   <div className='modal-team__main-text mt-3'  dangerouslySetInnerHTML={{ __html: this.props.user.interests.research}}>
+                                                   </div>
+                                                   <p className='sub-titles'>
+                                                       <FormattedMessage id="museum-exhibitions"/>:
+                                                   </p>
+                                                   <div className='modal-team__main-text mt-3'  dangerouslySetInnerHTML={{ __html: this.props.user.interests.exhibitions}}>
+                                                   </div>
+                                                   <p className='sub-titles'>
+                                                       <FormattedMessage id="participation"/>:
+                                                   </p>
+                                                   <div className='modal-team__main-text mt-3'  dangerouslySetInnerHTML={{ __html: this.props.user.interests.participation}}>
+                                                   </div>
+                                               </h3>
+                                           </Tab.Pane>
+                                           <Tab.Pane eventKey="publications">
+                                               <h3 className='h3'>
+                                                   <FormattedMessage id="publications"/>
+
+                                                   <div className='modal-team__main-text mt-3'  dangerouslySetInnerHTML={{ __html: this.props.user.interests.publications}}>
+                                                   </div>
+                                               </h3>
+                                           </Tab.Pane>
+                                       </Tab.Content>
+                                   </Tab.Container>
+                               </div>
+                            </Col>
+                        </Row>
+                    </Col>
+                </Row>
+            </React.Fragment>
+        );
+    }
+}
+
+const mapStateToProps = state => ({
+    user: state.modal.user
+})
+
+const mapDispatchToProps = dispatch => ({
+    closeModal: data => dispatch(closeModal(data))
+})
+
+export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(ModalTeamContent));

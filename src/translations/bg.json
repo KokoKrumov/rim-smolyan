@@ -44,5 +44,14 @@
 	"team": "Екип",
 	"page-not-found": "Тази страница не съществува.",
 	"archeology": "Археология",
-	"email-address": "Имейл адрес:"
+	"email-address": "Имейл адрес:",
+	"publications": "Публикации",
+	"interests": "Интереси и изяви",
+	"biography": "Биография",
+	"education-and-professions":"Образование и професионална квалификация",
+	"professional-development": "Професионално развитие",
+	"main-interests": "Основни интереси",
+	"research-projects" : "Изследователски проекти",
+	"museum-exhibitions" : "Музейни изложби",
+	"participation": "Участие в национални и международни форуми"
 }

@@ -33,7 +33,7 @@ export const fetchArticle = (id) => async dispatch => {
     dispatch({type: FETCH_ARTICLE, payload: response.data})
 }
 
-export const showModal = (data) => {
+export const showModal = (data, user) => {
     switch (data) {
         case 'modal-redirect':
             return {
@@ -48,7 +48,8 @@ export const showModal = (data) => {
         case 'modal-team':
             return {
                 type: FETCH_TEAM_MODAL,
-                data: data
+                data: data,
+                user: user
             }
         default:
             return data;

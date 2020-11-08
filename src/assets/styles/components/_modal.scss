@@ -115,4 +115,63 @@
     }
   }
 
+  &-team {
+
+    .card__link-label,
+    .card-body__email {
+      text-align: left;
+    }
+
+    .card-body__email {
+      margin-top: 13px;
+    }
+
+    .sub-titles {
+      @include margin(30px, 0px, 0px, 0px);
+      font-family: $font-acari-bold;
+      @include font-size(15px);
+      @include line-height(24px);
+
+      /* identical to box height, or 160% */
+      letter-spacing: 0.01em;
+      color: $dark-09;
+    }
+
+    &__main-text p {
+      margin-bottom: 10px;
+      @extend .paragraph-2;
+    }
+  }
+
+
+  &_tabs-wrap {
+    @include margin(40px, 0px, 30px, 0px);
+
+    .nav-tabs {
+      .nav-link {
+        @include padding(5px, 0px, 5px, 0px);
+        @include margin(0px, 40px, 0px, 0px);
+
+        &:hover {
+          color: $red;
+          border-color: transparent transparent transparent;
+        }
+      }
+    }
+
+
+    .nav-tabs .nav-link.active,
+    .nav-tabs .nav-link:focus,
+    .nav-tabs .nav-link:hover:focus,
+    .nav-tabs .nav-item.show .nav-link {
+      border-bottom-width: 2px;
+      border-color: transparent transparent $red;
+      background-color: transparent;
+      color: $red;
+    }
+
+    .tab-content {
+      @include padding(30px, 0px, 0px, 0px);
+    }
+  }
 }

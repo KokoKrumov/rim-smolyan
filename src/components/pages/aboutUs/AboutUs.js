@@ -8,7 +8,6 @@ import aboutUsBg from "../../../assets/images/about-us-page_bg.png";
 import AboutInfoLine from "../../infoLine/aboutInfoLine";
 import InfoColumn from "../../infoColumn/InfoColumn";
 import aboutUsHistoryBg from "../../../assets/images/about_us_history-bg.jpg";
-import ValentinaVasilevaImage from "../../../assets/images/team/valentina_vasileva.png";
 import CarouselImages from "../../carousel/carouselImages";
 import CardMediaHorizontal from "../../cards/cardMediaHorizontal";
 import CardInfoLine from "../../infoLine/CardInfoLine";
@@ -86,11 +85,8 @@ class AboutUs extends Component {
                     this.setState({listBuildingImagesCarousel: this.props.rimBuildingImages})
                 })
             this.props.fetchTeam()
-                .then(()=>{
+                .then(() => {
                     this.setState({team: this.props.team})
-                })
-                .then(()=>{
-                    console.log(this.props.team)
                 })
         }
     }
@@ -209,64 +205,77 @@ class AboutUs extends Component {
                         </Container>
                     </section>
                     <section className='section-team'>
-                        <div  className='section-team__container-wrap'>
-                        <Container>
-                            <div className="section-team__title__wrap">
-                                <h1
-                                    className='h1'
-                                >
-                                    <FormattedMessage id="team"/>
-                                </h1>
-                            </div>
-                            <div className='section-team__headmaster-wrap'>
-                                {/*<CardTeamHeadmaster*/}
-                                {/*    avatar={this.state.rimTeam.headmaster.avatar}*/}
-                                {/*    title={this.state.rimTeam.headmaster.title}*/}
-                                {/*    label={this.state.rimTeam.headmaster.label}*/}
-                                {/*    email={this.state.rimTeam.headmaster.email}*/}
-                                {/*/>*/}
-                            </div>
-                        </Container>
+                        <div className='section-team__container-wrap'>
+                            <Container>
+                                <div className="section-team__title__wrap">
+                                    <h1
+                                        className='h1'
+                                    >
+                                        <FormattedMessage id="team"/>
+                                    </h1>
+                                </div>
+                                <div className='section-team__headmaster-wrap'>
+                                    {
+                                        this.props.team.headmaster && this.props.team.headmaster.length !== 0
+                                            ?
+                                            this.props.team.headmaster.map(headmaster => {
+                                                return (
+                                                    <CardTeamHeadmaster
+                                                        key={headmaster.id}
+                                                        user={headmaster}
+                                                    />
+                                                )
+                                            })
+                                            :
+                                            <h3 className='h3 loading'>
+                                                Loading ...
+                                            </h3>
+                                    }
+
+                                </div>
+                            </Container>
                         </div>
 
-                        <div  className='section-team__container-wrap'>
-                        <Container>
-                            <div className="section-team__title__wrap">
-                                <h1
-                                    className='h1'
-                                >
-                                    <FormattedMessage id="archeology"/>
-                                </h1>
-                            </div>
-                            <div className='section-team__headmaster-wrap'>
-                                <Row>
-                                    <Col>
-                                        {/*<CardTeamMember*/}
-                                        {/*    avatar={this.state.rimTeam.headmaster.avatar}*/}
-                                        {/*    title={this.state.rimTeam.headmaster.title}*/}
-                                        {/*    label={this.state.rimTeam.headmaster.label}*/}
-                                        {/*    email={this.state.rimTeam.headmaster.email}*/}
-                                        {/*/>*/}
-                                    </Col>
-                                    <Col>
-                                        {/*<CardTeamMember*/}
-                                        {/*    avatar={this.state.rimTeam.headmaster.avatar}*/}
-                                        {/*    title={this.state.rimTeam.headmaster.title}*/}
-                                        {/*    label={this.state.rimTeam.headmaster.label}*/}
-                                        {/*    email={this.state.rimTeam.headmaster.email}*/}
-                                        {/*/>*/}
-                                    </Col>
-                                    <Col>
-                                        {/*<CardTeamMember*/}
-                                        {/*    avatar={this.state.rimTeam.headmaster.avatar}*/}
-                                        {/*    title={this.state.rimTeam.headmaster.title}*/}
-                                        {/*    label={this.state.rimTeam.headmaster.label}*/}
-                                        {/*    email={this.state.rimTeam.headmaster.email}*/}
-                                        {/*/>*/}
-                                    </Col>
-                                </Row>
-                            </div>
-                        </Container>
+                        <div className='section-team__container-wrap'>
+                            <Container>
+                                <div className="section-team__title__wrap">
+                                    <h1
+                                        className='h1'
+                                    >
+                                        <FormattedMessage id="archeology"/>
+                                    </h1>
+                                </div>
+                                <div className='section-team__headmaster-wrap'>
+                                    <Row>
+                                        {
+                                            this.props.team.archeology && this.props.team.archeology.length !== 0
+                                                ?
+                                                this.props.team.archeology.map(headmaster => {
+                                                    return (
+                                                        <Col  key={headmaster.id}>
+                                                            <CardTeamMember
+                                                                user={headmaster}
+                                                            />
+                                                        </Col>
+                                                    )
+                                                })
+                                                :
+                                                <h3 className='h3 loading'>
+                                                    Loading ...
+                                                </h3>
+                                        }
+
+                                        <Col>
+                                            {/*<CardTeamMember*/}
+                                            {/*    avatar={this.state.rimTeam.headmaster.avatar}*/}
+                                            {/*    title={this.state.rimTeam.headmaster.title}*/}
+                                            {/*    label={this.state.rimTeam.headmaster.label}*/}
+                                            {/*    email={this.state.rimTeam.headmaster.email}*/}
+                                            {/*/>*/}
+                                        </Col>
+                                    </Row>
+                                </div>
+                            </Container>
                         </div>
 
                     </section>
