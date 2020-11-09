@@ -48,10 +48,16 @@
 	"publications": "Публикации",
 	"interests": "Интереси и изяви",
 	"biography": "Биография",
-	"education-and-professions":"Образование и професионална квалификация",
+	"education-and-professethnographyions":"Образование и професионална квалификация",
 	"professional-development": "Професионално развитие",
 	"main-interests": "Основни интереси",
 	"research-projects" : "Изследователски проекти",
 	"museum-exhibitions" : "Музейни изложби",
-	"participation": "Участие в национални и международни форуми"
+	"participation": "Участие в национални и международни форуми",
+	"history": "История",
+	"ethnography": "Етнография",
+	"funds-and-scientific-archives": "Фондове и научен архив",
+	"department": "Отдел ",
+	"public-relations": "Връзки с обществеността",
+	"administrative-and-financial-service": "Административно-финансова служба"
 }

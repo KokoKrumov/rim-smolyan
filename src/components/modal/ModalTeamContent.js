@@ -23,7 +23,7 @@ class ModalTeamContent extends Component {
         return (
             <React.Fragment>
                 <Row  className="modal-body__default modal-team">
-                    <Col lg={3}>
+                    <Col lg={2}>
                         <div>
                             <figure className='figure'>
                                 <div className="img__wrap">
@@ -32,7 +32,7 @@ class ModalTeamContent extends Component {
                             </figure>
                         </div>
                     </Col>
-                    <Col lg={9}>
+                    <Col lg={10}>
                         <div className='title__wrap'>
                            <div>
                                <h3 className='h3'>

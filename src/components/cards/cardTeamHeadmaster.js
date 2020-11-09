@@ -29,7 +29,7 @@ class CardTeamHeadmaster extends Component {
                                 {this.state.user.name}
                             </h3>
                             <p className='card-body__label paragraph-3'>
-                                {this.state.user.label}
+                                {this.state.user.role}
                             </p>
                             <p className='link-wrap'>
                                 <a className="link card-body__email" href={`mailto:${ this.state.email}`} itemProp="url" target="" rel="noopener nofollow noreferrer">

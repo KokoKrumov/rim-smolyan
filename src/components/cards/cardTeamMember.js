@@ -30,7 +30,7 @@ class CardTeamMember extends Component {
                                 {this.state.user.name}
                             </h3>
                             <p className='card-body__label paragraph-3'>
-                                {this.state.user.label}
+                                {this.state.user.role}
                             </p>
 
                             <p className='card__link-label'>

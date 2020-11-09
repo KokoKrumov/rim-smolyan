@@ -239,22 +239,23 @@ class AboutUs extends Component {
                         <div className='section-team__container-wrap'>
                             <Container>
                                 <div className="section-team__title__wrap">
-                                    <h1
-                                        className='h1'
+                                    <h2
+                                        className='h2'
                                     >
-                                        <FormattedMessage id="archeology"/>
-                                    </h1>
+                                        <FormattedMessage id="department"/>
+                                        "<FormattedMessage id="archeology"/>"
+                                    </h2>
                                 </div>
                                 <div className='section-team__headmaster-wrap'>
                                     <Row>
                                         {
                                             this.props.team.archeology && this.props.team.archeology.length !== 0
                                                 ?
-                                                this.props.team.archeology.map(headmaster => {
+                                                this.props.team.archeology.map(user => {
                                                     return (
-                                                        <Col  key={headmaster.id}>
+                                                        <Col md={4}  key={user.id}>
                                                             <CardTeamMember
-                                                                user={headmaster}
+                                                                user={user}
                                                             />
                                                         </Col>
                                                     )
@@ -265,14 +266,186 @@ class AboutUs extends Component {
                                                 </h3>
                                         }
 
-                                        <Col>
-                                            {/*<CardTeamMember*/}
-                                            {/*    avatar={this.state.rimTeam.headmaster.avatar}*/}
-                                            {/*    title={this.state.rimTeam.headmaster.title}*/}
-                                            {/*    label={this.state.rimTeam.headmaster.label}*/}
-                                            {/*    email={this.state.rimTeam.headmaster.email}*/}
-                                            {/*/>*/}
-                                        </Col>
+
+                                    </Row>
+                                </div>
+                            </Container>
+                        </div>
+
+                        <div className='section-team__container-wrap'>
+                            <Container>
+                                <div className="section-team__title__wrap">
+                                    <h2
+                                        className='h2'
+                                    >
+                                        <FormattedMessage id="department"/>
+                                        "<FormattedMessage id="history"/>"
+                                    </h2>
+                                </div>
+                                <div className='section-team__headmaster-wrap'>
+                                    <Row>
+                                        {
+                                            this.props.team.history && this.props.team.history.length !== 0
+                                                ?
+                                                this.props.team.history.map(user => {
+                                                    return (
+                                                        <Col md={4}  key={user.id}>
+                                                            <CardTeamMember
+                                                                user={user}
+                                                            />
+                                                        </Col>
+                                                    )
+                                                })
+                                                :
+                                                <h3 className='h3 loading'>
+                                                    Loading ...
+                                                </h3>
+                                        }
+
+
+                                    </Row>
+                                </div>
+                            </Container>
+                        </div>
+                        <div className='section-team__container-wrap'>
+                            <Container>
+                                <div className="section-team__title__wrap">
+                                    <h2
+                                        className='h2'
+                                    >
+                                        <FormattedMessage id="department"/>
+                                        "<FormattedMessage id="ethnography"/>"
+                                    </h2>
+                                </div>
+                                <div className='section-team__headmaster-wrap'>
+                                    <Row>
+                                        {
+                                            this.props.team.ethnography && this.props.team.ethnography.length !== 0
+                                                ?
+                                                this.props.team.ethnography.map(user => {
+                                                    return (
+                                                        <Col md={4}  key={user.id}>
+                                                            <CardTeamMember
+                                                                user={user}
+                                                            />
+                                                        </Col>
+                                                    )
+                                                })
+                                                :
+                                                <h3 className='h3 loading'>
+                                                    Loading ...
+                                                </h3>
+                                        }
+
+
+                                    </Row>
+                                </div>
+                            </Container>
+                        </div>
+
+                        <div className='section-team__container-wrap'>
+                            <Container>
+                                <div className="section-team__title__wrap">
+                                    <h2
+                                        className='h2'
+                                    >
+                                        <FormattedMessage id="department"/>
+                                        "<FormattedMessage id="funds-and-scientific-archives"/>"
+                                    </h2>
+                                </div>
+                                <div className='section-team__headmaster-wrap'>
+                                    <Row>
+                                        {
+                                            this.props.team.funds_and_scientific_archives && this.props.team.funds_and_scientific_archives.length !== 0
+                                                ?
+                                                this.props.team.funds_and_scientific_archives.map(user => {
+                                                    return (
+                                                        <Col md={4}  key={user.id}>
+                                                            <CardTeamMember
+                                                                user={user}
+                                                            />
+                                                        </Col>
+                                                    )
+                                                })
+                                                :
+                                                <h3 className='h3 loading'>
+                                                    Loading ...
+                                                </h3>
+                                        }
+
+
+                                    </Row>
+                                </div>
+                            </Container>
+                        </div>
+
+                        <div className='section-team__container-wrap'>
+                            <Container>
+                                <div className="section-team__title__wrap">
+                                    <h2
+                                        className='h2'
+                                    >
+                                        <FormattedMessage id="department"/>
+                                        "<FormattedMessage id="public-relations"/>"
+                                    </h2>
+                                </div>
+                                <div className='section-team__headmaster-wrap'>
+                                    <Row>
+                                        {
+                                            this.props.team.public_relations && this.props.team.public_relations.length !== 0
+                                                ?
+                                                this.props.team.public_relations.map(user => {
+                                                    return (
+                                                        <Col md={4}  key={user.id}>
+                                                            <CardTeamMember
+                                                                user={user}
+                                                            />
+                                                        </Col>
+                                                    )
+                                                })
+                                                :
+                                                <h3 className='h3 loading'>
+                                                    Loading ...
+                                                </h3>
+                                        }
+
+
+                                    </Row>
+                                </div>
+                            </Container>
+                        </div>
+
+                        <div className='section-team__container-wrap'>
+                            <Container>
+                                <div className="section-team__title__wrap">
+                                    <h2
+                                        className='h2'
+                                    >
+                                        <FormattedMessage id="department"/>
+                                        "<FormattedMessage id="administrative-and-financial-service"/>"
+                                    </h2>
+                                </div>
+                                <div className='section-team__headmaster-wrap'>
+                                    <Row>
+                                        {
+                                            this.props.team.public_relations && this.props.team.public_relations.length !== 0
+                                                ?
+                                                this.props.team.public_relations.map(user => {
+                                                    return (
+                                                        <Col md={4}  key={user.id}>
+                                                            <CardTeamMember
+                                                                user={user}
+                                                            />
+                                                        </Col>
+                                                    )
+                                                })
+                                                :
+                                                <h3 className='h3 loading'>
+                                                    Loading ...
+                                                </h3>
+                                        }
+
+
                                     </Row>
                                 </div>
                             </Container>
