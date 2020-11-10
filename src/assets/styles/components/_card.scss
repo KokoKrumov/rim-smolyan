@@ -81,12 +81,17 @@
       color: $dark-06;
     }
 
-    &__email {
+    &__email,
+    &__email a{
       font-family: $font-acari-bold;
       @include font-size(16px);
       @include line-height(22px);
 
       color: $dark-08;
+    }
+
+    &__email a:hover{
+     text-decoration: underline;
     }
 
     &__wrap {
@@ -138,6 +143,7 @@
       @include width(125px);
       @include height(125px);
       border-radius: 50%;
+      background-color: $gray-c4;
     }
   }
 }

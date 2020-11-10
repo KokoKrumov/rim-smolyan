@@ -117,6 +117,13 @@
 
   &-team {
 
+    .img__wrap {
+      @include width(125px);
+      @include height(125px);
+      border-radius: 50%;
+      background-color: $gray-c4;
+    }
+
     .card__link-label,
     .card-body__email {
       text-align: left;
@@ -137,9 +144,21 @@
       color: $dark-09;
     }
 
-    &__main-text p {
+    &__main-text p,
+    &__main-text li {
       margin-bottom: 10px;
       @extend .paragraph-2;
+    }
+
+    &__main-text ul {
+      margin: revert;
+      padding: revert;
+    }
+
+    &__main-text li {
+      margin: auto;
+      padding: initial;
+      list-style: disc;
     }
   }
 

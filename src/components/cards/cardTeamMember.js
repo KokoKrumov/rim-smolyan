@@ -37,9 +37,11 @@ class CardTeamMember extends Component {
                                 <FormattedMessage id="email-address"/>
                             </p>
                             <p className='link-wrap'>
-                                <a className="link card-body__email" href={`mailto:${this.state.user.email}`} itemProp="url" target="" rel="noopener nofollow noreferrer">
-                                    {this.state.user.email}
-                                </a>
+                               <span
+                                   className="link card-body__email"
+                                   dangerouslySetInnerHTML={{__html: this.state.user.email}}
+                               >
+                                </span>
                             </p>
                         </div>
                     </div>

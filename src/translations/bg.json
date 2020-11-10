@@ -48,7 +48,7 @@
 	"publications": "Публикации",
 	"interests": "Интереси и изяви",
 	"biography": "Биография",
-	"education-and-professethnographyions":"Образование и професионална квалификация",
+	"education-and-professions":"Образование и професионална квалификация",
 	"professional-development": "Професионално развитие",
 	"main-interests": "Основни интереси",
 	"research-projects" : "Изследователски проекти",
@@ -59,5 +59,6 @@
 	"funds-and-scientific-archives": "Фондове и научен архив",
 	"department": "Отдел ",
 	"public-relations": "Връзки с обществеността",
-	"administrative-and-financial-service": "Административно-финансова служба"
+	"administrative-and-financial-service": "Административно-финансова служба",
+	"professional-skills-and-competencies": "Професионални умения и компетенции"
 }
