@@ -132,6 +132,7 @@ class ModalTeamContent extends Component {
                                                     <FormattedMessage id="interests"/>
                                                 </h3>
                                                 {
+                                                    this.props.user.interests &&
                                                     this.props.user.interests.main
                                                         ?
                                                         <React.Fragment>
@@ -146,6 +147,7 @@ class ModalTeamContent extends Component {
                                                         null
                                                 }
                                                 {
+                                                    this.props.user.interests &&
                                                     this.props.user.interests.research
                                                         ?
                                                         <React.Fragment>
@@ -161,6 +163,7 @@ class ModalTeamContent extends Component {
                                                 }
 
                                                 {
+                                                    this.props.user.interests &&
                                                     this.props.user.interests.exhibitions
                                                         ?
                                                         <React.Fragment>
@@ -176,6 +179,7 @@ class ModalTeamContent extends Component {
                                                 }
 
                                                 {
+                                                    this.props.user.interests &&
                                                     this.props.user.interests.participation
                                                         ?
                                                         <React.Fragment>
@@ -190,6 +194,7 @@ class ModalTeamContent extends Component {
                                                         null
                                                 }
                                                 {
+                                                    this.props.user.interests &&
                                                     this.props.user.interests.professional_skills
                                                         ?
                                                         <React.Fragment>
@@ -204,12 +209,29 @@ class ModalTeamContent extends Component {
                                                         :
                                                         null
                                                 }
+                                                {
+                                                    this.props.user.interests &&
+                                                    this.props.user.interests.organisations
+                                                        ?
+                                                        <React.Fragment>
+                                                            <p className='sub-titles'>
+                                                                <FormattedMessage
+                                                                    id="membership-in-organizations"/>:
+                                                            </p>
+                                                            <div className='modal-team__main-text mt-3'
+                                                                 dangerouslySetInnerHTML={{__html: this.props.user.interests.organisations}}>
+                                                            </div>
+                                                        </React.Fragment>
+                                                        :
+                                                        null
+                                                }
                                             </Tab.Pane>
                                             <Tab.Pane eventKey="publications">
                                                 <h3 className='h3'>
                                                     <FormattedMessage id="publications"/>
                                                 </h3>
                                                 {
+                                                    this.props.user.interests &&
                                                     this.props.user.interests.publications
                                                         ?
                                                         <React.Fragment>
