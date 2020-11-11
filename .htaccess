@@ -1,16 +1,18 @@
 AddDefaultCharset utf-8
 
-SSLOptions +StrictRequire
-SSLRequireSSL
-SSLRequire %{HTTP_HOST} eq "museumsmolyan.eu"
-ErrorDocument 403 https://museumsmolyan.eu
-
 RewriteEngine On
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^ /index.html [L]
+
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+RewriteCond %{HTTP_HOST} ^www.museumsmolyan.eu [NC]
+RewriteRule ^(.*)$ https://museumsmolyan.eu/$1 [L,R=301]
 
 Redirect 301 /contacts https://museumsmolyan.eu/contact-us
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ /index.php [L]
 
 Header set Cache-Control "max-age=3600, public"
 
