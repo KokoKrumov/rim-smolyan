@@ -1,12 +1,14 @@
 <?php
-$paths = [
+$path_beginings = [
     '/',
     '/news',
     '/about-us',
     '/contact-us',
 ];
 
-if ( ! in_array($_SERVER['REQUEST_URI'], $paths)) {
+$path_begining = '/' . explode('/', $_SERVER['REQUEST_URI'])[1];
+
+if ( ! in_array($path_begining, $path_beginings)) {
     http_response_code(404);
 }
 

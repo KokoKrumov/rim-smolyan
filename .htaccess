@@ -12,7 +12,7 @@ Redirect 301 /contacts https://museumsmolyan.eu/contact-us
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^ /index.html [L]
+RewriteRule ^ /index.php [L]
 
 Header set Cache-Control "max-age=3600, public"
 
