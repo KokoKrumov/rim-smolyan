@@ -228,7 +228,7 @@ class AboutUs extends Component {
                                             })
                                             :
                                             <h3 className='h3 loading'>
-                                                Loading ...
+                                                ...
                                             </h3>
                                     }
 
@@ -262,7 +262,7 @@ class AboutUs extends Component {
                                                 })
                                                 :
                                                 <h3 className='h3 loading'>
-                                                    Loading ...
+                                                    ...
                                                 </h3>
                                         }
 
@@ -298,7 +298,7 @@ class AboutUs extends Component {
                                                 })
                                                 :
                                                 <h3 className='h3 loading'>
-                                                    Loading ...
+                                                    ...
                                                 </h3>
                                         }
 
@@ -333,7 +333,7 @@ class AboutUs extends Component {
                                                 })
                                                 :
                                                 <h3 className='h3 loading'>
-                                                    Loading ...
+                                                    ...
                                                 </h3>
                                         }
 
@@ -369,7 +369,7 @@ class AboutUs extends Component {
                                                 })
                                                 :
                                                 <h3 className='h3 loading'>
-                                                    Loading ...
+                                                    ...
                                                 </h3>
                                         }
 
@@ -405,7 +405,7 @@ class AboutUs extends Component {
                                                 })
                                                 :
                                                 <h3 className='h3 loading'>
-                                                    Loading ...
+                                                    ...
                                                 </h3>
                                         }
 
@@ -441,7 +441,7 @@ class AboutUs extends Component {
                                                 })
                                                 :
                                                 <h3 className='h3 loading'>
-                                                    Loading ...
+                                                    ...
                                                 </h3>
                                         }
 
