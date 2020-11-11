@@ -62,7 +62,7 @@ function Footer({showModal}) {
                                     onClick={(e) => {
                                         handleShowModal(e, 'modal-redirect')
                                     }}
-                                    href="/collections"
+                                    href="#"
                                     className='nav__main-link'>
                                     <FormattedMessage id="menu.collections"/>
                                 </Nav.Link>
@@ -98,7 +98,7 @@ function Footer({showModal}) {
                                     onClick={(e) => {
                                         handleShowModal(e, 'modal-redirect')
                                     }}
-                                    href="/support-us"
+                                    href="#"
                                     className='nav__secondary-link'>
                                     <FormattedMessage id="menu.support"/>
                                 </Nav.Link>
@@ -106,7 +106,7 @@ function Footer({showModal}) {
                                     onClick={(e) => {
                                         handleShowModal(e, 'modal-redirect')
                                     }}
-                                    href="/administration"
+                                    href="#"
                                     className='nav__secondary-link'>
                                     <FormattedMessage id="menu.administrative"/>
                                 </Nav.Link>
@@ -114,7 +114,7 @@ function Footer({showModal}) {
                                     onClick={(e) => {
                                         handleShowModal(e, 'modal-redirect')
                                     }}
-                                    href="/policies"
+                                    href="#"
                                     className='nav__secondary-link'>
                                     <FormattedMessage id="menu.privacy-policy"/>
                                 </Nav.Link>
@@ -124,7 +124,7 @@ function Footer({showModal}) {
                                     onClick={(e) => {
                                         handleShowModal(e, 'modal-redirect')
                                     }}
-                                    href="/laslo"
+                                    href="#"
                                     className='nav__main-link'>
                                     <FormattedMessage id="menu.house-museum"/>
                                 </Nav.Link>

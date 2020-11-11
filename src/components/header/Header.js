@@ -59,7 +59,7 @@ function Header({showModal}) {
                                 </InputGroup>
                                 <Nav className="header-navigation__inner__child">
                                     <Nav.Link
-                                        href="/support"
+                                        href="#"
                                         onClick={(e) => {
                                             handleShowModal(e, 'modal-redirect')
                                         }}
@@ -67,7 +67,7 @@ function Header({showModal}) {
                                         <FormattedMessage id="menu.support"/>
                                     </Nav.Link>
                                     <p className='nav__main-link'>|</p>
-                                    <Nav.Link href="/admin"
+                                    <Nav.Link href="#"
                                               onClick={(e) => {
                                                   handleShowModal(e, 'modal-redirect')
                                               }}
@@ -105,7 +105,7 @@ function Header({showModal}) {
                                             onClick={(e) => {
                                                 handleShowModal(e, 'modal-redirect')
                                             }}
-                                            href="/main">
+                                            href="#">
                                             <FormattedMessage id="menu.main-collections"/>
                                         </NavDropdown.Item>
                                         <NavDropdown.Item
@@ -113,7 +113,7 @@ function Header({showModal}) {
                                             onClick={(e) => {
                                                 handleShowModal(e, 'modal-redirect')
                                             }}
-                                            href="/virtual">
+                                            href="#">
                                             <FormattedMessage id="menu.virtual-collections"/>
                                         </NavDropdown.Item>
                                     </NavDropdown>
@@ -125,18 +125,23 @@ function Header({showModal}) {
                                         className='nav__main-link '>
                                         <FormattedMessage id="menu.exhibitions"/>
                                     </Nav.Link>
-                                    <Nav.Link href="/news" eventKey="news" className='nav__main-link'>
+                                    <Nav.Link
+                                        href="/news"
+                                        eventKey="news"
+                                        className='nav__main-link'>
                                         <FormattedMessage id="menu.news"/>
                                     </Nav.Link>
                                     <Nav.Link
-                                        // href="/about-us"
+                                        href="/about-us"
                                         onClick={(e) => {
                                             handleShowModal(e, 'modal-redirect')
                                         }}
                                         className='nav__main-link'>
                                         <FormattedMessage id="menu.about-us"/>
                                     </Nav.Link>
-                                    <Nav.Link href="/contact-us" className='nav__main-link'>
+                                    <Nav.Link
+                                        href="/contact-us"
+                                        className='nav__main-link'>
                                         <FormattedMessage id="menu.contact-us"/>
                                     </Nav.Link>
                                     <p className='nav__main-link'>|</p>
