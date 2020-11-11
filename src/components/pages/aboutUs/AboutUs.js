@@ -356,9 +356,9 @@ class AboutUs extends Component {
                                 <div className='section-team__headmaster-wrap'>
                                     <Row>
                                         {
-                                            this.props.team.funds_and_scientific_archives && this.props.team.funds_and_scientific_archives.length !== 0
+                                            this.props.team.fundsAndScientificArchives && this.props.team.fundsAndScientificArchives.length !== 0
                                                 ?
-                                                this.props.team.funds_and_scientific_archives.map(user => {
+                                                this.props.team.fundsAndScientificArchives.map(user => {
                                                     return (
                                                         <Col md={4}  key={user.id}>
                                                             <CardTeamMember
