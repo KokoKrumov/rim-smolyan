@@ -214,5 +214,159 @@
       "organisations": "<p>Секретар на „Клуб приятели на РИМ „Стою Шишков” -\nСмолян \n</p>",
       "educational-programs":""
     }
+  },
+  {
+    "id": 11,
+    "department": "publicRelations",
+    "name": "Тинка Белегова",
+    "avatar": "../images/team/tinka_belegova.png",
+    "role": "Уредник",
+    "email": "<a href='mailto:t.belegova@museumsmolyan.eu' target='_blank'>t.belegova@museumsmolyan.eu</a>",
+    "year": "Родена в с. Загражден, обл. Смолян\nна 05.08.1957 г",
+    "education": "<p>Средно политехническо училище (гимназия) “Асен Златаров” – гр. Хасково (1975 г.);</p><p>Специалист “Културно-просветна работа” (профил Музика) в Институт за културнопросветни кадри – гр. Хасково ( 1978 г.); \n</p><p>Магистър “История” в Югозападен университет “Неофит Рилски” – гр. Благоевград\n( 1996 г.);</p><p>Магистър “Финанси” във Великотърновски университет “Св. св. Кирил и Методий” –\nгр. В. Търново ( 2003 г.);</p><p>Курс по английски език – първо и второ ниво (2002, 2004 г.)</p>",
+    "profession": "Уредник в отдел „Връзки с\nобществеността” на РИМ „Стою Шишков” – Смолян",
+    "past_professions": "<p>От Октомври 1978 г. до Юли 2002 г.\nНародна астрономическа обсерватория и Планетариум – гр. Смолян\nБиблиотекар</p><p>От Октомври 2003 до сега\nРегионален исторически музей “Стою Шишков” – гр. Смолян\nУредник</p>",
+    "interests": {
+      "main": "<p>Професионални интереси в областта на историята, музеологията, културния\nтуризъм, образователни програми, работни ателиета, музейни уроци и др. </p>",
+      "research": "",
+      "exhibitions": "",
+      "participation": "",
+      "publications": "",
+      "professional_skills": "<p>Работа с компютри - MS Word, Excel, Power Point, Internet. \n</p>",
+      "organisations": "",
+      "educational-programs":""
+    }
+  },
+  {
+    "id": 12,
+    "department": "publicRelations",
+    "name": "Александър Боготлиев",
+    "avatar": "../images/team/aleksandar_bogotliev.png",
+    "role": "Екскурзовод",
+    "email": "<a href='mailto:bogotliev@abv.bg ' target='_blank'>bogotliev@abv.bg </a>",
+    "year": "Роден в гр. Смолян на 18.04.1980 г.",
+    "education": "<p>Висше, специалност „Туризъм” в Университет по хранителни\nтехнологии – гр. Пловдив, 2004 г</p>",
+    "profession": "Екскурзовод",
+    "past_professions": "<p>от 2002 г. ски-инструктор в к.к. Пампорово;</p><p>от месец май 2017 г. екскурзовод в Регионален исторически музей\n„Стою Шишков” – Смолян; </p>",
+    "interests": {
+      "main": "<p>Туризъм, чужди езици</p><p>Интерес към културната история на Родопите, обредни обичаи и фолклор.</p>",
+      "research": "",
+      "exhibitions": "",
+      "participation": "",
+      "publications": "",
+      "professional_skills": "",
+      "organisations": "",
+      "educational-programs":""
+    }
+  },
+  {
+    "id": 13,
+    "department": "publicRelations",
+    "name": "Димитрия Кабакова",
+    "avatar": "../images/team/dimitriya_kabakova.png",
+    "role": "Екскурзовод",
+    "email": "<a href='mailto:dimitria.kabakova@abv.bg' target='_blank'>dimitria.kabakova@abv.bg</a>",
+    "year": "Роден в гр. Пазарджик на 31.08.1990 г. ",
+    "education": "<p>Висше, Археология в СУ „Св. Климент Охридски” – бакалавър;</p><p>Икономика\nи управление на енергетиката, инфраструктурата и комуналните услуги в СУ „Св.\nКлимент Охридски” – магистър. \n</p>",
+    "profession": "Екскурзовод",
+    "past_professions": "<p>От февруари 2016 до февруари 2017 г. – Общинска\nадминистрация – Смолян, Дирекция „АИО и ОМП“; </p><p>От февруари 2017 г. – екскурзовод\nв Регионален исторически музей „Стою Шишков” – Смолян. </p>",
+    "interests": {
+      "main": "<p>Археология, история.</p>",
+      "research": "",
+      "exhibitions": "",
+      "participation": "",
+      "publications": "",
+      "professional_skills": "",
+      "organisations": "",
+      "educational-programs":""
+    }
+  },
+  {
+    "id": 14,
+    "department": "publicRelations",
+    "name": "Анна Болгурова",
+    "avatar": "../images/team/anna_bolgurova.png",
+    "role": "Информатор",
+    "email": "",
+    "year": "",
+    "education": "",
+    "profession": "Информатор",
+    "past_professions": "",
+    "interests": {
+      "main": "",
+      "research": "",
+      "exhibitions": "",
+      "participation": "",
+      "publications": "",
+      "professional_skills": "",
+      "organisations": "",
+      "educational-programs":""
+    }
+  },
+  {
+    "id": 15,
+    "department": "administration",
+    "name": "Недялка Карталова",
+    "avatar": "",
+    "role": "Счетоводител",
+    "email": "accountant@museumsmolyan.eu",
+    "year": "",
+    "education": "",
+    "profession": "Счетоводител",
+    "past_professions": "",
+    "interests": {
+      "main": "",
+      "research": "",
+      "exhibitions": "",
+      "participation": "",
+      "publications": "",
+      "professional_skills": "",
+      "organisations": "",
+      "educational-programs":""
+    }
+  },
+  {
+    "id": 16,
+    "department": "administration",
+    "name": "Тодорка Димчевска",
+    "avatar": "",
+    "role": "Счетоводител",
+    "email": "accountant@museumsmolyan.eu",
+    "year": "",
+    "education": "",
+    "profession": "Счетоводител",
+    "past_professions": "",
+    "interests": {
+      "main": "",
+      "research": "",
+      "exhibitions": "",
+      "participation": "",
+      "publications": "",
+      "professional_skills": "",
+      "organisations": "",
+      "educational-programs":""
+    }
+  },
+  {
+    "id": 17,
+    "department": "administration",
+    "name": "Станка Язова",
+    "avatar": "",
+    "role": "домакин-деловодител",
+    "email": "accountant@museumsmolyan.eu",
+    "year": "",
+    "education": "",
+    "profession": "домакин-деловодител",
+    "past_professions": "",
+    "interests": {
+      "main": "",
+      "research": "",
+      "exhibitions": "",
+      "participation": "",
+      "publications": "",
+      "professional_skills": "",
+      "organisations": "",
+      "educational-programs":""
+    }
   }
 ]

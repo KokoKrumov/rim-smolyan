@@ -235,7 +235,6 @@ class AboutUs extends Component {
                                 </div>
                             </Container>
                         </div>
-
                         <div className='section-team__container-wrap'>
                             <Container>
                                 <div className="section-team__title__wrap">
@@ -253,7 +252,7 @@ class AboutUs extends Component {
                                                 ?
                                                 this.props.team.archeology.map(user => {
                                                     return (
-                                                        <Col md={4}  key={user.id}>
+                                                        <Col md={6} lg={4}  key={user.id}>
                                                             <CardTeamMember
                                                                 user={user}
                                                             />
@@ -271,7 +270,6 @@ class AboutUs extends Component {
                                 </div>
                             </Container>
                         </div>
-
                         <div className='section-team__container-wrap'>
                             <Container>
                                 <div className="section-team__title__wrap">
@@ -289,7 +287,7 @@ class AboutUs extends Component {
                                                 ?
                                                 this.props.team.history.map(user => {
                                                     return (
-                                                        <Col md={4}  key={user.id}>
+                                                        <Col md={6} lg={4} key={user.id}>
                                                             <CardTeamMember
                                                                 user={user}
                                                             />
@@ -324,7 +322,7 @@ class AboutUs extends Component {
                                                 ?
                                                 this.props.team.ethnography.map(user => {
                                                     return (
-                                                        <Col md={4}  key={user.id}>
+                                                        <Col md={6} lg={4} key={user.id}>
                                                             <CardTeamMember
                                                                 user={user}
                                                             />
@@ -342,7 +340,6 @@ class AboutUs extends Component {
                                 </div>
                             </Container>
                         </div>
-
                         <div className='section-team__container-wrap'>
                             <Container>
                                 <div className="section-team__title__wrap">
@@ -360,7 +357,7 @@ class AboutUs extends Component {
                                                 ?
                                                 this.props.team.fundsAndScientificArchives.map(user => {
                                                     return (
-                                                        <Col md={4}  key={user.id}>
+                                                        <Col md={6} lg={4} key={user.id}>
                                                             <CardTeamMember
                                                                 user={user}
                                                             />
@@ -378,7 +375,6 @@ class AboutUs extends Component {
                                 </div>
                             </Container>
                         </div>
-
                         <div className='section-team__container-wrap'>
                             <Container>
                                 <div className="section-team__title__wrap">
@@ -396,7 +392,7 @@ class AboutUs extends Component {
                                                 ?
                                                 this.props.team.publicRelations.map(user => {
                                                     return (
-                                                        <Col md={4}  key={user.id}>
+                                                        <Col md={6} lg={4} key={user.id}>
                                                             <CardTeamMember
                                                                 user={user}
                                                             />
@@ -414,7 +410,6 @@ class AboutUs extends Component {
                                 </div>
                             </Container>
                         </div>
-
                         <div className='section-team__container-wrap'>
                             <Container>
                                 <div className="section-team__title__wrap">
@@ -422,17 +417,17 @@ class AboutUs extends Component {
                                         className='h2'
                                     >
                                         <FormattedMessage id="department"/>
-                                        "<FormattedMessage id="administrative-and-financial-service"/>"
+                                        "<FormattedMessage id="administration-and-financial"/>"
                                     </h2>
                                 </div>
                                 <div className='section-team__headmaster-wrap'>
                                     <Row>
                                         {
-                                            this.props.team.public_relations && this.props.team.public_relations.length !== 0
+                                            this.props.team.administration && this.props.team.administration.length !== 0
                                                 ?
-                                                this.props.team.public_relations.map(user => {
+                                                this.props.team.administration.map(user => {
                                                     return (
-                                                        <Col md={4}  key={user.id}>
+                                                        <Col md={6} lg={4} key={user.id}>
                                                             <CardTeamMember
                                                                 user={user}
                                                             />
@@ -450,7 +445,6 @@ class AboutUs extends Component {
                                 </div>
                             </Container>
                         </div>
-
                     </section>
                 </main>
             </div>

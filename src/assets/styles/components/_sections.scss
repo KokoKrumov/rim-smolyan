@@ -10,13 +10,17 @@
 
     &__container {
       &-wrap {
-        @include padding(60px, 0px, 90px, 0px);
+        @include padding(60px, 0px, 60px, 0px);
         border-bottom: 1px solid $dark-02;
       }
     }
 
     .loading {
       color: $dark-02;
+    }
+
+    .card__wrap {
+      @include margin(0px, 0px, 30px, 0px);
     }
   }
 }
