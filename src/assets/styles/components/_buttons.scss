@@ -63,6 +63,8 @@
   &__border-overflow {
     border-bottom: 2px solid;
     @include padding(0px, 0px, 0px, 50px);
+    transition-duration: 0.3s;
+    transition-timing-function: ease-out;
 
     &__light {
       border-color: $light;
