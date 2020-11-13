@@ -62,6 +62,30 @@
     @include margin(50px, 0px, 0px, 0px);
   }
 
+
+  &__controls {
+    &-btn {
+      display: flex;
+      align-items: center;
+
+      &:hover {
+        img {
+          opacity: 0.7
+        }
+      }
+
+      &:focus {
+        box-shadow: none;
+      }
+
+      &:active {
+        img {
+          opacity: 0.3
+        }
+      }
+    }
+  }
+
   &-megatron {
     @include padding(115px, 0px, 90px, 0px);
 
@@ -97,26 +121,7 @@
         display: flex;
       }
 
-      &-btn {
-        display: flex;
-        align-items: center;
 
-        &:hover {
-          img {
-            opacity: 0.7
-          }
-        }
-
-        &:focus {
-          box-shadow: none;
-        }
-
-        &:active {
-          img {
-            opacity: 0.3
-          }
-        }
-      }
 
       &-index {
         font-family: $font-cormorant-regular;

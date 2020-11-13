@@ -67,6 +67,10 @@
     &__light {
       border-color: $light;
     }
+
+    &:hover {
+      padding: 0;
+    }
   }
 }
 

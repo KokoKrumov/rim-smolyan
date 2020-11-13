@@ -38,13 +38,13 @@ function CarouselMegatron({listMegatronCarousel, showModal}) {
                                     </div>
 
                                     <div className='carousel-megatron__controls__wrap'>
-                                        <button className='btn carousel-megatron__controls-btn'
+                                        <button className='btn carousel__controls-btn'
                                                 onClick={() => carousel.slidePrev()}>
                                             <img className="carousel-megatron__controls-btn__img"
                                                  src={carouselMegatronArrowLeft} alt=""
                                                  itemProp="image"/>
                                         </button>
-                                        <button className='btn carousel-megatron__controls-btn'
+                                        <button className='btn carousel__controls-btn'
                                                 onClick={() => carousel.slideNext()}>
                                             <img className="carousel-megatron__controls-btn__img"
                                                  src={carouselMegatronArrowRight} alt=""
