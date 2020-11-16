@@ -116,7 +116,7 @@ class Contacts extends Component {
                                             Октомври - Април
                                         </h6>
                                         <p className='time-period__text'>
-                                            09:00 - 12:00 13:00 - 18:00
+                                            09:00 - 12:00 / 13:00 - 17:00
                                         </p>
                                     </li>
                                     <li className='address__list-item'>
