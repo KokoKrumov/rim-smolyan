@@ -14,7 +14,8 @@ class InfoColumn extends Component {
         showRulesForActivity: this.props.showRulesForActivity,
         columns: this.props.columns,
         rulesForActivity: "rules-for-activity",
-        seeMore: "see-more"
+        seeMore: "see-more",
+        isSmall: this.props.isSmall ? this.props.isSmall : false
     }
 
     handleShowModal(e, data) {
@@ -26,7 +27,7 @@ class InfoColumn extends Component {
         const {intl} = this.props;
         return (
             <div
-                className='nae-container nae-container_content-dark hero-bg'
+                className='nae-container info-column nae-container_content-dark hero-bg'
                 style={{
                     backgroundImage: `url(${this.props.backgroundIMage})`
                 }}
@@ -34,9 +35,18 @@ class InfoColumn extends Component {
                 <Container>
                     <div>
                         <div className='nae__title-line'>
-                            <h1 className='h1'
-                                dangerouslySetInnerHTML={{__html: intl.formatMessage({id: this.props.title})}}>
-                            </h1>
+
+                            {
+                                this.state.isSmall
+                                    ?
+                                    <h2 className='h2'
+                                        dangerouslySetInnerHTML={{__html: intl.formatMessage({id: this.props.title})}}>
+                                    </h2>
+                                    :
+                                    <h1 className='h1'
+                                        dangerouslySetInnerHTML={{__html: intl.formatMessage({id: this.props.title})}}>
+                                    </h1>
+                            }
 
                         </div>
                         <div>
