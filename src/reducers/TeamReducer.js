@@ -9,7 +9,8 @@ let INITIAL_STATE = {
     scientific: [],
     publicRelations: [],
     administration: [],
-    fundsAndScientificArchives: []
+    fundsAndScientificArchives: [],
+    defaultTeam: []
 
 }
 
@@ -23,7 +24,7 @@ export default (state = INITIAL_STATE, action) => {
                     }
                 })
             }
-            return {...state}
+            return {...state, defaultTeam: action.payload}
         default:
             return state;
     }

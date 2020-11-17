@@ -80,13 +80,22 @@ class AboutUs extends Component {
             && this.props.team
             && this.state.team !== this.props.team
         ) {
+            // Fetch and set museum images for museum carousel
             this.props.fetchRimBuildingImages()
                 .then(() => {
                     this.setState({listBuildingImagesCarousel: this.props.rimBuildingImages})
                 })
+            // Fetch and set team members
             this.props.fetchTeam()
                 .then(() => {
                     this.setState({team: this.props.team})
+
+                    //When team arrives, and if there is a parameter in the URL that want content from some the of modals
+                    //then check which content the modal will show
+                    if (this.props.match.params.modalContent) {
+                        console.log(this.props.match.params.modalContent);
+                        console.log(this.state.team.defaultTeam[Number(this.props.match.params.modalContent)-1]);
+                    }
                 })
         }
     }

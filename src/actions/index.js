@@ -7,7 +7,8 @@ import {
     CLOSE_REDIRECT_MODAL,
     FETCH_RIM_BUILDING_IMAGES,
     FETCH_TEAM_MODAL, CLOSE_TEAM_MODAL,
-    FETCH_TEAM
+    FETCH_TEAM,
+    FETCH_DEPARTMENTS
 } from './types';
 
 import streams from "../api/streams";
