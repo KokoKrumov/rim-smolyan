@@ -6,6 +6,15 @@
       @include padding(100px, 0px, 60px, 0px);
       border-bottom: 1px solid $red;
     }
+    &__wrap__sm {
+      @include padding(55px, 0px, 60px, 0px);
+      border-bottom: 1px solid $red;
+
+      .back-link {
+        @include margin(0px, 0px, 35px, 0px);
+      }
+    }
+
   }
 
   &__wrap {

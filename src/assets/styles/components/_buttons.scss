@@ -11,6 +11,12 @@
     color: $dark;
     fill: $dark;
 
+    path {
+      fill: $dark;
+      transition-duration: 0.3s;
+      transition-timing-function: ease-out;
+    }
+
     &::before {
       background: $dark;
     }
@@ -38,6 +44,10 @@
     &:hover {
       color: $red;
       fill:  $red;
+
+      path {
+        fill:  $red;
+      }
 
       &::before {
         background: $red;

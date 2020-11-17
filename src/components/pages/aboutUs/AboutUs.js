@@ -14,6 +14,8 @@ import CardInfoLine from "../../infoLine/CardInfoLine";
 import CardTeamHeadmaster from "../../cards/cardTeamHeadmaster";
 import {FormattedMessage} from "react-intl";
 import CardTeamMember from "../../cards/cardTeamMember";
+import {Router, Route, Switch, Redirect} from "react-router-dom";
+import RegularPrograms from "./RegularPrograms";
 
 class AboutUs extends Component {
 
@@ -94,7 +96,7 @@ class AboutUs extends Component {
                     //then check which content the modal will show
                     if (this.props.match.params.modalContent) {
                         console.log(this.props.match.params.modalContent);
-                        console.log(this.state.team.defaultTeam[Number(this.props.match.params.modalContent)-1]);
+                        console.log(this.state.team.defaultTeam[Number(this.props.match.params.modalContent) - 1]);
                     }
                 })
         }
@@ -105,7 +107,7 @@ class AboutUs extends Component {
         this.props.showModal(data);
     }
 
-    render() {
+    renderMainAboutUsPage = () => {
         return (
             <div className='about-us-page'>
                 <div className='hero__wrap hero2cols'>
@@ -210,7 +212,7 @@ class AboutUs extends Component {
                                     />
                                 </Col>
                             </Row>
-                            <CardInfoLine title={"permanent-programs"}/>
+                            <CardInfoLine title={"regular-programs"} link={'/about-us/regular-programs'}/>
                         </Container>
                     </section>
                     <section className='section-team'>
@@ -261,7 +263,7 @@ class AboutUs extends Component {
                                                 ?
                                                 this.props.team.archeology.map(user => {
                                                     return (
-                                                        <Col md={6} lg={4}  key={user.id}>
+                                                        <Col md={6} lg={4} key={user.id}>
                                                             <CardTeamMember
                                                                 user={user}
                                                             />
@@ -457,6 +459,22 @@ class AboutUs extends Component {
                     </section>
                 </main>
             </div>
+        )
+    }
+
+    renderRegularPrograms = () => {
+        return (
+            <RegularPrograms/>
+        )
+    }
+
+    render() {
+        return (
+            <Switch>
+                <Route path='/about-us' exact component={this.renderMainAboutUsPage}/>
+                <Route path='/about-us/regular-programs' exact component={this.renderRegularPrograms}/>
+            </Switch>
+
         )
     }
 }

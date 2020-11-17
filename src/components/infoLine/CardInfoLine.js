@@ -8,7 +8,8 @@ import {showModal} from "../../actions";
 class CardInfoLine extends Component {
 
     state = {
-        title: this.props.title
+        title: this.props.title,
+        link: this.props.link ? this.props.link : '#'
     }
 
     handleShowModal(e, data) {
@@ -32,12 +33,12 @@ class CardInfoLine extends Component {
                                 <Link
 
                                     className="link cta_outline cta_outline__red cta_outline__border-overflow"
-                                    to="#"
+                                    to={this.state.link}
                                     itemProp="url"
                                     target=""
-                                    onClick={(e) => {
-                                        this.handleShowModal(e, 'modal-redirect')
-                                    }} rel="noopener nofollow noreferrer"
+                                    // onClick={(e) => {
+                                    //     this.handleShowModal(e, 'modal-redirect')
+                                    // }} rel="noopener nofollow noreferrer"
                                     dangerouslySetInnerHTML={{__html: intl.formatMessage({id: 'see-here'})}}
                                 >
                                 </Link>

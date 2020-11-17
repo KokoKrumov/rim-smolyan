@@ -38,7 +38,7 @@ class FundsPage extends Component {
         return (
             <div className='home-page__wrap'>
                 <HeroInner
-                    title={'Новини и Събития'}
+                    title={'news-and-events'}
                     subtitle={''}
                 />
 

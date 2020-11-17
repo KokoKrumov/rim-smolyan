@@ -18,7 +18,7 @@ class Contacts extends Component {
         return (
             <div className='contacts-page__wrap'>
                 <HeroInner
-                    title={'Контакти'}
+                    title={'contacts'}
                     subtitle={''}
                 />
 

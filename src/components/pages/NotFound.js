@@ -5,16 +5,11 @@ import {fetchNews} from "../../actions";
 
 class NotFound extends Component {
 
-    state = {
-        notFound: "Тази страница не съществува"
-    }
-
-
     render() {
         return (
             <div className='text-center'>
                 <HeroInner
-                    title={this.state.notFound}
+                    title={'page-not-exist'}
                     subtitle={''}
                 />
             </div>
