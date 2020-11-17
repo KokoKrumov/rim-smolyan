@@ -59,18 +59,13 @@ class InfoColumn extends Component {
                                         this.state.showRulesForActivity
                                             ?
                                             <p style={{marginTop: '2rem'}}>
-                                                <Link
-
-                                                    className="link cta_outline cta_outline__dark link-underline"
-                                                    to="#"
-                                                    itemProp="url"
-                                                    target=""
-                                                    onClick={(e) => {
-                                                        this.handleShowModal(e, 'modal-redirect')
-                                                    }} rel="noopener nofollow noreferrer"
+                                                <a class="link cta_outline cta_outline__dark link-underline"
+                                                    href="https://static.museumsmolyan.eu/docs/ustrojstvo_dejnost_rim_smolyan.pdf"
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
                                                     dangerouslySetInnerHTML={{__html: intl.formatMessage({id: this.state.rulesForActivity})}}
                                                 >
-                                                </Link>
+                                                </a>
                                             </p>
                                             :
                                             null
