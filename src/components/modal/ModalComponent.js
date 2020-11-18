@@ -26,7 +26,7 @@ class ModalComponent extends Component {
 
     handleCloseModal = () => {
         this.props.closeModal(this.state.modalContent);
-        if (this.props.modal.user.nickname) {
+        if (this.props.modal.user && this.props.modal.user.nickname) {
             //if the modal was opened from cardTeamMember
             // so we have a nickname in the end of the location href
             //when we close the modal, then remove the nickname from there
