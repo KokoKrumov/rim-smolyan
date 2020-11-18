@@ -174,28 +174,6 @@
   },
   {
     "id": 9,
-    "department": "fundsAndScientificArchives",
-    "name": "Георги Габровски",
-    "avatar": "../images/team/inj_georgi_gabrovski.png",
-    "role": "Консерватор",
-    "email": "<a href='mailto:g.gabrovsky@museumsmolyan.eu' target='_blank'>g.gabrovsky@museumsmolyan.eu</a>",
-    "year": "Родена в с. Трояново, област Бургаска, на 26.03.1944 г.",
-    "education": "<p>Висше, „Технология на силикатите”\nвъв ВХТИ „Д-р Асен Златаров” – Бургас (1970).</p>",
-    "profession": "От 2019г. – консерватор в Регионален исторически музей „Стою Шишков“ гр. Смолян",
-    "past_professions": "<p>от 1971 г. – технолог в Кабелен завод „В. Коларов” –\nБургас;</p><p>от 1977 г. – технолог в „Гамакабел” – Смолян;</p><p>1995 г. до сега – консерватор в\nРегионален исторически музей „Стою Шишков” – Смолян. </p>",
-    "interests": {
-      "main": "<p>Професионални интереси в областта на консервацията и реставрацията на движими\nкултурни ценности.</p>",
-      "research": "",
-      "exhibitions": "",
-      "participation": "",
-      "publications": "",
-      "professional_skills": "",
-      "organisations": "",
-      "educational-programs":""
-    }
-  },
-  {
-    "id": 10,
     "department": "publicRelations",
     "name": "Донка Симеонова",
     "avatar": "../images/team/donka_simeonova.png",
@@ -217,29 +195,29 @@
     }
   },
   {
-    "id": 11,
+    "id": 10,
     "department": "publicRelations",
-    "name": "Тинка Белегова",
-    "avatar": "../images/team/tinka_belegova.png",
-    "role": "Уредник",
-    "email": "<a href='mailto:t.belegova@museumsmolyan.eu' target='_blank'>t.belegova@museumsmolyan.eu</a>",
-    "year": "Родена в с. Загражден, обл. Смолян\nна 05.08.1957 г",
-    "education": "<p>Средно политехническо училище (гимназия) “Асен Златаров” – гр. Хасково (1975 г.);</p><p>Специалист “Културно-просветна работа” (профил Музика) в Институт за културнопросветни кадри – гр. Хасково ( 1978 г.); \n</p><p>Магистър “История” в Югозападен университет “Неофит Рилски” – гр. Благоевград\n( 1996 г.);</p><p>Магистър “Финанси” във Великотърновски университет “Св. св. Кирил и Методий” –\nгр. В. Търново ( 2003 г.);</p><p>Курс по английски език – първо и второ ниво (2002, 2004 г.)</p>",
-    "profession": "Уредник в отдел „Връзки с\nобществеността” на РИМ „Стою Шишков” – Смолян",
-    "past_professions": "<p>От Октомври 1978 г. до Юли 2002 г.\nНародна астрономическа обсерватория и Планетариум – гр. Смолян\nБиблиотекар</p><p>От Октомври 2003 до сега\nРегионален исторически музей “Стою Шишков” – гр. Смолян\nУредник</p>",
+    "name": "Димитрия Кабакова",
+    "avatar": "../images/team/dimitriya_kabakova.png",
+    "role": "Екскурзовод",
+    "email": "<a href='mailto:dimitria.kabakova@abv.bg' target='_blank'>dimitria.kabakova@abv.bg</a>",
+    "year": "Роден в гр. Пазарджик на 31.08.1990 г. ",
+    "education": "<p>Висше, Археология в СУ „Св. Климент Охридски” – бакалавър;</p><p>Икономика\nи управление на енергетиката, инфраструктурата и комуналните услуги в СУ „Св.\nКлимент Охридски” – магистър. \n</p>",
+    "profession": "Екскурзовод",
+    "past_professions": "<p>От февруари 2016 до февруари 2017 г. – Общинска\nадминистрация – Смолян, Дирекция „АИО и ОМП“; </p><p>От февруари 2017 г. – екскурзовод\nв Регионален исторически музей „Стою Шишков” – Смолян. </p>",
     "interests": {
-      "main": "<p>Професионални интереси в областта на историята, музеологията, културния\nтуризъм, образователни програми, работни ателиета, музейни уроци и др. </p>",
+      "main": "<p>Археология, история.</p>",
       "research": "",
       "exhibitions": "",
       "participation": "",
       "publications": "",
-      "professional_skills": "<p>Работа с компютри - MS Word, Excel, Power Point, Internet. \n</p>",
+      "professional_skills": "",
       "organisations": "",
       "educational-programs":""
     }
   },
   {
-    "id": 12,
+    "id": 11,
     "department": "publicRelations",
     "name": "Александър Боготлиев",
     "avatar": "../images/team/aleksandar_bogotliev.png",
@@ -262,18 +240,19 @@
     }
   },
   {
-    "id": 13,
+    "id": 12,
     "department": "publicRelations",
-    "name": "Димитрия Кабакова",
-    "avatar": "../images/team/dimitriya_kabakova.png",
-    "role": "Екскурзовод",
-    "email": "<a href='mailto:dimitria.kabakova@abv.bg' target='_blank'>dimitria.kabakova@abv.bg</a>",
-    "year": "Роден в гр. Пазарджик на 31.08.1990 г. ",
-    "education": "<p>Висше, Археология в СУ „Св. Климент Охридски” – бакалавър;</p><p>Икономика\nи управление на енергетиката, инфраструктурата и комуналните услуги в СУ „Св.\nКлимент Охридски” – магистър. \n</p>",
-    "profession": "Екскурзовод",
-    "past_professions": "<p>От февруари 2016 до февруари 2017 г. – Общинска\nадминистрация – Смолян, Дирекция „АИО и ОМП“; </p><p>От февруари 2017 г. – екскурзовод\nв Регионален исторически музей „Стою Шишков” – Смолян. </p>",
+    "name": "Мария Маргаритова",
+    "avatar": "../images/team/mariya_margaritova.png",
+    "role": "уредник в Къща музей „Ласло Наги“",
+    "email": "",
+    "phone": "<a href='tel:+359879111926' target='_blank'>0879 111 926</a>",
+    "year": "",
+    "education": "",
+    "profession": "уредник в Къща музей „Ласло Наги“",
+    "past_professions": "",
     "interests": {
-      "main": "<p>Археология, история.</p>",
+      "main": "",
       "research": "",
       "exhibitions": "",
       "participation": "",
@@ -281,10 +260,11 @@
       "professional_skills": "",
       "organisations": "",
       "educational-programs":""
+
     }
   },
   {
-    "id": 14,
+    "id": 13,
     "department": "publicRelations",
     "name": "Анна Болгурова",
     "avatar": "../images/team/anna_bolgurova.png",
@@ -307,7 +287,7 @@
     }
   },
   {
-    "id": 15,
+    "id": 14,
     "department": "administration",
     "name": "Недялка Карталова",
     "avatar": "",
@@ -329,7 +309,7 @@
     }
   },
   {
-    "id": 16,
+    "id": 15,
     "department": "administration",
     "name": "Тодорка Димчевска",
     "avatar": "",
@@ -351,7 +331,7 @@
     }
   },
   {
-    "id": 17,
+    "id": 16,
     "department": "administration",
     "name": "Станка Язова",
     "avatar": "",
@@ -373,7 +353,7 @@
     }
   },
   {
-    "id": 18,
+    "id": 17,
     "department": "fundsAndScientificArchives",
     "name": "Катя Стоева",
     "avatar": "",
@@ -395,30 +375,7 @@
     }
   },
   {
-    "id": 19,
-    "department": "publicRelations",
-    "name": "Мария Маргаритова",
-    "avatar": "../images/team/mariya_margaritova.png",
-    "role": "уредник в Къща музей „Ласло Наги“",
-    "email": "",
-    "phone": "<a href='tel:+359879111926' target='_blank'>0879 111 926</a>",
-    "year": "",
-    "education": "",
-    "profession": "уредник в Къща музей „Ласло Наги“",
-    "past_professions": "",
-    "interests": {
-      "main": "",
-      "research": "",
-      "exhibitions": "",
-      "participation": "",
-      "publications": "",
-      "professional_skills": "",
-      "organisations": "",
-      "educational-programs":""
-    }
-  },
-  {
-    "id": 20,
+    "id": 18,
     "department": "publicRelations",
     "name": "Весела Плеснева",
     "avatar": "",
@@ -441,32 +398,32 @@
     }
   },
   {
-    "id": 21,
-    "department": "publicRelations",
-    "name": "Милена Маринска",
-    "avatar": "",
-    "role": "Фотограф",
-    "email": "<a href='mailto:rim.smolyan@gmail.com' target='_blank'>rim.smolyan@gmail.com</a>",
-    "phone": "",
-    "year": "",
-    "education": "",
-    "profession": "Фотограф",
-    "past_professions": "",
-    "interests": {
-      "main": "",
-      "research": "",
-      "exhibitions": "",
-      "participation": "",
-      "publications": "",
-      "professional_skills": "",
-      "organisations": "",
-      "educational-programs":""
+    "id": 19,
+      "department": "publicRelations",
+      "name": "Ангел Георгиев",
+      "avatar": "",
+      "role": "Фотограф",
+      "email": "<a href='mailto:rim.smolyan@gmail.com' target='_blank'>rim.smolyan@gmail.com</a>",
+      "phone": "",
+      "year": "",
+      "education": "",
+      "profession": "Фотограф",
+      "past_professions": "",
+      "interests": {
+        "main": "",
+        "research": "",
+        "exhibitions": "",
+        "participation": "",
+        "publications": "",
+        "professional_skills": "",
+        "organisations": "",
+        "educational-programs":""
     }
   },
   {
-    "id": 22,
+    "id": 20,
     "department": "publicRelations",
-    "name": "Ангел Георгиев",
+    "name": "Милена Маринска",
     "avatar": "",
     "role": "Фотограф",
     "email": "<a href='mailto:rim.smolyan@gmail.com' target='_blank'>rim.smolyan@gmail.com</a>",
