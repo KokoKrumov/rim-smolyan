@@ -4,7 +4,7 @@ import Row from "react-bootstrap/cjs/Row";
 import Col from "react-bootstrap/cjs/Col";
 import {connect} from 'react-redux';
 import {fetchNews, fetchRimBuildingImages, fetchTeam, showModal} from "../../../actions";
-import aboutUsBg from "../../../assets/images/about-us-page_bg.png";
+import aboutUsBg from "../../../assets/images/about-us-page_bg.jpg";
 import AboutInfoLine from "../../infoLine/aboutInfoLine";
 import InfoColumn from "../../infoColumn/InfoColumn";
 import aboutUsHistoryBg from "../../../assets/images/about_us_history-bg.jpg";

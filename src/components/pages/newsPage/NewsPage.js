@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import heroImage from "../../../assets/images/baseHero.png";
+import heroImage from "../../../assets/images/baseHero.jpg";
 import aboutUsImage from "../../../assets/images/about_us_section_bg.png";
 import HeroInner from "../../hero/HeroInner";
 import Container from "react-bootstrap/cjs/Container";
