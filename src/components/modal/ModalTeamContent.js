@@ -42,6 +42,13 @@ class ModalTeamContent extends Component {
                                 <p className='card__link-label'>
                                     {this.props.user.profession}
                                 </p>
+                                <p className='card-body__email'>
+                                   <span
+                                       className="link card-body__phone"
+                                       dangerouslySetInnerHTML={{__html: this.props.user.phone}}
+                                   >
+                                    </span>
+                                </p>
                                 <p className='card-body__email'
                                    dangerouslySetInnerHTML={{__html: this.props.user.email}}
                                 >

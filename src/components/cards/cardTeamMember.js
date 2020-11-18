@@ -21,11 +21,11 @@ class CardTeamMember extends Component {
         return (
             <div className='card__wrap'>
                 <div className='card  card__white-bordered card__media-vertical'>
-                    <div  className='card__main-info'>
+                    <div className='card__main-info'>
                         <div className='card-avatar__wrap'>
                             <img className="img-fluid" src={this.state.user.avatar} alt="" itemProp="image"/>
                         </div>
-                        <div  className='card-body__wrap'>
+                        <div className='card-body__wrap'>
                             <h3 className='card-body__title h3'>
                                 {this.state.user.name}
                             </h3>
@@ -33,16 +33,44 @@ class CardTeamMember extends Component {
                                 {this.state.user.role}
                             </p>
 
-                            <p className='card__link-label'>
-                                <FormattedMessage id="email-address"/>
-                            </p>
-                            <p className='link-wrap'>
-                               <span
-                                   className="link card-body__email"
-                                   dangerouslySetInnerHTML={{__html: this.state.user.email}}
-                               >
-                                </span>
-                            </p>
+                            {
+                                this.state.user.email
+                                    ?
+                                    <React.Fragment>
+                                        <p className='card__link-label'>
+                                            <FormattedMessage id="email-address"/>
+                                        </p>
+                                        <p className='link-wrap'>
+                                           <span
+                                               className="link card-body__email"
+                                               dangerouslySetInnerHTML={{__html: this.state.user.email}}
+                                           >
+                                            </span>
+                                        </p>
+                                    </React.Fragment>
+                                :
+                                null
+                            }
+                            {
+                                this.state.user.phone
+                                    ?
+                                    <React.Fragment>
+                                        <p className='card__link-label'>
+                                            <FormattedMessage id="phone-address"/>
+                                        </p>
+                                        <p className='link-wrap'>
+                                           <span
+                                               className="link card-body__email"
+                                               dangerouslySetInnerHTML={{__html: this.state.user.phone}}
+                                           >
+                                            </span>
+                                        </p>
+                                    </React.Fragment>
+                                :
+                                null
+                            }
+
+
                         </div>
                     </div>
                     <div>
