@@ -1,6 +1,6 @@
 .section {
   &-team {
-    @include padding(70px, 0px, 40px, 0px);
+    @include padding(70px, 0px, 0px, 0px);
     background-color: $gray;
 
 
@@ -26,6 +26,10 @@
 
     .card__wrap {
       height: 100%;
+    }
+
+    .card__media-vertical {
+      justify-content: space-between;
     }
   }
 }
