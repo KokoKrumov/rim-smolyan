@@ -75,6 +75,14 @@ class AboutUs extends Component {
         team: null
     }
 
+    isMemberExist = (memberName) => {
+        return this.state.team.defaultTeam.some(member => member.nickname === memberName)
+    }
+
+    getMemberInformation = (memberName) => {
+        return this.state.team.defaultTeam.find(member => member.nickname === memberName)
+    }
+
     componentDidMount() {
         if (this.props
             && this.props.rimBuildingImages
@@ -92,19 +100,22 @@ class AboutUs extends Component {
                 .then(() => {
                     this.setState({team: this.props.team})
 
-                    //When team arrives, and if there is a parameter in the URL that want content from some the of modals
-                    //then check which content the modal will show
-                    if (this.props.match.params.modalContent) {
-                        console.log(this.props.match.params.modalContent);
-                        console.log(this.state.team.defaultTeam[Number(this.props.match.params.modalContent) - 1]);
+                    //When team arrives, then check ifURL path includes a parameter
+                    // and this parameter contain a nickname from the team
+                    //if this is true, then show modal with the info for this member
+                    if (this.props.match.params.modalContent && this.isMemberExist(this.props.match.params.modalContent)) {
+                        this.handleShowModal('modal-team', this.getMemberInformation(this.props.match.params.modalContent))
                     }
                 })
         }
     }
 
-    handleShowModal = (e, data) => {
-        e.preventDefault();
-        this.props.showModal(data);
+    handleShowModal = (data, user, e) => {
+        if (e) {
+            e.preventDefault();
+        }
+
+        this.props.showModal(data, user);
     }
 
     renderMainAboutUsPage = () => {
@@ -130,7 +141,7 @@ class AboutUs extends Component {
                                     <p className='about-us-page__text__bold'>
                                         Създаден през 1935 г. от <span className='color-red cursor-pointer'
                                                                        onClick={(e) => {
-                                                                           this.handleShowModal(e, 'modal-nedelov')
+                                                                           this.handleShowModal('modal-nedelov', e)
                                                                        }}>Стою Неделев ШИШКОВ</span> – родоповед,
                                         учител, издател,
                                         музеен деец и общественик с европейски измерения, Историческият музей в Смолян е
@@ -475,6 +486,7 @@ class AboutUs extends Component {
         return (
             <Switch>
                 <Route path='/about-us' exact component={this.renderMainAboutUsPage}/>
+                <Route path='/about-us/:modalContent' exact component={this.renderMainAboutUsPage}/>
                 <Route path='/about-us/regular-programs' exact component={this.renderRegularPrograms}/>
             </Switch>
 

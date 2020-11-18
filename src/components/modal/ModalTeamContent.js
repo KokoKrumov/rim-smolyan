@@ -4,10 +4,9 @@ import {closeModal} from "../../actions";
 import {connect} from "react-redux";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import StShishkovBarelef from '../../assets/images/St_Shishkov_barelef.png';
-import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
 import Nav from "react-bootstrap/Nav";
+import history from "../../history";
 
 
 class ModalTeamContent extends Component {
@@ -15,6 +14,14 @@ class ModalTeamContent extends Component {
     handleCloseModal = (e, data) => {
         e.preventDefault();
         this.props.closeModal(data);
+        if (this.props.user.nickname) {
+            //if the modal was opened from cardTeamMember
+            // so we have a nickname in the end of the location href
+            //when we close the modal, then remove the nickname from there
+            const location = history.location.pathname;
+            let resetLocation = location.replace(`/${this.props.user.nickname}`, '')
+            history.push(resetLocation)
+        }
     }
 
     render() {

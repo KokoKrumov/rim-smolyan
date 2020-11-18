@@ -22,7 +22,7 @@ function Header({showModal}) {
         window.location.reload();
     }
 
-    function handleShowModal(e, data) {
+    function handleShowModal(data, e) {
         e.preventDefault();
         showModal(data)
     }

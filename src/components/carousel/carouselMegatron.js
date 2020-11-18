@@ -18,7 +18,7 @@ function CarouselMegatron({listMegatronCarousel, showModal}) {
         setItem(e.item + 1)
     }
 
-    function handleShowModal(e, data) {
+    function handleShowModal(data, e) {
         e.preventDefault();
         showModal(data)
     }

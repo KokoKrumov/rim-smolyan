@@ -3,6 +3,7 @@ import {FormattedMessage, injectIntl} from 'react-intl';
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import {showModal} from "../../actions";
+import history from "../../history";
 
 class CardTeamHeadmaster extends Component {
 
@@ -10,9 +11,13 @@ class CardTeamHeadmaster extends Component {
         user: this.props.user
     }
 
-    handleShowModal = (e, data, user) => {
+    handleShowModal = (data, user, e) => {
         e.preventDefault();
         this.props.showModal(data, user);
+        //when you open a modal with some of the members in /about-us page
+        //then push the nick name in the location href, so an user has ability to copy the path
+        //(at this point of time cardTeamMember exist only in /about-us page)
+        history.push(`/about-us/${this.state.user.nickname}`)
     }
 
     render() {
@@ -56,7 +61,7 @@ class CardTeamHeadmaster extends Component {
                                 itemProp="url"
                                 target=""
                                 onClick={(e) => {
-                                    this.handleShowModal(e, 'modal-team', this.state.user)
+                                    this.handleShowModal('modal-team', this.state.user, e)
                                 }} rel="noopener nofollow noreferrer"
                                 dangerouslySetInnerHTML={{__html: intl.formatMessage({id: 'see-here'})}}
                             >

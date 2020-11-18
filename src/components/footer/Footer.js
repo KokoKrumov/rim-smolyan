@@ -14,7 +14,7 @@ import {FormattedMessage} from 'react-intl'
 
 function Footer({showModal}) {
 
-    function handleShowModal(e, data) {
+    function handleShowModal(data, e) {
         e.preventDefault();
         showModal(data)
     }

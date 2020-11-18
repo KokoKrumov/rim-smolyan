@@ -12,7 +12,7 @@ class CardInfoLine extends Component {
         link: this.props.link ? this.props.link : '/#'
     }
 
-    handleShowModal(e, data) {
+    handleShowModal(data, e) {
         if (this.state.link === '/#') {
             e.preventDefault();
             this.props.showModal(data)
@@ -40,7 +40,7 @@ class CardInfoLine extends Component {
                                 itemProp="url"
                                 target=""
                                 onClick={(e) => {
-                                    this.handleShowModal(e, 'modal-redirect')
+                                    this.handleShowModal('modal-redirect',e)
                                 }}
                                 rel="noopener nofollow noreferrer"
                                 dangerouslySetInnerHTML={{__html: intl.formatMessage({id: 'see-here'})}}

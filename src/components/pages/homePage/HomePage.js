@@ -97,7 +97,7 @@ class HomePage extends Component {
         })
     }
 
-    handleShowModal(e, data) {
+    handleShowModal(data, e) {
         e.preventDefault();
         this.props.showModal(data)
     }
