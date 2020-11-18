@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import heroImage from "../../../assets/images/baseHero.png";
+import heroImage from "../../../assets/images/baseHero.jpg";
 import aboutUsImage from "../../../assets/images/about_us_section_bg.png";
 import Hero from "../../hero/Hero";
 import WorkInfoLine from "../../infoLine/WorkInfoLine"
@@ -7,12 +7,12 @@ import NewsAndEventsList from "../../newsAndEventsList/NewsAndEventsList";
 import Container from "react-bootstrap/cjs/Container";
 import {Link} from "react-router-dom";
 import Row from "react-bootstrap/cjs/Row";
-import imageItem_1 from "../../../assets/images/img-shlem.png";
-import imageItem_2 from "../../../assets/images/img-diskos.png";
-import imageItem_3 from "../../../assets/images/img-nakit.png";
-import bgCarousell from "../../../assets/images/bg-shlem.png";
-import bgCarousel2 from "../../../assets/images/bg-diskos.png";
-import bgCarousel3 from "../../../assets/images/bg-nakit.png";
+import imageItem_1 from "../../../assets/images/img-shlem.jpg";
+import imageItem_2 from "../../../assets/images/img-diskos.jpg";
+import imageItem_3 from "../../../assets/images/img-nakit.jpg";
+import bgCarousell from "../../../assets/images/bg-shlem.jpg";
+import bgCarousel2 from "../../../assets/images/bg-diskos.jpg";
+import bgCarousel3 from "../../../assets/images/bg-nakit.jpg";
 import CarouselMegatron from "../../carousel/carouselMegatron";
 import {connect} from 'react-redux'
 import {fetchNews, showModal} from "../../../actions";
