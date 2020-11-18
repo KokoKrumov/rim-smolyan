@@ -486,8 +486,8 @@ class AboutUs extends Component {
         return (
             <Switch>
                 <Route path='/about-us' exact component={this.renderMainAboutUsPage}/>
-                <Route path='/about-us/:modalContent' exact component={this.renderMainAboutUsPage}/>
                 <Route path='/about-us/regular-programs' exact component={this.renderRegularPrograms}/>
+                <Route path='/about-us/:modalContent' exact component={this.renderMainAboutUsPage}/>
             </Switch>
 
         )
