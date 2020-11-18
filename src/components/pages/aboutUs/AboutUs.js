@@ -263,7 +263,7 @@ class AboutUs extends Component {
                                                 ?
                                                 this.props.team.archeology.map(user => {
                                                     return (
-                                                        <Col md={6} lg={4} key={user.id}>
+                                                        <Col md={6} lg={4} key={user.id} className="section-team__col">
                                                             <CardTeamMember
                                                                 user={user}
                                                             />
@@ -298,7 +298,7 @@ class AboutUs extends Component {
                                                 ?
                                                 this.props.team.history.map(user => {
                                                     return (
-                                                        <Col md={6} lg={4} key={user.id}>
+                                                        <Col md={6} lg={4} key={user.id} className="section-team__col">
                                                             <CardTeamMember
                                                                 user={user}
                                                             />
@@ -333,7 +333,7 @@ class AboutUs extends Component {
                                                 ?
                                                 this.props.team.ethnography.map(user => {
                                                     return (
-                                                        <Col md={6} lg={4} key={user.id}>
+                                                        <Col md={6} lg={4} key={user.id} className="section-team__col">
                                                             <CardTeamMember
                                                                 user={user}
                                                             />
@@ -368,7 +368,7 @@ class AboutUs extends Component {
                                                 ?
                                                 this.props.team.fundsAndScientificArchives.map(user => {
                                                     return (
-                                                        <Col md={6} lg={4} key={user.id}>
+                                                        <Col md={6} lg={4} key={user.id} className="section-team__col">
                                                             <CardTeamMember
                                                                 user={user}
                                                             />
@@ -403,7 +403,7 @@ class AboutUs extends Component {
                                                 ?
                                                 this.props.team.publicRelations.map(user => {
                                                     return (
-                                                        <Col md={6} lg={4} key={user.id}>
+                                                        <Col md={6} lg={4} key={user.id} className="section-team__col">
                                                             <CardTeamMember
                                                                 user={user}
                                                             />
@@ -438,7 +438,7 @@ class AboutUs extends Component {
                                                 ?
                                                 this.props.team.administration.map(user => {
                                                     return (
-                                                        <Col md={6} lg={4} key={user.id}>
+                                                        <Col md={6} lg={4} key={user.id} className="section-team__col">
                                                             <CardTeamMember
                                                                 user={user}
                                                             />

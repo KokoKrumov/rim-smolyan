@@ -19,7 +19,7 @@ class CardTeamHeadmaster extends Component {
         const {intl} = this.props;
         return (
             <div className='card__wrap'>
-                <div className='card  card__white-bordered card__media-horizontal'>
+                <div className='card card__white-bordered card__media-horizontal'>
                     <div className='card__main-info'>
                         <div className='card-avatar__wrap'>
                             <img className="img-fluid" src={this.state.user.avatar} alt="" itemProp="image"/>
@@ -30,6 +30,13 @@ class CardTeamHeadmaster extends Component {
                             </h3>
                             <p className='card-body__label paragraph-3'>
                                 {this.state.user.role}
+                            </p>
+                            <p className='link-wrap'>
+                               <span
+                                   className="link card-body__phone"
+                                   dangerouslySetInnerHTML={{__html: this.state.user.phone}}
+                               >
+                                </span>
                             </p>
                             <p className='link-wrap'>
                                <span
