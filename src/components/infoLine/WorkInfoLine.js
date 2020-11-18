@@ -55,9 +55,9 @@ class WorkInfoLine extends Component {
                             <p className='info-line__text'>
                                 <FormattedMessage id={this.getWorkingTime().months.inactive}/>
                                 <span style={{marginLeft: '11px'}}>
-                                    <Link to="/contact-us">
+                                    <a href="/contact-us">
                                         <img className="" src={arrowRight} alt=""itemProp="image"/>
-                                    </Link>
+                                    </a>
                                 </span>
                                 <OverlayTrigger
                                     key='top'
