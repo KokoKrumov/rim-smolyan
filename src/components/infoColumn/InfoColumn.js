@@ -10,7 +10,7 @@ import Col from "react-bootstrap/Col";
 class InfoColumn extends Component {
 
     state = {
-        showMoreLink: this.props.showMoreLink,
+        showMoreLink: this.props.showMoreLink ? this.props.showMoreLink : false,
         showRulesForActivity: this.props.showRulesForActivity,
         columns: this.props.columns,
         rulesForActivity: "rules-for-activity",
@@ -60,10 +60,10 @@ class InfoColumn extends Component {
                                             ?
                                             <p style={{marginTop: '2rem'}}>
                                                 <a className="link cta_outline cta_outline__dark link-underline"
-                                                    href="https://static.museumsmolyan.eu/docs/ustrojstvo_dejnost_rim_smolyan.pdf"
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    dangerouslySetInnerHTML={{__html: intl.formatMessage({id: this.state.rulesForActivity})}}
+                                                   href="https://static.museumsmolyan.eu/docs/ustrojstvo_dejnost_rim_smolyan.pdf"
+                                                   target="_blank"
+                                                   rel="noopener noreferrer"
+                                                   dangerouslySetInnerHTML={{__html: intl.formatMessage({id: this.state.rulesForActivity})}}
                                                 >
                                                 </a>
                                             </p>
@@ -77,18 +77,25 @@ class InfoColumn extends Component {
                                         this.state.showMoreLink
                                             ?
                                             <p>
-                                                <Link
+                                                <a
                                                     style={{margin: '0 2rem'}}
                                                     className="link cta_outline cta_outline__dark hvr-underline-from-left"
-                                                    to="#"
+                                                    href={`${this.state.showMoreLink}`}
                                                     itemProp="url"
                                                     target=""
-                                                    onClick={(e) => {
-                                                        this.handleShowModal('modal-redirect', e)
-                                                    }} rel="noopener nofollow noreferrer"
+                                                    onClick={
+                                                        this.state.showMoreLink
+                                                            ?
+                                                            null
+                                                            :
+                                                            (e) => {
+                                                                this.handleShowModal('modal-redirect', e)
+                                                            }
+                                                    }
+                                                    rel="noopener nofollow noreferrer"
                                                     dangerouslySetInnerHTML={{__html: intl.formatMessage({id: this.state.seeMore})}}
                                                 >
-                                                </Link>
+                                                </a>
                                             </p>
                                             :
                                             null

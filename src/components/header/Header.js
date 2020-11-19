@@ -27,6 +27,8 @@ function Header({showModal}) {
         showModal(data)
     }
 
+    let flag = localStorage.getItem('lang')
+
     return (
         <header className="header">
             <Container>
@@ -57,7 +59,7 @@ function Header({showModal}) {
                                         aria-describedby={intl.formatMessage({ id: 'menu.search-in'})}
                                     />
                                 </InputGroup>
-                                <Nav className="header-navigation__inner__child">
+                                <Nav className={`header-navigation__inner__child ${flag}`}>
                                     <Nav.Link
                                         href="#"
                                         onClick={(e) => {
@@ -76,9 +78,9 @@ function Header({showModal}) {
                                     </Nav.Link>
                                     <NavDropdown
                                         title={
-                                            <div className="">
+                                            <div className="display-flag">
                                                 <img className="thumbnail-image"
-                                                     src={BG}
+                                                     src={flag === 'en' ?  EN : BG}
                                                      alt="lang"
                                                 />
                                             </div>

@@ -71,7 +71,7 @@ class HomePage extends Component {
         infoColumn: {
             title: "about-us",
             text: "home-page.about-us.text",
-            showMoreLink: true,
+            showMoreLink: '/about-us',
             bgAboutUs: aboutUsImage,
             columns: 2
         }
