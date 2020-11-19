@@ -16,6 +16,7 @@ import {FormattedMessage} from "react-intl";
 import CardTeamMember from "../../cards/cardTeamMember";
 import {Router, Route, Switch, Redirect} from "react-router-dom";
 import RegularPrograms from "./RegularPrograms";
+import history from "../../../history";
 
 class AboutUs extends Component {
 
@@ -99,12 +100,13 @@ class AboutUs extends Component {
             this.props.fetchTeam()
                 .then(() => {
                     this.setState({team: this.props.team})
-
                     //When team arrives, then check ifURL path includes a parameter
                     // and this parameter contain a nickname from the team
                     //if this is true, then show modal with the info for this member
                     if (this.props.match.params.modalContent && this.isMemberExist(this.props.match.params.modalContent)) {
                         this.handleShowModal('modal-team', this.getMemberInformation(this.props.match.params.modalContent))
+                    } else if (this.props.match.params.modalContent === 'stoyu-shishkov') {
+                        this.handleShowModal('modal-shishkov', 'stoyu-shishkov')
                     }
                 })
         }
@@ -116,6 +118,7 @@ class AboutUs extends Component {
         }
 
         this.props.showModal(data, user);
+        history.push(`/about-us/${user}`)
     }
 
     renderMainAboutUsPage = () => {
@@ -139,10 +142,10 @@ class AboutUs extends Component {
                             <Row className='justify-content-between'>
                                 <Col lg={4}>
                                     <p className='about-us-page__text__bold'>
-                                        Създаден през 1935 г. от <span className='color-red cursor-pointer'
+                                        Създаден през 1935 г. от <a href='/#' className='color-red cursor-pointer link'
                                                                        onClick={(e) => {
-                                                                           this.handleShowModal('modal-nedelov', e)
-                                                                       }}>Стою Неделев ШИШКОВ</span> – родоповед,
+                                                                           this.handleShowModal('modal-shishkov', 'stoyu-shishkov', e)
+                                                                       }}>Стою Неделев ШИШКОВ</a> – родоповед,
                                         учител, издател,
                                         музеен деец и общественик с европейски измерения, Историческият музей в Смолян е
                                         най-големият музей, съхраняващ знаците на паметта на населението, обитавало

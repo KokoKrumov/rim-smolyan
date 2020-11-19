@@ -133,9 +133,6 @@ function Header({showModal}) {
                                     </Nav.Link>
                                     <Nav.Link
                                         href="/about-us"
-                                        onClick={(e) => {
-                                            handleShowModal('modal-redirect', e)
-                                        }}
                                         className='nav__main-link'>
                                         <FormattedMessage id="menu.about-us"/>
                                     </Nav.Link>

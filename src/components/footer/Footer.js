@@ -80,9 +80,6 @@ function Footer({showModal}) {
                                     <FormattedMessage id="menu.news"/>
                                 </Nav.Link>
                                 <Nav.Link
-                                    onClick={(e) => {
-                                        handleShowModal('modal-redirect', e)
-                                    }}
                                     href="/about-us"
                                     className='nav__main-link'>
                                     <FormattedMessage id="menu.about-us"/>

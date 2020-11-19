@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import StShishkovBarelef from '../../assets/images/St_Shishkov_barelef.png';
+import history from "../../history";
 
 
 class ModalShishkovContent extends Component {
@@ -12,6 +13,14 @@ class ModalShishkovContent extends Component {
     handleCloseModal = (e, data) => {
         e.preventDefault();
         this.props.closeModal(data);
+        // if (this.props.modal.user && this.props.modal.user.nickname) {
+            //if the modal was opened from Stoyu Shishkov
+            // so we have a his name in the end of the location href
+            //when we close the modal, then remove the nickname from there
+            const location = history.location.pathname;
+            let resetLocation = location.replace(`/stoyu-shishkov`, '')
+            history.push(resetLocation)
+        // }
     }
 
     render() {
@@ -43,7 +52,7 @@ class ModalShishkovContent extends Component {
                                     className='link cta_outline cta_outline__dark hvr-underline-from-center m-0'
                                     variant="primary"
                                     onClick={(e) => {
-                                        this.handleCloseModal(e, 'modal-nedelov');
+                                        this.handleCloseModal(e, 'modal-shishkov');
                                     }}
                                 >
                                     <FormattedMessage id="text.close"/>
@@ -58,9 +67,9 @@ class ModalShishkovContent extends Component {
                         </div>
                         <Row>
                             <Col lg={12}>
-                                <p className='paragraph-2 col-count-2'>
-                                    <div dangerouslySetInnerHTML={{ __html: intl.formatMessage({ id: 'about-us.shishkov.modal.text' }) }}>
-                                    </div>
+                                <p className='paragraph-2 col-count-2'
+                                   dangerouslySetInnerHTML={{ __html: intl.formatMessage({ id: 'about-us.shishkov.modal.text' }) }}
+                                >
                                 </p>
                             </Col>
                         </Row>
