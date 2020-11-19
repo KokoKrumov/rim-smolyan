@@ -1,13 +1,23 @@
 import React, {Component} from 'react';
 import heroSupportUsBg from "../../../assets/images/heroSupportUsBg.jpg";
-import injectIntl from "react-intl/lib/src/components/injectIntl";
 import Container from "react-bootstrap/cjs/Container";
 import Row from "react-bootstrap/cjs/Row";
 import Col from "react-bootstrap/cjs/Col";
+import {Link} from "react-router-dom";
+import {connect} from "react-redux";
+import {showModal} from "../../../actions";
+import Tab from "react-bootstrap/Tab";
+import Nav from "react-bootstrap/Nav";
+import {FormattedMessage, injectIntl} from 'react-intl';
 
 class SupportUs extends Component {
 
     state = {}
+
+    handleShowModal(data, e) {
+        e.preventDefault();
+        this.props.showModal(data)
+    }
 
     render() {
         const {intl} = this.props;
@@ -40,18 +50,31 @@ class SupportUs extends Component {
                                 </Col>
                                 <Col lg={5}>
                                     <p>
-                                        <a className='links' href="/#">
+                                        <Link
+                                            className='links'
+                                            to="/#"
+                                            onClick={(e) => {
+                                                this.handleShowModal('modal-redirect', e)
+                                            }}
+                                        >
                                             <span
                                                 dangerouslySetInnerHTML={{__html: intl.formatMessage({id: "status-for-awarding"})}}
                                             >
                                             </span>
-                                        </a>
-                                        <a className='links' href="/#">
+                                        </Link>
+                                        <Link
+                                            className='links'
+                                            to="/#"
+                                            onClick={(e) => {
+                                                this.handleShowModal('modal-redirect', e)
+                                            }}
+                                        >
                                             <span
                                                 dangerouslySetInnerHTML={{__html: intl.formatMessage({id: "donors-for-enrichment"})}}
                                             >
                                             </span>
-                                        </a>
+                                        </Link>
+
                                     </p>
                                 </Col>
                             </Row>
@@ -60,9 +83,61 @@ class SupportUs extends Component {
                     </div>
 
                 </div>
+                <Container>
+                    <h2 className="h2">
+                        Подкрепете ни чрез:
+                    </h2>
+                    <div className='modal_tabs-wrap'>
+                        <Tab.Container id="supports-examples" defaultActiveKey="support-examples">
+                            <Nav className="nav-tabs">
+                                <Nav.Item>
+                                    <Nav.Link eventKey="authentic-items" className='tab-item'>
+                                        <FormattedMessage id="biography"/>
+                                    </Nav.Link>
+                                </Nav.Item>
+                                <Nav.Item>
+                                    <Nav.Link eventKey="cash-donation" className='tab-item'>
+                                        <FormattedMessage id="interests"/>
+                                    </Nav.Link>
+                                </Nav.Item>
+                                <Nav.Item>
+                                    <Nav.Link eventKey="volunteer-work" className='tab-item'>
+                                        <FormattedMessage id="publications"/>
+                                    </Nav.Link>
+                                </Nav.Item>
+                            </Nav>
+                            <Tab.Content>
+                                <Tab.Pane eventKey="authentic-items">
+                                    <h3 className='h3'>
+                                        <FormattedMessage id="biography"/>
+                                    </h3>
+
+
+                                </Tab.Pane>
+                                <Tab.Pane eventKey="cash-donation">
+                                    <h3 className='h3'>
+                                        <FormattedMessage id="interests"/>
+                                    </h3>
+
+                                </Tab.Pane>
+                                <Tab.Pane eventKey="volunteer-work">
+                                    <h3 className='h3'>
+                                        <FormattedMessage id="publications"/>
+                                    </h3>
+
+                                </Tab.Pane>
+                            </Tab.Content>
+                        </Tab.Container>
+                    </div>
+                </Container>
             </div>
         )
     }
 }
 
-export default injectIntl(SupportUs);
+export default injectIntl(connect(
+    null,
+    {
+        showModal
+    }
+)(SupportUs));

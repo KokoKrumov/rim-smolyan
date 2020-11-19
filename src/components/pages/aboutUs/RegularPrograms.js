@@ -4,39 +4,12 @@ import {connect} from 'react-redux';
 import {fetchNews, fetchRimBuildingImages, fetchTeam, showModal} from "../../../actions";
 import HeroInner from "../../hero/HeroInner";
 import InfoColumn from "../../infoColumn/InfoColumn";
+import infoColumns from "../../../programs/regularPrograms.json"
 
 class RegularPrograms extends Component {
 
     state = {
-        infoColumn: [
-            {
-                id:1,
-                isSmall: true,
-                title: 'the-international-museum-day',
-                text: 'the-international-museum-day-text',
-                backgroundIMage:'',
-                showRulesForActivity: false,
-                columns: 2
-            },
-            {
-                id:2,
-                isSmall: true,
-                title: 'the-european-heritage-days',
-                text: 'the-european-heritage-days-text',
-                backgroundIMage:'',
-                showRulesForActivity: false,
-                columns: 2
-            }
-        ]
-    }
-
-    componentDidMount() {
-
-    }
-
-    handleShowModal = (e, data) => {
-        e.preventDefault();
-        this.props.showModal(data);
+        infoColumns: infoColumns
     }
 
     render() {
@@ -50,7 +23,7 @@ class RegularPrograms extends Component {
                 <main>
                     <Container className='container position-relative'>
                         {
-                            this.state.infoColumn.map((infoColumn) => {
+                            this.state.infoColumns.map((infoColumn) => {
                                 return (
                                     <React.Fragment key={infoColumn.id}>
                                         <InfoColumn
@@ -65,7 +38,6 @@ class RegularPrograms extends Component {
                                 )
                             })
                         }
-
                     </Container>
                 </main>
             </div>
