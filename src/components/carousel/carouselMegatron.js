@@ -147,7 +147,7 @@ function CarouselMegatron({listMegatronCarousel, showModal}) {
                                                     target=""
                                                     rel="noopener nofollow noreferrer"
                                                     onClick={(e) => {
-                                                        handleShowModal(e, 'modal-redirect')
+                                                        handleShowModal('modal-redirect', e)
                                                     }}
                                                 >
                                                     към фондове

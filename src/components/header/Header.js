@@ -61,7 +61,7 @@ function Header({showModal}) {
                                     <Nav.Link
                                         href="#"
                                         onClick={(e) => {
-                                            handleShowModal(e, 'modal-redirect')
+                                            handleShowModal('modal-redirect', e)
                                         }}
                                         className='nav__secondary-link'>
                                         <FormattedMessage id="menu.support"/>
@@ -69,7 +69,7 @@ function Header({showModal}) {
                                     <p className='nav__main-link'>|</p>
                                     <Nav.Link href="#"
                                               onClick={(e) => {
-                                                  handleShowModal(e, 'modal-redirect')
+                                                  handleShowModal('modal-redirect', e)
                                               }}
                                               className='nav__secondary-link'>
                                         <FormattedMessage id="menu.administrative"/>
@@ -103,7 +103,7 @@ function Header({showModal}) {
                                         <NavDropdown.Item
                                             className="nav__secondary-link"
                                             onClick={(e) => {
-                                                handleShowModal(e, 'modal-redirect')
+                                                handleShowModal('modal-redirect', e)
                                             }}
                                             href="#">
                                             <FormattedMessage id="menu.main-collections"/>
@@ -111,7 +111,7 @@ function Header({showModal}) {
                                         <NavDropdown.Item
                                             className="nav__secondary-link"
                                             onClick={(e) => {
-                                                handleShowModal(e, 'modal-redirect')
+                                                handleShowModal('modal-redirect', e)
                                             }}
                                             href="#">
                                             <FormattedMessage id="menu.virtual-collections"/>
@@ -120,7 +120,7 @@ function Header({showModal}) {
                                     <Nav.Link
                                         href="#"
                                         onClick={(e) => {
-                                            handleShowModal(e, 'modal-redirect')
+                                            handleShowModal('modal-redirect', e)
                                         }}
                                         className='nav__main-link '>
                                         <FormattedMessage id="menu.exhibitions"/>
@@ -134,7 +134,7 @@ function Header({showModal}) {
                                     <Nav.Link
                                         href="/about-us"
                                         onClick={(e) => {
-                                            handleShowModal(e, 'modal-redirect')
+                                            handleShowModal('modal-redirect', e)
                                         }}
                                         className='nav__main-link'>
                                         <FormattedMessage id="menu.about-us"/>
@@ -148,7 +148,7 @@ function Header({showModal}) {
                                     <Nav.Link
                                         href="#"
                                         onClick={(e) => {
-                                            handleShowModal(e, 'modal-redirect');
+                                            handleShowModal('modal-redirect', e);
                                         }}
                                         className='nav__main-link'>
                                         <FormattedMessage id="menu.house-museum"/>

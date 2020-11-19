@@ -60,7 +60,7 @@ function Footer({showModal}) {
                             <Nav className="">
                                 <Nav.Link
                                     onClick={(e) => {
-                                        handleShowModal(e, 'modal-redirect')
+                                        handleShowModal('modal-redirect', e)
                                     }}
                                     href="#"
                                     className='nav__main-link'>
@@ -68,7 +68,7 @@ function Footer({showModal}) {
                                 </Nav.Link>
                                 <Nav.Link
                                     onClick={(e) => {
-                                        handleShowModal(e, 'modal-redirect')
+                                        handleShowModal('modal-redirect', e)
                                     }}
                                     href="#"
                                     className='nav__main-link'>
@@ -81,7 +81,7 @@ function Footer({showModal}) {
                                 </Nav.Link>
                                 <Nav.Link
                                     onClick={(e) => {
-                                        handleShowModal(e, 'modal-redirect')
+                                        handleShowModal('modal-redirect', e)
                                     }}
                                     href="/about-us"
                                     className='nav__main-link'>
@@ -96,7 +96,7 @@ function Footer({showModal}) {
                             <Nav className="">
                                 <Nav.Link
                                     onClick={(e) => {
-                                        handleShowModal(e, 'modal-redirect')
+                                        handleShowModal('modal-redirect', e)
                                     }}
                                     href="#"
                                     className='nav__secondary-link'>
@@ -104,7 +104,7 @@ function Footer({showModal}) {
                                 </Nav.Link>
                                 <Nav.Link
                                     onClick={(e) => {
-                                        handleShowModal(e, 'modal-redirect')
+                                        handleShowModal('modal-redirect', e)
                                     }}
                                     href="#"
                                     className='nav__secondary-link'>
@@ -112,7 +112,7 @@ function Footer({showModal}) {
                                 </Nav.Link>
                                 <Nav.Link
                                     onClick={(e) => {
-                                        handleShowModal(e, 'modal-redirect')
+                                        handleShowModal('modal-redirect', e)
                                     }}
                                     href="#"
                                     className='nav__secondary-link'>
@@ -122,7 +122,7 @@ function Footer({showModal}) {
                             <Nav className="">
                                 <Nav.Link
                                     onClick={(e) => {
-                                        handleShowModal(e, 'modal-redirect')
+                                        handleShowModal('modal-redirect', e)
                                     }}
                                     href="#"
                                     className='nav__main-link'>
