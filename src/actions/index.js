@@ -41,7 +41,7 @@ export const showModal = (data, user) => {
                 type: FETCH_REDIRECT_MODAL,
                 data: data
             }
-        case 'modal-nedelov':
+        case 'modal-shishkov':
             return {
                 type: FETCH_NEDELOV_MODAL,
                 data: data
@@ -64,7 +64,7 @@ export const closeModal = (data) => {
                 type: CLOSE_REDIRECT_MODAL,
                 data: data
             }
-        case 'modal-nedelov':
+        case 'modal-shishkov':
             return {
                 type: CLOSE_NEDELOV_MODAL,
                 data: data

@@ -1,70 +1,81 @@
 .header {
-  @include padding(4px, 0px, 4px, 0px);
+	@include padding(4px, 0px, 4px, 0px);
 
-  &-navigation {
-    &__wrap {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-    }
+	&-navigation {
+		&__wrap {
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+		}
 
-    &__inner {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
+		&__inner {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
 
-      &__child {
-        &:first-child {
-          flex: 1;
-        }
+			&__child {
+				&:first-child {
+					flex: 1;
+				}
 
-        &:last-child {
-          flex: 1.25;
-          align-items: center;
-        }
-      }
-    }
+				&:last-child {
+					align-items: center;
+				}
 
-    &__nav {
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-    }
-  }
+				&.bg {
+					flex: 1.25;
+				}
 
-  .navbar-nav {
-    @include media-breakpoint-up(lg) {
-      justify-content: space-between;
-    }
-  }
+				&.en {
+					flex: 0.78;
 
-  .input-group {
-    @include padding(0px, 0px, 3px, 0px);
-    align-items: center;
-  }
+					.display-flag {
+						@include width(15px)
+					}
+				}
+			}
+		}
 
-  .form-control,
-  .form-control:active,
-  .form-control:hover {
-    background-color: rgba(0, 0, 0, 0);
-    border: none;
-    box-shadow: none;
-    color: rgba(255, 255, 255, 0.85);
-  }
+		&__nav {
+			border-top: 1px solid rgba(255, 255, 255, 0.1);
+		}
+	}
 
-  .nav__main-link.dropdown {
-    .nav-link {
-      display: flex;
-      align-items: center;
+	.navbar-nav {
+		@include media-breakpoint-up(lg) {
+			justify-content: space-between;
+		}
+	}
 
-      & > div {
-        line-height: 0;
-      }
-    }
-  }
+	.input-group {
+		@include padding(0px, 0px, 3px, 0px);
+		align-items: center;
+	}
 
-  .navbar-nav .dropdown .nav {
-    &__secondary-link {
-      text-transform: uppercase;
-      color: $dark;
-    }
-  }
+	.form-control,
+	.form-control:active,
+	.form-control:hover {
+		background-color: rgba(0, 0, 0, 0);
+		border: none;
+		box-shadow: none;
+		color: rgba(255, 255, 255, 0.85);
+	}
+
+	.nav__main-link.dropdown {
+		.nav-link {
+			display: flex;
+			align-items: center;
+
+			& > div {
+				line-height: 0;
+			}
+		}
+	}
+
+	.navbar-nav .dropdown .nav {
+		&__secondary-link {
+			text-transform: uppercase;
+			color: $dark;
+		}
+	}
 }

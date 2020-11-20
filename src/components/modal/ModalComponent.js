@@ -33,6 +33,11 @@ class ModalComponent extends Component {
             const location = history.location.pathname;
             let resetLocation = location.replace(`/${this.props.modal.user.nickname}`, '')
             history.push(resetLocation)
+        } else if (this.props.modal.type === "modal-shishkov") {
+            //if the modal is from shiskov
+            const location = history.location.pathname;
+            let resetLocation = location.replace(`/stoyu-shishkov`, '')
+            history.push(resetLocation)
         }
     }
 
@@ -40,7 +45,7 @@ class ModalComponent extends Component {
         switch (content) {
             case 'modal-redirect':
                 return <ModalRedirectContent/>
-            case 'modal-nedelov':
+            case 'modal-shishkov':
                 return <ModalNedelovContent/>
             case 'modal-team':
                 return <ModalTeamContent/>

@@ -29,5 +29,12 @@
         @include width(25px)
       }
     }
+    .display-flag {
+      @include width(12px);
+
+      .thumbnail-image {
+        width: 100%;
+      }
+    }
   }
 }

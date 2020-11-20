@@ -6,6 +6,11 @@
     @include font-size(19px);
     @include line-height(28px);
     letter-spacing: 0.005em;
+
+    .link:hover {
+      color: $red;
+      text-decoration: underline;
+    }
   }
 
   &__text__bold, .paragraph-2 {
