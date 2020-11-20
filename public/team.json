@@ -6,7 +6,7 @@
     "nickname": "valentina-vasileva",
     "avatar": "../images/team/valentina_vasileva.png",
     "role": "Директор",
-    "email": "<a href='mailto:rim.smolyan@gmail.com' target='_blank'>rim.smolyan@gmail.com</a>",
+    "email": "<a href='mailto:rim.smolyan@gmail.com' target='_blank'>rim.smolyan@gmail.com</a> <span class='mx-2'>/</span> <a href='mailto:v.vasileva.sm@gmail.com' target='_blank'>v.vasileva.sm@gmail.com</a> <span class='mx-2'>/</span> <a href='mailto:v_vasileva.sm@abv.bg' target='_blank'>v_vasileva.sm@abv.bg</a>",
     "phone": "<a href='tel:+35930162770' target='_blank'>тел./факс: 0301/ 6 27 70</a>",
     "year": "08.01.1965 г. в гр. Смолян",
     "education": "<p>Висше,История и география, ВТУ „Кирил и Методий“-Велико Търново</p>",
@@ -115,6 +115,29 @@
   {
     "id": 6,
     "department": "fundsAndScientificArchives",
+    "name": "Блага Илчева",
+    "nickname": "blaga-ilcheva",
+    "avatar": "../images/team/blaga_ilcheva.png",
+    "role": "Главен уредник",
+    "email": "",
+    "year": "Родена в гр. Смолян на 19. 12. 1977 г.",
+    "education": "<p>Висше, „История” във ВТУ „Св.\nСв. Кирил и Методий” (2001)</p>",
+    "profession": "Главен уредник",
+    "past_professions": "<p> от 2007 г. – уредник в отдел „Фондове” на Регионален\nисторически музей „Стою Шишков” – Смолян</p>",
+    "interests": {
+      "main": "",
+      "research": "",
+      "exhibitions": "",
+      "participation": "",
+      "publications": "<p>„Старите чешми в Райково”. В: сп. „Родопи”, № 5-6, Смолян, 2009 г. </p><p>„Капитан Петко Войвода – войводата, на когото родопчани са длъжници”. В:\n„Известия на Тракийския научен институт”, 2009 г. </p>",
+      "professional_skills": "<p>Компютърна грамотност – текстообработка, EXCEL, PPP,\nработа с бази – данни\n</p>",
+      "organisations": "<p>Българско историческо дружество – клон Смолян</p><p>Секретар на Областна организация на „Съюз на тракийските дружества в България\n/СТДБ/ - клон Смолян”</p>",
+      "educational-programs":""
+    }
+  },
+  {
+    "id": 7,
+    "department": "fundsAndScientificArchives",
     "name": "Ваня Йорданова",
     "nickname": "vanya-jordanova",
     "avatar": "../images/team/vanya_jordanova.png",
@@ -135,7 +158,7 @@
     }
   },
   {
-    "id": 7,
+    "id": 8,
     "department": "fundsAndScientificArchives",
     "name": "Цвета Колева",
     "nickname": "cveta-garova",
@@ -155,29 +178,6 @@
       "professional_skills": "<p>Обучение на тема „ Разработка и управление на европейски проекти – обучение на\nобучители”. Организатор: „Клуб отворено общество”, Търговско-промишлена палата –\nСмолян и Германо – българска индустриално – търговска камара – София, Смолян,\n2006 г.</p> <p>Квалификация за компютърна грамотност – сертификат ІТ card ESI, 2007 г. </p><p>Компютърна грамотност – текстообработка, работа с база данни,\nEXCEL. \n</p>",
       "organisations": "<p>Член на Българско историческо дружество – клон Смолян.</p>",
       "educational-programs":"<p> „Културни маршрути”, 2002 г. </p><p> Образователен цикъл „Европейски уроци”посветени на 9 май – Ден на Европа, 2002 –\n2007 </p><p>„Културни пейзажи”, 2003 г. </p><p> „На среща със Стою Шишков”, 2005 г</p><p>„Коледа и Нова година в българската и унгарската обредна традиция”, 2005 г. </p><p>„Великден в България и Унгария”, 2007 г</p><p>Рецитаторски конкурс „Със стиховете на Ласло Наги в сърцето” – регионален\nполуфинал на ХХІ Национален конкурс за изпълнение на унгарска и българска поезия\nШумен , 2008 г. (съвместно с Унгарския културен институт)</p>"
-    }
-  },
-  {
-    "id": 8,
-    "department": "fundsAndScientificArchives",
-    "name": "Блага Илчева",
-    "nickname": "blaga-ilcheva",
-    "avatar": "../images/team/blaga_ilcheva.png",
-    "role": "Главен уредник",
-    "email": "",
-    "year": "Родена в гр. Смолян на 19. 12. 1977 г.",
-    "education": "<p>Висше, „История” във ВТУ „Св.\nСв. Кирил и Методий” (2001)</p>",
-    "profession": "Главен уредник",
-    "past_professions": "<p> от 2007 г. – уредник в отдел „Фондове” на Регионален\nисторически музей „Стою Шишков” – Смолян</p>",
-    "interests": {
-      "main": "",
-      "research": "",
-      "exhibitions": "",
-      "participation": "",
-      "publications": "<p>„Старите чешми в Райково”. В: сп. „Родопи”, № 5-6, Смолян, 2009 г. </p><p>„Капитан Петко Войвода – войводата, на когото родопчани са длъжници”. В:\n„Известия на Тракийския научен институт”, 2009 г. </p>",
-      "professional_skills": "<p>Компютърна грамотност – текстообработка, EXCEL, PPP,\nработа с бази – данни\n</p>",
-      "organisations": "<p>Българско историческо дружество – клон Смолян</p><p>Секретар на Областна организация на „Съюз на тракийските дружества в България\n/СТДБ/ - клон Смолян”</p>",
-      "educational-programs":""
     }
   },
   {
@@ -252,30 +252,6 @@
   {
     "id": 12,
     "department": "publicRelations",
-    "name": "Александър Боготлиев",
-    "nickname": "aleksandar-bogotliev",
-    "avatar": "../images/team/aleksandar_bogotliev.png",
-    "role": "Екскурзовод",
-    "email": "",
-    "phone": "<a href='tel:+35930162727' target='_blank'>030162727</a>, <a href='tel:+359879111913' target='_blank'>0879 111 913</a>",
-    "year": "Роден в гр. Смолян на 18.04.1980 г.",
-    "education": "<p>Висше, специалност „Туризъм” в Университет по хранителни\nтехнологии – гр. Пловдив, 2004 г</p>",
-    "profession": "Екскурзовод",
-    "past_professions": "<p>от 2002 г. ски-инструктор в к.к. Пампорово;</p><p>от месец май 2017 г. екскурзовод в Регионален исторически музей\n„Стою Шишков” – Смолян; </p>",
-    "interests": {
-      "main": "<p>Туризъм, чужди езици</p><p>Интерес към културната история на Родопите, обредни обичаи и фолклор.</p>",
-      "research": "",
-      "exhibitions": "",
-      "participation": "",
-      "publications": "",
-      "professional_skills": "",
-      "organisations": "",
-      "educational-programs":""
-    }
-  },
-  {
-    "id": 13,
-    "department": "publicRelations",
     "name": "Мария Маргаритова",
     "nickname": "mariya-margaritova",
     "avatar": "../images/team/mariya_margaritova.png",
@@ -299,7 +275,7 @@
     }
   },
   {
-    "id": 14,
+    "id": 13,
     "department": "publicRelations",
     "name": "Анна Болгурова",
     "nickname": "anna-bolgurova",
@@ -313,6 +289,30 @@
     "past_professions": "",
     "interests": {
       "main": "",
+      "research": "",
+      "exhibitions": "",
+      "participation": "",
+      "publications": "",
+      "professional_skills": "",
+      "organisations": "",
+      "educational-programs":""
+    }
+  },
+  {
+    "id": 14,
+    "department": "publicRelations",
+    "name": "Александър Боготлиев",
+    "nickname": "aleksandar-bogotliev",
+    "avatar": "../images/team/aleksandar_bogotliev.png",
+    "role": "Екскурзовод",
+    "email": "",
+    "phone": "<a href='tel:+35930162727' target='_blank'>030162727</a>, <a href='tel:+359879111913' target='_blank'>0879 111 913</a>",
+    "year": "Роден в гр. Смолян на 18.04.1980 г.",
+    "education": "<p>Висше, специалност „Туризъм” в Университет по хранителни\nтехнологии – гр. Пловдив, 2004 г</p>",
+    "profession": "Екскурзовод",
+    "past_professions": "<p>от 2002 г. ски-инструктор в к.к. Пампорово;</p><p>от месец май 2017 г. екскурзовод в Регионален исторически музей\n„Стою Шишков” – Смолян; </p>",
+    "interests": {
+      "main": "<p>Туризъм, чужди езици</p><p>Интерес към културната история на Родопите, обредни обичаи и фолклор.</p>",
       "research": "",
       "exhibitions": "",
       "participation": "",
@@ -348,30 +348,6 @@
   },
   {
     "id": 16,
-      "department": "publicRelations",
-      "name": "Ангел Георгиев",
-      "nickname": "angel-georgiev",
-      "avatar": "",
-      "role": "Фотограф",
-      "email": "",
-      "phone": "",
-      "year": "",
-      "education": "",
-      "profession": "Фотограф",
-      "past_professions": "",
-      "interests": {
-        "main": "",
-        "research": "",
-        "exhibitions": "",
-        "participation": "",
-        "publications": "",
-        "professional_skills": "",
-        "organisations": "",
-        "educational-programs":""
-    }
-  },
-  {
-    "id": 17,
     "department": "publicRelations",
     "name": "Милена Маринска",
     "nickname": "milena-marinska",
@@ -392,6 +368,30 @@
       "professional_skills": "",
       "organisations": "",
       "educational-programs":""
+    }
+  },
+  {
+    "id": 17,
+      "department": "publicRelations",
+      "name": "Ангел Георгиев",
+      "nickname": "angel-georgiev",
+      "avatar": "",
+      "role": "Фотограф",
+      "email": "",
+      "phone": "",
+      "year": "",
+      "education": "",
+      "profession": "Фотограф",
+      "past_professions": "",
+      "interests": {
+        "main": "",
+        "research": "",
+        "exhibitions": "",
+        "participation": "",
+        "publications": "",
+        "professional_skills": "",
+        "organisations": "",
+        "educational-programs":""
     }
   },
   {
