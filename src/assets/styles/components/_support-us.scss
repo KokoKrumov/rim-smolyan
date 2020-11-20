@@ -25,4 +25,12 @@
 			text-decoration: underline;
 		}
 	}
+
+	&__main-content {
+		@include padding(100px, 0px, 100px, 0px);
+	}
+
+	.tab-content {
+		@include padding(40px, 0px, 100px, 0px);
+	}
 }

@@ -9,6 +9,7 @@ import {showModal} from "../../../actions";
 import Tab from "react-bootstrap/Tab";
 import Nav from "react-bootstrap/Nav";
 import {FormattedMessage, injectIntl} from 'react-intl';
+import CardInfoLine from "../../infoLine/CardInfoLine";
 
 class SupportUs extends Component {
 
@@ -83,48 +84,71 @@ class SupportUs extends Component {
                     </div>
 
                 </div>
-                <Container>
+                <Container className='support-us-page__main-content'>
                     <h2 className="h2">
-                        Подкрепете ни чрез:
+                        <FormattedMessage id="support-us-through"/>:
                     </h2>
                     <div className='modal_tabs-wrap'>
-                        <Tab.Container id="supports-examples" defaultActiveKey="support-examples">
+                        <Tab.Container id="supports-examples" defaultActiveKey="donation-of-authentic-items">
                             <Nav className="nav-tabs">
                                 <Nav.Item>
-                                    <Nav.Link eventKey="authentic-items" className='tab-item'>
-                                        <FormattedMessage id="biography"/>
+                                    <Nav.Link eventKey="donation-of-authentic-items" className='tab-item'>
+                                        <FormattedMessage id="donation-of-authentic-items"/>
                                     </Nav.Link>
                                 </Nav.Item>
                                 <Nav.Item>
                                     <Nav.Link eventKey="cash-donation" className='tab-item'>
-                                        <FormattedMessage id="interests"/>
+                                        <FormattedMessage id="cash-donation"/>
                                     </Nav.Link>
                                 </Nav.Item>
                                 <Nav.Item>
                                     <Nav.Link eventKey="volunteer-work" className='tab-item'>
-                                        <FormattedMessage id="publications"/>
+                                        <FormattedMessage id="volunteer-work"/>
                                     </Nav.Link>
                                 </Nav.Item>
                             </Nav>
                             <Tab.Content>
-                                <Tab.Pane eventKey="authentic-items">
-                                    <h3 className='h3'>
-                                        <FormattedMessage id="biography"/>
-                                    </h3>
-
-
+                                <Tab.Pane eventKey="donation-of-authentic-items">
+                                    <Row>
+                                        <Col lg={7}>
+                                            <CardInfoLine
+                                                title={"download-a-donation-contract"}
+                                                link={'/#'}
+                                                linkText={'here'}
+                                                isSmall={true}
+                                            />
+                                        </Col>
+                                    </Row>
                                 </Tab.Pane>
                                 <Tab.Pane eventKey="cash-donation">
-                                    <h3 className='h3'>
-                                        <FormattedMessage id="interests"/>
-                                    </h3>
-
+                                    <Row>
+                                        <Col lg={7}>
+                                            <CardInfoLine
+                                                title={"download-sponsorship-agreement"}
+                                                link={'/#'}
+                                                linkText={'here'}
+                                                isSmall={true}
+                                            />
+                                            <CardInfoLine
+                                                title={"bank-transfer"}
+                                                link={'/#'}
+                                                linkText={'here'}
+                                                isSmall={true}
+                                            />
+                                        </Col>
+                                    </Row>
                                 </Tab.Pane>
                                 <Tab.Pane eventKey="volunteer-work">
-                                    <h3 className='h3'>
-                                        <FormattedMessage id="publications"/>
-                                    </h3>
-
+                                    <Row>
+                                        <Col lg={7}>
+                                            <CardInfoLine
+                                                title={"opportunities-for-volunteer-work"}
+                                                link={'/#'}
+                                                linkText={'here'}
+                                                isSmall={true}
+                                            />
+                                        </Col>
+                                    </Row>
                                 </Tab.Pane>
                             </Tab.Content>
                         </Tab.Container>
