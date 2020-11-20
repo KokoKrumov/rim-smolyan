@@ -1,0 +1,36 @@
+.support-us-page {
+	.hero {
+		@include padding(160px, 0px, 100px, 0px);
+		min-height: 420px;
+
+		&__wrap {
+			height: auto;
+			min-height: auto;
+		}
+
+		.title,
+		[class^="paragraph"],
+		[class^="links"] {
+			color: $white;
+		}
+
+		[class^="paragraph"],
+		.links + .links {
+			@include margin(20px, 0px, 0px, 0px)
+		}
+
+		.links {
+			display: inline-block;
+			text-transform: uppercase;
+			text-decoration: underline;
+		}
+	}
+
+	&__main-content {
+		@include padding(100px, 0px, 100px, 0px);
+	}
+
+	.tab-content {
+		@include padding(40px, 0px, 100px, 0px);
+	}
+}

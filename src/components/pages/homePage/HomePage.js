@@ -91,10 +91,6 @@ class HomePage extends Component {
 
     componentDidMount() {
         this.fetchData();
-        this.setState({
-            bgHero: heroImage,
-            listMegatronCarousel: listMegatronCarousel
-        })
     }
 
     handleShowModal(data, e) {
@@ -106,7 +102,7 @@ class HomePage extends Component {
         return (
             <div className='home-page__wrap'>
                 <Hero
-                    Image={this.state.bgHero}
+                    Image={heroImage}
                     title={'Средните Родопи'}
                     subtitle={'от праисторическите времена до съвременността'}
                     subtitleSm={'Рaзгледайте нашите фондове'}
@@ -142,7 +138,7 @@ class HomePage extends Component {
                 </div>
 
                 <CarouselMegatron
-                    listMegatronCarousel={this.state.listMegatronCarousel}
+                    listMegatronCarousel={listMegatronCarousel}
                 />
 
                 <InfoColumn

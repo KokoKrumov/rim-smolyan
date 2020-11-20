@@ -97,6 +97,12 @@
   }
 }
 
+.links {
+  font-family: $font-acari-bold;
+  @include font-size(14px);
+  @include line-height(18px);
+  letter-spacing: 0.5px;
+}
 
 .h-sup {
   font-family: $font-acari-bold;
