@@ -1,0 +1,22 @@
+.accordion {
+	&__wrap {
+		border-bottom: 1px solid $dark-02;
+
+		&:hover {
+			background: $gray;
+		}
+
+		.card-header {
+			@include padding(30px, 0px, 15px, 0px);
+			cursor: pointer;
+
+			&:hover {
+				color: $red;
+			}
+		}
+
+		.card-body {
+			@include padding(15px, 0px, 40px, 0px);
+		}
+	}
+}

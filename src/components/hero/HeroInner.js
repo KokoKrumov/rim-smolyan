@@ -9,7 +9,7 @@ class HeroInner extends Component {
 
     state = {
         title: this.props.title,
-        link: this.props.subtitle,
+        link: this.props.subtitle ? this.props.subtitle : '',
         backLink: this.props.backLink ? this.props.backLink : false
     }
 
