@@ -207,6 +207,22 @@ class ModalTeamContent extends Component {
                                                         :
                                                         null
                                                 }
+
+                                                {
+                                                    this.props.user.interests &&
+                                                    this.props.user.interests.project_participation
+                                                        ?
+                                                        <React.Fragment>
+                                                            <p className='sub-titles'>
+                                                                <FormattedMessage id="project-participation"/>:
+                                                            </p>
+                                                            <div className='modal-team__main-text mt-3'
+                                                                 dangerouslySetInnerHTML={{__html: this.props.user.interests.project_participation}}>
+                                                            </div>
+                                                        </React.Fragment>
+                                                        :
+                                                        null
+                                                }
                                                 {
                                                     this.props.user.interests &&
                                                     this.props.user.interests.professional_skills
