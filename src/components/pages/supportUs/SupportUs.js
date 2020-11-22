@@ -113,7 +113,7 @@ class SupportUs extends Component {
                                         <Col lg={7}>
                                             <CardInfoLine
                                                 title={"download-a-donation-contract"}
-                                                link={'/#'}
+                                                link={'https://static.museumsmolyan.eu/docs/dogovor_za_darenie.doc'}
                                                 linkText={'here'}
                                                 isSmall={true}
                                             />
@@ -125,13 +125,13 @@ class SupportUs extends Component {
                                         <Col lg={7}>
                                             <CardInfoLine
                                                 title={"download-sponsorship-agreement"}
-                                                link={'/#'}
+                                                link={'https://static.museumsmolyan.eu/docs/dogovor_za_sponsorstvo.doc'}
                                                 linkText={'here'}
                                                 isSmall={true}
                                             />
                                             <CardInfoLine
                                                 title={"bank-transfer"}
-                                                link={'/#'}
+                                                link={'https://static.museumsmolyan.eu/docs/bankova_smetka.docx'}
                                                 linkText={'here'}
                                                 isSmall={true}
                                             />
