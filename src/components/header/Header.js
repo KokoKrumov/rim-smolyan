@@ -146,9 +146,6 @@ function Header({showModal}) {
                                     <p className='nav__main-link'>|</p>
                                     <Nav.Link
                                         href="#"
-                                        onClick={(e) => {
-                                            handleShowModal('modal-redirect', e);
-                                        }}
                                         className='nav__main-link'>
                                         <FormattedMessage id="menu.house-museum"/>
                                     </Nav.Link>

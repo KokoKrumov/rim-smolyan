@@ -118,9 +118,6 @@ function Footer({showModal}) {
                             </Nav>
                             <Nav className="">
                                 <Nav.Link
-                                    onClick={(e) => {
-                                        handleShowModal('modal-redirect', e)
-                                    }}
                                     href="#"
                                     className='nav__main-link'>
                                     <FormattedMessage id="menu.house-museum"/>
