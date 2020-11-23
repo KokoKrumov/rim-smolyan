@@ -32,6 +32,8 @@
 		}
 
 		&__active {
+			background-color: $gray;
+
 			.accordion__arrow svg{
 				transform: rotate(-90deg);
 			}
