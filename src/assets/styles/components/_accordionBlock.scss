@@ -12,11 +12,50 @@
 
 			&:hover {
 				color: $red;
+
+				svg {
+				fill: $red
+				}
 			}
 		}
 
 		.card-body {
 			@include padding(15px, 0px, 40px, 0px);
+
+			.links__wrap {
+				display: block;
+			}
+
+			.links__wrap + .links__wrap {
+				margin-top: 30px;
+			}
+		}
+
+		&__active {
+			.accordion__arrow svg{
+				transform: rotate(-90deg);
+			}
+		}
+
+		.links {
+			color: $dark;
+			text-transform: uppercase;
+			text-decoration: underline;
+
+			&:hover {
+				color: $red;
+			}
+		}
+	}
+
+	&__arrow {
+		text-align: right;
+		svg {
+			transform: rotate(90deg);
+			width: 14px;
+			fill: $dark;
+			transition-duration: 0.3s;
+			transition-timing-function: ease-out;
 		}
 	}
 }

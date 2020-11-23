@@ -5,6 +5,8 @@ import {showModal} from "../../actions";
 import Container from "react-bootstrap/Container";
 import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/cjs/Card";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 class AccordionBlock extends Component {
 
@@ -39,7 +41,7 @@ class AccordionBlock extends Component {
                                 key={block.id}
                             >
                                 <Card
-                                    className={`accordion__wrap ${this.state.numberOfClickedCard === block.id ? `bg-gray` : ``}`}
+                                    className={`accordion__wrap ${this.state.numberOfClickedCard === block.id ? `accordion__wrap__active` : ``}`}
                                 >
 
                                     <Accordion.Toggle
@@ -50,11 +52,26 @@ class AccordionBlock extends Component {
                                         }
                                     >
                                         <Container>
-                                            <h3
-                                                className='h3'
-                                                dangerouslySetInnerHTML={{__html: block.title}}
-                                            >
-                                            </h3>
+                                            <Row className='justify-content-between'>
+                                                <Col lg={8}>
+                                                    <h3
+                                                        className='h3'
+                                                        dangerouslySetInnerHTML={{__html: block.title}}
+                                                    >
+                                                    </h3>
+                                                </Col>
+                                                <Col lg={1}>
+                                                    <div className='accordion__arrow'>
+                                                        <svg width="100%" height="100%" viewBox="0 0 5 9" fill="none"
+                                                             xmlns="http://www.w3.org/2000/svg">
+                                                            <path opacity="0.8" fillRule="evenodd" clipRule="evenodd"
+                                                                  d="M0.639618 8.72206L-3.53289e-07 8.08244L3.72138 4.36106L-2.79584e-08 0.639679L0.639618 6.08446e-05L5 4.36044L0.639618 8.72206Z"/>
+                                                        </svg>
+                                                    </div>
+                                                </Col>
+                                            </Row>
+
+
                                         </Container>
                                     </Accordion.Toggle>
                                     <Accordion.Collapse eventKey={block.id}>
@@ -64,7 +81,6 @@ class AccordionBlock extends Component {
                                                     dangerouslySetInnerHTML={{__html: block.content}}
                                                 >
                                                 </div>
-
                                             </Container>
                                         </Card.Body>
                                     </Accordion.Collapse>
