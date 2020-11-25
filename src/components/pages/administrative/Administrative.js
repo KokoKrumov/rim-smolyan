@@ -1,22 +1,39 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
-import {showModal} from "../../../actions";
 import {FormattedMessage, injectIntl} from 'react-intl';
 import HeroInner from "../../hero/HeroInner";
 import administrative from './Administrative.json'
-import CollapseBlock from "../../collapse/AccordionBlock";
-import Accordion from "react-bootstrap/Accordion";
 import AccordionBlock from "../../collapse/AccordionBlock";
 
 class Administrative extends Component {
 
-    state = {
-        administrative: administrative
+
+    pureTheItem = (item) => {
+        return item.replace('#', '')
     }
 
-    handleShowModal(data, e) {
-        e.preventDefault();
-        this.props.showModal(data)
+    state = {
+        administrative: administrative,
+        openAccordionItem: null,
+        openAccordionItemPured:  null
+    }
+
+    updateActiveItem = () => {
+        console.log(this.props);
+        if (this.props?.location.hash && this.props?.location.hash !== this.state.openAccordionItem){
+            this.setState({
+                openAccordionItem: this.props.location.hash,
+                openAccordionItemPured : Number(this.pureTheItem(this.props.location.hash))
+            });
+        }
+    }
+
+    componentDidMount() {
+       this.updateActiveItem()
+    }
+
+    componentDidUpdate() {
+       this.updateActiveItem()
     }
 
     render() {
@@ -34,7 +51,7 @@ class Administrative extends Component {
                                 <HeroInner
                                     title={doc.type}
                                 />
-                                <AccordionBlock content={doc['sub_types']}/>
+                                <AccordionBlock content={doc['sub_types']} openAccordionItemPured={this.state.openAccordionItemPured}/>
 
                             </div>
                         )
@@ -48,6 +65,6 @@ class Administrative extends Component {
 export default injectIntl(connect(
     null,
     {
-        showModal
+        // showModal
     }
 )(Administrative));

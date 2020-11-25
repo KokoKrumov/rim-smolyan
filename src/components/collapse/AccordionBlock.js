@@ -7,12 +7,15 @@ import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/cjs/Card";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import history from "../../history";
 
 class AccordionBlock extends Component {
 
     state = {
         content: this.props.content,
-        numberOfClickedCard: null
+        numberOfClickedCard: null,
+        openAccordionItem: null
+
     }
 
     handleShowModal = (data, user, e) => {
@@ -21,7 +24,7 @@ class AccordionBlock extends Component {
     }
 
     activateTheAccordionItem = (blockId) => {
-        console.log(blockId);
+        // console.log(blockId);
         if (this.state.numberOfClickedCard === blockId) {
             this.setState({numberOfClickedCard: null})
         } else {
@@ -29,19 +32,33 @@ class AccordionBlock extends Component {
         }
     }
 
+    handleInitialHash = (block) => {
+        if (history.location.hash === `#${block.id}`) {
+            history.push(`/administrative`)
+            this.setState({
+                // numberOfClickedCard: null,
+                // openAccordionItem: null
+            })
+        } else {
+            history.push(`/administrative/#${block.id}`)
+        }
+    }
+
 
     render() {
         const {intl} = this.props;
         return (
-            <Accordion defaultActiveKey="1">
+            <Accordion activeKey={this.props.openAccordionItemPured} >
                 {
                     this.state.content.map(block => {
                         return (
-                            <React.Fragment
-                                key={block.id}
-                            >
+                            <React.Fragment key={block.title}>
                                 <Card
-                                    className={`accordion__wrap ${this.state.numberOfClickedCard === block.id ? `accordion__wrap__active` : ``}`}
+                                    id={block.id}
+                                    className={`accordion__wrap ${(this.state.numberOfClickedCard === block.id) || (this.props.openAccordionItemPured === block.id) ? `accordion__wrap__active` : ``}`}
+                                    onClick={()=>{
+                                        this.handleInitialHash(block);
+                                    }}
                                 >
 
                                     <Accordion.Toggle
@@ -74,7 +91,9 @@ class AccordionBlock extends Component {
 
                                         </Container>
                                     </Accordion.Toggle>
-                                    <Accordion.Collapse eventKey={block.id}>
+                                    <Accordion.Collapse
+                                        eventKey={block.id}
+                                    >
                                         <Card.Body>
                                             <Container>
                                                 <div
