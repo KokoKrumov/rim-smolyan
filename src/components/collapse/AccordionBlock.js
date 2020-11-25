@@ -7,42 +7,24 @@ import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/cjs/Card";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import history from "../../history";
 
 class AccordionBlock extends Component {
 
     state = {
         content: this.props.content,
-        numberOfClickedCard: null,
-        openAccordionItem: null
-
+        // numberOfClickedCard: null,
+        openAccordionItem: null,
+        openAccordionItemPured: this.props.openAccordionItemPured
     }
 
-    handleShowModal = (data, user, e) => {
-        e.preventDefault();
-        this.props.showModal(data, user);
-    }
+    // activateTheAccordionItem = (blockId) => {
+    //     if (this.state.numberOfClickedCard === blockId) {
+    //         this.setState({numberOfClickedCard: null})
+    //     } else {
+    //         this.setState({numberOfClickedCard: blockId})
+    //     }
+    // }
 
-    activateTheAccordionItem = (blockId) => {
-        // console.log(blockId);
-        if (this.state.numberOfClickedCard === blockId) {
-            this.setState({numberOfClickedCard: null})
-        } else {
-            this.setState({numberOfClickedCard: blockId})
-        }
-    }
-
-    handleInitialHash = (block) => {
-        if (history.location.hash === `#${block.id}`) {
-            history.push(`/administrative`)
-            this.setState({
-                // numberOfClickedCard: null,
-                // openAccordionItem: null
-            })
-        } else {
-            history.push(`/administrative/#${block.id}`)
-        }
-    }
 
 
     render() {
@@ -55,18 +37,18 @@ class AccordionBlock extends Component {
                             <React.Fragment key={block.title}>
                                 <Card
                                     id={block.id}
-                                    className={`accordion__wrap ${(this.state.numberOfClickedCard === block.id) || (this.props.openAccordionItemPured === block.id) ? `accordion__wrap__active` : ``}`}
+                                    className={`accordion__wrap ${(this.props.openAccordionItemPured === block.id) ? `accordion__wrap__active` : ``}`}
                                     onClick={()=>{
-                                        this.handleInitialHash(block);
+                                        this.props.handleInitialHash(block);
                                     }}
                                 >
 
                                     <Accordion.Toggle
                                         as={Card.Header}
                                         eventKey={block.id}
-                                        onClick={() =>
-                                            this.activateTheAccordionItem(block.id)
-                                        }
+                                        // onClick={() =>
+                                        //     this.activateTheAccordionItem(block.id)
+                                        // }
                                     >
                                         <Container>
                                             <Row className='justify-content-between'>

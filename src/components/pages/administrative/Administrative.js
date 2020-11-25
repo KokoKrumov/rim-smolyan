@@ -4,6 +4,7 @@ import {FormattedMessage, injectIntl} from 'react-intl';
 import HeroInner from "../../hero/HeroInner";
 import administrative from './Administrative.json'
 import AccordionBlock from "../../collapse/AccordionBlock";
+import history from "../../../history";
 
 class Administrative extends Component {
 
@@ -19,12 +20,24 @@ class Administrative extends Component {
     }
 
     updateActiveItem = () => {
-        console.log(this.props);
         if (this.props?.location.hash && this.props?.location.hash !== this.state.openAccordionItem){
             this.setState({
                 openAccordionItem: this.props.location.hash,
                 openAccordionItemPured : Number(this.pureTheItem(this.props.location.hash))
             });
+        } else if(!this.props?.location.hash && this.state.openAccordionItem) {
+            this.setState({
+                openAccordionItem: null,
+                openAccordionItemPured : null
+            });
+        }
+    }
+
+    handleInitialHash = (block) => {
+        if (history.location.hash === `#${block.id}`) {
+            history.push(`/administrative`)
+        } else {
+            history.push(`/administrative/#${block.id}`)
         }
     }
 
@@ -51,7 +64,11 @@ class Administrative extends Component {
                                 <HeroInner
                                     title={doc.type}
                                 />
-                                <AccordionBlock content={doc['sub_types']} openAccordionItemPured={this.state.openAccordionItemPured}/>
+                                <AccordionBlock
+                                    content={doc['sub_types']}
+                                    openAccordionItemPured={this.state.openAccordionItemPured}
+                                    handleInitialHash={this.handleInitialHash}
+                                />
 
                             </div>
                         )

@@ -51,30 +51,24 @@ class SupportUs extends Component {
                                 </Col>
                                 <Col lg={5}>
                                     <p>
-                                        <Link
+                                        <a
                                             className='links'
-                                            to="/#"
-                                            onClick={(e) => {
-                                                this.handleShowModal('modal-redirect', e)
-                                            }}
+                                            href="/administrative/#13"
                                         >
                                             <span
                                                 dangerouslySetInnerHTML={{__html: intl.formatMessage({id: "status-for-awarding"})}}
                                             >
                                             </span>
-                                        </Link>
-                                        <Link
+                                        </a>
+                                        <a
                                             className='links'
-                                            to="/#"
-                                            onClick={(e) => {
-                                                this.handleShowModal('modal-redirect', e)
-                                            }}
+                                            href="/administrative/#14"
                                         >
                                             <span
                                                 dangerouslySetInnerHTML={{__html: intl.formatMessage({id: "donors-for-enrichment"})}}
                                             >
                                             </span>
-                                        </Link>
+                                        </a>
 
                                     </p>
                                 </Col>
