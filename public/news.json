@@ -96,5 +96,17 @@
     "title": "Всестранно изучаване на родопите - каталог",
     "description": "Всестранно изучаване на родопите - каталог",
     "text": "<a href='https://static.museumsmolyan.eu/docs/katalog_85_muz_selo_sredni_rodopi.pdf' target='_blank' rel='noopener noreferrer'>Всестранно изучаване на родопите - каталог</a>"
+  },
+  {
+    "id": 9,
+    "type": "article",
+    "dateM": "Ноември",
+    "dateD": "27",
+    "dateY": "2020",
+    "image": "../images/rim-85-thumb.png",
+    "imageDetail": "../images/rim-85.png",
+    "title": "Временно преустановяване приема на посетители",
+    "description": "Временно преустановяване приема на посетители",
+    "text": "От 28 ноември 2020 г. до 3 януари 2021 г. РИМ \"Стою Шишков\" - Смолян и Къща музей \"Ласло Наги\" преустановят приема на посетители."
   }
 ]
