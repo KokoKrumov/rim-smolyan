@@ -5,6 +5,8 @@ import HeroInner from "../../hero/HeroInner";
 import administrative from './Administrative.json'
 import AccordionBlock from "../../collapse/AccordionBlock";
 import history from "../../../history";
+import {Route, Switch} from "react-router-dom";
+import InnerHelperPage from "../../innerHelperPages/innerHelperPage";
 
 class Administrative extends Component {
 
@@ -16,19 +18,19 @@ class Administrative extends Component {
     state = {
         administrative: administrative,
         openAccordionItem: null,
-        openAccordionItemPured:  null
+        openAccordionItemPured: null
     }
 
     updateActiveItem = () => {
-        if (this.props?.location.hash && this.props?.location.hash !== this.state.openAccordionItem){
+        if (this.props?.location.hash && this.props?.location.hash !== this.state.openAccordionItem) {
             this.setState({
                 openAccordionItem: this.props.location.hash,
-                openAccordionItemPured : Number(this.pureTheItem(this.props.location.hash))
+                openAccordionItemPured: Number(this.pureTheItem(this.props.location.hash))
             });
-        } else if(!this.props?.location.hash && this.state.openAccordionItem) {
+        } else if (!this.props?.location.hash && this.state.openAccordionItem) {
             this.setState({
                 openAccordionItem: null,
-                openAccordionItemPured : null
+                openAccordionItemPured: null
             });
         }
     }
@@ -42,15 +44,15 @@ class Administrative extends Component {
     }
 
     componentDidMount() {
-       this.updateActiveItem()
+        this.updateActiveItem()
+        console.log(this.props);
     }
 
     componentDidUpdate() {
-       this.updateActiveItem()
+        this.updateActiveItem()
     }
 
-    render() {
-        const {intl} = this.props;
+    renderMainAdministrativeUsPage = () => {
         return (
             <div className='administrative-page'>
 
@@ -75,6 +77,25 @@ class Administrative extends Component {
                     })
                 }
             </div>
+        )
+    }
+
+    renderDetailAdministrativePage = () => {
+        return (
+            <div className='administrative__detail-page'>
+                <InnerHelperPage />
+            </div>
+        )
+    }
+
+    render() {
+        const {intl} = this.props;
+        return (
+            <Switch>
+                <Route path='/administrative' exact component={this.renderMainAdministrativeUsPage}/>
+                <Route path='/administrative/:detailInfo' exact component={this.renderDetailAdministrativePage}/>
+            </Switch>
+
         )
     }
 }

@@ -7,7 +7,7 @@
         "id": 11,
         "title": "Приятели",
         "hash":"friends",
-        "content": "<div class='row'><div class='col'><ul><li><a class='links' href=\"/#\">Клуб \"Приятели на РИМ-Смолян\"</a></li></ul></div></div>"
+        "content": "<div class='row'><div class='col'><ul><li><a class='links' href='/administrative/club'>Клуб \"Приятели на РИМ-Смолян\"</a></li></ul></div></div>"
       },
       {
         "id": 12,

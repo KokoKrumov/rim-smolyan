@@ -43,6 +43,7 @@ class App extends Component {
                             <Route path='/contact-us' exact component={Contacts}/>
                             <Route path='/support-us' exact component={SupportUs}/>
                             <Route path='/administrative' exact component={Administrative}/>
+                            <Route path='/administrative/:detailInfo' exact component={Administrative}/>
                             <Route path='*' component={NotFound}/>
                         </Switch>
                     </main>
