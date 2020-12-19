@@ -71,19 +71,19 @@ class Contacts extends Component {
                                             </h4>
                                             <ul className='contacts__address-text'>
                                                 <li>
-                                                    <a className="link" href="mailto:museum-sm@mail.bg"
-                                                       itemProp="url"
-                                                       target=""
-                                                       rel="noopener nofollow noreferrer">
-                                                        museum-sm@mail.bg
-                                                    </a>
-                                                </li>
-                                                <li>
                                                     <a className="link" href="mailto:rim.smolyan@gmail.com"
                                                        itemProp="url"
                                                        target=""
                                                        rel="noopener nofollow noreferrer">
                                                         rim.smolyan@gmail.com
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a className="link" href="mailto:museum-sm@mail.bg"
+                                                       itemProp="url"
+                                                       target=""
+                                                       rel="noopener nofollow noreferrer">
+                                                        museum-sm@mail.bg
                                                     </a>
                                                 </li>
                                             </ul>
