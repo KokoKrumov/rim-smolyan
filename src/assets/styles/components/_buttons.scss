@@ -92,3 +92,11 @@ button.cta_outline {
   padding: inherit;
   margin: inherit;
 }
+
+.btn-link:hover {
+  text-decoration: none;
+}
+
+.btn-link:focus, .btn-link.focus {
+  box-shadow: none;
+}
