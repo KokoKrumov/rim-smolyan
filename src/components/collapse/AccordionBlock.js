@@ -7,6 +7,7 @@ import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/cjs/Card";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import {Link} from "react-router-dom";
 
 class AccordionBlock extends Component {
 
@@ -26,11 +27,11 @@ class AccordionBlock extends Component {
     // }
 
 
-
     render() {
         const {intl} = this.props;
+
         return (
-            <Accordion activeKey={this.props.openAccordionItemPured} >
+            <Accordion activeKey={this.props.openAccordionItemPured}>
                 {
                     this.state.content.map(block => {
                         return (
@@ -38,7 +39,7 @@ class AccordionBlock extends Component {
                                 <Card
                                     id={block.id}
                                     className={`accordion__wrap ${(this.props.openAccordionItemPured === block.id) ? `accordion__wrap__active` : ``}`}
-                                    onClick={()=>{
+                                    onClick={() => {
                                         this.props.handleInitialHash(block);
                                     }}
                                 >
@@ -78,10 +79,46 @@ class AccordionBlock extends Component {
                                     >
                                         <Card.Body>
                                             <Container>
-                                                <div
-                                                    dangerouslySetInnerHTML={{__html: block.content}}
-                                                >
-                                                </div>
+
+                                                {
+                                                    block.content
+                                                        ?
+                                                        <div
+                                                            onClick={(e) => {
+                                                                e.stopPropagation()
+                                                            }}
+                                                            className='sq'
+                                                            dangerouslySetInnerHTML={{__html: block.content}}
+                                                        >
+                                                        </div>
+                                                        :
+                                                        <Row>
+                                                            <Col lg={7}>
+                                                                {
+                                                                    block.projects.map((project, index) => {
+                                                                        return (
+
+                                                                            <p className='text-block__wrap' key={index}>
+                                                                                <a className='links'
+                                                                                   onClick={(e) => {
+                                                                                       e.stopPropagation()
+                                                                                   }}
+                                                                                   href={`/administrative/${block.id}/${project.id}`}
+                                                                                   dangerouslySetInnerHTML={{__html: project.content}}
+                                                                                >
+                                                                                </a>
+                                                                            </p>
+
+                                                                        )
+
+                                                                    })
+                                                                }
+                                                            </Col>
+                                                        </Row>
+
+                                                }
+
+
                                             </Container>
                                         </Card.Body>
                                     </Accordion.Collapse>
