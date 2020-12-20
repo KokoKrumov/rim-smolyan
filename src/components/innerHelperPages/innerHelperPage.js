@@ -21,7 +21,6 @@ class InnerHelperPage extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props.content);
     }
 
     render() {

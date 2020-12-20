@@ -20,11 +20,13 @@ class Administrative extends Component {
     }
 
     state = {
-        administrative: this.props.intl.location === 'bg' ? administrativeBG : administrativeEN,
-        administrativeProjects: this.props.intl.location === 'bg' ? Object.values(administrativeProjectsBG) : Object.values(administrativeProjectsEN),
+        administrative: this.props.intl.locale === 'en' ? administrativeEN : administrativeBG,
+        administrativeProjects: this.props.intl.locale === 'en' ? Object.values(administrativeProjectsEN) : Object.values(administrativeProjectsBG),
         openAccordionItem: null,
         openAccordionItemPured: null
     }
+
+
 
     updateActiveItem = () => {
         if (this.props?.location.hash && this.props?.location.hash !== this.state.openAccordionItem) {
@@ -75,6 +77,7 @@ class Administrative extends Component {
 
     componentDidMount() {
         this.updateActiveItem()
+        // console.log(this.props.intl);
     }
 
     componentDidUpdate() {
