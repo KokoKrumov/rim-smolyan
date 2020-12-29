@@ -46,7 +46,7 @@
 			background-color: $gray;
 
 			.accordion__arrow svg {
-				transform: rotate(-90deg);
+				transform: rotate(-90deg) translateY(-7px);
 			}
 		}
 
@@ -65,11 +65,19 @@
 		text-align: right;
 
 		svg {
-			transform: rotate(90deg);
-			width: 14px;
+			transform: rotate(90deg) translateY(7px);
+			width: 8px;
 			fill: $dark;
 			transition-duration: 0.3s;
 			transition-timing-function: ease-out;
+		}
+
+		&__download {
+			text-align: right;
+			svg {
+				width: 20px;
+				fill: $dark;
+			}
 		}
 	}
 }

@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
-import vectors from '../../assets/images/Vector.png'
 import Container from "react-bootstrap/cjs/Container";
 import {injectIntl} from "react-intl";
-import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 
 class HeroInner extends Component {

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {FormattedMessage, injectIntl} from 'react-intl';
+import {injectIntl} from 'react-intl';
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import {showModal} from "../../actions";

@@ -15,7 +15,7 @@ class ModalComponent extends Component {
     }
 
     componentDidUpdate() {
-        if (this.props.modal && this.state.modalContent !== this.props.modal.type || this.state.modalIsOpen !== this.props.modal.modalIsOpen) {
+        if ((this.props.modal && this.state.modalContent !== this.props.modal.type) || (this.state.modalIsOpen !== this.props.modal.modalIsOpen)) {
             this.setState({
                 modalIsOpen: this.props.modal.modalIsOpen,
                 modalContent: this.props.modal.type
