@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import vectors from '../../assets/images/Vector.png'
 import {Link} from "react-router-dom";
 
 class Hero extends Component {

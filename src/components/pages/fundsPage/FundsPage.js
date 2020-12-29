@@ -1,6 +1,4 @@
 import React, {Component} from 'react';
-import heroImage from "../../../assets/images/baseHero.jpg";
-import aboutUsImage from "../../../assets/images/about_us_section_bg.png";
 import HeroInner from "../../hero/HeroInner";
 import Container from "react-bootstrap/cjs/Container";
 import Row from "react-bootstrap/cjs/Row";
@@ -8,7 +6,6 @@ import Col from "react-bootstrap/cjs/Col";
 import Nav from "react-bootstrap/cjs/Nav";
 import NewsAndEventsListHorizontal from "../../newsAndEventsList/NewsAndEventsListHorizontal";
 import {connect} from 'react-redux'
-import {fetchNews} from "../../../actions";
 
 class FundsPage extends Component {
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Socials({}) {
+function Socials() {
 
     return (
         <div className='socials'>

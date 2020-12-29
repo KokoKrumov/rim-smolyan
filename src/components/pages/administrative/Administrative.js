@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
-import {FormattedMessage, injectIntl} from 'react-intl';
+import {injectIntl} from 'react-intl';
 import HeroInner from "../../hero/HeroInner";
 import administrativeBG from '../../../translations/AdministrativeBG.json'
 import administrativeEN from '../../../translations/AdministrativeEN.json'
