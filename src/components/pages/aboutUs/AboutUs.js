@@ -3,7 +3,7 @@ import Container from "react-bootstrap/cjs/Container";
 import Row from "react-bootstrap/cjs/Row";
 import Col from "react-bootstrap/cjs/Col";
 import {connect} from 'react-redux';
-import {fetchNews, fetchRimBuildingImages, fetchTeam, showModal} from "../../../actions";
+import {fetchRimBuildingImages, fetchTeam, showModal} from "../../../actions";
 import aboutUsBg from "../../../assets/images/about-us-page_bg.jpg";
 import AboutInfoLine from "../../infoLine/aboutInfoLine";
 import InfoColumn from "../../infoColumn/InfoColumn";
@@ -14,7 +14,7 @@ import CardInfoLine from "../../infoLine/CardInfoLine";
 import CardTeamHeadmaster from "../../cards/cardTeamHeadmaster";
 import {FormattedMessage} from "react-intl";
 import CardTeamMember from "../../cards/cardTeamMember";
-import {Router, Route, Switch, Redirect} from "react-router-dom";
+import { Route, Switch} from "react-router-dom";
 import RegularPrograms from "./RegularPrograms";
 import history from "../../../history";
 

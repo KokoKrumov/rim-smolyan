@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {IntlProvider} from "react-intl";
 import App from './components/App';
-import {isMobileScreen} from './utilities/browser';
 import messages_bg from "./translations/bg.json";
 import messages_en from "./translations/en.json";
 import {Provider} from "react-redux";
