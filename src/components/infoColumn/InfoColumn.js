@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import Container from "react-bootstrap/cjs/Container";
 import {injectIntl} from 'react-intl';
-import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import {showModal} from "../../actions";
 import Row from "react-bootstrap/Row";

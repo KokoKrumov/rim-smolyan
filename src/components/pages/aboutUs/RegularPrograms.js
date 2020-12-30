@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Container from "react-bootstrap/cjs/Container";
 import {connect} from 'react-redux';
-import {fetchNews, fetchRimBuildingImages, fetchTeam, showModal} from "../../../actions";
+import {fetchRimBuildingImages, fetchTeam, showModal} from "../../../actions";
 import HeroInner from "../../hero/HeroInner";
 import InfoColumn from "../../infoColumn/InfoColumn";
 import infoColumns from "../../../programs/regularPrograms.json"

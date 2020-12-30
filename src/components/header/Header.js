@@ -16,6 +16,7 @@ import {FormattedMessage, useIntl} from 'react-intl'
 
 function Header({showModal}) {
     const intl = useIntl();
+
     function setLanguage(lang, e) {
         e.preventDefault();
         localStorage.setItem('lang', lang);
@@ -54,9 +55,9 @@ function Header({showModal}) {
                                         </InputGroup.Text>
                                     </InputGroup.Prepend>
                                     <FormControl
-                                        placeholder={intl.formatMessage({ id: 'menu.search'})}
-                                        aria-label={intl.formatMessage({ id: 'menu.search'})}
-                                        aria-describedby={intl.formatMessage({ id: 'menu.search-in'})}
+                                        placeholder={intl.formatMessage({id: 'menu.search'})}
+                                        aria-label={intl.formatMessage({id: 'menu.search'})}
+                                        aria-describedby={intl.formatMessage({id: 'menu.search-in'})}
                                     />
                                 </InputGroup>
                                 <Nav className={`header-navigation__inner__child ${flag}`}>
@@ -69,10 +70,7 @@ function Header({showModal}) {
                                         <FormattedMessage id="menu.support"/>
                                     </Nav.Link>
                                     <p className='nav__main-link'>|</p>
-                                    <Nav.Link href="#"
-                                              onClick={(e) => {
-                                                  handleShowModal('modal-redirect', e)
-                                              }}
+                                    <Nav.Link href="/administrative"
                                               className='nav__secondary-link'>
                                         <FormattedMessage id="menu.administrative"/>
                                     </Nav.Link>
@@ -80,27 +78,30 @@ function Header({showModal}) {
                                         title={
                                             <div className="display-flag">
                                                 <img className="thumbnail-image"
-                                                     src={flag === 'en' ?  EN : BG}
+                                                     src={flag === 'en' ? EN : BG}
                                                      alt="lang"
                                                 />
                                             </div>
                                         }
                                         className='nav__main-link dropdown-lang'
                                         id="collasible-nav-dropdown">
-                                        <NavDropdown.Item>
-                                            <img className="thumbnail-image" src={BG} alt="" itemProp="image"
-                                                 onClick={(e) => setLanguage('bg', e)}/>
+                                        <NavDropdown.Item
+                                            onClick={(e) => setLanguage('bg', e)}
+                                        >
+                                            <img className="thumbnail-image" src={BG} alt="" itemProp="image"/>
                                         </NavDropdown.Item>
-                                        <NavDropdown.Item>
-                                            <img className="thumbnail-image" src={EN} alt="" itemProp="image"
-                                                 onClick={(e) => setLanguage('en', e)}/>
+                                        <NavDropdown.Item
+                                            onClick={(e) => setLanguage('en', e)}
+                                        >
+                                            <img className="thumbnail-image" src={EN} alt="" itemProp="image"/>
                                         </NavDropdown.Item>
                                     </NavDropdown>
                                 </Nav>
                             </div>
                             <div className='header-navigation__nav'>
                                 <Nav className="" activeKey="/news">
-                                    <NavDropdown title={intl.formatMessage({ id: 'menu.collections'})} className='nav__main-link'
+                                    <NavDropdown title={intl.formatMessage({id: 'menu.collections'})}
+                                                 className='nav__main-link'
                                                  id="collasible-nav-dropdown">
                                         <NavDropdown.Item
                                             className="nav__secondary-link"

@@ -35,7 +35,7 @@ class ModalTeamContent extends Component {
                             <figure className='figure'>
                                 <div className="img__wrap">
                                     <img className="img-fluid" src={this.props.user.avatar}
-                                         itemProp="image"/>
+                                         itemProp="image" alt=''/>
                                 </div>
                             </figure>
                         </div>

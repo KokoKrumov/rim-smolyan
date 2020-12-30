@@ -5,7 +5,6 @@ import infoIcon from "../../assets/images/info.svg";
 import Tooltip from 'react-bootstrap/Tooltip';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import {FormattedMessage} from 'react-intl';
-import {Link} from "react-router-dom";
 
 class WorkInfoLine extends Component {
     getWorkingTime() {

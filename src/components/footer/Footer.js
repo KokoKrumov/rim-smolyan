@@ -100,10 +100,7 @@ function Footer({showModal}) {
                                     <FormattedMessage id="menu.support"/>
                                 </Nav.Link>
                                 <Nav.Link
-                                    onClick={(e) => {
-                                        handleShowModal('modal-redirect', e)
-                                    }}
-                                    href="#"
+                                    href="/administrative"
                                     className='nav__secondary-link'>
                                     <FormattedMessage id="menu.administrative"/>
                                 </Nav.Link>

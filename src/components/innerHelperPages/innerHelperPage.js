@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {fetchNews, fetchRimBuildingImages, fetchTeam, showModal} from "../../actions";
+import {fetchRimBuildingImages, fetchTeam, showModal} from "../../actions";
 import Col from "react-bootstrap/cjs/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";

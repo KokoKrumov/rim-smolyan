@@ -3,7 +3,6 @@ import heroSupportUsBg from "../../../assets/images/heroSupportUsBg.jpg";
 import Container from "react-bootstrap/cjs/Container";
 import Row from "react-bootstrap/cjs/Row";
 import Col from "react-bootstrap/cjs/Col";
-import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import {showModal} from "../../../actions";
 import Tab from "react-bootstrap/Tab";

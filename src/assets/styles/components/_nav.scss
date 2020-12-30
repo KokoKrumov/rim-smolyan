@@ -65,8 +65,14 @@
 
 .navbar-expand-xl {
   .navbar-nav .nav {
-    &__main-link,
+    &__main-link.dropdown-lang,
+    &__main-link.dropdown,
     &__secondary-link {
+      @include padding(0px, 0px, 0px, 0px);
+    }
+    &__main-link,
+    &__main-link.dropdown-lang .nav-link,
+    &__main-link.dropdown .nav-link {
       @include padding(14px, 0px, 14px, 0px);
     }
   }
