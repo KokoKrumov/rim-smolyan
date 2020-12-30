@@ -5,9 +5,17 @@ import {connect} from "react-redux";
 
 class ModalRedirectContent extends Component {
 
+    state = {
+        url: null
+    }
+
     handleCloseModal = (e, data) => {
         // e.preventDefault();
         this.props.closeModal(data);
+    }
+
+    componentDidMount() {
+        this.setState({url: this.props.url})
     }
 
     render() {
@@ -23,7 +31,7 @@ class ModalRedirectContent extends Component {
                    <div className='d-flex justify-content-center align-items-center mt-5'>
                        <div className='mx-4'>
                            <a
-                               href='http://old.museumsmolyan.eu/'
+                               href={`http://old.museumsmolyan.eu/${this.state.url}`}
                                className='link cta_outline cta_outline__dark hvr-underline-from-center'
                                variant="secondary"
                                onClick={(e) => {
@@ -51,7 +59,12 @@ class ModalRedirectContent extends Component {
     }
 }
 
-const mapStateToProps = state => ({})
+const mapStateToProps = (state) => {
+    return {
+        url: state.modal.url
+    };
+}
+
 
 const mapDispatchToProps = dispatch => ({
     closeModal: data => dispatch(closeModal(data))

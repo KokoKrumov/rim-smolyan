@@ -11,9 +11,9 @@ import {
 export default (state = {}, action) => {
     switch (action.type) {
         case FETCH_REDIRECT_MODAL:
-            return {...state, type: action.data, modalIsOpen: true}
+            return {...state, type: action.data, url: action.url, modalIsOpen: true}
         case CLOSE_REDIRECT_MODAL:
-            return {...state, type: action.data, modalIsOpen: false}
+            return {...state, type: action.data, url: action.url, modalIsOpen: false}
         case FETCH_NEDELOV_MODAL:
             return {...state, type: action.data, modalIsOpen: true}
         case CLOSE_NEDELOV_MODAL:

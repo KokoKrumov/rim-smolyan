@@ -23,9 +23,9 @@ function Header({showModal}) {
         window.location.reload();
     }
 
-    function handleShowModal(data, e) {
+    function handleShowModal(data, url, e) {
         e.preventDefault();
-        showModal(data)
+        showModal(data, url)
     }
 
     let flag = localStorage.getItem('lang')
@@ -64,7 +64,7 @@ function Header({showModal}) {
                                     <Nav.Link
                                         href="#"
                                         onClick={(e) => {
-                                            handleShowModal('modal-redirect', e)
+                                            handleShowModal('modal-redirect', '/', e)
                                         }}
                                         className='nav__secondary-link'>
                                         <FormattedMessage id="menu.support"/>
@@ -106,7 +106,7 @@ function Header({showModal}) {
                                         <NavDropdown.Item
                                             className="nav__secondary-link"
                                             onClick={(e) => {
-                                                handleShowModal('modal-redirect', e)
+                                                handleShowModal('modal-redirect','Z_fondove.html', e)
                                             }}
                                             href="#">
                                             <FormattedMessage id="menu.main-collections"/>
@@ -114,7 +114,7 @@ function Header({showModal}) {
                                         <NavDropdown.Item
                                             className="nav__secondary-link"
                                             onClick={(e) => {
-                                                handleShowModal('modal-redirect', e)
+                                                handleShowModal('modal-redirect','Z_vir_fondove.html', e)
                                             }}
                                             href="#">
                                             <FormattedMessage id="menu.virtual-collections"/>
