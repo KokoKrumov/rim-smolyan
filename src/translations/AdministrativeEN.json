@@ -8,14 +8,14 @@
         "title": "Friends",
         "hash": "friends",
         "type": "collapsable",
-        "content": "<div class='row'><div class='col'><ul><li><a class='links' href='/administrative/club'>Клуб \"Приятели на РИМ-Смолян\"</a></li></ul></div></div>"
+        "content": "<div class='row'><div class='col'><ul><li><a class='links' href='http://www.museum-friends.com/' target='_blank' rel='noopener noreferrer'>Клуб \"Приятели на РИМ-Смолян\"</a></li></ul></div></div>"
       },
       {
         "id": 12,
         "title": "Links",
         "hash": "links",
         "type": "collapsable",
-        "content": "<div class='row'><div class='col'><ul><li><a class='links' href=\"/#\">Община Смолян</a></li></ul></div><div class='col'><ul><li><a class='links' href=\"/#\">Регионален инспекторат по образованието - Смолян</a></li></ul></div><div class='col'><ul><li><a class='links' href=\"/#\">Нов български университет – Департамент „Антропология”</a></li></ul></div></div>"
+        "content": "<div class='row'><div class='col'><ul><li><a class='links' href='https://www.smolyan.bg/' target='_blank' rel='noopener noreferrer'>Община Смолян</a></li></ul></div><div class='col'><ul><li><a class='links' href='https://www.ruobg.com/news' target='_blank' rel='noopener noreferrer'>Регионален инспекторат по образованието - Смолян</a></li></ul></div><div class='col'><ul><li><a class='links' href='https://anthropology.nbu.bg/' target='_blank' rel='noopener noreferrer'>Нов български университет – Департамент „Антропология”</a></li></ul></div></div>"
       },
       {
         "id": 13,
