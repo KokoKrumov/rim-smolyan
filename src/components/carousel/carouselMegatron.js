@@ -18,9 +18,9 @@ function CarouselMegatron({listMegatronCarousel, showModal}) {
         setItem(e.item + 1)
     }
 
-    function handleShowModal(data, e) {
+    function handleShowModal(data, url, e) {
         e.preventDefault();
-        showModal(data)
+        showModal(data, url)
     }
 
     if (listMegatronCarousel) {
@@ -147,7 +147,7 @@ function CarouselMegatron({listMegatronCarousel, showModal}) {
                                                     target=""
                                                     rel="noopener nofollow noreferrer"
                                                     onClick={(e) => {
-                                                        handleShowModal('modal-redirect', e)
+                                                        handleShowModal('modal-redirect', 'Z_fondove.html', e)
                                                     }}
                                                 >
                                                     към фондове

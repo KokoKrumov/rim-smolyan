@@ -23,7 +23,7 @@ class App extends Component {
 
     componentDidMount() {
         if (isMobileScreen()) {
-            this.props.showModal('modal-redirect')
+            this.props.showModal('modal-redirect', '')
         }
     }
 

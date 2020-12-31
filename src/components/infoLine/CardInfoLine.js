@@ -12,10 +12,10 @@ class CardInfoLine extends Component {
         isSmall: this.props.isSmall
     }
 
-    handleShowModal(data, e) {
+    handleShowModal(data, url, e) {
         if (this.state.link === '/#') {
             e.preventDefault();
-            this.props.showModal(data)
+            this.props.showModal(data, url)
         }
 
     }
@@ -48,7 +48,7 @@ class CardInfoLine extends Component {
                                 itemProp="url"
                                 target=""
                                 onClick={(e) => {
-                                    this.handleShowModal('modal-redirect',e)
+                                    this.handleShowModal('modal-redirect', '',e)
                                 }}
                                 rel="noopener nofollow noreferrer"
                                 dangerouslySetInnerHTML={{__html: intl.formatMessage({id: this.state.linkText})}}

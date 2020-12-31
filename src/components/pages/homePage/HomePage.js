@@ -93,9 +93,9 @@ class HomePage extends Component {
         this.fetchData();
     }
 
-    handleShowModal(data, e) {
+    handleShowModal(data, url, e) {
         e.preventDefault();
-        this.props.showModal(data)
+        this.props.showModal(data, url)
     }
 
     render() {

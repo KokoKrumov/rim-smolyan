@@ -14,9 +14,9 @@ class SupportUs extends Component {
 
     state = {}
 
-    handleShowModal(data, e) {
+    handleShowModal(data, url, e) {
         e.preventDefault();
-        this.props.showModal(data)
+        this.props.showModal(data, url)
     }
 
     render() {
@@ -136,7 +136,7 @@ class SupportUs extends Component {
                                         <Col lg={7}>
                                             <CardInfoLine
                                                 title={"opportunities-for-volunteer-work"}
-                                                link={'/#'}
+                                                link={'/contact-us'}
                                                 linkText={'here'}
                                                 isSmall={true}
                                             />
