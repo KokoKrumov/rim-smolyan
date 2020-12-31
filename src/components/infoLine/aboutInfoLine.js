@@ -7,9 +7,9 @@ import {showModal} from "../../actions";
 
 class AboutInfoLine extends Component {
 
-    handleShowModal(data, e) {
+    handleShowModal(data, url, e) {
         e.preventDefault();
-        this.props.showModal(data)
+        this.props.showModal(data, url)
     }
 
     render() {
@@ -31,7 +31,7 @@ class AboutInfoLine extends Component {
                                     itemProp="url"
                                     target=""
                                     onClick={(e) => {
-                                        this.handleShowModal( 'modal-redirect', e)
+                                        this.handleShowModal( 'modal-redirect', '', e)
                                     }} rel="noopener nofollow noreferrer"
                                     dangerouslySetInnerHTML={{__html: intl.formatMessage({id: 'see-here'})}}
                                 >

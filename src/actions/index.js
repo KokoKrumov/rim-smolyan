@@ -33,12 +33,13 @@ export const fetchArticle = (id) => async dispatch => {
     dispatch({type: FETCH_ARTICLE, payload: response.data})
 }
 
-export const showModal = (data, user) => {
+export const showModal = (data, url, user) => {
     switch (data) {
         case 'modal-redirect':
             return {
                 type: FETCH_REDIRECT_MODAL,
-                data: data
+                data: data,
+                url: url
             }
         case 'modal-shishkov':
             return {

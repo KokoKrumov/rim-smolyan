@@ -17,9 +17,9 @@ class InfoColumn extends Component {
         isSmall: this.props.isSmall ? this.props.isSmall : false
     }
 
-    handleShowModal(data, e) {
+    handleShowModal(data, url, e) {
         e.preventDefault();
-        this.props.showModal(data)
+        this.props.showModal(data, url)
     }
 
     render() {
@@ -88,7 +88,7 @@ class InfoColumn extends Component {
                                                             null
                                                             :
                                                             (e) => {
-                                                                this.handleShowModal('modal-redirect', e)
+                                                                this.handleShowModal('modal-redirect', '', e)
                                                             }
                                                     }
                                                     rel="noopener nofollow noreferrer"

@@ -10,9 +10,9 @@ import history from "../../history";
 
 class ModalShishkovContent extends Component {
 
-    handleCloseModal = (e, data) => {
+    handleCloseModal = (e, url, data) => {
         e.preventDefault();
-        this.props.closeModal(data);
+        this.props.closeModal(data, url);
         // if (this.props.modal.user && this.props.modal.user.nickname) {
             //if the modal was opened from Stoyu Shishkov
             // so we have a his name in the end of the location href
@@ -52,7 +52,7 @@ class ModalShishkovContent extends Component {
                                     className='link cta_outline cta_outline__dark hvr-underline-from-center m-0'
                                     variant="primary"
                                     onClick={(e) => {
-                                        this.handleCloseModal(e, 'modal-shishkov');
+                                        this.handleCloseModal(e, '', 'modal-shishkov');
                                     }}
                                 >
                                     <FormattedMessage id="text.close"/>

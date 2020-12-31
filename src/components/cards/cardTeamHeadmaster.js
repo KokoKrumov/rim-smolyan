@@ -11,9 +11,9 @@ class CardTeamHeadmaster extends Component {
         user: this.props.user
     }
 
-    handleShowModal = (data, user, e) => {
+    handleShowModal = (data, url, user, e) => {
         e.preventDefault();
-        this.props.showModal(data, user);
+        this.props.showModal(data, url, user);
         //when you open a modal with some of the members in /about-us page
         //then push the nick name in the location href, so an user has ability to copy the path
         //(at this point of time cardTeamMember exist only in /about-us page)
@@ -61,7 +61,7 @@ class CardTeamHeadmaster extends Component {
                                 itemProp="url"
                                 target=""
                                 onClick={(e) => {
-                                    this.handleShowModal('modal-team', this.state.user, e)
+                                    this.handleShowModal('modal-team', '', this.state.user, e)
                                 }} rel="noopener nofollow noreferrer"
                                 dangerouslySetInnerHTML={{__html: intl.formatMessage({id: 'see-here'})}}
                             >

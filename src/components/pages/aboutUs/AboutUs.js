@@ -104,21 +104,27 @@ class AboutUs extends Component {
                     // and this parameter contain a nickname from the team
                     //if this is true, then show modal with the info for this member
                     if (this.props.match.params.modalContent && this.isMemberExist(this.props.match.params.modalContent)) {
-                        this.handleShowModal('modal-team', this.getMemberInformation(this.props.match.params.modalContent))
+                        this.handleShowModal('modal-team', '', this.getMemberInformation(this.props.match.params.modalContent))
                     } else if (this.props.match.params.modalContent === 'stoyu-shishkov') {
-                        this.handleShowModal('modal-shishkov', 'stoyu-shishkov')
+                        this.handleShowModal('modal-shishkov', '', 'stoyu-shishkov')
                     }
                 })
         }
     }
 
-    handleShowModal = (data, user, e) => {
+    handleShowModal = (data, url, user, e) => {
         if (e) {
             e.preventDefault();
         }
 
-        this.props.showModal(data, user);
-        history.push(`/about-us/${user}`)
+        this.props.showModal(data, url, user);
+        //check if modal is shishkov or someone from the team
+        if(user.nickname){
+            history.push(`/about-us/${user.nickname}`)
+        } else {
+            history.push(`/about-us/${user}`)
+        }
+
     }
 
     renderMainAboutUsPage = () => {
@@ -144,7 +150,7 @@ class AboutUs extends Component {
                                     <p className='about-us-page__text__bold'>
                                         Създаден през 1935 г. от <a href='/#' className='color-red cursor-pointer link'
                                                                        onClick={(e) => {
-                                                                           this.handleShowModal('modal-shishkov', 'stoyu-shishkov', e)
+                                                                           this.handleShowModal('modal-shishkov', '', 'stoyu-shishkov', e)
                                                                        }}>Стою Неделев ШИШКОВ</a> – родоповед,
                                         учител, издател,
                                         музеен деец и общественик с европейски измерения, Историческият музей в Смолян е
