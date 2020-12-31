@@ -64,7 +64,7 @@ function Header({showModal}) {
                                     <Nav.Link
                                         href="#"
                                         onClick={(e) => {
-                                            handleShowModal('modal-redirect', '/', e)
+                                            handleShowModal('modal-redirect', '', e)
                                         }}
                                         className='nav__secondary-link'>
                                         <FormattedMessage id="menu.support"/>
@@ -123,7 +123,7 @@ function Header({showModal}) {
                                     <Nav.Link
                                         href="#"
                                         onClick={(e) => {
-                                            handleShowModal('modal-redirect', e)
+                                            handleShowModal('modal-redirect', 'Z_ekspozicia.html', e)
                                         }}
                                         className='nav__main-link '>
                                         <FormattedMessage id="menu.exhibitions"/>
