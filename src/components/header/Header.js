@@ -62,10 +62,7 @@ function Header({showModal}) {
                                 </InputGroup>
                                 <Nav className={`header-navigation__inner__child ${flag}`}>
                                     <Nav.Link
-                                        href="#"
-                                        onClick={(e) => {
-                                            handleShowModal('modal-redirect', '', e)
-                                        }}
+                                        href="/support-us"
                                         className='nav__secondary-link'>
                                         <FormattedMessage id="menu.support"/>
                                     </Nav.Link>
