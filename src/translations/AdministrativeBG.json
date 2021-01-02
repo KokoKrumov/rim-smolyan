@@ -116,7 +116,7 @@
         "title": "Отчет за дейността",
         "type":  "collapsable",
         "hash": "",
-        "content": "<div class='row'><div class='col-1'><ul><li><a class='links' href=\"/#\">2010</a></li><li><a class='links' href=\"/#\">2011</a></li><li><a class='links' href=\"/#\">2012</a></li><li><a class='links' href=\"/#\">2013</a></li></ul></div><div class='col-1'><ul><li><a class='links' href=\"/#\">2014</a></li><li><a class='links' href=\"/#\">2015</a></li><li><a class='links' href=\"/#\">2016</a></li><li><a class='links' href=\"/#\">2017</a></li></ul></div><div class='col-1'><ul><li><a class='links' href=\"/#\">2018</a></li></ul></div></div>"
+        "content": "<div class='row'><div class='col-1'><ul><li><a class='links' href='https://static.museumsmolyan.eu/docs/otcheti/otchet_2010.pdf' target='_blank' rel='noopener noreferrer'>2010</a></li><li><a class='links' href='https://static.museumsmolyan.eu/docs/otcheti/otchet_2011.pdf' target='_blank' rel='noopener noreferrer'>2011</a></li><li><a class='links' href='https://static.museumsmolyan.eu/docs/otcheti/otchet_2012.pdf' target='_blank' rel='noopener noreferrer'>2012</a></li><li><a class='links' href='https://static.museumsmolyan.eu/docs/otcheti/otchet_2013.pdf' target='_blank' rel='noopener noreferrer'>2013</a></li></ul></div><div class='col-1'><ul><li><a class='links' href='https://static.museumsmolyan.eu/docs/otcheti/otchet_2014.pdf' target='_blank' rel='noopener noreferrer'>2014</a></li><li><a class='links' href='https://static.museumsmolyan.eu/docs/otcheti/otchet_2015.pdf' target='_blank' rel='noopener noreferrer'>2015</a></li><li><a class='links' href='https://static.museumsmolyan.eu/docs/otcheti/otchet_2016.pdf' target='_blank' rel='noopener noreferrer'>2016</a></li><li><a class='links' href='https://static.museumsmolyan.eu/docs/otcheti/otchet_2017.pdf' target='_blank' rel='noopener noreferrer'>2017</a></li></ul></div><div class='col-1'><ul><li><a class='links' href='https://static.museumsmolyan.eu/docs/otcheti/otchet_2018.pdf' target='_blank' rel='noopener noreferrer'>2018</a></li></ul></div></div>"
       },
       {
         "id": 32,
@@ -129,31 +129,31 @@
         "id": 33,
         "type": "downloadable",
         "title": "Изисквания за износ зад граница на произведения на изкуството",
-        "url": "#"
+        "url": "https://static.museumsmolyan.eu/docs/iznos_zad_granica.pdf"
       },
       {
         "id": 34,
         "type":  "downloadable",
         "title": "Вътрешни правила за защита на личните данни",
-        "url":  "#"
+        "url":  "https://static.museumsmolyan.eu/docs/gdpr.pdf"
       },
       {
         "id": 35,
         "type":  "downloadable",
         "title": "Банкова сметка за дарения",
-        "url":  "#"
+        "url":  "https://static.museumsmolyan.eu/docs/bankova_smetka.docx"
       },
       {
         "id": 36,
         "type":  "downloadable",
         "title": "Договор за дарение",
-        "url":  "#"
+        "url":  "https://static.museumsmolyan.eu/docs/dogovor_za_darenie.doc"
       },
       {
         "id": 37,
         "type":  "downloadable",
         "title": "Договор за спонсорство",
-        "url":  "#"
+        "url":  "https://static.museumsmolyan.eu/docs/dogovor_za_sponsorstvo.doc"
       }
     ]
   }
