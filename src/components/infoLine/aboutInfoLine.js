@@ -24,18 +24,10 @@ class AboutInfoLine extends Component {
                                 <FormattedMessage id="about-us.info-line.support"/>
                             </p>
                             <p className='info-line__titled__text info-line__text-bold'>
-                                <Link
-
-                                    className="link cta_outline cta_outline__light cta_outline__border-overflow"
-                                    to="#"
-                                    itemProp="url"
-                                    target=""
-                                    onClick={(e) => {
-                                        this.handleShowModal( 'modal-redirect', '', e)
-                                    }} rel="noopener nofollow noreferrer"
+                                <a href="/support-us"
                                     dangerouslySetInnerHTML={{__html: intl.formatMessage({id: 'see-here'})}}
-                                >
-                                </Link>
+                                    className="link cta_outline cta_outline__light cta_outline__border-overflow"
+                                ></a>
                             </p>
                         </div>
                     </div>
