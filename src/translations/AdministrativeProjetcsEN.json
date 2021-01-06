@@ -89,5 +89,19 @@
         "author_title": ""
       }
     ]
+  },
+  {
+    "parentId": 23,
+    "projects": [
+      {
+        "id": 1,
+        "title": "Projects in which we were a supporting organization",
+        "sub_title": "",
+        "text": "The Regional Museum of History Stoyu Shishkov, Smolyan was an active participant in the Public Forum <b>'The Rhodopes – the Voice of Time' (the cultural and historical heritage – a factor for the sustainable development of Smolyan – Zlatograd Region)”</b> implemented in 2005-2006 by the municipalities of Smolyan and Zlatograd with the support of the National Culture Fund and the Swiss Development and Cooperation Agency through the Foundation for Local Government Reform.  The project goal is to promote the establishment of  an efficient process of consultations at an inter-municipal and regional level with the purpose of using cultural heritage as an instrument of sustainable regional development. The specific objectives involve the creation of a methodology that comprises a variety of forum activities such as:",
+        "date": "",
+        "author": "",
+        "author_title": ""
+      }
+    ]
   }
 ]

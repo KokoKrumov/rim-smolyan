@@ -64,7 +64,7 @@ class InnerHelperPage extends Component {
                                 <div className='inner-helper-page__author_wrap'>
                                     <p className='h-sup'>{this.state.date}</p>
                                     <div className='inner-helper-page__author'>
-                                        <h5 className='h5'>{this.state.author}, <br/>
+                                        <h5 className='h5'>{this.state.author ? `${this.state.author},` : null} <br/>
                                             {this.state.authorTitle}
                                         </h5>
                                     </div>

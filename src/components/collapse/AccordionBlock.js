@@ -154,7 +154,7 @@ class AccordionBlock extends Component {
                                                                          fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                         <path opacity="0.7"
                                                                               d="M16.0072 10.8789L10 16.8861L3.99277 10.8789L5.09766 9.77402L9.21875 13.8951V0H10.7812V13.8951L14.9023 9.77402L16.0072 10.8789ZM20 18.4375H0V20H20V18.4375Z"
-                                                                              fill="#272323"/>
+                                                                              />
                                                                     </svg>
                                                                 </div>
                                                             </Col>
