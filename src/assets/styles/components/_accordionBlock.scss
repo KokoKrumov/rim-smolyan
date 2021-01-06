@@ -29,17 +29,6 @@
 			.text-block__wrap + .text-block__wrap {
 				margin-top: 30px;
 			}
-
-			.administrative__list-dots{
-				@include margin(30px, 0px, 0px, 0px);
-				@include padding(0px, 0px, 0px, 40px);
-
-
-				li {
-					@include padding(0px, 0px, 20px, 0px);
-					list-style: disc;
-				}
-			}
 		}
 
 		&__active {

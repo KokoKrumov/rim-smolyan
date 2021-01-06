@@ -25,3 +25,21 @@
 		}
 	}
 }
+
+.administrative__list-type{
+	@include margin(30px, 0px, 0px, 0px);
+	@include padding(0px, 0px, 0px, 40px);
+
+
+	li {
+		@include padding(0px, 0px, 20px, 0px);
+	}
+}
+
+.administrative__list-dots li {
+	list-style: disc;
+}
+
+.administrative__list-numbers li {
+	list-style: decimal;
+}
