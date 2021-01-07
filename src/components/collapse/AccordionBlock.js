@@ -16,18 +16,194 @@ class AccordionBlock extends Component {
         openAccordionItemPured: this.props.openAccordionItemPured
     }
 
-    // activateTheAccordionItem = (blockId) => {
-    //     if (this.state.numberOfClickedCard === blockId) {
-    //         this.setState({numberOfClickedCard: null})
-    //     } else {
-    //         this.setState({numberOfClickedCard: blockId})
-    //     }
-    // }
-
     docDownload = (url) => {
         window.open(url);
     }
 
+    renderContentFriends = (block) => {
+        return (
+            <div className='row'>
+                <div className='col'>
+                    <ul>
+                        {
+                            // console.log(block)
+                            block.content.map((friend, index) => {
+                                return (
+                                    <li key={index}>
+                                        <a className="links" href={friend.url} itemProp="url" target=""
+                                           rel="noopener nofollow noreferrer">
+                                            {friend.title}
+                                        </a>
+                                    </li>
+                                )
+                            })
+                        }
+                    </ul>
+                </div>
+            </div>
+        )
+    }
+    renderContentLinks = (block) => {
+        return (
+            <div className='row'>
+                <div className="col">
+                    <div className='list__default col-count-3'>
+                        <ul>
+                            {
+                                block.content.map((link, index) => {
+                                    return (
+                                        <li>
+                                            <a className="links" href={link.url} itemProp="url" target=""
+                                               rel="noopener nofollow noreferrer">
+                                                {link.title}
+                                            </a>
+                                        </li>
+                                    )
+                                })
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
+    renderContentStatute = (block) => {
+        return (
+            <div className='row'>
+                <div className='col'>
+                    <div className='list__default col-count-2'>
+                        <p className='text-block__wrap paragraph-3 d-inline'
+                           dangerouslySetInnerHTML={{__html: block.content}}
+                        />
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
+    renderContentDonors = (block) => {
+        return (
+            <div className='row'>
+                <div className="col">
+                    <div className='list__default col-count-3'>
+                        {
+                            block.content.map((year, index) => {
+                                return (
+                                    <React.Fragment>
+                                        <p className='list__default__title'>{year.year}</p>
+                                        <ul>
+
+                                            {
+                                                year.donors.map((donor, index) => {
+                                                    return (
+                                                        <li>
+                                                            {donor.id}. {donor.name}
+                                                        </li>
+                                                    )
+                                                })
+                                            }
+                                        </ul>
+                                    </React.Fragment>
+
+                                )
+                            })
+                        }
+                        <ul>
+                            {/*{*/}
+                            {/*    block.content.map((link, index) => {*/}
+                            {/*        return (*/}
+                            {/*            <li>*/}
+                            {/*                <a className="links" href={link.url} itemProp="url" target=""*/}
+                            {/*                   rel="noopener nofollow noreferrer">*/}
+                            {/*                    {link.title}*/}
+                            {/*                </a>*/}
+                            {/*            </li>*/}
+                            {/*        )*/}
+                            {/*    })*/}
+                            {/*}*/}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
+    renderContentMedia = (block) => {
+        return (
+            <div className='row'>
+                <div className='col'>
+                    <ul>
+                        {
+                            // console.log(block)
+                            block.content.map((media, index) => {
+                                return (
+                                    <li key={index}>
+                                        <a className="links"
+                                           href={media.url}
+                                           target="_blank"
+                                           itemProp="url"
+                                           rel="noopener nofollow noreferrer"
+                                        >
+                                            <img className="img-fluid" src={media.logo} alt={media.name} itemProp="image"/>
+                                        </a>
+                                    </li>
+                                )
+                            })
+                        }
+                    </ul>
+                </div>
+            </div>
+        )
+    }
+
+    renderProjects = (block) => {
+        return (
+            <Row>
+                <Col lg={7}>
+                    {
+                        block.projects.map((project, index) => {
+                            return (
+
+                                <p className='text-block__wrap'
+                                   key={index}>
+                                    <a className='links'
+                                       onClick={(e) => {
+                                           e.stopPropagation()
+                                       }}
+                                       href={`/administrative/${block.id}/${project.id}`}
+                                       dangerouslySetInnerHTML={{__html: project.content}}
+                                    >
+                                    </a>
+                                </p>
+
+                            )
+
+                        })
+                    }
+                </Col>
+            </Row>
+        )
+    }
+
+    renderContent = (block) => {
+        switch (block.hash) {
+            case "friends":
+                return this.renderContentFriends(block)
+            case "links":
+                return this.renderContentLinks(block)
+            case "statute":
+                return this.renderContentStatute(block)
+            case "donors":
+                return this.renderContentDonors(block)
+            case "media":
+                return this.renderContentMedia(block)
+            // case "projects":
+            //     this.renderProjects(block)
+            //     break;
+
+        }
+    }
 
     render() {
         const {intl} = this.props;
@@ -87,45 +263,8 @@ class AccordionBlock extends Component {
                                                     <Card.Body>
                                                         <Container>
                                                             {
-                                                                block.content
-                                                                    ?
-                                                                    <div
-                                                                        onClick={(e) => {
-                                                                            e.stopPropagation()
-                                                                        }}
-                                                                        className='sq'
-                                                                        dangerouslySetInnerHTML={{__html: block.content}}
-                                                                    >
-                                                                    </div>
-                                                                    :
-                                                                    <Row>
-                                                                        <Col lg={7}>
-                                                                            {
-                                                                                block.projects.map((project, index) => {
-                                                                                    return (
-
-                                                                                        <p className='text-block__wrap'
-                                                                                           key={index}>
-                                                                                            <a className='links'
-                                                                                               onClick={(e) => {
-                                                                                                   e.stopPropagation()
-                                                                                               }}
-                                                                                               href={`/administrative/${block.id}/${project.id}`}
-                                                                                               dangerouslySetInnerHTML={{__html: project.content}}
-                                                                                            >
-                                                                                            </a>
-                                                                                        </p>
-
-                                                                                    )
-
-                                                                                })
-                                                                            }
-                                                                        </Col>
-                                                                    </Row>
-
+                                                                this.renderContent(block)
                                                             }
-
-
                                                         </Container>
                                                     </Card.Body>
                                                 </Accordion.Collapse>
@@ -154,7 +293,7 @@ class AccordionBlock extends Component {
                                                                          fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                         <path opacity="0.7"
                                                                               d="M16.0072 10.8789L10 16.8861L3.99277 10.8789L5.09766 9.77402L9.21875 13.8951V0H10.7812V13.8951L14.9023 9.77402L16.0072 10.8789ZM20 18.4375H0V20H20V18.4375Z"
-                                                                              />
+                                                                        />
                                                                     </svg>
                                                                 </div>
                                                             </Col>

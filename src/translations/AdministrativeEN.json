@@ -8,35 +8,112 @@
         "title": "Friends",
         "hash": "friends",
         "type": "collapsable",
-        "content": "<div class='row'><div class='col'><ul><li><a class='links' href='http://www.museum-friends.com/' target='_blank' rel='noopener noreferrer'>Клуб \"Приятели на РИМ-Смолян\"</a></li></ul></div></div>"
+        "content": [
+          {
+            "id": 1,
+            "title": "The Club of Friends to the Regional Museum of History  Stoyu Shishkov, Smolyan”",
+            "url": "http://www.museum-friends.com/"
+          }
+        ]
       },
       {
         "id": 12,
         "title": "Links",
         "hash": "links",
         "type": "collapsable",
-        "content": "<div class='row'><div class='col'><ul><li><a class='links' href='https://www.smolyan.bg/' target='_blank' rel='noopener noreferrer'>Община Смолян</a></li></ul></div><div class='col'><ul><li><a class='links' href='https://www.ruobg.com/news' target='_blank' rel='noopener noreferrer'>Регионален инспекторат по образованието - Смолян</a></li></ul></div><div class='col'><ul><li><a class='links' href='https://anthropology.nbu.bg/' target='_blank' rel='noopener noreferrer'>Нов български университет – Департамент „Антропология”</a></li></ul></div></div>"
+        "content": [
+          {
+            "id": 1,
+            "title": "Smolyan municipality",
+            "url": "https://www.smolyan.bg/"
+          },
+          {
+            "id": 2,
+            "title": "Smolyan Region",
+            "url": "https://sm.government.bg/"
+          },
+          {
+            "id": 3,
+            "title": "The Ministry of Culture of the Republic of Bulgaria",
+            "url": "http://www.mc.government.bg/"
+          },
+          {
+            "id": 4,
+            "title": "Zlatograd municipality",
+            "url": "https://www.zlatograd.bg/"
+          },
+          {
+            "id": 5,
+            "title": "Chepelare municipality",
+            "url": "https://www.chepelare.acstre.com/BG.php"
+          }
+        ]
       },
       {
         "id": 13,
         "title": "Status for awarding donors and volunteers",
         "hash": "statute",
         "type": "collapsable",
-        "content": "<div class='row'><div class='col'><div class='list__default col-count-2'><p class='text-block__wrap paragraph-3'>През 2007 г. е въведена инициативата за отличаване на дарители и доброволци на Регионален исторически музей „Стою Шишков“ – Смолян, с цел изказване на благодарност от страна на институцията и за поощрение. Церемония за отличаване на дарителитеи доброволците, допринесли за обогатяване на фондовете и за развитие на Регионален исторически музей „Стою Шишков“ – Смолян, се провежда ежегодно на 18 май-Международния ден на музеите или на близка до него дата. Отличават се дарители и доброволци с принос за период от една година - от 18 май на предходната година до 17 май на следващата година. Всеки отличен получава почетно „ Свидетелство за дарение/ за принос“ под уникален номер. Поименното свидетелство за дарение или за принос  се вписва в специална „Книга за дарения“.Имената на дарителите и доброволците се публикуват на сайта на РИМ „Стою Шишков“ – Смолян</p><p class='text-block__wrap paragraph-3'>За многократни дарителина РИМ „Стою Шишков“ – Смолян  се присъжда званието „Заслужил дарител“ и Почетна грамота.\nПрез 2018 г. е учредено званието „Дарител на годината“, което се присъжда за: <ul class='administrative__list-type administrative__list-dots'><li>дарение на автентични вещи с голяма историческа значимост и принос за обогатяване на музейните фондове</li><li>постоянно прилагане на доброволчески труд</li><li>парични дарения в размер над 5000 лв. за закупуване на предмети с цел обогатяване на фондовете, за провеждане на археологически разкопки, за консервация и реставрация на културни ценности и други специфични музейни дейности.</li></ul></p><p class='text-block__wrap paragraph-3'>Званието  „Дарител на годината“ се присъжда при необходимост, а не ежегодно. То е придружено с връчване на почетен знак и вписване в „Книга за даренията“.</p><p class='text-block__wrap paragraph-3'>Предложенията за отличаване на дарители и доброволци се правят от музейните експерти и се утвърждават от Дирекционния съвет на Регионален исторически музей  „Стою Шишков“ – Смолян.</p></div></div>"
+        "content": "През 2007 г. е въведена инициативата за отличаване на дарители и доброволци на Регионален исторически музей „Стою Шишков“ – Смолян, с цел изказване на благодарност от страна на институцията и за поощрение. Церемония за отличаване на дарителитеи доброволците, допринесли за обогатяване на фондовете и за развитие на Регионален исторически музей „Стою Шишков“ – Смолян, се провежда ежегодно на 18 май-Международния ден на музеите или на близка до него дата. Отличават се дарители и доброволци с принос за период от една година - от 18 май на предходната година до 17 май на следващата година. Всеки отличен получава почетно „ Свидетелство за дарение/ за принос“ под уникален номер. Поименното свидетелство за дарение или за принос  се вписва в специална „Книга за дарения“.Имената на дарителите и доброволците се публикуват на сайта на РИМ „Стою Шишков“ – Смолян</p><p class='text-block__wrap paragraph-3'>За многократни дарителина РИМ „Стою Шишков“ – Смолян  се присъжда званието „Заслужил дарител“ и Почетна грамота.\nПрез 2018 г. е учредено званието „Дарител на годината“, което се присъжда за: <ul class='administrative__list-type administrative__list-dots'><li>дарение на автентични вещи с голяма историческа значимост и принос за обогатяване на музейните фондове</li><li>постоянно прилагане на доброволчески труд</li><li>парични дарения в размер над 5000 лв. за закупуване на предмети с цел обогатяване на фондовете, за провеждане на археологически разкопки, за консервация и реставрация на културни ценности и други специфични музейни дейности.</li></ul></p><p class='text-block__wrap paragraph-3'>Званието  „Дарител на годината“ се присъжда при необходимост, а не ежегодно. То е придружено с връчване на почетен знак и вписване в „Книга за даренията“.</p><p class='text-block__wrap paragraph-3'>Предложенията за отличаване на дарители и доброволци се правят от музейните експерти и се утвърждават от Дирекционния съвет на Регионален исторически музей  „Стою Шишков“ – Смолян."
       },
       {
         "id": 14,
         "title": "Donors for enrichment of the museum funds and volunteer work for the development of the institution",
         "hash": "donors",
         "type": "collapsable",
-        "content": "<div class='row'><div class='col'><div class='list__default col-count-3'><p class='list__default__title'>2007 година</p><ul><li>1. д-р Никола Хекимов</li><li>2. Никола и Руса Попалови</li><li>3. Цветан Стоилов</li><li>4. Росица Невенова</li><li>5. Мария Стронгелова</li><li>6. Надежда Марева</li><li>7. Здравко Узунов</li><li>8. Стефан Карагяуров</li><li>9. Фотоклуб“Смолян“</li><li>10. Стефана Илчевска</li><li>11. Александър Жалов</li><li>12. Сашо Сарандалиев</li><li>13. Дора Стоева</li><li>14. Магдалена Добрикова</li><li>15. Ася Чаушева</li><li>16. Костадин Пацев</li><li>17. Лиляна Турналиева – Цолова</li><li>18. Иван Пеев</li><li>19. Емил Спиридонов</li><li>20. Тодора Маркова</li><li>21. Манол Тенчев</li></ul> <p class='list__default__title'>2008 година</p><ul><li>22. Никола Николов</li><li>23. Веска Митева</li><li>24. Митра Вълчева</li><li>25. Денка Вълчева</li><li>26. Костадин Вълчев</li><li>27. Васил Василев</li></ul></div></div></div>"
+        "content": [
+          {
+            "id": "",
+            "year": "2007 година",
+            "donors": [
+              {
+                "id": 1,
+                "name": "д-р Никола Хекимов"
+              },
+              {
+                "id": 2,
+                "name": "Никола и Руса Попалови"
+              },
+              {
+                "id": 3,
+                "name": "Цветан Стоилов"
+              }
+            ]
+          },
+          {
+            "id": "",
+            "year": "2008 година",
+            "donors": [
+              {
+                "id": 1,
+                "name": "Никола Николов"
+              },
+              {
+                "id": 2,
+                "name": "Веска Митева"
+              },
+              {
+                "id": 3,
+                "name": "Митра Вълчева"
+              }
+            ]
+          }
+        ]
       },
       {
         "id": 15,
         "title": "Media partners",
         "hash": "media",
         "type": "collapsable",
-        "content": "<div class='row'><div class='col'><ul><li><a class='links' href='https://www.peika.bg/' target='_blank' rel='noopener noreferrer'><img src='https://www.peika.bg/img/public/logo.png'/></a></li></ul></div></div>"
+        "content1": "<div class='row'><div class='col'><ul><li><a class='links' href='https://www.peika.bg/' target='_blank' rel='noopener noreferrer'><img src='https://www.peika.bg/img/public/logo.png'/></a></li></ul></div></div>",
+        "content": [
+          {
+            "id": 1,
+            "name": "peika",
+            "logo": "https://www.peika.bg/img/public/logo.png",
+            "url": "https://www.peika.bg/"
+          }
+        ]
       }
     ]
   },
@@ -47,6 +124,7 @@
       {
         "id": 21,
         "title": "Our projects",
+        "hash": "projects",
         "type": "collapsable",
         "projects": [
           {
@@ -66,6 +144,7 @@
       {
         "id": 22,
         "title": "Projects in which we were partners",
+        "hash": "projects",
         "type": "collapsable",
         "projects": [
           {
@@ -77,6 +156,7 @@
       {
         "id": 23,
         "title": "Projects in which we were a supporting organization",
+        "hash": "projects",
         "type": "collapsable",
         "projects": [
           {
