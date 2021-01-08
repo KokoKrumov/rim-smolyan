@@ -105,7 +105,6 @@
         "title": "Медийни партньори",
         "hash": "media",
         "type": "collapsable",
-        "content1": "<div class='row'><div class='col'><ul><li><a class='links' href='https://www.peika.bg/' target='_blank' rel='noopener noreferrer'><img src='https://www.peika.bg/img/public/logo.png'/></a></li></ul></div></div>",
         "content": [
           {
             "id": 1,
@@ -124,8 +123,9 @@
       {
         "id": 21,
         "title": "Наши проекти",
+        "hash": "projects",
         "type":  "collapsable",
-        "projects": [
+        "content": [
           {
             "id": 1,
             "content": "Организиране, създаване и представяне на фотодокументална изложба \"Християнско наследство в Родопите - църкви и манастири\"  в Смолян и Солун  Проект по Програма PHARE ТГС България - Гърция: BG 01.06.07-014"
@@ -163,8 +163,9 @@
       {
         "id": 22,
         "title": "Проекти, на които сме партньори",
+        "hash": "projects",
         "type":  "collapsable",
-        "projects": [
+        "content": [
           {
             "id": 1,
             "content": "Регионален исторически музей „Стою Шишков” – Смолян, е партньор на проектите на общините Смолян, Чепеларе и Рудозем, изпълнени по стартиралата през 2007 г. Програма ФАР - ТГС България - Гърция “Насърчаване на културните, туристическите и човешките ресурси в транс граничния регион” с приоритет социализация на археологически обекти до ХІV век с цел превръщането им в туристически дестинации."
@@ -174,8 +175,9 @@
       {
         "id": 23,
         "title": "Проекти, на които сме подкрепяща организация",
+        "hash": "projects",
         "type":  "collapsable",
-        "projects": [
+        "content": [
           {
             "id": 1,
             "content": "През 2006-2007 г. Регионален исторически музей “Стою Шишков”- Смолян е организация, подкрепяща проекта на Община Остелато (Италия) и на Община Смолян “To touch or not to touch”, предназначен за незрящи хора. Целта е да им бъдат предоставени възможности  за запознаване с културното многообразие на региона. В рамките на проекта в залите на музея са организирани ателиета за незрящи на тема „Тъкани и тъкачни техники”, създаден е филм „Да докоснеш планината”. Издаден е „Пътеводител на Регионален исторически музей „Стою Шишков” – Смолян” на брайлов език, с което музеят е новатор за България при приложение на подобна форма за приобщаване към културното наследство на хора в неравностойно положение."
@@ -192,14 +194,14 @@
         "id": 31,
         "title": "Отчет за дейността",
         "type":  "collapsable",
-        "hash": "",
+        "hash": "reports",
         "content": "<div class='row'><div class='col-1'><ul><li><a class='links' href='https://static.museumsmolyan.eu/docs/otcheti/otchet_2010.pdf' target='_blank' rel='noopener noreferrer'>2010</a></li><li><a class='links' href='https://static.museumsmolyan.eu/docs/otcheti/otchet_2011.pdf' target='_blank' rel='noopener noreferrer'>2011</a></li><li><a class='links' href='https://static.museumsmolyan.eu/docs/otcheti/otchet_2012.pdf' target='_blank' rel='noopener noreferrer'>2012</a></li><li><a class='links' href='https://static.museumsmolyan.eu/docs/otcheti/otchet_2013.pdf' target='_blank' rel='noopener noreferrer'>2013</a></li></ul></div><div class='col-1'><ul><li><a class='links' href='https://static.museumsmolyan.eu/docs/otcheti/otchet_2014.pdf' target='_blank' rel='noopener noreferrer'>2014</a></li><li><a class='links' href='https://static.museumsmolyan.eu/docs/otcheti/otchet_2015.pdf' target='_blank' rel='noopener noreferrer'>2015</a></li><li><a class='links' href='https://static.museumsmolyan.eu/docs/otcheti/otchet_2016.pdf' target='_blank' rel='noopener noreferrer'>2016</a></li><li><a class='links' href='https://static.museumsmolyan.eu/docs/otcheti/otchet_2017.pdf' target='_blank' rel='noopener noreferrer'>2017</a></li></ul></div><div class='col-1'><ul><li><a class='links' href='https://static.museumsmolyan.eu/docs/otcheti/otchet_2018.pdf' target='_blank' rel='noopener noreferrer'>2018</a></li></ul></div></div>"
       },
       {
         "id": 32,
         "title": "Профил на купувача",
         "type":  "collapsable",
-        "hash": "",
+        "hash": "reports",
         "content": "<div class='row'><div class='col-10'><p class='paragraph-2'>\"РЕМОНТ НА ПОКРИВ И КОНСЕРВАЦИОННИ И РЕСТАВРАЦИОННИ РАБОТИ (КРР)  ПО ДЪРВЕНИ ЕЛЕМЕНТИ И КОНСТРУКЦИИ ЗА ОБЕКТ: КЪЩА-МУЗЕЙ „ЛАСЛО НАГИ“ - СМОЛЯН</p><br><ul><li class=' mb-2'><a class='links' href='https://static.museumsmolyan.eu/docs/profil_na_kupuvacha/obqva.pdf' target='_blank' rel='noopener noreferrer'>Обява</a></li><li class=' mb-2'><a class='links' href='https://static.museumsmolyan.eu/docs/profil_na_kupuvacha/dokumentaciya.doc' target='_blank' rel='noopener noreferrer'>Документация</a></li><li class=' mb-2'><a class='links' href='https://static.museumsmolyan.eu/docs/profil_na_kupuvacha/kolich_stoin_smetka.xlsx' target='_blank' rel='noopener noreferrer'>Количествена сметка</a></li><li class=' mb-2'><a class='links' href='https://static.museumsmolyan.eu/docs/profil_na_kupuvacha/info_udaljavane.docx' target='_blank' rel='noopener noreferrer'>Информация за удължаване на първоначалния срок за получаване на оферти</a></li><li class=' mb-2'><a class='links' href='https://static.museumsmolyan.eu/docs/profil_na_kupuvacha/nov_srok_23.08.2016.docx' target='_blank' rel='noopener noreferrer'>Информация относно нов срок за отваряне на оферти</a></li><li class=' mb-2'><a class='links' href='https://static.museumsmolyan.eu/docs/profil_na_kupuvacha/protokol_2016-08-26.pdf' target='_blank' rel='noopener noreferrer'>Протокол на комисия по чл. 192 от зоп и чл. 97, ал. 4 от Правилника за прилагане на зоп</a></li></ul><p class='paragraph-3 mt-4'>Информацията е качена на: 26.08.2016 г.</p></div></div>"
       },
       {

@@ -30,8 +30,12 @@ class AccordionBlock extends Component {
                             block.content.map((friend, index) => {
                                 return (
                                     <li key={index}>
-                                        <a className="links" href={friend.url} itemProp="url" target=""
-                                           rel="noopener nofollow noreferrer">
+                                        <a
+                                            className="links"
+                                            href={friend.url}
+                                            itemProp="url"
+                                            target="_blank"
+                                            rel="noopener nofollow noreferrer">
                                             {friend.title}
                                         </a>
                                     </li>
@@ -52,9 +56,13 @@ class AccordionBlock extends Component {
                             {
                                 block.content.map((link, index) => {
                                     return (
-                                        <li>
-                                            <a className="links" href={link.url} itemProp="url" target=""
-                                               rel="noopener nofollow noreferrer">
+                                        <li key={index}>
+                                            <a
+                                                className="links"
+                                                href={link.url}
+                                                itemProp="url"
+                                                target="_blank"
+                                                rel="noopener nofollow noreferrer">
                                                 {link.title}
                                             </a>
                                         </li>
@@ -90,14 +98,14 @@ class AccordionBlock extends Component {
                         {
                             block.content.map((year, index) => {
                                 return (
-                                    <React.Fragment>
+                                    <React.Fragment key={index}>
                                         <p className='list__default__title'>{year.year}</p>
                                         <ul>
 
                                             {
                                                 year.donors.map((donor, index) => {
                                                     return (
-                                                        <li>
+                                                        <li key={index}>
                                                             {donor.id}. {donor.name}
                                                         </li>
                                                     )
@@ -105,24 +113,9 @@ class AccordionBlock extends Component {
                                             }
                                         </ul>
                                     </React.Fragment>
-
                                 )
                             })
                         }
-                        <ul>
-                            {/*{*/}
-                            {/*    block.content.map((link, index) => {*/}
-                            {/*        return (*/}
-                            {/*            <li>*/}
-                            {/*                <a className="links" href={link.url} itemProp="url" target=""*/}
-                            {/*                   rel="noopener nofollow noreferrer">*/}
-                            {/*                    {link.title}*/}
-                            {/*                </a>*/}
-                            {/*            </li>*/}
-                            {/*        )*/}
-                            {/*    })*/}
-                            {/*}*/}
-                        </ul>
                     </div>
                 </div>
             </div>
@@ -135,7 +128,6 @@ class AccordionBlock extends Component {
                 <div className='col'>
                     <ul>
                         {
-                            // console.log(block)
                             block.content.map((media, index) => {
                                 return (
                                     <li key={index}>
@@ -145,7 +137,8 @@ class AccordionBlock extends Component {
                                            itemProp="url"
                                            rel="noopener nofollow noreferrer"
                                         >
-                                            <img className="img-fluid" src={media.logo} alt={media.name} itemProp="image"/>
+                                            <img className="img-fluid" src={media.logo} alt={media.name}
+                                                 itemProp="image"/>
                                         </a>
                                     </li>
                                 )
@@ -162,9 +155,8 @@ class AccordionBlock extends Component {
             <Row>
                 <Col lg={7}>
                     {
-                        block.projects.map((project, index) => {
+                        block.content.map((project, index) => {
                             return (
-
                                 <p className='text-block__wrap'
                                    key={index}>
                                     <a className='links'
@@ -176,13 +168,21 @@ class AccordionBlock extends Component {
                                     >
                                     </a>
                                 </p>
-
                             )
-
                         })
                     }
                 </Col>
             </Row>
+        )
+    }
+
+    renderReports = (block) => {
+        return (
+            <div
+                dangerouslySetInnerHTML={{__html: block.content}}
+            >
+
+            </div>
         )
     }
 
@@ -198,10 +198,10 @@ class AccordionBlock extends Component {
                 return this.renderContentDonors(block)
             case "media":
                 return this.renderContentMedia(block)
-            // case "projects":
-            //     this.renderProjects(block)
-            //     break;
-
+            case "projects":
+                return this.renderProjects(block)
+            case "reports":
+                return this.renderReports(block)
         }
     }
 
@@ -302,15 +302,12 @@ class AccordionBlock extends Component {
                                                 </Accordion.Toggle>
                                             </React.Fragment>
                                     }
-
                                 </Card>
-
                             </React.Fragment>
                         )
                     })
                 }
             </Accordion>
-
         )
     }
 }

@@ -102,10 +102,9 @@
       },
       {
         "id": 15,
-        "title": "Media partners",
+        "title": "Медийни партньори",
         "hash": "media",
         "type": "collapsable",
-        "content1": "<div class='row'><div class='col'><ul><li><a class='links' href='https://www.peika.bg/' target='_blank' rel='noopener noreferrer'><img src='https://www.peika.bg/img/public/logo.png'/></a></li></ul></div></div>",
         "content": [
           {
             "id": 1,
