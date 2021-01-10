@@ -8,35 +8,153 @@
         "title": "Приятели",
         "hash": "friends",
         "type": "collapsable",
-        "content": "<div class='row'><div class='col'><ul><li><a class='links' href='http://www.museum-friends.com/' target='_blank' rel='noopener noreferrer'>Клуб \"Приятели на РИМ-Смолян\"</a></li></ul></div></div>"
+        "content": [
+          {
+            "id": 1,
+            "title": "Клуб \"Приятели на РИМ-Смолян\"",
+            "url": "http://www.museum-friends.com/"
+          }
+        ]
       },
       {
         "id": 12,
         "title": "Връзки",
         "hash": "links",
-        "type":  "collapsable",
-        "content": "<div class='row'><div class='col'><ul><li><a class='links' href='https://www.smolyan.bg/' target='_blank' rel='noopener noreferrer'>Община Смолян</a></li></ul></div><div class='col'><ul><li><a class='links' href='https://www.ruobg.com/news' target='_blank' rel='noopener noreferrer'>Регионален инспекторат по образованието - Смолян</a></li></ul></div><div class='col'><ul><li><a class='links' href='https://anthropology.nbu.bg/' target='_blank' rel='noopener noreferrer'>Нов български университет – Департамент „Антропология”</a></li></ul></div></div>"
+        "type": "collapsable",
+        "content": [
+          {
+            "id": 1,
+            "title": "Община Смолян",
+            "url": "https://www.smolyan.bg/"
+          },
+          {
+            "id": 2,
+            "title": "Областна администрация Смолян",
+            "url": "https://sm.government.bg/"
+          },
+          {
+            "id": 3,
+            "title": "Министерство на културата на Република България",
+            "url": "http://www.mc.government.bg/"
+          },
+          {
+            "id": 4,
+            "title": "Община Златоград",
+            "url": "https://www.zlatograd.bg/"
+          },
+          {
+            "id": 5,
+            "title": "Община Чепеларе",
+            "url": "https://www.chepelare.acstre.com/BG.php"
+          }
+        ]
       },
       {
         "id": 13,
-        "title": "Статут за отличаване на дарителите и доброволците ",
+        "title": "Статут за отличаване на дарителите и доброволците",
         "hash": "statute",
-        "type":  "collapsable",
-        "content": "<div class='row'><div class='col'><div class='list__default col-count-2'><p class='text-block__wrap paragraph-3'>През 2007 г. е въведена инициативата за отличаване на дарители и доброволци на Регионален исторически музей „Стою Шишков“ – Смолян, с цел изказване на благодарност от страна на институцията и за поощрение. Церемония за отличаване на дарителитеи доброволците, допринесли за обогатяване на фондовете и за развитие на Регионален исторически музей „Стою Шишков“ – Смолян, се провежда ежегодно на 18 май-Международния ден на музеите или на близка до него дата. Отличават се дарители и доброволци с принос за период от една година - от 18 май на предходната година до 17 май на следващата година. Всеки отличен получава почетно „ Свидетелство за дарение/ за принос“ под уникален номер. Поименното свидетелство за дарение или за принос  се вписва в специална „Книга за дарения“.Имената на дарителите и доброволците се публикуват на сайта на РИМ „Стою Шишков“ – Смолян</p><p class='text-block__wrap paragraph-3'>За многократни дарителина РИМ „Стою Шишков“ – Смолян  се присъжда званието „Заслужил дарител“ и Почетна грамота.\nПрез 2018 г. е учредено званието „Дарител на годината“, което се присъжда за: <ul class='administrative__list-type administrative__list-dots'><li>дарение на автентични вещи с голяма историческа значимост и принос за обогатяване на музейните фондове</li><li>постоянно прилагане на доброволчески труд</li><li>парични дарения в размер над 5000 лв. за закупуване на предмети с цел обогатяване на фондовете, за провеждане на археологически разкопки, за консервация и реставрация на културни ценности и други специфични музейни дейности.</li></ul></p><p class='text-block__wrap paragraph-3'>Званието  „Дарител на годината“ се присъжда при необходимост, а не ежегодно. То е придружено с връчване на почетен знак и вписване в „Книга за даренията“.</p><p class='text-block__wrap paragraph-3'>Предложенията за отличаване на дарители и доброволци се правят от музейните експерти и се утвърждават от Дирекционния съвет на Регионален исторически музей  „Стою Шишков“ – Смолян.</p></div></div>"
+        "type": "collapsable",
+        "content": "През 2007 г. е въведена инициативата за отличаване на дарители и доброволци на Регионален исторически музей „Стою Шишков“ – Смолян, с цел изказване на благодарност от страна на институцията и за поощрение. Церемония за отличаване на дарителитеи доброволците, допринесли за обогатяване на фондовете и за развитие на Регионален исторически музей „Стою Шишков“ – Смолян, се провежда ежегодно на 18 май-Международния ден на музеите или на близка до него дата. Отличават се дарители и доброволци с принос за период от една година - от 18 май на предходната година до 17 май на следващата година. Всеки отличен получава почетно „ Свидетелство за дарение/ за принос“ под уникален номер. Поименното свидетелство за дарение или за принос  се вписва в специална „Книга за дарения“.Имената на дарителите и доброволците се публикуват на сайта на РИМ „Стою Шишков“ – Смолян</p><p class='text-block__wrap paragraph-3'>За многократни дарителина РИМ „Стою Шишков“ – Смолян  се присъжда званието „Заслужил дарител“ и Почетна грамота.\nПрез 2018 г. е учредено званието „Дарител на годината“, което се присъжда за: <ul class='administrative__list-type administrative__list-dots'><li>дарение на автентични вещи с голяма историческа значимост и принос за обогатяване на музейните фондове</li><li>постоянно прилагане на доброволчески труд</li><li>парични дарения в размер над 5000 лв. за закупуване на предмети с цел обогатяване на фондовете, за провеждане на археологически разкопки, за консервация и реставрация на културни ценности и други специфични музейни дейности.</li></ul></p><p class='text-block__wrap paragraph-3'>Званието  „Дарител на годината“ се присъжда при необходимост, а не ежегодно. То е придружено с връчване на почетен знак и вписване в „Книга за даренията“.</p><p class='text-block__wrap paragraph-3'>Предложенията за отличаване на дарители и доброволци се правят от музейните експерти и се утвърждават от Дирекционния съвет на Регионален исторически музей  „Стою Шишков“ – Смолян."
       },
       {
         "id": 14,
         "title": "Дарители за обогатяване на музейните фондове и доброволчески труд за развитието на институцията",
         "hash": "donors",
-        "type":  "collapsable",
-        "content": "<div class='row'><div class='col'><div class='list__default col-count-3'><p class='list__default__title'>2007 година</p><ul><li>1. д-р Никола Хекимов</li><li>2. Никола и Руса Попалови</li><li>3. Цветан Стоилов</li><li>4. Росица Невенова</li><li>5. Мария Стронгелова</li><li>6. Надежда Марева</li><li>7. Здравко Узунов</li><li>8. Стефан Карагяуров</li><li>9. Фотоклуб“Смолян“</li><li>10. Стефана Илчевска</li><li>11. Александър Жалов</li><li>12. Сашо Сарандалиев</li><li>13. Дора Стоева</li><li>14. Магдалена Добрикова</li><li>15. Ася Чаушева</li><li>16. Костадин Пацев</li><li>17. Лиляна Турналиева – Цолова</li><li>18. Иван Пеев</li><li>19. Емил Спиридонов</li><li>20. Тодора Маркова</li><li>21. Манол Тенчев</li></ul> <p class='list__default__title'>2008 година</p><ul><li>22. Никола Николов</li><li>23. Веска Митева</li><li>24. Митра Вълчева</li><li>25. Денка Вълчева</li><li>26. Костадин Вълчев</li><li>27. Васил Василев</li></ul></div></div></div>"
+        "type": "collapsable",
+        "content": [
+          {
+            "id": "",
+            "year": "2007 година",
+            "donors": [
+              {
+                "id": 1,
+                "number": 1,
+                "name": "д-р Никола Хекимов"
+              },
+              {
+                "id": 2,
+                "number": 2,
+                "name": "Никола и Руса Попалови"
+              },
+              {
+                "id": 3,
+                "number": 3,
+                "name": "Цветан Стоилов"
+              }
+            ]
+          },
+          {
+            "id": "",
+            "year": "2008 година",
+            "donors": [
+              {
+                "id": 1,
+                "number": 22,
+                "name": "Никола Николов"
+              },
+              {
+                "id": 2,
+                "number": 23,
+                "name": "Веска Митева"
+              },
+              {
+                "id": 3,
+                "number": 24,
+                "name": "Митра Вълчева"
+              }
+            ]
+          },
+          {
+            "id": "",
+            "year": "2018 година",
+            "donors": [
+              {
+                "id": 1,
+                "number": 176,
+                "name": "Дечко Хаджихристев"
+              },
+              {
+                "id": 2,
+                "number": 177,
+                "name": "Христо Андонов"
+              },
+              {
+                "id": 3,
+                "number": 178,
+                "name": " Димитър Михайловв"
+              },
+              {
+                "id": 4,
+                "number": 179,
+                "name": "Д-р Иван Църов"
+              },
+              {
+                "id": 5,
+                "number": 180,
+                "name": "Тодор Маринов"
+              },
+              {
+                "id": 6,
+                "number": 181,
+                "name": "Стоил Василев"
+              }
+            ]
+          }
+        ]
       },
       {
         "id": 15,
         "title": "Медийни партньори",
         "hash": "media",
-        "type":  "collapsable",
-        "content": "<div class='row'><div class='col'><ul><li><a class='links' href='https://www.peika.bg/' target='_blank' rel='noopener noreferrer'><img src='https://www.peika.bg/img/public/logo.png'/></a></li></ul></div></div>"
+        "type": "collapsable",
+        "content": [
+          {
+            "id": 1,
+            "name": "peika",
+            "logo": "https://www.peika.bg/img/public/logo.png",
+            "url": "https://www.peika.bg/"
+          }
+        ]
       }
     ]
   },
@@ -47,8 +165,9 @@
       {
         "id": 21,
         "title": "Наши проекти",
-        "type":  "collapsable",
-        "projects": [
+        "hash": "projects",
+        "type": "collapsable",
+        "content": [
           {
             "id": 1,
             "content": "Организиране, създаване и представяне на фотодокументална изложба \"Християнско наследство в Родопите - църкви и манастири\"  в Смолян и Солун  Проект по Програма PHARE ТГС България - Гърция: BG 01.06.07-014"
@@ -86,8 +205,9 @@
       {
         "id": 22,
         "title": "Проекти, на които сме партньори",
-        "type":  "collapsable",
-        "projects": [
+        "hash": "partnersProjects",
+        "type": "collapsable",
+        "content": [
           {
             "id": 1,
             "content": "Регионален исторически музей „Стою Шишков” – Смолян, е партньор на проектите на общините Смолян, Чепеларе и Рудозем, изпълнени по стартиралата през 2007 г. Програма ФАР - ТГС България - Гърция “Насърчаване на културните, туристическите и човешките ресурси в транс граничния регион” с приоритет социализация на археологически обекти до ХІV век с цел превръщането им в туристически дестинации."
@@ -97,8 +217,9 @@
       {
         "id": 23,
         "title": "Проекти, на които сме подкрепяща организация",
-        "type":  "collapsable",
-        "projects": [
+        "hash": "partnersProjects",
+        "type": "collapsable",
+        "content": [
           {
             "id": 1,
             "content": "През 2006-2007 г. Регионален исторически музей “Стою Шишков”- Смолян е организация, подкрепяща проекта на Община Остелато (Италия) и на Община Смолян “To touch or not to touch”, предназначен за незрящи хора. Целта е да им бъдат предоставени възможности  за запознаване с културното многообразие на региона. В рамките на проекта в залите на музея са организирани ателиета за незрящи на тема „Тъкани и тъкачни техники”, създаден е филм „Да докоснеш планината”. Издаден е „Пътеводител на Регионален исторически музей „Стою Шишков” – Смолян” на брайлов език, с което музеят е новатор за България при приложение на подобна форма за приобщаване към културното наследство на хора в неравностойно положение."
@@ -114,15 +235,61 @@
       {
         "id": 31,
         "title": "Отчет за дейността",
-        "type":  "collapsable",
-        "hash": "",
-        "content": "<div class='row'><div class='col-1'><ul><li><a class='links' href='https://static.museumsmolyan.eu/docs/otcheti/otchet_2010.pdf' target='_blank' rel='noopener noreferrer'>2010</a></li><li><a class='links' href='https://static.museumsmolyan.eu/docs/otcheti/otchet_2011.pdf' target='_blank' rel='noopener noreferrer'>2011</a></li><li><a class='links' href='https://static.museumsmolyan.eu/docs/otcheti/otchet_2012.pdf' target='_blank' rel='noopener noreferrer'>2012</a></li><li><a class='links' href='https://static.museumsmolyan.eu/docs/otcheti/otchet_2013.pdf' target='_blank' rel='noopener noreferrer'>2013</a></li></ul></div><div class='col-1'><ul><li><a class='links' href='https://static.museumsmolyan.eu/docs/otcheti/otchet_2014.pdf' target='_blank' rel='noopener noreferrer'>2014</a></li><li><a class='links' href='https://static.museumsmolyan.eu/docs/otcheti/otchet_2015.pdf' target='_blank' rel='noopener noreferrer'>2015</a></li><li><a class='links' href='https://static.museumsmolyan.eu/docs/otcheti/otchet_2016.pdf' target='_blank' rel='noopener noreferrer'>2016</a></li><li><a class='links' href='https://static.museumsmolyan.eu/docs/otcheti/otchet_2017.pdf' target='_blank' rel='noopener noreferrer'>2017</a></li></ul></div><div class='col-1'><ul><li><a class='links' href='https://static.museumsmolyan.eu/docs/otcheti/otchet_2018.pdf' target='_blank' rel='noopener noreferrer'>2018</a></li></ul></div></div>"
+        "type": "collapsable",
+        "hash": "reports",
+        "content": [
+          {
+            "id": 1,
+            "url": "https://static.museumsmolyan.eu/docs/otcheti/otchet_2010.pdf",
+            "year": "2010"
+          },
+          {
+            "id": 2,
+            "url": "https://static.museumsmolyan.eu/docs/otcheti/otchet_2011.pdf",
+            "year": "2011"
+          },
+          {
+            "id": 3,
+            "url": "https://static.museumsmolyan.eu/docs/otcheti/otchet_2012.pdf",
+            "year": "2012"
+          },
+          {
+            "id": 4,
+            "url": "https://static.museumsmolyan.eu/docs/otcheti/otchet_2013.pdf",
+            "year": "2013"
+          },
+          {
+            "id": 5,
+            "url": "https://static.museumsmolyan.eu/docs/otcheti/otchet_2014.pdf",
+            "year": "2014"
+          },
+          {
+            "id": 6,
+            "url": "https://static.museumsmolyan.eu/docs/otcheti/otchet_2015.pdf",
+            "year": "2015"
+          },
+          {
+            "id": 7,
+            "url": "https://static.museumsmolyan.eu/docs/otcheti/otchet_2016.pdf",
+            "year": "2016"
+          },
+          {
+            "id": 8,
+            "url": "https://static.museumsmolyan.eu/docs/otcheti/otchet_2017.pdf",
+            "year": "2017"
+          },
+          {
+            "id": 9,
+            "url": "https://static.museumsmolyan.eu/docs/otcheti/otchet_2018.pdf",
+            "year": "2018"
+          }
+        ]
       },
       {
         "id": 32,
         "title": "Профил на купувача",
-        "type":  "collapsable",
-        "hash": "",
+        "type": "collapsable",
+        "hash": "docs",
         "content": "<div class='row'><div class='col-10'><p class='paragraph-2'>\"РЕМОНТ НА ПОКРИВ И КОНСЕРВАЦИОННИ И РЕСТАВРАЦИОННИ РАБОТИ (КРР)  ПО ДЪРВЕНИ ЕЛЕМЕНТИ И КОНСТРУКЦИИ ЗА ОБЕКТ: КЪЩА-МУЗЕЙ „ЛАСЛО НАГИ“ - СМОЛЯН</p><br><ul><li class=' mb-2'><a class='links' href='https://static.museumsmolyan.eu/docs/profil_na_kupuvacha/obqva.pdf' target='_blank' rel='noopener noreferrer'>Обява</a></li><li class=' mb-2'><a class='links' href='https://static.museumsmolyan.eu/docs/profil_na_kupuvacha/dokumentaciya.doc' target='_blank' rel='noopener noreferrer'>Документация</a></li><li class=' mb-2'><a class='links' href='https://static.museumsmolyan.eu/docs/profil_na_kupuvacha/kolich_stoin_smetka.xlsx' target='_blank' rel='noopener noreferrer'>Количествена сметка</a></li><li class=' mb-2'><a class='links' href='https://static.museumsmolyan.eu/docs/profil_na_kupuvacha/info_udaljavane.docx' target='_blank' rel='noopener noreferrer'>Информация за удължаване на първоначалния срок за получаване на оферти</a></li><li class=' mb-2'><a class='links' href='https://static.museumsmolyan.eu/docs/profil_na_kupuvacha/nov_srok_23.08.2016.docx' target='_blank' rel='noopener noreferrer'>Информация относно нов срок за отваряне на оферти</a></li><li class=' mb-2'><a class='links' href='https://static.museumsmolyan.eu/docs/profil_na_kupuvacha/protokol_2016-08-26.pdf' target='_blank' rel='noopener noreferrer'>Протокол на комисия по чл. 192 от зоп и чл. 97, ал. 4 от Правилника за прилагане на зоп</a></li></ul><p class='paragraph-3 mt-4'>Информацията е качена на: 26.08.2016 г.</p></div></div>"
       },
       {
@@ -133,27 +300,27 @@
       },
       {
         "id": 34,
-        "type":  "downloadable",
+        "type": "downloadable",
         "title": "Вътрешни правила за защита на личните данни",
-        "url":  "https://static.museumsmolyan.eu/docs/gdpr.pdf"
+        "url": "https://static.museumsmolyan.eu/docs/gdpr.pdf"
       },
       {
         "id": 35,
-        "type":  "downloadable",
+        "type": "downloadable",
         "title": "Банкова сметка за дарения",
-        "url":  "https://static.museumsmolyan.eu/docs/bankova_smetka.docx"
+        "url": "https://static.museumsmolyan.eu/docs/bankova_smetka.docx"
       },
       {
         "id": 36,
-        "type":  "downloadable",
+        "type": "downloadable",
         "title": "Договор за дарение",
-        "url":  "https://static.museumsmolyan.eu/docs/dogovor_za_darenie.doc"
+        "url": "https://static.museumsmolyan.eu/docs/dogovor_za_darenie.doc"
       },
       {
         "id": 37,
-        "type":  "downloadable",
+        "type": "downloadable",
         "title": "Договор за спонсорство",
-        "url":  "https://static.museumsmolyan.eu/docs/dogovor_za_sponsorstvo.doc"
+        "url": "https://static.museumsmolyan.eu/docs/dogovor_za_sponsorstvo.doc"
       }
     ]
   }
