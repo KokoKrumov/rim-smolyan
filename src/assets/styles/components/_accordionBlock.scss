@@ -40,9 +40,11 @@
 		}
 
 		.links {
-			color: $dark;
+			display: inline-block;
 			text-transform: uppercase;
 			text-decoration: underline;
+			line-height: 1.7rem;
+			color: $dark;
 
 			&:hover {
 				color: $red;

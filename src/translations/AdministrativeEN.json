@@ -68,14 +68,17 @@
             "donors": [
               {
                 "id": 1,
+                "number": 1,
                 "name": "д-р Никола Хекимов"
               },
               {
                 "id": 2,
+                "number": 2,
                 "name": "Никола и Руса Попалови"
               },
               {
                 "id": 3,
+                "number": 3,
                 "name": "Цветан Стоилов"
               }
             ]
@@ -86,15 +89,54 @@
             "donors": [
               {
                 "id": 1,
+                "number": 22,
                 "name": "Никола Николов"
               },
               {
                 "id": 2,
+                "number": 23,
                 "name": "Веска Митева"
               },
               {
                 "id": 3,
+                "number": 24,
                 "name": "Митра Вълчева"
+              }
+            ]
+          },
+          {
+            "id": "",
+            "year": "2018 година",
+            "donors": [
+              {
+                "id": 1,
+                "number": 176,
+                "name": "Дечко Хаджихристев"
+              },
+              {
+                "id": 2,
+                "number": 177,
+                "name": "Христо Андонов"
+              },
+              {
+                "id": 3,
+                "number": 178,
+                "name": " Димитър Михайловв"
+              },
+              {
+                "id": 4,
+                "number": 179,
+                "name": "Д-р Иван Църов"
+              },
+              {
+                "id": 5,
+                "number": 180,
+                "name": "Тодор Маринов"
+              },
+              {
+                "id": 6,
+                "number": 181,
+                "name": "Стоил Василев"
               }
             ]
           }
@@ -102,7 +144,7 @@
       },
       {
         "id": 15,
-        "title": "Медийни партньори",
+        "title": "Media partners",
         "hash": "media",
         "type": "collapsable",
         "content": [
@@ -125,7 +167,7 @@
         "title": "Our projects",
         "hash": "projects",
         "type": "collapsable",
-        "projects": [
+        "content": [
           {
             "id": 1,
             "content": "Organization, creation and presentation of photo documentary exhibition “The Christian Heritage in the Rhodopes – Churches and Monasteries” in Smolyan and Thessaloniki, Phare Programme CBC Bulgaria-Greece Project: BG 01.06.07-014"
@@ -143,9 +185,9 @@
       {
         "id": 22,
         "title": "Projects in which we were partners",
-        "hash": "projects",
+        "hash": "partnersProjects",
         "type": "collapsable",
-        "projects": [
+        "content": [
           {
             "id": 1,
             "content": "The Regional Museum of History Stoyu Shishkov, Smolyan was a partner in projects of the municipalities of Smolyan, Chepelare and Rudozem under the Phare CBC Bulgaria-Greece Programme launched in 2007 “Promotion of the Cultural, Tourist and Human Resources in Cross Border Regions ” with a priority the socialization of archaeological sites dating back to 14th century and turning them into tourist destinations."
@@ -155,9 +197,9 @@
       {
         "id": 23,
         "title": "Projects in which we were a supporting organization",
-        "hash": "projects",
+        "hash": "partnersProjects",
         "type": "collapsable",
-        "projects": [
+        "content": [
           {
             "id": 1,
             "content": "In 2006-2007, the Regional Museum of History Stoyu Shishkov, Smolyan was a supporting organization in the project for blind and visually impaired people of Ostellato Municipality (Italy) <b>“To Touch or Not to Touch”</b>. The project objective was to provide opportunities to visually impaired people to get acquainted with the cultural diversity of the region. Within the project activities, the museum organized workshops for visually impaired people on the topic “Textiles and Weaving Techniques”. A film <b>“To Touch the Mountain”</b>  and a <b>“Guide of the Regional Museum of History Stoyu Shishkov\"</b>, Smolyan in Brailles were made. The latter was the innovative contribution of the museum to disadvantaged people which helped them learn more about the cultural heritage of the region."
@@ -173,15 +215,61 @@
       {
         "id": 31,
         "title": "Отчет за дейността",
-        "type":  "collapsable",
-        "hash": "",
-        "content": "<div class='row'><div class='col-1'><ul><li><a class='links' href='https://static.museumsmolyan.eu/docs/otcheti/otchet_2010.pdf' target='_blank' rel='noopener noreferrer'>2010</a></li><li><a class='links' href='https://static.museumsmolyan.eu/docs/otcheti/otchet_2011.pdf' target='_blank' rel='noopener noreferrer'>2011</a></li><li><a class='links' href='https://static.museumsmolyan.eu/docs/otcheti/otchet_2012.pdf' target='_blank' rel='noopener noreferrer'>2012</a></li><li><a class='links' href='https://static.museumsmolyan.eu/docs/otcheti/otchet_2013.pdf' target='_blank' rel='noopener noreferrer'>2013</a></li></ul></div><div class='col-1'><ul><li><a class='links' href='https://static.museumsmolyan.eu/docs/otcheti/otchet_2014.pdf' target='_blank' rel='noopener noreferrer'>2014</a></li><li><a class='links' href='https://static.museumsmolyan.eu/docs/otcheti/otchet_2015.pdf' target='_blank' rel='noopener noreferrer'>2015</a></li><li><a class='links' href='https://static.museumsmolyan.eu/docs/otcheti/otchet_2016.pdf' target='_blank' rel='noopener noreferrer'>2016</a></li><li><a class='links' href='https://static.museumsmolyan.eu/docs/otcheti/otchet_2017.pdf' target='_blank' rel='noopener noreferrer'>2017</a></li></ul></div><div class='col-1'><ul><li><a class='links' href='https://static.museumsmolyan.eu/docs/otcheti/otchet_2018.pdf' target='_blank' rel='noopener noreferrer'>2018</a></li></ul></div></div>"
+        "type": "collapsable",
+        "hash": "reports",
+        "content": [
+          {
+            "id": 1,
+            "url": "https://static.museumsmolyan.eu/docs/otcheti/otchet_2010.pdf",
+            "year": "2010"
+          },
+          {
+            "id": 2,
+            "url": "https://static.museumsmolyan.eu/docs/otcheti/otchet_2011.pdf",
+            "year": "2011"
+          },
+          {
+            "id": 3,
+            "url": "https://static.museumsmolyan.eu/docs/otcheti/otchet_2012.pdf",
+            "year": "2012"
+          },
+          {
+            "id": 4,
+            "url": "https://static.museumsmolyan.eu/docs/otcheti/otchet_2013.pdf",
+            "year": "2013"
+          },
+          {
+            "id": 5,
+            "url": "https://static.museumsmolyan.eu/docs/otcheti/otchet_2014.pdf",
+            "year": "2014"
+          },
+          {
+            "id": 6,
+            "url": "https://static.museumsmolyan.eu/docs/otcheti/otchet_2015.pdf",
+            "year": "2015"
+          },
+          {
+            "id": 7,
+            "url": "https://static.museumsmolyan.eu/docs/otcheti/otchet_2016.pdf",
+            "year": "2016"
+          },
+          {
+            "id": 8,
+            "url": "https://static.museumsmolyan.eu/docs/otcheti/otchet_2017.pdf",
+            "year": "2017"
+          },
+          {
+            "id": 9,
+            "url": "https://static.museumsmolyan.eu/docs/otcheti/otchet_2018.pdf",
+            "year": "2018"
+          }
+        ]
       },
       {
         "id": 32,
         "title": "Профил на купувача",
         "type":  "collapsable",
-        "hash": "",
+        "hash": "docs",
         "content": "<div class='row'><div class='col-10'><p class='paragraph-2'>\"РЕМОНТ НА ПОКРИВ И КОНСЕРВАЦИОННИ И РЕСТАВРАЦИОННИ РАБОТИ (КРР)  ПО ДЪРВЕНИ ЕЛЕМЕНТИ И КОНСТРУКЦИИ ЗА ОБЕКТ: КЪЩА-МУЗЕЙ „ЛАСЛО НАГИ“ - СМОЛЯН</p><br><ul><li class=' mb-2'><a class='links' href='https://static.museumsmolyan.eu/docs/profil_na_kupuvacha/obqva.pdf' target='_blank' rel='noopener noreferrer'>Обява</a></li><li class=' mb-2'><a class='links' href='https://static.museumsmolyan.eu/docs/profil_na_kupuvacha/dokumentaciya.doc' target='_blank' rel='noopener noreferrer'>Документация</a></li><li class=' mb-2'><a class='links' href='https://static.museumsmolyan.eu/docs/profil_na_kupuvacha/kolich_stoin_smetka.xlsx' target='_blank' rel='noopener noreferrer'>Количествена сметка</a></li><li class=' mb-2'><a class='links' href='https://static.museumsmolyan.eu/docs/profil_na_kupuvacha/info_udaljavane.docx' target='_blank' rel='noopener noreferrer'>Информация за удължаване на първоначалния срок за получаване на оферти</a></li><li class=' mb-2'><a class='links' href='https://static.museumsmolyan.eu/docs/profil_na_kupuvacha/nov_srok_23.08.2016.docx' target='_blank' rel='noopener noreferrer'>Информация относно нов срок за отваряне на оферти</a></li><li class=' mb-2'><a class='links' href='https://static.museumsmolyan.eu/docs/profil_na_kupuvacha/protokol_2016-08-26.pdf' target='_blank' rel='noopener noreferrer'>Протокол на комисия по чл. 192 от зоп и чл. 97, ал. 4 от Правилника за прилагане на зоп</a></li></ul><p class='paragraph-3 mt-4'>Информацията е качена на: 26.08.2016 г.</p></div></div>"
       },
       {

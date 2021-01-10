@@ -8,6 +8,8 @@ import {fetchNews} from "../../../actions";
 import Socials from "../../socials/socials";
 import Form from 'react-bootstrap/Form'
 import mapShot from '../../../assets/images/map-shot.png'
+import {OverlayTrigger} from "react-bootstrap";
+import Tooltip from "react-bootstrap/Tooltip";
 
 class Contacts extends Component {
 
@@ -79,12 +81,27 @@ class Contacts extends Component {
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a className="link" href="mailto:museum-sm@mail.bg"
-                                                       itemProp="url"
-                                                       target=""
-                                                       rel="noopener nofollow noreferrer">
-                                                        museum-sm@mail.bg
-                                                    </a>
+                                                    <OverlayTrigger
+                                                        key='top'
+                                                        placement='top'
+                                                        overlay={
+                                                            <Tooltip
+                                                                className='tooltip__dark'
+                                                                id={`tooltip-top`}>
+                                                                   Счетоводство и администрация
+                                                            </Tooltip>
+                                                        }
+                                                    >
+                                                        <span>
+                                                            <a className="link" href="mailto:museum-sm@mail.bg"
+                                                               itemProp="url"
+                                                               target=""
+                                                               rel="noopener nofollow noreferrer">
+                                                                            museum-sm@mail.bg
+                                                                        </a>
+                                                        </span>
+                                                    </OverlayTrigger>
+
                                                 </li>
                                             </ul>
                                         </li>
@@ -123,7 +140,8 @@ class Contacts extends Component {
                                         <p className='paragraph-3'>
                                             Понеделник е санитарен ден.
                                             За работното време на официалните празници на Република
-                                            България информация се публикува в секция "Новини" и в социалните мрежи на музея.
+                                            България информация се публикува в секция "Новини" и в социалните мрежи на
+                                            музея.
                                         </p>
                                     </li>
                                 </ul>
@@ -165,8 +183,9 @@ class Contacts extends Component {
                                                     rows={3}/>
                                             </Form.Group>
                                             <div className='text-right'>
-                                                <button className="link cta_outline cta_outline__dark hvr-underline-from-center"
-                                                   disabled>
+                                                <button
+                                                    className="link cta_outline cta_outline__dark hvr-underline-from-center"
+                                                    disabled>
                                                     Изпрати
                                                 </button>
                                             </div>

@@ -136,6 +136,7 @@ class SupportUs extends Component {
                                         <Col lg={7}>
                                             <CardInfoLine
                                                 title={"opportunities-for-volunteer-work"}
+                                                subtitle={"use-contact-form"}
                                                 link={'/contact-us'}
                                                 linkText={'here'}
                                                 isSmall={true}

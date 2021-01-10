@@ -7,6 +7,7 @@ class CardInfoLine extends Component {
 
     state = {
         title: this.props.title,
+        subtitle: this.props.subtitle,
         link: this.props.link ? this.props.link : '/#',
         linkText: this.props.linkText ? this.props.linkText : 'see-here',
         isSmall: this.props.isSmall
@@ -24,16 +25,29 @@ class CardInfoLine extends Component {
 
         const {intl} = this.props;
         return (
-            <div className={`info-line info-line__card info-line__bordered__white info-line__titled ${this.state.isSmall ? 'is-small' : ''}`}>
+            <div
+                className={`info-line info-line__card info-line__bordered__white info-line__titled ${this.state.isSmall ? 'is-small' : ''}`}>
                 <div className='info-line__content-wrap'>
                     <div className='info-line__titled__item'>
                         {
                             this.state.isSmall
                                 ?
-                                <h5 className='h5'
-                                    dangerouslySetInnerHTML={{__html: intl.formatMessage({id: this.state.title})}}
-                                >
-                                </h5>
+                                <div>
+                                    <h5 className='h5'
+                                        dangerouslySetInnerHTML={{__html: intl.formatMessage({id: this.state.title})}}
+                                    >
+                                    </h5>
+
+                                    {
+                                        this.state.subtitle
+                                            ?
+                                            <p className='h5__sub mt-2'
+                                               dangerouslySetInnerHTML={{__html: intl.formatMessage({id: this.state.subtitle})}}>
+                                            </p>
+                                            :
+                                            null
+                                    }
+                                </div>
                                 :
                                 <h2 className='h2'
                                     dangerouslySetInnerHTML={{__html: intl.formatMessage({id: this.state.title})}}
@@ -48,7 +62,7 @@ class CardInfoLine extends Component {
                                 itemProp="url"
                                 target=""
                                 onClick={(e) => {
-                                    this.handleShowModal('modal-redirect', '',e)
+                                    this.handleShowModal('modal-redirect', '', e)
                                 }}
                                 rel="noopener nofollow noreferrer"
                                 dangerouslySetInnerHTML={{__html: intl.formatMessage({id: this.state.linkText})}}

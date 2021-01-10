@@ -29,7 +29,7 @@
           },
           {
             "id": 2,
-            "title": "Област Смолян",
+            "title": "Областна администрация Смолян",
             "url": "https://sm.government.bg/"
           },
           {
@@ -68,14 +68,17 @@
             "donors": [
               {
                 "id": 1,
+                "number": 1,
                 "name": "д-р Никола Хекимов"
               },
               {
                 "id": 2,
+                "number": 2,
                 "name": "Никола и Руса Попалови"
               },
               {
                 "id": 3,
+                "number": 3,
                 "name": "Цветан Стоилов"
               }
             ]
@@ -86,15 +89,54 @@
             "donors": [
               {
                 "id": 1,
+                "number": 22,
                 "name": "Никола Николов"
               },
               {
                 "id": 2,
+                "number": 23,
                 "name": "Веска Митева"
               },
               {
                 "id": 3,
+                "number": 24,
                 "name": "Митра Вълчева"
+              }
+            ]
+          },
+          {
+            "id": "",
+            "year": "2018 година",
+            "donors": [
+              {
+                "id": 1,
+                "number": 176,
+                "name": "Дечко Хаджихристев"
+              },
+              {
+                "id": 2,
+                "number": 177,
+                "name": "Христо Андонов"
+              },
+              {
+                "id": 3,
+                "number": 178,
+                "name": " Димитър Михайловв"
+              },
+              {
+                "id": 4,
+                "number": 179,
+                "name": "Д-р Иван Църов"
+              },
+              {
+                "id": 5,
+                "number": 180,
+                "name": "Тодор Маринов"
+              },
+              {
+                "id": 6,
+                "number": 181,
+                "name": "Стоил Василев"
               }
             ]
           }
@@ -124,7 +166,7 @@
         "id": 21,
         "title": "Наши проекти",
         "hash": "projects",
-        "type":  "collapsable",
+        "type": "collapsable",
         "content": [
           {
             "id": 1,
@@ -163,8 +205,8 @@
       {
         "id": 22,
         "title": "Проекти, на които сме партньори",
-        "hash": "projects",
-        "type":  "collapsable",
+        "hash": "partnersProjects",
+        "type": "collapsable",
         "content": [
           {
             "id": 1,
@@ -175,8 +217,8 @@
       {
         "id": 23,
         "title": "Проекти, на които сме подкрепяща организация",
-        "hash": "projects",
-        "type":  "collapsable",
+        "hash": "partnersProjects",
+        "type": "collapsable",
         "content": [
           {
             "id": 1,
@@ -193,15 +235,61 @@
       {
         "id": 31,
         "title": "Отчет за дейността",
-        "type":  "collapsable",
+        "type": "collapsable",
         "hash": "reports",
-        "content": "<div class='row'><div class='col-1'><ul><li><a class='links' href='https://static.museumsmolyan.eu/docs/otcheti/otchet_2010.pdf' target='_blank' rel='noopener noreferrer'>2010</a></li><li><a class='links' href='https://static.museumsmolyan.eu/docs/otcheti/otchet_2011.pdf' target='_blank' rel='noopener noreferrer'>2011</a></li><li><a class='links' href='https://static.museumsmolyan.eu/docs/otcheti/otchet_2012.pdf' target='_blank' rel='noopener noreferrer'>2012</a></li><li><a class='links' href='https://static.museumsmolyan.eu/docs/otcheti/otchet_2013.pdf' target='_blank' rel='noopener noreferrer'>2013</a></li></ul></div><div class='col-1'><ul><li><a class='links' href='https://static.museumsmolyan.eu/docs/otcheti/otchet_2014.pdf' target='_blank' rel='noopener noreferrer'>2014</a></li><li><a class='links' href='https://static.museumsmolyan.eu/docs/otcheti/otchet_2015.pdf' target='_blank' rel='noopener noreferrer'>2015</a></li><li><a class='links' href='https://static.museumsmolyan.eu/docs/otcheti/otchet_2016.pdf' target='_blank' rel='noopener noreferrer'>2016</a></li><li><a class='links' href='https://static.museumsmolyan.eu/docs/otcheti/otchet_2017.pdf' target='_blank' rel='noopener noreferrer'>2017</a></li></ul></div><div class='col-1'><ul><li><a class='links' href='https://static.museumsmolyan.eu/docs/otcheti/otchet_2018.pdf' target='_blank' rel='noopener noreferrer'>2018</a></li></ul></div></div>"
+        "content": [
+          {
+            "id": 1,
+            "url": "https://static.museumsmolyan.eu/docs/otcheti/otchet_2010.pdf",
+            "year": "2010"
+          },
+          {
+            "id": 2,
+            "url": "https://static.museumsmolyan.eu/docs/otcheti/otchet_2011.pdf",
+            "year": "2011"
+          },
+          {
+            "id": 3,
+            "url": "https://static.museumsmolyan.eu/docs/otcheti/otchet_2012.pdf",
+            "year": "2012"
+          },
+          {
+            "id": 4,
+            "url": "https://static.museumsmolyan.eu/docs/otcheti/otchet_2013.pdf",
+            "year": "2013"
+          },
+          {
+            "id": 5,
+            "url": "https://static.museumsmolyan.eu/docs/otcheti/otchet_2014.pdf",
+            "year": "2014"
+          },
+          {
+            "id": 6,
+            "url": "https://static.museumsmolyan.eu/docs/otcheti/otchet_2015.pdf",
+            "year": "2015"
+          },
+          {
+            "id": 7,
+            "url": "https://static.museumsmolyan.eu/docs/otcheti/otchet_2016.pdf",
+            "year": "2016"
+          },
+          {
+            "id": 8,
+            "url": "https://static.museumsmolyan.eu/docs/otcheti/otchet_2017.pdf",
+            "year": "2017"
+          },
+          {
+            "id": 9,
+            "url": "https://static.museumsmolyan.eu/docs/otcheti/otchet_2018.pdf",
+            "year": "2018"
+          }
+        ]
       },
       {
         "id": 32,
         "title": "Профил на купувача",
-        "type":  "collapsable",
-        "hash": "reports",
+        "type": "collapsable",
+        "hash": "docs",
         "content": "<div class='row'><div class='col-10'><p class='paragraph-2'>\"РЕМОНТ НА ПОКРИВ И КОНСЕРВАЦИОННИ И РЕСТАВРАЦИОННИ РАБОТИ (КРР)  ПО ДЪРВЕНИ ЕЛЕМЕНТИ И КОНСТРУКЦИИ ЗА ОБЕКТ: КЪЩА-МУЗЕЙ „ЛАСЛО НАГИ“ - СМОЛЯН</p><br><ul><li class=' mb-2'><a class='links' href='https://static.museumsmolyan.eu/docs/profil_na_kupuvacha/obqva.pdf' target='_blank' rel='noopener noreferrer'>Обява</a></li><li class=' mb-2'><a class='links' href='https://static.museumsmolyan.eu/docs/profil_na_kupuvacha/dokumentaciya.doc' target='_blank' rel='noopener noreferrer'>Документация</a></li><li class=' mb-2'><a class='links' href='https://static.museumsmolyan.eu/docs/profil_na_kupuvacha/kolich_stoin_smetka.xlsx' target='_blank' rel='noopener noreferrer'>Количествена сметка</a></li><li class=' mb-2'><a class='links' href='https://static.museumsmolyan.eu/docs/profil_na_kupuvacha/info_udaljavane.docx' target='_blank' rel='noopener noreferrer'>Информация за удължаване на първоначалния срок за получаване на оферти</a></li><li class=' mb-2'><a class='links' href='https://static.museumsmolyan.eu/docs/profil_na_kupuvacha/nov_srok_23.08.2016.docx' target='_blank' rel='noopener noreferrer'>Информация относно нов срок за отваряне на оферти</a></li><li class=' mb-2'><a class='links' href='https://static.museumsmolyan.eu/docs/profil_na_kupuvacha/protokol_2016-08-26.pdf' target='_blank' rel='noopener noreferrer'>Протокол на комисия по чл. 192 от зоп и чл. 97, ал. 4 от Правилника за прилагане на зоп</a></li></ul><p class='paragraph-3 mt-4'>Информацията е качена на: 26.08.2016 г.</p></div></div>"
       },
       {
@@ -212,27 +300,27 @@
       },
       {
         "id": 34,
-        "type":  "downloadable",
+        "type": "downloadable",
         "title": "Вътрешни правила за защита на личните данни",
-        "url":  "https://static.museumsmolyan.eu/docs/gdpr.pdf"
+        "url": "https://static.museumsmolyan.eu/docs/gdpr.pdf"
       },
       {
         "id": 35,
-        "type":  "downloadable",
+        "type": "downloadable",
         "title": "Банкова сметка за дарения",
-        "url":  "https://static.museumsmolyan.eu/docs/bankova_smetka.docx"
+        "url": "https://static.museumsmolyan.eu/docs/bankova_smetka.docx"
       },
       {
         "id": 36,
-        "type":  "downloadable",
+        "type": "downloadable",
         "title": "Договор за дарение",
-        "url":  "https://static.museumsmolyan.eu/docs/dogovor_za_darenie.doc"
+        "url": "https://static.museumsmolyan.eu/docs/dogovor_za_darenie.doc"
       },
       {
         "id": 37,
-        "type":  "downloadable",
+        "type": "downloadable",
         "title": "Договор за спонсорство",
-        "url":  "https://static.museumsmolyan.eu/docs/dogovor_za_sponsorstvo.doc"
+        "url": "https://static.museumsmolyan.eu/docs/dogovor_za_sponsorstvo.doc"
       }
     ]
   }

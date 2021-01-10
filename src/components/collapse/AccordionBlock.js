@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {injectIntl} from 'react-intl';
+import {FormattedMessage, injectIntl} from 'react-intl';
 import {connect} from "react-redux";
 import {showModal} from "../../actions";
 import Container from "react-bootstrap/Container";
@@ -18,6 +18,14 @@ class AccordionBlock extends Component {
 
     docDownload = (url) => {
         window.open(url);
+    }
+
+    sortReturnLastNumber = (a, b) => {
+        if (a > b) {
+            return 1
+        } else {
+            return -1
+        }
     }
 
     renderContentFriends = (block) => {
@@ -47,6 +55,7 @@ class AccordionBlock extends Component {
             </div>
         )
     }
+
     renderContentLinks = (block) => {
         return (
             <div className='row'>
@@ -96,6 +105,7 @@ class AccordionBlock extends Component {
                 <div className="col">
                     <div className='list__default col-count-3'>
                         {
+
                             block.content.map((year, index) => {
                                 return (
                                     <React.Fragment key={index}>
@@ -106,15 +116,15 @@ class AccordionBlock extends Component {
                                                 year.donors.map((donor, index) => {
                                                     return (
                                                         <li key={index}>
-                                                            {donor.id}. {donor.name}
+                                                            {donor.number}. {donor.name}
                                                         </li>
                                                     )
-                                                })
+                                                }).sort(this.sortReturnLastNumber)
                                             }
                                         </ul>
                                     </React.Fragment>
                                 )
-                            })
+                            }).sort(this.sortReturnLastNumber)
                         }
                     </div>
                 </div>
@@ -176,12 +186,65 @@ class AccordionBlock extends Component {
         )
     }
 
+    renderPartnersProjects = (block) => {
+        return (
+            <Row>
+                <Col lg={7}>
+                    {
+                        block.content.map((project, index) => {
+                            return (
+                                <div>
+                                    <p className='text-block__wrap'
+                                       key={index}
+                                       dangerouslySetInnerHTML={{__html: project.content}}
+                                    />
+                                    <a className='mt-4 link cta_outline cta_outline__dark hvr-underline-from-left'
+                                       onClick={(e) => {
+                                           e.stopPropagation()
+                                       }}
+                                       href={`/administrative/${block.id}/${project.id}`}
+                                    >
+                                        <FormattedMessage id="see-more"/>
+                                    </a>
+                                </div>
+                            )
+                        })
+                    }
+                </Col>
+            </Row>
+        )
+    }
+
     renderReports = (block) => {
+        return (
+            <div className='row'>
+                <div className='col'>
+                    <div className='paragraph-2 col-count-15'>
+                        <ul>
+                            {
+                                block.content.map((document, index) => {
+                                    return (
+                                        <li key={index}>
+                                            <a className='links' href={document.url} target='_blank'
+                                               rel='noopener noreferrer'>
+                                                {document.year}
+                                            </a>
+                                        </li>
+                                    )
+                                }).sort(this.sortReturnLastNumber)
+                            }
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        )
+    }
+    renderDocs = (block) => {
         return (
             <div
                 dangerouslySetInnerHTML={{__html: block.content}}
             >
-
             </div>
         )
     }
@@ -200,8 +263,12 @@ class AccordionBlock extends Component {
                 return this.renderContentMedia(block)
             case "projects":
                 return this.renderProjects(block)
+            case "partnersProjects":
+                return this.renderPartnersProjects(block)
             case "reports":
                 return this.renderReports(block)
+            case "docs":
+                return this.renderDocs(block)
         }
     }
 
