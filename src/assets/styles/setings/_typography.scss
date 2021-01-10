@@ -60,6 +60,12 @@
   @include line-height(27px);
   margin: 0;
 }
+.h5__sub {
+  font-family: $font-cormorant-regular;
+  @include font-size(20px);
+  @include line-height(24px);
+  margin: 0;
+}
 
 .paragraph-2 {
   font-family: $font-acari-regular;
