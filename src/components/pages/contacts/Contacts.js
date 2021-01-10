@@ -10,11 +10,11 @@ import Form from 'react-bootstrap/Form'
 import mapShot from '../../../assets/images/map-shot.png'
 import {OverlayTrigger} from "react-bootstrap";
 import Tooltip from "react-bootstrap/Tooltip";
+import {FormattedMessage} from 'react-intl';
 
 class Contacts extends Component {
 
     state = {}
-
 
     render() {
         return (
@@ -88,7 +88,7 @@ class Contacts extends Component {
                                                             <Tooltip
                                                                 className='tooltip__dark'
                                                                 id={`tooltip-top`}>
-                                                                   Счетоводство и администрация
+                                                                <FormattedMessage id="accounting"/>
                                                             </Tooltip>
                                                         }
                                                     >
