@@ -132,3 +132,13 @@
     color: $red;
   }
 }
+
+.terms .h4 {
+  line-height: 1.4;
+}
+
+.terms {
+  .paragraph-3 + .paragraph-3 {
+    margin-top: 20px;
+  }
+}
