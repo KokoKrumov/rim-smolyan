@@ -45,7 +45,7 @@
           {
             "id": 5,
             "title": "Община Чепеларе",
-            "url": "https://www.chepelare.acstre.com/BG.php"
+            "url": "http://chepelare.org/"
           }
         ]
       },
@@ -282,6 +282,11 @@
             "id": 9,
             "url": "https://static.museumsmolyan.eu/docs/otcheti/otchet_2018.pdf",
             "year": "2018"
+          },
+          {
+            "id": 10,
+            "url": "https://static.museumsmolyan.eu/docs/otcheti/otchet_2019.pdf",
+            "year": "2019"
           }
         ]
       },
