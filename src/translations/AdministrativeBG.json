@@ -34,19 +34,30 @@
           },
           {
             "id": 3,
-            "title": "Министерство на културата на Република България",
-            "url": "http://www.mc.government.bg/"
-          },
-          {
-            "id": 4,
             "title": "Община Златоград",
             "url": "https://www.zlatograd.bg/"
           },
           {
-            "id": 5,
+            "id": 4,
             "title": "Община Чепеларе",
             "url": "http://chepelare.org/"
+          },
+          {
+            "id": 5,
+            "title": "Регионален инспекторат по образованието - Смолян",
+            "url": "https://www.ruobg.com/news"
+          },
+          {
+            "id": 6,
+            "title": "Нов български университет – Департамент „Антропология”",
+            "url": "https://anthropology.nbu.bg/"
+          },
+          {
+            "id": 7,
+            "title": "Министерство на културата на Република България",
+            "url": "http://www.mc.government.bg/"
           }
+
         ]
       },
       {

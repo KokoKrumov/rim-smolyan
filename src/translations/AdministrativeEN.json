@@ -24,7 +24,7 @@
         "content": [
           {
             "id": 1,
-            "title": "Smolyan municipality",
+            "title": "Smolyan Municipality",
             "url": "https://www.smolyan.bg/"
           },
           {
@@ -34,18 +34,28 @@
           },
           {
             "id": 3,
-            "title": "The Ministry of Culture of the Republic of Bulgaria",
-            "url": "http://www.mc.government.bg/"
-          },
-          {
-            "id": 4,
-            "title": "Zlatograd municipality",
+            "title": "Zlatograd Municipality",
             "url": "https://www.zlatograd.bg/"
           },
           {
+            "id": 4,
+            "title": "Chepelare Municipality",
+            "url": "http://chepelare.org/"
+          },
+          {
             "id": 5,
-            "title": "Chepelare municipality",
-            "url": "https://www.chepelare.acstre.com/BG.php"
+            "title": "Regional Department of Education Smolyan",
+            "url": "https://www.ruobg.com/news"
+          },
+          {
+            "id": 6,
+            "title": "New Bulgarian University - Department of Anthropology",
+            "url": "https://anthropology.nbu.bg/"
+          },
+          {
+            "id": 7,
+            "title": "The Ministry of Culture of the Republic of Bulgaria",
+            "url": "http://www.mc.government.bg/"
           }
         ]
       },
