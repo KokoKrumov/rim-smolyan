@@ -35,7 +35,7 @@ function NewsAndEventsList({listOfNewsAndEvents}) {
                                             null
                                         }
                                         <div className='nae-item__img'>
-                                            <img className="img-fluid" src={article.image} alt="" itemProp="image"/>
+                                            <img className="img-fluid img" src={article.image} alt="" itemProp="image"/>
                                         </div>
                                     </div>
                                     <h5 className='h5'>

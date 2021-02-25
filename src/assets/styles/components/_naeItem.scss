@@ -1,119 +1,140 @@
 .nae-item {
 
-  &__img__wrap {
-    @include margin(0px, 0px, 15px, 0px);
-    position: relative;
-    overflow: hidden;
-  }
+	&__img__wrap {
+		@include margin(0px, 0px, 15px, 0px);
+		position: relative;
+		overflow: hidden;
+	}
 
-  .h5 {
-    color: $dark;
-  }
+	.h5 {
+		color: $dark;
+	}
 
-  &__date {
+	&__date {
 
-    &__wrap {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: auto;
-      @include padding(35px, 28px, 24px, 12px);
-      background-color: $dark;
-      z-index: 1;
-    }
+		&__wrap {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: auto;
+			@include padding(35px, 28px, 24px, 12px);
+			background-color: $dark;
+			z-index: 1;
+		}
 
-    &-day {
-      font-family: $font-acari-regular;
-      font-weight: 300;
-      @include font-size(54px);
-      @include line-height(54px);
-      letter-spacing: -0.02rem;
-      color: $white;
-    }
+		&-day {
+			font-family: $font-acari-regular;
+			font-weight: 300;
+			@include font-size(54px);
+			@include line-height(54px);
+			letter-spacing: -0.02rem;
+			color: $white;
+		}
 
-    &-month {
-      text-align: center;
-      font-family: $font-acari-bold;
-      @include font-size(11px);
-      @include line-height(14px);
-      letter-spacing: 0.05rem;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.8);
-    }
-  }
+		&-month {
+			text-align: center;
+			font-family: $font-acari-bold;
+			@include font-size(11px);
+			@include line-height(14px);
+			letter-spacing: 0.05rem;
+			text-transform: uppercase;
+			color: rgba(255, 255, 255, 0.8);
+		}
+	}
 
-  &__img:before {
-    content: ' ';
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35));
-  }
+	&__img:before {
+		content: ' ';
+		position: absolute;
+		top: 100%;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(0deg, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35));
+		z-index: 1;
+	}
 
-  &__vertical:hover {
-    .nae-item__img:before {
-      top: 0;
-    }
+	&__vertical {
+		.nae-item__img {
+			.img {
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				width: 100%;
+				border: 0;
+			}
 
-    .nae-item__date__wrap {
-      background-color: $red;
-    }
+			&:after {
+				padding-top: 66.25%;
+				display: block;
+				content: "";
+			}
+		}
+	}
 
-    .h5 {
-      text-decoration: underline;
-    }
-  }
+	&__vertical:hover {
+		.nae-item__img:before {
+			top: 0;
+		}
 
-  &__horizontal {
-    width: 100%;
+		.nae-item__date__wrap {
+			background-color: $red;
+		}
 
-    .nae-item__wrap {
-      display: flex;
-      flex-direction: row;
-    }
+		.h5 {
+			text-decoration: underline;
+		}
+	}
 
-    .link-img:hover {
-      .nae-item__date__wrap {
-        background-color: $red;
-      }
+	&__horizontal {
+		width: 100%;
 
-      .nae-item__img:before {
-        top: 0;
-      }
-    }
+		.nae-item__wrap {
+			display: flex;
+			flex-direction: row;
+		}
 
-    .link-title:hover {
-      text-decoration: none;
+		.link-img:hover {
+			.nae-item__date__wrap {
+				background-color: $red;
+			}
 
-      .h3 {
-        text-decoration: underline;
-      }
-    }
+			.nae-item__img:before {
+				top: 0;
+			}
+		}
 
-    .h3, .h3 > .link {
-      color: $dark;
-      &:hover {
-        text-decoration: underline;
-      }
-    }
-  }
+		.link-title:hover {
+			text-decoration: none;
 
-  &__horizontal + &__horizontal {
-    @include margin(25px, 0px, 0px, 0px);
-  }
+			.h3 {
+				text-decoration: underline;
+			}
+		}
 
-  &__article-date {
-    font-family: $font-acari-bold;
-    @include font-size(12px);
-    @include line-height(16px);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: rgba(39,35,35, 0.5);
+		.h3, .h3 > .link {
+			color: $dark;
 
-    &__wrap {
-      @include margin(0px, 0px, 15px, 0px);
-    }
-  }
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+	}
+
+	&__horizontal + &__horizontal {
+		@include margin(25px, 0px, 0px, 0px);
+	}
+
+	&__article-date {
+		font-family: $font-acari-bold;
+		@include font-size(12px);
+		@include line-height(16px);
+		letter-spacing: 1px;
+		text-transform: uppercase;
+		color: rgba(39, 35, 35, 0.5);
+
+		&__wrap {
+			@include margin(0px, 0px, 15px, 0px);
+		}
+	}
 }
