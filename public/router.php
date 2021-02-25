@@ -6,6 +6,8 @@ $path_beginings = [
     '/contact-us',
     '/support-us',
     '/administrative',
+    '/privacy-policy',
+    '/terms',
 ];
 
 $path_begining = '/' . explode('/', $_SERVER['REQUEST_URI'])[1];

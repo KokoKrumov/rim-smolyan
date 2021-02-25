@@ -1,6 +1,6 @@
 {
 	"headline": "Smolyan History Museum “Stoyu Shishkov“",
-	"copyright": "© 2020 Smolyan History Museum",
+	"copyright": "© 2021 Smolyan History Museum",
 	"design": "Design",
 	"menu.search": "Search",
 	"menu.search-in": "search in smolyan history museum website",
@@ -15,6 +15,7 @@
   	"menu.contact-us": "contact us",
   	"menu.house-museum": "house museum laslo nagi",
   	"menu.privacy-policy": "Privacy Policy",
+  	"menu.terms": "Terms and conditions",
 	"modal.warning.title": "The updated site of the Smolyan History Museum “Stoyu Shishkov“ is still functioning in its early version, which means that some of the pages are inaccessible because their construction is in progress.",
 	"modal.warning.text": "The link to the page you wish to access is not active for the reasons set out above. The content provided for this page can be viewed on the old site of the museum. Do you want to be redirected?",
 	"text.yes": "Redirect",
@@ -89,5 +90,7 @@
 	"project-participation": "Participation in national and international projects",
 	"partnerships": "Partnerships",
 	"projects": "Projects",
-	"documents": "Документи"
+	"documents": "Documents",
+	"use-contact-form": "(Please contact us)",
+	"accounting": "Accounting"
 }

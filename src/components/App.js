@@ -18,6 +18,8 @@ import {connect} from "react-redux";
 import {showModal} from "../actions";
 import SupportUs from "./pages/supportUs/SupportUs";
 import Administrative from "./pages/administrative/Administrative";
+import Terms from "./pages/terms/Terms";
+import PrivacyPolicy from "./pages/privacyPolicy/PrivacyPolicy";
 
 class App extends Component {
 
@@ -42,6 +44,8 @@ class App extends Component {
                             <Route path='/about-us/:modalContent' exact component={AboutUs}/>
                             <Route path='/contact-us' exact component={Contacts}/>
                             <Route path='/support-us' exact component={SupportUs}/>
+                            <Route path='/privacy-policy' exact component={PrivacyPolicy}/>
+                            <Route path='/terms' exact component={Terms}/>
                             <Route path='/administrative' exact component={Administrative}/>
                             <Route path='/administrative/:parentId/:id' exact component={Administrative}/>
                             <Route path='*' component={NotFound}/>

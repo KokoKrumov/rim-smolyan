@@ -1,0 +1,16 @@
+.tooltip {
+	&.show {
+		opacity: 1;
+	}
+
+	&__dark .tooltip-inner {
+		background: rgb(29, 29, 29);
+		color: #FFFFFF;
+	}
+}
+
+.bs-tooltip-auto[x-placement^=top] .arrow:before, .bs-tooltip-top .arrow:before {
+	top: 0;
+	border-width: .4rem .4rem 0;
+	border-top-color: #1D1D1D;
+}

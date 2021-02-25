@@ -67,6 +67,8 @@
   }
 
   &__horizontal {
+    width: 100%;
+
     .nae-item__wrap {
       display: flex;
       flex-direction: row;

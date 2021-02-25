@@ -102,9 +102,14 @@ function Footer({showModal}) {
                                     <FormattedMessage id="menu.administrative"/>
                                 </Nav.Link>
                                 <Nav.Link
-                                    href="#"
-                                    className='nav__secondary-link not-allowed'>
+                                    href="/privacy-policy"
+                                    className='nav__secondary-link'>
                                     <FormattedMessage id="menu.privacy-policy"/>
+                                </Nav.Link>
+                                <Nav.Link
+                                    href="/terms"
+                                    className='nav__secondary-link'>
+                                    <FormattedMessage id="menu.terms"/>
                                 </Nav.Link>
                             </Nav>
                             <Nav className="">

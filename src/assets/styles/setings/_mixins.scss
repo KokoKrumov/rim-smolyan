@@ -47,7 +47,7 @@
 }
 
 
-$columns: 12;
+$columns: 20;
 
 @mixin col-x-list {
   @for $i from 1 through $columns {
