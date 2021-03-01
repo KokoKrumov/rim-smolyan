@@ -1,144 +1,152 @@
 .display {
-  font-family: $font-cormorant-regular;
-  font-weight: 500;
-  @include font-size(95px);
-  @include line-height(70px);
-  letter-spacing: -1px;
-  text-transform: uppercase;
+	font-family: $font-cormorant-regular;
+	font-weight: 500;
+	@include font-size(95px);
+	@include line-height(70px);
+	letter-spacing: -1px;
+	text-transform: uppercase;
 
-  @media (max-width: 576px) {
-    word-break: break-word;
-  }
+	@media (max-width: 576px) {
+		word-break: break-word;
+	}
 }
 
 
 .h1 {
-  font-family: $font-cormorant-regular;
-  @include font-size(58px);
-  @include line-height(60px);
-  letter-spacing: -0.01em;
-  text-transform: uppercase;
-  margin: 0;
+	font-family: $font-cormorant-regular;
+	@include font-size(58px);
+	@include line-height(60px);
+	letter-spacing: -0.01em;
+	text-transform: uppercase;
+	margin: 0;
 
-  @media (max-width: 576px) {
-    word-break: break-word;
-  }
+	@media (max-width: 576px) {
+		word-break: break-word;
+	}
 }
 
 .h2 {
-  /* H2 */
+	/* H2 */
 
-  font-family: $font-cormorant-regular;
-  @include font-size(48px);
-  @include line-height(52px);
-  letter-spacing: -0.01em;
-  color: $dark;
+	font-family: $font-cormorant-regular;
+	@include font-size(48px);
+	@include line-height(52px);
+	letter-spacing: -0.01em;
+	color: $dark;
 
-  @media (max-width: 576px) {
-    word-break: break-word;
-  }
+	@media (max-width: 576px) {
+		word-break: break-word;
+	}
 
 }
 
 .h3, .h3 > .link {
-  font-family: $font-cormorant-bold;
-  @include font-size(30px);
-  @include line-height(34px);
-  margin: 0;
+	font-family: $font-cormorant-bold;
+	@include font-size(30px);
+	@include line-height(34px);
+	margin: 0;
 }
 
 .h4, .h4 > .link {
-  font-family: $font-cormorant-bold;
-  @include font-size(28px);
-  @include line-height(30px);
-  margin: 0;
+	font-family: $font-cormorant-bold;
+	@include font-size(28px);
+	@include line-height(30px);
+	margin: 0;
 }
 
 .h5 {
-  font-family: $font-cormorant-regular;
-  @include font-size(24px);
-  @include line-height(27px);
-  margin: 0;
+	font-family: $font-cormorant-regular;
+	@include font-size(24px);
+	@include line-height(27px);
+	margin: 0;
 }
+
 .h5__sub {
-  font-family: $font-cormorant-regular;
-  @include font-size(20px);
-  @include line-height(24px);
-  margin: 0;
+	font-family: $font-cormorant-regular;
+	@include font-size(20px);
+	@include line-height(24px);
+	margin: 0;
 }
 
 .paragraph-2 {
-  font-family: $font-acari-regular;
-  @include font-size(17px);
-  @include line-height(27px);
-  letter-spacing: 0.01em;
-  opacity: 0.9;
+	font-family: $font-acari-regular;
+	@include font-size(17px);
+	@include line-height(27px);
+	letter-spacing: 0.01em;
+	opacity: 0.9;
 }
 
 .paragraph-3 {
-  font-family: $font-acari-regular;
-  @include font-size(15px);
-  @include line-height(24px);
-  letter-spacing: 0.01em;
-  opacity: 0.9;
+	font-family: $font-acari-regular;
+	@include font-size(15px);
+	@include line-height(24px);
+	letter-spacing: 0.01em;
+	opacity: 0.9;
 }
 
 .subtitle {
-  font-family: $font-acari-bold;
-  @include font-size(18px);
-  @include line-height(18px);
-  text-align: center;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
+	font-family: $font-acari-bold;
+	@include font-size(18px);
+	@include line-height(18px);
+	text-align: center;
+	letter-spacing: 0.5px;
+	text-transform: uppercase;
 
-  &__sm {
-    @include font-size(14px);
-    @include line-height(42px);
-    text-align: center;
-    letter-spacing: 0.5px;
+	&__sm {
+		@include font-size(14px);
+		@include line-height(42px);
+		text-align: center;
+		letter-spacing: 0.5px;
 
-    .link {
-      @include line-height(38px);
-    }
-  }
+		.link {
+			@include line-height(38px);
+		}
+	}
 }
 
 .links {
-  font-family: $font-acari-bold;
-  @include font-size(14px);
-  @include line-height(18px);
-  letter-spacing: 0.5px;
+	font-family: $font-acari-bold;
+	@include font-size(14px);
+	@include line-height(18px);
+	letter-spacing: 0.5px;
 }
 
 .h-sup {
-  font-family: $font-acari-bold;
-  @include font-size(12px);
-  @include line-height(16px);
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: rgba(39, 35, 35, 0.5);
+	font-family: $font-acari-bold;
+	@include font-size(12px);
+	@include line-height(16px);
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	color: rgba(39, 35, 35, 0.5);
 }
 
 .tabs,
 .tab-item {
-  font-family: $font-acari-medium;
-  @include font-size(18px);
-  @include line-height(20px);
-  letter-spacing: 0.01em;
-  /* #EB1D01 */
-  color: $dark;
+	font-family: $font-acari-medium;
+	@include font-size(18px);
+	@include line-height(20px);
+	letter-spacing: 0.01em;
+	/* #EB1D01 */
+	color: $dark;
 
-  &.active {
-    color: $red;
-  }
+	&.active {
+		color: $red;
+	}
 }
 
 .terms .h4 {
-  line-height: 1.4;
+	line-height: 1.4;
 }
 
 .terms {
-  .paragraph-3 + .paragraph-3 {
-    margin-top: 20px;
-  }
+	.paragraph-3 + .paragraph-3 {
+		margin-top: 20px;
+	}
 }
+
+html {
+	@include media-breakpoint-down(lg) {
+		font-size: 85.7%;
+	}
+}
+

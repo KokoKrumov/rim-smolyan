@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import rimLogo from '../../assets/images/rim-logo.svg'
 import searchIcon from '../../assets/images/search-icon.svg'
 import BG from '../../assets/images/bg.svg'
@@ -16,6 +16,10 @@ import {FormattedMessage, useIntl} from 'react-intl'
 
 function Header({showModal}) {
     const intl = useIntl();
+
+    const [navIsOpen, setNavIsOpen] = useState(false)
+
+    const toggleHeaderNavigation = () => setNavIsOpen(!navIsOpen)
 
     function setLanguage(lang, e) {
         e.preventDefault();
@@ -44,7 +48,20 @@ function Header({showModal}) {
                             </p>
                         </div>
                     </Navbar.Brand>
-                    <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
+                    <Navbar.Toggle onClick={toggleHeaderNavigation}>
+                        {/* Close mark */}
+                        <div id="close-icon">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        {/* close mark ends */}
+                        <div className={`hamburger hamburger--slider js-hamburger ${ navIsOpen ? "is-active" : ""}`}>
+                            <div className="hamburger-box">
+                                <div className="hamburger-inner"></div>
+                            </div>
+                        </div>
+                    </Navbar.Toggle>
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <div className='header-navigation__wrap'>
                             <div className='header-navigation__inner'>
@@ -103,7 +120,7 @@ function Header({showModal}) {
                                         <NavDropdown.Item
                                             className="nav__secondary-link"
                                             onClick={(e) => {
-                                                handleShowModal('modal-redirect','Z_fondove.html', e)
+                                                handleShowModal('modal-redirect', 'Z_fondove.html', e)
                                             }}
                                             href="#">
                                             <FormattedMessage id="menu.main-collections"/>
@@ -111,7 +128,7 @@ function Header({showModal}) {
                                         <NavDropdown.Item
                                             className="nav__secondary-link"
                                             onClick={(e) => {
-                                                handleShowModal('modal-redirect','Z_vir_fondove.html', e)
+                                                handleShowModal('modal-redirect', 'Z_vir_fondove.html', e)
                                             }}
                                             href="#">
                                             <FormattedMessage id="menu.virtual-collections"/>
