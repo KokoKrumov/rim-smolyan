@@ -32,6 +32,10 @@
     .display-flag {
       @include width(12px);
 
+      @include media-breakpoint-down(lg) {
+        @include width(16px);
+      }
+
       .thumbnail-image {
         width: 100%;
       }
