@@ -4,6 +4,10 @@ export function isMobileScreen(): boolean {
   return window.document.documentElement.clientWidth < variables['--mobile-max-width']
 }
 
+export function isTabletScreen(): boolean {
+  return window.document.documentElement.clientWidth < variables['--tablet-max-width']
+}
+
 /**
  * Checks if it's iOS device
  */

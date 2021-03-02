@@ -7,6 +7,21 @@
 			width: 100%;
 			display: flex;
 			flex-direction: column;
+
+
+			@include media-breakpoint-down(xl) {
+				&.container {
+					padding-right: 0;
+					padding-left: 0;
+
+					.header-navigation__nav,
+					.header-navigation__inner {
+						width: 100%;
+					}
+				}
+
+			}
+
 		}
 
 		&__inner {
@@ -14,14 +29,36 @@
 			flex-direction: row;
 			align-items: center;
 
+			@include media-breakpoint-down(lg) {
+				flex-direction: column;
+			}
+
 			&__child {
 				&:first-child {
 					flex: 1;
 				}
 
+				//&.navbar-nav
 				&:last-child {
 					align-items: center;
+
+					@include media-breakpoint-down(lg) {
+						width: 100%;
+						align-items: flex-start;
+
+
+						@include padding(17.5px, 0px, 17.5px, 0px);
+
+						.nav__secondary-link {
+							padding-top: 0.46875rem !important;
+							padding-bottom: 0.46875rem !important;
+							display: block;
+							width: 100%;
+						}
+					}
+
 				}
+
 				&:last-child,
 				&.bg {
 					flex: 1.245;
@@ -34,12 +71,51 @@
 						@include width(15px)
 					}
 				}
+
+				@include media-breakpoint-down(lg) {
+					border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+				}
+
+				&__mobile {
+					display: flex;
+					align-items: center;
+					width: 100%;
+					padding-right: 60px;
+
+					@include media-breakpoint-down(xs) {
+						padding-right: 26px;
+					}
+
+					.dropdown-lang {
+						height: 26px;
+						display: flex;
+						align-items: center;
+					}
+				}
 			}
 		}
 
 		&__nav {
-			border-top: 1px solid rgba(255, 255, 255, 0.1);
+			@include media-breakpoint-up(xl) {
+				border-top: 1px solid rgba(255, 255, 255, 0.1);
+			}
+
+			@include media-breakpoint-down(lg) {
+				margin-top: 1.56rem;
+				margin-bottom: 1.56rem;
+			}
+
+			.nav__main-link__separate-line {
+				@include media-breakpoint-down(lg) {
+					margin-top: 1.56rem;
+					margin-bottom: 1.56rem;
+					border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+					padding: 0 !important;
+				}
+			}
 		}
+
+
 	}
 
 	.navbar-nav {
@@ -67,6 +143,11 @@
 			display: flex;
 			align-items: center;
 
+
+			@include media-breakpoint-down(lg) {
+				@include padding(7px, 10px, 7px, 25px);
+			}
+
 			& > div {
 				line-height: 0;
 			}
@@ -80,9 +161,20 @@
 		}
 	}
 
+
 	@include media-breakpoint-down(lg) {
+
+		.dropdown-toggle::after {
+			border-top-color: #fff
+		}
+
 		padding-top: 13px;
 		padding-bottom: 10px;
 
+		&__container {
+			align-items: flex-start !important;
+			padding-right: 1.5rem !important;
+			padding-left: 1.5rem !important;
+		}
 	}
 }

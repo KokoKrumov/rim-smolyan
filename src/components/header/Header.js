@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import rimLogo from '../../assets/images/rim-logo.svg'
 import searchIcon from '../../assets/images/search-icon.svg'
 import BG from '../../assets/images/bg.svg'
@@ -13,11 +13,27 @@ import FormControl from 'react-bootstrap/FormControl'
 import {showModal} from "../../actions";
 import {connect} from "react-redux";
 import {FormattedMessage, useIntl} from 'react-intl'
+import {isTabletScreen} from "../../utilities/browser";
 
 function Header({showModal}) {
     const intl = useIntl();
 
     const [navIsOpen, setNavIsOpen] = useState(false)
+    const [isTabletScreenV, setIsTabletScreen] = React.useState(isTabletScreen())
+
+    useEffect(() => {
+        function handleResize() {
+            setIsTabletScreen(isTabletScreen())
+
+        }
+
+        window.addEventListener('resize', handleResize)
+
+        return _ => {
+            window.removeEventListener('resize', handleResize)
+
+        }
+    })
 
     const toggleHeaderNavigation = () => setNavIsOpen(!navIsOpen)
 
@@ -36,8 +52,9 @@ function Header({showModal}) {
 
     return (
         <header className="header">
-            <Container>
-                <Navbar collapseOnSelect expand="xl" variant="dark">
+            <Navbar collapseOnSelect expand="xl" variant="dark">
+                {console.log(isTabletScreenV)}
+                <Container className='header__container'>
                     <Navbar.Brand href="/">
                         <div className="brand__wrap">
                             <div className='brand-logo__wrap'>
@@ -56,60 +73,110 @@ function Header({showModal}) {
                             <span></span>
                         </div>
                         {/* close mark ends */}
-                        <div className={`hamburger hamburger--slider js-hamburger ${ navIsOpen ? "is-active" : ""}`}>
+                        <div className={`hamburger hamburger--slider js-hamburger ${navIsOpen ? "is-active" : ""}`}>
                             <div className="hamburger-box">
                                 <div className="hamburger-inner"></div>
                             </div>
                         </div>
                     </Navbar.Toggle>
                     <Navbar.Collapse id="responsive-navbar-nav">
-                        <div className='header-navigation__wrap'>
+                        <div className={`header-navigation__wrap ${isTabletScreenV ? 'container' : ''}`}>
                             <div className='header-navigation__inner'>
-                                <InputGroup className="header-navigation__inner__child">
-                                    <InputGroup.Prepend>
-                                        <InputGroup.Text id="basic-addon1">
-                                            <img className="" src={searchIcon} alt="" itemProp="image"/>
-                                        </InputGroup.Text>
-                                    </InputGroup.Prepend>
-                                    <FormControl
-                                        placeholder={intl.formatMessage({id: 'menu.search'})}
-                                        aria-label={intl.formatMessage({id: 'menu.search'})}
-                                        aria-describedby={intl.formatMessage({id: 'menu.search-in'})}
-                                    />
-                                </InputGroup>
+
+                                {
+                                    isTabletScreenV
+                                        ?
+                                        <div className='header-navigation__inner__child__mobile'>
+                                            <InputGroup className="header-navigation__inner__child">
+                                                <InputGroup.Prepend>
+                                                    <InputGroup.Text id="basic-addon1">
+                                                        <img className="" src={searchIcon} alt="" itemProp="image"/>
+                                                    </InputGroup.Text>
+                                                </InputGroup.Prepend>
+                                                <FormControl
+                                                    placeholder={intl.formatMessage({id: 'menu.search'})}
+                                                    aria-label={intl.formatMessage({id: 'menu.search'})}
+                                                    aria-describedby={intl.formatMessage({id: 'menu.search-in'})}
+                                                />
+                                            </InputGroup>
+                                            <NavDropdown
+                                                title={
+                                                    <div className="display-flag">
+                                                        <img className="thumbnail-image"
+                                                             src={flag === 'en' ? EN : BG}
+                                                             alt="lang"
+                                                        />
+                                                    </div>
+                                                }
+                                                className='nav__main-link dropdown-lang'
+                                                id="collasible-nav-dropdown">
+                                                <NavDropdown.Item
+                                                    onClick={(e) => setLanguage('bg', e)}
+                                                >
+                                                    <img className="thumbnail-image" src={BG} alt="" itemProp="image"/>
+                                                </NavDropdown.Item>
+                                                <NavDropdown.Item
+                                                    onClick={(e) => setLanguage('en', e)}
+                                                >
+                                                    <img className="thumbnail-image" src={EN} alt="" itemProp="image"/>
+                                                </NavDropdown.Item>
+                                            </NavDropdown>
+                                        </div>
+                                        :
+                                        <InputGroup className="header-navigation__inner__child">
+                                            <InputGroup.Prepend>
+                                                <InputGroup.Text id="basic-addon1">
+                                                    <img className="" src={searchIcon} alt="" itemProp="image"/>
+                                                </InputGroup.Text>
+                                            </InputGroup.Prepend>
+                                            <FormControl
+                                                placeholder={intl.formatMessage({id: 'menu.search'})}
+                                                aria-label={intl.formatMessage({id: 'menu.search'})}
+                                                aria-describedby={intl.formatMessage({id: 'menu.search-in'})}
+                                            />
+                                        </InputGroup>
+                                }
+
+
                                 <Nav className={`header-navigation__inner__child ${flag}`}>
                                     <Nav.Link
                                         href="/support-us"
                                         className='nav__secondary-link'>
                                         <FormattedMessage id="menu.support"/>
                                     </Nav.Link>
-                                    <p className='nav__main-link'>|</p>
+                                    <p className='nav__main-link d-none d-xl-block'>|</p>
                                     <Nav.Link href="/administrative"
                                               className='nav__secondary-link'>
                                         <FormattedMessage id="menu.administrative"/>
                                     </Nav.Link>
-                                    <NavDropdown
-                                        title={
-                                            <div className="display-flag">
-                                                <img className="thumbnail-image"
-                                                     src={flag === 'en' ? EN : BG}
-                                                     alt="lang"
-                                                />
-                                            </div>
-                                        }
-                                        className='nav__main-link dropdown-lang'
-                                        id="collasible-nav-dropdown">
-                                        <NavDropdown.Item
-                                            onClick={(e) => setLanguage('bg', e)}
-                                        >
-                                            <img className="thumbnail-image" src={BG} alt="" itemProp="image"/>
-                                        </NavDropdown.Item>
-                                        <NavDropdown.Item
-                                            onClick={(e) => setLanguage('en', e)}
-                                        >
-                                            <img className="thumbnail-image" src={EN} alt="" itemProp="image"/>
-                                        </NavDropdown.Item>
-                                    </NavDropdown>
+                                    {
+                                        !isTabletScreenV
+                                            ?
+                                            <NavDropdown
+                                                title={
+                                                    <div className="display-flag">
+                                                        <img className="thumbnail-image"
+                                                             src={flag === 'en' ? EN : BG}
+                                                             alt="lang"
+                                                        />
+                                                    </div>
+                                                }
+                                                className='nav__main-link dropdown-lang'
+                                                id="collasible-nav-dropdown">
+                                                <NavDropdown.Item
+                                                    onClick={(e) => setLanguage('bg', e)}
+                                                >
+                                                    <img className="thumbnail-image" src={BG} alt="" itemProp="image"/>
+                                                </NavDropdown.Item>
+                                                <NavDropdown.Item
+                                                    onClick={(e) => setLanguage('en', e)}
+                                                >
+                                                    <img className="thumbnail-image" src={EN} alt="" itemProp="image"/>
+                                                </NavDropdown.Item>
+                                            </NavDropdown>
+                                            :
+                                            null
+                                    }
                                 </Nav>
                             </div>
                             <div className='header-navigation__nav'>
@@ -158,7 +225,7 @@ function Header({showModal}) {
                                         className='nav__main-link'>
                                         <FormattedMessage id="menu.contact-us"/>
                                     </Nav.Link>
-                                    <p className='nav__main-link'>|</p>
+                                    <p className='nav__main-link nav__main-link__separate-line'><span className='d-none d-xl-block'>|</span></p>
                                     <Nav.Link
                                         href="#"
                                         className='nav__main-link not-allowed'>
@@ -168,8 +235,8 @@ function Header({showModal}) {
                             </div>
                         </div>
                     </Navbar.Collapse>
-                </Navbar>
-            </Container>
+                </Container>
+            </Navbar>
         </header>
     );
 }

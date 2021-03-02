@@ -1,12 +1,28 @@
 .navbar-toggler {
-	margin-top: -1rem;
+	&.collapsed {
+		//margin-top: -1rem;
+	}
+
+	margin-top: -0.8rem;
 	margin-right: -1rem;
 	border: none;
 	padding: 0;
+	z-index: 99;
 
 	&:focus {
 		outline: none;
 		border: none;
+	}
+}
+
+.navbar-collapse {
+	@include media-breakpoint-down(lg) {
+		padding: 0 1.5rem;
+		width: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		background: rgb(39, 35, 35);
 	}
 }
 
@@ -80,7 +96,7 @@
 	}
 
 	&--slider.is-active &-inner {
-		transform: translate3d(0, 10px, 0) rotate(45deg);
+		transform: translate3d(0, 17px, 0) rotate(45deg);
 	}
 
 	//&--slider.is-active &-inner:after {

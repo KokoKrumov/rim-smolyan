@@ -17,6 +17,12 @@
       align-content: center;
       @include width(38px);
       @include height(52px);
+
+      @include media-breakpoint-down(lg) {
+
+        @include width(30px);
+        @include height(40px);
+      }
     }
   }
 
@@ -27,15 +33,29 @@
     @include line-height(19px);
     @include width(183px);
     text-transform: uppercase;
+
+    @include media-breakpoint-down(lg) {
+      @include font-size(12px);
+      @include line-height(16px);
+      @include width(157px);
+    }
   }
 
   &__wrap {
     display: flex;
-    align-content: center;
+    align-items: center;
     justify-content: flex-start;
 
+    @include media-breakpoint-down(lg) {
+      align-items: flex-start;
+    }
+
     .brand-logo__wrap {
-      @include margin(0px, 15px, 0px, 0px)
+      @include margin(0px, 15px, 0px, 0px);
+
+      @include media-breakpoint-down(lg) {
+        @include margin(0px, 10px, 0px, 0px)
+      }
     }
   }
 }
