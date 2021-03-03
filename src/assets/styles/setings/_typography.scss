@@ -9,6 +9,15 @@
 	@media (max-width: 576px) {
 		word-break: break-word;
 	}
+
+	@include media-breakpoint-down(md) {
+		@include font-size(62px);
+		@include line-height(58px);
+	}
+
+	@media (max-width: 360px) {
+		@include font-size(56px);
+	}
 }
 
 
