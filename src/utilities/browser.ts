@@ -5,7 +5,7 @@ export function isMobileScreen(): boolean {
 }
 
 export function isTabletScreen(): boolean {
-  return window.document.documentElement.clientWidth < variables['--tablet-max-width']
+    return window.document.documentElement.clientWidth < variables['--tablet-max-width']
 }
 
 /**

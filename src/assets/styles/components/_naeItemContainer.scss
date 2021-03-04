@@ -1,6 +1,10 @@
 .nae-container {
   @include padding(150px, 0px, 140px, 0px);
 
+  @include media-breakpoint-down(md) {
+    @include padding(60px, 0px, 60px, 0px);
+  }
+
   .nae__title-line {
     display: flex;
     align-items: center;
@@ -8,10 +12,24 @@
     @include margin(0px, 0px, 40px, 0px);
   }
 
+  .h1 {
+    @include media-breakpoint-down(lg) {
+      width: 100%;
+     text-align: center;
+    }
+  }
+
   &_content-dark {
     .h1,
     .paragraph-2 {
       color: $dark;
+    }
+  }
+
+  .nae__title-line__link {
+    @include media-breakpoint-down(lg) {
+      @include margin(60px, 0px, 0px, 0px);
+      text-align: center;
     }
   }
 }

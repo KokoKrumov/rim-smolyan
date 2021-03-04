@@ -29,6 +29,11 @@
 	text-transform: uppercase;
 	margin: 0;
 
+	@include media-breakpoint-down(md) {
+		@include font-size(30px);
+		@include line-height(36px);
+	}
+
 	@media (max-width: 576px) {
 		word-break: break-word;
 	}

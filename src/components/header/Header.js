@@ -53,7 +53,6 @@ function Header({showModal}) {
     return (
         <header className="header">
             <Navbar collapseOnSelect expand="xl" variant="dark">
-                {console.log(isTabletScreenV)}
                 <Container className='header__container'>
                     <Navbar.Brand href="/">
                         <div className="brand__wrap">
