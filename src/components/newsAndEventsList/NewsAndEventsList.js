@@ -21,10 +21,10 @@ function NewsAndEventsList({listOfNewsAndEvents}) {
             listOfNewsAndEvents.slice(-3, listOfNewsAndEvents.length).map((article, index) => {
                 if (index < iterateOverNumber) {
                     return (
-                        <Col lg={4} key={article.id}>
+                        <Col md={4} key={article.id} className='nae-item__vertical__wrap'>
                             <div className='nae-item nae-item__vertical'>
                                 {/*MINUS 1 BECAUSE THE ARRAY STARTS WITH 0*/}
-                                <a href={`/news/${article.id-1}`}>
+                                <a href={`/news/${article.id - 1}`}>
                                     <div className='nae-item__img__wrap'>
                                         {article.dateD && article.type === 'event' ?
                                             <div className='nae-item__date__wrap'>

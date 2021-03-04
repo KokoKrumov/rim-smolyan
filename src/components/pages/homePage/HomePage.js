@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, useEffect} from 'react';
 import heroImage from "../../../assets/images/baseHero.jpg";
 import aboutUsImage from "../../../assets/images/about_us_section_bg.png";
 import Hero from "../../hero/Hero";
@@ -18,6 +18,7 @@ import {connect} from 'react-redux'
 import {fetchNews, showModal} from "../../../actions";
 import InfoColumn from "../../infoColumn/InfoColumn";
 import {FormattedMessage} from 'react-intl';
+import {isTabletScreen} from "../../../utilities/browser";
 
 let listMegatronCarousel = [
     {
@@ -68,6 +69,7 @@ class HomePage extends Component {
         bgAboutUs: null,
         listOfNewsAndEvents: null,
         listMegatronCarousel: null,
+        isTabletScreenV: isTabletScreen(),
         infoColumn: {
             title: "about-us",
             text: "home-page.about-us.text",
@@ -75,6 +77,13 @@ class HomePage extends Component {
             bgAboutUs: aboutUsImage,
             columns: 2
         }
+    }
+
+
+    handleResize() {
+        this.setState({
+            isTabletScreenV: isTabletScreen()
+        })
     }
 
     fetchData = () => {
@@ -91,6 +100,16 @@ class HomePage extends Component {
 
     componentDidMount() {
         this.fetchData();
+        window.addEventListener('resize', () => {
+            this.handleResize()
+        })
+
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('resize', () => {
+            this.handleResize()
+        })
     }
 
     handleShowModal(data, url, e) {
@@ -116,30 +135,53 @@ class HomePage extends Component {
                                 <h1 className='h1'>
                                     Новини и Събития
                                 </h1>
-                                <div className='nae__title-line__link'>
-                                    <Link
-                                        className="link cta_outline cta_outline__dark hvr-underline-from-right"
-                                        to="/news"
-                                        itemProp="url"
-                                        target=""
-                                        rel="noopener nofollow noreferrer">
-                                        <FormattedMessage id="see-all"/>
-                                    </Link>
+                                {
+                                    !this.state.isTabletScreenV
+                                        ?
+                                        <div className='nae__title-line__link'>
+                                            <Link
+                                                className="link cta_outline cta_outline__dark hvr-underline-from-right"
+                                                to="/news"
+                                                itemProp="url"
+                                                target=""
+                                                rel="noopener nofollow noreferrer">
+                                                <FormattedMessage id="see-all"/>
+                                            </Link>
 
-                                </div>
+                                        </div>
+                                        :
+                                        null
+                                }
                             </div>
-                            <div>
-                                <Row>
-                                    <NewsAndEventsList listOfNewsAndEvents={this.state.listOfNewsAndEvents}/>
-                                </Row>
-                            </div>
+                            <Row>
+                                <NewsAndEventsList listOfNewsAndEvents={this.state.listOfNewsAndEvents}/>
+                            </Row>
+                            {
+                                this.state.isTabletScreenV
+                                    ?
+                                    <div className='nae__title-line__link'>
+                                        <Link
+                                            className="link cta_outline cta_outline__dark hvr-underline-from-right"
+                                            to="/news"
+                                            itemProp="url"
+                                            target=""
+                                            rel="noopener nofollow noreferrer">
+                                            <FormattedMessage id="see-all"/>
+                                        </Link>
+
+                                    </div>
+                                    :
+                                    null
+                            }
                         </div>
                     </Container>
                 </div>
 
                 <CarouselMegatron
                     listMegatronCarousel={listMegatronCarousel}
+                    isTableScreen={this.state.isTabletScreenV}
                 />
+
 
                 <InfoColumn
                     title={this.state.infoColumn.title}

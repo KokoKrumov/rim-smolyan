@@ -1,6 +1,10 @@
 .info-line {
 	@include padding(18px, 0px, 18px, 0px);
 
+	@include media-breakpoint-down(md) {
+		@include padding(15px, 0px, 15px, 0px);
+	}
+
 	& + & {
 		@include margin(30px, 0px, 0px, 0px);
 	}
@@ -59,11 +63,18 @@
 		justify-content: space-between;
 		align-items: center;
 
+
 		@include media-breakpoint-down(lg) {
 			flex-direction: column;
+			align-items: flex-start;
+
+			.info-line__item__inactive-months {
+				display: none;
+			}
 
 			.info-line__item + .info-line__item {
-				margin-top: 1rem;
+				width: 100%;
+				margin-top: 10px;
 			}
 		}
 	}
@@ -75,6 +86,34 @@
 
 		&-bold {
 			font-family: $font-acari-bold;
+		}
+
+		@include media-breakpoint-down(md) {
+			@include font-size(14px);
+		}
+
+		&__get-working-time {
+			margin-left: 6px;
+			@include media-breakpoint-down(md) {
+				margin-top: 30px;
+				margin-left: 0;
+				display: block;
+			}
+		}
+
+		&__working-days {
+			@include media-breakpoint-down(md) {
+				width: 100%;
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+				justify-content: space-between;
+
+				span:last-child {
+					width: auto;
+					margin-left: auto;
+				}
+			}
 		}
 	}
 

@@ -1,45 +1,72 @@
 .hero {
-  @include padding(80px, 0px, 115px, 0px);
+	@include padding(80px, 0px, 115px, 0px);
 
-  &-inner {
-    &__wrap {
-      @include padding(100px, 0px, 60px, 0px);
-      border-bottom: 1px solid $red;
-    }
-    &__wrap__sm {
-      @include padding(55px, 0px, 60px, 0px);
-      border-bottom: 1px solid $red;
+	&-inner {
+		&__wrap {
+			@include padding(100px, 0px, 60px, 0px);
+			border-bottom: 1px solid $red;
+		}
 
-      .back-link {
-        @include margin(0px, 0px, 35px, 0px);
-      }
-    }
+		&__wrap__sm {
+			@include padding(55px, 0px, 60px, 0px);
+			border-bottom: 1px solid $red;
 
-  }
+			.back-link {
+				@include margin(0px, 0px, 35px, 0px);
+			}
+		}
 
-  &__wrap {
-    position: relative;
-    height: calc(100vh - (5.8125rem + 3.5625rem));
-    min-height: 25rem;
+	}
 
-    .hero-bg {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-    }
+	&__wrap {
+		position: relative;
+		height: calc(100vh - (5.8125rem + 3.5625rem));
+		min-height: 25rem;
 
-    .display {
-      @include padding(92px, 15px, 20px, 15px);
-      position: relative;
-      z-index: 1;
-      color: $white;
-      text-align: center;
-    }
+		@include media-breakpoint-down(md) {
+			height: calc(100vh - (7.75rem + 4rem));
+		}
 
-    .subtitle {
-      @include padding(10px, 15px, 45px, 15px);
-      color: $white;
-    }
-  }
+		.hero-bg {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			flex-direction: column;
+
+			@include media-breakpoint-down(sm) {
+				align-items: flex-start;
+			}
+		}
+
+		.display {
+			@include padding(92px, 15px, 20px, 15px);
+			position: relative;
+			z-index: 1;
+			color: $white;
+			text-align: center;
+
+			@include media-breakpoint-down(sm) {
+				margin-bottom: 0;
+				text-align: left;
+			}
+		}
+
+		.subtitle {
+			@include padding(10px, 15px, 45px, 15px);
+			color: $white;
+
+			@include media-breakpoint-down(md) {
+				@include padding(0px, 15px, 45px, 15px);
+				@include font-size(15px);
+				text-align: left;
+			}
+
+			&__sm {
+				@include media-breakpoint-down(md) {
+					width: 100%;
+					text-align: center;
+				}
+			}
+		}
+	}
 }

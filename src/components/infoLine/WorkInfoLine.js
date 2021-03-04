@@ -39,18 +39,18 @@ class WorkInfoLine extends Component {
                         <div className='info-line__item'>
                             <p className='info-line__text info-line__text-bold text-uppercase'>
                                 <FormattedMessage id="working.time"/>
-                                <span style={{marginLeft: '6px'}}>( <FormattedMessage id={this.getWorkingTime().months.active}/> )</span>:
+                                <span className='info-line__text__get-working-time'>( <FormattedMessage id={this.getWorkingTime().months.active}/> ):</span>
                             </p>
                         </div>
 
                         <div className='info-line__item'>
-                            <p className='info-line__text info-line__text-bold'>
-                                <FormattedMessage id="working.days"/>
+                            <p className='info-line__text info-line__text__working-days info-line__text-bold'>
+                                <span><FormattedMessage id="working.days"/></span>
                                 <span style={{marginLeft: '1rem'}}>{this.getWorkingTime().hours}</span>
                             </p>
                         </div>
 
-                        <div className='info-line__item'>
+                        <div className='info-line__item info-line__item__inactive-months'>
                             <p className='info-line__text'>
                                 <FormattedMessage id={this.getWorkingTime().months.inactive}/>
                                 <span style={{marginLeft: '11px'}}>

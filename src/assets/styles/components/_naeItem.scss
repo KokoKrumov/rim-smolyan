@@ -4,6 +4,10 @@
 		@include margin(0px, 0px, 15px, 0px);
 		position: relative;
 		overflow: hidden;
+
+		@include media-breakpoint-down(md) {
+			@include margin(0px, 0px, 20px, 0px);
+		}
 	}
 
 	.h5 {
@@ -68,6 +72,15 @@
 				padding-top: 66.25%;
 				display: block;
 				content: "";
+			}
+		}
+
+
+		&__wrap {
+			@include media-breakpoint-down(md) {
+				&:not(:first-child) {
+					@include margin(60px, 0px, 0px, 0px);
+				}
 			}
 		}
 	}

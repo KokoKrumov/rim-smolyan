@@ -9,7 +9,7 @@ import carouselMegatronArrowLeft from "../../assets/images/carousel__left-arrow.
 import {connect} from "react-redux";
 import {showModal} from "../../actions";
 
-function CarouselMegatron({listMegatronCarousel, showModal}) {
+function CarouselMegatron({listMegatronCarousel, showModal, isTableScreen}) {
     const handleOnDragStart = (e) => e.preventDefault()
     const [item, setItem] = useState(1);
     let carousel = React.createRef();
@@ -26,39 +26,46 @@ function CarouselMegatron({listMegatronCarousel, showModal}) {
     if (listMegatronCarousel) {
         return (
             <div className='carousel-megatron__wrap'>
-                <div className='carousel-megatron__controls__out'>
-                    <Container>
-                        <Row>
-                            <Col lg={6}>
-                                <div className='carousel-megatron__controls'>
-                                    <div>
-                                        <p className='carousel-megatron__controls-index'>
-                                            {item}/{listMegatronCarousel.length}
-                                        </p>
-                                    </div>
+                {
+                    !isTableScreen
+                        ?
+                        <div className='carousel-megatron__controls__out'>
+                            <Container>
+                                <Row>
+                                    <Col lg={6}>
+                                        <div className='carousel-megatron__controls'>
+                                            <div>
+                                                <p className='carousel-megatron__controls-index'>
+                                                    {item}/{listMegatronCarousel.length}
+                                                </p>
+                                            </div>
 
-                                    <div className='carousel-megatron__controls__wrap'>
-                                        <button className='btn carousel__controls-btn'
-                                                onClick={() => carousel.slidePrev()}>
-                                            <img className="carousel-megatron__controls-btn__img"
-                                                 src={carouselMegatronArrowLeft} alt=""
-                                                 itemProp="image"/>
-                                        </button>
-                                        <button className='btn carousel__controls-btn'
-                                                onClick={() => carousel.slideNext()}>
-                                            <img className="carousel-megatron__controls-btn__img"
-                                                 src={carouselMegatronArrowRight} alt=""
-                                                 itemProp="image"/>
-                                        </button>
-                                    </div>
-                                </div>
-                            </Col>
-                            <Col lg={5}>
+                                            <div className='carousel-megatron__controls__wrap'>
+                                                <button className='btn carousel__controls-btn'
+                                                        onClick={() => carousel.slidePrev()}>
+                                                    <img className="carousel-megatron__controls-btn__img"
+                                                         src={carouselMegatronArrowLeft} alt=""
+                                                         itemProp="image"/>
+                                                </button>
+                                                <button className='btn carousel__controls-btn'
+                                                        onClick={() => carousel.slideNext()}>
+                                                    <img className="carousel-megatron__controls-btn__img"
+                                                         src={carouselMegatronArrowRight} alt=""
+                                                         itemProp="image"/>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </Col>
+                                    <Col lg={5}>
 
-                            </Col>
-                        </Row>
-                    </Container>
-                </div>
+                                    </Col>
+                                </Row>
+                            </Container>
+                        </div>
+                        :
+                        null
+
+                }
 
 
                 <AliceCarousel
@@ -66,8 +73,9 @@ function CarouselMegatron({listMegatronCarousel, showModal}) {
                     dotsDisabled={true}
                     buttonsDisabled={true}
                     ref={(el) => (carousel = el)}
-                    swipeDisabled={true}
+                    swipeDisabled={!isTableScreen}
                     onSlideChanged={onSlideChanged}
+                    paddingRight={50}
                 >
 
                     {listMegatronCarousel.map(item => {
@@ -93,71 +101,108 @@ function CarouselMegatron({listMegatronCarousel, showModal}) {
                                             <p className='carousel__type'>
                                                 {item.type}
                                             </p>
-                                            <p className='carousel-megatron__description paragraph-3'>
-                                                {item.description}
-                                            </p>
-                                            <Row>
-                                                <Col lg={6} className='carousel__data-info__bordered'>
-                                                    <div className='carousel__data-info__wrap'>
-                                                        <p className='carousel__data-info__title'>
-                                                            Размери:
-                                                        </p>
-                                                        <p className='carousel__data-info__description'>
-                                                            {item.height}
-                                                        </p>
 
-                                                        <p className='carousel__data-info__description'>
-                                                            {item.width}
+                                            {
+                                                !isTableScreen
+                                                    ?
+                                                    <React.Fragment>
+                                                        <p className='carousel-megatron__description paragraph-3'>
+                                                            {item.description}
                                                         </p>
-                                                    </div>
-                                                    <div className='carousel__data-info__wrap'>
-                                                        <p className='carousel__data-info__title'>
-                                                            Селище:
+                                                        <Row>
+                                                            <Col lg={6} className='carousel__data-info__bordered'>
+                                                                <div className='carousel__data-info__wrap'>
+                                                                    <p className='carousel__data-info__title'>
+                                                                        Размери:
+                                                                    </p>
+                                                                    <p className='carousel__data-info__description'>
+                                                                        {item.height}
+                                                                    </p>
+
+                                                                    <p className='carousel__data-info__description'>
+                                                                        {item.width}
+                                                                    </p>
+                                                                </div>
+                                                                <div className='carousel__data-info__wrap'>
+                                                                    <p className='carousel__data-info__title'>
+                                                                        Селище:
+                                                                    </p>
+                                                                    <p className='carousel__data-info__description'>
+                                                                        {item.settlement}
+                                                                    </p>
+                                                                </div>
+                                                            </Col>
+                                                            <Col lg={6} className='carousel__data-info__bordered'>
+                                                                <div className='carousel__data-info__wrap'>
+                                                                    <p className='carousel__data-info__title'>
+                                                                        Датировка:
+                                                                    </p>
+                                                                    <p className='carousel__data-info__description'>
+                                                                        {item.dating}
+                                                                    </p>
+                                                                </div>
+                                                                <div className='carousel__data-info__wrap'>
+                                                                    <p className='carousel__data-info__title'>
+                                                                        Инв. номер:
+                                                                    </p>
+                                                                    <p className='carousel__data-info__description'>
+                                                                        {item.number}
+                                                                    </p>
+                                                                </div>
+                                                            </Col>
+                                                        </Row>
+                                                        <p className='carousel__data-link'>
+                                                            <Link
+                                                                style={{marginTop: '2rem'}}
+                                                                className="link cta_outline cta_outline__light hvr-underline-from-left"
+                                                                to="#"
+                                                                itemProp="url"
+                                                                target=""
+                                                                rel="noopener nofollow noreferrer"
+                                                                onClick={(e) => {
+                                                                    handleShowModal('modal-redirect', 'Z_fondove.html', e)
+                                                                }}
+                                                            >
+                                                                към фондове
+                                                            </Link>
                                                         </p>
-                                                        <p className='carousel__data-info__description'>
-                                                            {item.settlement}
-                                                        </p>
-                                                    </div>
-                                                </Col>
-                                                <Col lg={6} className='carousel__data-info__bordered'>
-                                                    <div className='carousel__data-info__wrap'>
-                                                        <p className='carousel__data-info__title'>
-                                                            Датировка:
-                                                        </p>
-                                                        <p className='carousel__data-info__description'>
-                                                            {item.dating}
-                                                        </p>
-                                                    </div>
-                                                    <div className='carousel__data-info__wrap'>
-                                                        <p className='carousel__data-info__title'>
-                                                            Инв. номер:
-                                                        </p>
-                                                        <p className='carousel__data-info__description'>
-                                                            {item.number}
-                                                        </p>
-                                                    </div>
-                                                </Col>
-                                            </Row>
-                                            <p className='carousel__data-link'>
-                                                <Link
-                                                    style={{marginTop: '2rem'}}
-                                                    className="link cta_outline cta_outline__light hvr-underline-from-left"
-                                                    to="#"
-                                                    itemProp="url"
-                                                    target=""
-                                                    rel="noopener nofollow noreferrer"
-                                                    onClick={(e) => {
-                                                        handleShowModal('modal-redirect', 'Z_fondove.html', e)
-                                                    }}
-                                                >
-                                                    към фондове
-                                                </Link>
-                                            </p>
+                                                    </React.Fragment>
+                                                    :
+                                                    null
+                                            }
+
+
                                         </Col>
                                         <Col lg={5}>
                                             <div className='carousel-megatron__img-wrap'>
                                                 <img className="w-100" src={item.image} alt="" itemProp="image"/>
                                             </div>
+                                            {
+                                                isTableScreen
+                                                    ?
+                                                    <React.Fragment>
+                                                        <p className='carousel-megatron__description paragraph-3'>
+                                                            {item.description}
+                                                        </p>
+                                                        <p className='carousel__data-link'>
+                                                            <Link
+                                                                style={{marginTop: '2rem'}}
+                                                                className="link cta_outline cta_outline__light hvr-underline-from-left"
+                                                                to="#"
+                                                                itemProp="url"
+                                                                target=""
+                                                                rel="noopener nofollow noreferrer"
+                                                                onClick={(e) => {
+                                                                    handleShowModal('modal-redirect', 'Z_fondove.html', e)
+                                                                }}
+                                                            >
+                                                                към фондове
+                                                            </Link>
+                                                        </p>
+                                                    </React.Fragment>
+                                                    :
+                                                    null
+                                            }
                                         </Col>
                                     </Row>
 
@@ -165,10 +210,10 @@ function CarouselMegatron({listMegatronCarousel, showModal}) {
                             </div>
                         )
                     })}
-                </AliceCarousel>
-            </div>
-        )
-    } else {
+                        </AliceCarousel>
+                        </div>
+                        )
+                    } else {
         return (
             <div>
                 <p>
