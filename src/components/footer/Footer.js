@@ -23,8 +23,8 @@ function Footer({showModal}) {
         <footer className="footer">
             <div className='footer__top'>
                 <Container>
-                    <Navbar collapseOnSelect expand="xl" variant="dark">
-                        <div className='d-flex flex-column'>
+                    <Navbar variant="dark">
+                        <div className='footer__navbar-brand__wrap'>
                             <Navbar.Brand href="/">
                                 <div className="brand__wrap">
                                     <div className='brand-logo__wrap'>

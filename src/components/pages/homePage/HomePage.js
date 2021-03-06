@@ -19,6 +19,7 @@ import {fetchNews, showModal} from "../../../actions";
 import InfoColumn from "../../infoColumn/InfoColumn";
 import {FormattedMessage} from 'react-intl';
 import {isTabletScreen} from "../../../utilities/browser";
+import CarouselMegatronMobile from "../../carousel/CarouselMegatronMobile";
 
 let listMegatronCarousel = [
     {
@@ -181,16 +182,16 @@ class HomePage extends Component {
                     listMegatronCarousel={listMegatronCarousel}
                     isTableScreen={this.state.isTabletScreenV}
                 />
+                <div className='home-page__info-column'>
+                    <InfoColumn
+                        title={this.state.infoColumn.title}
+                        text={this.state.infoColumn.text}
+                        backgroundIMage={this.state.infoColumn.bgAboutUs}
+                        showMoreLink={this.state.infoColumn.showMoreLink}
+                        columns={this.state.infoColumn.columns}
+                    />
 
-
-                <InfoColumn
-                    title={this.state.infoColumn.title}
-                    text={this.state.infoColumn.text}
-                    backgroundIMage={this.state.infoColumn.bgAboutUs}
-                    showMoreLink={this.state.infoColumn.showMoreLink}
-                    columns={this.state.infoColumn.columns}
-                />
-
+                </div>
             </div>
         )
     }
