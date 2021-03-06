@@ -92,8 +92,14 @@
 	}
 
 	&__bottom__inner {
-		.nav__secondary-link:last-child {
-			display: none;
+		@include media-breakpoint-down(sm) {
+			.nav__secondary-link {
+				width: 100%;
+				text-align: center;
+				&:last-child {
+					display: none;
+				}
+			}
 		}
 	}
 }
