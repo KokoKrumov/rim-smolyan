@@ -1,159 +1,182 @@
 .carousel {
 
 
-  &__dark {
-    color: $white;
-  }
+	&__dark {
+		color: $white;
+	}
 
-  &__title {
-    @include margin(80px, 0px, 0px, 0px);
-    font-family: $font-cormorant-light;
-    @include font-size(74px);
-    @include line-height(60px);
-    letter-spacing: 0.02em;
-    text-transform: capitalize;
+	&__title {
+		@include margin(80px, 0px, 0px, 0px);
+		font-family: $font-cormorant-light;
+		@include font-size(74px);
+		@include line-height(60px);
+		letter-spacing: 0.02em;
+		text-transform: capitalize;
 
-    @include media-breakpoint-down(md) {
-      @include margin(10px, 0px, 0px, 0px);
-    }
-  }
+		@include media-breakpoint-down(md) {
+			@include margin(10px, 0px, 0px, 0px);
+			@include font-size(50px);
+		}
+	}
 
-  &__type {
-    margin-top: 5px;
-    font-family: $font-cormorant-regular;
-    @include font-size(17px);
-    @include line-height(30px);
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-  }
+	&__type {
+		margin-top: 5px;
+		font-family: $font-cormorant-regular;
+		@include font-size(17px);
+		@include line-height(30px);
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
 
-  &__data-info {
-    &__bordered {
-      @include margin(80px, 0px, 0px, 0px);
-      border-left: 1px solid rgba(255, 255, 255, 0.3);
-      @include padding(0px, 0px, 0px, 15px);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
+		@include media-breakpoint-down(md) {
+			@include font-size(15px);
+			line-height: 1.4;
+		}
+	}
 
-    &__wrap + &__wrap {
-      margin: 0;
-      @include padding(25px, 0px, 0px, 0px);
-    }
+	&__data-info {
+		&__bordered {
+			@include margin(80px, 0px, 0px, 0px);
+			border-left: 1px solid rgba(255, 255, 255, 0.3);
+			@include padding(0px, 0px, 0px, 15px);
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+		}
 
-    &__title {
-      @include margin(0px, 0px, 5px, 0px);
-      font-family: $font-acari-regular;
-      font-weight: 600;
-      @include font-size(15px);
-      @include line-height(15px);
-      letter-spacing: 0.055em;
-      text-transform: uppercase;
-      color: #FFFFFF;
-      opacity: 0.5;
-    }
+		&__wrap + &__wrap {
+			margin: 0;
+			@include padding(25px, 0px, 0px, 0px);
+		}
 
-    &__description {
-      font-family: $font-acari-regular;
-      font-weight: 500;
-      @include font-size(15px);
-      @include line-height(21px);
-    }
-  }
+		&__title {
+			@include margin(0px, 0px, 5px, 0px);
+			font-family: $font-acari-regular;
+			font-weight: 600;
+			@include font-size(15px);
+			@include line-height(15px);
+			letter-spacing: 0.055em;
+			text-transform: uppercase;
+			color: #FFFFFF;
+			opacity: 0.5;
+		}
 
-  &__data-link {
-    @include margin(50px, 0px, 0px, 0px);
+		&__description {
+			font-family: $font-acari-regular;
+			font-weight: 500;
+			@include font-size(15px);
+			@include line-height(21px);
+		}
+	}
 
-    @include media-breakpoint-down(md) {
-      @include margin(0px, 0px, 0px, 0px);
-    }
-  }
+	&__data-link {
+		@include margin(50px, 0px, 0px, 0px);
 
-
-  &__controls {
-    &-btn {
-      display: flex;
-      align-items: center;
-
-      &:hover {
-        img {
-          opacity: 0.7
-        }
-      }
-
-      &:focus {
-        box-shadow: none;
-      }
-
-      &:active {
-        img {
-          opacity: 0.3
-        }
-      }
-    }
-  }
-
-  &-megatron {
-    @include padding(115px, 0px, 90px, 0px);
-
-    @include media-breakpoint-down(md) {
-      @include padding(40px, 0px, 50px, 0px);
-    }
-
-    &__wrap {
-      position: relative;
-    }
-
-    &__row {
-      justify-content: space-between;
-    }
-
-    &__description {
-      @include margin(35px, 0px, 0px, 0px);
-    }
-
-    &__img-wrap {
-      border: 10px solid $light;
-      @include media-breakpoint-down(md) {
-        @include margin(30px, 0px, 0px, 0px);
-      }
-    }
-
-    &__controls {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      &__out {
-        position: absolute;
-        top: 8.75rem;
-        z-index: 9;
-        width: 100%;
-      }
-
-      &__wrap {
-        display: flex;
-      }
+		@include media-breakpoint-down(md) {
+			@include margin(0px, 0px, 0px, 0px);
+		}
+	}
 
 
+	&__controls {
+		&-btn {
+			display: flex;
+			align-items: center;
 
-      &-index {
-        font-family: $font-cormorant-regular;
-        @include font-size(15px);
-        @include line-height(15px);
-        color: #FFFFFF;
-        opacity: 0.7;
-      }
-    }
-  }
+			&:hover {
+				img {
+					opacity: 0.7
+				}
+			}
 
-  &-images {
-    &__controls-wrap {
-      margin-bottom: 40px;
-      display: flex;
-      justify-content: flex-end;
-    }
-  }
+			&:focus {
+				box-shadow: none;
+			}
 
+			&:active {
+				img {
+					opacity: 0.3
+				}
+			}
+		}
+	}
+
+	&-megatron {
+		@include padding(115px, 0px, 90px, 0px);
+
+		@include media-breakpoint-down(md) {
+			@include padding(40px, 0px, 50px, 0px);
+		}
+
+		&__wrap {
+			position: relative;
+		}
+
+		&__row {
+			justify-content: space-between;
+		}
+
+		&__description {
+			@include margin(35px, 0px, 0px, 0px);
+		}
+
+		&__img-wrap {
+			border: 10px solid $light;
+			@include media-breakpoint-down(md) {
+				@include margin(30px, 0px, 0px, 0px);
+			}
+		}
+
+		&__controls {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+
+			&__out {
+				position: absolute;
+				top: 8.75rem;
+				z-index: 9;
+				width: 100%;
+
+				@include media-breakpoint-down(lg) {
+					position: initial;
+				}
+
+			}
+
+			&__wrap {
+				display: flex;
+			}
+
+			&-index {
+				font-family: $font-cormorant-regular;
+				@include font-size(15px);
+				@include line-height(15px);
+				color: #FFFFFF;
+				opacity: 0.7;
+			}
+		}
+	}
+
+	.wrap-controls__lg {
+		@include media-breakpoint-down(lg) {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+
+			.carousel-megatron__controls__out {
+				margin-top: 2rem;
+				width: auto;
+			}
+		}
+	}
+
+
+
+	&-images {
+		&__controls-wrap {
+			margin-bottom: 40px;
+			display: flex;
+			justify-content: flex-end;
+		}
+	}
 }

@@ -141,3 +141,27 @@
 		}
 	}
 }
+
+.home-page__info-column {
+
+	.link {
+		margin: 0 2rem;
+	}
+
+	@include media-breakpoint-down(md) {
+		flex-direction: column-reverse;
+		.nae-container {
+			.link {
+				@include margin(30px, 0px, 0px, 0px);
+			}
+
+			.nae__title-line {
+				@include margin(0px, 0px, 30px, 0px);
+			}
+
+			.h1 {
+				text-align: left;
+			}
+		}
+	}
+}

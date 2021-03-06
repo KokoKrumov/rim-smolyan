@@ -27,7 +27,7 @@
     "bootstrap": "^4.5.3",
     "lodash": "^4.17.20",
     "react": "^16.13.1",
-    "react-alice-carousel": "^1.19.3",
+    "react-alice-carousel": "^2.4.0",
     "react-bootstrap": "^1.4.0",
     "react-dom": "^16.13.1",
     "react-intl": "^5.8.4",

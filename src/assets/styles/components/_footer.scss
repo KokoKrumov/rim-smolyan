@@ -1,52 +1,105 @@
 .footer {
-  &__top {
-    @include padding(75px, 0px, 35px, 0px);
-  }
+	&__top {
+		@include padding(75px, 0px, 35px, 0px);
+	}
 
-  .navbar-brand {
+	.navbar-brand {
 
-    @media (min-width: 576px) {
-      @include margin(0px, 145px, 0px, 0px)
-    }
-  }
+		@media (min-width: 576px) {
+			@include margin(0px, 145px, 0px, 0px)
+		}
+	}
 
-  &__main-nav {
-    align-items: flex-start;
-    justify-content: space-between;
-  }
+	&__main-nav {
+		align-items: flex-start;
+		justify-content: space-between;
 
-  .navbar-nav {
-    display: flex;
-    flex-direction: column;
-  }
+		@include media-breakpoint-down(lg) {
+			&.navbar-collapse {
+				@include padding(40px, 0px, 0px, 0px);
+				flex-direction: column;
+			}
 
-  .navbar-expand-xl .navbar-nav .nav__main-link,
-  .navbar-expand-xl .navbar-nav .nav__secondary-link {
+			.navbar-nav:nth-child(2) {
+				@include margin(35px, 0px, 35px, 0px);
+			}
 
-    @include padding(6px, 0px, 6px, 0px);
-  }
+			.nav__secondary-link {
+				@include font-size(15px);
+				opacity: 0.5;
+			}
+		}
+	}
+
+	.navbar-nav {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.navbar-expand .navbar-nav .nav__main-link,
+	.navbar-expand .navbar-nav .nav__secondary-link {
+
+		@include padding(6px, 0px, 6px, 0px);
+	}
 
 
+	.navbar {
+		align-items: stretch;
+	}
 
-  .navbar {
-    align-items: stretch;
-  }
+	&__bottom {
+		border-top: 1px solid rgba(255, 255, 255, 0.1);
+		@include padding(17px, 0px, 25px, 0px);
 
-  &__bottom {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    @include padding(17px, 0px, 25px, 0px);
+		.nav__secondary-link {
+			color: rgba(255, 255, 255, 0.4);
+			font-family: $font-acari-regular;
+			@include font-size(13px);
+			@include line-height(14px);
+		}
 
-    .nav__secondary-link {
-      color: rgba(255, 255, 255, 0.4);
-      font-family: $font-acari-regular;
-      @include font-size(13px);
-      @include line-height(14px);
-    }
+		&__inner {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+		}
+	}
 
-    &__inner {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-    }
-  }
+	.navbar-expand {
+		@include media-breakpoint-down(lg) {
+			flex-direction: column;
+
+
+			.navbar-collapse {
+				position: initial;
+
+			}
+		}
+	}
+
+	&__navbar-brand__wrap {
+		display: flex;
+		flex-direction: column;
+
+		@include media-breakpoint-down(lg) {
+			flex-direction: row;
+
+			.socials {
+				margin: 0 0 0 auto;
+			}
+
+		}
+	}
+
+	&__bottom__inner {
+		@include media-breakpoint-down(sm) {
+			.nav__secondary-link {
+				width: 100%;
+				text-align: center;
+				&:last-child {
+					display: none;
+				}
+			}
+		}
+	}
 }

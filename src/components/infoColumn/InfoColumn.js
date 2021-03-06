@@ -52,7 +52,7 @@ class InfoColumn extends Component {
                             <p className={`paragraph-2 col-count-${this.state.columns}`}
                                dangerouslySetInnerHTML={{__html: intl.formatMessage({id: this.props.text})}}>
                             </p>
-                            <Row>
+                            <Row className='home-page__info-column'>
                                 <Col>
                                     {
                                         this.state.showRulesForActivity
@@ -77,7 +77,6 @@ class InfoColumn extends Component {
                                             ?
                                             <p>
                                                 <a
-                                                    style={{margin: '0 2rem'}}
                                                     className="link cta_outline cta_outline__dark hvr-underline-from-left"
                                                     href={`${this.state.showMoreLink}`}
                                                     itemProp="url"
