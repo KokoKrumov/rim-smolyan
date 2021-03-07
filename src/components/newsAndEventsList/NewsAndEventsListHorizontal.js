@@ -13,7 +13,7 @@ function NewsAndEventsListHorizontal({listOfNewsAndEvents}) {
         return (
             listOfNewsAndEvents.map((event, index) => {
                 return (
-                    <div className='nae-item nae-item__horizontal' key={event.id}>
+                    <div className='nae-item nae-item__horizontal container' key={event.id}>
 
                         <Row>
                             <Col lg={5}>
@@ -29,7 +29,7 @@ function NewsAndEventsListHorizontal({listOfNewsAndEvents}) {
                                             null
                                         }
                                         <div className='nae-item__img'>
-                                            <img className="img-fluid" src={event.image} alt="" itemProp="image"/>
+                                            <img className="img" src={event.image} alt="" itemProp="image"/>
                                         </div>
                                     </div>
                                 </a>
@@ -56,7 +56,6 @@ function NewsAndEventsListHorizontal({listOfNewsAndEvents}) {
                                         {event.description}
                                     </p>
                                     <a
-                                        style={{marginTop: '2rem'}}
                                         className="a cta_outline cta_outline__dark hvr-underline-from-left"
                                         href={`/news/${index}`}
                                         itemProp="url"

@@ -1,6 +1,10 @@
 .tab_list-container {
   @include padding(60px, 0px, 100px, 0px);
 
+  @include media-breakpoint-down(md) {
+    @include padding(30px, 0px, 50px, 0px);
+  }
+
   &_content-dark {
     .h1,
     .h3,
@@ -16,5 +20,23 @@
   .tab_list-container {
     @include margin(0px, 0px, 0px, 0px);
     border-bottom: 1px solid rgba(39, 35, 35, 0.2);
+  }
+}
+
+.nae__filter__wrap {
+  @include media-breakpoint-down(md) {
+    padding-bottom: 30px;
+
+    .tab_list-link {
+      @include padding(5px, 0px, 5px, 0px);
+      flex: 1;
+      text-align: center;
+      @include font-size(16px)
+    }
+
+    .tab_list-link + .tab_list-link {
+      border-left: 1px solid rgba(39, 35, 35, 0.2);
+      border-top: none;
+    }
   }
 }
