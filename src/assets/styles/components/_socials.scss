@@ -29,5 +29,17 @@
 
   &__top-indent {
     margin-top: 1.875rem;
+
+
+    @include media-breakpoint-down(md) {
+      @include margin(60px, 0px, 0px, 0px);
+      .socials-label {
+        text-align: right;
+      }
+
+      .socials {
+        justify-content: flex-end;
+      }
+    }
   }
 }

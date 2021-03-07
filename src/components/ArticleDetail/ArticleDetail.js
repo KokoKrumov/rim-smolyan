@@ -2,6 +2,7 @@ import React from 'react';
 import Col from "react-bootstrap/cjs/Col";
 import Row from "react-bootstrap/Row";
 import Socials from "../socials/socials";
+import SocialsShare from "../socials/socialsShare";
 
 
 function ArticleDetail({article}) {
@@ -28,7 +29,7 @@ function ArticleDetail({article}) {
                 </Row>
 
                 <Row>
-                    <Col lg={8}>
+                    <Col lg={7} xl={8}>
                         <figure className='nae-item__img__wrap image__article-detail'>
                             {
                                 article.dateD && article.type === 'event'
@@ -50,10 +51,10 @@ function ArticleDetail({article}) {
                             </p>
                         </div>
                     </Col>
-                    <Col lg={2}>
+                    <Col lg={4} xl={2}>
                         <div className="socials__wrap socials__top-indent">
                             <p className='socials-label'>Споделете страницата</p>
-                            <Socials/>
+                            <SocialsShare articleID={article.id} articleTitle={article.title}/>
                         </div>
                     </Col>
                 </Row>
