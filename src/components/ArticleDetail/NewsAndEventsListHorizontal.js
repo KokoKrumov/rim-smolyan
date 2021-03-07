@@ -50,7 +50,6 @@ function NewsAndEventsListHorizontal({listOfNewsAndEvents}) {
                                         {event.description}
                                     </p>
                                     <a
-                                        style={{marginTop: '2rem'}}
                                         className="a cta_outline cta_outline__dark hvr-underline-from-left"
                                         href={`/news/${index}`}
                                         itemProp="url"

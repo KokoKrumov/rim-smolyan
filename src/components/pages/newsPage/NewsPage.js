@@ -53,7 +53,7 @@ class NewsPage extends Component {
                     <Container className='tab_list-container__layout'>
                         <Row>
                             <Col lg={2}>
-                                <Nav defaultActiveKey="/home" className="flex-column">
+                                <Nav defaultActiveKey="/home" className="nae__filter__wrap flex-row justify-content-around justify-content-lg-start flex-lg-column">
                                     <Nav.Link className='tab_list-link' eventKey="link-3">Събития</Nav.Link>
                                     <Nav.Link className='tab_list-link' eventKey="link-1">Новини</Nav.Link>
                                     <Nav.Link className='tab_list-link' eventKey="link-2">Всички</Nav.Link>

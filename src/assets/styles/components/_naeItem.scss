@@ -117,6 +117,11 @@
 			}
 		}
 
+		.nae-item__img .img {
+			width: 100%;
+			height: auto;
+		}
+
 		.link-title:hover {
 			text-decoration: none;
 
@@ -132,10 +137,22 @@
 				text-decoration: underline;
 			}
 		}
+
+		.a {
+			margin-top: 2rem;
+
+			@include media-breakpoint-down(md) {
+				margin-top: 1rem;
+			}
+		}
 	}
 
 	&__horizontal + &__horizontal {
 		@include margin(25px, 0px, 0px, 0px);
+
+		@include media-breakpoint-down(md) {
+			@include margin(60px, 0px, 0px, 0px);
+		}
 	}
 
 	&__article-date {
@@ -148,6 +165,10 @@
 
 		&__wrap {
 			@include margin(0px, 0px, 15px, 0px);
+
+			@include media-breakpoint-down(md) {
+				@include margin(0px, 0px, 10px, 0px);
+			}
 		}
 	}
 }
