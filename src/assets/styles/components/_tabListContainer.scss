@@ -21,6 +21,11 @@
     @include margin(0px, 0px, 0px, 0px);
     border-bottom: 1px solid rgba(39, 35, 35, 0.2);
   }
+
+  @include media-breakpoint-down(md) {
+    @include margin(30px, 0px, 50px, 0px);
+  }
+
 }
 
 .nae__filter__wrap {

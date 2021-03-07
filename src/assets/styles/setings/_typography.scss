@@ -48,6 +48,12 @@
 	letter-spacing: -0.01em;
 	color: $dark;
 
+	@include media-breakpoint-down(md) {
+		@include font-size(40px);
+		@include line-height(47px);
+		margin-bottom: 15px;
+	}
+
 	@media (max-width: 576px) {
 		word-break: break-word;
 	}
@@ -88,6 +94,12 @@
 	@include line-height(27px);
 	letter-spacing: 0.01em;
 	opacity: 0.9;
+
+
+	@include media-breakpoint-down(md) {
+		@include font-size(15px);
+		@include line-height(25px);
+	}
 }
 
 .paragraph-3 {

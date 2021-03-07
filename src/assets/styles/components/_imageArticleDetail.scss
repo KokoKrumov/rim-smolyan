@@ -1,9 +1,13 @@
 .image {
-  &__article-detail {
-    @include margin(30px, 0px, 60px, 0px);
+	&__article-detail {
+		@include margin(30px, 0px, 60px, 0px);
 
-    .nae-item__date__wrap {
-      background-color: $red;
-    }
-  }
+		.nae-item__date__wrap {
+			background-color: $red;
+		}
+
+		@include media-breakpoint-down(md) {
+			@include margin(30px, 0px, 30px, 0px);
+		}
+	}
 }
