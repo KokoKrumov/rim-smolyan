@@ -110,9 +110,12 @@
 		&__wrap {
 			position: relative;
 
+			.rec-slider-container {
+				margin: 0;
+			}
 
-			.alice-carousel__stage-item {
-				height: auto;
+			.rec-item-wrapper {
+				height: 100%;
 			}
 		}
 

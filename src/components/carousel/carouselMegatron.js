@@ -10,6 +10,7 @@ import {connect} from "react-redux";
 import {showModal} from "../../actions";
 import {isMobileScreen} from "../../utilities/browser";
 import {isTabletScreen} from "../../utilities/browser";
+import Carousel from 'react-elastic-carousel';
 
 function CarouselMegatron({listMegatronCarousel, showModal, isTableScreen}) {
     const handleOnDragStart = (e) => e.preventDefault()
@@ -32,8 +33,8 @@ function CarouselMegatron({listMegatronCarousel, showModal, isTableScreen}) {
         }
     })
 
-    function onSlideChanged(e) {
-        setItem(e.item + 1)
+    function onSlideChanged(item) {
+        setItem(item + 1)
     }
 
     function handleShowModal(data, url, e) {
@@ -84,22 +85,16 @@ function CarouselMegatron({listMegatronCarousel, showModal, isTableScreen}) {
                         null
 
                 }
-
-
-                <AliceCarousel
-                    autoHeight
-                    mouseTracking
-                    disableDotsControls
-                    disableButtonsControls
-                    ref={(el) => (carousel = el)}
-                    swipeDisabled={!isTableScreen}
-                    onSlideChanged={onSlideChanged}
-                    infinite
-                    swipeDelta={120}
-                    // touchTracking={false}
-                    animationType='fadeout'
+                <Carousel
+                    ref={ref => (carousel = ref)}
+                    isRTL={false}
+                    itemsToShow={1}
+                    showArrows={false}
+                    pagination={false}
+                    onChange={(currentItem, pageIndex) =>
+                        onSlideChanged(pageIndex)
+                    }
                 >
-
                     {listMegatronCarousel.map(item => {
                         return (
                             <div
@@ -261,10 +256,13 @@ function CarouselMegatron({listMegatronCarousel, showModal, isTableScreen}) {
                             </div>
                         )
                     })}
-                        </AliceCarousel>
-                        </div>
-                        )
-                    } else {
+                </Carousel>
+
+
+                {/*</AliceCarousel>*/}
+            </div>
+        )
+    } else {
         return (
             <div>
                 <p>
