@@ -35,8 +35,8 @@ function CarouselImages({listImages}) {
                 <div className='carousel-images__wrap'>
                     <AliceCarousel
                         mouseTrackingEnabled
-                        dotsDisabled={true}
-                        buttonsDisabled={true}
+                        disableButtonsControls
+                        disableDotsControls
                         ref={(el) => (carousel = el)}
                         swipeDisabled={true}
                         onSlideChanged={onSlideChanged}
