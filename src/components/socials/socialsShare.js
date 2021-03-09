@@ -6,7 +6,6 @@ import {
 } from "react-share";
 
 function SocialsShare({articleID, articleTitle}) {
-
     return (
         <div className='socials'>
             <div className='socials-item'>

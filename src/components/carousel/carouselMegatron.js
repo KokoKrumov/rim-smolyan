@@ -87,7 +87,7 @@ function CarouselMegatron({listMegatronCarousel, showModal, isTableScreen}) {
 
 
                 <AliceCarousel
-                    // autoHeight
+                    autoHeight
                     mouseTracking
                     disableDotsControls
                     disableButtonsControls
@@ -95,6 +95,9 @@ function CarouselMegatron({listMegatronCarousel, showModal, isTableScreen}) {
                     swipeDisabled={!isTableScreen}
                     onSlideChanged={onSlideChanged}
                     infinite
+                    swipeDelta={120}
+                    // touchTracking={false}
+                    animationType='fadeout'
                 >
 
                     {listMegatronCarousel.map(item => {

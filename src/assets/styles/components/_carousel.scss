@@ -109,6 +109,11 @@
 
 		&__wrap {
 			position: relative;
+
+
+			.alice-carousel__stage-item {
+				height: auto;
+			}
 		}
 
 		&__row {
