@@ -91,7 +91,6 @@ class HomePage extends Component {
         if (this.props
             && this.props.news
             && this.props.news !== this.state.news) {
-            console.log(process.env.REACT_APP_API_URL);
             this.props.fetchNews()
                 .then(() => {
                     this.setState({listOfNewsAndEvents: this.props.news})
