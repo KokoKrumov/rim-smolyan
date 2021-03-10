@@ -107,29 +107,31 @@ function CarouselMegatron({listMegatronCarousel, showModal, isTableScreen}) {
                                     <Col lg={5}>
 
 
-                                        <Carousel
-                                            ref={ref => (carousel1 = ref)}
-                                            isRTL={false}
-                                            itemsToShow={1}
-                                            initialActiveIndex={item}
-                                            showArrows={false}
-                                            pagination={false}
-                                            onChange={(currentItem, pageIndex) => {
-                                                goto(pageIndex)
-                                            }}
+                                      <div className="row">
+                                          <Carousel
+                                              ref={ref => (carousel1 = ref)}
+                                              isRTL={false}
+                                              itemsToShow={1}
+                                              initialActiveIndex={item}
+                                              showArrows={false}
+                                              pagination={false}
+                                              onChange={(currentItem, pageIndex) => {
+                                                  goto(pageIndex)
+                                              }}
 
-                                            outerSpacing={30}
-                                            itemPadding={[0, 10]}
-                                        >
-                                            {listMegatronCarousel.map(item => {
-                                                return (
-                                                    <div className='carousel-megatron__img-wrap'>
-                                                        <img className="w-100" src={item.image} alt="" itemProp="image"/>
+                                              outerSpacing={30}
+                                              itemPadding={[0, 15]}
+                                          >
+                                              {listMegatronCarousel.map(item => {
+                                                  return (
+                                                      <div className='carousel-megatron__img-wrap'>
+                                                          <img className="w-100" src={item.image} alt="" itemProp="image"/>
 
-                                                    </div>
-                                                )
-                                            })}
-                                        </Carousel>
+                                                      </div>
+                                                  )
+                                              })}
+                                          </Carousel>
+                                      </div>
                                         <p className='carousel-megatron__description paragraph-3'>
                                             {carouselDescription}
                                         </p>

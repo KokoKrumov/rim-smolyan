@@ -77,7 +77,7 @@
 
 
 		&__wrap {
-			@include media-breakpoint-down(md) {
+			@include media-breakpoint-down(sm) {
 				&:not(:first-child) {
 					@include margin(60px, 0px, 0px, 0px);
 				}
