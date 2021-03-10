@@ -16,7 +16,7 @@
 		@include media-breakpoint-down(md) {
 			@include margin(10px, 0px, 0px, 0px);
 			@include font-size(50px);
-			height: 60px;
+			min-height: 62px;
 		}
 	}
 
@@ -169,6 +169,8 @@
 		}
 
 		&__mobile {
+			height: 940px;
+
 			.rec-slider {
 				margin-right: 30px;
 				margin-left: 0;
@@ -179,6 +181,10 @@
 				flex-direction: column;
 				width: 100%;
 				@include padding(0px, 10px, 0px, 10px);
+			}
+
+			&__bg {
+				background-color: #312D2E;
 			}
 		}
 	}
