@@ -62,103 +62,104 @@ function CarouselMegatron({listMegatronCarousel, showModal, isTableScreen}) {
     console.log(listMegatronCarousel);
 
     if (listMegatronCarousel) {
-        console.log(carouselBg);
 
         return (
-            <ReactCSSTransitionReplace
-                transitionName="cross-fade"
-                transitionEnterTimeout={500}
-                transitionLeaveTimeout={500}>
-            <div className='carousel-megatron__wrap carousel-megatron__mobile' key={item} style={{'height': '980px'}}>
-                <div
-                    key={item.id}
-                    className='carousel carousel__dark carousel-megatron hero-bg'
-                    style={{
-                        backgroundImage: `url(${carouselBg})`
-                        // backgroundColor: `#251A20`
-                    }}
-                >
-                    <Container>
-                        <Row
+            <div className='carousel-megatron__mobile__bg'>
+                <ReactCSSTransitionReplace
+                    transitionName="cross-fade"
+                    transitionEnterTimeout={500}
+                    transitionLeaveTimeout={500}>
+                    <div className='carousel-megatron__wrap carousel-megatron__mobile' key={item} >
+                        <div
                             key={item.id}
-                            // onDragStart={handleOnDragStart}
-                            className="carousel-megatron__row"
+                            className='carousel carousel__dark carousel-megatron hero-bg'
+                            style={{
+                                backgroundImage: `url(${carouselBg})`
+                                // backgroundColor: `#251A20`
+                            }}
                         >
-                            <Col lg={6}>
+                            <Container>
+                                <Row
+                                    key={item.id}
+                                    // onDragStart={handleOnDragStart}
+                                    className="carousel-megatron__row"
+                                >
+                                    <Col lg={6}>
 
-                                <div className='carousel__title-wrap__mobile'>
-                                    <h3 className='carousel__title'>
-                                        <ReactCSSTransitionReplace
-                                            transitionName="cross-fade"
-                                            transitionEnterTimeout={500}
-                                            transitionLeaveTimeout={500}>
+                                        <div className='carousel__title-wrap__mobile'>
+                                            <h3 className='carousel__title'>
+                                                <ReactCSSTransitionReplace
+                                                    transitionName="cross-fade"
+                                                    transitionEnterTimeout={500}
+                                                    transitionLeaveTimeout={500}>
                                             <span key={item}>
                                                 {carouselTitle}
 
                                             </span>
-                                        </ReactCSSTransitionReplace>
-                                    </h3>
-                                    <p className='carousel__type'>
-                                        {carouselType}
-                                    </p>
-                                </div>
+                                                </ReactCSSTransitionReplace>
+                                            </h3>
+                                            <p className='carousel__type'>
+                                                {carouselType}
+                                            </p>
+                                        </div>
 
-                            </Col>
-                            <Col lg={5}>
-
-
-                                <Carousel
-                                    ref={ref => (carousel1 = ref)}
-                                    isRTL={false}
-                                    itemsToShow={1}
-                                    initialActiveIndex={item}
-                                    showArrows={false}
-                                    pagination={false}
-                                    onChange={(currentItem, pageIndex) => {
-                                        goto(pageIndex)
-                                    }}
-
-                                    outerSpacing={30}
-                                    itemPadding={[0, 10]}
-                                >
-                                    {listMegatronCarousel.map(item => {
-                                        return (
-                                            <div className='carousel-megatron__img-wrap'>
-                                                <img className="w-100" src={item.image} alt="" itemProp="image"/>
-
-                                            </div>
-                                        )
-                                    })}
-                                </Carousel>
-                                <p className='carousel-megatron__description paragraph-3'>
-                                    {carouselDescription}
-                                </p>
+                                    </Col>
+                                    <Col lg={5}>
 
 
-                                <div className='wrap-controls__lg'>
-                                    <p className='carousel__data-link'>
-                                        <Link
-                                            style={{marginTop: '2rem'}}
-                                            className="link cta_outline cta_outline__light hvr-underline-from-left"
-                                            to="#"
-                                            itemProp="url"
-                                            target=""
-                                            rel="noopener nofollow noreferrer"
-                                            onClick={(e) => {
-                                                handleShowModal('modal-redirect', 'Z_fondove.html', e)
+                                        <Carousel
+                                            ref={ref => (carousel1 = ref)}
+                                            isRTL={false}
+                                            itemsToShow={1}
+                                            initialActiveIndex={item}
+                                            showArrows={false}
+                                            pagination={false}
+                                            onChange={(currentItem, pageIndex) => {
+                                                goto(pageIndex)
                                             }}
-                                        >
-                                            към фондове
-                                        </Link>
-                                    </p>
-                                </div>
-                            </Col>
-                        </Row>
 
-                    </Container>
-                </div>
+                                            outerSpacing={30}
+                                            itemPadding={[0, 10]}
+                                        >
+                                            {listMegatronCarousel.map(item => {
+                                                return (
+                                                    <div className='carousel-megatron__img-wrap'>
+                                                        <img className="w-100" src={item.image} alt="" itemProp="image"/>
+
+                                                    </div>
+                                                )
+                                            })}
+                                        </Carousel>
+                                        <p className='carousel-megatron__description paragraph-3'>
+                                            {carouselDescription}
+                                        </p>
+
+
+                                        <div className='wrap-controls__lg'>
+                                            <p className='carousel__data-link'>
+                                                <Link
+                                                    style={{marginTop: '2rem'}}
+                                                    className="link cta_outline cta_outline__light hvr-underline-from-left"
+                                                    to="#"
+                                                    itemProp="url"
+                                                    target=""
+                                                    rel="noopener nofollow noreferrer"
+                                                    onClick={(e) => {
+                                                        handleShowModal('modal-redirect', 'Z_fondove.html', e)
+                                                    }}
+                                                >
+                                                    към фондове
+                                                </Link>
+                                            </p>
+                                        </div>
+                                    </Col>
+                                </Row>
+
+                            </Container>
+                        </div>
+                    </div>
+                </ReactCSSTransitionReplace>
             </div>
-            </ReactCSSTransitionReplace>
         )
     } else {
         return (
