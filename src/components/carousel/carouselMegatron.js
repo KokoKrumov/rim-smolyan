@@ -123,6 +123,7 @@ function CarouselMegatron({listMegatronCarousel, showModal, isTableScreen}) {
                                                 !isMobileScreenV
                                                     ?
                                                     <React.Fragment>
+
                                                         <p className='carousel-megatron__description paragraph-3'>
                                                             {item.description}
                                                         </p>

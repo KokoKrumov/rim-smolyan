@@ -178,10 +178,20 @@ class HomePage extends Component {
                     </Container>
                 </div>
 
-                <CarouselMegatron
-                    listMegatronCarousel={listMegatronCarousel}
-                    isTableScreen={this.state.isTabletScreenV}
-                />
+                {
+                    !isTabletScreen()
+                        ?
+                        <CarouselMegatron
+                            listMegatronCarousel={listMegatronCarousel}
+                            isTableScreen={this.state.isTabletScreenV}
+                        />
+                        :
+                        <CarouselMegatronMobile
+                            listMegatronCarousel={listMegatronCarousel}
+                        />
+                }
+
+
                 <div className='home-page__info-column'>
                     <InfoColumn
                         title={this.state.infoColumn.title}
