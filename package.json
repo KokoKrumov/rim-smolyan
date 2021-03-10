@@ -24,11 +24,13 @@
     "webpack-cli": "^4.2.0"
   },
   "dependencies": {
+    "@types/react-transition-group": "^1.1.6",
     "bootstrap": "^4.5.3",
     "lodash": "^4.17.20",
     "react": "^16.13.1",
     "react-alice-carousel": "^2.4.0",
     "react-bootstrap": "^1.4.0",
+    "react-css-transition-replace": "^4.0.4",
     "react-dom": "^16.13.1",
     "react-elastic-carousel": "^0.11.1",
     "react-intl": "^5.8.4",

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Col from "react-bootstrap/cjs/Col";
 import AliceCarousel from 'react-alice-carousel'
 import Row from "react-bootstrap/cjs/Row";
@@ -8,116 +8,167 @@ import carouselMegatronArrowRight from "../../assets/images/carousel__right-arro
 import carouselMegatronArrowLeft from "../../assets/images/carousel__left-arrow.svg";
 import {connect} from "react-redux";
 import {showModal} from "../../actions";
+import {isMobileScreen} from "../../utilities/browser";
+import {isTabletScreen} from "../../utilities/browser";
+import Carousel, {consts} from 'react-elastic-carousel';
+import ReactCSSTransitionReplace from 'react-css-transition-replace';
 
-const items2 = [
-    <div className="item" data-value="1">1</div>,
-    <div className="item" data-value="2">2</div>,
-    <div className="item" data-value="3">3</div>,
-    <div className="item" data-value="4">4</div>,
-    <div className="item" data-value="5">5</div>,
-];
+function CarouselMegatron({listMegatronCarousel, showModal, isTableScreen}) {
+    const handleOnDragStart = (e) => e.preventDefault()
+    const [item, setItem] = useState(0);
+    const [carouselBg, setCarouselBg] = useState('')
+    const [carouselTitle, setCarouselTitle] = useState('')
+    const [carouselDescription, setCarouselDescription] = useState('')
+    const [carouselType, setCarouselType] = useState('')
+    let carousel1 = React.createRef();
+    let carousel2 = React.createRef();
+    let carousel3 = React.createRef();
+    const [isMobileScreenV, setIsMobileScreen] = React.useState(isMobileScreen())
+    const [isTabletScreenV, setIsTabletScreen] = React.useState(isTabletScreen())
 
-const thumbItems = (items, [setThumbIndex, setThumbAnimation]) => {
-    return items.map((item, i) => (
-        <div className="thumb" onClick={() => (setThumbIndex(i), setThumbAnimation(true))}>
-            {item}
-        </div>
-    ));
-};
+    useEffect(() => {
+
+        setCarouselBg(listMegatronCarousel[item].bgImage);
+        setCarouselTitle(listMegatronCarousel[item].title);
+        setCarouselDescription(listMegatronCarousel[item].description);
+        setCarouselType(listMegatronCarousel[item].type);
+
+        function handleResize() {
+            setIsTabletScreen(isTabletScreen())
+            setIsMobileScreen(isMobileScreen())
+
+        }
 
 
-function CarouselMegatron({listMegatronCarousel, showModal}) {
+        window.addEventListener('resize', handleResize)
 
-    let items = []
-    if (listMegatronCarousel) {
-        items = listMegatronCarousel.map(item => {
-            return (
-                <div>
-                    {item.title}
-                </div>
-            )
-        })
+        return _ => {
+            window.removeEventListener('resize', handleResize)
+        }
+    })
 
+    function goto(index) {
+        // carousel1.goTo(Number(index))
+        // carousel2.goTo(Number(index))
+        // carousel3.goTo(Number(index))
+        setItem(index)
     }
 
-    const [mainIndex, setMainIndex] = useState(0);
-    const [mainAnimation, setMainAnimation] = useState(false);
-    const [thumbIndex, setThumbIndex] = useState(0);
-    const [thumbAnimation, setThumbAnimation] = useState(false);
-    const [thumbs] = useState(thumbItems(items ? items : null, [setThumbIndex, setThumbAnimation]));
+    function handleShowModal(data, url, e) {
+        e.preventDefault();
+        showModal(data, url)
+    }
 
-    const slideNext = () => {
-        if (!thumbAnimation && thumbIndex < thumbs.length - 1) {
-            setThumbAnimation(true);
-            setThumbIndex(thumbIndex + 1);
-        }
-    };
+    console.log(listMegatronCarousel);
 
-    const slidePrev = () => {
-        if (!thumbAnimation && thumbIndex > 0) {
-            setThumbAnimation(true);
-            setThumbIndex(thumbIndex - 1);
-        }
-    };
+    if (listMegatronCarousel) {
+        console.log(carouselBg);
 
-    const syncMainBeforeChange = (e) => {
-        setMainAnimation(true);
-        if (e.type === 'action') {
-            setThumbAnimation(true);
-        }
-    };
+        return (
+            <ReactCSSTransitionReplace
+                transitionName="cross-fade"
+                transitionEnterTimeout={500}
+                transitionLeaveTimeout={500}>
+            <div className='carousel-megatron__wrap carousel-megatron__mobile' key={item} style={{'height': '980px'}}>
+                <div
+                    key={item.id}
+                    className='carousel carousel__dark carousel-megatron hero-bg'
+                    style={{
+                        backgroundImage: `url(${carouselBg})`
+                        // backgroundColor: `#251A20`
+                    }}
+                >
+                    <Container>
+                        <Row
+                            key={item.id}
+                            // onDragStart={handleOnDragStart}
+                            className="carousel-megatron__row"
+                        >
+                            <Col lg={6}>
 
-    const syncMainAfterChange = (e) => {
-        setMainAnimation(false);
+                                <div className='carousel__title-wrap__mobile'>
+                                    <h3 className='carousel__title'>
+                                        <ReactCSSTransitionReplace
+                                            transitionName="cross-fade"
+                                            transitionEnterTimeout={500}
+                                            transitionLeaveTimeout={500}>
+                                            <span key={item}>
+                                                {carouselTitle}
 
-        if (e.type === 'action') {
-            setThumbIndex(e.item);
-            setThumbAnimation(false);
-        } else {
-            setMainIndex(thumbIndex);
-        }
-    };
+                                            </span>
+                                        </ReactCSSTransitionReplace>
+                                    </h3>
+                                    <p className='carousel__type'>
+                                        {carouselType}
+                                    </p>
+                                </div>
 
-    const syncThumbs = (e) => {
-        setThumbIndex(e.item);
-        setThumbAnimation(false);
-
-        if (!mainAnimation) {
-            setMainIndex(e.item);
-        }
-    };
+                            </Col>
+                            <Col lg={5}>
 
 
-    return [
-        <AliceCarousel
-            activeIndex={mainIndex}
-            // animationType="fadeout"
-            // animationDuration={800}
-            disableDotsControls
-            disableButtonsControls
-            // infinite
-            items={items}
-            mouseTracking={false}
-            onSlideChange={syncMainBeforeChange}
-            onSlideChanged={syncMainAfterChange}
-            touchTracking={!mainAnimation}
-        />,
-        <div className="thumbs">
-            <AliceCarousel
-                activeIndex={thumbIndex}
-                autoWidth
-                disableDotsControls
-                disableButtonsControls
-                items={thumbs}
-                mouseTracking={false}
-                onSlideChanged={syncThumbs}
-                touchTracking={!mainAnimation}
-            />
-            <div className="btn-prev" onClick={slidePrev}>&lang;</div>
-            <div className="btn-next" onClick={slideNext}>&rang;</div>
-        </div>
-    ]
+                                <Carousel
+                                    ref={ref => (carousel1 = ref)}
+                                    isRTL={false}
+                                    itemsToShow={1}
+                                    initialActiveIndex={item}
+                                    showArrows={false}
+                                    pagination={false}
+                                    onChange={(currentItem, pageIndex) => {
+                                        goto(pageIndex)
+                                    }}
 
+                                    outerSpacing={30}
+                                    itemPadding={[0, 10]}
+                                >
+                                    {listMegatronCarousel.map(item => {
+                                        return (
+                                            <div className='carousel-megatron__img-wrap'>
+                                                <img className="w-100" src={item.image} alt="" itemProp="image"/>
+
+                                            </div>
+                                        )
+                                    })}
+                                </Carousel>
+                                <p className='carousel-megatron__description paragraph-3'>
+                                    {carouselDescription}
+                                </p>
+
+
+                                <div className='wrap-controls__lg'>
+                                    <p className='carousel__data-link'>
+                                        <Link
+                                            style={{marginTop: '2rem'}}
+                                            className="link cta_outline cta_outline__light hvr-underline-from-left"
+                                            to="#"
+                                            itemProp="url"
+                                            target=""
+                                            rel="noopener nofollow noreferrer"
+                                            onClick={(e) => {
+                                                handleShowModal('modal-redirect', 'Z_fondove.html', e)
+                                            }}
+                                        >
+                                            към фондове
+                                        </Link>
+                                    </p>
+                                </div>
+                            </Col>
+                        </Row>
+
+                    </Container>
+                </div>
+            </div>
+            </ReactCSSTransitionReplace>
+        )
+    } else {
+        return (
+            <div>
+                <p>
+                    Loading ...
+                </p>
+            </div>
+        )
+    }
 }
 
 export default connect(
