@@ -8,6 +8,12 @@
 			min-height: auto;
 		}
 
+		.title {
+			@include media-breakpoint-down(md) {
+				margin-bottom: 5px;
+			}
+		}
+
 		.title,
 		[class^="paragraph"],
 		[class^="links"] {
@@ -16,21 +22,83 @@
 
 		[class^="paragraph"],
 		.links + .links {
-			@include margin(20px, 0px, 0px, 0px)
+			@include margin(20px, 0px, 0px, 0px);
+
+			@include media-breakpoint-down(md) {
+				&:first-child {
+					@include margin(20px, 0px, 55px, 0px);
+				}
+			}
 		}
 
 		.links {
 			display: inline-block;
 			text-transform: uppercase;
 			text-decoration: underline;
+
+			@include media-breakpoint-down(md) {
+				line-height: 1.9;
+			}
+		}
+
+		@include media-breakpoint-down(md) {
+
+			@include padding(100px, 0px, 130px, 0px);
+			.hero-bg {
+				//@include padding()
+			}
 		}
 	}
 
 	&__main-content {
 		@include padding(100px, 0px, 100px, 0px);
+
+		@include media-breakpoint-down(md) {
+			@include padding(70px, 0px, 100px, 0px);
+		}
 	}
 
 	.tab-content {
 		@include padding(40px, 0px, 100px, 0px);
+	}
+
+
+	@include media-breakpoint-down(md) {
+
+		.modal_tabs-wrap {
+			@include margin(50px, 0px, 0px, 0px)
+		}
+
+		.nav-tabs {
+			.nav-item + .nav-item {
+				@include margin(50px, 0px, 0px, 0px)
+			}
+		}
+
+		.support-us-page__main-content .h2 {
+			@include padding(0px, 15px, 0px, 15px);
+		}
+
+		.nav-tabs .nav-link {
+			@include font-size(20px);
+			color: #272323;
+		}
+
+		.info-line__card {
+			@include margin(20px, 0px, 0px, 0px)
+		}
+
+		.info-line__titled.is-small {
+			@include padding(30px, 24px, 23px, 24px);
+		}
+
+		.info-line__titled__item {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+
+		.cta_outline__border-overflow {
+			@include padding(0px, 50px, 0px, 0px);
+		}
 	}
 }
