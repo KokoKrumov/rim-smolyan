@@ -9,19 +9,17 @@ import Tab from "react-bootstrap/Tab";
 import Nav from "react-bootstrap/Nav";
 import {FormattedMessage, injectIntl} from 'react-intl';
 import CardInfoLine from "../../infoLine/CardInfoLine";
-import Accordion from "react-bootstrap/Accordion";
-import Card from "react-bootstrap/cjs/Card";
-import {isTabletScreen} from "../../../utilities/browser";
+import {isMobileScreen} from "../../../utilities/browser";
 
 class SupportUs extends Component {
 
     state = {
-        isTabletScreenV: isTabletScreen(),
+        isMobileScreenV: isMobileScreen(),
     }
 
     handleResize() {
         this.setState({
-            isTabletScreenV: isTabletScreen()
+            isMobileScreenV: isMobileScreen()
         })
     }
 
@@ -30,6 +28,7 @@ class SupportUs extends Component {
             this.handleResize()
         })
     }
+
 
     componentWillUnmount() {
         window.removeEventListener('resize', () => {
@@ -106,17 +105,17 @@ class SupportUs extends Component {
                     </h2>
                     <div className='modal_tabs-wrap'>
                         <Tab.Container id="supports-examples"
-                                       defaultActiveKey={`${this.state.isTabletScreenV ? null : 'donation-of-authentic-items'}`}
+                                       defaultActiveKey={`${this.state.isMobileScreenV ? null : 'donation-of-authentic-items'}`}
                         >
                             <Nav className="nav-tabs">
-                                <Nav.Item className={` ${this.state.isTabletScreenV ? 'container' : null}`}>
+                                <Nav.Item className={` ${this.state.isMobileScreenV ? 'container' : null}`}>
                                     <Nav.Link eventKey="donation-of-authentic-items"
-                                              disabled={` ${(this.state.isTabletScreenV)}`}
+                                              disabled={this.state.isMobileScreenV}
                                               className={`tab-item`}>
                                         <FormattedMessage id="donation-of-authentic-items"/>
                                     </Nav.Link>
                                     {
-                                        this.state.isTabletScreenV
+                                        this.state.isMobileScreenV
                                             ?
                                             <Row>
                                                 <Col lg={7}>
@@ -132,15 +131,15 @@ class SupportUs extends Component {
                                             null
                                     }
                                 </Nav.Item>
-                                <Nav.Item className={` ${this.state.isTabletScreenV ? 'container' : null}`}>
+                                <Nav.Item className={` ${this.state.isMobileScreenV ? 'container' : null}`}>
                                     <Nav.Link eventKey="cash-donation"
                                               className='tab-item'
-                                              disabled={` ${(this.state.isTabletScreenV)}`}
+                                              disabled={this.state.isMobileScreenV}
                                     >
                                         <FormattedMessage id="cash-donation"/>
                                     </Nav.Link>
                                     {
-                                        this.state.isTabletScreenV
+                                        this.state.isMobileScreenV
                                             ?
                                             <Row>
                                                 <Col lg={7}>
@@ -162,16 +161,16 @@ class SupportUs extends Component {
                                             null
                                     }
                                 </Nav.Item>
-                                <Nav.Item className={` ${this.state.isTabletScreenV ? 'container' : null}`}>
+                                <Nav.Item className={` ${this.state.isMobileScreenV ? 'container' : null}`}>
                                     <Nav.Link
                                         eventKey="volunteer-work"
                                         className='tab-item'
-                                        disabled={` ${(this.state.isTabletScreenV)}`}
+                                        disabled={this.state.isMobileScreenV}
                                     >
                                         <FormattedMessage id="volunteer-work"/>
                                     </Nav.Link>
                                     {
-                                        this.state.isTabletScreenV
+                                        this.state.isMobileScreenV
                                             ?
                                             <Row>
                                                 <Col lg={7}>
@@ -190,7 +189,7 @@ class SupportUs extends Component {
                                 </Nav.Item>
                             </Nav>
                             {
-                                !this.state.isTabletScreenV
+                                !this.state.isMobileScreenV
                                     ?
                                     <Tab.Content>
                                         <Tab.Pane eventKey="donation-of-authentic-items">
