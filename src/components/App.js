@@ -23,11 +23,11 @@ import PrivacyPolicy from "./pages/privacyPolicy/PrivacyPolicy";
 
 class App extends Component {
 
-    /*componentDidMount() {
-        if (isTabletScreen()) {
-            this.props.showModal('modal-redirect', '')
-        }
-    }*/
+    // componentDidMount() {
+    //     if (isTabletScreen()) {
+    //         this.props.showModal('modal-redirect', '')
+    //     }
+    // }
 
     render() {
         return (
