@@ -18,10 +18,14 @@
 			@include font-size(24px);
 			@include line-height(28px);
 			@include margin(0px, 0px, 10px, 0px);
+
+			@include media-breakpoint-down(md) {
+				@include font-size(22px);
+			}
 		}
 
 		ul + &__title {
-			@include margin(40px, 0px, 0px, 0px);
+			@include margin(40px, 0px, 10px, 0px);
 		}
 	}
 }

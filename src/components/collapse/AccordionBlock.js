@@ -298,15 +298,15 @@ class AccordionBlock extends Component {
                                                     eventKey={block.id}
                                                 >
                                                     <Container>
-                                                        <Row className='justify-content-between'>
-                                                            <Col lg={8}>
+                                                        <Row className='justify-content-between align-items-center'>
+                                                            <Col xs={10} lg={8}>
                                                                 <h3
                                                                     className='h3'
                                                                     dangerouslySetInnerHTML={{__html: block.title}}
                                                                 >
                                                                 </h3>
                                                             </Col>
-                                                            <Col lg={1}>
+                                                            <Col xs={2} lg={1}>
                                                                 <div className='accordion__arrow'>
                                                                     <svg width="100%" height="100%" viewBox="0 0 5 9"
                                                                          fill="none"
@@ -347,14 +347,14 @@ class AccordionBlock extends Component {
                                                 >
                                                     <Container>
                                                         <Row className='justify-content-between'>
-                                                            <Col lg={8}>
+                                                            <Col xs={10} lg={8}>
                                                                 <h3
                                                                     className='h3'
                                                                     dangerouslySetInnerHTML={{__html: block.title}}
                                                                 >
                                                                 </h3>
                                                             </Col>
-                                                            <Col lg={1}>
+                                                            <Col xs={2} lg={1}>
                                                                 <div className='accordion__arrow__download'>
                                                                     <svg width="100%" height="100%" viewBox="0 0 20 20"
                                                                          fill="none" xmlns="http://www.w3.org/2000/svg">
