@@ -1,3 +1,17 @@
 .administrative-page {
- @include padding(0px, 0px, 100px, 0px)
+	@include padding(0px, 0px, 100px, 0px);
+
+	@include media-breakpoint-down(md) {
+		.list__default {
+			li + li {
+				margin-top: 15px;
+			}
+		}
+
+		.col-count-15 {
+			li + li {
+				margin-top: 10px;
+			}
+		}
+	}
 }

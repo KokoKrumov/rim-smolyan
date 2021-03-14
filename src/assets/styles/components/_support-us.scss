@@ -70,6 +70,7 @@
 		}
 
 		.support-us-page__main-content .h2 {
+			@include font-size(38px);
 			@include padding(0px, 15px, 0px, 15px);
 		}
 
@@ -101,6 +102,12 @@
 			.nav-item + .nav-item {
 				@include margin(50px, 0px, 0px, 0px)
 			}
+		}
+	}
+
+	@include media-breakpoint-down(sm) {
+		.modal_tabs-wrap .nav-tabs .nav-link {
+			margin-right: 0;
 		}
 	}
 }

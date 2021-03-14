@@ -65,6 +65,10 @@
 	@include font-size(30px);
 	@include line-height(34px);
 	margin: 0;
+
+	@include media-breakpoint-down(md) {
+		@include font-size(24px);
+	}
 }
 
 .h4, .h4 > .link {
@@ -176,8 +180,17 @@ html {
 	}
 }
 
-.col-count-2 {
+.col-count-2,
+.col-count-3 {
 	@include media-breakpoint-down(md) {
 		column-count: 1 !important;
+	}
+}
+
+.col-count-15 {
+	@include media-breakpoint-down(md) {
+		column-count: 4 !important;
+		grid-column-gap: calc(190px / 4) !important;
+		column-gap: calc(190px / 4) !important;
 	}
 }
