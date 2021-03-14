@@ -1,64 +1,129 @@
 .about-us-page {
-  color: #ffffff;
+	color: #ffffff;
 
-  &__text__bold {
-    font-family: $font-acari-bold;
-    @include font-size(19px);
-    @include line-height(28px);
-    letter-spacing: 0.005em;
+	&__text__bold {
+		font-family: $font-acari-bold;
+		@include font-size(19px);
+		@include line-height(28px);
+		letter-spacing: 0.005em;
 
-    .link:hover {
-      color: $red;
-      text-decoration: underline;
-    }
-  }
+		.link:hover {
+			color: $red;
+			text-decoration: underline;
+		}
+	}
 
-  &__text__bold, .paragraph-2 {
-    @include margin(36px, 0px, 0px, 0px);
-  }
-
-
-  .hero__wrap {
-    height: 100%;
-    min-height: auto;
-  }
-
-  .hero-bg {
-    min-height: calc(100vh - (5.8125rem + 3.5625rem));
-  }
+	&__text__bold, .paragraph-2 {
+		@include margin(36px, 0px, 0px, 0px);
+	}
 
 
-  &__building-carousel{
-    &.nae-container {
-      @include margin(25px, 0px, 0px, 0px)
-    }
-  }
+	.hero__wrap {
+		height: 100%;
+		min-height: auto;
+	}
 
-  .section-building {
-    @include padding(120px, 0px, 100px, 0px);
+	.hero-bg {
+		@include media-breakpoint-up(lg) {
+			min-height: calc(100vh - (5.8125rem + 3.5625rem));
+		}
+	}
 
-    .nae-container {
-      @include padding(0px, 0px, 10px, 0px)
-    }
 
-    .info-line__card {
-      @include margin(30px, 0px, 0px, 0px)
-    }
-  }
+	&__building-carousel {
+		&.nae-container {
+			@include margin(25px, 0px, 0px, 0px)
+		}
+
+		@include media-breakpoint-down(md) {
+			.rec-slider {
+				margin-left: 0;
+			}
+		}
+	}
+
+	.section-building {
+		@include padding(120px, 0px, 100px, 0px);
+
+		@include media-breakpoint-down(md) {
+			@include padding(0px, 0px, 100px, 0px);
+		}
+
+		.nae-container {
+			@include padding(0px, 0px, 10px, 0px);
+
+			@include media-breakpoint-down(md) {
+				&.hero-bg {
+					padding-top: 3.75rem;
+				}
+			}
+		}
+
+		.info-line__card {
+			@include margin(30px, 0px, 0px, 0px)
+		}
+
+		.info-line__bordered__white {
+			@include media-breakpoint-down(md) {
+				@include padding(35px, 15px, 35px, 15px);
+
+
+				.h2 {
+					@include font-size(32px);
+					margin-bottom: 15px;
+				}
+
+				.info-line__titled__text {
+					margin-top: 0;
+				}
+			}
+		}
+	}
+
+
+	@include media-breakpoint-down(md) {
+		.info-line__titled__item {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+
+		.info-line__titled__text {
+			margin-top: 15px;
+			@include font-size(24px);
+		}
+
+		.hero {
+			padding-bottom: 13.1875rem;
+		}
+
+		.nae-container.hero-bg {
+			padding-top: 6.75rem;
+		}
+
+		.home-page__info-column .link {
+			margin: 0;
+			display: inline-block;
+		}
+	}
+
 }
 
 .about-us {
-  &__info-line {
-    &__wrap {
-      position: absolute;
-      top: -50%;
-      right: -50%;
-      transform: translate(-50%, -73%);
-      width: 100%;
+	&__info-line {
+		&__wrap {
+			position: absolute;
+			top: -50%;
+			right: -50%;
+			transform: translate(-50%, -73%);
+			width: 100%;
 
-      .info-line {
-        @include padding(58px, 80px, 37px, 80px);
-      }
-    }
-  }
+			.info-line {
+				@include padding(58px, 80px, 37px, 80px);
+
+				@include media-breakpoint-down(md) {
+					@include padding(25px, 10px, 37px, 10px);
+				}
+			}
+		}
+	}
 }

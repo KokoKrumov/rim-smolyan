@@ -4,11 +4,31 @@ import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import {showModal} from "../../actions";
 import history from "../../history";
+import {isMobileScreen} from "../../utilities/browser";
 
 class CardTeamHeadmaster extends Component {
 
     state = {
-        user: this.props.user
+        user: this.props.user,
+        isMobileScreenV: isMobileScreen(),
+    }
+
+    handleResize() {
+        this.setState({
+            isMobileScreenV: isMobileScreen()
+        })
+    }
+
+    componentDidMount() {
+        window.addEventListener('resize', () => {
+            this.handleResize()
+        })
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('resize', () => {
+            this.handleResize()
+        })
     }
 
     handleShowModal = (data, url, user, e) => {
@@ -53,20 +73,39 @@ class CardTeamHeadmaster extends Component {
                         </div>
                     </div>
                     <div>
-                        <p className='info-line__titled__text info-line__text-bold'>
-                            <Link
+                        {
+                            this.state.isMobileScreenV
+                            ?
+                                <p className='info-line__titled__text info-line__text-bold'>
+                                    <Link
+                                        className="link cta_outline cta_outline__red hvr-underline-from-center"
+                                        to={`/about-us/${this.state.user.nickname}`}
+                                        itemProp="url"
+                                        target=""
+                                        onClick={(e) => {
+                                            this.handleShowModal('modal-team', '', this.state.user, e)
+                                        }} rel="noopener nofollow noreferrer"
+                                        dangerouslySetInnerHTML={{__html: intl.formatMessage({id: 'see-more'})}}>
+                                    </Link>
+                                </p>
+                                :
+                                <p className='info-line__titled__text info-line__text-bold'>
+                                    <Link
 
-                                className="link cta_outline cta_outline__red cta_outline__border-overflow"
-                                to="#"
-                                itemProp="url"
-                                target=""
-                                onClick={(e) => {
-                                    this.handleShowModal('modal-team', '', this.state.user, e)
-                                }} rel="noopener nofollow noreferrer"
-                                dangerouslySetInnerHTML={{__html: intl.formatMessage({id: 'see-here'})}}
-                            >
-                            </Link>
-                        </p>
+                                        className="link cta_outline cta_outline__red cta_outline__border-overflow"
+                                        to={`/about-us/${this.state.user.nickname}`}
+                                        itemProp="url"
+                                        target=""
+                                        onClick={(e) => {
+                                            this.handleShowModal('modal-team', '', this.state.user, e)
+                                        }} rel="noopener nofollow noreferrer"
+                                        dangerouslySetInnerHTML={{__html: intl.formatMessage({id: 'see-here'})}}
+                                    >
+                                    </Link>
+                                </p>
+                        }
+
+
                     </div>
                 </div>
             </div>

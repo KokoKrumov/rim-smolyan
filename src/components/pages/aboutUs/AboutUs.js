@@ -208,7 +208,7 @@ class AboutUs extends Component {
                                 </Col>
                                 <Col lg={6}>
                                     <Row>
-                                        <Col>
+                                        <Col className='pr-0 pl-0'>
                                             <div className="about-us-page__building-carousel nae-container">
                                                 <CarouselImages
                                                     listImages={this.state.listBuildingImagesCarousel}
