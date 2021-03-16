@@ -1,196 +1,259 @@
 .modal {
 
-  &-dialog {
-    @media (min-width: 576px) {
-      width: 100%;
-      max-width: 1055px;
-    }
-  }
+	&-dialog {
+		@media (min-width: 576px) {
+			width: 100%;
+			max-width: 1055px;
+		}
+	}
 
-  &-body {
-    &__redirect {
-      padding: 30px 5%;
-      @media (min-width: 576px) {
-        padding: 55px 7%;
-      }
-    }
+	&-body {
+		&__redirect {
+			padding: 30px 5%;
+			@media (min-width: 576px) {
+				padding: 55px 7%;
+			}
+		}
 
-    &__default {
-      @include padding(40px, 50px, 40px, 50px);
-      @media (min-width: 576px) {
-        @include padding(40px, 50px, 40px, 50px);
-      }
+		&__default {
+			@include padding(40px, 50px, 40px, 50px);
+			@media (min-width: 576px) {
+				@include padding(40px, 50px, 40px, 50px);
+			}
 
-      .title {
-        &__wrap {
-          display: flex;
-          justify-content: space-between;
-          @include margin(0px, 0px, 20px, 0px);
-        }
-      }
-    }
-  }
-
-  &-text {
-    font-family: $font-acari-regular;
-    text-align: center;
-    color: rgba(39, 35, 35, 0.85);
-  }
-
-  &-title {
-    @include font-size(18px);
-    @include line-height(24px);
-
-    @media (min-width: 576px) {
-      @include font-size(24px);
-      @include line-height(30px);
-    }
-
-    letter-spacing: 0.015em;
-  }
-
-  &-paragraph {
-    @include margin(50px, 0px, 0px, 0px);
-    @include font-size(14px);
-    @include line-height(20px);
-
-    @media (min-width: 576px) {
-      @include font-size(16px);
-      @include line-height(22px);
-    }
-    letter-spacing: 0.01em;
-  }
+			.title {
+				&__wrap {
+					display: flex;
+					justify-content: space-between;
+					@include margin(0px, 0px, 20px, 0px);
+				}
+			}
 
 
-  &-content {
-    border-radius: 1px;
-  }
+			@include media-breakpoint-down(md) {
+				padding-left: 0;
+				padding-right: 0;
+				position: relative;
 
-  &__barelef {
-    margin-right: 25%;
+				.title__wrap {
+					margin-top: 20px;
+					justify-content: center;
+					text-align: center;
+				}
 
-    .img__wrap {
-      @include margin(0px, 0px, 10px, 0px);
-    }
+				.modal__close {
+					position: absolute;
+					top: 0;
+					right: 0;
+					padding: 5px 10px;
+				}
+			}
+		}
+	}
 
-    &__text {
-      font-family: $font-acari-regular;
-      @include font-size(13px);
-      @include line-height(15px);
-      color: rgba(39, 35, 35, 0.5);
-    }
+	&-text {
+		font-family: $font-acari-regular;
+		text-align: center;
+		color: rgba(39, 35, 35, 0.85);
+	}
 
-    &__wrap {
-      .paragraph-2 {
-        color: rgba(39, 35, 35, 0.8);
-      }
+	&-title {
+		@include font-size(18px);
+		@include line-height(24px);
 
-      .col-count-2 {
-        column-gap: 30px;
-      }
-    }
-  }
+		@media (min-width: 576px) {
+			@include font-size(24px);
+			@include line-height(30px);
+		}
 
+		letter-spacing: 0.015em;
+	}
 
-  .paragraph-sm + .paragraph-sm {
-    margin-top: 15px;
-  }
+	&-paragraph {
+		@include margin(50px, 0px, 0px, 0px);
+		@include font-size(14px);
+		@include line-height(20px);
 
-  &__close {
-    @include margin(-15px, -15px, 0px, 0px);
-
-    .link {
-      display: flex;
-      align-items: center;
-
-      &:hover {
-        .icon-close {
-
-        }
-      }
-    }
-
-    .icon-close {
-      @include margin(0px, 0px, 0px, 10px);
-    }
-  }
-
-  &-team {
-
-    .img__wrap {
-      @include width(125px);
-      @include height(125px);
-      border-radius: 50%;
-      background-color: $gray-c4;
-    }
-
-    .card__link-label,
-    .card-body__email {
-      text-align: left;
-    }
-
-    .card-body__email {
-      margin-top: 13px;
-    }
-
-    .sub-titles {
-      @include margin(30px, 0px, 0px, 0px);
-      font-family: $font-acari-bold;
-      @include font-size(15px);
-      @include line-height(24px);
-
-      /* identical to box height, or 160% */
-      letter-spacing: 0.01em;
-      color: $dark-09;
-    }
-
-    &__main-text p,
-    &__main-text li {
-      margin-bottom: 10px;
-      @extend .paragraph-2;
-    }
-
-    &__main-text ul {
-      margin: revert;
-      padding: revert;
-    }
-
-    &__main-text li {
-      margin: auto;
-      padding: initial;
-      list-style: disc;
-    }
-  }
+		@media (min-width: 576px) {
+			@include font-size(16px);
+			@include line-height(22px);
+		}
+		letter-spacing: 0.01em;
+	}
 
 
-  &_tabs-wrap {
-    @include margin(40px, 0px, 30px, 0px);
+	&-content {
+		border-radius: 1px;
+	}
 
-    .nav-tabs {
-      .nav-link {
-        @include padding(5px, 0px, 5px, 0px);
-        @include margin(0px, 40px, 0px, 0px);
+	&__barelef {
+		margin-right: 25%;
 
-        &:hover {
-          color: $red;
-          border-color: transparent transparent transparent;
-        }
-      }
-    }
+		.img__wrap {
+			@include margin(0px, 0px, 10px, 0px);
+		}
+
+		&__text {
+			font-family: $font-acari-regular;
+			@include font-size(13px);
+			@include line-height(15px);
+			color: rgba(39, 35, 35, 0.5);
+		}
+
+		&__wrap {
+			.paragraph-2 {
+				color: rgba(39, 35, 35, 0.8);
+			}
+
+			.col-count-2 {
+				column-gap: 30px;
+			}
+
+			@include media-breakpoint-down(md) {
+				//margin-right: 0;
+			}
+
+		}
+
+		@include media-breakpoint-down(md) {
+
+			margin-right: 0;
+
+			&-figure {
+				text-align: center;
+			}
+
+		}
+	}
 
 
-    .nav-tabs .nav-link.active,
-    .nav-tabs .nav-link:focus,
-    .nav-tabs .nav-link:hover:focus,
-    .nav-tabs .nav-item.show .nav-link {
-      border-bottom-width: 2px;
-      border-color: transparent transparent $red;
-      background-color: transparent;
-      color: $red;
-    }
+	.paragraph-sm + .paragraph-sm {
+		margin-top: 15px;
+	}
 
-    .tab-content {
-      @include padding(30px, 0px, 0px, 0px);
-    }
-  }
+	&__close {
+		@include margin(-15px, -15px, 0px, 0px);
+
+		.link {
+			display: flex;
+			align-items: center;
+
+			&:hover {
+				.icon-close {
+
+				}
+			}
+		}
+
+		.icon-close {
+			@include margin(0px, 0px, 0px, 10px);
+		}
+	}
+
+	&-team {
+
+		.img__wrap {
+			@include width(125px);
+			@include height(125px);
+			border-radius: 50%;
+			background-color: $gray-c4;
+		}
+
+		.card__link-label,
+		.card-body__email {
+			@include media-breakpoint-up(lg) {
+				text-align: left;
+			}
+		}
+
+		.card-body__email {
+			margin-top: 13px;
+		}
+
+		.sub-titles {
+			@include margin(30px, 0px, 0px, 0px);
+			font-family: $font-acari-bold;
+			@include font-size(15px);
+			@include line-height(24px);
+
+			/* identical to box height, or 160% */
+			letter-spacing: 0.01em;
+			color: $dark-09;
+		}
+
+		&__main-text p,
+		&__main-text li {
+			margin-bottom: 10px;
+			@extend .paragraph-2;
+		}
+
+		&__main-text ul {
+			margin: revert;
+			padding: revert;
+		}
+
+		&__main-text li {
+			margin: auto;
+			padding: initial;
+			list-style: disc;
+		}
+
+		@include media-breakpoint-down(md) {
+			.figure {
+				width: 100%;
+			}
+
+			.img__wrap {
+				margin: 0 auto;
+			}
+		}
+	}
+
+
+	&_tabs-wrap {
+		@include margin(40px, 0px, 30px, 0px);
+
+		.nav-tabs {
+			.nav-link {
+				@include padding(5px, 0px, 5px, 0px);
+				@include margin(0px, 40px, 0px, 0px);
+
+				&:hover {
+					color: $red;
+					border-color: transparent transparent transparent;
+				}
+			}
+		}
+
+
+		.nav-tabs .nav-link.active,
+		.nav-tabs .nav-link:focus,
+		.nav-tabs .nav-link:hover:focus,
+		.nav-tabs .nav-item.show .nav-link {
+			border-bottom-width: 2px;
+			border-color: transparent transparent $red;
+			background-color: transparent;
+			color: $red;
+		}
+
+		.tab-content {
+			@include padding(30px, 0px, 0px, 0px);
+		}
+
+		@include media-breakpoint-down(md) {
+			.nav-tabs {
+				flex-wrap: nowrap;
+				overflow-y: scroll;
+
+				.nav-link {
+					margin-right: 30px;
+				}
+			}
+
+			.nav-item {
+				flex: none;
+				margin-bottom: 0;
+			}
+		}
+	}
 }

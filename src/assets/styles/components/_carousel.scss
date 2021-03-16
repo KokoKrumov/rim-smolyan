@@ -111,13 +111,6 @@
 		&__wrap {
 			position: relative;
 
-			.rec-slider-container {
-				margin: 0;
-			}
-
-			.rec-item-wrapper {
-				height: 100%;
-			}
 		}
 
 		&__row {
@@ -211,5 +204,16 @@
 			display: flex;
 			justify-content: flex-end;
 		}
+	}
+}
+
+.rec-carousel-wrapper {
+
+	.rec-slider-container {
+		margin: 0;
+	}
+
+	.rec-item-wrapper {
+		height: 100%;
 	}
 }

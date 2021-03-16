@@ -36,6 +36,11 @@
 		}
 
 		@include media-breakpoint-down(md) {
+
+			.carousel-images__wrap {
+				margin-left: -10px;
+			}
+
 			.rec-slider {
 				margin-left: 0;
 			}
