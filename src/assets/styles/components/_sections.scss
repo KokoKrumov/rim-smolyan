@@ -1,35 +1,69 @@
 .section {
-  &-team {
-    @include padding(70px, 0px, 0px, 0px);
-    background-color: $gray;
+	&-team {
+		@include media-breakpoint-up(lg) {
+			@include padding(70px, 0px, 0px, 0px);
+		}
+		background-color: $gray;
 
 
-    &__col {
-      @include margin(0px, 0px, 30px, 0px);
-    }
+		&__col {
+			@include margin(0px, 0px, 30px, 0px);
+		}
 
-    &__title__wrap {
-      @include margin(0px, 0px, 40px, 0px);
-      color: $dark;
-    }
+		&__title__wrap {
+			@include margin(0px, 0px, 40px, 0px);
+			color: $dark;
 
-    &__container {
-      &-wrap {
-        @include padding(60px, 0px, 60px, 0px);
-        border-bottom: 1px solid $dark-02;
-      }
-    }
+			@include media-breakpoint-down(md) {
+				.h2 {
+					@include font-size(30px);
+					text-align: center;
+				}
+			}
 
-    .loading {
-      color: $dark-02;
-    }
+		}
 
-    .card__wrap {
-      height: 100%;
-    }
+		&__container {
+			&-wrap {
+				@include padding(60px, 0px, 60px, 0px);
+				border-bottom: 1px solid $dark-02;
+			}
+		}
 
-    .card__media-vertical {
-      justify-content: space-between;
-    }
-  }
+		.loading {
+			color: $dark-02;
+		}
+
+		.card__wrap {
+			height: 100%;
+		}
+
+		.card__media-vertical {
+			justify-content: space-between;
+		}
+
+		@include media-breakpoint-down(md) {
+			.card {
+				@include padding(50px, 25px, 40px, 25px);
+
+				&__media-horizontal,
+				&__main-info {
+					flex-direction: column;
+				}
+
+				&-body__wrap {
+					padding-left: 0 !important;
+				}
+
+				&__media-horizontal {
+					align-items: center;
+				}
+
+				&-body__label,
+				.link-wrap {
+					text-align: center;
+				}
+			}
+		}
+	}
 }

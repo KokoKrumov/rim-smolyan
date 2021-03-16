@@ -11,7 +11,7 @@ function SocialsShare({articleID, articleTitle}) {
             <div className='socials-item'>
                 <FacebookShareButton
                     // process.env.REACT_APP_DOMAIN
-                    url={`${process.env.REACT_APP_API_URL}/news/${articleID}`}
+                    url={`https:${process.env.REACT_APP_API_URL}/news/${articleID}`}
                     quote={articleTitle}
                     hashtag={'#museumsmolyan'}
                 >

@@ -1,14 +1,31 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import AliceCarousel from 'react-alice-carousel'
 import {connect} from "react-redux";
 import {showModal} from "../../actions";
 import carouselImagesArrowLeftDark from "../../assets/images/carousel__left-arrow__dark.svg";
 import carouselImagesArrowRightDark from "../../assets/images/carousel__right-arrow__dark.svg";
+import Carousel from "react-elastic-carousel";
+import {isMobileScreen, isTabletScreen} from "../../utilities/browser";
 
 function CarouselImages({listImages}) {
     const handleOnDragStart = (e) => e.preventDefault()
     const [item, setItem] = useState(1);
+
+    const [isMobileScreenV, setIsMobileScreen] = React.useState(isMobileScreen())
     let carousel = React.createRef();
+
+    useEffect(() => {
+        function handleResize() {
+            setIsMobileScreen(isMobileScreen())
+        }
+
+        window.addEventListener('resize', handleResize)
+
+        return _ => {
+            window.removeEventListener('resize', handleResize)
+        }
+    })
+
 
     function onSlideChanged(e) {
         setItem(e.item + 1)
@@ -19,13 +36,13 @@ function CarouselImages({listImages}) {
             <React.Fragment>
                 <div className='carousel-images__controls-wrap  carousel__controls-wrap'>
                     <button className='btn carouselImages__controls-btn carousel__controls-btn'
-                            onClick={() => carousel.slidePrev()}>
+                            onClick={() => carousel.slideNext()}>
                         <img className="carousel-images-btn__img"
                              src={carouselImagesArrowLeftDark} alt=""
                              itemProp="image"/>
                     </button>
                     <button className='btn carousel-images-btn carousel__controls-btn'
-                            onClick={() => carousel.slideNext()}>
+                            onClick={() => carousel.slidePrev()}>
                         <img className="carousel-images__controls-btn__img"
                              src={carouselImagesArrowRightDark} alt=""
                              itemProp="image"/>
@@ -33,13 +50,15 @@ function CarouselImages({listImages}) {
                 </div>
 
                 <div className='carousel-images__wrap'>
-                    <AliceCarousel
-                        mouseTrackingEnabled
-                        disableButtonsControls
-                        disableDotsControls
-                        ref={(el) => (carousel = el)}
-                        swipeDisabled={true}
-                        onSlideChanged={onSlideChanged}
+                    <Carousel
+                        ref={ref => (carousel = ref)}
+                        isRTL={true}
+                        itemsToShow={1}
+                        initialActiveIndex={item}
+                        showArrows={false}
+                        pagination={false}
+                        outerSpacing={isMobileScreenV ? 20 : 0}
+                        itemPadding={isMobileScreenV ? [0, 10] : []}
                     >
 
                         {listImages.map(item => {
@@ -49,12 +68,12 @@ function CarouselImages({listImages}) {
                                     className='carousel carousel-building__item'
                                     onDragStart={handleOnDragStart}
                                 >
-                                    <img className="" src={item.image} alt="" itemProp="image"/>
+                                    <img className="img-fluid" src={item.image} alt="" itemProp="image"/>
 
                                 </div>
                             )
                         })}
-                    </AliceCarousel>
+                    </Carousel>
                 </div>
             </React.Fragment>
         )

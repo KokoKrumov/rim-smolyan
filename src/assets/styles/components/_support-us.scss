@@ -91,10 +91,6 @@
 			flex-direction: column;
 			align-items: flex-start;
 		}
-
-		.cta_outline__border-overflow {
-			@include padding(0px, 50px, 0px, 0px);
-		}
 	}
 
 	@media (max-width: 855px)  {

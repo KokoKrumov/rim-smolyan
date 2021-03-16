@@ -1,102 +1,113 @@
 .cta_outline {
-  font-family: $font-acari-bold;
-  @include font-size(14px);
-  @include line-height(26px);
-  /* identical to box height, or 114% */
-  transition: 0.3s;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
+	font-family: $font-acari-bold;
+	@include font-size(14px);
+	@include line-height(26px);
+	/* identical to box height, or 114% */
+	transition: 0.3s;
+	letter-spacing: 0.5px;
+	text-transform: uppercase;
 
-  &__dark {
-    color: $dark;
-    fill: $dark;
+	&__dark {
+		color: $dark;
+		fill: $dark;
 
-    path {
-      fill: $dark;
-      transition-duration: 0.3s;
-      transition-timing-function: ease-out;
-    }
+		path {
+			fill: $dark;
+			transition-duration: 0.3s;
+			transition-timing-function: ease-out;
+		}
 
-    &::before {
-      background: $dark;
-    }
-  }
-  &__red {
-    color: $red;
-    fill: $red;
+		&::before {
+			background: $dark;
+		}
+	}
 
-    &::before {
-      background: $red;
-    }
-  }
+	&__red {
+		color: $red;
+		fill: $red;
 
-  &__light {
-    color: $white;
-    fill:  $white;
+		&::before {
+			background: $red;
+		}
+	}
 
-    &::before {
-      background: $white;
-    }
-  }
+	&__light {
+		color: $white;
+		fill: $white;
 
-  &__dark,
-  &__light {
-    &:hover {
-      color: $red;
-      fill:  $red;
+		&::before {
+			background: $white;
+		}
+	}
 
-      path {
-        fill:  $red;
-      }
+	&__dark,
+	&__light {
+		&:hover {
+			color: $red;
+			fill: $red;
 
-      &::before {
-        background: $red;
-      }
-    }
-  }
+			path {
+				fill: $red;
+			}
 
-  &__red {
-    &:hover {
-      color: $dark;
-      fill:  $dark;
+			&::before {
+				background: $red;
+			}
+		}
+	}
 
-      &::before {
-        background: $dark;
-      }
-    }
-  }
+	&__red {
+		&:hover {
+			color: $dark;
+			fill: $dark;
 
-  &__left-line::before {
+			&::before {
+				background: $dark;
+			}
+		}
+	}
 
-  }
+	&__left-line::before {
 
-  &__border-overflow {
-    border-bottom: 2px solid;
-    @include padding(0px, 0px, 0px, 50px);
-    transition-duration: 0.3s;
-    transition-timing-function: ease-out;
+	}
 
-    &__light {
-      border-color: $light;
-    }
+	&__border-overflow {
+		border-bottom: 2px solid;
+		@include padding(0px, 0px, 0px, 50px);
+		transition-duration: 0.3s;
+		transition-timing-function: ease-out;
 
-    &:hover {
-      padding: 0;
-    }
-  }
+		&__light {
+			border-color: $light;
+		}
+
+		&:hover {
+			padding: 0;
+		}
+	}
 }
 
 button.cta_outline {
-  background: none;
-  border: none;
-  padding: inherit;
-  margin: inherit;
+	background: none;
+	border: none;
+	padding: inherit;
+	margin: inherit;
 }
 
 .btn-link:hover {
-  text-decoration: none;
+	text-decoration: none;
 }
 
 .btn-link:focus, .btn-link.focus {
-  box-shadow: none;
+	box-shadow: none;
+}
+
+
+.about-us-page,
+.support-us-page {
+	@include media-breakpoint-down(md) {
+		.cta_outline__border-overflow {
+			@include padding(0px, 50px, 0px, 0px);
+		}
+	}
 }
