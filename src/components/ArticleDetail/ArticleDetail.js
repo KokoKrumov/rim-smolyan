@@ -54,7 +54,7 @@ function ArticleDetail({article}) {
                     <Col lg={4} xl={2}>
                         <div className="socials__wrap socials__top-indent">
                             <p className='socials-label'>Споделете страницата</p>
-                            <SocialsShare articleID={article.id} articleTitle={article.title}/>
+                            <SocialsShare articleID={(article.id - 1)} articleTitle={article.title}/>
                         </div>
                     </Col>
                 </Row>
