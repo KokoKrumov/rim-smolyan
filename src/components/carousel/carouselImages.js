@@ -34,20 +34,24 @@ function CarouselImages({listImages}) {
     if (listImages) {
         return (
             <React.Fragment>
-                <div className='carousel-images__controls-wrap  carousel__controls-wrap'>
-                    <button className='btn carouselImages__controls-btn carousel__controls-btn'
-                            onClick={() => carousel.slideNext()}>
-                        <img className="carousel-images-btn__img"
-                             src={carouselImagesArrowLeftDark} alt=""
-                             itemProp="image"/>
-                    </button>
-                    <button className='btn carousel-images-btn carousel__controls-btn'
-                            onClick={() => carousel.slidePrev()}>
-                        <img className="carousel-images__controls-btn__img"
-                             src={carouselImagesArrowRightDark} alt=""
-                             itemProp="image"/>
-                    </button>
-                </div>
+                {
+                    !isMobileScreenV
+                    &&
+                    <div className='carousel-images__controls-wrap  carousel__controls-wrap'>
+                        <button className='btn carouselImages__controls-btn carousel__controls-btn'
+                                onClick={() => carousel.slideNext()}>
+                            <img className="carousel-images-btn__img"
+                                 src={carouselImagesArrowLeftDark} alt=""
+                                 itemProp="image"/>
+                        </button>
+                        <button className='btn carousel-images-btn carousel__controls-btn'
+                                onClick={() => carousel.slidePrev()}>
+                            <img className="carousel-images__controls-btn__img"
+                                 src={carouselImagesArrowRightDark} alt=""
+                                 itemProp="image"/>
+                        </button>
+                    </div>
+                }
 
                 <div className='carousel-images__wrap'>
                     <Carousel

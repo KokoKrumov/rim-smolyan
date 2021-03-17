@@ -15,6 +15,10 @@
 			color: $dark;
 
 			@include media-breakpoint-down(md) {
+				.h1	{
+				text-align: center;
+				}
+
 				.h2 {
 					@include font-size(30px);
 					text-align: center;

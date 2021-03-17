@@ -11,6 +11,7 @@ import jltLogo from '../../assets/images/JLTLogo.svg'
 import {showModal} from "../../actions";
 import {connect} from "react-redux";
 import {FormattedMessage} from 'react-intl'
+import Socials from "../socials/socials";
 
 function Footer({showModal}) {
 
@@ -35,25 +36,7 @@ function Footer({showModal}) {
                                     </p>
                                 </div>
                             </Navbar.Brand>
-                            <div className='socials'>
-                                <div className='socials-item'>
-                                    <a href="https://www.facebook.com/museum.smolyan" target="_blank"
-                                       rel="noopener noreferrer">
-                                        <img className="" src={fbLogo} alt="" itemProp="image"/>
-                                    </a>
-                                </div>
-                                <div className='socials-item'>
-                                    <a href="https://twitter.com/museum_sm" target="_blank" rel="noopener noreferrer">
-                                        <img className="" src={twitterLogo} alt="" itemProp="image"/>
-                                    </a>
-                                </div>
-                                <div className='socials-item'>
-                                    <a href="https://www.instagram.com/museumsmolyan/" target="_blank"
-                                       rel="noopener noreferrer">
-                                        <img className="" src={instagramLogo} alt="" itemProp="image"/>
-                                    </a>
-                                </div>
-                            </div>
+                            <Socials/>
                         </div>
                         <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
                         <Navbar.Collapse className="footer__main-nav" id="responsive-navbar-nav">
