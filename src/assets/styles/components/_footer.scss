@@ -96,9 +96,22 @@
 			.nav__secondary-link {
 				width: 100%;
 				text-align: center;
+
 				&:last-child {
 					display: none;
 				}
+			}
+		}
+	}
+
+	.socials-item {
+		svg {
+			fill: #ffffffb3
+		}
+
+		&:hover {
+			svg {
+				fill: #828282
 			}
 		}
 	}

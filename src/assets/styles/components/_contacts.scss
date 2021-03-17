@@ -45,4 +45,10 @@
   &__map__wrap {
     @include margin(70px, 0px, 0px, 0px);
   }
+
+  .address__list {
+    @include media-breakpoint-down(md){
+      @include margin(15px, 0px, 25px, 0px)
+    }
+  }
 }
