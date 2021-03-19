@@ -207,9 +207,9 @@
   },
   {
     "id": 18,
-    "type": "article",
+    "type": "event",
     "dateM": "Март",
-    "dateD": "19",
+    "dateD": "22-31",
     "dateY": "2021",
     "image": "../images/rim-85-thumb.jpg",
     "imageDetail": "../images/rim-85.jpg",
