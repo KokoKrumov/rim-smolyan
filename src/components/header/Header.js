@@ -52,7 +52,12 @@ function Header({showModal}) {
 
     return (
         <header className="header">
-            <Navbar collapseOnSelect expand="xl" variant="dark">
+            <Navbar
+                collapseOnSelect
+                expand="xl"
+                variant="dark"
+                onToggle={toggleHeaderNavigation}
+            >
                 <Container className='header__container'>
                     <Navbar.Brand href="/">
                         <div className="brand__wrap">
@@ -64,17 +69,17 @@ function Header({showModal}) {
                             </p>
                         </div>
                     </Navbar.Brand>
-                    <Navbar.Toggle onClick={toggleHeaderNavigation}>
+                    <Navbar.Toggle>
                         {/* Close mark */}
                         <div id="close-icon">
-                            <span></span>
-                            <span></span>
-                            <span></span>
+                            <span/>
+                            <span/>
+                            <span/>
                         </div>
                         {/* close mark ends */}
                         <div className={`hamburger hamburger--slider js-hamburger ${navIsOpen ? "is-active" : ""}`}>
                             <div className="hamburger-box">
-                                <div className="hamburger-inner"></div>
+                                <div className="hamburger-inner"/>
                             </div>
                         </div>
                     </Navbar.Toggle>
@@ -224,7 +229,8 @@ function Header({showModal}) {
                                         className='nav__main-link'>
                                         <FormattedMessage id="menu.contact-us"/>
                                     </Nav.Link>
-                                    <p className='nav__main-link nav__main-link__separate-line'><span className='d-none d-xl-block'>|</span></p>
+                                    <p className='nav__main-link nav__main-link__separate-line'><span
+                                        className='d-none d-xl-block'>|</span></p>
                                     <Nav.Link
                                         href="#"
                                         className='nav__main-link not-allowed'>
