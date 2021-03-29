@@ -44,6 +44,13 @@ function NewsAndEventsListHorizontal({listOfNewsAndEvents}) {
                                         :
                                         null
                                     }
+                                    {event.type === 'exhibition' ?
+                                        <div className='nae-item__article-date__wrap'>
+                                            <p className='nae-item__article-date'>{event.dateStart} - {event.dateEnd} | {event.place}</p>
+                                        </div>
+                                        :
+                                        null
+                                    }
 
                                     <h3 className='h3'>
                                         <a className="link a-title" href={`/news/${index}`} itemProp="url" target=""

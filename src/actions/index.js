@@ -7,7 +7,8 @@ import {
     CLOSE_REDIRECT_MODAL,
     FETCH_RIM_BUILDING_IMAGES,
     FETCH_TEAM_MODAL, CLOSE_TEAM_MODAL,
-    FETCH_TEAM
+    FETCH_TEAM,
+    FETCH_EXHIBITIONS
 } from './types';
 
 import streams from "../api/streams";
@@ -16,6 +17,11 @@ import streams from "../api/streams";
 export const fetchNews = () => async dispatch => {
     const response = await streams.get('/news.json');
     dispatch({type: FETCH_NEWS, payload: response.data})
+}
+
+export const fetchExhibitions = () => async dispatch => {
+    const response = await streams.get('/exhibitions.json');
+    dispatch({type: FETCH_EXHIBITIONS, payload: response.data})
 }
 
 export const fetchRimBuildingImages = () => async dispatch => {

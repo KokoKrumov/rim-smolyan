@@ -1,0 +1,58 @@
+.exhibitions {
+    &__wrap {
+        @include padding(100px, 0px, 100px, 0px);
+    }
+
+    &__hero {
+        &-wrap {
+            .paragraph-2 {
+                @include margin(60px, 0px, 60px, 0px);
+            }
+        }
+    }
+
+    &__dark {
+        @include padding(52px, 0px, 62px, 0px);
+        background: #272323;
+        color: #FFFFFF;
+    }
+
+    &__temporary {
+        @include padding(100px, 0px, 60px, 0px);
+
+        &__subtitle {
+            @include margin(40px, 0px, 30px, 0px);
+            @include font-size(19px);
+            font-family: $font-acari-bold;
+            color: #272323;
+            letter-spacing: 0.5px;
+        }
+    }
+
+    &__archive {
+        .accordion__wrap {
+            .paragraph-3 {
+                margin: 0;
+                font-weight: bold;
+                text-transform: uppercase;
+                color: #272323;
+            }
+        }
+
+        .accordion__arrow {
+            width: 20px;
+            height: 20px;
+            margin-left: 10px;
+        }
+
+    }
+
+    .accordion__wrap__exhibitions {
+        &.accordion__wrap__active {
+
+            .card-header {
+                border-bottom: 1px solid rgba(39, 35, 35, 0.2);
+            }
+        }
+    }
+}
