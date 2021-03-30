@@ -1,173 +1,177 @@
 .card {
 
-	&__white-bordered {
-		background: #FFFFFF;
-		border: 1px solid rgba(39, 35, 35, 0.25);
-		border-radius: 0;
-		transition-duration: 0.3s;
-		transition-timing-function: ease-out;
+    &__white-bordered {
+        background: #FFFFFF;
+        border: 1px solid rgba(39, 35, 35, 0.25);
+        border-radius: 0;
+        transition-duration: 0.3s;
+        transition-timing-function: ease-out;
 
-		&:hover {
-			border-color: $dark;
-		}
-	}
+        &:hover {
+            border-color: $dark;
+        }
+    }
 
-	&__media-horizontal {
-		display: flex;
-		align-items: flex-start;
-		justify-content: center;
-		flex-direction: row;
+    &__media-horizontal {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        flex-direction: row;
 
-		&__end {
-			align-items: flex-end;
-		}
-	}
+        &__end {
+            align-items: flex-end;
+        }
+    }
 
-	&__media-vertical {
-		display: flex;
-		align-items: stretch;
-		justify-content: center;
-		flex-direction: column;
-		text-align: center;
+    &__media-vertical {
+        display: flex;
+        align-items: stretch;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
 
-		.card__main-info {
-			flex-direction: column;
-			align-items: stretch;
-		}
+        .card__main-info {
+            flex-direction: column;
+            align-items: stretch;
+        }
 
-		.card-avatar__wrap {
-			margin: 0 auto;
-		}
-
-
-		.card-body__wrap {
-			@include margin(28px, 0px, 0px, 0px);
-		}
-	}
-
-	&__icon-text {
-		@include padding(20px, 65px, 24px, 23px);
-		height: 100%;
-
-		&__wrap {
-			@include padding(30px, 0px, 0px, 0px);
-			height: 100%;
-		}
+        .card-avatar__wrap {
+            margin: 0 auto;
+        }
 
 
-		&__icon__wrap {
-			padding-top: 7px;
-			width: 25px;
-		}
+        .card-body__wrap {
+            @include margin(28px, 0px, 0px, 0px);
+        }
+    }
 
-		&__text__wrap {
-			padding-left: 1rem;
-			-webkit-box-flex: 1;
-			-ms-flex: 1;
-			flex: 1;
-		}
+    &__icon-text {
+        @include padding(20px, 65px, 24px, 23px);
+        height: 100%;
 
-		&__text {
-			color: $dark;
-		}
-	}
+        &__wrap {
+            @include padding(30px, 0px, 0px, 0px);
+            height: 100%;
+        }
 
 
-	&__main-info {
-		display: flex;
-		align-items: center;
-	}
+        &__icon__wrap {
+            padding-top: 7px;
+            width: 25px;
+        }
 
-	&-body {
-		&__title {
-			color: $dark;
-		}
+        &__text__wrap {
+            padding-left: 1rem;
+            -webkit-box-flex: 1;
+            -ms-flex: 1;
+            flex: 1;
+        }
 
-		&__label {
-			color: $dark-06;
-		}
+        &__text {
+            color: $dark;
+        }
+    }
 
-		&__email,
-		&__email a {
-			font-family: $font-acari-bold;
-			@include font-size(16px);
-			@include line-height(22px);
-			color: $dark-08;
-		}
 
-		&__email + &__email {
-			margin-top: 0;
-		}
+    &__main-info {
+        display: flex;
+        align-items: center;
+    }
 
-		&__phone,
-		&__phone a {
-			font-family: $font-acari-bold;
-			@include font-size(14px);
-			@include line-height(22px);
+    &-body {
+        &__title {
+            color: $dark;
+        }
 
-			color: $dark-08;
-		}
+        &__label {
+            color: $dark-06;
+        }
 
-		&__phone a:hover,
-		&__email a:hover {
-			text-decoration: underline;
-		}
+        &__email,
+        &__email a {
+            font-family: $font-acari-bold;
+            @include font-size(16px);
+            @include line-height(22px);
+            color: $dark-08;
+        }
 
-		&__wrap {
-			.link-wrap {
-				margin-top: 15px;
-			}
+        &__email + &__email {
+            margin-top: 0;
+        }
 
-			.link-wrap + .link-wrap {
-				margin-top: 0;
-			}
-		}
-	}
+        &__phone,
+        &__phone a {
+            font-family: $font-acari-bold;
+            @include font-size(14px);
+            @include line-height(22px);
 
-	&__wrap {
+            color: $dark-08;
+        }
 
-		.card {
+        &__phone a:hover,
+        &__email a:hover {
+            text-decoration: underline;
+        }
 
-			&__media-horizontal {
-				@include padding(50px, 65px, 60px, 55px);
-				justify-content: space-between;
-				align-items: flex-end;
+        &__wrap {
+            .link-wrap {
+                margin-top: 15px;
+            }
 
-				.card-body__wrap {
-					@include padding(0px, 0px, 0px, 65px);
-				}
-			}
+            .link-wrap + .link-wrap {
+                margin-top: 0;
+            }
+        }
+    }
 
-			&__media-vertical {
-				@include padding(50px, 25px, 40px, 25px);
-				height: 100%;
+    &__wrap {
 
-				.card__link-label {
-					@include margin(35px, 0px, 0px, 0px);
-				}
+        .card {
 
-				.link-wrap {
-					margin-top: 0;
-				}
-			}
+            &__media-horizontal {
+                @include padding(50px, 65px, 60px, 55px);
+                justify-content: space-between;
+                align-items: flex-end;
 
-		}
-	}
+                .card-body__wrap {
+                    @include padding(0px, 0px, 0px, 65px);
+                }
+            }
 
-	&__link-label {
-		font-family: $font-acari-regular;
-		@include font-size(16px);
-		@include line-height(22px);
-		text-align: center;
-		color: $dark-08;
-	}
+            &__media-vertical {
+                @include padding(50px, 25px, 40px, 25px);
+                height: 100%;
 
-	&-avatar {
-		&__wrap {
-			@include width(125px);
-			@include height(125px);
-			border-radius: 50%;
-			background-color: $gray-c4;
-		}
-	}
+                .card__link-label {
+                    @include margin(35px, 0px, 0px, 0px);
+                }
+
+                .link-wrap {
+                    margin-top: 0;
+                }
+            }
+
+        }
+    }
+
+    &__link-label {
+        font-family: $font-acari-regular;
+        @include font-size(16px);
+        @include line-height(22px);
+        text-align: center;
+        color: $dark-08;
+    }
+
+    &-avatar {
+        &__wrap {
+            @include width(125px);
+            @include height(125px);
+            border-radius: 50%;
+            background-color: $gray-c4;
+        }
+    }
+
+    &-exhibition-archive {
+        @include margin(20px, 0px, 40px, 0px)
+    }
 }

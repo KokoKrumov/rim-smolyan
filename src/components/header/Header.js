@@ -206,10 +206,8 @@ function Header({showModal}) {
                                         </NavDropdown.Item>
                                     </NavDropdown>
                                     <Nav.Link
-                                        href="#"
-                                        onClick={(e) => {
-                                            handleShowModal('modal-redirect', 'Z_ekspozicia.html', e)
-                                        }}
+                                        href="/exhibitions"
+                                        eventKey="exhibitions"
                                         className='nav__main-link '>
                                         <FormattedMessage id="menu.exhibitions"/>
                                     </Nav.Link>

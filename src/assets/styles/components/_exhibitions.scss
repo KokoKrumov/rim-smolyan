@@ -31,7 +31,7 @@
 
     &__archive {
         .accordion__wrap {
-            .paragraph-3 {
+            .btn-collapse {
                 margin: 0;
                 font-weight: bold;
                 text-transform: uppercase;
@@ -45,6 +45,10 @@
             margin-left: 10px;
         }
 
+        &__subtitle {
+            margin-top: 5px;
+            color: #272323;
+        }
     }
 
     .accordion__wrap__exhibitions {
@@ -53,6 +57,10 @@
             .card-header {
                 border-bottom: 1px solid rgba(39, 35, 35, 0.2);
             }
+        }
+
+        .card-body {
+            padding-bottom: 0;
         }
     }
 }

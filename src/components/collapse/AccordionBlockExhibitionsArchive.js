@@ -5,8 +5,7 @@ import {showModal} from "../../actions";
 import Container from "react-bootstrap/Container";
 import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/cjs/Card";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import CardExhibitionArchive from "../cards/cardExhibitionArchive";
 
 class AccordionBlock extends Component {
 
@@ -40,7 +39,7 @@ class AccordionBlock extends Component {
                             <Container>
                                 <div className='d-flex justify-content-start align-items-center pr-3 pl-3'>
                                     <h3
-                                        className='paragraph-3'
+                                        className='paragraph-3 btn-collapse'
                                         dangerouslySetInnerHTML={{__html: intl.formatMessage({id: 'archive'})}}
                                     >
                                     </h3>
@@ -60,14 +59,21 @@ class AccordionBlock extends Component {
                         <Accordion.Collapse eventKey="0">
                             <Card.Body>
                                 <Container>
-                                    {
-                                        this.state.content &&
-                                        this.state.content.map(item => {
-                                            return (
-                                                item.title
-                                            )
-                                        })
-                                    }
+                                    <div className='pr-3 pl-3'>
+                                        <p className='paragraph-2 exhibitions__archive__subtitle'
+                                           dangerouslySetInnerHTML={{__html: intl.formatMessage({id: 'archive-subtitle'})}}
+                                        />
+                                    </div>
+                                    <div className='pr-3 pl-3'>
+                                        {
+                                            this.state.content &&
+                                            this.state.content.map(item => {
+                                                return (
+                                                    <CardExhibitionArchive title={item.title} text={item.text}/>
+                                                )
+                                            })
+                                        }
+                                    </div>
                                 </Container>
                             </Card.Body>
                         </Accordion.Collapse>
