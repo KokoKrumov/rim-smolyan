@@ -12,7 +12,6 @@ import NewsDetailPage from "./pages/newsDetailPage/NewsDetailPage";
 import Contacts from "./pages/contacts/Contacts";
 import ModalComponent from "./modal/ModalComponent";
 import NotFound from "./pages/NotFound";
-import {isTabletScreen} from "../utilities/browser";
 import {injectIntl} from "react-intl";
 import {connect} from "react-redux";
 import {showModal} from "../actions";
@@ -20,6 +19,7 @@ import SupportUs from "./pages/supportUs/SupportUs";
 import Administrative from "./pages/administrative/Administrative";
 import Terms from "./pages/terms/Terms";
 import PrivacyPolicy from "./pages/privacyPolicy/PrivacyPolicy";
+import ExhibitionsPage from "./pages/exhibitions/Exhibitions";
 
 class App extends Component {
 
@@ -39,7 +39,8 @@ class App extends Component {
                             <Route path='/' exact component={HomePage}/>
                             <Route path='/funds' exact component={FundsPage}/>
                             <Route path='/news' exact component={NewsPage}/>
-                            <Route path='/news/:articleId' exact component={NewsDetailPage}/>
+                            <Route path='/exhibitions' exact component={ExhibitionsPage}/>
+                            <Route path='/:news/:articleId' exact component={NewsDetailPage}/>
                             <Route path='/about-us' exact component={AboutUs}/>
                             <Route path='/about-us/:modalContent' exact component={AboutUs}/>
                             <Route path='/contact-us' exact component={Contacts}/>

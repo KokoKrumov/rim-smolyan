@@ -70,6 +70,15 @@
 		@include font-size(24px);
 	}
 }
+.h3-light {
+	font-family: $font-cormorant-regular;
+	@include font-size(30px);
+	@include line-height(42px);
+
+	@include media-breakpoint-down(md) {
+		@include font-size(24px);
+	}
+}
 
 .h4, .h4 > .link {
 	font-family: $font-cormorant-bold;
@@ -90,6 +99,18 @@
 	@include font-size(20px);
 	@include line-height(24px);
 	margin: 0;
+}
+
+.paragraph-1 {
+	font-family: $font-cormorant-regular;
+	@include font-size(38px);
+	@include line-height(52px);
+
+
+	@include media-breakpoint-down(md) {
+		//@include font-size(15px);
+		//@include line-height(25px);
+	}
 }
 
 .paragraph-2 {

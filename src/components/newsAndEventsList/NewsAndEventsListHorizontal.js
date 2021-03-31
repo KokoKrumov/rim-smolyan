@@ -17,7 +17,7 @@ function NewsAndEventsListHorizontal({listOfNewsAndEvents}) {
 
                         <Row>
                             <Col lg={5}>
-                                <a className="link link-img" href={`/news/${index}`} itemProp="url" target=""
+                                <a className="link link-img" href={`/${event.type}/${index}`} itemProp="url" target=""
                                    rel="noopener nofollow noreferrer">
                                     <div className='nae-item__img__wrap'>
                                         {event.dateD && event.type === 'event' ?
@@ -44,9 +44,16 @@ function NewsAndEventsListHorizontal({listOfNewsAndEvents}) {
                                         :
                                         null
                                     }
+                                    {event.type === 'exhibition' ?
+                                        <div className='nae-item__article-date__wrap'>
+                                            <p className='nae-item__article-date'>{event.dateStart} - {event.dateEnd} | {event.place}</p>
+                                        </div>
+                                        :
+                                        null
+                                    }
 
                                     <h3 className='h3'>
-                                        <a className="link a-title" href={`/news/${index}`} itemProp="url" target=""
+                                        <a className="link a-title" href={`/${event.type}/${index}`} itemProp="url" target=""
                                            rel="noopener nofollow noreferrer">
                                             {event.title}
                                         </a>
@@ -57,7 +64,7 @@ function NewsAndEventsListHorizontal({listOfNewsAndEvents}) {
                                     </p>
                                     <a
                                         className="a cta_outline cta_outline__dark hvr-underline-from-left"
-                                        href={`/news/${index}`}
+                                        href={`/${event.type}/${index}`}
                                         itemProp="url"
                                         target=""
                                         rel="noopener nofollow noreferrer">

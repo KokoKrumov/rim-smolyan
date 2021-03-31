@@ -1,74 +1,90 @@
 .accordion {
-	&__wrap {
-		border-bottom: 1px solid $dark-02;
+    &__wrap {
+        &:not(.accordion__wrap__exhibitions) {
+            border-bottom: 1px solid $dark-02;
+        }
 
-		&:hover {
-			background: $gray;
-		}
 
-		.card-header {
-			@include padding(30px, 0px, 25px, 0px);
-			cursor: pointer;
+        &:not(.accordion__wrap__exhibitions):hover {
+            background: $gray;
+        }
 
-			&:hover {
-				color: $red;
+        .card-header {
+            @include padding(30px, 0px, 25px, 0px);
+            cursor: pointer;
 
-				svg {
-					fill: $red
-				}
-			}
-		}
+            .h3,
+            .paragraph-3 {
+                transition-duration: 0.3s;
+            }
 
-		.card-body {
-			@include padding(15px, 0px, 40px, 0px);
+            &:hover {
+                &,
+                .paragraph-3 {
+                    color: $red;
+                }
 
-			.text-block__wrap {
-				display: block;
-			}
+                svg {
+                    fill: $red
+                }
+            }
+        }
 
-			.text-block__wrap + .text-block__wrap {
-				margin-top: 30px;
-			}
-		}
+        .card-body {
+            @include padding(15px, 0px, 40px, 0px);
 
-		&__active {
-			background-color: $gray;
+            .text-block__wrap {
+                display: block;
+            }
 
-			.accordion__arrow svg {
-				transform: rotate(-90deg) translateY(-7px);
-			}
-		}
+            .text-block__wrap + .text-block__wrap {
+                margin-top: 30px;
+            }
+        }
 
-		.links {
-			display: inline-block;
-			text-transform: uppercase;
-			text-decoration: underline;
-			line-height: 1.7rem;
-			color: $dark;
+        &__active {
+            &:not(.accordion__wrap__exhibitions) {
+                background-color: $gray;
 
-			&:hover {
-				color: $red;
-			}
-		}
-	}
+            }
 
-	&__arrow {
-		text-align: right;
+            .accordion__arrow svg {
+                transform: rotate(-90deg) translateY(0);
+            }
+        }
 
-		svg {
-			transform: rotate(90deg) translateY(7px);
-			width: 8px;
-			fill: $dark;
-			transition-duration: 0.3s;
-			transition-timing-function: ease-out;
-		}
+        .links {
+            display: inline-block;
+            text-transform: uppercase;
+            text-decoration: underline;
+            line-height: 1.7rem;
+            color: $dark;
 
-		&__download {
-			text-align: right;
-			svg {
-				width: 20px;
-				fill: $dark;
-			}
-		}
-	}
+            &:hover {
+                color: $red;
+            }
+        }
+    }
+
+    &__arrow {
+        text-align: right;
+        margin-right: 7px;
+
+        svg {
+            transform: rotate(90deg) translateY(0);
+            width: 8px;
+            fill: $dark;
+            transition-duration: 0.3s;
+            transition-timing-function: ease-out;
+        }
+
+        &__download {
+            text-align: right;
+
+            svg {
+                width: 20px;
+                fill: $dark;
+            }
+        }
+    }
 }
