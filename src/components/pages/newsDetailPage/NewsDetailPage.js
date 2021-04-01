@@ -7,13 +7,16 @@ import {fetchExhibitions, fetchNews} from "../../../actions";
 import NewsAndEventsList from "../../newsAndEventsList/NewsAndEventsList";
 import ArticleDetail from "../../ArticleDetail/ArticleDetail";
 import {FormattedMessage, injectIntl} from 'react-intl';
+import NotFound from "../NotFound";
 
 class NewsDetailPage extends Component {
 
     state = {
         articleId: null,
         article: null,
-        listOfNewsAndEvents: null
+        articleType: null,
+        listOfNewsAndEvents: null,
+        isPageExist: null
     }
 
     fetchDate = () => {
@@ -21,21 +24,32 @@ class NewsDetailPage extends Component {
             if (this.props.news && this.state.articleId !== Number(this.props.match.params.articleId)) {
                 this.props.fetchNews()
                     .then(() => {
-                        this.setState({
-                            articleId: Number(this.props.match.params.articleId),
-                            article: this.props.news[Number(this.props.match.params.articleId)],
-                            listOfNewsAndEvents: this.props.news
-                        })
+                        if (this.props.news[Number(this.props.match.params.articleId)]) {
+                            this.setState({
+                                articleId: Number(this.props.match.params.articleId),
+                                article: this.props.news[Number(this.props.match.params.articleId)],
+                                articleType: this.props.news[Number(this.props.match.params.articleId)].type,
+                                listOfNewsAndEvents: this.props.news
+                            })
+                        } else {
+                            return null
+                        }
+
                     })
             }
         } else {
             if (this.props.exhibitions && this.state.articleId !== Number(this.props.match.params.articleId)) {
                 this.props.fetchExhibitions()
                     .then(() => {
-                        this.setState({
-                            articleId: Number(this.props.match.params.articleId),
-                            article: this.props.exhibitions[Number(this.props.match.params.articleId)]
-                        })
+                        if (this.props.exhibitions[Number(this.props.match.params.articleId)]) {
+                            this.setState({
+                                articleId: Number(this.props.match.params.articleId),
+                                article: this.props.exhibitions[Number(this.props.match.params.articleId)],
+                                articleType: this.props.exhibitions[Number(this.props.match.params.articleId)].type,
+                            })
+                        } else {
+                            return null
+                        }
                     })
             }
         }
@@ -43,7 +57,6 @@ class NewsDetailPage extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props.match);
         this.fetchDate()
     }
 
@@ -59,7 +72,31 @@ class NewsDetailPage extends Component {
         }
     }
 
-    render() {
+    setBreadcrumbs = () => {
+        const {intl} = this.props;
+
+        if (this.state.articleType === 'exhibition') {
+            return `${intl.formatMessage({id: 'temporary-exhibitions-title'})} - ${this.state.article ? this.state.article.title : null}`
+        } else {
+            return `${this.state.article ? this.state.article.title : null}`
+        }
+    }
+
+    provideContentByType = () => {
+        // check if router url param matches article type
+        //also if activity doesn't exist, articleType is not set and this returns false
+        if (this.state.articleType === this.props.match.params.news) {
+            console.log('4');
+            return this.renderContent()
+        } else {
+            console.log('3');
+            return <NotFound/>
+        }
+
+
+    }
+
+    renderContent = () => {
         const {intl} = this.props;
         return (
             <div className='news-detail-page__wrap'>
@@ -71,19 +108,17 @@ class NewsDetailPage extends Component {
                             &&
                             <ol className='breadcrumb'>
                                 <li className='breadcrumb-item'>
-                                    <a className="link" href={`/${this.setHref(this.state.article.type)}`}
+                                    <a className="link" href={`/${this.setHref(this.state.articleType)}`}
                                        itemProp="url" target=""
                                        rel="noopener nofollow noreferrer"
-                                       dangerouslySetInnerHTML={{__html: intl.formatMessage({id: `menu.${this.setHref(this.state.article.type)}`})}}/>
+                                       dangerouslySetInnerHTML={{__html: intl.formatMessage({id: `menu.${this.setHref(this.state.articleType)}`})}}/>
 
                                 </li>
                                 <li className='breadcrumb-item active'
-                                    dangerouslySetInnerHTML={{__html: `${intl.formatMessage({id: 'temporary-exhibitions-title'})} - ${this.state.article ? this.state.article.title : null}`}}
+                                    dangerouslySetInnerHTML={{__html: this.setBreadcrumbs()}}
                                 />
-
                             </ol>
                         }
-
                     </div>
                 </Container>
                 {/* !BREADCRUMBS*/}
@@ -126,6 +161,25 @@ class NewsDetailPage extends Component {
                 {/* !ADDITIONAL CONTENT*/}
             </div>
         )
+    }
+
+
+    render() {
+
+            if(this.props.news || this.props.exhibitions){
+                console.log('1');
+                return (
+                    this.provideContentByType()
+                )
+            } else {
+                console.log('0');
+                return (
+                    <h3 className='h3'>
+                        Loading...
+                    </h3>
+                )
+            }
+
     }
 }
 

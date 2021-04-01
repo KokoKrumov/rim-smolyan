@@ -285,7 +285,6 @@ class AccordionBlock extends Component {
                                     id={block.id}
                                     className={`accordion__wrap ${(this.props.openAccordionItemPured === block.id) ? `accordion__wrap__active` : ``}`}
                                 >
-
                                     {
                                         block.type === 'collapsable'
                                             ?
@@ -319,8 +318,6 @@ class AccordionBlock extends Component {
 
                                                             </Col>
                                                         </Row>
-
-
                                                     </Container>
                                                 </Accordion.Toggle>
 
