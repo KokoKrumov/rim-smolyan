@@ -58,7 +58,7 @@ class InfoColumn extends Component {
                                         this.state.showRulesForActivity
                                             ?
                                             <p style={{marginTop: '2rem'}}>
-                                                <a className="link cta_outline cta_outline__dark link-underline m-0"
+                                                <a className="link cta_outline cta_outline__dark link-underline m-0 d-inline-block"
                                                    href="https://static.museumsmolyan.eu/docs/ustrojstvo_dejnost_rim_smolyan.pdf"
                                                    target="_blank"
                                                    rel="noopener noreferrer"

@@ -69,7 +69,7 @@ class AccordionBlock extends Component {
                                             this.state.content &&
                                             this.state.content.map(item => {
                                                 return (
-                                                    <CardExhibitionArchive title={item.title} text={item.text}/>
+                                                    <CardExhibitionArchive key={item.id} title={item.title} text={item.text}/>
                                                 )
                                             })
                                         }

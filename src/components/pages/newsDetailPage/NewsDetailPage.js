@@ -20,11 +20,14 @@ class NewsDetailPage extends Component {
     }
 
     fetchDate = () => {
+        // check if activity is exhibition, event o article
+        // check if we fetch news or exhibitions
+        //check if activity json file has such article number or article type matches url type
         if (this.props.match.params.news !== 'exhibition') {
             if (this.props.news && this.state.articleId !== Number(this.props.match.params.articleId)) {
                 this.props.fetchNews()
                     .then(() => {
-                        if (this.props.news[Number(this.props.match.params.articleId)]) {
+                        if (this.props.news[Number(this.props.match.params.articleId)] && this.props.news[Number(this.props.match.params.articleId)].type === this.props.match.params.news) {
                             this.setState({
                                 articleId: Number(this.props.match.params.articleId),
                                 article: this.props.news[Number(this.props.match.params.articleId)],
@@ -32,7 +35,9 @@ class NewsDetailPage extends Component {
                                 listOfNewsAndEvents: this.props.news
                             })
                         } else {
-                            return null
+                            this.setState({
+                                isPageExist: false
+                            })
                         }
 
                     })
@@ -41,14 +46,16 @@ class NewsDetailPage extends Component {
             if (this.props.exhibitions && this.state.articleId !== Number(this.props.match.params.articleId)) {
                 this.props.fetchExhibitions()
                     .then(() => {
-                        if (this.props.exhibitions[Number(this.props.match.params.articleId)]) {
+                        if (this.props.exhibitions[Number(this.props.match.params.articleId)] && this.props.exhibitions[Number(this.props.match.params.articleId)].type === this.props.match.params.news) {
                             this.setState({
                                 articleId: Number(this.props.match.params.articleId),
                                 article: this.props.exhibitions[Number(this.props.match.params.articleId)],
                                 articleType: this.props.exhibitions[Number(this.props.match.params.articleId)].type,
                             })
                         } else {
-                            return null
+                            this.setState({
+                                isPageExist: false
+                            })
                         }
                     })
             }
@@ -85,10 +92,23 @@ class NewsDetailPage extends Component {
     provideContentByType = () => {
         // check if router url param matches article type
         //also if activity doesn't exist, articleType is not set and this returns false
-        if (this.state.articleType === this.props.match.params.news) {
-            console.log('4');
-            return this.renderContent()
-        } else {
+        if (this.state.isPageExist === null) {
+
+            if (this.state.articleType === this.props.match.params.news) {
+                console.log('4');
+                return this.renderContent()
+            } else {
+                console.log(this.state);
+                return (
+                    <Container>
+                        <h3 className='h3'>
+                            Loading...
+                        </h3>
+                    </Container>
+                )
+
+            }
+        } else if(this.state.isPageExist === false) {
             console.log('3');
             return <NotFound/>
         }
@@ -166,19 +186,19 @@ class NewsDetailPage extends Component {
 
     render() {
 
-            if(this.props.news || this.props.exhibitions){
-                console.log('1');
-                return (
-                    this.provideContentByType()
-                )
-            } else {
-                console.log('0');
-                return (
-                    <h3 className='h3'>
-                        Loading...
-                    </h3>
-                )
-            }
+        if (this.props.news || this.props.exhibitions) {
+            console.log('1');
+            return (
+                this.provideContentByType()
+            )
+        } else {
+            console.log('0');
+            return (
+                <h3 className='h3'>
+                    Loading...
+                </h3>
+            )
+        }
 
     }
 }
