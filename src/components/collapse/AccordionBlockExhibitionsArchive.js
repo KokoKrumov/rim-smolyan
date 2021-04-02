@@ -16,9 +16,7 @@ class AccordionBlock extends Component {
     }
 
     setActiveKay = (activeKay) => {
-        this.setState({activeKay: this.state.activeKay === 0 ? null : 0}, () => {
-            console.log(this.state.activeKay);
-        })
+        this.setState({activeKay: this.state.activeKay === 0 ? null : 0})
     }
 
     render() {

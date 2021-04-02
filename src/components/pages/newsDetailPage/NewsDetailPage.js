@@ -95,10 +95,8 @@ class NewsDetailPage extends Component {
         if (this.state.isPageExist === null) {
 
             if (this.state.articleType === this.props.match.params.news) {
-                console.log('4');
                 return this.renderContent()
             } else {
-                console.log(this.state);
                 return (
                     <Container>
                         <h3 className='h3'>
@@ -109,7 +107,6 @@ class NewsDetailPage extends Component {
 
             }
         } else if(this.state.isPageExist === false) {
-            console.log('3');
             return <NotFound/>
         }
 
@@ -187,12 +184,10 @@ class NewsDetailPage extends Component {
     render() {
 
         if (this.props.news || this.props.exhibitions) {
-            console.log('1');
             return (
                 this.provideContentByType()
             )
         } else {
-            console.log('0');
             return (
                 <h3 className='h3'>
                     Loading...
