@@ -284,11 +284,7 @@ class AccordionBlock extends Component {
                                 <Card
                                     id={block.id}
                                     className={`accordion__wrap ${(this.props.openAccordionItemPured === block.id) ? `accordion__wrap__active` : ``}`}
-                                    onClick={() => {
-                                        this.props.handleInitialHash(block);
-                                    }}
                                 >
-
                                     {
                                         block.type === 'collapsable'
                                             ?
@@ -296,6 +292,9 @@ class AccordionBlock extends Component {
                                                 <Accordion.Toggle
                                                     as={Card.Header}
                                                     eventKey={block.id}
+                                                    onClick={() => {
+                                                        this.props.handleInitialHash(block);
+                                                    }}
                                                 >
                                                     <Container>
                                                         <Row className='justify-content-between align-items-center'>
@@ -319,8 +318,6 @@ class AccordionBlock extends Component {
 
                                                             </Col>
                                                         </Row>
-
-
                                                     </Container>
                                                 </Accordion.Toggle>
 
