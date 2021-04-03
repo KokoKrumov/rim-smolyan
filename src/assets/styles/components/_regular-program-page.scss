@@ -2,7 +2,11 @@
 	@include padding(0px, 0px, 80px, 0px);
 
 	.info-column {
-		@include padding(60px, 0px, 20px, 0px)
+		@include padding(60px, 0px, 20px, 0px);
+
+		p {
+			margin-bottom: 1rem;
+		}
 	}
 
 }
