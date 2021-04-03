@@ -18,7 +18,7 @@ function NewsAndEventsListHorizontal({listOfNewsAndEvents, exhibitions}) {
                         <Row>
                             <Col lg={5}>
                                 {/*IMAGE AND DATE*/}
-                                <a className="link link-img" href={`/${exhibitions ? 'exhibition' : 'news'}/${index}`} itemProp="url" target=""
+                                <a className="link link-img" href={`/${exhibitions ? 'exhibitions' : 'news'}/${index}`} itemProp="url" target=""
                                    rel="noopener nofollow noreferrer">
                                     <div className='nae-item__img__wrap'>
                                         {event.dateD && event.type === 'event' ?
@@ -58,7 +58,7 @@ function NewsAndEventsListHorizontal({listOfNewsAndEvents, exhibitions}) {
 
                                     {/*TITLE*/}
                                     <h3 className='h3'>
-                                        <a className="link a-title" href={`/${exhibitions ? 'exhibition' : 'news'}/${index}`} itemProp="url" target=""
+                                        <a className="link a-title" href={`/${exhibitions ? 'exhibitions' : 'news'}/${index}`} itemProp="url" target=""
                                            rel="noopener nofollow noreferrer">
                                             {event.title}
                                         </a>
@@ -71,7 +71,7 @@ function NewsAndEventsListHorizontal({listOfNewsAndEvents, exhibitions}) {
                                     {/*LINK TO SEE MORE*/}
                                     <a
                                         className="a cta_outline cta_outline__dark hvr-underline-from-left"
-                                        href={`/${exhibitions ? 'exhibition' : 'news'}/${index}`}
+                                        href={`/${exhibitions ? 'exhibitions' : 'news'}/${index}`}
                                         itemProp="url"
                                         target=""
                                         rel="noopener nofollow noreferrer">
