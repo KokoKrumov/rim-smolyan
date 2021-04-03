@@ -16,27 +16,28 @@ class NewsDetailPage extends Component {
         article: null,
         articleType: null,
         listOfNewsAndEvents: null,
-        isPageExist: null
+        isPageExist: null,
+        isLoading: true
     }
 
     fetchDate = () => {
-        // check if activity is exhibition, event o article
-        // check if we fetch news or exhibitions
-        //check if activity json file has such article number or article type matches url type
-        if (this.props.match.params.news !== 'exhibition') {
+        if (this.props.match.params.news !== 'exhibitions') {
             if (this.props.news && this.state.articleId !== Number(this.props.match.params.articleId)) {
                 this.props.fetchNews()
                     .then(() => {
-                        if (this.props.news[Number(this.props.match.params.articleId)] && this.props.news[Number(this.props.match.params.articleId)].type === this.props.match.params.news) {
+                        if (this.props.news[Number(this.props.match.params.articleId)]) {
                             this.setState({
                                 articleId: Number(this.props.match.params.articleId),
                                 article: this.props.news[Number(this.props.match.params.articleId)],
+                                articleSection: 'news',
                                 articleType: this.props.news[Number(this.props.match.params.articleId)].type,
-                                listOfNewsAndEvents: this.props.news
+                                listOfNewsAndEvents: this.props.news,
+                                isLoading: false
                             })
                         } else {
                             this.setState({
-                                isPageExist: false
+                                isPageExist: false,
+                                isLoading: false
                             })
                         }
 
@@ -46,15 +47,18 @@ class NewsDetailPage extends Component {
             if (this.props.exhibitions && this.state.articleId !== Number(this.props.match.params.articleId)) {
                 this.props.fetchExhibitions()
                     .then(() => {
-                        if (this.props.exhibitions[Number(this.props.match.params.articleId)] && this.props.exhibitions[Number(this.props.match.params.articleId)].type === this.props.match.params.news) {
+                        if (this.props.exhibitions[Number(this.props.match.params.articleId)]) {
                             this.setState({
                                 articleId: Number(this.props.match.params.articleId),
                                 article: this.props.exhibitions[Number(this.props.match.params.articleId)],
+                                articleSection: 'exhibitions',
                                 articleType: this.props.exhibitions[Number(this.props.match.params.articleId)].type,
+                                isLoading: false
                             })
                         } else {
                             this.setState({
-                                isPageExist: false
+                                isPageExist: false,
+                                isLoading: false
                             })
                         }
                     })
@@ -90,23 +94,15 @@ class NewsDetailPage extends Component {
     }
 
     provideContentByType = () => {
-        // check if router url param matches article type
-        //also if activity doesn't exist, articleType is not set and this returns false
-        if (this.state.isPageExist === null) {
 
-            if (this.state.articleType === this.props.match.params.news) {
+        if (this.state.isPageExist === null) {
+            if (this.state.articleSection === this.props.match.params.news) {
                 return this.renderContent()
             } else {
-                return (
-                    <Container>
-                        <h3 className='h3'>
-                            Loading...
-                        </h3>
-                    </Container>
-                )
+                return <NotFound/>
 
             }
-        } else if(this.state.isPageExist === false) {
+        } else if (this.state.isPageExist === false) {
             return <NotFound/>
         }
 
@@ -125,10 +121,10 @@ class NewsDetailPage extends Component {
                             &&
                             <ol className='breadcrumb'>
                                 <li className='breadcrumb-item'>
-                                    <a className="link" href={`/${this.setHref(this.state.articleType)}`}
+                                    <a className="link" href={`/${this.state.articleSection}`}
                                        itemProp="url" target=""
                                        rel="noopener nofollow noreferrer"
-                                       dangerouslySetInnerHTML={{__html: intl.formatMessage({id: `menu.${this.setHref(this.state.articleType)}`})}}/>
+                                       dangerouslySetInnerHTML={{__html: intl.formatMessage({id: `menu.${this.state.articleSection}`})}}/>
 
                                 </li>
                                 <li className='breadcrumb-item active'
@@ -157,7 +153,7 @@ class NewsDetailPage extends Component {
                 {/* !MAIN DETAIL CONTENT*/}
                 {/*ADDITIONAL CONTENT*/}
                 {
-                    this.props.match.params.news !== 'exhibition'
+                    this.props.match.params.news !== 'exhibitions'
                     &&
                     <Container>
                         <Row>
@@ -183,7 +179,7 @@ class NewsDetailPage extends Component {
 
     render() {
 
-        if (this.props.news || this.props.exhibitions) {
+        if (!this.state.isLoading && (this.props.news || this.props.exhibitions)) {
             return (
                 this.provideContentByType()
             )

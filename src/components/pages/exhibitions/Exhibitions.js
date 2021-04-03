@@ -84,6 +84,7 @@ class ExhibitionsPage extends Component {
                             </Col>
                             <div>
                                 <NewsAndEventsListHorizontal
+                                    exhibitions
                                     listOfNewsAndEvents={this.state.exhibitions}
                                 />
                             </div>
