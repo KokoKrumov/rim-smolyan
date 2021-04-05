@@ -8,7 +8,8 @@ import {
     FETCH_RIM_BUILDING_IMAGES,
     FETCH_TEAM_MODAL, CLOSE_TEAM_MODAL,
     FETCH_TEAM,
-    FETCH_EXHIBITIONS
+    FETCH_EXHIBITIONS,
+    FETCH_ROUTES
 } from './types';
 
 import streams from "../api/streams";
@@ -17,6 +18,11 @@ import streams from "../api/streams";
 export const fetchNews = () => async dispatch => {
     const response = await streams.get('/news.json');
     dispatch({type: FETCH_NEWS, payload: response.data})
+}
+
+export const fetchRoutes = () => async dispatch => {
+    const response = await streams.get('/routes.json');
+    dispatch({type: FETCH_ROUTES, payload: response.data})
 }
 
 export const fetchExhibitions = () => async dispatch => {

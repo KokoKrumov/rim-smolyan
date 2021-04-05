@@ -100,5 +100,12 @@
   "temporary-exhibitions-title": "Temporary exhibitions",
   "temporary-exhibitions-subtitle": "Currently, the halls of the Regional Museum of History Stoyu Shishkov, Smolyan are presenting the following exhibitions:",
   "archive": "Archive",
-  "archive-subtitle": "Currently, the halls of the Regional Museum of History Stoyu Shishkov, Smolyan are presenting the following exhibitions:"
+  "archive-subtitle": "Currently, the halls of the Regional Museum of History Stoyu Shishkov, Smolyan are presenting the following exhibitions:",
+  "services": "Services",
+  "workshops": "workshops",
+  "workshops-text": "<p>Музейните ателиета целят задълбочаване познанията по история и култура, усвояване на нови знания и умения, забавление в свободното време. Предлагани на различна социална публика, по различни теми, най-посещавани са тези, свързани с традициите и обичаите, с краезнаниетото и родоизследването. Най-активни участници в тях са младите хора. </p><p>В рамките на ателието участниците получават знания посредством лекции, беседи и презентации и досег до автентични образци;</p><p>усвояват начините за работа в специализираната библиотека и архива на музея; усъвършенствуват заниманията си и придобиват сръчности и умения. Участниците получават материали, компетентна помощ от експертите и възможности за изява. Те имат право да изработят за свои потребности зададените задачи, да бъде обявено авторството им, да поканят и включат свои приятели в инициативата, да се връщат многократно.</p>",
+  "routes": "Routes",
+  "routes-text": "<b>Април-октомври</b>, в дните от вторник до събота, само по предварителна заявка (една седмица по-рано) за български и англоговорящи групи (минимум 10 човека). Часовете се определят по споразумение с групата. Предлагаме само екскурзоводско обслужване.",
+  "routes-list-title": "Предлагани маршрути",
+  "routes-call": "За заявки на телефон"
 }
