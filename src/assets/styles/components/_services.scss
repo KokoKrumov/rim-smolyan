@@ -15,6 +15,10 @@
         padding-bottom: 2.5rem;
     }
 
+    .section-routes .h5__sub {
+        font-weight: bold;
+    }
+
     .section {
         border-top: 1px solid rgba(0, 0, 0, 0.2);
     }
@@ -61,6 +65,30 @@
             &:hover {
                 text-decoration: underline;
             }
+        }
+    }
+
+    .list-services {
+        margin-top: 1.25rem;
+    }
+
+    .list-services__item {
+        margin-bottom: 1.25rem;
+        font-family: $font-acari-bold;
+        @include font-size(17px);
+        @include line-height(25px);
+        color: #524F4F;
+    }
+
+    .section-services {
+        .nae-container {
+            padding-bottom: 2.5rem;
+        }
+    }
+
+    &__main {
+        .section:last-child {
+            padding-bottom: 6.25rem;
         }
     }
 }

@@ -7,13 +7,16 @@ import InfoColumn from "../../infoColumn/InfoColumn";
 import Col from "react-bootstrap/cjs/Col";
 import Row from "react-bootstrap/cjs/Row";
 import imgTraveling from "../../../assets/images/traveling.png"
-import {closeModal, fetchRoutes} from "../../../actions";
+import {closeModal, fetchRoutes, fetchServices} from "../../../actions";
 
 class Services extends Component {
 
-    state = {}
+    state = {
+        routes: null,
+        services: null,
+    }
 
-    fetchData = () => {
+    fetchRoutes = () => {
         if (this.props && this.props.routes && this.props.routes !== this.state.routes) {
             this.props.fetchRoutes()
                 .then(() => {
@@ -23,9 +26,20 @@ class Services extends Component {
         }
     }
 
+    fetchServices = () => {
+        if (this.props && this.props.services && this.props.services !== this.state.services) {
+            this.props.fetchServices()
+                .then(() => {
+                    this.setState({services: this.props.services})
+                })
+
+        }
+    }
+
 
     componentDidMount() {
-        this.fetchData()
+        this.fetchRoutes()
+        this.fetchServices()
     }
 
     render() {
@@ -35,7 +49,7 @@ class Services extends Component {
                 <HeroInner
                     title={'services'}
                 />
-                <main>
+                <main className='services-page__main'>
 
                     <section>
                         <Container className='position-relative'>
@@ -90,7 +104,8 @@ class Services extends Component {
                                             }
                                         </ul>
                                         <p className='paragraph-2 routes-call'>
-                                            <span dangerouslySetInnerHTML={{__html: intl.formatMessage({id: "routes-call"})}}/>
+                                            <span
+                                                dangerouslySetInnerHTML={{__html: intl.formatMessage({id: "routes-call"})}}/>
                                             <a href="tel:030162727"> 0301/ 6-27-27</a>
                                         </p>
                                     </div>
@@ -106,6 +121,60 @@ class Services extends Component {
                             </Row>
                         </Container>
                     </section>
+                    <section className='section'>
+                        <Container className='position-relative'>
+                            <Row>
+                                <InfoColumn
+                                    title={'thematic-talks-title'}
+                                    text={'thematic-talks-text'}
+                                    isSmall={true}
+                                    columns={2}
+                                />
+                            </Row>
+
+                        </Container>
+                    </section>
+                    <section className='section section-services'>
+                        <Container className='position-relative'>
+                            <Row>
+                                <InfoColumn
+                                    title={'offered-services-title'}
+                                    text={'offered-services-text'}
+                                    isSmall={true}
+                                    columns={2}
+                                />
+                            </Row>
+
+                            <Row>
+                                <Col xs={12}>
+                                    <p className={`paragraph-2`}
+                                       dangerouslySetInnerHTML={{__html: intl.formatMessage({id: "we-offer"}) + ':'}}/>
+                                </Col>
+                            </Row>
+
+                            <Row>
+                                <Col xs={12}>
+                                    <ul className='list-services col-count-3'>
+                                        {
+                                            this.state.services
+                                                ?
+                                                this.state.services.map(item => {
+                                                    return (
+                                                        <li className='list-services__item' key={item.id}>
+                                                            {item.title};
+                                                        </li>
+                                                    )
+                                                })
+                                                :
+                                                <p className={`paragraph-2`}>
+                                                    Loading...
+                                                </p>
+                                        }
+                                    </ul>
+                                </Col>
+                            </Row>
+                        </Container>
+                    </section>
                 </main>
             </div>
         )
@@ -114,13 +183,15 @@ class Services extends Component {
 
 
 const mapStateToProps = state => ({
-    routes: Object.values(state.routes)
+    routes: Object.values(state.routes),
+    services: Object.values(state.services)
 })
 
 
 export default injectIntl(connect(
     mapStateToProps,
     {
-        fetchRoutes
+        fetchRoutes,
+        fetchServices
     }
 )(Services));
