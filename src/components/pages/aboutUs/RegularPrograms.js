@@ -21,7 +21,7 @@ class RegularPrograms extends Component {
                     backLink={true}
                 />
                 <main>
-                    <Container className='container position-relative'>
+                    <Container className='position-relative'>
                         {
                             this.state.infoColumns.map((infoColumn) => {
                                 return (

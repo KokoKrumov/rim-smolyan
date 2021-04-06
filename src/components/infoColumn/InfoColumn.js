@@ -49,9 +49,9 @@ class InfoColumn extends Component {
 
                         </div>
                         <div>
-                            <p className={`paragraph-2 col-count-${this.state.columns}`}
+                            <div className={`paragraph-2 col-count-${this.state.columns}`}
                                dangerouslySetInnerHTML={{__html: intl.formatMessage({id: this.props.text})}}>
-                            </p>
+                            </div>
                             <Row className='home-page__info-column'>
                                 <Col>
                                     {
