@@ -8,6 +8,7 @@ import Col from "react-bootstrap/cjs/Col";
 import Row from "react-bootstrap/cjs/Row";
 import imgTraveling from "../../../assets/images/traveling.png"
 import {closeModal, fetchRoutes, fetchServices} from "../../../actions";
+import CardInfoLine from "../../infoLine/CardInfoLine";
 
 class Services extends Component {
 
@@ -144,14 +145,12 @@ class Services extends Component {
                                     columns={2}
                                 />
                             </Row>
-
                             <Row>
                                 <Col xs={12}>
                                     <p className={`paragraph-2`}
                                        dangerouslySetInnerHTML={{__html: intl.formatMessage({id: "we-offer"}) + ':'}}/>
                                 </Col>
                             </Row>
-
                             <Row>
                                 <Col xs={12}>
                                     <ul className='list-services col-count-3'>
@@ -171,6 +170,13 @@ class Services extends Component {
                                                 </p>
                                         }
                                     </ul>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <div className='section-services__card-info__price-link'>
+                                        <CardInfoLine title={"services-price-card-title"} link={'/prices'} isSmall={true} linkText={'here'}/>
+                                    </div>
                                 </Col>
                             </Row>
                         </Container>

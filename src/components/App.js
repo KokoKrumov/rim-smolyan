@@ -21,6 +21,7 @@ import Terms from "./pages/terms/Terms";
 import PrivacyPolicy from "./pages/privacyPolicy/PrivacyPolicy";
 import ExhibitionsPage from "./pages/exhibitions/Exhibitions";
 import Services from "./pages/services/Services";
+import Prices from "./pages/prices/Prices";
 
 class App extends Component {
 
@@ -50,6 +51,7 @@ class App extends Component {
                             <Route path='/terms' exact component={Terms}/>
                             <Route path='/administrative' exact component={Administrative}/>
                             <Route path='/services' exact component={Services}/>
+                            <Route path='/prices' exact component={Prices}/>
                             <Route path='/administrative/:parentId/:id' exact component={Administrative}/>
                             <Route path='*' component={NotFound}/>
                         </Switch>
