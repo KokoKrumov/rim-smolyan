@@ -84,6 +84,22 @@
         .nae-container {
             padding-bottom: 2.5rem;
         }
+
+        &__card-info__price-link {
+            margin-top: 7.5rem;
+
+            .h5__sub {
+                font-weight: 600;
+            }
+
+            .info-line__titled__item {
+                @include media-breakpoint-down(md) {
+                    flex-direction: column;
+                    align-items: flex-end;
+                }
+
+            }
+        }
     }
 
     &__main {

@@ -33,10 +33,17 @@ class CardInfoLine extends Component {
                             this.state.isSmall
                                 ?
                                 <div>
-                                    <h5 className='h5'
-                                        dangerouslySetInnerHTML={{__html: intl.formatMessage({id: this.state.title})}}
-                                    >
-                                    </h5>
+                                    {
+                                        this.state.title
+                                            ?
+                                            <h5 className='h5'
+                                                dangerouslySetInnerHTML={{__html: intl.formatMessage({id: this.state.title})}}
+                                            >
+                                            </h5>
+                                            :
+                                            null
+                                    }
+
 
                                     {
                                         this.state.subtitle
