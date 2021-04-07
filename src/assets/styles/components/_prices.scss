@@ -1,0 +1,20 @@
+.prices-page__main{
+	@include padding(90px, 0px, 120px, 0px);
+
+	@include media-breakpoint-down(md){
+		@include padding(45px, 0px, 60px, 0px);
+	}
+
+	.prices-title {
+		@include font-size(20px);
+		@include line-height(27px);
+	}
+
+	.paragraph-2 {
+		margin-top: 2rem;
+	}
+
+	.prices-title:not(:first-child) {
+		margin-top: 4rem;
+	}
+}
