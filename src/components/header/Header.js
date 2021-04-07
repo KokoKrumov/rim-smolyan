@@ -220,11 +220,25 @@ function Header({showModal}) {
                                         className='nav__main-link'>
                                         <FormattedMessage id="menu.news"/>
                                     </Nav.Link>
-                                    <Nav.Link
-                                        href="/about-us"
-                                        className='nav__main-link'>
-                                        <FormattedMessage id="menu.about-us"/>
-                                    </Nav.Link>
+                                    <NavDropdown title={intl.formatMessage({id: 'menu.about-us'})}
+                                                 className='nav__main-link'
+                                                 id="collasible-nav-dropdown">
+                                        <NavDropdown.Item
+                                            className="nav__secondary-link"
+                                            href="/about-us">
+                                            <FormattedMessage id="menu.about-museum"/>
+                                        </NavDropdown.Item>
+                                        <NavDropdown.Item
+                                            className="nav__secondary-link"
+                                            href="/services">
+                                            <FormattedMessage id="services"/>
+                                        </NavDropdown.Item>
+                                        <NavDropdown.Item
+                                            className="nav__secondary-link"
+                                            href="/prices">
+                                            <FormattedMessage id="prices"/>
+                                        </NavDropdown.Item>
+                                    </NavDropdown>
                                     <Nav.Link
                                         href="/contact-us"
                                         className='nav__main-link'>
