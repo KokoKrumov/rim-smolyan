@@ -1,32 +1,30 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
-import {fetchNews} from "../../../actions";
+import {fetchExhibitions} from "../../../actions";
 import Article from "../../Article/Article";
 import {injectIntl} from 'react-intl';
 import NotFound from "../NotFound";
 
-class NewsDetailPage extends Component {
+class ExhibitionsDetailPage extends Component {
 
     state = {
         articleId: null,
         article: null,
         articleType: null,
-        listOfNewsAndEvents: null,
         isPageExist: null,
         isLoading: true
     }
 
     fetchDate = () => {
-        if (this.props.news && this.state.articleId !== Number(this.props.match.params.articleId)) {
-            this.props.fetchNews()
+        if (this.props.exhibitions && this.state.articleId !== Number(this.props.match.params.articleId)) {
+            this.props.fetchExhibitions()
                 .then(() => {
-                    if (this.props.news[Number(this.props.match.params.articleId)]) {
+                    if (this.props.exhibitions[Number(this.props.match.params.articleId)]) {
                         this.setState({
                             articleId: Number(this.props.match.params.articleId),
-                            article: this.props.news[Number(this.props.match.params.articleId)],
-                            articleSection: 'news',
-                            articleType: this.props.news[Number(this.props.match.params.articleId)].type,
-                            listOfNewsAndEvents: this.props.news,
+                            article: this.props.exhibitions[Number(this.props.match.params.articleId)],
+                            articleSection: 'exhibitions',
+                            articleType: this.props.exhibitions[Number(this.props.match.params.articleId)].type,
                             isLoading: false
                         })
                     } else {
@@ -35,7 +33,6 @@ class NewsDetailPage extends Component {
                             isLoading: false
                         })
                     }
-
                 })
         }
     }
@@ -45,17 +42,18 @@ class NewsDetailPage extends Component {
     }
 
     setBreadcrumbs = () => {
-        return `${this.state.article ? this.state.article.title : null}`
+        const {intl} = this.props;
+
+        return `${intl.formatMessage({id: 'temporary-exhibitions-title'})} - ${this.state.article ? this.state.article.title : null}`
     }
 
     provideContentByType = () => {
         if (this.state.isPageExist === null) {
             const data = {
                 breadcrumbs: this.setBreadcrumbs(),
-                detailContainer: '',
+                detailContainer: 'exhibition-container',
                 article: this.state.article,
-                articleSection: this.state.articleSection,
-                listOfNewsAndEvents: this.state.listOfNewsAndEvents
+                articleSection: this.state.articleSection
             };
             return <Article data={data}/>
         } else if (this.state.isPageExist === false) {
@@ -64,8 +62,7 @@ class NewsDetailPage extends Component {
     }
 
     render() {
-
-        if (!this.state.isLoading && this.props.news) {
+        if (!this.state.isLoading && this.props.exhibitions) {
             return (
                 this.provideContentByType()
             )
@@ -80,10 +77,11 @@ class NewsDetailPage extends Component {
     }
 }
 
+
 const mapStateToProps = (state) => {
     return {
-        news: Object.values(state.news)
+        exhibitions: Object.values(state.exhibitions)
     };
 }
 
-export default injectIntl(connect(mapStateToProps, {fetchNews})(NewsDetailPage));
+export default injectIntl(connect(mapStateToProps, {fetchExhibitions})(ExhibitionsDetailPage));
