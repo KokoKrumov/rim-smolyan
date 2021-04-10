@@ -3,6 +3,8 @@ $path_beginings = [
     '/',
     '/news',
     '/about-us',
+    '/services',
+    '/prices',
     '/contact-us',
     '/support-us',
     '/administrative',
