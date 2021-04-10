@@ -24,40 +24,124 @@
         "content": [
           {
             "id": 1,
+            "title": "Министерство на културата на Република България",
+            "url": "http://mc.government.bg/"
+          },
+          {
+            "id": 2,
             "title": "Община Смолян",
             "url": "https://www.smolyan.bg/"
           },
           {
-            "id": 2,
+            "id": 3,
             "title": "Областна администрация Смолян",
             "url": "https://sm.government.bg/"
           },
           {
-            "id": 3,
+            "id": 4,
             "title": "Община Златоград",
             "url": "https://www.zlatograd.bg/"
           },
           {
-            "id": 4,
+            "id": 5,
             "title": "Община Чепеларе",
             "url": "http://chepelare.org/"
           },
           {
-            "id": 5,
+            "id": 6,
+            "title": "Община Рудозем",
+            "url": "https://www.rudozem.bg/"
+          },
+          {
+            "id": 7,
+            "title": "Община Мадан",
+            "url": "https://www.madan.bg/"
+          },
+          {
+            "id": 8,
+            "title": "Община Девин",
+            "url": "https://www.devin.bg/"
+          },
+          {
+            "id": 9,
+            "title": "Община Неделино",
+            "url": "https://nedelino.bg/"
+          },
+          {
+            "id": 10,
+            "title": "Община Баните",
+            "url": "https://banite.egov.bg/"
+          },
+          {
+            "id": 11,
             "title": "Регионален инспекторат по образованието - Смолян",
             "url": "https://www.ruobg.com/news"
           },
           {
-            "id": 6,
+            "id": 12,
+            "title": "Териториална агенция „Държавен архив” - Смолян",
+            "url": "https://www.archives.government.bg/58-Смолян"
+          },
+          {
+            "id": 13,
+            "title": "Асоциация на родопските общини",
+            "url": "http://www.arm-bg.net/"
+          },
+          {
+            "id": 14,
+            "title": "Регионална туристическа асоциация „Родопи”",
+            "url": "https://www.rhodopes.bg/bg/"
+          },
+          {
+            "id": 15,
+            "title": "Европа Директно - Смолян",
+            "url": "https://www.horizonti.eu/europe-direct/"
+          },
+          {
+            "id": 16,
+            "title": "Варненски свободен университет „Черноризец Храбър” - Филиал Смолян",
+            "url": "https://www.vfu.bg/учебни-звена/филиал-смолян.html"
+          },
+          {
+            "id": 17,
+            "title": "Пловдивски университет „Паисий Хилендарски” – Филиал Смолян",
+            "url": "https://uni-plovdiv.bg/pages/index/45"
+          },
+          {
+            "id": 18,
+            "title": "Пловдивски университет „Паисий Хилендарски” - Философско-исторически факултет",
+            "url": "https://uni-plovdiv.bg/pages/index/42"
+          },
+          {
+            "id": 19,
+            "title": "Софийски университет „Св. Климент Охридски” – Исторически факултет",
+            "url": "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/istoricheski_fakultet"
+          },
+          {
+            "id": 20,
             "title": "Нов български университет – Департамент „Антропология”",
             "url": "https://anthropology.nbu.bg/"
           },
           {
-            "id": 7,
-            "title": "Министерство на културата на Република България",
-            "url": "http://www.mc.government.bg/"
+            "id": 21,
+            "title": "Нов български университет – Департамент „Кино, реклама и шоубизнес”",
+            "url": "https://visualarts.nbu.bg/"
+          },
+          {
+            "id": 22,
+            "title": "Национален археологически институт с музей при БАН",
+            "url": "http://www.naim.bg/"
+          },
+          {
+            "id": 23,
+            "title": "Институт за етнология и фолклористика с етнографски музей при БАН",
+            "url": "http://iefem.bas.bg/"
+          },
+          {
+            "id": 24,
+            "title": "Институт за исторически изследвания при БАН",
+            "url": "http://ihist.bas.bg/"
           }
-
         ]
       },
       {
