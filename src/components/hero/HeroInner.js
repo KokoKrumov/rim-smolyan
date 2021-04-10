@@ -5,19 +5,37 @@ import {Link} from "react-router-dom";
 
 class HeroInner extends Component {
 
-    state = {
-        title: this.props.title,
-        subtitle: this.props.subtitle ? this.props.subtitle : '',
-        subtitleLg: this.props.subtitleLg ? this.props.subtitleLg : '',
-        backLink: this.props.backLink ? this.props.backLink : false,
-        arrowBottom: this.props.arrowBottom
+    constructor(props) {
+        super(props);
+        this.state = {
+            title: this.props.title,
+            subtitle: this.props.subtitle ? this.props.subtitle : '',
+            labelTitle: this.props.labelTitle ? this.props.labelTitle : '',
+            subtitleLg: this.props.subtitleLg ? this.props.subtitleLg : '',
+            backLink: this.props.backLink ? this.props.backLink : false,
+            arrowBottom: this.props.arrowBottom
+        }
     }
 
+
     renderHero = () => {
+        console.log(this.state.labelTitle);
         const {intl} = this.props;
         return (
             <div className={`hero-inner__wrap${this.state.backLink ? '__sm' : ''}`}>
                 <Container>
+                    {
+                        this.state.labelTitle
+                            ?
+                            <div>
+                                <p className='h-sup'
+                                   dangerouslySetInnerHTML={{__html: intl.formatMessage({id: this.state.labelTitle})}}
+                                />
+                            </div>
+                            :
+                            null
+
+                    }
                     {
                         this.state.backLink
                             ?

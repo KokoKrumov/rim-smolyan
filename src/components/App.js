@@ -22,6 +22,7 @@ import PrivacyPolicy from "./pages/privacyPolicy/PrivacyPolicy";
 import ExhibitionsPage from "./pages/exhibitions/Exhibitions";
 import Services from "./pages/services/Services";
 import Prices from "./pages/prices/Prices";
+import Collections from "./pages/collection/Collections";
 
 class App extends Component {
 
@@ -43,6 +44,7 @@ class App extends Component {
                             <Route path='/news' exact component={NewsPage}/>
                             <Route path='/exhibitions' exact component={ExhibitionsPage}/>
                             <Route path='/about-us/:modalContent' exact component={AboutUs}/>
+                            <Route path='/collections/:type' exact component={Collections}/>
                             <Route path='/:news/:articleId' exact component={NewsDetailPage}/>
                             <Route path='/about-us' exact component={AboutUs}/>
                             <Route path='/contact-us' exact component={Contacts}/>
