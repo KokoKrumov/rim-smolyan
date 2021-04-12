@@ -23,7 +23,8 @@ import PrivacyPolicy from "./pages/privacyPolicy/PrivacyPolicy";
 import ExhibitionsPage from "./pages/exhibitions/Exhibitions";
 import Services from "./pages/services/Services";
 import Prices from "./pages/prices/Prices";
-import Collections from "./pages/collection/Collections";
+import CollectionsVirtual from "./pages/collection/CollectionsVirtual";
+import CollectionsMain from "./pages/collection/CollectionsMain";
 
 class App extends Component {
 
@@ -47,7 +48,8 @@ class App extends Component {
                             <Route path='/exhibitions/:articleId' exact component={ExhibitionsDetailPage}/>
                             <Route path='/exhibitions' exact component={ExhibitionsPage}/>
                             <Route path='/about-us/:modalContent' exact component={AboutUs}/>
-                            <Route path='/collections/:type' exact component={Collections}/>
+                            <Route path='/main-collections/' exact component={CollectionsMain}/>
+                            <Route path='/virtual-collections/' exact component={CollectionsVirtual}/>
                             <Route path='/about-us' exact component={AboutUs}/>
                             <Route path='/contact-us' exact component={Contacts}/>
                             <Route path='/support-us' exact component={SupportUs}/>

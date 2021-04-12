@@ -6,6 +6,7 @@ import TeamReducer from "./TeamReducer";
 import exhibitionsReducer from "./ExhibitionsReducer";
 import routesReducer from "./RoutesReducer";
 import servicesReducer from "./ServicesReducer";
+import CollectionsReducer from "./CollectionsReducer";
 
 
 export default combineReducers({
@@ -15,5 +16,6 @@ export default combineReducers({
     services: servicesReducer,
     modal: ModalReducer,
     rimBuildingImages: RimBuildingImagesReducer,
-    team: TeamReducer
+    team: TeamReducer,
+    collections: CollectionsReducer
 })

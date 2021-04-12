@@ -7,7 +7,7 @@ import Row from "react-bootstrap/cjs/Row";
 import history from "../../../history";
 import NotFound from "../NotFound";
 
-class Collections extends Component {
+class CollectionsVirtual extends Component {
 
     constructor(props) {
         super(props);
@@ -80,4 +80,4 @@ class Collections extends Component {
 }
 
 
-export default injectIntl(Collections);
+export default injectIntl(CollectionsVirtual);

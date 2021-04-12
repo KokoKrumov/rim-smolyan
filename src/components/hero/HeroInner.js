@@ -19,7 +19,6 @@ class HeroInner extends Component {
 
 
     renderHero = () => {
-        console.log(this.state.labelTitle);
         const {intl} = this.props;
         return (
             <div className={`hero-inner__wrap${this.state.backLink ? '__sm' : ''}`}>

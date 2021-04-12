@@ -1,11 +1,22 @@
 [
   {
     "id": 1,
-    "image": "../images/about-us_building_img-1.jpg"
+    "image": "../images/collections-virtual/harbaliev.png"
   },
   {
     "id": 2,
-    "image": "../images/about-us_building_img-1.jpg"
-
+    "image": "../images/collections-virtual/istoriqNaBulgaria.png"
+  },
+  {
+    "id": 3,
+    "image": "../images/collections-virtual/maska.png"
+  },
+  {
+    "id": 4,
+    "image": "../images/collections-virtual/rekvizit.png"
+  },
+  {
+    "id": 5,
+    "image": "../images/collections-virtual/wepons.png"
   }
 ]
