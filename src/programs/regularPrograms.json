@@ -4,7 +4,7 @@
     "isSmall": true,
     "title": "the-international-museum-day",
     "text": "the-international-museum-day-text",
-    "backgroundIMage": "",
+    "backgroundImage": "",
     "showRulesForActivity": false,
     "columns": 2
   },
@@ -13,7 +13,7 @@
     "isSmall": true,
     "title": "the-european-heritage-days",
     "text": "the-european-heritage-days-text",
-    "backgroundIMage": "",
+    "backgroundImage": "",
     "showRulesForActivity": false,
     "columns": 2
   }
