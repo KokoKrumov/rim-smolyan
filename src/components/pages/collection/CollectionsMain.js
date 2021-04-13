@@ -5,9 +5,14 @@ import Container from "react-bootstrap/cjs/Container";
 import Col from "react-bootstrap/cjs/Col";
 import Row from "react-bootstrap/cjs/Row";
 import history from "../../../history";
+import photoArchiveBg from "../../../assets/images/photo-archive.png";
+import libraryBg from "../../../assets/images/library-bg.png";
+import scientificArchiveBg from "../../../assets/images/scientific-archive-bg.png";
 import {connect} from "react-redux";
-import {closeModal, fetchCollectionsMain} from "../../../actions";
+import {fetchCollectionsMain} from "../../../actions";
 import CardCollections from "../../cards/cardCollections";
+import InfoColumn from "../../infoColumn/InfoColumn";
+import heroSupportUsBg from "../../../assets/images/heroSupportUsBg.jpg";
 
 class Collections extends Component {
 
@@ -20,9 +25,9 @@ class Collections extends Component {
 
     componentDidMount() {
         this.props.fetchCollectionsMain()
-            .then(()=>{
+            .then(() => {
                 this.setState({
-                    collectionsMain:this.props.collectionsMain
+                    collectionsMain: this.props.collectionsMain
                 })
             })
     }
@@ -47,7 +52,7 @@ class Collections extends Component {
                                         {
                                             this.state.collectionsMain
                                                 ?
-                                                this.state.collectionsMain.map(item =>{
+                                                this.state.collectionsMain.map(item => {
                                                     return <CardCollections key={item.id} item={item}/>
                                                 })
                                                 :
@@ -60,6 +65,45 @@ class Collections extends Component {
                                 </Col>
                             </Row>
                         </Container>
+                    </section>
+                    <section>
+                        <InfoColumn
+                            title={'photo-archive'}
+                            text={'photo-archive-text'}
+                            backgroundImage={photoArchiveBg}
+                            columns={2}
+                        />
+                    </section>
+                    <section>
+                        <div className='hero__wrap'>
+                            <div
+                                className='hero hero-bg'
+                                style={{
+                                    backgroundImage: `url(${scientificArchiveBg})`
+                                }}
+                            >
+                                <Container>
+                                    <h1 className='h1'
+                                        dangerouslySetInnerHTML={{__html: intl.formatMessage({id: "scientific-archive"})}}
+                                    />
+                                    <p className='paragraph-2'
+                                       dangerouslySetInnerHTML={{__html: intl.formatMessage({id: "scientific-archive-text"})}}
+                                    />
+                                    <p className='paragraph-2'
+                                       dangerouslySetInnerHTML={{__html: intl.formatMessage({id: "scientific-archive-text"})}}
+                                    />
+                                </Container>
+                            </div>
+
+                        </div>
+                    </section>
+                    <section>
+                        <InfoColumn
+                            title={'library'}
+                            text={'library-text'}
+                            backgroundImage={libraryBg}
+                            columns={2}
+                        />
                     </section>
                 </main>
             </div>
@@ -76,7 +120,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => ({
     fetchCollectionsMain: () => dispatch(fetchCollectionsMain())
 })
-
 
 
 export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(Collections));

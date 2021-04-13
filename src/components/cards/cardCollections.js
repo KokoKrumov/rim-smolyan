@@ -7,8 +7,11 @@ import history from "../../history";
 
 class CardCollections extends Component {
 
-    state = {
-        item: this.props.item
+    constructor(props) {
+        super(props);
+        this.state = {
+            item: this.props.item
+        }
     }
 
     render() {
@@ -16,16 +19,19 @@ class CardCollections extends Component {
         return (
             <div className='card card-collections__wrap'>
                 <div className='card-collections__img'>
-                    <a href="#" className='card-collections__link'>
-                        <img className='card-collections__image' src={this.state.item.image} alt=""/>
-                        <h4 className='h4'
-                            dangerouslySetInnerHTML={{__html: `${this.state.item.title}`}}
-                        />
-                        <p className='card-collections__text'>
-                            (<span dangerouslySetInnerHTML={{__html: `${this.state.item.galleryLength}`}}/>
-                            <span dangerouslySetInnerHTML={{__html: intl.formatMessage({id: 'pics'})}}/>)
-                        </p>
-                    </a>
+                    <figure>
+                        <a href={`/main-collections/intro/${this.state.item.collectionsType}`}
+                           className='card-collections__link'>
+                            <img className='card-collections__image' src={this.state.item.image} alt=""/>
+                            <figcaption className='card-collections__text'>
+                                <h4 className='h4'
+                                    dangerouslySetInnerHTML={{__html: `${this.state.item.title}`}}
+                                />
+                                    (<span dangerouslySetInnerHTML={{__html: `${this.state.item.galleryLength}`}}/>
+                                    <span dangerouslySetInnerHTML={{__html: intl.formatMessage({id: 'pics'})}}/>)
+                            </figcaption>
+                        </a>
+                    </figure>
                 </div>
             </div>
         )
@@ -34,8 +40,7 @@ class CardCollections extends Component {
 
 
 export default injectIntl(connect(
-null,
-{
-}
+    null,
+    {}
 )(CardCollections));
 

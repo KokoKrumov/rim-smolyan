@@ -7,15 +7,21 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 class InfoColumn extends Component {
-
-    state = {
-        showMoreLink: this.props.showMoreLink ? this.props.showMoreLink : false,
-        showRulesForActivity: this.props.showRulesForActivity,
-        columns: this.props.columns,
-        rulesForActivity: "rules-for-activity",
-        seeMore: "see-more",
-        isSmall: this.props.isSmall ? this.props.isSmall : false
+    constructor(props) {
+        super(props);
+        this.state = {
+            title: this.props.title ? this.props.title : '',
+            text:this.props.text ? this.props.text : '',
+            backgroundImage: this.props.backgroundImage,
+            showMoreLink: this.props.showMoreLink ? this.props.showMoreLink : false,
+            showRulesForActivity: this.props.showRulesForActivity,
+            columns: this.props.columns,
+            rulesForActivity: "rules-for-activity",
+            seeMore: "see-more",
+            isSmall: this.props.isSmall ? this.props.isSmall : false
+        }
     }
+    
 
     handleShowModal(data, url, e) {
         e.preventDefault();
@@ -27,8 +33,8 @@ class InfoColumn extends Component {
         return (
             <div
                 className='nae-container info-column nae-container_content-dark hero-bg'
-                style={this.props.backgroundImage ? {
-                    backgroundImage: `url(${this.props.backgroundImage})`
+                style={this.state.backgroundImage ? {
+                    backgroundImage: `url(${this.state.backgroundImage})`
                 } : null}
             >
                 <Container>
@@ -39,18 +45,18 @@ class InfoColumn extends Component {
                                 this.state.isSmall
                                     ?
                                     <h2 className='h2'
-                                        dangerouslySetInnerHTML={{__html: intl.formatMessage({id: this.props.title})}}>
+                                        dangerouslySetInnerHTML={{__html: intl.formatMessage({id: this.state.title})}}>
                                     </h2>
                                     :
                                     <h1 className='h1'
-                                        dangerouslySetInnerHTML={{__html: intl.formatMessage({id: this.props.title})}}>
+                                        dangerouslySetInnerHTML={{__html: intl.formatMessage({id: this.state.title})}}>
                                     </h1>
                             }
 
                         </div>
                         <div>
                             <div className={`paragraph-2 col-count-${this.state.columns}`}
-                               dangerouslySetInnerHTML={{__html: intl.formatMessage({id: this.props.text})}}>
+                               dangerouslySetInnerHTML={{__html: intl.formatMessage({id: this.state.text})}}>
                             </div>
                             <Row className='home-page__info-column'>
                                 <Col>

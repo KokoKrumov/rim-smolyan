@@ -8,7 +8,7 @@
     "galleryLength": "61"
   },
   {
-    "id": 5,
+    "id": 2,
     "image": "../images/collections-main/wepons.png",
     "title": "Оръжие",
     "collectionsType": "weapons",
@@ -16,7 +16,7 @@
     "galleryLength": "15"
   },
   {
-    "id": 4,
+    "id": 3,
     "image": "../images/collections-main/rekvizit.png",
     "title": "Етнография и обреден реквизит",
     "collectionsType": "ethnography",
@@ -24,7 +24,7 @@
     "galleryLength": "30"
   },
   {
-    "id": 1,
+    "id": 4,
     "image": "../images/collections-main/harbaliev.png",
     "title": "O.з. полк. Райчо Пеев Харбалиев",
     "collectionsType": "colonel-harbaliev",
@@ -33,7 +33,7 @@
   },
 
   {
-    "id": 6,
+    "id": 5,
     "image": "../images/collections-main/numizmatika.png",
     "title": "Нумизматика",
     "collectionsType": "numismatics",
@@ -41,7 +41,7 @@
     "galleryLength": "30"
   },
   {
-    "id": 2,
+    "id": 6,
     "image": "../images/collections-main/istoriqNaBulgaria.png",
     "title": "История на България ХV-ХІХ в.",
     "collectionsType": "history-of-Bulgaria",

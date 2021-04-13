@@ -124,5 +124,12 @@
   "collections-main": "Main collections",
   "collections-main-subtitle":  "Over the years the museum in Smolyan has accumulated rich and varied collections, totaling over 150 thousand units in the main, auxiliary and exchange collections.",
   "collections-virtual": "Virtual collections",
-  "pics": "pictures"
+  "pics": "pictures",
+  "photo-archive": "Photo archive",
+  "photo-archive-text": "The Museum's Photo archive stocks more than 100 000 negatives, slides, films and video cassettes that have captured moments from the life of the local community, have preserved the cultural and historical heritage of the Middle Rhodopes, and have stored moments from the typical museum work such as archaeological excavations, field work, displays and exhibitions, conferences, meetings etc. These photo materials were prepared by the museum photographers over the years as well as by renowned masters of the art of photography in Bulgaria such as Peter Frantz, Aleksi Aleksiev, Rumen Baykov, Yavor Popov, Toroz Horosyan, and Krum Yanev. There are also photos by Krum Savov, a well-known photographer from the beginning of the 20th century, who was the first photojournalist from the Rhodopes to be granted prestigious international awards. The Photo Archive contents data is being stored into an electronic file. The museum has the necessary equipment and has started the digitization of the negatives and slides.",
+  "library": "Library",
+  "library-text": "The museum library has over 13 500 volumes of specialized literature mainly in its history, archaeology, ethnography, art and local studies sections. The library collection is regularly replenished through exchange, donations or purchase of books from academic publishing houses. Subscription to national and regional periodicals such as Historical Review, History, The Past, Archive Review, State Archive Publications, Monuments, Museums and Restoration, Bulgarian Ethnology, Bulgarian Folklore, All About Weapons, The Rhodopes and others.\nBesides being an important unit for the research work of the museum experts, the library is also available, under specific conditions, to scientists, teachers, university and high school students, local studies experts and genealogy researchers.\nThe library has an electronic catalogue and access to Internet.",
+  "scientific-archive": "Scientific archive",
+  "scientific-archive-text": "Scientific archive"
+
 }
