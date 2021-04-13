@@ -10,6 +10,7 @@ class InfoColumn extends Component {
 
     state = {
         showMoreLink: this.props.showMoreLink ? this.props.showMoreLink : false,
+        backgroundImage: this.props.backgroundImage ? this.props.backgroundImage : '',
         showRulesForActivity: this.props.showRulesForActivity,
         columns: this.props.columns,
         rulesForActivity: "rules-for-activity",
@@ -28,7 +29,7 @@ class InfoColumn extends Component {
             <div
                 className='nae-container info-column nae-container_content-dark hero-bg'
                 style={{
-                    backgroundImage: `url(${this.props.backgroundIMage})`
+                    backgroundImage: `url(${this.props.backgroundImage})`
                 }}
             >
                 <Container>
