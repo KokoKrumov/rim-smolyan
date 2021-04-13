@@ -7,7 +7,7 @@ import InfoColumn from "../../infoColumn/InfoColumn";
 import Col from "react-bootstrap/cjs/Col";
 import Row from "react-bootstrap/cjs/Row";
 import imgTraveling from "../../../assets/images/traveling.png"
-import {closeModal, fetchRoutes, fetchServices} from "../../../actions";
+import {fetchRoutes, fetchServices} from "../../../actions";
 import CardInfoLine from "../../infoLine/CardInfoLine";
 
 class Services extends Component {
