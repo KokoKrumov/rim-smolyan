@@ -30,7 +30,7 @@ class RegularPrograms extends Component {
                                             title={infoColumn.title}
                                             text={infoColumn.text}
                                             isSmall={infoColumn.isSmall}
-                                            backgroundIMage={infoColumn.backgroundIMage}
+                                            backgroundImage={infoColumn.backgroundImage}
                                             showRulesForActivity={infoColumn.showRulesForActivity}
                                             columns={infoColumn.columns}
                                         />

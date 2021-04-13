@@ -196,7 +196,7 @@ class HomePage extends Component {
                     <InfoColumn
                         title={this.state.infoColumn.title}
                         text={this.state.infoColumn.text}
-                        backgroundIMage={this.state.infoColumn.bgAboutUs}
+                        backgroundImage={this.state.infoColumn.bgAboutUs}
                         showMoreLink={this.state.infoColumn.showMoreLink}
                         columns={this.state.infoColumn.columns}
                     />

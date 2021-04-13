@@ -28,7 +28,7 @@ class InfoColumn extends Component {
             <div
                 className='nae-container info-column nae-container_content-dark hero-bg'
                 style={{
-                    backgroundImage: `url(${this.props.backgroundIMage})`
+                    backgroundImage: `url(${this.props.backgroundImage})`
                 }}
             >
                 <Container>

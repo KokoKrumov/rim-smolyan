@@ -189,7 +189,7 @@ class AboutUs extends Component {
                     <InfoColumn
                         title={this.state.infoColumn.history.title}
                         text={this.state.infoColumn.history.text}
-                        backgroundIMage={this.state.infoColumn.history.aboutUsHistoryBg}
+                        backgroundImage={this.state.infoColumn.history.aboutUsHistoryBg}
                         showRulesForActivity={this.state.infoColumn.history.showRulesForActivity}
                         columns={this.state.infoColumn.history.columns}
                     />
