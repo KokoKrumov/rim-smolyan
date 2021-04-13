@@ -28,7 +28,7 @@
         @include font-size(17px);
         font-family: "acari_sansregular", sans-serif;
         @include line-height(27px);
-        color: #272323;
+        color: $dark;
     }
 
     .hero-bg {

@@ -3,24 +3,32 @@
     "id": 1,
     "image": "../images/collections-main/maska.png",
     "title": "Археология",
+    "collectionsType": "archeology",
+    "fetchType": "ARCHEOLOGY",
     "galleryLength": "61"
   },
   {
     "id": 5,
     "image": "../images/collections-main/wepons.png",
     "title": "Оръжие",
+    "collectionsType": "weapons",
+    "fetchType": "weapons",
     "galleryLength": "15"
   },
   {
     "id": 4,
     "image": "../images/collections-main/rekvizit.png",
     "title": "Етнография и обреден реквизит",
+    "collectionsType": "ethnography",
+    "fetchType": "ethnography",
     "galleryLength": "30"
   },
   {
     "id": 1,
     "image": "../images/collections-main/harbaliev.png",
     "title": "O.з. полк. Райчо Пеев Харбалиев",
+    "collectionsType": "colonel-harbaliev",
+    "fetchType": "colonel-harbaliev",
     "galleryLength": "10"
   },
 
@@ -28,12 +36,16 @@
     "id": 6,
     "image": "../images/collections-main/numizmatika.png",
     "title": "Нумизматика",
+    "collectionsType": "numismatics",
+    "fetchType": "numismatics",
     "galleryLength": "30"
   },
   {
     "id": 2,
     "image": "../images/collections-main/istoriqNaBulgaria.png",
     "title": "История на България ХV-ХІХ в.",
+    "collectionsType": "history-of-Bulgaria",
+    "fetchType": "history-of-Bulgaria",
     "galleryLength": "18"
   }
 ]

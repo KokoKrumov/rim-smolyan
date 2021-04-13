@@ -25,6 +25,7 @@ import Services from "./pages/services/Services";
 import Prices from "./pages/prices/Prices";
 import CollectionsVirtual from "./pages/collection/CollectionsVirtual";
 import CollectionsMain from "./pages/collection/CollectionsMain";
+import CollectionsMainIntro from "./pages/collection/CollectionsMainIntro";
 
 class App extends Component {
 
@@ -49,6 +50,7 @@ class App extends Component {
                             <Route path='/exhibitions' exact component={ExhibitionsPage}/>
                             <Route path='/about-us/:modalContent' exact component={AboutUs}/>
                             <Route path='/main-collections/' exact component={CollectionsMain}/>
+                            <Route path='/main-collections/intro/:type' exact component={CollectionsMainIntro}/>
                             <Route path='/virtual-collections/' exact component={CollectionsVirtual}/>
                             <Route path='/about-us' exact component={AboutUs}/>
                             <Route path='/contact-us' exact component={Contacts}/>

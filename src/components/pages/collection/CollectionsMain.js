@@ -35,6 +35,7 @@ class Collections extends Component {
                     labelTitle={'collections-main'}
                     subtitleLg={'collections-main-subtitle'}
                     title={'collections'}
+                    arrowBottom={true}
                 />
                 <main className='prices-page__main'>
 
