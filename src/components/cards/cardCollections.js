@@ -22,7 +22,7 @@ class CardCollections extends Component {
                     <figure>
                         <a href={`/main-collections/intro/${this.state.item.collectionsType}`}
                            className='card-collections__link'>
-                            <img className='card-collections__image' src={this.state.item.image} alt=""/>
+                            <img className='card-collections__image img-fluid' src={this.state.item.image} alt=""/>
                             <figcaption className='card-collections__text'>
                                 <h4 className='h4'
                                     dangerouslySetInnerHTML={{__html: `${this.state.item.title}`}}

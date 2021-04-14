@@ -1,0 +1,30 @@
+.collections-page {
+    @include padding(90px, 0px, 120px, 0px);
+
+    @include media-breakpoint-down(md) {
+        @include padding(45px, 0px, 60px, 0px);
+    }
+
+    .card-columns {
+
+        @include media-breakpoint-down(lg) {
+            column-count: 2;
+        }
+        @include media-breakpoint-down(sm) {
+            column-count: 1;
+        }
+    }
+
+    &__wrap {
+        .hero-inner__wrap {
+            .paragraph-1 {
+                @include media-breakpoint-down(md) {
+                    @include font-size(22px);
+                    line-height: 1.6;
+                }
+            }
+        }
+    }
+
+
+}

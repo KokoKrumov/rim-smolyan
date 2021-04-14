@@ -35,14 +35,14 @@ class Collections extends Component {
     render() {
         const {intl} = this.props;
         return (
-            <div className='collections-page'>
+            <div className='collections-page__wrap'>
                 <HeroInner
                     labelTitle={'collections-main'}
                     subtitleLg={'collections-main-subtitle'}
                     title={'collections'}
                     arrowBottom={true}
                 />
-                <main className='prices-page__main'>
+                <main className='collections-page'>
 
                     <section>
                         <Container className='position-relative'>
@@ -74,24 +74,45 @@ class Collections extends Component {
                             columns={2}
                         />
                     </section>
-                    <section>
-                        <div className='hero__wrap'>
+                    <section className='archive'>
+                        <div className=''>
                             <div
-                                className='hero hero-bg'
+                                className='hero-bg'
                                 style={{
                                     backgroundImage: `url(${scientificArchiveBg})`
                                 }}
                             >
-                                <Container>
-                                    <h1 className='h1'
-                                        dangerouslySetInnerHTML={{__html: intl.formatMessage({id: "scientific-archive"})}}
-                                    />
-                                    <p className='paragraph-2'
-                                       dangerouslySetInnerHTML={{__html: intl.formatMessage({id: "scientific-archive-text"})}}
-                                    />
-                                    <p className='paragraph-2'
-                                       dangerouslySetInnerHTML={{__html: intl.formatMessage({id: "scientific-archive-text"})}}
-                                    />
+                                <Container className='archive__container'>
+                                   <Row>
+                                       <Col xs={12} md={11}>
+                                           <h1 className='h1'
+                                               dangerouslySetInnerHTML={{__html: intl.formatMessage({id: "scientific-archive"})}}
+                                           />
+                                           <p className='paragraph-2'
+                                              dangerouslySetInnerHTML={{__html: intl.formatMessage({id: "scientific-archive-text"})}}
+                                           />
+
+                                           <ul className='archive__list col-count-2'>
+                                               <li className='archive__list-item'>
+                                                   Документални материали от изследователски програми - „Родопи”, „Родопски крепости”, „Родопски мостове”, теренни проучвания и народописни материали за селища от територията на Средните Родопи;
+
+                                               </li>
+                                               <li className='archive__list-item'>
+                                                   Документи, свързани с научно-техническата обработка на фондовете -  книги за регистрация, полеви дневници, научни паспорти, актове за приемане-предаване, протоколи от инвентаризации, консервация и реставрация на културни ценности;
+
+                                               </li>
+                                               <li className='archive__list-item'>
+                                                   Материали, свързани с експозиционни дейности - тематико-структурни и тематико-експозиционни планове;  консултации; рисунки, схеми, чертежи; плакати, покани и други рекламни материали от музейни изложби.
+                                               </li>
+                                               <li className='archive__list-item'>
+                                                   Материали, свързани с недвижими културни ценности в Средните Родопи, обособени в „Технически архив”.
+                                               </li>
+                                           </ul>
+                                           <p className='paragraph-2'
+                                              dangerouslySetInnerHTML={{__html: intl.formatMessage({id: "scientific-archive-text-help"})}}
+                                           />
+                                       </Col>
+                                   </Row>
                                 </Container>
                             </div>
 
