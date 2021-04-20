@@ -131,5 +131,10 @@
   "library-text": "The museum library has over 13 500 volumes of specialized literature mainly in its history, archaeology, ethnography, art and local studies sections. The library collection is regularly replenished through exchange, donations or purchase of books from academic publishing houses. Subscription to national and regional periodicals such as Historical Review, History, The Past, Archive Review, State Archive Publications, Monuments, Museums and Restoration, Bulgarian Ethnology, Bulgarian Folklore, All About Weapons, The Rhodopes and others.\nBesides being an important unit for the research work of the museum experts, the library is also available, under specific conditions, to scientists, teachers, university and high school students, local studies experts and genealogy researchers.\nThe library has an electronic catalogue and access to Internet.",
   "scientific-archive": "Scientific archive",
   "scientific-archive-text": "It was established in the 70s of the 20th century as a specialized unit of the overall museum structure. Today the Science Archive comprises a total of 2,600 archive units such as:",
-  "scientific-archive-text-help": "The archive data index is available to users in a computer file."
+  "scientific-archive-text-help": "The archive data index is available to users in a computer file.",
+  "collection": "collection",
+  "collection-introduction": "Представяне на фонда",
+  "introduction": "Introduction",
+  "gallery": "Gallery",
+  "gallery-intro": "Галерията не е изчерпателна. Същата съдържа снимки само на част от единиците във фонда."
 }

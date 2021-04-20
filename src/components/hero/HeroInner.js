@@ -13,7 +13,8 @@ class HeroInner extends Component {
             labelTitle: this.props.labelTitle ? this.props.labelTitle : '',
             subtitleLg: this.props.subtitleLg ? this.props.subtitleLg : '',
             backLink: this.props.backLink ? this.props.backLink : false,
-            arrowBottom: this.props.arrowBottom
+            arrowBottom: this.props.arrowBottom,
+            breadcrumbs: this.props.breadcrumbs,
         }
     }
 
@@ -23,6 +24,28 @@ class HeroInner extends Component {
         return (
             <div className={`hero-inner__wrap${this.state.backLink ? '__sm' : ''}`}>
                 <Container>
+                    {
+                        this.state.breadcrumbs
+                            ?
+                            <Container>
+                                <div className='breadcrumb__wrap'>
+                                    <ol className='breadcrumb'>
+                                        <li className='breadcrumb-item'>
+                                            <a className="link" href={`/${this.state.breadcrumbs.parentLink}`}
+                                               itemProp="url" target=""
+                                               rel="noopener nofollow noreferrer"
+                                               dangerouslySetInnerHTML={{__html: intl.formatMessage({id: this.state.breadcrumbs.parent})}}
+                                            />
+                                        </li>
+                                        <li className='breadcrumb-item active'>
+                                            {this.state.breadcrumbs.child.title}
+                                        </li>
+                                    </ol>
+                                </div>
+                            </Container>
+                            :
+                            null
+                    }
                     {
                         this.state.labelTitle
                             ?
@@ -61,10 +84,16 @@ class HeroInner extends Component {
                     }
 
                     <div>
-                        <h1 className='h1'
-                            dangerouslySetInnerHTML={{__html: intl.formatMessage({id: this.state.title})}}
-                        >
-                        </h1>
+                        {
+                            this.state.title
+                            ?
+                                <h1 className='h1'
+                                    dangerouslySetInnerHTML={{__html: intl.formatMessage({id: this.state.title})}}
+                                />
+                                :
+                                null
+                        }
+
                         {
                             this.state.subtitle
                                 ?

@@ -1,22 +1,58 @@
 [
   {
     "id": 1,
-    "image": "../images/collections-virtual/harbaliev.png"
+    "image": "../images/collections-virtual/beads.png",
+    "title": "Мъниста, мънистени накити и украси",
+    "collectionsType": "beads",
+    "fetchType": "BEADS",
+    "galleryLength": "61"
   },
   {
     "id": 2,
-    "image": "../images/collections-virtual/istoriqNaBulgaria.png"
+    "image": "../images/collections-virtual/thracianCities.png",
+    "title": "Монети на тракийските градове, племена и царе (V в. пр.Хр. - І в.)",
+    "collectionsType": "coins-of-Thracian-cities",
+    "fetchType": "COINS-OF-THRACIAN-CITIES",
+    "galleryLength": "15"
   },
   {
     "id": 3,
-    "image": "../images/collections-virtual/maska.png"
+    "image": "../images/collections-virtual/roman-imperial-coins.png",
+    "title": "Римски императорски монети",
+    "collectionsType": "roman-imperial-coins",
+    "fetchType": "ROMAN-IMPERIAL-COINS",
+    "galleryLength": "15"
   },
   {
     "id": 4,
-    "image": "../images/collections-virtual/rekvizit.png"
+    "image": "../images/collections-virtual/relics-of-the-first-world-war.png",
+    "title": "Реликви от Първата световна война",
+    "collectionsType": "relics-of-the-first-world-war",
+    "fetchType": "RELICS-OF-THE-FIRST-WORLD-WAR",
+    "galleryLength": "15"
   },
   {
     "id": 5,
-    "image": "../images/collections-virtual/wepons.png"
+    "image": "../images/collections-virtual/bulgarian-award.png",
+    "title": "Монархическите ордени в българската наградна система от „Дарение о. з. полк. Р. П. Харбалиев“",
+    "collectionsType": "the-monarchical-orders-in-the-Bulgarian-award-system",
+    "fetchType": "BULGARIAN-AWARD",
+    "galleryLength": "15"
+  },
+  {
+    "id": 6,
+    "image": "../images/collections-virtual/relics-of-the-first-world-war.png",
+    "title": "Реликви от Първата световна война",
+    "collectionsType": "relics-of-the-first-world-war",
+    "fetchType": "RELICS-OF-THE-FIRST-WORLD-WAR",
+    "galleryLength": "15"
+  },
+  {
+    "id": 7,
+    "image": "../images/collections-virtual/bulgarian-award.png",
+    "title": "Монархическите ордени в българската наградна система от „Дарение о. з. полк. Р. П. Харбалиев“",
+    "collectionsType": "the-monarchical-orders-in-the-Bulgarian-award-system",
+    "fetchType": "BULGARIAN-AWARD",
+    "galleryLength": "15"
   }
 ]

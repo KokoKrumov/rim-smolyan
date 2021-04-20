@@ -30,16 +30,15 @@ export const fetchCollectionsMain = () => async dispatch => {
     dispatch({type: FETCH_COLLECTIONS_MAIN, payload: response.data})
 }
 
-export const fetchCollections = (fetchType, collectionsType) => async dispatch => {
-console.log(fetchType, collectionsType);
-    const response = await streams.get(`/collections-${collectionsType}.json`);
-    dispatch({type: `FETCH_COLLECTIONS_${fetchType}`, payload: response.data})
-
-}
-
 export const fetchCollectionsVirtual = () => async dispatch => {
     const response = await streams.get('/collections-virtual.json');
     dispatch({type: FETCH_COLLECTIONS_VIRTUAL, payload: response.data})
+}
+
+export const fetchCollections = (fetchType, collectionsType) => async dispatch => {
+    console.log(fetchType, collectionsType);
+    const response = await streams.get(`/collections-${collectionsType}.json`);
+    dispatch({type: `FETCH_COLLECTIONS_${fetchType}`, payload: response.data})
 }
 
 export const fetchExhibitions = () => async dispatch => {

@@ -30,6 +30,10 @@
                 color: #3D3939;
                 margin-bottom: 3.125rem;
             }
+
+            .breadcrumb__wrap {
+                margin-bottom: 3.75rem;
+            }
         }
 
         &__wrap__sm {
@@ -92,6 +96,23 @@
                     text-align: center;
                 }
             }
+        }
+    }
+
+    &-collection {
+        color: $white;
+
+        .hero {
+            @include padding(200px, 0px, 170px, 0px);
+            background-position: bottom;
+        }
+
+        .title-label {
+            font-family: $font-acari-bold;
+            @include font-size(18px);
+            @include line-height(32px);
+            text-transform: uppercase;
+            margin-bottom: 5px;
         }
     }
 }

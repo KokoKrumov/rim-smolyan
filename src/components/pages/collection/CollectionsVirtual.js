@@ -4,56 +4,55 @@ import HeroInner from "../../hero/HeroInner";
 import Container from "react-bootstrap/cjs/Container";
 import Col from "react-bootstrap/cjs/Col";
 import Row from "react-bootstrap/cjs/Row";
-import history from "../../../history";
-import NotFound from "../NotFound";
+import photoArchiveBg from "../../../assets/images/photo-archive.png";
+import libraryBg from "../../../assets/images/library-bg.png";
+import scientificArchiveBg from "../../../assets/images/scientific-archive-bg.png";
+import {connect} from "react-redux";
+import CardCollections from "../../cards/cardCollections";
+import InfoColumn from "../../infoColumn/InfoColumn";
+import CollectionsList from "./CollectionsList";
+import {fetchCollectionsVirtual} from "../../../actions";
 
-class CollectionsVirtual extends Component {
+class Collections extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            page: this.props.match.params.type
+            collectionsVirtual: []
         };
     }
 
     componentDidMount() {
-        console.log(this.state.page);
+        this.props.fetchCollectionsVirtual()
+            .then(() => {
+                this.setState({
+                    collectionsVirtual: this.props.collectionsVirtual
+                })
+            })
     }
 
-    isMainCollection = () => {
-        return this.state.page === 'main-collections'
-    }
-
-    renderCollections = () => {
-
+    render() {
         const {intl} = this.props;
         return (
-            <div className='collections-page'>
+            <div className='collections-page__wrap'>
                 <HeroInner
-                    labelTitle={this.isMainCollection() ? 'collections-main' : 'collections-virtual'}
-                    subtitleLg={this.isMainCollection() ? 'collections-main-subtitle' : 'collections-virtual-subtitle'}
+                    labelTitle={'collections-virtual'}
+                    subtitleLg={'collections-main-subtitle'}
                     title={'collections'}
+                    arrowBottom={true}
                 />
-                <main className='prices-page__main'>
+                <main className='collections-page'>
 
                     <section>
                         <Container className='position-relative'>
                             <Row>
-                                <Col xs={12} sm={8}>
-                                    <h5 className='prices-title'
-                                        dangerouslySetInnerHTML={{__html: intl.formatMessage({id: 'prices-entrance-tours'})}}
+                                <Col xs={12}>
+                                    <CollectionsList
+                                        collections={this.state.collectionsVirtual}
+                                        collectionsType={'virtual'}
+                                        cols={4}
+                                        smallCards
                                     />
-                                    <div
-                                        dangerouslySetInnerHTML={{__html: intl.formatMessage({id: 'prices-entrance-tours-text'})}}
-                                    />
-
-                                    <h5 className='prices-title'
-                                        dangerouslySetInnerHTML={{__html: intl.formatMessage({id: 'prices-services-charges'})}}
-                                    />
-                                    <div
-                                        dangerouslySetInnerHTML={{__html: intl.formatMessage({id: 'prices-services-charges-text'})}}
-                                    />
-
                                 </Col>
                             </Row>
                         </Container>
@@ -62,22 +61,17 @@ class CollectionsVirtual extends Component {
             </div>
         )
     }
-
-    renderPage = () => {
-        switch (this.state.page) {
-            case 'main-collections':
-            case 'virtual-collections':
-                return this.renderCollections()
-            default:
-                return <NotFound/>
-
-        }
-    }
-
-    render() {
-        return this.renderPage()
-    }
 }
 
+const mapStateToProps = (state) => {
+    return {
+        collectionsVirtual: state.collections.virtual
+    };
+}
 
-export default injectIntl(CollectionsVirtual);
+const mapDispatchToProps = dispatch => ({
+    fetchCollectionsVirtual: () => dispatch(fetchCollectionsVirtual())
+})
+
+
+export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(Collections));
