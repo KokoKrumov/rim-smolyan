@@ -3,12 +3,21 @@ import {injectIntl} from 'react-intl';
 
 function CardCollections(props) {
     const {intl} = props;
-    console.log(props);
+
+    let generateHref = () => {
+       if (props.isInnerGallery) {
+           //@ToDo should think about main-collections and virtual collections
+           return`/main-collections/detail/${props.collectionsType}/${props.item.collectionsType}`
+       } else {
+           return`/${props.collectionsType}-collections/intro/${props.item.collectionsType}`
+       }
+    }
+
     return (
         <div className='card card-collections__wrap'>
             <div className='card-collections__img'>
                 <figure>
-                    <a href={`/${props.collectionsType}-collections/intro/${props.item.collectionsType}`}
+                    <a href={generateHref()}
                        className='card-collections__link'>
                         <img className='card-collections__image img-fluid' src={props.item.image} alt=""/>
                         <figcaption className='card-collections__text'>

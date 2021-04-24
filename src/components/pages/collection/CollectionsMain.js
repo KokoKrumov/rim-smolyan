@@ -38,8 +38,8 @@ class Collections extends Component {
         return (
             <div className='collections-page__wrap'>
                 <HeroInner
-                    labelTitle={'collections-main'}
-                    subtitleLg={'collections-main-subtitle'}
+                    labelTitle={this.state.collectionsMain.title}
+                    subtitleLg={this.state.collectionsMain.subtitle}
                     title={'collections'}
                     arrowBottom={true}
                 />
@@ -50,7 +50,7 @@ class Collections extends Component {
                             <Row>
                                 <Col xs={12}>
                                     <CollectionsList
-                                        collections={this.state.collectionsMain}
+                                        collections={this.state.collectionsMain.gallery}
                                         collectionsType={'main'}
                                         cols={3}
                                     />

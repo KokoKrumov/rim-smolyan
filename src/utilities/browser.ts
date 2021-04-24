@@ -56,3 +56,12 @@ export function escapeHtml(unsafeHtml: string) {
     .replace('"', '&quot;')
     .replace('\'', '&#039;')
 }
+
+export function checkIfValueExistInIntl(val:any, props:any) {
+  const {intl} = props;
+  if (!!props.intl.messages[`${val}`]) {
+    return {__html: intl.formatMessage({id: val})}
+  } else {
+    return {__html: val}
+  }
+}

@@ -1,51 +1,55 @@
-[
-  {
-    "id": 1,
-    "image": "../images/collections-main/maska.png",
-    "title": "Археология",
-    "collectionsType": "archeology",
-    "fetchType": "ARCHEOLOGY",
-    "galleryLength": "61"
-  },
-  {
-    "id": 2,
-    "image": "../images/collections-main/wepons.png",
-    "title": "Оръжие",
-    "collectionsType": "weapons",
-    "fetchType": "WEAPONS",
-    "galleryLength": "15"
-  },
-  {
-    "id": 3,
-    "image": "../images/collections-main/rekvizit.png",
-    "title": "Етнография и обреден реквизит",
-    "collectionsType": "ethnography",
-    "fetchType": "ETHNOGRAPHY",
-    "galleryLength": "30"
-  },
-  {
-    "id": 4,
-    "image": "../images/collections-main/harbaliev.png",
-    "title": "O.з. полк. Райчо Пеев Харбалиев",
-    "collectionsType": "colonel-harbaliev",
-    "fetchType": "COLONEL-HARBALIEV",
-    "galleryLength": "10"
-  },
+{
+  "title": "Основни Фондове",
+  "subtitle": "През годините музеят в Смолян е натрупал богати и разнообразни колекции, възлизащи над 150 хил. единици основен, спомагателен и обменен фонд. ",
+  "gallery": [
+    {
+      "id": 1,
+      "image": "../images/collections-main/maska.png",
+      "title": "Археология",
+      "collectionsType": "archeology",
+      "fetchType": "ARCHEOLOGY",
+      "galleryLength": "61"
+    },
+    {
+      "id": 2,
+      "image": "../images/collections-main/wepons.png",
+      "title": "Оръжие",
+      "collectionsType": "weapons",
+      "fetchType": "WEAPONS",
+      "galleryLength": "15"
+    },
+    {
+      "id": 3,
+      "image": "../images/collections-main/rekvizit.png",
+      "title": "Етнография и обреден реквизит",
+      "collectionsType": "ethnography",
+      "fetchType": "ETHNOGRAPHY",
+      "galleryLength": "30"
+    },
+    {
+      "id": 4,
+      "image": "../images/collections-main/harbaliev.png",
+      "title": "O.з. полк. Райчо Пеев Харбалиев",
+      "collectionsType": "colonel-harbaliev",
+      "fetchType": "COLONEL-HARBALIEV",
+      "galleryLength": "10"
+    },
+    {
+      "id": 5,
+      "image": "../images/collections-main/numizmatika.png",
+      "title": "Нумизматика",
+      "collectionsType": "numismatics",
+      "fetchType": "NUMISMATICS",
+      "galleryLength": "30"
+    },
+    {
+      "id": 6,
+      "image": "../images/collections-main/istoriqNaBulgaria.png",
+      "title": "История на България ХV-ХІХ в.",
+      "collectionsType": "history-of-Bulgaria",
+      "fetchType": "HISTORY-OF-BULGARIA",
+      "galleryLength": "18"
+    }
+  ]
+}
 
-  {
-    "id": 5,
-    "image": "../images/collections-main/numizmatika.png",
-    "title": "Нумизматика",
-    "collectionsType": "numismatics",
-    "fetchType": "NUMISMATICS",
-    "galleryLength": "30"
-  },
-  {
-    "id": 6,
-    "image": "../images/collections-main/istoriqNaBulgaria.png",
-    "title": "История на България ХV-ХІХ в.",
-    "collectionsType": "history-of-Bulgaria",
-    "fetchType": "HISTORY-OF-BULGARIA",
-    "galleryLength": "18"
-  }
-]

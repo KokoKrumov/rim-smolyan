@@ -15,94 +15,39 @@ import Nav from "react-bootstrap/Nav";
 import Tab from 'react-bootstrap/Tab'
 import TabContainer from 'react-bootstrap/TabContainer'
 import HeroCollections from "../../hero/HeroCollections";
-import SocialsShare from "../../socials/socialsShare";
-import NavigateThroughCollections from "../../nav/NavigateThroughCollections";
 
-class CollectionsMainIntroAndGallery extends Component {
+class CollectionsMainDetailItem extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            collectionsType: null,
-            fetchType: null,
-            collectionExist: null,
+            item: null,
             //"COLLECTIONmAIN" are all MAIN COLLECTIONS LIST
             collectionsMain: null,
             // "COLLECTION" IS THE INFORMATION ABOUT current COLLECTION
-            collection: null,
-            // "COLLECTIONfrommain" IS THE INFORMATION from main collection json ABOUT current COLLECTION
-            collectionFromMain: null,
-            collectionNextItem: null,
-            collectionPrevItem: null,
-            isInnerGallery: this.props.match.path.includes('intro')
+            collection: null
         };
-    }
-    
-    indexOfCollection = (collections, type) => {
-        console.log(collections.findIndex(el => el.collectionsType === type))
-        return collections.findIndex(el => el.collectionsType === type)
-    }
-    
-    setCollectionFromMain = (collections, type) => {
-        return collections.find(el => el.collectionsType === type)
-    }
-    
-    setNextCollectionFromMain = (collections, type) => {
-        //IF CURRENT COLLECTION IS LAST
-        if (this.indexOfCollection(collections, type) === collections.length-1) {
-            //THEN SET NEXT ITEM TO BE THE FIRST ITEM OF THE MAIN COLLECTION
-            return collections[this.indexOfCollection(collections, type) + 1]
-        } else {
-            return collections[this.indexOfCollection(collections, type) + 1]
-        }
-    }
-    
-    setPrevCollectionFromMain = (collections, type) => {
-        //IF CURRENT COLLECTION IS FIRST
-        if (this.indexOfCollection(collections, type) === 0) {
-            //THEN SET PREV ITEM TO BE THE LAST ITEM OF THE MAIN COLLECTION
-            return collections[collections.length - 1]
-        } else {
-            return collections[this.indexOfCollection(collections, type) - 1]
-        }
     }
 
     collectionTypeExist = (collections, type) => {
         //COPY THE ARRAY OF OBJECTS
         //GETT ALL MAIN COLLECTIONS
         const collectionsObj = [...collections];
+
         this.setState({
             //CHECK IF THE VALUE OF A FIELD 'TYPE' EXISTS IN SOME OF THE OBJECTS OF AN ARRAY
             //(CHECK IF THE COLLECTION EXISTS)
             collectionExist: collectionsObj.some(el => el.collectionsType === type),
-            // get the collection from main collection
-            collectionFromMain: this.setCollectionFromMain(collectionsObj, type),
-            collectionNextItem: this.setNextCollectionFromMain(collectionsObj, type),
-            collectionPrevItem: this.setPrevCollectionFromMain(collectionsObj, type),
-
-            collectionIndexFromMain: collectionsObj.some(el => el.collectionsType === type),
-            collectionsType: type
+            collectionsType: type,
+            fetchType: type.toUpperCase()
         })
     }
 
     componentDidMount() {
-        this.props.fetchCollectionsMain()
-            .then(() => {
-                this.collectionTypeExist(this.props.collectionsMain.gallery, this.props.match.params.type)
-            })
-            .then(() => {
-                //IF COLLECTION EXIST
-                if (this.state.collectionExist) {
-                    // THEN FETCH ITS DATA
-                    this.props.fetchCollections(this.state.collectionsType)
-                        .then(() => {
-                            this.setState(prevState => ({
-                                collection: this.props.collection[0]
-                            }))
-                        })
-                }
-
-            })
+        //ВЗЕМИ TYPE  И ITEM ОТ URL-A
+        // ОТИДИ ДО TYPE KOLEKCIQTA И ВИЖ ДАЛИ ITEM СЪЩЕСТВУВА
+        // console.log(this.props.match.params.item);
+        // console.log(this.props.match.params.type);
     }
 
     pageContent = () => {
@@ -119,7 +64,7 @@ class CollectionsMainIntroAndGallery extends Component {
                         :
                         null
                 }
-                <div className='collections-page pt-0 pb-0'>
+                <div className='collections-page pt-0'>
 
                     {
                         this.state.collection
@@ -137,10 +82,10 @@ class CollectionsMainIntroAndGallery extends Component {
                             :
                             null
                     }
-                    <main className='prices-page__main collections-page__intro-and-gallery'>
+                    <main className='prices-page__main'>
                         <section>
                             <Container>
-                                <Tab.Container defaultActiveKey="introduction">
+                                <Tab.Container id="left-tabs-example" defaultActiveKey="introduction">
                                     <Row className='justify-content-between'>
                                         <Col sm={2}>
                                             <Nav className="flex-column">
@@ -156,10 +101,6 @@ class CollectionsMainIntroAndGallery extends Component {
                                                     />
                                                 </Nav>
                                             </Nav>
-                                            <div className="socials__wrap">
-                                                <p className='socials-label'>Споделете страницата</p>
-                                                <SocialsShare page={'share-page'} url={this.props.match.url}/>
-                                            </div>
                                         </Col>
                                         <Col sm={10}>
                                             <Tab.Content>
@@ -207,7 +148,6 @@ class CollectionsMainIntroAndGallery extends Component {
                                                                                     key={item.title}
                                                                                     item={item}
                                                                                     collectionsType={this.state.collectionsType}
-                                                                                    isInnerGallery
                                                                                 />
                                                                             })
                                                                             :
@@ -240,11 +180,6 @@ class CollectionsMainIntroAndGallery extends Component {
                             </Container>
                         </section>
                     </main>
-                    <NavigateThroughCollections
-                        collectionType={'main-collections/intro'}
-                        prevLink={this.state.collectionPrevItem}
-                        nextLink={this.state.collectionNextItem}
-                    />
                 </div>
             </>
         )
@@ -278,17 +213,17 @@ class CollectionsMainIntroAndGallery extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        collectionsMain: state.collections.main,
+        item: state.item,
         collection: state.collections.byType
     };
 }
 
 const mapDispatchToProps = dispatch => (
     {
-        fetchCollectionsMain: () => dispatch(fetchCollectionsMain()),
-        fetchCollections: (collectionsType) => dispatch(fetchCollections(collectionsType))
+        fetchItem: (item) => dispatch(fetchCollections(item)),
+        fetchCollections: (fetchType, collectionsType) => dispatch(fetchCollections(fetchType, collectionsType))
     }
 )
 
 
-export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(CollectionsMainIntroAndGallery));
+export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(CollectionsMainDetailItem));

@@ -1,4 +1,4 @@
-import {FETCH_COLLECTIONS_ARCHEOLOGY, FETCH_COLLECTIONS_MAIN, FETCH_COLLECTIONS_VIRTUAL} from '../actions/types'
+import {FETCH_COLLECTIONS_BYTYPE, FETCH_COLLECTIONS_MAIN, FETCH_COLLECTIONS_VIRTUAL} from '../actions/types'
 
 let INITIAL_STATE = {
     main: [],
@@ -12,7 +12,7 @@ export default (state = INITIAL_STATE, action) => {
             return {...state, main: action.payload}
         case FETCH_COLLECTIONS_VIRTUAL:
             return {...state, virtual: action.payload}
-        case FETCH_COLLECTIONS_ARCHEOLOGY:
+        case FETCH_COLLECTIONS_BYTYPE:
             return {...state, byType: action.payload}
         default:
             return state;
