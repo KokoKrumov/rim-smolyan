@@ -17,6 +17,7 @@ import TabContainer from 'react-bootstrap/TabContainer'
 import HeroCollections from "../../hero/HeroCollections";
 import SocialsShare from "../../socials/socialsShare";
 import NavigateThroughCollections from "../../nav/NavigateThroughCollections";
+import {setCollectionFromMain, setNextCollectionFromMain, setPrevCollectionFromMain} from "../../../utilities/browser";
 
 class CollectionsMainIntroAndGallery extends Component {
 
@@ -37,35 +38,7 @@ class CollectionsMainIntroAndGallery extends Component {
             isInnerGallery: this.props.match.path.includes('intro')
         };
     }
-    
-    indexOfCollection = (collections, type) => {
-        console.log(collections.findIndex(el => el.collectionsType === type))
-        return collections.findIndex(el => el.collectionsType === type)
-    }
-    
-    setCollectionFromMain = (collections, type) => {
-        return collections.find(el => el.collectionsType === type)
-    }
-    
-    setNextCollectionFromMain = (collections, type) => {
-        //IF CURRENT COLLECTION IS LAST
-        if (this.indexOfCollection(collections, type) === collections.length-1) {
-            //THEN SET NEXT ITEM TO BE THE FIRST ITEM OF THE MAIN COLLECTION
-            return collections[this.indexOfCollection(collections, type) + 1]
-        } else {
-            return collections[this.indexOfCollection(collections, type) + 1]
-        }
-    }
-    
-    setPrevCollectionFromMain = (collections, type) => {
-        //IF CURRENT COLLECTION IS FIRST
-        if (this.indexOfCollection(collections, type) === 0) {
-            //THEN SET PREV ITEM TO BE THE LAST ITEM OF THE MAIN COLLECTION
-            return collections[collections.length - 1]
-        } else {
-            return collections[this.indexOfCollection(collections, type) - 1]
-        }
-    }
+
 
     collectionTypeExist = (collections, type) => {
         //COPY THE ARRAY OF OBJECTS
@@ -76,9 +49,9 @@ class CollectionsMainIntroAndGallery extends Component {
             //(CHECK IF THE COLLECTION EXISTS)
             collectionExist: collectionsObj.some(el => el.collectionsType === type),
             // get the collection from main collection
-            collectionFromMain: this.setCollectionFromMain(collectionsObj, type),
-            collectionNextItem: this.setNextCollectionFromMain(collectionsObj, type),
-            collectionPrevItem: this.setPrevCollectionFromMain(collectionsObj, type),
+            collectionFromMain: setCollectionFromMain(collectionsObj, type),
+            collectionNextItem: setNextCollectionFromMain(collectionsObj, type),
+            collectionPrevItem: setPrevCollectionFromMain(collectionsObj, type),
 
             collectionIndexFromMain: collectionsObj.some(el => el.collectionsType === type),
             collectionsType: type
