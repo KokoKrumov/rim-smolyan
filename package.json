@@ -26,6 +26,7 @@
   "dependencies": {
     "@types/react-transition-group": "^1.1.6",
     "bootstrap": "^4.5.3",
+    "ga-4-react": "^0.1.281",
     "lodash": "^4.17.20",
     "react": "^16.13.1",
     "react-alice-carousel": "^2.4.0",
