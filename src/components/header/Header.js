@@ -247,8 +247,8 @@ function Header({showModal}) {
                                     <p className='nav__main-link nav__main-link__separate-line'><span
                                         className='d-none d-xl-block'>|</span></p>
                                     <Nav.Link
-                                        href="#"
-                                        className='nav__main-link not-allowed'>
+                                        href="/laslo-nagi"
+                                        className='nav__main-link'>
                                         <FormattedMessage id="menu.house-museum"/>
                                     </Nav.Link>
                                 </Nav>
