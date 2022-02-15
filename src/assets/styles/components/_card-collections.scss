@@ -1,0 +1,35 @@
+.card-collections {
+
+	&__wrap {
+		border: none;
+		text-align: center;
+		margin-bottom: 2.5rem !important;
+
+		.h4, .h5 {
+			margin-top: 0.8rem !important;
+		}
+	}
+
+	&__image {
+		transition: filter 200ms ease;
+	}
+
+
+	&__link {
+		display: block;
+		color: $dark;
+
+		&:hover {
+			color: $dark;
+			text-decoration: underline;
+
+			.card-collections__image {
+				filter: brightness(0.6);
+			}
+		}
+	}
+}
+
+.small-cards {
+
+}

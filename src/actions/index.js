@@ -9,7 +9,7 @@ import {
     FETCH_TEAM_MODAL, CLOSE_TEAM_MODAL,
     FETCH_TEAM,
     FETCH_EXHIBITIONS,
-    FETCH_ROUTES, FETCH_SERVICES
+    FETCH_ROUTES, FETCH_SERVICES, FETCH_COLLECTIONS_MAIN, FETCH_COLLECTIONS_VIRTUAL, FETCH_COLLECTIONS_BYTYPE
 } from './types';
 
 import streams from "../api/streams";
@@ -23,6 +23,22 @@ export const fetchNews = () => async dispatch => {
 export const fetchRoutes = () => async dispatch => {
     const response = await streams.get('/routes.json');
     dispatch({type: FETCH_ROUTES, payload: response.data})
+}
+
+export const fetchCollectionsMain = () => async dispatch => {
+    const response = await streams.get('/collections-main.json');
+    dispatch({type: FETCH_COLLECTIONS_MAIN, payload: response.data})
+}
+
+export const fetchCollectionsVirtual = () => async dispatch => {
+    const response = await streams.get('/collections-virtual.json');
+    dispatch({type: FETCH_COLLECTIONS_VIRTUAL, payload: response.data})
+}
+
+export const fetchCollections = (collectionsType) => async dispatch => {
+    console.log(collectionsType);
+    const response = await streams.get(`/collections-${collectionsType}.json`);
+    dispatch({type: `FETCH_COLLECTIONS_BYTYPE`, payload: response.data})
 }
 
 export const fetchExhibitions = () => async dispatch => {

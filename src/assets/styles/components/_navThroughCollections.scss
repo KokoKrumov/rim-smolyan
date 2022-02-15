@@ -1,0 +1,50 @@
+.nav-through-collections {
+    border-top: 1px solid #E9E9E9;
+
+    &__first-half {
+        border-right: 1px solid #E9E9E9;
+        @include padding(45px, 35px, 30px, 0px);
+        text-align: right;
+    }
+
+    &__second-half {
+        @include padding(45px, 0px, 30px, 35px)
+    }
+
+    &__first-half,
+    &__second-half {
+        transition: 0.3s;
+    }
+
+    &__first-half:hover,
+    &__second-half:hover {
+        cursor: pointer;
+        background-color: $gray;
+        .nav-through-collections__direction__item {
+            color: $red;
+        }
+
+        .img {
+            filter: invert(20%) sepia(100%) saturate(5437%) hue-rotate(4deg) brightness(94%) contrast(99%);
+        }
+    }
+
+    &__direction {
+        font-family: $font-acari-regular;
+        font-weight: 500;
+        @include font-size(14px);
+        @include line-height(16px);
+        text-transform: uppercase;
+        color: $dark;
+        opacity: 0.7;
+
+        &__item {
+            padding-top: 5px;
+            font-family: $font-acari-bold;
+            @include font-size(18px);
+            @include line-height(20px);
+            text-transform: uppercase;
+            color: $dark;
+        }
+    }
+}
