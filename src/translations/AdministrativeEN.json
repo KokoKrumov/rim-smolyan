@@ -272,6 +272,21 @@
             "id": 9,
             "url": "https://static.museumsmolyan.eu/docs/otcheti/otchet_2018.pdf",
             "year": "2018"
+          },
+          {
+            "id": 10,
+            "url": "https://static.museumsmolyan.eu/docs/otcheti/otchet_2019.pdf",
+            "year": "2019"
+          },
+          {
+            "id": 11,
+            "url": "https://static.museumsmolyan.eu/docs/otcheti/otchet_2020.pdf",
+            "year": "2020"
+          },
+          {
+            "id": 12,
+            "url": "https://static.museumsmolyan.eu/docs/otcheti/otchet_2021.pdf",
+            "year": "2021"
           }
         ]
       },

@@ -8,6 +8,9 @@ import {Provider} from "react-redux";
 import {createStore, applyMiddleware, compose} from 'redux';
 import reducers from './reducers';
 import reduxThunk from 'redux-thunk'
+import GA4React from "ga-4-react";
+
+const ga4react = new GA4React("G-Y09PXD41TG");
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducers, composeEnhancers(applyMiddleware(reduxThunk)))
@@ -20,12 +23,22 @@ const language = localStorage.getItem('lang') ??
     'bg' ??
     navigator.languages[0].split(/[-_]/)[0];  // language without region code
 
-ReactDOM.render(
-    <IntlProvider locale={language} messages={messages[language]}>
-        <Provider store={store}>
-            <App/>
-        </Provider>
-    </IntlProvider>,
+(async _ => {
+    await ga4react.initialize()
+        .then((ga4) => {
+            ga4.pageview('path')
+            ga4.gtag('event', 'pageview', 'path')
+        }, (err) => {
+            console.error(err)
+        });
 
-    document.getElementById('root')
-);
+    ReactDOM.render(
+        <IntlProvider locale={language} messages={messages[language]}>
+            <Provider store={store}>
+                <App/>
+            </Provider>
+        </IntlProvider>,
+
+        document.getElementById('root')
+    );
+})();
