@@ -10,6 +10,7 @@ $path_beginings = [
     '/administrative',
     '/privacy-policy',
     '/terms',
+    '/laslo-nagi',
 ];
 
 $path_begining = '/' . explode('/', $_SERVER['REQUEST_URI'])[1];
