@@ -27,6 +27,7 @@ import CollectionsVirtual from "./pages/collection/CollectionsVirtual";
 import CollectionsMain from "./pages/collection/CollectionsMain";
 import CollectionsMainIntroAndGallery from "./pages/collection/CollectionsMainIntroAndGallery";
 import CollectionsMainDetailItem from "./pages/collection/CollectionsMainDetailItem";
+import LasloNagiPage from "./pages/lasloNagiPage/LasloNagiPage";
 
 class App extends Component {
 
@@ -54,6 +55,7 @@ class App extends Component {
                             <Route path='/main-collections/intro/:type' exact component={CollectionsMainIntroAndGallery}/>
                             <Route path='/main-collections/detail/:type/:item' exact component={CollectionsMainDetailItem}/>
                             <Route path='/virtual-collections/' exact component={CollectionsVirtual}/>
+                            <Route path='/laslo-nagi' exact component={LasloNagiPage}/>
                             <Route path='/about-us' exact component={AboutUs}/>
                             <Route path='/contact-us' exact component={Contacts}/>
                             <Route path='/support-us' exact component={SupportUs}/>

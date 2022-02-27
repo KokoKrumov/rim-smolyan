@@ -14,12 +14,14 @@ function HeroCollections(props) {
                 }}
             >
                 <Container>
-                    <p className='title-label'
-                        dangerouslySetInnerHTML={{__html: intl.formatMessage({id: 'collection'})}}
-                    />
-                    <h1 className='h1'>
-                        {props.title}
-                    </h1>
+                    {
+                        props.label &&
+                        <p className='title-label'
+                           dangerouslySetInnerHTML={{__html: intl.formatMessage({id: 'collection'})}}
+                        />
+                    }
+
+                    <h1 className='h1' dangerouslySetInnerHTML={{__html: props.title}}/>
                 </Container>
             </div>
 

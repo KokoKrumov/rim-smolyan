@@ -1,0 +1,24 @@
+.laslo-nagi__page {
+	.hero-collection .hero {
+		padding-top: 17.5rem;
+		padding-bottom: 6.625rem;
+		background-position: center;
+	}
+
+	&__contact-section {
+		.title {
+			font-family: $font-acari-regular;
+			@include font-size(20px);
+			@include line-height(27px);
+			margin-bottom: 30px;
+		}
+		.list {
+			margin-bottom: 50px;
+			& > li {
+				font-family: $font-acari-regular;
+				@include font-size(17px);
+				@include line-height(27px);
+			}
+		}
+	}
+}

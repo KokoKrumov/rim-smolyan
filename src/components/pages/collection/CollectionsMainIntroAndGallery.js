@@ -88,6 +88,7 @@ class CollectionsMainIntroAndGallery extends Component {
                         <HeroCollections
                             bgImage={this.state.collection.bgImage}
                             title={this.state.collection.title}
+                            label={true}
                         />
                         :
                         null
