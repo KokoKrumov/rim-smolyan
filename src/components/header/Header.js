@@ -238,6 +238,11 @@ function Header({showModal}) {
                                             href="/prices">
                                             <FormattedMessage id="prices"/>
                                         </NavDropdown.Item>
+                                        <NavDropdown.Item
+                                            className="nav__secondary-link"
+                                            href="/games">
+                                            <FormattedMessage id="games"/>
+                                        </NavDropdown.Item>
                                     </NavDropdown>
                                     <Nav.Link
                                         href="/contact-us"

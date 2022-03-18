@@ -1,0 +1,24 @@
+.regulation {
+	&-text {
+		.title {
+			font-family: $font-acari-semibold;
+			@include font-size(20px);
+			@include line-height(27px);
+		}
+
+		ul, li {
+			list-style-type: disc;
+		}
+
+		li {
+			@include margin(0px, 0px, 16px, 0px);
+			ul, li{
+				list-style-type: circle;
+			}
+		}
+
+		ul {
+			@include padding(0px, 0px, 0px, 40px);
+		}
+	}
+}
