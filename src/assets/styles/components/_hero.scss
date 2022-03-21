@@ -120,8 +120,21 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+
+  @include media-breakpoint-down(sm) {
+    flex-direction: column;
+
+    .h1 {
+      text-align: center;
+      @include margin(0px, 0px, 40px, 0px);
+    }
+
+    .games-title-img__wrap {
+      margin: 0 auto;
+    }
+  }
 }
 
 .games-title-img__wrap {
-  @include width(380px);
+  max-width: 23.75rem;
 }
