@@ -29,6 +29,7 @@ import CollectionsMainIntroAndGallery from "./pages/collection/CollectionsMainIn
 import CollectionsMainDetailItem from "./pages/collection/CollectionsMainDetailItem";
 import LasloNagiPage from "./pages/lasloNagiPage/LasloNagiPage";
 import Games from "./pages/games/Games";
+import Regulation from './pages/games/Regulation';
 
 class App extends Component {
 
@@ -66,6 +67,7 @@ class App extends Component {
                             <Route path='/services' exact component={Services}/>
                             <Route path='/prices' exact component={Prices}/>
                             <Route path='/games' exact component={Games}/>
+                            <Route path='/regulation' exact component={Regulation}/>
                             <Route path='/administrative/:parentId/:id' exact component={Administrative}/>
                             <Route path='*' component={NotFound}/>
                         </Switch>

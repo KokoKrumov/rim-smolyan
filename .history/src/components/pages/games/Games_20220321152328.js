@@ -26,16 +26,14 @@ class Games extends Component {
                     <section>
                         <Container className='position-relative'>
                             <Row>
-                                <Col xs={12} sm={9}>
+                                <Col xs={8} sm={8}>
                                     <h1 className='h1'
                                         dangerouslySetInnerHTML={{__html: intl.formatMessage({id: 'first-time-in-smolyan'})}}
                                     />
-                                    <p className='paragraph-2' dangerouslySetInnerHTML={{__html: intl.formatMessage({id: 'first-time-in-smolyan-first-paragraph'})}}/>
-                                   <div className='mt-40'>
-                                        <h3 className='h3'
-                                            dangerouslySetInnerHTML={{__html: intl.formatMessage({id: 'first-time-in-smolyan-sub-title'})}}
-                                        />
-                                   </div>
+                                    <p className='paragraph-2 mt-40' dangerouslySetInnerHTML={{__html: intl.formatMessage({id: 'first-time-in-smolyan-first-paragraph'})}}/>
+                                    <h3 className='h3'
+                                        dangerouslySetInnerHTML={{__html: intl.formatMessage({id: 'first-time-in-smolyan-sub-title'})}}
+                                    />
                                     <div dangerouslySetInnerHTML={{__html: intl.formatMessage({id: 'first-time-in-smolyan-sub-title-next-text'})}}/>
                                     <p className='mt-60'>
                                         <Link

@@ -1,0 +1,9 @@
+.mt-40 {
+  @include margin(40px, 0px, 0px, 0px);
+}
+.mt-60 {
+  @include margin(60px, 0px, 0px, 0px);
+}
+.mt-120 {
+  @include margin(120px, 0px, 0px, 0px);
+}

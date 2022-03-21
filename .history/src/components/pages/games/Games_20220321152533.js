@@ -26,7 +26,7 @@ class Games extends Component {
                     <section>
                         <Container className='position-relative'>
                             <Row>
-                                <Col xs={12} sm={9}>
+                                <Col xs={8} sm={8}>
                                     <h1 className='h1'
                                         dangerouslySetInnerHTML={{__html: intl.formatMessage({id: 'first-time-in-smolyan'})}}
                                     />

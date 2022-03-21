@@ -1,6 +1,7 @@
 import React from 'react';
 import Col from "react-bootstrap/cjs/Col";
 import Row from "react-bootstrap/Row";
+import Socials from "../socials/socials";
 import SocialsShare from "../socials/socialsShare";
 
 
