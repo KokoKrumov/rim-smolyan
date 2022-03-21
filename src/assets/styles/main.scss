@@ -1,6 +1,7 @@
 @import "vendors/bootstrap/bootstrap-imports";
 @import "vendors/carousel/carousel-alice-imports";
 @import "setings/mixins";
+@import "setings/utils";
 @import "setings/colors";
 @import "setings/reset";
 @import "setings/fonts";
@@ -51,3 +52,4 @@
 @import "components/collections";
 @import "components/navThroughCollections";
 @import "components/lasloNagiPage";
+@import "components/regulation";
