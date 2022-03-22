@@ -6,8 +6,9 @@ import {FormattedMessage} from 'react-intl';
 function NewsAndEventsListHorizontal({listOfNewsAndEvents, exhibitions}) {
 
     function order(a, b) {
-        return b.key - a.key;
+        return b.id - a.id;
     }
+    console.log('listOfNewsAndEvents', listOfNewsAndEvents);
 
     if (listOfNewsAndEvents) {
         return (
@@ -18,19 +19,21 @@ function NewsAndEventsListHorizontal({listOfNewsAndEvents, exhibitions}) {
                         <Row>
                             <Col lg={5}>
                                 {/*IMAGE AND DATE*/}
-                                <a className="link link-img" href={`/${exhibitions ? 'exhibitions' : 'news'}/${index}`} itemProp="url" target=""
-                                   rel="noopener nofollow noreferrer">
+                                <a className="link link-img" 
+                                    href={`${process.env.REACT_APP_API_URL}/posts/${event.id}?_fields=id,modified_gmt,slug,title,content,excerpt,event_date,event_place,_links,_embedded&_embed`}
+                                    itemProp="url" target=""
+                                    rel="noopener nofollow noreferrer">
                                     <div className='nae-item__img__wrap'>
-                                        {event.dateD && event.type === 'event' ?
+                                        {event.event_date ?
                                             <div className='nae-item__date__wrap'>
-                                                <p className='nae-item__date-day'>{event.dateD}</p>
-                                                <p className='nae-item__date-month'>{event.dateM}</p>
+                                                <p className='nae-item__date-day'>{event.event_date}</p>
+                                                {/* <p className='nae-item__date-month'>{event.dateM}</p> */}
                                             </div>
                                             :
                                             null
                                         }
                                         <div className='nae-item__img'>
-                                            <img className="img" src={event.image} alt="" itemProp="image"/>
+                                            <img className="img" src={event._embedded['wp:featuredmedia'][0].source_url} alt="" itemProp="image"/>
                                         </div>
                                     </div>
                                 </a>
@@ -40,27 +43,28 @@ function NewsAndEventsListHorizontal({listOfNewsAndEvents, exhibitions}) {
                             <Col lg={7}>
                                 <div>
                                     {/*DATE*/}
-                                    {event.dateM && event.type === 'article' ?
+                                    {event.daevent_dateteM  ?
                                         <div className='nae-item__article-date__wrap'>
-                                            <p className='nae-item__article-date'>{event.dateD} {event.dateM}</p>
+                                            {/* <p className='nae-item__article-date'>{event.dateD} {event.dateM}</p> */}
+                                            <p className='nae-item__article-date'>{event.event_date}</p>
                                         </div>
                                         :
                                         null
                                     }
-                                    {event.type === 'exhibition' ?
+                                    {/* {event.type === 'exhibition' ?
                                         <div className='nae-item__article-date__wrap'>
                                             <p className='nae-item__article-date'>{event.dateStart} - {event.dateEnd} | {event.place}</p>
                                         </div>
                                         :
                                         null
-                                    }
+                                    } */}
                                     {/*!DATE*/}
 
                                     {/*TITLE*/}
                                     <h3 className='h3'>
-                                        <a className="link a-title" href={`/${exhibitions ? 'exhibitions' : 'news'}/${index}`} itemProp="url" target=""
+                                        <a className="link a-title"  href={event._links.self[0].href} itemProp="url" target=""
                                            rel="noopener nofollow noreferrer">
-                                            {event.title}
+                                            {event.title.rendered}
                                         </a>
                                     </h3>
                                     {/*!TITLE*/}
@@ -71,7 +75,7 @@ function NewsAndEventsListHorizontal({listOfNewsAndEvents, exhibitions}) {
                                     {/*LINK TO SEE MORE*/}
                                     <a
                                         className="a cta_outline cta_outline__dark hvr-underline-from-left"
-                                        href={`/${exhibitions ? 'exhibitions' : 'news'}/${index}`}
+                                         href={event._links.self[0].href}
                                         itemProp="url"
                                         target=""
                                         rel="noopener nofollow noreferrer">

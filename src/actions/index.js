@@ -16,7 +16,7 @@ import streams from "../api/streams";
 //Create Actions
 
 export const fetchNews = () => async dispatch => {
-    const response = await streams.get('/news.json');
+    const response = await streams.get('/posts?_fields=id,modified_gmt,slug,title,content,excerpt,event_date,event_place,_links,_embedded&_embed');
     dispatch({type: FETCH_NEWS, payload: response.data})
 }
 

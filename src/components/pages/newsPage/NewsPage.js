@@ -15,14 +15,15 @@ class NewsPage extends Component {
     state = {
         bgHero: null,
         bgAboutUs: null,
-        listOfNewsAndEvents: null,
-        news: null
+        listOfNewsAndEvents: [],
+        news: []
     }
 
     fetchData = () => {
         if(this.props && this.props.news  && this.props.news !== this.state.news){
             this.props.fetchNews()
                 .then(() => {
+                    console.log('news', this.props.news);
                     this.setState({news: this.props.news})
                 })
 
