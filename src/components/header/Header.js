@@ -228,6 +228,11 @@ function Header({showModal}) {
                                             href="/about-us">
                                             <FormattedMessage id="menu.about-museum"/>
                                         </NavDropdown.Item>
+										<NavDropdown.Item
+                                            className="nav__secondary-link"
+                                            href="/games">
+                                            <FormattedMessage id="games"/>
+                                        </NavDropdown.Item>
                                         <NavDropdown.Item
                                             className="nav__secondary-link"
                                             href="/services">
@@ -237,11 +242,6 @@ function Header({showModal}) {
                                             className="nav__secondary-link"
                                             href="/prices">
                                             <FormattedMessage id="prices"/>
-                                        </NavDropdown.Item>
-                                        <NavDropdown.Item
-                                            className="nav__secondary-link"
-                                            href="/games">
-                                            <FormattedMessage id="games"/>
                                         </NavDropdown.Item>
                                     </NavDropdown>
                                     <Nav.Link
