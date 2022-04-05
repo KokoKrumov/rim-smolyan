@@ -58,7 +58,7 @@ function Footer({showModal}) {
                                     <FormattedMessage id="menu.exhibitions"/>
                                 </Nav.Link>
                                 <Nav.Link
-                                    href="/news"
+                                    href="/news-and-events"
                                     className='nav__main-link'>
                                     <FormattedMessage id="menu.news"/>
                                 </Nav.Link>

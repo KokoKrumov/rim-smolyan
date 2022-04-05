@@ -1,73 +1,74 @@
-import React from 'react';
+import React from "react";
 import Col from "react-bootstrap/cjs/Col";
 import Row from "react-bootstrap/Row";
 import SocialsShare from "../socials/socialsShare";
+import ArticleDate from "../Article/ArticleDate";
 
+function ArticleDetail({ article }) {
+  const articleType = article._embedded["wp:term"][0][1].slug;
+  const articleImg =
+    article._embedded["wp:featuredmedia"][0].media_details.sizes.medium_large ||
+    article._embedded["wp:featuredmedia"][0].media_details.sizes.full;
+  const articleText = article.content.rendered;
 
-function ArticleDetail({article}) {
+  if (article) {
+    return (
+      <article>
+        <Row>
+          <Col lg={8}>
+            <header>
+              <h2
+                className="h2"
+                dangerouslySetInnerHTML={{
+                  __html: article.title.rendered,
+                }}
+              />
+              {article.event_date && articleType === "news" ? (
+                <p className="h-sup">{article.event_date}</p>
+              ) : null}
+            </header>
+          </Col>
+        </Row>
 
-    if (article) {
-        return (
-            <article>
+        <Row>
+          <Col lg={7} xl={8}>
+            <figure className="nae-item__img__wrap image__article-detail">
+              {article.event_date && articleType === "events" ? (
+                <ArticleDate date={article.event_date} />
+              ) : null}
 
-                <Row>
-                    <Col lg={8}>
-                        <header>
-                            <h2 className='h2'>{article.title}</h2>
-                            <p className='h-sup'>{article.place}</p>
-                            {
-                                article.dateD && article.type === 'article'
-                                    ?
-                                    <p className='h-sup'>{article.dateD} {article.dateM} {article.dateY}</p>
-                                    :
-                                    null
-                            }
-
-                        </header>
-                    </Col>
-                </Row>
-
-                <Row>
-                    <Col lg={7} xl={8}>
-                        <figure className='nae-item__img__wrap image__article-detail'>
-                            {
-                                article.dateD && article.type === 'event'
-                                    ?
-                                    <div className="nae-item__date__wrap">
-                                        <p className="nae-item__date-day">{article.dateD}</p>
-                                        <p className="nae-item__date-month">{article.dateM}</p>
-                                    </div>
-                                    :
-                                    null
-
-                            }
-
-                            <img className="img-fluid" src={article.imageDetail} alt="" itemProp="image"/>
-                        </figure>
-                        <div>
-                            <p className='paragraph-2' dangerouslySetInnerHTML={{__html: `${article.text}`}}>
-
-                            </p>
-                        </div>
-                    </Col>
-                    <Col lg={4} xl={2}>
-                        <div className="socials__wrap socials__top-indent">
-                            <p className='socials-label'>Споделете страницата</p>
-                            <SocialsShare articleID={(article.id - 1)} articleTitle={article.title} page={'news'}/>
-                        </div>
-                    </Col>
-                </Row>
-            </article>
-        )
-    } else {
-        return (
-            <div>
-                <p>
-                    Loading ...
-                </p>
+              <img
+                className="img-fluid"
+                src={articleImg.source_url}
+                alt=""
+                itemProp="image"
+              />
+            </figure>
+            <div
+              className="paragraph-2 wpc-paragraphs-margin"
+              dangerouslySetInnerHTML={{ __html: `${articleText}` }}
+            ></div>
+          </Col>
+          <Col lg={4} xl={2}>
+            <div className="socials__wrap socials__top-indent">
+              <p className="socials-label">Споделете страницата</p>
+              <SocialsShare
+                articleID={article.id - 1}
+                articleTitle={article.title}
+                page={"news"}
+              />
             </div>
-        )
-    }
+          </Col>
+        </Row>
+      </article>
+    );
+  } else {
+    return (
+      <div>
+        <p>Loading ...</p>
+      </div>
+    );
+  }
 }
 
 export default ArticleDetail;

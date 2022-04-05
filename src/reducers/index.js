@@ -1,21 +1,26 @@
-import {combineReducers} from "redux";
-import newsReducer from './NewsReducer'
-import ModalReducer from './ModalReducer'
+import { combineReducers } from "redux";
+import newsReducer from "./NewsReducer";
+import articleReducer from "./ArticleReducer";
+import newsErrorReducer from "./NewsErrorReducer";
+import ModalReducer from "./ModalReducer";
 import RimBuildingImagesReducer from "./RimBuildingImagesReducer";
 import TeamReducer from "./TeamReducer";
 import exhibitionsReducer from "./ExhibitionsReducer";
 import routesReducer from "./RoutesReducer";
 import servicesReducer from "./ServicesReducer";
 import CollectionsReducer from "./CollectionsReducer";
-
+import CategoriesReducer from "./CategoriesReducer";
 
 export default combineReducers({
-    news: newsReducer,
-    exhibitions: exhibitionsReducer,
-    routes: routesReducer,
-    services: servicesReducer,
-    modal: ModalReducer,
-    rimBuildingImages: RimBuildingImagesReducer,
-    team: TeamReducer,
-    collections: CollectionsReducer
-})
+  news: newsReducer,
+  article: articleReducer,
+  newsError: newsErrorReducer,
+  exhibitions: exhibitionsReducer,
+  routes: routesReducer,
+  services: servicesReducer,
+  modal: ModalReducer,
+  rimBuildingImages: RimBuildingImagesReducer,
+  team: TeamReducer,
+  collections: CollectionsReducer,
+  categories: CategoriesReducer,
+});
