@@ -9,7 +9,6 @@ import ModalNedelovContent from "../modal/ModalShishkovContent";
 import ModalTeamContent from "../modal/ModalTeamContent";
 
 function SocialButton({buttonType, articleID, articleTitle, url}) {
-    console.log('api', process.env.REACT_APP_API_URL)
     const facebookShareURLButton = () => {
         return (
             <FacebookShareButton
