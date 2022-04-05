@@ -149,14 +149,10 @@ export function extarctIdAndCategories(
   slug: string,
   listFrom: string,
   props: any,
-  listOfNewsAndEvents: any
+  listOfNewsAndEvents: any,
+  propsCategories: any
 ): any {
-  if (
-    props &&
-    props.news &&
-    props.categories &&
-    props.news !== listOfNewsAndEvents
-  ) {
+  if (props && props.news && props.news !== listOfNewsAndEvents) {
     let categories, slugItem, slugId, slugSanatize;
     slugSanatize = slug.replace("/", "");
     try {
@@ -166,13 +162,13 @@ export function extarctIdAndCategories(
         slugItem = getItemBySlug(slugSanatize, categories);
         slugId = slugItem.id;
       } else {
-        categories = props.categories;
+        categories = propsCategories;
         slugItem = getItemBySlug(slugSanatize, categories);
         slugId = slugItem.id;
       }
     } catch (e) {
       console.log("e", e);
-      console.log("props", props);
+      console.log("propropsCategoriesps", propsCategories);
     }
 
     return { slugId, categories };
