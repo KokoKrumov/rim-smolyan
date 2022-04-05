@@ -149,8 +149,7 @@ export function extarctIdAndCategories(
   slug: string,
   listFrom: string,
   props: any,
-  listOfNewsAndEvents: any,
-  propsCategories: any
+  listOfNewsAndEvents: any
 ): any {
   if (props && props.news && props.news !== listOfNewsAndEvents) {
     let categories, slugItem, slugId, slugSanatize;
@@ -159,16 +158,17 @@ export function extarctIdAndCategories(
       if (listFrom === "storage") {
         const categoriesFromStorage = sessionStorage.getItem("categories");
         categories = JSON.parse(categoriesFromStorage || "''");
+        console.log("categories", categories);
         slugItem = getItemBySlug(slugSanatize, categories);
         slugId = slugItem.id;
       } else {
-        categories = propsCategories;
+        categories = props.categories;
+        console.log("categories", categories);
         slugItem = getItemBySlug(slugSanatize, categories);
         slugId = slugItem.id;
       }
     } catch (e) {
       console.log("e", e);
-      console.log("propropsCategoriesps", propsCategories);
     }
 
     return { slugId, categories };
