@@ -149,21 +149,27 @@ export function extarctIdAndCategories(
   slug: string,
   listFrom: string,
   props: any,
-  listOfNewsAndEvents: any
+  listOfNewsAndEvents: any,
+  propsCategories: any
 ): any {
-  if (props && props.news && props.news !== listOfNewsAndEvents) {
+  if (
+    props &&
+    props.news &&
+    props.categories &&
+    props.news !== listOfNewsAndEvents
+  ) {
     let categories, slugItem, slugId, slugSanatize;
     slugSanatize = slug.replace("/", "");
     try {
       if (listFrom === "storage") {
         const categoriesFromStorage = sessionStorage.getItem("categories");
         categories = JSON.parse(categoriesFromStorage || "''");
-        console.log("categories", categories);
+        console.log("categories storage", categories);
         slugItem = getItemBySlug(slugSanatize, categories);
         slugId = slugItem.id;
       } else {
-        categories = props.categories;
-        console.log("categories", categories);
+        categories = propsCategories;
+        console.log("categories props", categories);
         slugItem = getItemBySlug(slugSanatize, categories);
         slugId = slugItem.id;
       }
