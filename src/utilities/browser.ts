@@ -154,16 +154,19 @@ export function extarctIdAndCategories(
   if (props && props.news && props.news !== listOfNewsAndEvents) {
     let categories, slugItem, slugId, slugSanatize;
     slugSanatize = slug.replace("/", "");
-
-    if (listFrom === "storage") {
-      const categoriesFromStorage = sessionStorage.getItem("categories");
-      categories = JSON.parse(categoriesFromStorage || "{}");
-      slugItem = getItemBySlug(slugSanatize, categories);
-      slugId = slugItem.id;
-    } else {
-      categories = props.categories;
-      slugItem = getItemBySlug(slugSanatize, categories);
-      slugId = slugItem.id;
+    try {
+      if (listFrom === "storage") {
+        const categoriesFromStorage = sessionStorage.getItem("categories");
+        categories = JSON.parse(categoriesFromStorage || "''");
+        slugItem = getItemBySlug(slugSanatize, categories);
+        slugId = slugItem.id;
+      } else {
+        categories = props.categories;
+        slugItem = getItemBySlug(slugSanatize, categories);
+        slugId = slugItem.id;
+      }
+    } catch (e) {
+      console.log("e", e);
     }
 
     return { slugId, categories };
