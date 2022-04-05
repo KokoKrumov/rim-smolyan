@@ -134,7 +134,8 @@ class HomePage extends Component {
         3,
         "storage",
         this.props,
-        this.state.listOfNewsAndEvents
+        this.state.listOfNewsAndEvents,
+        this.state.categories
       );
     }
 
@@ -156,7 +157,8 @@ class HomePage extends Component {
         3,
         "props",
         this.props,
-        this.state.listOfNewsAndEvents
+        this.state.listOfNewsAndEvents,
+        this.props.categories
       );
     }
   }
