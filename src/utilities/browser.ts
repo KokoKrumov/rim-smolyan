@@ -162,7 +162,7 @@ export function extarctIdAndCategories(
     slugSanatize = slug.replace("/", "");
     if (listFrom === "storage") {
       const categoriesFromStorage = sessionStorage.getItem("categories");
-      categories = JSON.parse(categoriesFromStorage || "''");
+      categories = JSON.parse(categoriesFromStorage || "{}");
       console.log("categories storage", categories);
       slugItem = getItemBySlug(slugSanatize, categories);
       slugId = slugItem.id;
