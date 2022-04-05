@@ -151,7 +151,12 @@ export function extarctIdAndCategories(
   props: any,
   listOfNewsAndEvents: any
 ): any {
-  if (props && props.news && props.news !== listOfNewsAndEvents) {
+  if (
+    props &&
+    props.news &&
+    props.categories &&
+    props.news !== listOfNewsAndEvents
+  ) {
     let categories, slugItem, slugId, slugSanatize;
     slugSanatize = slug.replace("/", "");
     try {
@@ -167,6 +172,7 @@ export function extarctIdAndCategories(
       }
     } catch (e) {
       console.log("e", e);
+      console.log("props", props);
     }
 
     return { slugId, categories };
