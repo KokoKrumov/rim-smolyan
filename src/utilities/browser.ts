@@ -160,21 +160,17 @@ export function extarctIdAndCategories(
   ) {
     let categories, slugItem, slugId, slugSanatize;
     slugSanatize = slug.replace("/", "");
-    try {
-      if (listFrom === "storage") {
-        const categoriesFromStorage = sessionStorage.getItem("categories");
-        categories = JSON.parse(categoriesFromStorage || "''");
-        console.log("categories storage", categories);
-        slugItem = getItemBySlug(slugSanatize, categories);
-        slugId = slugItem.id;
-      } else {
-        categories = propsCategories;
-        console.log("categories props", categories);
-        slugItem = getItemBySlug(slugSanatize, categories);
-        slugId = slugItem.id;
-      }
-    } catch (e) {
-      console.log("e", e);
+    if (listFrom === "storage") {
+      const categoriesFromStorage = sessionStorage.getItem("categories");
+      categories = JSON.parse(categoriesFromStorage || "''");
+      console.log("categories storage", categories);
+      slugItem = getItemBySlug(slugSanatize, categories);
+      slugId = slugItem.id;
+    } else {
+      categories = propsCategories;
+      console.log("categories props", categories);
+      slugItem = getItemBySlug(slugSanatize, categories);
+      slugId = slugItem.id;
     }
 
     return { slugId, categories };
