@@ -120,13 +120,17 @@ export function getItemBySlug(slug: string, list: any) {
   return list.find((item: { slug: string }) => item.slug === slug);
 }
 
-export function standartTheDate(date: string) {
-  const arrFromDate = date.split(".");
-  const day = arrFromDate[0];
-  const month = arrFromDate[1];
-  const year = arrFromDate[2];
-  const ISODate = `${year}-${month}-${day}`;
-  return new Date(ISODate);
+export function standartTheDate(date: string, isISO: boolean) {
+  if (isISO) {
+    return new Date(date);
+  } else {
+    const arrFromDate = date.split(".");
+    const day = arrFromDate[0];
+    const month = arrFromDate[1];
+    const year = arrFromDate[2];
+    const ISODate = `${year}-${month}-${day}`;
+    return new Date(ISODate);
+  }
 }
 
 // const longMonthFormatter = new Intl.DateTimeFormat('en-US', {
@@ -134,14 +138,19 @@ const longMonthFormatter = new Intl.DateTimeFormat("bg-BG", {
   month: "long",
 });
 
-export function getDateDayForArticleCard(date: string) {
-  const day = standartTheDate(date).getDate();
+export function getDateDayForArticleCard(date: string, isIOS = false) {
+  const day = standartTheDate(date, isIOS).getDate();
   return day;
 }
 
-export function getDateMonthForArticleCard(date: string) {
+export function getDateYearForArticleCard(date: string, isIOS = false) {
+  const year = standartTheDate(date, isIOS).getFullYear();
+  return year;
+}
+
+export function getDateMonthForArticleCard(date: string, isIOS = false) {
   // const month = standartTheDate(date).getMonth();
-  const month = longMonthFormatter.format(standartTheDate(date));
+  const month = longMonthFormatter.format(standartTheDate(date, isIOS));
   return month;
 }
 
@@ -163,12 +172,10 @@ export function extarctIdAndCategories(
     if (listFrom === "storage") {
       const categoriesFromStorage = sessionStorage.getItem("categories");
       categories = JSON.parse(categoriesFromStorage || "{}");
-      console.log("categories storage", categories);
       slugItem = getItemBySlug(slugSanatize, categories);
       slugId = slugItem.id;
     } else {
       categories = propsCategories;
-      console.log("categories props", categories);
       slugItem = getItemBySlug(slugSanatize, categories);
       slugId = slugItem.id;
     }

@@ -3,12 +3,17 @@ import Col from "react-bootstrap/cjs/Col";
 import Row from "react-bootstrap/Row";
 import SocialsShare from "../socials/socialsShare";
 import ArticleDate from "../Article/ArticleDate";
+import NewsDate from "../pages/newsDetailPage/NewsDate";
 
 function ArticleDetail({ article }) {
   const articleType = article._embedded["wp:term"][0][1].slug;
-  const articleImg =
-    article._embedded["wp:featuredmedia"][0].media_details.sizes.medium_large ||
-    article._embedded["wp:featuredmedia"][0].media_details.sizes.full;
+  const imageExist = article._embedded["wp:featuredmedia"];
+  const articleImg = imageExist
+    ? article._embedded["wp:featuredmedia"][0].media_details.sizes
+        .medium_large ||
+      article._embedded["wp:featuredmedia"][0].media_details.sizes.full
+    : "";
+
   const articleText = article.content.rendered;
 
   if (article) {
@@ -32,11 +37,21 @@ function ArticleDetail({ article }) {
 
         <Row>
           <Col lg={7} xl={8}>
+            <div className="nae-item__modified_gmt">
+              {article.modified_gmt ? (
+                <NewsDate date={article.modified_gmt} />
+              ) : null}
+              {article.event_place ? (
+                <div className="h-sup">
+                  <span className="d-inline-block px-2">|</span>
+                  {article.event_place}
+                </div>
+              ) : null}
+            </div>
             <figure className="nae-item__img__wrap image__article-detail">
               {article.event_date && articleType === "events" ? (
                 <ArticleDate date={article.event_date} />
               ) : null}
-
               <img
                 className="img-fluid"
                 src={articleImg.source_url}
