@@ -17,7 +17,7 @@ export function isTabletScreen(): boolean {
 /**
  * Checks if it's iOS device
  */
-export function isISO(): boolean {
+export function isIOS(): boolean {
   let iOS =
     /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream;
   return iOS;
