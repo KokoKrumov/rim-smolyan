@@ -7,8 +7,7 @@ import NewsDateAndYear from "../pages/newsDetailPage/NewsDateAndYear";
 
 function ArticleDetail({ article }) {
   const articleType = article._embedded["wp:term"][0][1].slug;
-  const imageExist = article._embedded["wp:featuredmedia"];
-  const articleImg = imageExist
+  const articleImg = article._embedded["wp:featuredmedia"]
     ? article._embedded["wp:featuredmedia"][0].media_details.sizes
         .medium_large ||
       article._embedded["wp:featuredmedia"][0].media_details.sizes.full
