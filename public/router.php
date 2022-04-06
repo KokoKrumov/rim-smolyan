@@ -1,8 +1,11 @@
 <?php
 $path_beginings = [
     '/',
+    '/news-and-events',
     '/news',
+    '/events',
     '/about-us',
+    '/museum-games',
     '/services',
     '/prices',
     '/contact-us',

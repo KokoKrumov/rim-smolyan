@@ -11,13 +11,28 @@
   </url>
 
   <url>
+    <loc>https://museumsmolyan.eu/news-and-events</loc>
+    <lastmod>2022-04-07T01:12:35+00:00</lastmod>
+  </url>
+
+  <url>
     <loc>https://museumsmolyan.eu/news</loc>
     <lastmod>2020-11-07T01:12:35+00:00</lastmod>
   </url>
 
   <url>
+    <loc>https://museumsmolyan.eu/events</loc>
+    <lastmod>2022-04-07T01:12:35+00:00</lastmod>
+  </url>
+
+  <url>
     <loc>https://museumsmolyan.eu/about-us</loc>
     <lastmod>2020-11-07T01:12:35+00:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://museumsmolyan.eu/museum-games</loc>
+    <lastmod>2022-04-07T01:12:35+00:00</lastmod>
   </url>
 
   <url>
@@ -53,6 +68,11 @@
   <url>
     <loc>https://museumsmolyan.eu/terms</loc>
     <lastmod>2021-02-08T00:37:35+00:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://museumsmolyan.eu/laslo-nagi</loc>
+    <lastmod>2022-04-07T01:12:35+00:00</lastmod>
   </url>
 
 </urlset>
