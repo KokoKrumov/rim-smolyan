@@ -66,8 +66,13 @@ function NewsAndEventsListHorizontal({ listOfNewsAndEvents, exhibitions }) {
                   />
                 </h3>
                 {/*!TITLE*/}
+                {event.excerpt.rendered && (
+                  <p
+                    className="paragraph-3"
+                    dangerouslySetInnerHTML={{ __html: event.excerpt.rendered }}
+                  />
+                )}
 
-                <p className="paragraph-3">{event.description}</p>
                 {/*LINK TO SEE MORE*/}
                 <a
                   className="a cta_outline cta_outline__dark hvr-underline-from-left"
