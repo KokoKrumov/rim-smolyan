@@ -17,7 +17,7 @@ export function isTabletScreen(): boolean {
 /**
  * Checks if it's iOS device
  */
-export function isIOS(): boolean {
+export function isISO(): boolean {
   let iOS =
     /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream;
   return iOS;
@@ -138,19 +138,19 @@ const longMonthFormatter = new Intl.DateTimeFormat("bg-BG", {
   month: "long",
 });
 
-export function getDateDayForArticleCard(date: string, isIOS = false) {
-  const day = standartTheDate(date, isIOS).getDate();
+export function getDateDayForArticleCard(date: string, isISO = false) {
+  const day = standartTheDate(date, isISO).getDate();
   return day;
 }
 
-export function getDateYearForArticleCard(date: string, isIOS = false) {
-  const year = standartTheDate(date, isIOS).getFullYear();
+export function getDateYearForArticleCard(date: string, isISO = false) {
+  const year = standartTheDate(date, isISO).getFullYear();
   return year;
 }
 
-export function getDateMonthForArticleCard(date: string, isIOS = false) {
+export function getDateMonthForArticleCard(date: string, isISO = false) {
   // const month = standartTheDate(date).getMonth();
-  const month = longMonthFormatter.format(standartTheDate(date, isIOS));
+  const month = longMonthFormatter.format(standartTheDate(date, isISO));
   return month;
 }
 
