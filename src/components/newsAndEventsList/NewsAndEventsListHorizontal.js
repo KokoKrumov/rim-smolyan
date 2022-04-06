@@ -67,7 +67,7 @@ function NewsAndEventsListHorizontal({ listOfNewsAndEvents, exhibitions }) {
                 </h3>
                 {/*!TITLE*/}
                 {event.excerpt.rendered && (
-                  <p
+                  <div
                     className="paragraph-3"
                     dangerouslySetInnerHTML={{ __html: event.excerpt.rendered }}
                   />
