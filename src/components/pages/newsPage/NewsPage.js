@@ -17,6 +17,12 @@ import history from "../../../history";
 class NewsPage extends Component {
   navLinks = [
     {
+      href: "/news-and-events",
+      className: "tab_list-link",
+      eventKey: "link-2",
+      label: "Всички",
+    },
+    {
       href: "/events",
       className: "tab_list-link",
       eventKey: "link-3",
@@ -27,12 +33,6 @@ class NewsPage extends Component {
       className: "tab_list-link",
       eventKey: "link-1",
       label: "Новини",
-    },
-    {
-      href: "/news-and-events",
-      className: "tab_list-link",
-      eventKey: "link-2",
-      label: "Всички",
     },
   ];
 
