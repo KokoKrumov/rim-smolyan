@@ -3,6 +3,7 @@ import Col from "react-bootstrap/cjs/Col";
 import Row from "react-bootstrap/cjs/Row";
 import { FormattedMessage } from "react-intl";
 import ArticleDate from "../Article/ArticleDate";
+import NewsDateAndYear from "../pages/newsDetailPage/NewsDateAndYear";
 
 function NewsAndEventsListHorizontal({ listOfNewsAndEvents, exhibitions }) {
   if (listOfNewsAndEvents) {
@@ -44,10 +45,11 @@ function NewsAndEventsListHorizontal({ listOfNewsAndEvents, exhibitions }) {
             <Col lg={7}>
               <div>
                 {/*DATE*/}
-                {event.daevent_dateteM ? (
+                {event.modified_gmt ? (
                   <div className="nae-item__article-date__wrap">
-                    {/* <p className='nae-item__article-date'>{event.dateD} {event.dateM}</p> */}
-                    <p className="nae-item__article-date">{event.event_date}</p>
+                    <div className="nae-item__article-date">
+                      <NewsDateAndYear date={event.modified_gmt} />
+                    </div>
                   </div>
                 ) : null}
                 {/*!DATE*/}

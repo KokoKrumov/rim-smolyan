@@ -64,7 +64,8 @@ class NewsPage extends Component {
           10,
           "storage",
           this.props,
-          this.state.listOfNewsAndEvents
+          this.state.listOfNewsAndEvents,
+          this.props.categories
         );
       }
     );
@@ -86,13 +87,9 @@ class NewsPage extends Component {
       listOfNewsAndEvents,
       propsCategories
     );
-    this.setState({
-      loadingNewArticles: true,
-    });
     this.props.fetchNews(slugId, page, per_page).then(() => {
       this.setState({
         categories: categories,
-        loadingNewArticles: false,
       });
     });
   };
@@ -141,7 +138,8 @@ class NewsPage extends Component {
         10,
         "storage",
         this.props,
-        this.state.listOfNewsAndEvents
+        this.state.listOfNewsAndEvents,
+        this.state.categories
       );
     }
     // OPTIONS FOR INFINITE SCROLL
@@ -158,7 +156,7 @@ class NewsPage extends Component {
     this.observer.observe(this.loadingRef);
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
+  componentDidUpdate() {
     if (
       !sessionStorage.getItem("categories") &&
       this.props &&
@@ -172,7 +170,8 @@ class NewsPage extends Component {
         10,
         "props",
         this.props,
-        this.state.listOfNewsAndEvents
+        this.state.listOfNewsAndEvents,
+        this.props.categories
       );
     }
 

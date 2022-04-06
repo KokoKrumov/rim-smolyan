@@ -175,4 +175,10 @@
       }
     }
   }
+
+  &__modified_gmt {
+    @include margin(10px, 0px, 0px, 0px);
+    display: flex;
+    flex-direction: row;
+  }
 }
