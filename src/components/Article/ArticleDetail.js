@@ -3,7 +3,7 @@ import Col from "react-bootstrap/cjs/Col";
 import Row from "react-bootstrap/Row";
 import SocialsShare from "../socials/socialsShare";
 import ArticleDate from "../Article/ArticleDate";
-import NewsDate from "../pages/newsDetailPage/NewsDate";
+import NewsDateAndYear from "../pages/newsDetailPage/NewsDateAndYear";
 
 function ArticleDetail({ article }) {
   const articleType = article._embedded["wp:term"][0][1].slug;
@@ -37,9 +37,9 @@ function ArticleDetail({ article }) {
 
         <Row>
           <Col lg={7} xl={8}>
-            <div className="nae-item__modified_gmt">
-              {article.modified_gmt ? (
-                <NewsDate date={article.modified_gmt} />
+            <div className="nae-item__date_post">
+              {article.date_gmt ? (
+                <NewsDateAndYear date={article.date_gmt} />
               ) : null}
               {article.event_place ? (
                 <div className="h-sup">

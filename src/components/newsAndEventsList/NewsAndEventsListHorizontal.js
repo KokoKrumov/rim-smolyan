@@ -45,10 +45,10 @@ function NewsAndEventsListHorizontal({ listOfNewsAndEvents, exhibitions }) {
             <Col lg={7}>
               <div>
                 {/*DATE*/}
-                {event.modified_gmt ? (
+                {event.date_gmt ? (
                   <div className="nae-item__article-date__wrap">
                     <div className="nae-item__article-date">
-                      <NewsDateAndYear date={event.modified_gmt} />
+                      <NewsDateAndYear date={event.date_gmt} />
                     </div>
                   </div>
                 ) : null}

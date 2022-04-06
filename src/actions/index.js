@@ -27,8 +27,7 @@ export const fetchNews =
   (id, page = 1, number = 10) =>
   async (dispatch) => {
     try {
-      const response = await streams.get(
-        `/posts?categories=${id}&_fields=id,modified_gmt,slug,title,content,excerpt,event_date,event_place,_links,_embedded&_embed&page=${page}&per_page=${number}`
+      const response = await streams.get(`/posts?categories=${id}&_fields=id,date_gmt,slug,title,content,excerpt,event_date,event_place,_links,_embedded&_embed&page=${page}&per_page=${number}`
       );
       dispatch({ type: FETCH_NEWS, payload: response.data });
     } catch (error) {
@@ -94,7 +93,7 @@ export const fetchTeam = () => async (dispatch) => {
 // export const fetchArticle = (id) => async (dispatch) => {
 //   // const response = await streams.get(`/streamy/${id}`);
 //   const response = await streams.get(
-//     `/posts?slug={url-slug}&_fields=id,modified_gmt,slug,title,content,excerpt,event_date,event_place,archive,_links,_embedded&_embed`
+//     `/posts?slug={url-slug}&_fields=id,date_gmt,slug,title,content,excerpt,event_date,event_place,archive,_links,_embedded&_embed`
 //   );
 //   dispatch({ type: FETCH_ARTICLE, payload: response.data });
 // };
@@ -102,7 +101,7 @@ export const fetchTeam = () => async (dispatch) => {
 export const fetchArticle = (urlSlug) => async (dispatch) => {
   try {
     const response = await streams.get(
-      `/posts?slug=${urlSlug}&_fields=id,modified_gmt,slug,title,content,excerpt,event_date,event_place,_links,_embedded&_embed`
+      `/posts?slug=${urlSlug}&_fields=id,date_gmt,slug,title,content,excerpt,event_date,event_place,_links,_embedded&_embed`
     );
     dispatch({ type: FETCH_ARTICLE, payload: response.data });
   } catch (error) {
