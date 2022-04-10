@@ -6,8 +6,8 @@ import CardInfoLine from "../../infoLine/CardInfoLine";
 import HeroCollections from "../../hero/HeroCollections";
 import {FormattedMessage, injectIntl} from 'react-intl';
 import {connect} from "react-redux";
-import lаszlоNagyPageBG from '../../../translations/lаszlоNagyPageBG.json';
-import lаszlоNagyPageEN from '../../../translations/lаszlоNagyPageEN.json';
+import laszloNagyPageBG from '../../../translations/laszloNagyPageBG.json';
+import laszloNagyPageEN from '../../../translations/laszloNagyPageEN.json';
 import InfoColumn from "../../infoColumn/InfoColumn";
 import CarouselImages from "../../carousel/carouselImages";
 import HeroInner from "../../hero/HeroInner";
@@ -37,7 +37,7 @@ const LaszloNagyPage = (props) => {
 		]
 	}
 
-	const laszloNagyContent = props.intl.locale === 'en' ? lаszlоNagyPageEN : lаszlоNagyPageBG;
+	const laszloNagyContent = props.intl.locale === 'en' ? laszloNagyPageEN : laszloNagyPageBG;
 
 	return (
 		<div className='laszlo-nagy__page'>

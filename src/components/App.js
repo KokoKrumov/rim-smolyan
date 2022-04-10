@@ -27,7 +27,7 @@ import CollectionsVirtual from "./pages/collection/CollectionsVirtual";
 import CollectionsMain from "./pages/collection/CollectionsMain";
 import CollectionsMainIntroAndGallery from "./pages/collection/CollectionsMainIntroAndGallery";
 import CollectionsMainDetailItem from "./pages/collection/CollectionsMainDetailItem";
-import LаszlоNagyPage from "./pages/lаszlоNagyPage/LаszlоNagyPage";
+import LaszloNagyPage from "./pages/laszloNagyPage/LaszloNagyPage";
 import Games from "./pages/games/Games";
 import Regulation from "./pages/games/Regulation";
 
