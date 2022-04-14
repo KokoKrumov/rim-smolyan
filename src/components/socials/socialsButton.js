@@ -13,7 +13,7 @@ function SocialButton({buttonType, articleID, articleTitle, url}) {
         return (
             <FacebookShareButton
                 // process.env.REACT_APP_DOMAIN
-                url={`https:${process.env.REACT_APP_API_URL}/${url}`}
+                url={`${process.env.REACT_APP_DOMAIN}/${url}`}
                 quote={articleTitle}
                 hashtag={'#museumsmolyan'}
             >
@@ -31,7 +31,7 @@ function SocialButton({buttonType, articleID, articleTitle, url}) {
         return (
             <FacebookShareButton
                 // process.env.REACT_APP_DOMAIN
-                url={`https:${process.env.REACT_APP_API_URL}/news/${articleID}`}
+                url={`${process.env.REACT_APP_DOMAIN}/news-and-events/${articleID}`}
                 quote={articleTitle}
                 hashtag={'#museumsmolyan'}
             >
@@ -65,7 +65,7 @@ function SocialButton({buttonType, articleID, articleTitle, url}) {
             <TwitterShareButton
                 windowWidth='800px'
                 windowHeight='600px'
-                url={`${process.env.REACT_APP_API_URL}/${url}`}
+                url={`${process.env.REACT_APP_DOMAIN}/${url}`}
                 title={articleTitle}
             >
                 <svg width="17" height="16" viewBox="0 0 17 16" fill="none"
@@ -83,7 +83,7 @@ function SocialButton({buttonType, articleID, articleTitle, url}) {
             <TwitterShareButton
                 windowWidth='800px'
                 windowHeight='600px'
-                url={`${process.env.REACT_APP_API_URL}/news/${articleID}`}
+                url={`${process.env.REACT_APP_DOMAIN}/news-and-events/${articleID}`}
                 title={articleTitle}
             >
                 <svg width="17" height="16" viewBox="0 0 17 16" fill="none"
