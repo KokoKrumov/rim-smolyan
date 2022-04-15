@@ -35,6 +35,7 @@ function ArticleDetail({ article }) {
         </Row>
 
         <Row>
+          {/* MAIN CONTENT */}
           <Col lg={7} xl={8}>
             <div className="nae-item__date_post">
               {article.date_gmt ? (
@@ -59,10 +60,12 @@ function ArticleDetail({ article }) {
               />
             </figure>
             <div
-              className="paragraph-2 wpc-paragraphs-margin"
+              className="paragraph-2 wpc-paragraphs-margin wpc-paragraph__main-content"
               dangerouslySetInnerHTML={{ __html: `${articleText}` }}
             ></div>
           </Col>
+          {/* MAIN CONTENT */}
+          {/* SOCIA ICONS */}
           <Col lg={4} xl={2}>
             <div className="socials__wrap socials__top-indent">
               <p className="socials-label">Споделете страницата</p>
@@ -73,6 +76,7 @@ function ArticleDetail({ article }) {
               />
             </div>
           </Col>
+          {/* !SOCIA ICONS */}
         </Row>
       </article>
     );

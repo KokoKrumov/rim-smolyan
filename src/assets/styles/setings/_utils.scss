@@ -19,3 +19,7 @@
 .wpc-paragraphs-margin p {
   @include margin(0px, 0px, 30px, 0px);
 }
+
+.link {
+  display: inline-block;
+}
