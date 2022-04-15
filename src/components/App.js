@@ -27,7 +27,7 @@ import CollectionsVirtual from "./pages/collection/CollectionsVirtual";
 import CollectionsMain from "./pages/collection/CollectionsMain";
 import CollectionsMainIntroAndGallery from "./pages/collection/CollectionsMainIntroAndGallery";
 import CollectionsMainDetailItem from "./pages/collection/CollectionsMainDetailItem";
-import LasloNagiPage from "./pages/lasloNagiPage/LasloNagiPage";
+import LaszloNagyPage from "./pages/laszloNagyPage/LaszloNagyPage";
 import Games from "./pages/games/Games";
 import Regulation from "./pages/games/Regulation";
 
@@ -81,7 +81,7 @@ class App extends Component {
                 exact
                 component={CollectionsVirtual}
               />
-              <Route path="/laslo-nagi" exact component={LasloNagiPage} />
+              <Route path="/lаszlо-nagy" exact component={LaszloNagyPage} />
               <Route path="/about-us" exact component={AboutUs} />
               <Route path="/contact-us" exact component={Contacts} />
               <Route path="/support-us" exact component={SupportUs} />

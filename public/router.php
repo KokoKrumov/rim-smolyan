@@ -1,8 +1,11 @@
 <?php
 $path_beginings = [
     '/',
+    '/news-and-events',
     '/news',
+    '/events',
     '/about-us',
+    '/museum-games',
     '/services',
     '/prices',
     '/contact-us',
@@ -10,7 +13,7 @@ $path_beginings = [
     '/administrative',
     '/privacy-policy',
     '/terms',
-    '/laslo-nagi',
+    '/laszlo-nagy',
 ];
 
 $path_begining = '/' . explode('/', $_SERVER['REQUEST_URI'])[1];

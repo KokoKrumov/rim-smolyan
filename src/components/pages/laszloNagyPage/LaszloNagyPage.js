@@ -6,8 +6,8 @@ import CardInfoLine from "../../infoLine/CardInfoLine";
 import HeroCollections from "../../hero/HeroCollections";
 import {FormattedMessage, injectIntl} from 'react-intl';
 import {connect} from "react-redux";
-import lasloNagiPageBG from '../../../translations/lasloNagiPageBG.json';
-import lasloNagiPageEN from '../../../translations/lasloNagiPageEN.json';
+import laszloNagyPageBG from '../../../translations/laszloNagyPageBG.json';
+import laszloNagyPageEN from '../../../translations/laszloNagyPageEN.json';
 import InfoColumn from "../../infoColumn/InfoColumn";
 import CarouselImages from "../../carousel/carouselImages";
 import HeroInner from "../../hero/HeroInner";
@@ -16,43 +16,43 @@ import Tooltip from "react-bootstrap/Tooltip";
 import Socials from "../../socials/socials";
 
 
-const LasloNagiPage = (props) => {
+const LaszloNagyPage = (props) => {
 
-	let lasloNagiPageContent = {
-		bgImage: './images/lasloNagi/heroBg.png',
-		aboutHouseBgImage: './images/lasloNagi/aboutHouseBgImage.png',
-		lasloNagiCarouselImg: [
+	let laszloNagyPageContent = {
+		bgImage: './images/laszloNagy/heroBg.png',
+		aboutHouseBgImage: './images/laszloNagy/aboutHouseBgImage.png',
+		laszloNagyCarouselImg: [
 			{
 				id: 1,
-				image: "../images/lasloNagi/lasloNagiCarouselImg.png"
+				image: "../images/laszloNagy/laszloNagyCarouselImg.png"
 			},
 			{
 				id: 2,
-				image: "../images/lasloNagi/lasloNagiCarouselImg.png"
+				image: "../images/laszloNagy/laszloNagyCarouselImg.png"
 			},
 			{
 				id: 3,
-				image: "../images/lasloNagi/lasloNagiCarouselImg.png"
+				image: "../images/laszloNagy/laszloNagyCarouselImg.png"
 			},
 		]
 	}
 
-	const lasloNagiContent = props.intl.locale === 'en' ? lasloNagiPageEN : lasloNagiPageBG;
+	const laszloNagyContent = props.intl.locale === 'en' ? laszloNagyPageEN : laszloNagyPageBG;
 
 	return (
-		<div className='laslo-nagi__page'>
+		<div className='laszlo-nagy__page'>
 			<div className=''>
 				<HeroCollections
-					bgImage={lasloNagiPageContent.bgImage}
-					title={lasloNagiContent.title}
+					bgImage={laszloNagyPageContent.bgImage}
+					title={laszloNagyContent.title}
 					label={false}
 				/>
 			</div>
 			<main>
 				<InfoColumn
-					title={lasloNagiContent.aboutHouse}
-					text={lasloNagiContent.aboutHouseText}
-					backgroundImage={lasloNagiPageContent.aboutHouseBgImage}
+					title={laszloNagyContent.aboutHouse}
+					text={laszloNagyContent.aboutHouseText}
+					backgroundImage={laszloNagyPageContent.aboutHouseBgImage}
 					columns={2}
 				/>
 
@@ -62,8 +62,8 @@ const LasloNagiPage = (props) => {
 							<Col lg={5}>
 								<Row>
 									<InfoColumn
-										title={lasloNagiContent.permanentExhibitionTitle}
-										text={lasloNagiContent.permanentExhibitionText}
+										title={laszloNagyContent.permanentExhibitionTitle}
+										text={laszloNagyContent.permanentExhibitionText}
 										columns={1}
 									/>
 								</Row>
@@ -73,7 +73,7 @@ const LasloNagiPage = (props) => {
 									<Col className='pr-0 pl-0'>
 										<div className="about-us-page__building-carousel nae-container">
 											<CarouselImages
-												listImages={lasloNagiPageContent.lasloNagiCarouselImg}
+												listImages={laszloNagyPageContent.laszloNagyCarouselImg}
 											/>
 										</div>
 									</Col>
@@ -84,10 +84,10 @@ const LasloNagiPage = (props) => {
 				</section>
 				<section className='section-building'>
 					<HeroInner
-						title={lasloNagiContent.priceAndWorkingHours}
+						title={laszloNagyContent.priceAndWorkingHours}
 						subtitle={''}
 					/>
-					<div className='contacts contacts__wrap laslo-nagi__page__contact-section'>
+					<div className='contacts contacts__wrap laszlo-nagy__page__contact-section'>
 						<Container className=''>
 							<Row className=''>
 								<Col lg={11}>
@@ -173,4 +173,4 @@ const LasloNagiPage = (props) => {
 	)
 }
 
-export default injectIntl(LasloNagiPage);
+export default injectIntl(LaszloNagyPage);

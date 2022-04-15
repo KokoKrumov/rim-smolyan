@@ -36,6 +36,7 @@
 			&__child {
 				&:first-child {
 					flex: 1;
+					visibility: hidden;
 				}
 
 				//&.navbar-nav
