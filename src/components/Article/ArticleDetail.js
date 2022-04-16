@@ -15,6 +15,32 @@ function ArticleDetail({ article }) {
 
   const articleText = article.content.rendered;
 
+  function renderDate(article) {
+    if (articleType === "news") {
+      return (
+        <div>
+          {article.date_gmt ? (
+            <NewsDateAndYear date={article.date_gmt} />
+          ) : null}
+          {article.event_place ? (
+            <div className="h-sup">
+              <span className="d-inline-block px-2">|</span>
+              {article.event_place}
+            </div>
+          ) : null}
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          {article.event_place ? (
+            <div className="h-sup">{article.event_place}</div>
+          ) : null}
+        </div>
+      );
+    }
+  }
+
   if (article) {
     return (
       <article>
@@ -37,17 +63,8 @@ function ArticleDetail({ article }) {
         <Row>
           {/* MAIN CONTENT */}
           <Col lg={7} xl={8}>
-            <div className="nae-item__date_post">
-              {article.date_gmt ? (
-                <NewsDateAndYear date={article.date_gmt} />
-              ) : null}
-              {article.event_place ? (
-                <div className="h-sup">
-                  <span className="d-inline-block px-2">|</span>
-                  {article.event_place}
-                </div>
-              ) : null}
-            </div>
+            {renderDate(article)}
+            <div className="nae-item__date_post"></div>
             <figure className="nae-item__img__wrap image__article-detail">
               {article.event_date && articleType === "events" ? (
                 <ArticleDate date={article.event_date} />
