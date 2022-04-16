@@ -10,7 +10,7 @@ import NewsAndEventsListHorizontal from "../../newsAndEventsList/NewsAndEventsLi
 import { connect } from "react-redux";
 import { fetchNews, resetFetchNews } from "../../../actions";
 import { withRouter } from "react-router";
-import { isEqual, map, find } from "lodash";
+import { isEqual } from "lodash";
 import { extarctIdAndCategories } from "../../../utilities/browser";
 import history from "../../../history";
 

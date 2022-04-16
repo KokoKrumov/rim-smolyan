@@ -45,7 +45,7 @@ function NewsAndEventsListHorizontal({ listOfNewsAndEvents, exhibitions }) {
             <Col lg={7}>
               <div>
                 {/*DATE*/}
-                {event.date_gmt ? (
+                {!event.event_date ? (
                   <div className="nae-item__article-date__wrap">
                     <div className="nae-item__article-date">
                       <NewsDateAndYear date={event.date_gmt} />

@@ -2,6 +2,7 @@ import React from "react";
 import {
   getDateDayForArticleCard,
   getDateMonthForArticleCard,
+  getDateYearForArticleCard,
 } from "../../utilities/browser";
 import { isEqual } from "lodash";
 
@@ -26,6 +27,10 @@ function ArticleDate({ date }) {
               <p className="nae-item__date-month">
                 {getDateMonthForArticleCard(date1)}
               </p>
+
+              <p className="nae-item__date-month">
+                {getDateYearForArticleCard(date1)}
+              </p>
             </div>
             <div>
               <p className="nae-item__date-day"> - </p>
@@ -36,6 +41,10 @@ function ArticleDate({ date }) {
               </p>
               <p className="nae-item__date-month">
                 {getDateMonthForArticleCard(date2)}
+              </p>
+
+              <p className="nae-item__date-month">
+                {getDateYearForArticleCard(date2)}
               </p>
             </div>
           </div>
@@ -51,6 +60,9 @@ function ArticleDate({ date }) {
             <p className="nae-item__date-month">
               {getDateMonthForArticleCard(date2)}
             </p>
+            <p className="nae-item__date-month">
+              {getDateYearForArticleCard(date2)}
+            </p>
           </div>
         </div>
       );
@@ -61,6 +73,9 @@ function ArticleDate({ date }) {
         <p className="nae-item__date-day">{getDateDayForArticleCard(date)}</p>
         <p className="nae-item__date-month">
           {getDateMonthForArticleCard(date)}
+        </p>
+        <p className="nae-item__date-month">
+          {getDateYearForArticleCard(date)}
         </p>
       </div>
     );

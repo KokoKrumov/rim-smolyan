@@ -14,20 +14,21 @@ import {
   FETCH_SERVICES,
   FETCH_COLLECTIONS_MAIN,
   FETCH_COLLECTIONS_VIRTUAL,
-  FETCH_COLLECTIONS_BYTYPE,
   FETCH_CATEGORIES,
   FETCH_NEWS_ERROR,
   RESET_FETCH_NEWS,
 } from "./types";
 
 import streams from "../api/streams";
+import publicStreams from "../api/public";
 //Create Actions
 
 export const fetchNews =
   (id, page = 1, number = 10) =>
   async (dispatch) => {
     try {
-      const response = await streams.get(`/posts?categories=${id}&_fields=id,date_gmt,slug,title,content,excerpt,event_date,event_place,_links,_embedded&_embed&page=${page}&per_page=${number}`
+      const response = await streams.get(
+        `/posts?categories=${id}&_fields=id,date_gmt,slug,title,content,excerpt,event_date,event_place,_links,_embedded&_embed&page=${page}&per_page=${number}`
       );
       dispatch({ type: FETCH_NEWS, payload: response.data });
     } catch (error) {
@@ -81,12 +82,12 @@ export const fetchServices = () => async (dispatch) => {
 };
 
 export const fetchRimBuildingImages = () => async (dispatch) => {
-  const response = await streams.get("/rim-building-images.json");
+  const response = await publicStreams.get("/rim-building-images.json");
   dispatch({ type: FETCH_RIM_BUILDING_IMAGES, payload: response.data });
 };
 
 export const fetchTeam = () => async (dispatch) => {
-  const response = await streams.get("/team.json");
+  const response = await publicStreams.get("/team.json");
   dispatch({ type: FETCH_TEAM, payload: response.data });
 };
 

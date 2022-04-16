@@ -152,7 +152,7 @@
   }
 
   &__horizontal + &__horizontal {
-    @include margin(25px, 0px, 0px, 0px);
+    @include margin(40px, 0px, 0px, 0px);
 
     @include media-breakpoint-down(md) {
       @include margin(60px, 0px, 0px, 0px);
@@ -180,5 +180,12 @@
     @include margin(10px, 0px, 0px, 0px);
     display: flex;
     flex-direction: row;
+  }
+}
+
+.wpc-paragraph__main-content {
+  img, video {
+    max-width: 100%;
+    height: auto;
   }
 }
