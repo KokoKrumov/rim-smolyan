@@ -97,8 +97,8 @@ function Footer({showModal}) {
                             </Nav>
                             <Nav className="">
                                 <Nav.Link
-                                    href="#"
-                                    className='nav__main-link not-allowed'>
+                                    href="/laszlo-nagy"
+                                    className='nav__main-link'>
                                     <FormattedMessage id="menu.house-museum"/>
                                 </Nav.Link>
                             </Nav>
