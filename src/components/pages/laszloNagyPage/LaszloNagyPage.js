@@ -18,55 +18,55 @@ const LaszloNagyPage = (props) => {
     laszloNagyCarouselImg: [
       {
         id: 1,
-        image: "../images/laszloNagy/laslo-nagi-1.jpg",
+        image: "../images/laszloNagy/permanent-exhibition-1.jpg",
       },
       {
         id: 2,
-        image: "../images/laszloNagy/laslo-nagi-2.jpg",
+        image: "../images/laszloNagy/permanent-exhibition-2.jpg",
       },
       {
         id: 3,
-        image: "../images/laszloNagy/laslo-nagi-3.jpg",
+        image: "../images/laszloNagy/permanent-exhibition-3.jpg",
       },
       {
         id: 4,
-        image: "../images/laszloNagy/laslo-nagi-4.jpg",
+        image: "../images/laszloNagy/permanent-exhibition-4.jpg",
       },
       {
         id: 5,
-        image: "../images/laszloNagy/laslo-nagi-5.jpg",
+        image: "../images/laszloNagy/permanent-exhibition-5.jpg",
       },
       {
         id: 6,
-        image: "../images/laszloNagy/laslo-nagi-6.jpg",
+        image: "../images/laszloNagy/permanent-exhibition-6.jpg",
       },
       {
         id: 7,
-        image: "../images/laszloNagy/laslo-nagi-7.jpg",
+        image: "../images/laszloNagy/permanent-exhibition-7.jpg",
       },
       {
         id: 8,
-        image: "../images/laszloNagy/laslo-nagi-8.jpg",
+        image: "../images/laszloNagy/permanent-exhibition-8.jpg",
       },
       {
         id: 9,
-        image: "../images/laszloNagy/laslo-nagi-9.jpg",
+        image: "../images/laszloNagy/permanent-exhibition-9.jpg",
       },
       {
         id: 10,
-        image: "../images/laszloNagy/laslo-nagi-10.jpg",
+        image: "../images/laszloNagy/permanent-exhibition-10.jpg",
       },
       {
         id: 11,
-        image: "../images/laszloNagy/laslo-nagi-11.jpg",
+        image: "../images/laszloNagy/permanent-exhibition-11.jpg",
       },
       {
         id: 12,
-        image: "../images/laszloNagy/laslo-nagi-12.jpg",
+        image: "../images/laszloNagy/permanent-exhibition-12.jpg",
       },
       {
         id: 13,
-        image: "../images/laszloNagy/laslo-nagi-13.jpg",
+        image: "../images/laszloNagy/permanent-exhibition-13.jpg",
       },
     ],
   };
