@@ -18,7 +18,7 @@ class NewsDetailPage extends Component {
 
   fetchData = () => {
     const routeObj = matchPath(this.props.location.pathname, {
-      path: "/news/:slug",
+      path: ["/news-and-events/:slug", "/news/:slug", "/events/:slug"],
       exact: true,
       strict: false,
     });
@@ -31,7 +31,7 @@ class NewsDetailPage extends Component {
           this.setState({
             articleId: Number(article.id),
             article: article,
-            articleSection: "news",
+            articleSection: "news-and-events",
             isLoading: false,
           });
         } else {
