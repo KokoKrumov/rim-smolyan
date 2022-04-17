@@ -146,7 +146,7 @@ class NewsPage extends Component {
     var options = {
       root: null,
       rootMargin: "0px",
-      threshold: 0.95,
+      threshold: 0.90,
     };
 
     this.observer = new IntersectionObserver(
