@@ -44,7 +44,7 @@ export const resetFetchNews = () => {
 };
 
 export const fetchRoutes = () => async (dispatch) => {
-  const response = await streams.get("/routes.json");
+  const response = await publicStreams.get("/routes.json");
   dispatch({ type: FETCH_ROUTES, payload: response.data });
 };
 
@@ -77,7 +77,7 @@ export const fetchExhibitions = () => async (dispatch) => {
 };
 
 export const fetchServices = () => async (dispatch) => {
-  const response = await streams.get("/services.json");
+  const response = await publicStreams.get("/services.json");
   dispatch({ type: FETCH_SERVICES, payload: response.data });
 };
 
