@@ -81,7 +81,7 @@ class App extends Component {
                 exact
                 component={CollectionsVirtual}
               />
-              <Route path="/lаszlо-nagy" exact component={LaszloNagyPage} />
+              <Route path="/laszlo-nagy" exact component={LaszloNagyPage} />
               <Route path="/about-us" exact component={AboutUs} />
               <Route path="/contact-us" exact component={Contacts} />
               <Route path="/support-us" exact component={SupportUs} />
