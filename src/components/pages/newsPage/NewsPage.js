@@ -23,16 +23,16 @@ class NewsPage extends Component {
       label: "Всички",
     },
     {
-      href: "/events",
-      className: "tab_list-link",
-      eventKey: "link-3",
-      label: "Събития",
-    },
-    {
       href: "/news",
       className: "tab_list-link",
       eventKey: "link-1",
       label: "Новини",
+    },
+    {
+      href: "/events",
+      className: "tab_list-link",
+      eventKey: "link-3",
+      label: "Събития",
     },
   ];
 
