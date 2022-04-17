@@ -19,13 +19,13 @@ class NewsPage extends Component {
     {
       href: "/news-and-events",
       className: "tab_list-link",
-      eventKey: "link-2",
+      eventKey: "link-1",
       label: "Всички",
     },
     {
       href: "/news",
       className: "tab_list-link",
-      eventKey: "link-1",
+      eventKey: "link-2",
       label: "Новини",
     },
     {
