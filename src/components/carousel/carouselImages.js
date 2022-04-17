@@ -30,7 +30,6 @@ function CarouselImages({ listImages }) {
   }
 
   if (listImages) {
-    console.log("listImages: ", listImages);
     return (
       <React.Fragment>
         {!isMobileScreenV && (
