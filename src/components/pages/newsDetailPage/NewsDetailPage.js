@@ -23,6 +23,8 @@ class NewsDetailPage extends Component {
       strict: false,
     });
     const slug = routeObj.params.slug;
+    // Suggested edit
+    // const slug = this.props.match.params.slug;
     this.props
       .fetchArticle(slug)
       .then(() => {
