@@ -87,9 +87,9 @@ function ArticleDetail({ article }) {
             <div className="socials__wrap socials__top-indent">
               <p className="socials-label">Споделете страницата</p>
               <SocialsShare
-                articleID={article.id - 1}
-                articleTitle={article.title}
-                page={"news"}
+                articleID={article.id}
+                articleTitle={article.title.rendered}
+                page={"news-and-events"}
               />
             </div>
           </Col>

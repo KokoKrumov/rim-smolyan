@@ -132,7 +132,7 @@ class CollectionsMainIntroAndGallery extends Component {
                                             </Nav>
                                             <div className="socials__wrap">
                                                 <p className='socials-label'>Споделете страницата</p>
-                                                <SocialsShare page={'share-page'} url={this.props.match.url}/>
+                                                <SocialsShare page={'share-page'}/>
                                             </div>
                                         </Col>
                                         <Col sm={10}>
