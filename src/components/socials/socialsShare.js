@@ -1,10 +1,10 @@
 import React from 'react';
 import SocialButton from "./socialsButton";
 
-function SocialsShare({articleID, articleTitle, page}) {
+function SocialsShare({articleTitle, page}) {
     const url = window.location.protocol + '//' + window.location.hostname + window.location.pathname
     const hashtag = '#museumsmolyan'
-    const data = {articleID, articleTitle, url, hashtag}
+    const data = {articleTitle, url, hashtag}
     return (
         <div className='socials'>
             <div className='socials-item'>

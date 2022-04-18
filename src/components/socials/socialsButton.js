@@ -8,7 +8,7 @@ import ModalRedirectContent from "../modal/ModalRedirectContent";
 import ModalNedelovContent from "../modal/ModalShishkovContent";
 import ModalTeamContent from "../modal/ModalTeamContent";
 
-function SocialButton({buttonType, articleID, articleTitle, url, hashtag = null}) {
+function SocialButton({buttonType, articleTitle, url, hashtag = null}) {
     const facebookShareButton = () => {
         return (
             <FacebookShareButton
