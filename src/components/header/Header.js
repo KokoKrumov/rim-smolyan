@@ -294,7 +294,7 @@ function Header({ showModal }) {
                   <p className="nav__main-link nav__main-link__separate-line">
                     <span className="d-none d-xl-block">|</span>
                   </p>
-                  <Nav.Link href="/laszlo-nagy" className="nav__main-link">
+                  <Nav.Link href="/house-museum-laszlo-nagy" className="nav__main-link">
                     <FormattedMessage id="menu.house-museum" />
                   </Nav.Link>
                 </Nav>
