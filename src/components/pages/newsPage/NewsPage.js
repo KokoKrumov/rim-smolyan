@@ -43,7 +43,6 @@ class NewsPage extends Component {
     news: [],
     currentNews: [],
     categories: [],
-    loadingNewArticles: false,
     prevY: 0,
     page: 1,
     newsError: false,
@@ -64,27 +63,17 @@ class NewsPage extends Component {
           10,
           "storage",
           this.props,
-          this.state.listOfNewsAndEvents,
           this.props.categories
         );
       }
     );
   }
 
-  fetchData = (
-    slug,
-    page,
-    per_page,
-    listFrom,
-    props,
-    listOfNewsAndEvents,
-    propsCategories
-  ) => {
+  fetchData = (slug, page, per_page, listFrom, props, propsCategories) => {
     const { slugId, categories } = extarctIdAndCategories(
       slug,
       listFrom,
       props,
-      listOfNewsAndEvents,
       propsCategories
     );
     this.props.fetchNews(slugId, page, per_page).then(() => {
@@ -138,7 +127,6 @@ class NewsPage extends Component {
         10,
         "storage",
         this.props,
-        this.state.listOfNewsAndEvents,
         this.state.categories
       );
     }
@@ -170,7 +158,6 @@ class NewsPage extends Component {
         10,
         "props",
         this.props,
-        this.state.listOfNewsAndEvents,
         this.props.categories
       );
     }
@@ -229,10 +216,7 @@ class NewsPage extends Component {
                   </div>
                 </Row>
                 <Row>
-                  <div
-                    ref={(loadingRef) => (this.loadingRef = loadingRef)}
-                    // style={loadingCSS}
-                  >
+                  <div ref={(loadingRef) => (this.loadingRef = loadingRef)}>
                     <span>{!this.state.newsError && "Loading..."}</span>
                   </div>
                 </Row>

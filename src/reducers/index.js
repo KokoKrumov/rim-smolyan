@@ -2,6 +2,7 @@ import { combineReducers } from "redux";
 import newsReducer from "./NewsReducer";
 import articleReducer from "./ArticleReducer";
 import newsErrorReducer from "./NewsErrorReducer";
+import exhibitionsErrorReducer from "./ExhibitionsErrorReducer";
 import ModalReducer from "./ModalReducer";
 import RimBuildingImagesReducer from "./RimBuildingImagesReducer";
 import TeamReducer from "./TeamReducer";
@@ -15,6 +16,7 @@ export default combineReducers({
   news: newsReducer,
   article: articleReducer,
   newsError: newsErrorReducer,
+  exhibitionsError: exhibitionsErrorReducer,
   exhibitions: exhibitionsReducer,
   routes: routesReducer,
   services: servicesReducer,

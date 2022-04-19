@@ -93,20 +93,11 @@ class HomePage extends Component {
     });
   }
 
-  fetchData = (
-    id,
-    page,
-    perPage,
-    listFrom,
-    props,
-    listOfNewsAndEvents,
-    propsCategories
-  ) => {
+  fetchData = (id, page, perPage, listFrom, props, propsCategories) => {
     const { slugId, categories } = extarctIdAndCategories(
       id,
       listFrom,
       props,
-      listOfNewsAndEvents,
       propsCategories
     );
     this.props.fetchNews(slugId, page, perPage).then(() => {
@@ -134,7 +125,6 @@ class HomePage extends Component {
         3,
         "storage",
         this.props,
-        this.state.listOfNewsAndEvents,
         this.state.categories
       );
     }
@@ -157,7 +147,6 @@ class HomePage extends Component {
         3,
         "props",
         this.props,
-        this.state.listOfNewsAndEvents,
         this.props.categories
       );
     }
