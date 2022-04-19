@@ -18,7 +18,7 @@ function NewsAndEventsListHorizontal({ listOfNewsAndEvents }) {
               {/*IMAGE AND DATE*/}
               <a
                 className="link link-img"
-                href={`/news/${event.slug}`}
+                href={`/news-and-events/${event.slug}`}
                 itemProp="url"
                 target=""
                 rel="noopener nofollow noreferrer"
@@ -58,7 +58,7 @@ function NewsAndEventsListHorizontal({ listOfNewsAndEvents }) {
                 <h3 className="h3">
                   <a
                     className="link a-title"
-                    href={`/news/${event.slug}`}
+                    href={`/news-and-events/${event.slug}`}
                     itemProp="url"
                     target=""
                     rel="noopener nofollow noreferrer"
@@ -76,7 +76,7 @@ function NewsAndEventsListHorizontal({ listOfNewsAndEvents }) {
                 {/*LINK TO SEE MORE*/}
                 <a
                   className="a cta_outline cta_outline__dark hvr-underline-from-left"
-                  href={`/news/${event.slug}`}
+                  href={`/news-and-events/${event.slug}`}
                   itemProp="url"
                   target=""
                   rel="noopener nofollow noreferrer"

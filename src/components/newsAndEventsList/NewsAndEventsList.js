@@ -8,7 +8,7 @@ function NewsAndEventsList({ listOfNewsAndEvents }) {
       return (
         <Col md={4} key={article.id} className="nae-item__vertical__wrap">
           <div className="nae-item nae-item__vertical">
-            <a href={`/news/${article.slug}`}>
+            <a href={`/news-and-events/${article.slug}`}>
               <div className="nae-item__img__wrap">
                 {article.event_date ? (
                   <ArticleDate date={article.event_date} />

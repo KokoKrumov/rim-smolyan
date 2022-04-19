@@ -17,21 +17,15 @@ class NewsDetailPage extends Component {
   };
 
   fetchData = () => {
-    const routeObj = matchPath(this.props.location.pathname, {
-      path: "/news/:slug",
-      exact: true,
-      strict: false,
-    });
-    const slug = routeObj.params.slug;
     this.props
-      .fetchArticle(slug)
+      .fetchArticle(this.props.match.params.slug)
       .then(() => {
         if (this.props?.article) {
           const article = this.props.article[0];
           this.setState({
             articleId: Number(article.id),
             article: article,
-            articleSection: "news",
+            articleSection: "news-and-events",
             isLoading: false,
           });
         } else {

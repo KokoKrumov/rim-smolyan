@@ -13,7 +13,7 @@ $path_beginings = [
     '/administrative',
     '/privacy-policy',
     '/terms',
-    '/laszlo-nagy',
+    '/house-museum-laszlo-nagy',
 ];
 
 $path_begining = '/' . explode('/', $_SERVER['REQUEST_URI'])[1];

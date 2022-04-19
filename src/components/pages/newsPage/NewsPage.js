@@ -19,20 +19,20 @@ class NewsPage extends Component {
     {
       href: "/news-and-events",
       className: "tab_list-link",
-      eventKey: "link-2",
+      eventKey: "link-1",
       label: "Всички",
+    },
+    {
+      href: "/news",
+      className: "tab_list-link",
+      eventKey: "link-2",
+      label: "Новини",
     },
     {
       href: "/events",
       className: "tab_list-link",
       eventKey: "link-3",
       label: "Събития",
-    },
-    {
-      href: "/news",
-      className: "tab_list-link",
-      eventKey: "link-1",
-      label: "Новини",
     },
   ];
 
@@ -134,7 +134,7 @@ class NewsPage extends Component {
     var options = {
       root: null,
       rootMargin: "0px",
-      threshold: 0.95,
+      threshold: 0.90,
     };
 
     this.observer = new IntersectionObserver(
