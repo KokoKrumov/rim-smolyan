@@ -1,13 +1,25 @@
-import _ from 'lodash'
-import {FETCH_EXHIBITIONS, FETCH_EXHIBITIONS_ARTICLE} from '../actions/types'
+import _ from "lodash";
+import { FETCH_EXHIBITIONS, RESET_FETCH_EXHIBITIONS } from "../actions/types";
 
-export default (state = {}, action) => {
-    switch (action.type) {
-        case FETCH_EXHIBITIONS:
-            return {...state, ..._.mapKeys(action.payload, 'id')}
-        case FETCH_EXHIBITIONS_ARTICLE:
-            return {...state, [action.payload.id]: action.payload}
-        default:
-            return state;
-    }
-}
+let INITIAL_STATE = {
+  activeExhibitions: [],
+  archiveExhibitions: [],
+};
+
+export default (state = INITIAL_STATE, action) => {
+  switch (action.type) {
+    case FETCH_EXHIBITIONS:
+      action.payload.map((exhibition) => {
+        if (exhibition.archive) {
+          INITIAL_STATE.archiveExhibitions.push(exhibition);
+        } else {
+          INITIAL_STATE.activeExhibitions.push(exhibition);
+        }
+      });
+      return INITIAL_STATE;
+    case RESET_FETCH_EXHIBITIONS:
+      return { ...action.data };
+    default:
+      return state;
+  }
+};

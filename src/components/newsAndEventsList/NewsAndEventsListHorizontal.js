@@ -5,9 +5,9 @@ import { FormattedMessage } from "react-intl";
 import ArticleDate from "../Article/ArticleDate";
 import NewsDateAndYear from "../pages/newsDetailPage/NewsDateAndYear";
 
-function NewsAndEventsListHorizontal({ listOfNewsAndEvents, exhibitions }) {
+function NewsAndEventsListHorizontal({ listOfNewsAndEvents }) {
   if (listOfNewsAndEvents) {
-    return listOfNewsAndEvents.map((event, index) => {
+    return listOfNewsAndEvents.map((event) => {
       return (
         <div
           className="nae-item nae-item__horizontal container"

@@ -10,6 +10,7 @@ import {
   CLOSE_TEAM_MODAL,
   FETCH_TEAM,
   FETCH_EXHIBITIONS,
+  FETCH_EXHIBITIONS_ERROR,
   FETCH_ROUTES,
   FETCH_SERVICES,
   FETCH_COLLECTIONS_MAIN,
@@ -17,6 +18,7 @@ import {
   FETCH_CATEGORIES,
   FETCH_NEWS_ERROR,
   RESET_FETCH_NEWS,
+  RESET_FETCH_EXHIBITIONS,
 } from "./types";
 
 import streams from "../api/streams";
@@ -39,6 +41,13 @@ export const fetchNews =
 export const resetFetchNews = () => {
   return {
     type: RESET_FETCH_NEWS,
+    data: [],
+  };
+};
+
+export const resetFetchExhibitions = () => {
+  return {
+    type: RESET_FETCH_EXHIBITIONS,
     data: [],
   };
 };
@@ -71,10 +80,19 @@ export const fetchCollections = (collectionsType) => async (dispatch) => {
   dispatch({ type: `FETCH_COLLECTIONS_BYTYPE`, payload: response.data });
 };
 
-export const fetchExhibitions = () => async (dispatch) => {
-  const response = await streams.get("/exhibitions.json");
-  dispatch({ type: FETCH_EXHIBITIONS, payload: response.data });
-};
+export const fetchExhibitions =
+  (id, page = 1, number = 10) =>
+  async (dispatch) => {
+    try {
+      const response = await streams.get(
+        `/posts?categories=${id}&_fields=id,date_gmt,slug,title,content,excerpt,event_date,event_place,archive,_links,_embedded&_embed&page=${page}&per_page=${number}`
+        // `/posts?categories=${id}&_fields=id,date_gmt,slug,title,content,excerpt,event_date,event_place,_links,_embedded&_embed&page=${page}&per_page=${number}`
+      );
+      dispatch({ type: FETCH_EXHIBITIONS, payload: response.data });
+    } catch (error) {
+      dispatch({ type: FETCH_EXHIBITIONS_ERROR, payload: error });
+    }
+  };
 
 export const fetchServices = () => async (dispatch) => {
   const response = await publicStreams.get("/services.json");

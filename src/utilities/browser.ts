@@ -158,15 +158,9 @@ export function extarctIdAndCategories(
   slug: string,
   listFrom: string,
   props: any,
-  listOfNewsAndEvents: any,
   propsCategories: any
 ): any {
-  if (
-    props &&
-    props.news &&
-    props.categories &&
-    props.news !== listOfNewsAndEvents
-  ) {
+  if (props) {
     let categories, slugItem, slugId, slugSanatize;
     slugSanatize = slug.replace("/", "");
     if (listFrom === "storage") {
@@ -179,7 +173,6 @@ export function extarctIdAndCategories(
       slugItem = getItemBySlug(slugSanatize, categories);
       slugId = slugItem.id;
     }
-
     return { slugId, categories };
   }
 }
