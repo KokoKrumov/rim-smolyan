@@ -9,28 +9,28 @@ import CardExhibitionArchive from "../cards/cardExhibitionArchive";
 
 class AccordionBlock extends Component {
   state = {
-    activeKay: 0,
+    activeKey: "",
     openAccordionItem: null,
   };
 
-  setActiveKay = (activeKay) => {
-    this.setState({ activeKay: this.state.activeKay === 0 ? null : 0 });
+  toggleActiveKey = () => {
+    this.setState({ activeKey: this.state.activeKey === "0" ? "" : "0" });
   };
 
   render() {
     const { intl, content } = this.props;
     return (
-      <Accordion defaultActiveKey="0">
+      <Accordion>
         <Card
           className={`accordion__wrap accordion__wrap__exhibitions ${
-            this.state.activeKay === 0 ? `accordion__wrap__active` : ``
+            this.state.activeKey === "0" ? `accordion__wrap__active` : ``
           }`}
         >
           <React.Fragment>
             <Accordion.Toggle
               as={Card.Header}
               eventKey="0"
-              onClick={() => this.setActiveKay(0)}
+              onClick={() => this.toggleActiveKey()}
             >
               <Container>
                 <div className="d-flex justify-content-start align-items-center pr-3 pl-3">
