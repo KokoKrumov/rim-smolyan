@@ -12,12 +12,14 @@ import { showModal } from "../../actions";
 import { connect } from "react-redux";
 import { FormattedMessage, useIntl } from "react-intl";
 import { isTabletScreen } from "../../utilities/browser";
+import history from "../../history";
 
 function Header({ showModal }) {
   const intl = useIntl();
 
   const [navIsOpen, setNavIsOpen] = useState(false);
   const [isTabletScreenV, setIsTabletScreen] = React.useState(isTabletScreen());
+  const flag = localStorage.getItem("lang");
 
   useEffect(() => {
     function handleResize() {
@@ -39,13 +41,14 @@ function Header({ showModal }) {
     window.location.reload();
   }
 
+  function isCurrentUrl(url) {
+    return history.location.pathname.includes(url);
+  }
+
   function handleShowModal(data, url, e) {
     e.preventDefault();
     showModal(data, url);
   }
-
-  let flag = localStorage.getItem("lang");
-
   return (
     <header className="header">
       <Navbar
@@ -158,18 +161,19 @@ function Header({ showModal }) {
 
                 <Nav className={`header-navigation__inner__child ${flag}`}>
                   <Nav.Link
-                    // active={location.pathname === "/support-us"}
-                    // key={"/support-us"}
-                    // eventKey="/support-us"
+                    className={`nav__secondary-link ${
+                      isCurrentUrl("support-us") && "active"
+                    }`}
                     href="/support-us"
-                    className="nav__secondary-link"
                   >
                     <FormattedMessage id="menu.support" />
                   </Nav.Link>
                   <p className="nav__main-link d-none d-xl-block">|</p>
                   <Nav.Link
                     href="/administrative"
-                    className="nav__secondary-link"
+                    className={`nav__secondary-link ${
+                      isCurrentUrl("administrative") && "active"
+                    }`}
                   >
                     <FormattedMessage id="menu.administrative" />
                   </Nav.Link>
@@ -232,48 +236,76 @@ function Header({ showModal }) {
                   <Nav.Link
                     href="/exhibitions"
                     eventKey="exhibitions"
-                    className="nav__main-link "
+                    className={`nav__main-link ${
+                      isCurrentUrl("exhibitions") && "active"
+                    }`}
                   >
                     <FormattedMessage id="menu.exhibitions" />
                   </Nav.Link>
                   <Nav.Link
                     href="/news-and-events"
                     eventKey="news"
-                    className="nav__main-link"
+                    className={`nav__main-link ${
+                      isCurrentUrl("news-and-events") ||
+                      isCurrentUrl("news") ||
+                      isCurrentUrl("events")
+                        ? "active"
+                        : ""
+                    }`}
                   >
                     <FormattedMessage id="menu.news" />
                   </Nav.Link>
                   <NavDropdown
                     title={intl.formatMessage({ id: "menu.about-us" })}
-                    className="nav__main-link"
+                    className={`nav__main-link ${
+                      isCurrentUrl("museum-games") ||
+                      isCurrentUrl("about-us") ||
+                      isCurrentUrl("services") ||
+                      isCurrentUrl("prices")
+                        ? "active"
+                        : ""
+                    }`}
                     id="collasible-nav-dropdown"
                   >
                     <NavDropdown.Item
-                      className="nav__secondary-link"
+                      className={`nav__secondary-link ${
+                        isCurrentUrl("about-us") && "active"
+                      }`}
                       href="/about-us"
                     >
                       <FormattedMessage id="menu.about-museum" />
                     </NavDropdown.Item>
                     <NavDropdown.Item
-                      className="nav__secondary-link"
+                      className={`nav__secondary-link ${
+                        isCurrentUrl("museum-games") && "active"
+                      }`}
                       href="/museum-games"
                     >
                       <FormattedMessage id="games" />
                     </NavDropdown.Item>
                     <NavDropdown.Item
-                      className="nav__secondary-link"
+                      className={`nav__secondary-link ${
+                        isCurrentUrl("services") && "active"
+                      }`}
                       href="/services"
                     >
                       <FormattedMessage id="services" />
                     </NavDropdown.Item>
                     <NavDropdown.Item
-                      className="nav__secondary-link"
+                      className={`nav__secondary-link ${
+                        isCurrentUrl("prices") && "active"
+                      }`}
                       href="/prices"
                     >
                       <FormattedMessage id="prices" />
                     </NavDropdown.Item>
                   </NavDropdown>
-                  <Nav.Link href="/contact-us" className="nav__main-link">
+                  <Nav.Link
+                    href="/contact-us"
+                    className={`nav__main-link ${
+                      isCurrentUrl("contact-us") && "active"
+                    }`}
+                  >
                     <FormattedMessage id="menu.contact-us" />
                   </Nav.Link>
                   <p className="nav__main-link nav__main-link__separate-line">
@@ -281,7 +313,9 @@ function Header({ showModal }) {
                   </p>
                   <Nav.Link
                     href="/house-museum-laszlo-nagy"
-                    className="nav__main-link"
+                    className={`nav__main-link ${
+                      isCurrentUrl("house-museum-laszlo-nagy") && "active"
+                    }`}
                   >
                     <FormattedMessage id="menu.house-museum" />
                   </Nav.Link>

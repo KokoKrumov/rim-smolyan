@@ -6,6 +6,7 @@ import { fetchExhibitions, resetFetchExhibitions } from "../../../actions";
 import exhibitionPermanentHero from "../../../assets/images/exhibition-permanent-hero.png";
 import { injectIntl } from "react-intl";
 import { extarctIdAndCategories } from "../../../utilities/browser";
+import utilizeScroll from "../../../utilities/utilizeScroll";
 import Image from "react-bootstrap/Image";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
@@ -16,6 +17,11 @@ import exhibitionsArchiveEN from "../../../translations/exhibitionsArchiveEN.jso
 import { isEqual } from "lodash";
 
 class ExhibitionsPage extends Component {
+  constructor(props) {
+    super(props);
+    this.elScroll = utilizeScroll();
+  }
+
   state = {
     img: exhibitionPermanentHero,
     exhibitions: [],
@@ -45,6 +51,7 @@ class ExhibitionsPage extends Component {
 
   componentDidMount() {
     this.props.resetFetchExhibitions();
+    // this.elScroll.executeScroll();
     // react can't update when there are changes in storage,
     // however, the storage contains "categories" from the first load,
     // so we have to check the storage when component is mounting
@@ -103,9 +110,13 @@ class ExhibitionsPage extends Component {
           title={"permanent-exhibitions-title"}
           subtitleLg={"permanent-exhibitions-subtitle"}
           arrowBottom={true}
+          scrollOnClick={this.elScroll.executeScroll}
         />
 
-        <div className="exhibitions exhibitions__wrap">
+        <div
+          className="exhibitions exhibitions__wrap"
+          ref={this.elScroll.elRef}
+        >
           <section className="exhibitions__permanent">
             <Container className="exhibitions__container">
               <div className="exhibitions__hero-wrap">

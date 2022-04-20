@@ -41,4 +41,21 @@
       }
     }
   }
+
+  &-item {
+    &.active {
+      background-color: transparent;
+      color: $red;
+      &.nav__secondary-link {
+        color: $red !important;
+        background-color: transparent;
+      }
+    }
+    &:active {
+      color: $red;
+      background-color: $dark;
+    }
+
+   
+  }
 }

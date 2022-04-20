@@ -18,7 +18,7 @@
     }
 
     &__secondary-link,
-    &__secondary-link > .nav-link, {
+    &__secondary-link > .nav-link {
       color: rgba(255, 255, 255, 0.7);
 
       &:hover {
@@ -36,6 +36,7 @@
 
 .navbar-nav .nav {
   &__main-link {
+    border-top: 1px solid transparent;
     @include padding(14px, 0px, 14px, 0px);
     font-family: $font-acari-regular;
     font-weight: 500;
@@ -46,6 +47,10 @@
 
     .nav-link {
       padding: 0;
+    }
+
+    &.active {
+     border-top-color: $red; 
     }
   }
 

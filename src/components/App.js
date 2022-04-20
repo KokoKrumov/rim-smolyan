@@ -50,7 +50,11 @@ class App extends Component {
             <Switch>
               <Route path="/" exact component={HomePage} />
               <Route path="/funds" exact component={FundsPage} />
-              <Route path="/news-and-events/:slug" exact component={NewsDetailPage} />
+              <Route
+                path="/news-and-events/:slug"
+                exact
+                component={NewsDetailPage}
+              />
               <Route path="/news-and-events" exact component={NewsPage} />
               <Route path="/news/:slug" exact component={NewsDetailPage} />
               <Route path="/news" exact component={NewsPage} />
@@ -83,7 +87,11 @@ class App extends Component {
                 exact
                 component={CollectionsVirtual}
               />
-              <Route path="/house-museum-laszlo-nagy" exact component={LaszloNagyPage} />
+              <Route
+                path="/house-museum-laszlo-nagy"
+                exact
+                component={LaszloNagyPage}
+              />
               <Route path="/about-us" exact component={AboutUs} />
               <Route path="/contact-us" exact component={Contacts} />
               <Route path="/support-us" exact component={SupportUs} />
