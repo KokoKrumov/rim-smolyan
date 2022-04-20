@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import rimLogo from "../../assets/images/rim-logo.svg";
 import searchIcon from "../../assets/images/search-icon.svg";
-import BG from "../../assets/images/bg.svg";
-import EN from "../../assets/images/en.svg";
 import Image from "react-bootstrap/Image";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
@@ -116,31 +114,23 @@ function Header({ showModal }) {
                     <NavDropdown
                       title={
                         <div className="display-flag">
-                          <img
-                            className="thumbnail-image"
-                            src={flag === "en" ? EN : BG}
-                            alt="lang"
-                          />
+                          <span>{flag === "en" ? "EN" : "BG"}</span>
                         </div>
                       }
                       className="nav__main-link dropdown-lang"
                       id="collasible-nav-dropdown"
                     >
-                      <NavDropdown.Item onClick={(e) => setLanguage("bg", e)}>
-                        <img
-                          className="thumbnail-image"
-                          src={BG}
-                          alt=""
-                          itemProp="image"
-                        />
+                      <NavDropdown.Item
+                        className={flag === "bg" && "active"}
+                        onClick={(e) => setLanguage("bg", e)}
+                      >
+                        <span>BG</span>
                       </NavDropdown.Item>
-                      <NavDropdown.Item onClick={(e) => setLanguage("en", e)}>
-                        <img
-                          className="thumbnail-image"
-                          src={EN}
-                          alt=""
-                          itemProp="image"
-                        />
+                      <NavDropdown.Item
+                        className={flag === "en" && "active"}
+                        onClick={(e) => setLanguage("en", e)}
+                      >
+                        <span>EN</span>
                       </NavDropdown.Item>
                     </NavDropdown>
                   </div>
@@ -167,7 +157,13 @@ function Header({ showModal }) {
                 )}
 
                 <Nav className={`header-navigation__inner__child ${flag}`}>
-                  <Nav.Link href="/support-us" className="nav__secondary-link">
+                  <Nav.Link
+                    // active={location.pathname === "/support-us"}
+                    // key={"/support-us"}
+                    // eventKey="/support-us"
+                    href="/support-us"
+                    className="nav__secondary-link"
+                  >
                     <FormattedMessage id="menu.support" />
                   </Nav.Link>
                   <p className="nav__main-link d-none d-xl-block">|</p>
@@ -181,31 +177,23 @@ function Header({ showModal }) {
                     <NavDropdown
                       title={
                         <div className="display-flag">
-                          <img
-                            className="thumbnail-image"
-                            src={flag === "en" ? EN : BG}
-                            alt="lang"
-                          />
+                          <span>{flag === "en" ? "EN" : "BG"}</span>
                         </div>
                       }
                       className="nav__main-link dropdown-lang"
                       id="collasible-nav-dropdown"
                     >
-                      <NavDropdown.Item onClick={(e) => setLanguage("bg", e)}>
-                        <img
-                          className="thumbnail-image"
-                          src={BG}
-                          alt=""
-                          itemProp="image"
-                        />
+                      <NavDropdown.Item
+                        className={flag === "bg" && "active"}
+                        onClick={(e) => setLanguage("bg", e)}
+                      >
+                        <span>BG</span>
                       </NavDropdown.Item>
-                      <NavDropdown.Item onClick={(e) => setLanguage("en", e)}>
-                        <img
-                          className="thumbnail-image"
-                          src={EN}
-                          alt=""
-                          itemProp="image"
-                        />
+                      <NavDropdown.Item
+                        className={flag === "en" && "active"}
+                        onClick={(e) => setLanguage("en", e)}
+                      >
+                        <span>EN</span>
                       </NavDropdown.Item>
                     </NavDropdown>
                   ) : null}
@@ -291,7 +279,10 @@ function Header({ showModal }) {
                   <p className="nav__main-link nav__main-link__separate-line">
                     <span className="d-none d-xl-block">|</span>
                   </p>
-                  <Nav.Link href="/house-museum-laszlo-nagy" className="nav__main-link">
+                  <Nav.Link
+                    href="/house-museum-laszlo-nagy"
+                    className="nav__main-link"
+                  >
                     <FormattedMessage id="menu.house-museum" />
                   </Nav.Link>
                 </Nav>
