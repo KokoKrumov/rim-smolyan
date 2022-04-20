@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import rimLogo from "../../assets/images/rim-logo.svg";
 import searchIcon from "../../assets/images/search-icon.svg";
-import BG from "../../assets/images/bg.svg";
-import EN from "../../assets/images/en.svg";
 import Image from "react-bootstrap/Image";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
@@ -14,12 +12,14 @@ import { showModal } from "../../actions";
 import { connect } from "react-redux";
 import { FormattedMessage, useIntl } from "react-intl";
 import { isTabletScreen } from "../../utilities/browser";
+import history from "../../history";
 
 function Header({ showModal }) {
   const intl = useIntl();
 
   const [navIsOpen, setNavIsOpen] = useState(false);
   const [isTabletScreenV, setIsTabletScreen] = React.useState(isTabletScreen());
+  const flag = localStorage.getItem("lang");
 
   useEffect(() => {
     function handleResize() {
@@ -41,13 +41,14 @@ function Header({ showModal }) {
     window.location.reload();
   }
 
+  function isCurrentUrl(url) {
+    return history.location.pathname.includes(url);
+  }
+
   function handleShowModal(data, url, e) {
     e.preventDefault();
     showModal(data, url);
   }
-
-  let flag = localStorage.getItem("lang");
-
   return (
     <header className="header">
       <Navbar
@@ -116,31 +117,23 @@ function Header({ showModal }) {
                     <NavDropdown
                       title={
                         <div className="display-flag">
-                          <img
-                            className="thumbnail-image"
-                            src={flag === "en" ? EN : BG}
-                            alt="lang"
-                          />
+                          <span>{flag === "en" ? "EN" : "BG"}</span>
                         </div>
                       }
                       className="nav__main-link dropdown-lang"
                       id="collasible-nav-dropdown"
                     >
-                      <NavDropdown.Item onClick={(e) => setLanguage("bg", e)}>
-                        <img
-                          className="thumbnail-image"
-                          src={BG}
-                          alt=""
-                          itemProp="image"
-                        />
+                      <NavDropdown.Item
+                        className={flag === "bg" && "active"}
+                        onClick={(e) => setLanguage("bg", e)}
+                      >
+                        <span>BG</span>
                       </NavDropdown.Item>
-                      <NavDropdown.Item onClick={(e) => setLanguage("en", e)}>
-                        <img
-                          className="thumbnail-image"
-                          src={EN}
-                          alt=""
-                          itemProp="image"
-                        />
+                      <NavDropdown.Item
+                        className={flag === "en" && "active"}
+                        onClick={(e) => setLanguage("en", e)}
+                      >
+                        <span>EN</span>
                       </NavDropdown.Item>
                     </NavDropdown>
                   </div>
@@ -167,13 +160,20 @@ function Header({ showModal }) {
                 )}
 
                 <Nav className={`header-navigation__inner__child ${flag}`}>
-                  <Nav.Link href="/support-us" className="nav__secondary-link">
+                  <Nav.Link
+                    className={`nav__secondary-link ${
+                      isCurrentUrl("support-us") && "active"
+                    }`}
+                    href="/support-us"
+                  >
                     <FormattedMessage id="menu.support" />
                   </Nav.Link>
                   <p className="nav__main-link d-none d-xl-block">|</p>
                   <Nav.Link
                     href="/administrative"
-                    className="nav__secondary-link"
+                    className={`nav__secondary-link ${
+                      isCurrentUrl("administrative") && "active"
+                    }`}
                   >
                     <FormattedMessage id="menu.administrative" />
                   </Nav.Link>
@@ -181,31 +181,23 @@ function Header({ showModal }) {
                     <NavDropdown
                       title={
                         <div className="display-flag">
-                          <img
-                            className="thumbnail-image"
-                            src={flag === "en" ? EN : BG}
-                            alt="lang"
-                          />
+                          <span>{flag === "en" ? "EN" : "BG"}</span>
                         </div>
                       }
                       className="nav__main-link dropdown-lang"
                       id="collasible-nav-dropdown"
                     >
-                      <NavDropdown.Item onClick={(e) => setLanguage("bg", e)}>
-                        <img
-                          className="thumbnail-image"
-                          src={BG}
-                          alt=""
-                          itemProp="image"
-                        />
+                      <NavDropdown.Item
+                        className={flag === "bg" && "active"}
+                        onClick={(e) => setLanguage("bg", e)}
+                      >
+                        <span>BG</span>
                       </NavDropdown.Item>
-                      <NavDropdown.Item onClick={(e) => setLanguage("en", e)}>
-                        <img
-                          className="thumbnail-image"
-                          src={EN}
-                          alt=""
-                          itemProp="image"
-                        />
+                      <NavDropdown.Item
+                        className={flag === "en" && "active"}
+                        onClick={(e) => setLanguage("en", e)}
+                      >
+                        <span>EN</span>
                       </NavDropdown.Item>
                     </NavDropdown>
                   ) : null}
@@ -243,58 +235,88 @@ function Header({ showModal }) {
                   </NavDropdown>
                   <Nav.Link
                     href="/exhibitions"
-                    onClick={(e) => {
-                      handleShowModal("modal-redirect", "Z_ekspozicia.html", e);
-                    }}
                     eventKey="exhibitions"
-                    className="nav__main-link "
+                    className={`nav__main-link ${
+                      isCurrentUrl("exhibitions") && "active"
+                    }`}
                   >
                     <FormattedMessage id="menu.exhibitions" />
                   </Nav.Link>
                   <Nav.Link
                     href="/news-and-events"
                     eventKey="news"
-                    className="nav__main-link"
+                    className={`nav__main-link ${
+                      isCurrentUrl("news-and-events") ||
+                      isCurrentUrl("news") ||
+                      isCurrentUrl("events")
+                        ? "active"
+                        : ""
+                    }`}
                   >
                     <FormattedMessage id="menu.news" />
                   </Nav.Link>
                   <NavDropdown
                     title={intl.formatMessage({ id: "menu.about-us" })}
-                    className="nav__main-link"
+                    className={`nav__main-link ${
+                      isCurrentUrl("museum-games") ||
+                      isCurrentUrl("about-us") ||
+                      isCurrentUrl("services") ||
+                      isCurrentUrl("prices")
+                        ? "active"
+                        : ""
+                    }`}
                     id="collasible-nav-dropdown"
                   >
                     <NavDropdown.Item
-                      className="nav__secondary-link"
+                      className={`nav__secondary-link ${
+                        isCurrentUrl("about-us") && "active"
+                      }`}
                       href="/about-us"
                     >
                       <FormattedMessage id="menu.about-museum" />
                     </NavDropdown.Item>
                     <NavDropdown.Item
-                      className="nav__secondary-link"
+                      className={`nav__secondary-link ${
+                        isCurrentUrl("museum-games") && "active"
+                      }`}
                       href="/museum-games"
                     >
                       <FormattedMessage id="games" />
                     </NavDropdown.Item>
                     <NavDropdown.Item
-                      className="nav__secondary-link"
+                      className={`nav__secondary-link ${
+                        isCurrentUrl("services") && "active"
+                      }`}
                       href="/services"
                     >
                       <FormattedMessage id="services" />
                     </NavDropdown.Item>
                     <NavDropdown.Item
-                      className="nav__secondary-link"
+                      className={`nav__secondary-link ${
+                        isCurrentUrl("prices") && "active"
+                      }`}
                       href="/prices"
                     >
                       <FormattedMessage id="prices" />
                     </NavDropdown.Item>
                   </NavDropdown>
-                  <Nav.Link href="/contact-us" className="nav__main-link">
+                  <Nav.Link
+                    href="/contact-us"
+                    className={`nav__main-link ${
+                      isCurrentUrl("contact-us") && "active"
+                    }`}
+                  >
                     <FormattedMessage id="menu.contact-us" />
                   </Nav.Link>
                   <p className="nav__main-link nav__main-link__separate-line">
                     <span className="d-none d-xl-block">|</span>
                   </p>
-                  <Nav.Link href="/house-museum-laszlo-nagy" className="nav__main-link">
+                  <Nav.Link
+                    href="/house-museum-laszlo-nagy"
+                    className={`nav__main-link ${
+                      isCurrentUrl("house-museum-laszlo-nagy") && "active"
+                    }`}
+                  >
                     <FormattedMessage id="menu.house-museum" />
                   </Nav.Link>
                 </Nav>

@@ -134,7 +134,7 @@ class NewsPage extends Component {
     var options = {
       root: null,
       rootMargin: "0px",
-      threshold: 0.90,
+      threshold: 0.9,
     };
 
     this.observer = new IntersectionObserver(
@@ -195,11 +195,11 @@ class NewsPage extends Component {
                       <Nav.Link
                         active={location.pathname === link.href}
                         key={link.label}
+                        eventKey={link.eventKey}
                         onClick={() => {
                           this.fetchArticles(link.href);
                         }}
                         className={link.className}
-                        eventKey={link.eventKey}
                       >
                         {link.label}
                       </Nav.Link>

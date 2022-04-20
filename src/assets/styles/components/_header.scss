@@ -62,14 +62,17 @@
 
 				&:last-child,
 				&.bg {
-					flex: 1.229;
+					flex: 1.179;
+					.display-flag {
+						@include width(20px)
+					}
 				}
 
 				&.en {
-					flex: 0.777;
+					flex: 0.780;
 
 					.display-flag {
-						@include width(15px)
+						@include width(18px)
 					}
 				}
 

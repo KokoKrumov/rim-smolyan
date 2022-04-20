@@ -4,7 +4,7 @@ import { fetchArticle, fetchNews } from "../../../actions";
 import Article from "../../Article/Article";
 import { injectIntl } from "react-intl";
 import NotFound from "../NotFound";
-import { matchPath } from "react-router";
+import { extarctIdAndCategories } from "../../../utilities/browser";
 
 class NewsDetailPage extends Component {
   state = {
@@ -16,7 +16,7 @@ class NewsDetailPage extends Component {
     isLoading: true,
   };
 
-  fetchData = () => {
+  fetchData = (id, listFrom, props, propsCategories) => {
     this.props
       .fetchArticle(this.props.match.params.slug)
       .then(() => {
@@ -36,16 +36,29 @@ class NewsDetailPage extends Component {
         }
       })
       .then(() => {
-        this.props.fetchNews(2, Math.floor(Math.random() * 11), 3).then(() => {
-          this.setState({
-            listOfNewsAndEvents: this.props.news,
+        const { slugId } = extarctIdAndCategories(
+          id,
+          listFrom,
+          props,
+          propsCategories
+        );
+        this.props
+          .fetchNews(slugId, Math.ceil(Math.random() * 11), 3)
+          .then(() => {
+            this.setState({
+              listOfNewsAndEvents: this.props.news,
+            });
           });
-        });
       });
   };
 
   componentDidMount() {
-    this.fetchData();
+    this.fetchData(
+      "news-and-events",
+      "storage",
+      this.props,
+      this.state.categories
+    );
   }
 
   setBreadcrumbs = () => {
