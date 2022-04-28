@@ -19,6 +19,8 @@ import {
   FETCH_NEWS_ERROR,
   RESET_FETCH_NEWS,
   RESET_FETCH_EXHIBITIONS,
+  FETCH_EXHIBITION_ARTICLE,
+  FETCH_EXHIBITION_ARTICLE_ERROR,
 } from "./types";
 
 import streams from "../api/streams";
@@ -93,6 +95,18 @@ export const fetchExhibitions =
       dispatch({ type: FETCH_EXHIBITIONS_ERROR, payload: error });
     }
   };
+
+export const fetchExhibitionArticle = (slug) => async (dispatch) => {
+  console.log("slug: ", slug);
+  try {
+    const response = await streams.get(
+      `/posts?slug=${slug}&_fields=id,date_gmt,slug,title,content,excerpt,event_date,event_place,archive,_links,_embedded&_embed `
+    );
+    dispatch({ type: FETCH_EXHIBITION_ARTICLE, payload: response.data });
+  } catch (error) {
+    dispatch({ type: FETCH_EXHIBITION_ARTICLE_ERROR, payload: error });
+  }
+};
 
 export const fetchServices = () => async (dispatch) => {
   const response = await publicStreams.get("/services.json");

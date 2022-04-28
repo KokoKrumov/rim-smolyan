@@ -143,10 +143,15 @@
 	}
 
 	.nav__main-link.dropdown {
+
 		.nav-link {
 			display: flex;
 			align-items: center;
-
+			position: relative;
+	
+			&::after {
+				color: rgba(255, 255, 255, 0.85);
+			}
 
 			@include media-breakpoint-down(lg) {
 				@include padding(7px, 10px, 7px, 25px);

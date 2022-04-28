@@ -174,6 +174,7 @@ class ExhibitionsPage extends Component {
               <div>
                 <NewsAndEventsListHorizontal
                   listOfNewsAndEvents={this.state.exhibitions.activeExhibitions}
+                  isExhibition
                 />
               </div>
             </Container>
@@ -194,6 +195,7 @@ class ExhibitionsPage extends Component {
 const mapStateToProps = (state) => {
   return {
     exhibitions: state.exhibitions,
+    categories: Object.values(state.categories),
   };
 };
 

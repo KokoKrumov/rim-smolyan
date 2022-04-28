@@ -5,8 +5,9 @@ import { FormattedMessage } from "react-intl";
 import ArticleDate from "../Article/ArticleDate";
 import NewsDateAndYear from "../pages/newsDetailPage/NewsDateAndYear";
 
-function NewsAndEventsListHorizontal({ listOfNewsAndEvents }) {
+function NewsAndEventsListHorizontal({ listOfNewsAndEvents, isExhibition }) {
   if (listOfNewsAndEvents) {
+    console.log("isExhibitio: ", isExhibition);
     return listOfNewsAndEvents.map((event) => {
       return (
         <div
@@ -18,7 +19,9 @@ function NewsAndEventsListHorizontal({ listOfNewsAndEvents }) {
               {/*IMAGE AND DATE*/}
               <a
                 className="link link-img"
-                href={`/news-and-events/${event.slug}`}
+                href={`/${isExhibition ? "exhibitions" : "news-and-events"}/${
+                  event.slug
+                }`}
                 itemProp="url"
                 target=""
                 rel="noopener nofollow noreferrer"
@@ -58,7 +61,9 @@ function NewsAndEventsListHorizontal({ listOfNewsAndEvents }) {
                 <h3 className="h3">
                   <a
                     className="link a-title"
-                    href={`/news-and-events/${event.slug}`}
+                    href={`/${
+                      isExhibition ? "exhibitions" : "news-and-events"
+                    }/${event.slug}`}
                     itemProp="url"
                     target=""
                     rel="noopener nofollow noreferrer"
@@ -76,7 +81,9 @@ function NewsAndEventsListHorizontal({ listOfNewsAndEvents }) {
                 {/*LINK TO SEE MORE*/}
                 <a
                   className="a cta_outline cta_outline__dark hvr-underline-from-left"
-                  href={`/news-and-events/${event.slug}`}
+                  href={`/${isExhibition ? "exhibitions" : "news-and-events"}/${
+                    event.slug
+                  }`}
                   itemProp="url"
                   target=""
                   rel="noopener nofollow noreferrer"

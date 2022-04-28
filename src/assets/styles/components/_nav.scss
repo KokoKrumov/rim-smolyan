@@ -1,12 +1,20 @@
 .navbar-dark {
   .navbar-nav .nav {
     &__main-link,
-    &__main-link > .nav-link, {
+    &__main-link > .nav-link {
       color: rgba(255, 255, 255, 0.85);
+
+      &::after {
+        transition: all 0.1s ease-in-out;
+      }
 
       &:hover,
       &.show.dropdown > a {
-        color: $gray-hover;
+  
+        &,
+        &::after {
+          color: $gray-hover !important;
+        }
       }
 
       &:active,

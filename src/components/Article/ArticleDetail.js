@@ -7,10 +7,10 @@ import NewsDateAndYear from "../pages/newsDetailPage/NewsDateAndYear";
 
 function ArticleDetail({ article }) {
   const articleType = article._embedded["wp:term"][0][1].slug;
+  console.log("articleType: ", articleType);
   const articleImg = article._embedded["wp:featuredmedia"]
     ? article._embedded["wp:featuredmedia"][0].media_details.sizes.full ||
-      article._embedded["wp:featuredmedia"][0].media_details.sizes
-        .medium_large
+      article._embedded["wp:featuredmedia"][0].media_details.sizes.medium_large
     : "";
 
   const articleText = article.content.rendered;
@@ -27,6 +27,14 @@ function ArticleDetail({ article }) {
               <span className="d-inline-block px-2">|</span>
               {article.event_place}
             </div>
+          ) : null}
+        </div>
+      );
+    } else if (articleType === "exhibitions") {
+      return (
+        <div>
+          {article.event_place ? (
+            <div className="h-sup">{article.event_place}</div>
           ) : null}
         </div>
       );
@@ -66,7 +74,8 @@ function ArticleDetail({ article }) {
             {renderDate(article)}
             <div className="nae-item__date_post"></div>
             <figure className="nae-item__img__wrap image__article-detail">
-              {article.event_date && articleType === "events" ? (
+              {(article.event_date && articleType === "events") ||
+              articleType === "exhibitions" ? (
                 <ArticleDate date={article.event_date} />
               ) : null}
               <img

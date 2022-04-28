@@ -61,7 +61,7 @@ class App extends Component {
               <Route path="/events/:slug" exact component={NewsDetailPage} />
               <Route path="/events" exact component={NewsPage} />
               <Route
-                path="/exhibitions/:articleId"
+                path="/exhibitions/:articleSlug"
                 exact
                 component={ExhibitionsDetailPage}
               />
