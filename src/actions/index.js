@@ -88,7 +88,6 @@ export const fetchExhibitions =
     try {
       const response = await streams.get(
         `/posts?categories=${id}&_fields=id,date_gmt,slug,title,content,excerpt,event_date,event_place,archive,_links,_embedded&_embed&page=${page}&per_page=${number}`
-        // `/posts?categories=${id}&_fields=id,date_gmt,slug,title,content,excerpt,event_date,event_place,_links,_embedded&_embed&page=${page}&per_page=${number}`
       );
       dispatch({ type: FETCH_EXHIBITIONS, payload: response.data });
     } catch (error) {
@@ -97,7 +96,6 @@ export const fetchExhibitions =
   };
 
 export const fetchExhibitionArticle = (slug) => async (dispatch) => {
-  console.log("slug: ", slug);
   try {
     const response = await streams.get(
       `/posts?slug=${slug}&_fields=id,date_gmt,slug,title,content,excerpt,event_date,event_place,archive,_links,_embedded&_embed `

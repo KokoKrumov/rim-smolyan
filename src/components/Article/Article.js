@@ -9,7 +9,6 @@ import ArticleDetail from "./ArticleDetail";
 class Article extends Component {
   render() {
     const { intl, data } = this.props;
-    console.log("data: ", data);
     return (
       <div className="news-detail-page__wrap">
         {/*BREADCRUMBS*/}

@@ -5,6 +5,23 @@
 		background-position: center;
 	}
 
+
+	.section-carousel {
+		@include padding(120px, 0px, 40px, 0px);
+		
+		@include media-breakpoint-down(md) {
+			@include padding(60px, 0px, 40px, 0px);
+		}
+	
+		.nae-container {
+			@include padding(0px, 0px, 10px, 0px);
+		}
+
+		.paragraph-2 {
+			@include margin(36px, 0px, 0px, 0px);
+		}
+	}
+
 	&__contact-section {
 		.title {
 			font-family: $font-acari-regular;

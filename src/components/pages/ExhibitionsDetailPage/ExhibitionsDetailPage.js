@@ -20,10 +20,6 @@ class ExhibitionsDetailPage extends Component {
       .fetchExhibitionArticle(this.props.match.params.articleSlug)
       .then(() => {
         if (this.props?.exhibitionArticle) {
-          console.log(
-            "this.props?.exhibitionArticle: ",
-            this.props?.exhibitionArticle
-          );
           this.setState({
             article: this.props?.exhibitionArticle[0],
             articleSection: "exhibitions",
@@ -31,31 +27,6 @@ class ExhibitionsDetailPage extends Component {
           });
         }
       });
-
-    // if (
-    //   this.props.exhibitions &&
-    //   this.state.articleId !== Number(this.props.match.params.articleSlug)
-    // ) {
-    //   this.props.fetchExhibitions().then(() => {
-    //     if (this.props.exhibitions[Number(this.props.match.params.articleId)]) {
-    //       this.setState({
-    //         articleId: Number(this.props.match.params.articleId),
-    //         article:
-    //           this.props.exhibitions[Number(this.props.match.params.articleId)],
-    //         articleSection: "exhibitions",
-    //         articleType:
-    //           this.props.exhibitions[Number(this.props.match.params.articleId)]
-    //             .type,
-    //         isLoading: false,
-    //       });
-    //     } else {
-    //       this.setState({
-    //         isPageExist: false,
-    //         isLoading: false,
-    //       });
-    //     }
-    //   });
-    // }
   };
 
   componentDidMount() {

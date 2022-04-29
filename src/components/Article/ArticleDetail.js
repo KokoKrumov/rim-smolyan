@@ -3,11 +3,12 @@ import Col from "react-bootstrap/cjs/Col";
 import Row from "react-bootstrap/Row";
 import SocialsShare from "../socials/socialsShare";
 import ArticleDate from "../Article/ArticleDate";
+import ExhibitionDate from "../Exhibition/ExhibitionDate";
 import NewsDateAndYear from "../pages/newsDetailPage/NewsDateAndYear";
 
 function ArticleDetail({ article }) {
   const articleType = article._embedded["wp:term"][0][1].slug;
-  console.log("articleType: ", articleType);
+  console.log(article._embedded["wp:featuredmedia"][0].media_details.sizes);
   const articleImg = article._embedded["wp:featuredmedia"]
     ? article._embedded["wp:featuredmedia"][0].media_details.sizes.full ||
       article._embedded["wp:featuredmedia"][0].media_details.sizes.medium_large
@@ -34,7 +35,12 @@ function ArticleDetail({ article }) {
       return (
         <div>
           {article.event_place ? (
-            <div className="h-sup">{article.event_place}</div>
+            <div className="h-sup d-flex align-center">
+              <div className="mr-2">
+                <ExhibitionDate date={article.event_date} />
+              </div>{" "}
+              |<div className="ml-2">{article.event_place}</div>
+            </div>
           ) : null}
         </div>
       );
@@ -72,10 +78,8 @@ function ArticleDetail({ article }) {
           {/* MAIN CONTENT */}
           <Col lg={7} xl={8}>
             {renderDate(article)}
-            <div className="nae-item__date_post"></div>
             <figure className="nae-item__img__wrap image__article-detail">
-              {(article.event_date && articleType === "events") ||
-              articleType === "exhibitions" ? (
+              {article.event_date && articleType === "events" ? (
                 <ArticleDate date={article.event_date} />
               ) : null}
               <img
