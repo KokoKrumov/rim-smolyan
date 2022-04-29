@@ -7,7 +7,6 @@ import NewsDateAndYear from "../pages/newsDetailPage/NewsDateAndYear";
 
 function NewsAndEventsListHorizontal({ listOfNewsAndEvents, isExhibition }) {
   if (listOfNewsAndEvents) {
-    console.log("isExhibitio: ", isExhibition);
     return listOfNewsAndEvents.map((event) => {
       return (
         <div
