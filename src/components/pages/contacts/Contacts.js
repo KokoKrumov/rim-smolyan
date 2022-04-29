@@ -41,7 +41,7 @@ class Contacts extends Component {
                         <li>
                           <a
                             className="link"
-                            href="tel:+030162727"
+                            href="tel:+35930162727"
                             itemProp="url"
                             target=""
                             rel="noopener nofollow noreferrer"
@@ -52,7 +52,7 @@ class Contacts extends Component {
                         <li>
                           <a
                             className="link"
-                            href="tel:+0879111915"
+                            href="tel:+359879111915"
                             itemProp="url"
                             target=""
                             rel="noopener nofollow noreferrer"
@@ -63,7 +63,7 @@ class Contacts extends Component {
                         <li>
                           <a
                             className="link"
-                            href="tel:+0879111913"
+                            href="tel:+359879111913"
                             itemProp="url"
                             target=""
                             rel="noopener nofollow noreferrer"

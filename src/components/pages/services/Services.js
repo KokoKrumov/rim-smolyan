@@ -107,7 +107,7 @@ class Services extends Component {
                                         <p className='paragraph-2 routes-call'>
                                             <span
                                                 dangerouslySetInnerHTML={{__html: intl.formatMessage({id: "routes-call"})}}/>
-                                            <a href="tel:030162727"> 0301/ 6-27-27</a>
+                                            <a href="tel:+35930162727"> 0301/ 6-27-27</a>
                                         </p>
                                     </div>
                                 </Col>
