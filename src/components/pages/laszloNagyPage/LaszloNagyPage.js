@@ -12,6 +12,7 @@ import CarouselImages from "../../carousel/carouselImages";
 import HeroInner from "../../hero/HeroInner";
 
 const LaszloNagyPage = (props) => {
+  const { intl } = props;
   let laszloNagyPageContent = {
     bgImage: "./images/laszloNagy/heroBg.png",
     aboutHouseBgImage: "./images/laszloNagy/aboutHouseBgImage.png",
@@ -91,13 +92,29 @@ const LaszloNagyPage = (props) => {
           columns={2}
         />
 
-        <section className="section-building">
+        <section className="section-building section-carousel">
           <Container>
+            <Row>
+              <Col lg={5}>
+                <div className="nae-container info-column nae-container_content-dark">
+                  <div className="nae__title-line mb-0">
+                    <h1
+                      className="h1"
+                      dangerouslySetInnerHTML={{
+                        __html: intl.formatMessage({
+                          id: laszloNagyContent.permanentExhibitionTitle,
+                        }),
+                      }}
+                    ></h1>
+                  </div>
+                </div>
+              </Col>
+              <Col lg={6} />
+            </Row>
             <Row className="justify-content-between">
               <Col lg={5}>
                 <Row>
                   <InfoColumn
-                    title={laszloNagyContent.permanentExhibitionTitle}
                     text={laszloNagyContent.permanentExhibitionText}
                     columns={1}
                   />

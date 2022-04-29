@@ -32,7 +32,11 @@
 
 	&__building-carousel {
 		&.nae-container {
-			@include margin(25px, 0px, 0px, 0px)
+			@include margin(-20px, 0px, 0px, 0px);
+			
+			@include media-breakpoint-down(md) {
+				@include margin(20px, 0px, 0px, 0px);
+			}
 		}
 
 		@include media-breakpoint-down(md) {
@@ -51,7 +55,7 @@
 		@include padding(120px, 0px, 100px, 0px);
 
 		@include media-breakpoint-down(md) {
-			@include padding(0px, 0px, 100px, 0px);
+			@include padding(60px, 0px, 100px, 0px);
 		}
 
 		.nae-container {
@@ -59,7 +63,7 @@
 
 			@include media-breakpoint-down(md) {
 				&.hero-bg {
-					padding-top: 3.75rem;
+					padding-top: 0;
 				}
 			}
 		}
