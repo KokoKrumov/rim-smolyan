@@ -9,23 +9,29 @@ import ArticleDetail from "./ArticleDetail";
 class Article extends Component {
   render() {
     const { intl, data } = this.props;
+    const host =
+      data.articleSection === "exhibitions"
+        ? "exhibitions"
+        : data.article.event_date !== ""
+        ? "events"
+        : "news";
     return (
       <div className="news-detail-page__wrap">
         {/*BREADCRUMBS*/}
         <Container>
           <div className="breadcrumb__wrap">
-            {data.article?.type && (
+            {data.articleSection && (
               <ol className="breadcrumb">
                 <li className="breadcrumb-item">
                   <a
                     className="link"
-                    href={`/${data.articleSection}`}
+                    href={`/${host}`}
                     itemProp="url"
                     target=""
                     rel="noopener nofollow noreferrer"
                     dangerouslySetInnerHTML={{
                       __html: intl.formatMessage({
-                        id: `menu.${data.articleSection}`,
+                        id: `${host}`,
                       }),
                     }}
                   />

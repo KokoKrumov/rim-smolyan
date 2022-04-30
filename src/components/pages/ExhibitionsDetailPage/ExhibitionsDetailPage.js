@@ -37,7 +37,7 @@ class ExhibitionsDetailPage extends Component {
     const { intl } = this.props;
 
     return `${intl.formatMessage({ id: "temporary-exhibitions-title" })} - ${
-      this.state.article ? this.state.article.title : null
+      this.state.article ? this.state.article.title.rendered : null
     }`;
   };
 
