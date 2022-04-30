@@ -77,7 +77,6 @@ export const fetchCollectionsVirtual = () => async (dispatch) => {
 };
 
 export const fetchCollections = (collectionsType) => async (dispatch) => {
-  console.log(collectionsType);
   const response = await streams.get(`/collections-${collectionsType}.json`);
   dispatch({ type: `FETCH_COLLECTIONS_BYTYPE`, payload: response.data });
 };

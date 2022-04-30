@@ -36,7 +36,6 @@ class ExhibitionsDetailPage extends Component {
   setBreadcrumbs = () => {
     const { intl } = this.props;
 
-    console.log("this.state.article: ", this.state.article);
     return `${intl.formatMessage({ id: "temporary-exhibitions-title" })} - ${
       this.state.article ? this.state.article.title.rendered : null
     }`;
@@ -44,7 +43,6 @@ class ExhibitionsDetailPage extends Component {
 
   provideContentByType = () => {
     if (this.state.isPageExist === null) {
-      console.log("this.setBreadcrumbs(): ", this.setBreadcrumbs());
       const data = {
         breadcrumbs: this.setBreadcrumbs(),
         detailContainer: "exhibition-container",

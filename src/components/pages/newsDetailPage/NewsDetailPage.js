@@ -62,7 +62,7 @@ class NewsDetailPage extends Component {
   }
 
   setBreadcrumbs = () => {
-    return `${this.state.article ? this.state.article.title : null}`;
+    return `${this.state.article ? this.state.article.title.rendered : null}`;
   };
 
   provideContentByType = () => {
