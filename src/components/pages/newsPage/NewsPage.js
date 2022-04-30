@@ -197,7 +197,8 @@ class NewsPage extends Component {
                         key={link.label}
                         eventKey={link.eventKey}
                         onClick={() => {
-                          this.fetchArticles(link.href);
+                          location.pathname !== link.href &&
+                            this.fetchArticles(link.href);
                         }}
                         className={link.className}
                       >
