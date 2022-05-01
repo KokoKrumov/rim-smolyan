@@ -50,10 +50,7 @@ function Footer({showModal}) {
                                     <FormattedMessage id="menu.collections"/>
                                 </Nav.Link>
                                 <Nav.Link
-                                    onClick={(e) => {
-                                        handleShowModal('modal-redirect','Z_ekspozicia.html', e)
-                                    }}
-                                    href="#"
+                                    href="/exhibitions"
                                     className='nav__main-link'>
                                     <FormattedMessage id="menu.exhibitions"/>
                                 </Nav.Link>
