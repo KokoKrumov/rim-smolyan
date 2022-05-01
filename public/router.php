@@ -1,6 +1,7 @@
 <?php
 $path_beginings = [
     '/',
+    '/exhibitions',
     '/news-and-events',
     '/news',
     '/events',
