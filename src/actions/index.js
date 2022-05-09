@@ -66,8 +66,10 @@ export const fetchCategories = () => async (dispatch) => {
   dispatch({ type: FETCH_CATEGORIES, payload: response.data });
 };
 
-export const fetchCollectionsMain = () => async (dispatch) => {
-  const response = await streams.get("/collections-main.json");
+export const fetchCollectionsMain = (parent) => async (dispatch) => {
+  const response = await streams.get(
+    `/categories?parent=${parent}&_fields=id,name,slug,description&page=1&per_page=50`
+  );
   dispatch({ type: FETCH_COLLECTIONS_MAIN, payload: response.data });
 };
 
