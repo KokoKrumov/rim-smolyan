@@ -6,6 +6,7 @@ import Container from "react-bootstrap/cjs/Container";
 import Row from "react-bootstrap/cjs/Row";
 import Col from "react-bootstrap/cjs/Col";
 import Nav from "react-bootstrap/cjs/Nav";
+import Spinner from "react-bootstrap/Spinner";
 import NewsAndEventsListHorizontal from "../../newsAndEventsList/NewsAndEventsListHorizontal";
 import { connect } from "react-redux";
 import { fetchNews, resetFetchNews } from "../../../actions";
@@ -210,16 +211,26 @@ class NewsPage extends Component {
               </Col>
               <Col lg={9}>
                 <Row>
-                  <div style={{ minHeight: "1000px" }}>
+                  <div>
                     <NewsAndEventsListHorizontal
                       listOfNewsAndEvents={this.state.news}
                     />
                   </div>
                 </Row>
                 <Row>
-                  <div ref={(loadingRef) => (this.loadingRef = loadingRef)}>
-                    <span>{!this.state.newsError && "Loading..."}</span>
-                  </div>
+                  <Col>
+                    <div ref={(loadingRef) => (this.loadingRef = loadingRef)}>
+                      {!this.state.newsError && (
+                        <div className="spinner-wrap">
+                          <Spinner
+                            className="spinner"
+                            animation="border"
+                            role="status"
+                          />
+                        </div>
+                      )}
+                    </div>
+                  </Col>
                 </Row>
               </Col>
             </Row>
