@@ -210,28 +210,21 @@ class NewsPage extends Component {
                 </Nav>
               </Col>
               <Col lg={9}>
-                <Row>
-                  <div>
-                    <NewsAndEventsListHorizontal
-                      listOfNewsAndEvents={this.state.news}
-                    />
-                  </div>
-                </Row>
-                <Row>
-                  <Col>
-                    <div ref={(loadingRef) => (this.loadingRef = loadingRef)}>
-                      {!this.state.newsError && (
-                        <div className="spinner-wrap">
-                          <Spinner
-                            className="spinner"
-                            animation="border"
-                            role="status"
-                          />
-                        </div>
-                      )}
+                <div style={{ minHeight: "1000px" }}>
+                  <NewsAndEventsListHorizontal
+                    listOfNewsAndEvents={this.state.news}
+                  />
+                  {!this.state.newsError && (
+                    <div className="spinner-wrap">
+                      <Spinner
+                        className="spinner"
+                        animation="border"
+                        role="status"
+                      />
                     </div>
-                  </Col>
-                </Row>
+                  )}
+                </div>
+                <div ref={(loadingRef) => (this.loadingRef = loadingRef)} />
               </Col>
             </Row>
           </Container>
