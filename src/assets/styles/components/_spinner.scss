@@ -1,0 +1,13 @@
+.spinner-wrap {
+	width: 100%;
+	height: 200px;
+	padding-top: 70px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	.spinner {
+		width: 3.5rem;
+		height: 3.5rem;
+	}
+}
