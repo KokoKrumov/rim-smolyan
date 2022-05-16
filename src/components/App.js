@@ -121,6 +121,7 @@ class App extends Component {
 const mapStateToProps = (state) => {
   return {
     categories: Object.values(state.categories),
+    news: Object.values(state.news),
   };
 };
 

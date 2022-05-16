@@ -71,17 +71,23 @@ class NewsPage extends Component {
   }
 
   fetchData = (slug, page, per_page, listFrom, props, propsCategories) => {
+    document.body.style.overflow = "hidden";
     const { slugId, categories } = extarctIdAndCategories(
       slug,
       listFrom,
       props,
       propsCategories
     );
-    this.props.fetchNews(slugId, page, per_page).then(() => {
-      this.setState({
-        categories: categories,
+    this.props
+      .fetchNews(slugId, page, per_page)
+      .then(() => {
+        this.setState({
+          categories: categories,
+        });
+      })
+      .then(() => {
+        document.body.style.overflow = "scroll";
       });
-    });
   };
 
   //FETCH DATA WHEN SCROLL TO THE BOTTOM
@@ -175,6 +181,10 @@ class NewsPage extends Component {
         newsError: this.props.newsError,
       });
     }
+  }
+
+  componentWillUnmount() {
+    document.body.style.overflow = "scroll";
   }
 
   render() {
