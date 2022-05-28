@@ -47,6 +47,7 @@ class NewsPage extends Component {
     prevY: 0,
     page: 1,
     newsError: false,
+    isLoading: false,
   };
 
   fetchArticles(href) {
@@ -71,23 +72,31 @@ class NewsPage extends Component {
   }
 
   fetchData = (slug, page, per_page, listFrom, props, propsCategories) => {
-    document.body.style.overflow = "hidden";
-    const { slugId, categories } = extarctIdAndCategories(
-      slug,
-      listFrom,
-      props,
-      propsCategories
-    );
-    this.props
-      .fetchNews(slugId, page, per_page)
-      .then(() => {
-        this.setState({
-          categories: categories,
-        });
-      })
-      .then(() => {
-        document.body.style.overflow = "scroll";
+    if (!this.state.isLoading) {
+      this.setState({
+        isLoading: true,
       });
+
+      const { slugId, categories } = extarctIdAndCategories(
+        slug,
+        listFrom,
+        props,
+        propsCategories
+      );
+      this.props
+        .fetchNews(slugId, page, per_page)
+        .then(() => {
+          console.log("fetch");
+          this.setState({
+            categories: categories,
+          });
+        })
+        .then(() => {
+          this.setState({
+            isLoading: false,
+          });
+        });
+    }
   };
 
   //FETCH DATA WHEN SCROLL TO THE BOTTOM
