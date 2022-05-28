@@ -23,11 +23,11 @@ class Collections extends Component {
     this.state = {
       collectionsMain: [],
     };
+    const { location } = this.props;
   }
 
   fetchData = (listFrom, props, propsCategories) => {
-    const { location } = this.props;
-    const slug = location.pathname;
+    const slug = this.location.pathname;
 
     const { slugId, categories } = extarctIdAndCategories(
       slug,
@@ -51,7 +51,7 @@ class Collections extends Component {
       )
     ) {
       this.fetchData(
-        location.pathname,
+        this.location.pathname,
         this.state.page,
         10,
         "storage",
