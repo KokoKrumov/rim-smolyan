@@ -86,7 +86,6 @@ class NewsPage extends Component {
       this.props
         .fetchNews(slugId, page, per_page)
         .then(() => {
-          console.log("fetch");
           this.setState({
             categories: categories,
           });
