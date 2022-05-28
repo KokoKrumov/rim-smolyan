@@ -5,6 +5,7 @@ import Article from "../../Article/Article";
 import { injectIntl } from "react-intl";
 import NotFound from "../NotFound";
 import { extarctIdAndCategories } from "../../../utilities/browser";
+import Spinner from "react-bootstrap/Spinner";
 
 class NewsDetailPage extends Component {
   state = {
@@ -84,7 +85,11 @@ class NewsDetailPage extends Component {
     if (!this.state.isLoading && this.props.article) {
       return this.provideContentByType();
     } else {
-      return <h3 className="h3">Loading...</h3>;
+      return (
+        <div className="spinner-wrap">
+          <Spinner className="spinner" animation="border" role="status" />
+        </div>
+      );
     }
   }
 }

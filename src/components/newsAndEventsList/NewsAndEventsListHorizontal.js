@@ -1,6 +1,7 @@
 import React from "react";
 import Col from "react-bootstrap/cjs/Col";
 import Row from "react-bootstrap/cjs/Row";
+import Spinner from "react-bootstrap/cjs/Spinner";
 import { FormattedMessage } from "react-intl";
 import ArticleDate from "../Article/ArticleDate";
 import ExhibitionDate from "../Exhibition/ExhibitionDate";
@@ -108,8 +109,8 @@ function NewsAndEventsListHorizontal({ listOfNewsAndEvents, isExhibition }) {
     });
   } else {
     return (
-      <div>
-        <p>Loading ...</p>
+      <div className="spinner-wrap">
+        <Spinner className="spinner" animation="border" role="status" />
       </div>
     );
   }

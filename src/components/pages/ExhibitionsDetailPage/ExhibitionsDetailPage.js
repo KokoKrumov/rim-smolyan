@@ -4,7 +4,7 @@ import { fetchExhibitions, fetchExhibitionArticle } from "../../../actions";
 import Article from "../../Article/Article";
 import { injectIntl } from "react-intl";
 import NotFound from "../NotFound";
-
+import Spinner from "react-bootstrap/Spinner";
 class ExhibitionsDetailPage extends Component {
   state = {
     articleId: null,
@@ -59,7 +59,11 @@ class ExhibitionsDetailPage extends Component {
     if (!this.state.isLoading && this.props.exhibitions) {
       return this.provideContentByType();
     } else {
-      return <h3 className="h3">Loading...</h3>;
+      return (
+        <div className="spinner-wrap">
+          <Spinner className="spinner" animation="border" role="status" />
+        </div>
+      );
     }
   }
 }

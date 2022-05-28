@@ -6,6 +6,7 @@ import Container from "react-bootstrap/cjs/Container";
 import Row from "react-bootstrap/cjs/Row";
 import Col from "react-bootstrap/cjs/Col";
 import Nav from "react-bootstrap/cjs/Nav";
+import Spinner from "react-bootstrap/Spinner";
 import NewsAndEventsListHorizontal from "../../newsAndEventsList/NewsAndEventsListHorizontal";
 import { connect } from "react-redux";
 import { fetchNews, resetFetchNews } from "../../../actions";
@@ -46,6 +47,7 @@ class NewsPage extends Component {
     prevY: 0,
     page: 1,
     newsError: false,
+    isLoading: false,
   };
 
   fetchArticles(href) {
@@ -70,17 +72,31 @@ class NewsPage extends Component {
   }
 
   fetchData = (slug, page, per_page, listFrom, props, propsCategories) => {
-    const { slugId, categories } = extarctIdAndCategories(
-      slug,
-      listFrom,
-      props,
-      propsCategories
-    );
-    this.props.fetchNews(slugId, page, per_page).then(() => {
+    if (!this.state.isLoading) {
       this.setState({
-        categories: categories,
+        isLoading: true,
       });
-    });
+
+      const { slugId, categories } = extarctIdAndCategories(
+        slug,
+        listFrom,
+        props,
+        propsCategories
+      );
+      this.props
+        .fetchNews(slugId, page, per_page)
+        .then(() => {
+          console.log("fetch");
+          this.setState({
+            categories: categories,
+          });
+        })
+        .then(() => {
+          this.setState({
+            isLoading: false,
+          });
+        });
+    }
   };
 
   //FETCH DATA WHEN SCROLL TO THE BOTTOM
@@ -176,6 +192,10 @@ class NewsPage extends Component {
     }
   }
 
+  componentWillUnmount() {
+    document.body.style.overflow = "scroll";
+  }
+
   render() {
     const { location } = this.props;
     return (
@@ -209,18 +229,21 @@ class NewsPage extends Component {
                 </Nav>
               </Col>
               <Col lg={9}>
-                <Row>
-                  <div style={{ minHeight: "1000px" }}>
-                    <NewsAndEventsListHorizontal
-                      listOfNewsAndEvents={this.state.news}
-                    />
-                  </div>
-                </Row>
-                <Row>
-                  <div ref={(loadingRef) => (this.loadingRef = loadingRef)}>
-                    <span>{!this.state.newsError && "Loading..."}</span>
-                  </div>
-                </Row>
+                <div style={{ minHeight: "1000px" }}>
+                  <NewsAndEventsListHorizontal
+                    listOfNewsAndEvents={this.state.news}
+                  />
+                  {!this.state.newsError && (
+                    <div className="spinner-wrap">
+                      <Spinner
+                        className="spinner"
+                        animation="border"
+                        role="status"
+                      />
+                    </div>
+                  )}
+                </div>
+                <div ref={(loadingRef) => (this.loadingRef = loadingRef)} />
               </Col>
             </Row>
           </Container>
