@@ -1,6 +1,6 @@
 {
   "name": "rim-smolyan",
-  "version": "1.6.6",
+  "version": "1.6.7",
   "private": false,
   "devDependencies": {
     "@babel/cli": "^7.2.3",
