@@ -4,42 +4,66 @@ import HeroInner from "../../hero/HeroInner";
 import Container from "react-bootstrap/cjs/Container";
 import Col from "react-bootstrap/cjs/Col";
 import Row from "react-bootstrap/cjs/Row";
-import history from "../../../history";
+import Spinner from "react-bootstrap/cjs/Spinner";
 import photoArchiveBg from "../../../assets/images/photo-archive.png";
 import libraryBg from "../../../assets/images/library-bg.png";
 import scientificArchiveBg from "../../../assets/images/scientific-archive-bg.png";
 import { connect } from "react-redux";
-import heroSupportUsBg from "../../../assets/images/heroSupportUsBg.jpg";
-import { extarctIdAndCategories } from "../../../utilities/browser";
-import CardCollections from "../../cards/cardCollections";
+import {
+  extarctIdAndCategories,
+  slugSanatize,
+} from "../../../utilities/browser";
 import { fetchCollectionsMain } from "../../../actions";
 import InfoColumn from "../../infoColumn/InfoColumn";
 import CollectionsList from "./CollectionsList";
 import { isEqual } from "lodash";
+import utilizeScroll from "../../../utilities/utilizeScroll";
 
 class Collections extends Component {
   constructor(props) {
     super(props);
+    this.elScroll = utilizeScroll();
     this.state = {
       collectionsMain: [],
+      isLoading: false,
+      categories: [],
     };
-    const { location } = this.props;
   }
+  location = this.props.location;
 
-  fetchData = (listFrom, props, propsCategories) => {
-    const slug = this.location.pathname;
-
-    const { slugId, categories } = extarctIdAndCategories(
-      slug,
+  fetchData = (id, listFrom, props, propsCategories) => {
+    const { slugId, pureSlug } = extarctIdAndCategories(
+      id,
       listFrom,
       props,
       propsCategories
     );
-    this.props.fetchCollectionsMain(slugId).then(() => {
+    if (!sessionStorage.getItem(pureSlug)) {
+      console.log("make request");
+      this.props
+        .fetchCollectionsMain(slugId)
+        .then(() => {
+          this.setState({
+            collectionsMain: this.props.collectionsMain,
+          });
+
+          sessionStorage.setItem(
+            pureSlug,
+            JSON.stringify(this.props.collectionsMain)
+          );
+        })
+        .then(() => {
+          this.setState({
+            isLoading: false,
+          });
+        });
+    } else {
+      console.log("get from storage", sessionStorage.getItem(pureSlug));
       this.setState({
-        collectionsMain: this.props.collectionsMain,
+        collectionsMain: JSON.parse(sessionStorage.getItem(pureSlug)),
+        isLoading: false,
       });
-    });
+    }
   };
 
   componentDidMount() {
@@ -50,20 +74,16 @@ class Collections extends Component {
         this.state.categories
       )
     ) {
+      this.setState({
+        isLoading: true,
+      });
       this.fetchData(
         this.location.pathname,
-        this.state.page,
-        10,
         "storage",
         this.props,
         this.state.categories
       );
     }
-    this.props.fetchCollectionsMain("13").then(() => {
-      this.setState({
-        collectionsMain: this.props.collectionsMain,
-      });
-    });
   }
 
   componentDidUpdate() {
@@ -73,11 +93,12 @@ class Collections extends Component {
       this.props.categories &&
       !isEqual(this.props.categories, this.state.categories)
     ) {
-      const { location } = this.props;
+      this.setState({
+        categories: this.props.categories,
+        isLoading: true,
+      });
       this.fetchData(
-        location.pathname,
-        1,
-        10,
+        this.location.pathname,
         "props",
         this.props,
         this.props.categories
@@ -90,21 +111,32 @@ class Collections extends Component {
     return (
       <div className="collections-page__wrap">
         <HeroInner
-          labelTitle={this.state.collectionsMain.title}
-          subtitleLg={this.state.collectionsMain.subtitle}
+          labelTitle={slugSanatize(this.location.pathname, "/")}
+          subtitleLg={"collections-virtual-subtitle"}
           title={"collections"}
           arrowBottom={true}
+          scrollOnClick={this.elScroll.executeScroll}
         />
-        <main className="collections-page">
+        <main className="collections-page" ref={this.elScroll.elRef}>
           <section>
             <Container className="position-relative">
               <Row>
                 <Col xs={12}>
-                  <CollectionsList
-                    collections={this.state.collectionsMain.gallery}
-                    collectionsType={"main"}
-                    cols={3}
-                  />
+                  {this.state.isLoading ? (
+                    <div className="spinner-wrap">
+                      <Spinner
+                        className="spinner"
+                        animation="border"
+                        role="status"
+                      />
+                    </div>
+                  ) : (
+                    <CollectionsList
+                      collections={this.state.collectionsMain}
+                      collectionsType={"main"}
+                      cols={3}
+                    />
+                  )}
                 </Col>
               </Row>
             </Container>

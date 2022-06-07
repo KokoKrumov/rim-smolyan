@@ -68,7 +68,7 @@ class App extends Component {
               <Route path="/exhibitions" exact component={ExhibitionsPage} />
               <Route path="/about-us/:modalContent" exact component={AboutUs} />
               <Route
-                path="/main-collections/"
+                path="/main-collections"
                 exact
                 component={CollectionsMain}
               />
@@ -83,7 +83,7 @@ class App extends Component {
                 component={CollectionsMainDetailItem}
               />
               <Route
-                path="/virtual-collections/"
+                path="/virtual-collections"
                 exact
                 component={CollectionsVirtual}
               />

@@ -21,6 +21,8 @@ import {
   RESET_FETCH_EXHIBITIONS,
   FETCH_EXHIBITION_ARTICLE,
   FETCH_EXHIBITION_ARTICLE_ERROR,
+  FETCH_COLLECTIONS_BYTYPE_ERROR,
+  FETCH_COLLECTIONS_BYTYPE,
 } from "./types";
 
 import streams from "../api/streams";
@@ -78,10 +80,19 @@ export const fetchCollectionsVirtual = () => async (dispatch) => {
   dispatch({ type: FETCH_COLLECTIONS_VIRTUAL, payload: response.data });
 };
 
-export const fetchCollections = (collectionsType) => async (dispatch) => {
-  const response = await streams.get(`/collections-${collectionsType}.json`);
-  dispatch({ type: `FETCH_COLLECTIONS_BYTYPE`, payload: response.data });
-};
+export const fetchCollections =
+  (slugId, page = 1, number = 10) =>
+  async (dispatch) => {
+    try {
+      const response = await streams.get(
+        `/posts?categories=${slugId}&_fields=id,date_gmt,slug,title,_links,_embedded&_embed&page=${page}&per_page=${number}`
+      );
+      dispatch({ type: FETCH_COLLECTIONS_BYTYPE, payload: response.data });
+    } catch (error) {
+      console.log("error: ", error);
+      dispatch({ type: FETCH_COLLECTIONS_BYTYPE_ERROR, payload: error });
+    }
+  };
 
 export const fetchExhibitions =
   (id, page = 1, number = 10) =>

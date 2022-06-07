@@ -116,7 +116,7 @@ export function setPrevCollectionFromMain(collections: any, type: string) {
   }
 }
 
-export function getItemBySlug(slug: string, list: any) {
+export function getItemBySlug(slug: any, list: any) {
   return list.find((item: { slug: string }) => item.slug === slug);
 }
 
@@ -154,6 +154,12 @@ export function getDateMonthForArticleCard(date: string, isISO = false) {
   return month;
 }
 
+export function slugSanatize(string: string) {
+  const paramsInURl = string.split("/");
+  const lastParam = paramsInURl.pop() || paramsInURl.pop();
+  return lastParam;
+}
+
 export function extarctIdAndCategories(
   slug: string,
   listFrom: string,
@@ -161,18 +167,18 @@ export function extarctIdAndCategories(
   propsCategories: any
 ): any {
   if (props) {
-    let categories, slugItem, slugId, slugSanatize;
-    slugSanatize = slug.replace("/", "");
+    let categories, slugItem, slugId, pureSlug, removeChar, regex;
+    pureSlug = slugSanatize(slug);
     if (listFrom === "storage") {
       const categoriesFromStorage = sessionStorage.getItem("categories");
       categories = JSON.parse(categoriesFromStorage || "{}");
-      slugItem = getItemBySlug(slugSanatize, categories);
-      slugId = slugItem.id;
+      slugItem = getItemBySlug(pureSlug, categories);
+      slugId = slugItem && slugItem.id;
     } else {
       categories = propsCategories;
-      slugItem = getItemBySlug(slugSanatize, categories);
-      slugId = slugItem.id;
+      slugItem = getItemBySlug(pureSlug, categories);
+      slugId = slugItem && slugItem.id;
     }
-    return { slugId, categories };
+    return { slugId, categories, pureSlug };
   }
 }

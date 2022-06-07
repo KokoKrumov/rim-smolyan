@@ -27,9 +27,14 @@ export default injectIntl(function HeroInner(props) {
                     }}
                   />
                 </li>
-                <li className="breadcrumb-item active">
-                  {props.breadcrumbs.child.title}
-                </li>
+                <li
+                  className="breadcrumb-item active"
+                  dangerouslySetInnerHTML={{
+                    __html: intl.formatMessage({
+                      id: props.breadcrumbs.child,
+                    }),
+                  }}
+                />
               </ol>
             </div>
           </Container>
