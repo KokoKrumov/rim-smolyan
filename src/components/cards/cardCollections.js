@@ -9,6 +9,9 @@ function CardCollections(props) {
     itemImgAlt: "",
   });
 
+  const location = props.location;
+  console.log("location: ", location);
+
   useEffect(() => {
     if (item.hasOwnProperty("description")) {
       setItemObj({
@@ -25,14 +28,14 @@ function CardCollections(props) {
     }
   }, []);
 
-  let generateHref = () => {
+  function generateHref() {
     if (props.isInnerGallery) {
       //@ToDo should think about main-collections and virtual collections
       return `/main-collections/detail/${props.collectionsType}/${item.slug}`;
     } else {
       return `/${props.collectionsType}-collections/intro/${item.slug}`;
     }
-  };
+  }
 
   return (
     <div className="card card-collections__wrap">
@@ -48,7 +51,7 @@ function CardCollections(props) {
               <h4
                 className={props.smallCards ? "h5" : "h4"}
                 dangerouslySetInnerHTML={{
-                  __html: `${itemObj.title}`,
+                  __html: itemObj.title,
                 }}
               />
               {item.galleryLength ? (

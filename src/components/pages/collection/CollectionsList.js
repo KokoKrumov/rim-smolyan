@@ -4,7 +4,6 @@ import CardCollections from "../../cards/cardCollections";
 import Spinner from "react-bootstrap/Spinner";
 
 function CollectionsList(props) {
-  const { intl } = props;
   return (
     <div className={`card-columns card-columns-${props.cols}`}>
       {props.collections ? (

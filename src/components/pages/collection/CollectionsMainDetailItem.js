@@ -1,30 +1,35 @@
-import React from 'react';
-import {injectIntl} from 'react-intl';
-import Container from "react-bootstrap/cjs/Container";
-import Col from "react-bootstrap/cjs/Col";
-import Row from "react-bootstrap/cjs/Row";
-import history from "../../../history";
-import {connect} from "react-redux";
-import {closeModal, fetchCollections, fetchCollectionsMain} from "../../../actions";
+import React from "react";
+import { useEffect } from "react";
+import { injectIntl } from "react-intl";
+import { connect } from "react-redux";
+import { fetchItemFromCollection } from "../../../actions";
 
 function CollectionsMainDetailItem(props) {
-    return (
-        <div></div>
-    );
+  const itemName = props.match.params.item;
+  useEffect(() => {
+    props.fetchItemFromCollection(itemName);
+  }, []);
+
+  useEffect(() => {
+    console.log("itemFomCollection", props.itemFomCollection);
+  }, [props.itemFomCollection]);
+
+  return (
+    <div>
+      <p>"CollectionsMainDetailItem"</p>
+    </div>
+  );
 }
 const mapStateToProps = (state) => {
-    return {
-        item: state.item,
-        collection: state.collections.byType
-    };
-}
+  return {
+    itemFomCollection: state.itemFomCollection,
+  };
+};
 
-const mapDispatchToProps = dispatch => (
-    {
-        fetchItem: (item) => dispatch(fetchCollections(item)),
-        fetchCollections: (fetchType, collectionsType) => dispatch(fetchCollections(fetchType, collectionsType))
-    }
-)
+const mapDispatchToProps = (dispatch) => ({
+  fetchItemFromCollection: (item) => dispatch(fetchItemFromCollection(item)),
+});
 
-
-export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(CollectionsMainDetailItem));
+export default injectIntl(
+  connect(mapStateToProps, mapDispatchToProps)(CollectionsMainDetailItem)
+);

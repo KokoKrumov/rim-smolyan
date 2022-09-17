@@ -23,7 +23,6 @@ import PrivacyPolicy from "./pages/privacyPolicy/PrivacyPolicy";
 import ExhibitionsPage from "./pages/exhibitions/Exhibitions";
 import Services from "./pages/services/Services";
 import Prices from "./pages/prices/Prices";
-import CollectionsVirtual from "./pages/collection/CollectionsVirtual";
 import CollectionsMain from "./pages/collection/CollectionsMain";
 import CollectionsMainIntroAndGallery from "./pages/collection/CollectionsMainIntroAndGallery";
 import CollectionsMainDetailItem from "./pages/collection/CollectionsMainDetailItem";
@@ -34,6 +33,7 @@ import Regulation from "./pages/games/Regulation";
 class App extends Component {
   componentDidMount() {
     if (!sessionStorage.getItem("categories")) {
+      console.log(" this.props: ", this.props);
       this.props.fetchCategories().then(() => {
         const categoriesValues = this.props.categories;
         sessionStorage.setItem("categories", JSON.stringify(categoriesValues));
@@ -85,7 +85,7 @@ class App extends Component {
               <Route
                 path="/virtual-collections"
                 exact
-                component={CollectionsVirtual}
+                component={CollectionsMain}
               />
               <Route
                 path="/house-museum-laszlo-nagy"

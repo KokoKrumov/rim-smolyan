@@ -50,6 +50,12 @@ class CollectionsMainIntroAndGallery extends Component {
       props,
       propsCategories
     );
+
+    this.setState({
+      collectionsType: pureSlug,
+      title: pureSlug,
+    });
+
     if (!sessionStorage.getItem(pureSlug)) {
       this.props
         .fetchCollections(slugId)
@@ -58,8 +64,6 @@ class CollectionsMainIntroAndGallery extends Component {
             this.setState({
               collection: this.props.collection,
               collectionExist: true,
-              title: pureSlug,
-              // collectionNavigation:
             });
             sessionStorage.setItem(
               pureSlug,

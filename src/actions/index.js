@@ -23,6 +23,8 @@ import {
   FETCH_EXHIBITION_ARTICLE_ERROR,
   FETCH_COLLECTIONS_BYTYPE_ERROR,
   FETCH_COLLECTIONS_BYTYPE,
+  FETCH_ITEM_FROM_COLLECTION,
+  FETCH_ITEM_FROM_COLLECTION_ERROR,
 } from "./types";
 
 import streams from "../api/streams";
@@ -63,12 +65,14 @@ export const fetchRoutes = () => async (dispatch) => {
 
 export const fetchCategories = () => async (dispatch) => {
   const response = await streams.get(
-    "/categories?_fields=id,name,slug,parent&per_page=100"
+    // "/categories?_fields=id,name,slug,parent,count&per_page=100"
+    "/categories?_fields=id,name,slug,parent,count&per_page=100"
   );
   dispatch({ type: FETCH_CATEGORIES, payload: response.data });
 };
 
 export const fetchCollectionsMain = (parent) => async (dispatch) => {
+  console.log("parent: ", parent);
   const response = await streams.get(
     `/categories?parent=${parent}&_fields=id,name,slug,description&page=1&per_page=50`
   );
@@ -149,6 +153,17 @@ export const fetchArticle = (urlSlug) => async (dispatch) => {
     dispatch({ type: FETCH_ARTICLE, payload: response.data });
   } catch (error) {
     dispatch({ type: FETCH_NEWS_ERROR, payload: error });
+  }
+};
+
+export const fetchItemFromCollection = (urlSlug) => async (dispatch) => {
+  try {
+    const response = await streams.get(
+      `/posts?slug=${urlSlug}&_fields=id,date_gmt,slug,title,content,excerpt,collection_item_dating,collection_item_inventory_number,collection_item_location,collection_item_material,collection_item_size,_links,_embedded&_embed`
+    );
+    dispatch({ type: FETCH_ITEM_FROM_COLLECTION, payload: response.data[0] });
+  } catch (error) {
+    dispatch({ type: FETCH_ITEM_FROM_COLLECTION_ERROR, payload: error });
   }
 };
 
