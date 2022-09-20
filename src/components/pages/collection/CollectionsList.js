@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { injectIntl } from "react-intl";
 import CardCollections from "../../cards/cardCollections";
 import Spinner from "react-bootstrap/Spinner";

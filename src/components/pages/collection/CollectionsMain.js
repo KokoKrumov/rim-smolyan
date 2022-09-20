@@ -39,7 +39,6 @@ class Collections extends Component {
       propsCategories
     );
     if (!sessionStorage.getItem(pureSlug)) {
-      console.log("make request");
       this.props
         .fetchCollectionsMain(slugId)
         .then(() => {
@@ -58,7 +57,6 @@ class Collections extends Component {
           });
         });
     } else {
-      console.log("get from storage", sessionStorage.getItem(pureSlug));
       this.setState({
         collectionsMain: JSON.parse(sessionStorage.getItem(pureSlug)),
         isLoading: false,

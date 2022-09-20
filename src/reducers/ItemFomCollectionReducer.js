@@ -7,7 +7,6 @@ import {
 export default (state = {}, action) => {
   switch (action.type) {
     case FETCH_ITEM_FROM_COLLECTION:
-      console.log("error", action.payload);
       return action.payload;
     case FETCH_ITEM_FROM_COLLECTION_ERROR:
       return action.payload;

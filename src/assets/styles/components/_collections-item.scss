@@ -1,0 +1,16 @@
+.collections-item-header-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: none;
+}
+
+.collections-item {
+    .back-link{
+        margin-bottom: 0;
+    }
+
+    .socials {
+        margin-top: 10px;
+    }
+}

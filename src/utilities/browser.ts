@@ -75,9 +75,10 @@ export function escapeHtml(unsafeHtml: string) {
     .replace("'", "&#039;");
 }
 
-export function checkIfValueExistInIntl(val: any, props: any) {
-  const { intl } = props;
-  if (!!props.intl.messages[`${val}`]) {
+export function checkIfValueExistInIntl(val: any, intl: any) {
+  console.log('intl: ', intl);
+ 
+  if (!!intl.messages[`${val}`]) {
     return { __html: intl.formatMessage({ id: val }) };
   } else {
     return { __html: val };
