@@ -33,7 +33,6 @@ import Regulation from "./pages/games/Regulation";
 class App extends Component {
   componentDidMount() {
     if (!sessionStorage.getItem("categories")) {
-      console.log(" this.props: ", this.props);
       this.props.fetchCategories().then(() => {
         const categoriesValues = this.props.categories;
         sessionStorage.setItem("categories", JSON.stringify(categoriesValues));

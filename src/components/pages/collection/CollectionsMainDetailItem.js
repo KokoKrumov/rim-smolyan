@@ -4,21 +4,19 @@ import { injectIntl } from "react-intl";
 import { connect } from "react-redux";
 import { fetchItemFromCollection } from "../../../actions";
 import Spinner from "react-bootstrap/Spinner";
-import HeroInner from "../../hero/HeroInner";
 
 import Container from "react-bootstrap/cjs/Container";
 import Col from "react-bootstrap/cjs/Col";
 import Row from "react-bootstrap/cjs/Row";
 import SocialsShare from "../../socials/socialsShare";
 import { Link } from "react-router-dom";
-
+import CollectionItemsArrowNavigation from "./CollectionItemsArrowNavigation";
 function CollectionsMainDetailItem({
   fetchItemFromCollection,
   match,
   itemFomCollection,
   intl,
 }) {
-  console.log("match: ", match);
   const itemName = match.params.item;
   const [item, setItem] = useState({});
   useEffect(() => {
@@ -33,7 +31,7 @@ function CollectionsMainDetailItem({
     return (
       <div className="collections-item collections-page__wrap">
         {/* BACK NAVIGATION AND SOCIAL SHARES */}
-        <Container className="position-relative">
+        <Container>
           <div className="hero-inner__wrap__sm collections-item-header-nav">
             <div className="back-link">
               <Link
@@ -59,20 +57,123 @@ function CollectionsMainDetailItem({
           </div>
         </Container>
         {/* ITEM SPECIFIC AND ARROWS */}
-        <main className="collections-page">
+        <main className="position-relative">
+          <CollectionItemsArrowNavigation />
           <section>
-            <Container className="position-relative">
+            <Container>
               <Row>
-                <Col xs={12}></Col>
+                <Col xs={5}>
+                  <div className="collections-item__title-wrap">
+                    <h2 className="h2">{item.title.rendered}</h2>
+                  </div>
+                  <div className="collections-item__tech-list__wrap">
+                    <ul className="collections-item__tech-list">
+                      <li className="collections-item__tech-list__item">
+                        <p
+                          className="collections-item__tech-list__item__label"
+                          dangerouslySetInnerHTML={{
+                            __html: intl.formatMessage({
+                              id: "collection.item.material",
+                            }),
+                          }}
+                        />
+                        <p className="collections-item__tech-list__item__text">
+                          {item.collection_item_material}
+                        </p>
+                      </li>
+                      <li className="collections-item__tech-list__item">
+                        <p
+                          className="collections-item__tech-list__item__label"
+                          dangerouslySetInnerHTML={{
+                            __html: intl.formatMessage({
+                              id: "collection.item.sizes",
+                            }),
+                          }}
+                        />
+                        <p className="collections-item__tech-list__item__text">
+                          {item.collection_item_size}
+                        </p>
+                      </li>
+                      <li className="collections-item__tech-list__item">
+                        <p
+                          className="collections-item__tech-list__item__label"
+                          dangerouslySetInnerHTML={{
+                            __html: intl.formatMessage({
+                              id: "collection.item.dating",
+                            }),
+                          }}
+                        />
+                        <p className="collections-item__tech-list__item__text">
+                          {item.collection_item_dating}
+                        </p>
+                      </li>
+                      <li className="collections-item__tech-list__item">
+                        <p
+                          className="collections-item__tech-list__item__label"
+                          dangerouslySetInnerHTML={{
+                            __html: intl.formatMessage({
+                              id: "collection.item.location",
+                            }),
+                          }}
+                        />
+                        <p className="collections-item__tech-list__item__text">
+                          {item.collection_item_location}
+                        </p>
+                      </li>
+                      <li className="collections-item__tech-list__item">
+                        <p
+                          className="collections-item__tech-list__item__label"
+                          dangerouslySetInnerHTML={{
+                            __html: intl.formatMessage({
+                              id: "collection.item.inventory-number",
+                            }),
+                          }}
+                        />
+                        <p className="collections-item__tech-list__item__text">
+                          {item.collection_item_inventory_number}
+                        </p>
+                      </li>
+                    </ul>
+                  </div>
+                </Col>
+                <Col xs={7}>
+                  <div className="collections-item__img__wrap">
+                    <img
+                      className="img-fluid"
+                      src={item._embedded["wp:featuredmedia"][0].source_url}
+                      alt={item.title.rendered}
+                    />
+                  </div>
+                </Col>
               </Row>
             </Container>
           </section>
-
-          <div>
-            <div>{item.title.rendered}</div>
-          </div>
-          {/* ITEM TITLE AND DESCRIPTION */}
-          <div></div>
+          <hr className="mt-60" />
+          <section>
+            <Container>
+              <Row>
+                <Col md={6}>
+                  <div className="collections-item__description">
+                    <h4 className="collections-item__description__title">
+                      Описание
+                    </h4>
+                    <p
+                      className="collections-item__description__text paragraph-2"
+                      dangerouslySetInnerHTML={{
+                        __html: item.content.rendered,
+                      }}
+                    />
+                    <p
+                      className="collections-item__description__author paragraph-2"
+                      dangerouslySetInnerHTML={{
+                        __html: item._embedded.author[0].name,
+                      }}
+                    />
+                  </div>
+                </Col>
+              </Row>
+            </Container>
+          </section>
         </main>
       </div>
     );

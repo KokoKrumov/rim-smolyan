@@ -9,9 +9,6 @@ function CardCollections(props) {
     itemImgAlt: "",
   });
 
-  const location = props.location;
-  console.log("location: ", location);
-
   useEffect(() => {
     if (item.hasOwnProperty("description")) {
       setItemObj({

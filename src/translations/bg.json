@@ -164,5 +164,10 @@
   "collection.numismatics": "Нумизматика",
   "collection.col-raycho-peev-harbaliev": "О.з. полк. Райчо Пеев Харбалиев",
   "collection.weapon-main-collections": "Оръжие",
-  "collection.folklore": "Фолклор"
+  "collection.folklore": "Фолклор",
+  "collection.item.material": "Материал:",
+  "collection.item.sizes": "Rазмери:",
+  "collection.item.dating": "Датировка:",
+  "collection.item.location": "Селище:",
+  "collection.item.inventory-number": "Инв. номер:"
 }

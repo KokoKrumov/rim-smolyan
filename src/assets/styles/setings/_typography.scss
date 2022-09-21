@@ -40,8 +40,6 @@
 }
 
 .h2 {
-    /* H2 */
-
     font-family: $font-cormorant-regular;
     @include font-size(48px);
     @include line-height(52px);
