@@ -13,10 +13,8 @@ import Tab from "react-bootstrap/Tab";
 import HeroCollections from "../../hero/HeroCollections";
 import SocialsShare from "../../socials/socialsShare";
 import NavigateThroughCollections from "../../nav/NavigateThroughCollections";
-import {
-  extarctIdAndCategories,
-  slugSanatize,
-} from "../../../utilities/browser";
+
+import { extarctIdAndCategories } from "../../../utilities/browser";
 import { isEqual } from "lodash";
 import Spinner from "react-bootstrap/cjs/Spinner";
 
@@ -50,6 +48,7 @@ class CollectionsMainIntroAndGallery extends Component {
       props,
       propsCategories
     );
+    console.log("slugId, pureSlug: ", slugId, pureSlug);
 
     this.setState({
       collectionsType: pureSlug,

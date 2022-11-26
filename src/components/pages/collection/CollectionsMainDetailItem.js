@@ -19,6 +19,7 @@ function CollectionsMainDetailItem({
 }) {
   const itemName = match.params.item;
   const [item, setItem] = useState({});
+
   useEffect(() => {
     fetchItemFromCollection(itemName);
   }, [fetchItemFromCollection, itemName]);
@@ -57,9 +58,9 @@ function CollectionsMainDetailItem({
           </div>
         </Container>
         {/* ITEM SPECIFIC AND ARROWS */}
-        <main className="position-relative">
-          <CollectionItemsArrowNavigation />
-          <section>
+        <main>
+          <section className="position-relative">
+            <CollectionItemsArrowNavigation match={match} />
             <Container>
               <Row>
                 <Col xs={5}>

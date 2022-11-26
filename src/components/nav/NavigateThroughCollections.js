@@ -29,7 +29,6 @@ class NavigateThroughCollections extends Component {
   location = this.props.location;
 
   fetchData = (id, listFrom, props, propsCategories) => {
-    console.log("id: ", id);
     const { slugId, pureSlug } = extarctIdAndCategories(
       id,
       listFrom,
@@ -37,7 +36,6 @@ class NavigateThroughCollections extends Component {
       propsCategories
     );
     if (!sessionStorage.getItem(pureSlug)) {
-      console.log("make request");
       this.props
         .fetchCollectionsMain(slugId)
         .then(() => {
@@ -86,10 +84,6 @@ class NavigateThroughCollections extends Component {
       this.state.currentIndex === undefined &&
       this.state.collection.length !== 0
     ) {
-      console.log(
-        "slugSanatize(window.location.pathname): ",
-        slugSanatize(window.location.pathname)
-      );
       const { currentIndex, prevIndex, nextItem } = navigationCollectionItems(
         this.state.collection,
         slugSanatize(window.location.pathname)

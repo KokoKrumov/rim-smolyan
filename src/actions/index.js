@@ -93,7 +93,6 @@ export const fetchCollections =
       );
       dispatch({ type: FETCH_COLLECTIONS_BYTYPE, payload: response.data });
     } catch (error) {
-      console.log("error: ", error);
       dispatch({ type: FETCH_COLLECTIONS_BYTYPE_ERROR, payload: error });
     }
   };

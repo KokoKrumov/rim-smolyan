@@ -13,5 +13,23 @@
     .left-arrow {
         @include padding(20px, 20px, 20px, 20px);
         cursor: pointer;
+        z-index: 2;
+    }
+}
+
+.item-preview {
+    position: absolute;
+    top: calc(50% - 100px);
+    transform: translate(0);
+    width: 260px;
+    height: 210px;
+    z-index: 1;
+
+    &__right {
+        right: 0;
+    }
+
+    &__left {
+        left: 0;    
     }
 }
