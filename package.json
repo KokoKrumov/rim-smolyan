@@ -46,13 +46,13 @@
   },
   "scripts": {
     "start": "react-scripts --openssl-legacy-provider start",
-    "build": "react-scripts  build",
-    "test": "react-scripts  test",
-    "eject": "react-scripts  eject",
-    "start:dev": "env-cmd -f ./environments/.dev.env react-scripts start",
-    "build:dev": "env-cmd -f ./environments/.dev.env npm run-script  build",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "start:dev": "env-cmd -f ./environments/.dev.env react-scripts --openssl-legacy-provider start",
+    "build:dev": "env-cmd -f ./environments/.dev.env npm run-script build",
     "start:prod": "env-cmd -f ./environments/.prod.env react-scripts --openssl-legacy-provider start",
-    "build:prod": "env-cmd -f ./environments/.prod.env npm run-script  build"
+    "build:prod": "env-cmd -f ./environments/.prod.env npm run-script build"
   },
   "eslintConfig": {
     "extends": "react-app"
