@@ -38,20 +38,20 @@
     "react-intl": "^5.8.4",
     "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^3.4.4",
+    "react-scripts": "^5.0.1",
     "react-share": "^4.4.0",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "styled-components": "^5.2.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts --openssl-legacy-provider start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "start:dev": "env-cmd -f ./environments/.dev.env react-scripts start",
     "build:dev": "env-cmd -f ./environments/.dev.env npm run-script build",
-    "start:prod": "env-cmd -f ./environments/.prod.env react-scripts start",
+    "start:prod": "env-cmd -f ./environments/.prod.env react-scripts --openssl-legacy-provider start",
     "build:prod": "env-cmd -f ./environments/.prod.env npm run-script build"
   },
   "eslintConfig": {
