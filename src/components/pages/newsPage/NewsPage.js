@@ -162,13 +162,13 @@ class NewsPage extends Component {
   componentDidUpdate() {
     if (
       !sessionStorage.getItem("categories") &&
-      this.props &&
-      this.props.categories &&
+      this.props?.categories &&
       !isEqual(this.props.categories, this.state.categories)
     ) {
       const { location } = this.props;
+      const { pathname } = location;
       this.fetchData(
-        location.pathname,
+        pathname,
         1,
         10,
         "props",
@@ -177,10 +177,14 @@ class NewsPage extends Component {
       );
     }
 
-    if (this.props.news && !isEqual(this.props.news, this.state.currentNews)) {
+    if (
+      this.props.news &&
+      !isEqual(this.props.categories, this.state.categories)
+    ) {
       this.setState({
         currentNews: this.props.news,
         news: [...this.state.news, ...this.props.news],
+        categories: this.props.categories,
       });
     }
 
