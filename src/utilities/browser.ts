@@ -153,7 +153,7 @@ export function getDateMonthForArticleCard(date: string, isISO = false) {
   return month;
 }
 
-export function slugSanatize(string: string) {
+export function slugSanitize(string: string) {
   const paramsInURl = string.split("/");
   const lastParam = paramsInURl.pop() || paramsInURl.pop();
   return lastParam;
@@ -167,7 +167,7 @@ export function extarctIdAndCategories(
 ): any {
   if (props) {
     let categories, slugItem, slugId, pureSlug, removeChar, regex;
-    pureSlug = slugSanatize(slug);
+    pureSlug = slugSanitize(slug);
     if (listFrom === "storage") {
       const categoriesFromStorage = sessionStorage.getItem("categories");
       categories = JSON.parse(categoriesFromStorage || "{}");

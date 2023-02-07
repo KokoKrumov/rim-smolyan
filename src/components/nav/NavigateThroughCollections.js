@@ -4,7 +4,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import arrowLeftLong from "../../assets/images/arrow-left-long.svg";
 import arrowRightLong from "../../assets/images/arrow-right-long.svg";
-import { extarctIdAndCategories, slugSanatize } from "../../utilities/browser";
+import { extarctIdAndCategories, slugSanitize } from "../../utilities/browser";
 import sortById from "../../utilities/sortById";
 import navigationCollectionItems from "../../utilities/navigationCollectionItems";
 import { isEqual } from "lodash";
@@ -86,7 +86,7 @@ class NavigateThroughCollections extends Component {
     ) {
       const { currentIndex, prevIndex, nextItem } = navigationCollectionItems(
         this.state.collection,
-        slugSanatize(window.location.pathname)
+        slugSanitize(window.location.pathname)
       );
       this.setState({
         currentIndex,
@@ -121,7 +121,7 @@ class NavigateThroughCollections extends Component {
     ) {
       const { currentIndex, prevIndex, nextItem } = navigationCollectionItems(
         this.state.collection,
-        slugSanatize(window.location.pathname)
+        slugSanitize(window.location.pathname)
       );
       this.setState({
         currentIndex: currentIndex,

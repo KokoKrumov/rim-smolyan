@@ -14,22 +14,34 @@
         @include padding(20px, 20px, 20px, 20px);
         cursor: pointer;
         z-index: 2;
-    }
+    }   
 }
 
 .item-preview {
+    @include padding(25px, 20px, 25px, 20px);
     position: absolute;
     top: calc(50% - 100px);
-    transform: translate(0);
+    transform: translate(100%);
+    transition: 3s ease-in;
     width: 260px;
     height: 210px;
     z-index: 1;
+    background-color: $dark;
+    color: $white;
 
-    &__right {
+    &.show {
+        transform: translate(0);
+    }
+
+    &__nextIndex {
         right: 0;
     }
 
-    &__left {
+    &__prevIndex {
         left: 0;    
+    }
+
+    &__image {
+        width: 110px;
     }
 }

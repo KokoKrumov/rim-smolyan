@@ -11,7 +11,7 @@ import scientificArchiveBg from "../../../assets/images/scientific-archive-bg.pn
 import { connect } from "react-redux";
 import {
   extarctIdAndCategories,
-  slugSanatize,
+  slugSanitize,
 } from "../../../utilities/browser";
 import { fetchCollectionsMain } from "../../../actions";
 import InfoColumn from "../../infoColumn/InfoColumn";
@@ -109,7 +109,7 @@ class Collections extends Component {
     return (
       <div className="collections-page__wrap">
         <HeroInner
-          labelTitle={slugSanatize(this.location.pathname, "/")}
+          labelTitle={slugSanitize(this.location.pathname, "/")}
           subtitleLg={"collections-virtual-subtitle"}
           title={"collections"}
           arrowBottom={true}
@@ -139,7 +139,7 @@ class Collections extends Component {
               </Row>
             </Container>
           </section>
-          {slugSanatize(this.location.pathname, "/") === "main-collections" && (
+          {slugSanitize(this.location.pathname, "/") === "main-collections" && (
             <>
               <section>
                 <InfoColumn
