@@ -177,13 +177,20 @@ class NewsPage extends Component {
       );
     }
 
-    if (
-      this.props.news &&
-      !isEqual(this.props.categories, this.state.categories)
-    ) {
+    console.log("this.props: ", this.props);
+    console.log("this.state.categories: ", this.state.categories);
+    console.log("this.props.categories: ", this.props.categories);
+    if (this.props.news && !isEqual(this.props.news, this.state.currentNews)) {
       this.setState({
         currentNews: this.props.news,
         news: [...this.state.news, ...this.props.news],
+        categories: this.props.categories,
+      });
+    } else {
+      console.log("updating");
+      this.setState({
+        currentNews: this.props.news,
+        news: this.state.currentNews,
         categories: this.props.categories,
       });
     }

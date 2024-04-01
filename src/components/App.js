@@ -34,10 +34,21 @@ import Regulation from "./pages/games/Regulation";
 class App extends Component {
   componentDidMount() {
     if (!sessionStorage.getItem("categories")) {
-      this.props.fetchCategories().then(() => {
-        const categoriesValues = this.props.categories;
-        sessionStorage.setItem("categories", JSON.stringify(categoriesValues));
-      });
+      this.props
+        .fetchCategories()
+        .then(() => {
+          const categoriesValues = this.props.categories;
+          sessionStorage.setItem(
+            "categories",
+            JSON.stringify(categoriesValues)
+          );
+        })
+        .then(() => {
+          console.log(
+            "categoriesValues: ",
+            JSON.stringify(this.props.categories)
+          );
+        });
     }
   }
 
@@ -101,7 +112,11 @@ class App extends Component {
               <Route path="/services" exact component={Services} />
               <Route path="/prices" exact component={Prices} />
               <Route path="/museum-games" exact component={Games} />
-              <Route path="/museum-games/regulation" exact component={Regulation} />
+              <Route
+                path="/museum-games/regulation"
+                exact
+                component={Regulation}
+              />
               <Route
                 path="/administrative/:parentId/:id"
                 exact

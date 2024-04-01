@@ -8,6 +8,7 @@ import ExhibitionDate from "../Exhibition/ExhibitionDate";
 import NewsDateAndYear from "../pages/newsDetailPage/NewsDateAndYear";
 
 function NewsAndEventsListHorizontal({ listOfNewsAndEvents, isExhibition }) {
+  // console.log("listOfNewsAndEvents: ", listOfNewsAndEvents);
   if (listOfNewsAndEvents) {
     return listOfNewsAndEvents.map((event) => {
       return (
