@@ -8,7 +8,7 @@ const navigationCollectionItems = (collection, currentItem) => {
   } else {
     prevIndex = collection[collection.length - 1];
   }
- 
+
   if (currentIndex === collection.length - 1) {
     nextIndex = collection[0];
   } else {

@@ -1,19 +1,19 @@
+import React, { useEffect, useState } from "react";
+
+import ArrowLeft from "../../../assets/icons/ArrowLeft";
+import ArrowRight from "../../../assets/icons/ArrowRight";
+import { connect } from "react-redux";
+import { fetchCollections } from "../../../actions";
+import { isEqual } from "lodash";
 import navigationCollectionItems from "../../../utilities/navigationCollectionItems";
 import { slugSanitize } from "../../../utilities/browser";
-import ArrowRight from "../../../assets/icons/ArrowRight";
-import ArrowLeft from "../../../assets/icons/ArrowLeft";
-
-import React, { useEffect, useState } from "react";
-import { fetchCollections } from "../../../actions";
-
-import { connect } from "react-redux";
-import { isEqual } from "lodash";
 
 function CollectionItemsArrowNavigation({
   match,
   fetchCollections,
   collection,
 }) {
+  console.log("%c match", "color: orange", match);
   const collectionName = match.params.type;
   const [itemsFromCollection, setItemsFromCollection] = useState([]);
   const [navItems, setNavItems] = useState({
@@ -25,21 +25,23 @@ function CollectionItemsArrowNavigation({
   const [linkToTheItem, setLinkToTheItem] = useState("");
   const showPreview = Boolean(Object.keys(showItem).length);
 
-  useEffect(() => {
-    const itemsFromStorage = JSON.parse(sessionStorage.getItem(collectionName));
-    if (itemsFromStorage && !isEqual(itemsFromStorage, itemsFromCollection)) {
-      setItemsFromCollection(itemsFromStorage);
-    } else {
-      const categoriesFromStorage = JSON.parse(
-        sessionStorage.getItem("categories")
-      );
+  // useEffect(() => {
+  const itemsFromStorage = JSON.parse(sessionStorage.getItem(collectionName));
+  console.log("%c itemsFromStorage", "color: orange", itemsFromStorage);
+  console.log("%c itemsFromCollection", "color: orange", itemsFromCollection);
+  if (itemsFromStorage.length !== 0 && !isEqual(itemsFromStorage, itemsFromCollection)) {
+    setItemsFromCollection(itemsFromStorage);
+  } else {
+    const categoriesFromStorage = JSON.parse(
+      sessionStorage.getItem("categories")
+    );
 
-      const parentCollectionId = categoriesFromStorage.find(
-        (item) => item.slug === collectionName
-      ).id;
-      fetchCollections(parentCollectionId);
-    }
-  }, [collectionName, fetchCollections, itemsFromCollection]);
+    const parentCollectionId = categoriesFromStorage.find(
+      (item) => item.slug === collectionName
+    ).id;
+    fetchCollections(parentCollectionId);
+  }
+  // }, [collectionName, fetchCollections, itemsFromCollection]);
 
   useEffect(() => {
     if (collection.length && !isEqual(itemsFromCollection, collection)) {
@@ -48,6 +50,7 @@ function CollectionItemsArrowNavigation({
   }, [collection, itemsFromCollection]);
 
   useEffect(() => {
+    console.log("%c 111", "color: blue");
     const { currentIndex, prevIndex, nextItem } = navigationCollectionItems(
       collection,
       slugSanitize(window.location.pathname)
@@ -98,10 +101,9 @@ function CollectionItemsArrowNavigation({
     //   return null;
     // }
   }
-  if (
-    Object.keys(navItems.prevIndex).length !== 0 ||
-    Object.keys(navItems.nextIndex).length !== 0
-  ) {
+
+  console.log("%c navItems", "color: orange", navItems);
+  if (navItems.prevIndex.length !== 0 || navItems.nextIndex.length !== 0) {
     return (
       <div className="collection-items-arrow-navigation">
         <a

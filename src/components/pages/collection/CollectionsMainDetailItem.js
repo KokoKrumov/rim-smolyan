@@ -1,16 +1,17 @@
-import React from "react";
 import { useEffect, useState } from "react";
-import { injectIntl } from "react-intl";
-import { connect } from "react-redux";
-import { fetchItemFromCollection } from "../../../actions";
-import Spinner from "react-bootstrap/Spinner";
 
-import Container from "react-bootstrap/cjs/Container";
 import Col from "react-bootstrap/cjs/Col";
+import CollectionItemsArrowNavigation from "./CollectionItemsArrowNavigation";
+import Container from "react-bootstrap/cjs/Container";
+import { Link } from "react-router-dom";
+import React from "react";
 import Row from "react-bootstrap/cjs/Row";
 import SocialsShare from "../../socials/socialsShare";
-import { Link } from "react-router-dom";
-import CollectionItemsArrowNavigation from "./CollectionItemsArrowNavigation";
+import Spinner from "react-bootstrap/Spinner";
+import { connect } from "react-redux";
+import { fetchItemFromCollection } from "../../../actions";
+import { injectIntl } from "react-intl";
+
 function CollectionsMainDetailItem({
   fetchItemFromCollection,
   match,

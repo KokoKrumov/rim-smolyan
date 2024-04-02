@@ -1,17 +1,18 @@
 import React, { Component } from "react";
+import { extarctIdAndCategories, slugSanitize } from "../../utilities/browser";
+
+import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import Spinner from "react-bootstrap/cjs/Spinner";
 import arrowLeftLong from "../../assets/images/arrow-left-long.svg";
 import arrowRightLong from "../../assets/images/arrow-right-long.svg";
-import { extarctIdAndCategories, slugSanitize } from "../../utilities/browser";
-import sortById from "../../utilities/sortById";
-import navigationCollectionItems from "../../utilities/navigationCollectionItems";
-import { isEqual } from "lodash";
-import { fetchCollectionsMain } from "../../actions";
 import { connect } from "react-redux";
-import Spinner from "react-bootstrap/cjs/Spinner";
+import { fetchCollectionsMain } from "../../actions";
 import { injectIntl } from "react-intl";
+import { isEqual } from "lodash";
+import navigationCollectionItems from "../../utilities/navigationCollectionItems";
+import sortById from "../../utilities/sortById";
 
 class NavigateThroughCollections extends Component {
   constructor(props) {
