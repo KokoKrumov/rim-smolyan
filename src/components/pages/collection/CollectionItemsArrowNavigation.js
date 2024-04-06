@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import ArrowLeft from "../../../assets/icons/ArrowLeft";
 import ArrowRight from "../../../assets/icons/ArrowRight";
+import { ObjectFlags } from "typescript";
 import { connect } from "react-redux";
 import { fetchCollections } from "../../../actions";
 import { isEqual } from "lodash";
@@ -13,7 +14,6 @@ function CollectionItemsArrowNavigation({
   fetchCollections,
   collection,
 }) {
-  console.log("%c match", "color: orange", match);
   const collectionName = match.params.type;
   const [itemsFromCollection, setItemsFromCollection] = useState([]);
   const [navItems, setNavItems] = useState({
@@ -25,23 +25,24 @@ function CollectionItemsArrowNavigation({
   const [linkToTheItem, setLinkToTheItem] = useState("");
   const showPreview = Boolean(Object.keys(showItem).length);
 
-  // useEffect(() => {
-  const itemsFromStorage = JSON.parse(sessionStorage.getItem(collectionName));
-  console.log("%c itemsFromStorage", "color: orange", itemsFromStorage);
-  console.log("%c itemsFromCollection", "color: orange", itemsFromCollection);
-  if (itemsFromStorage.length !== 0 && !isEqual(itemsFromStorage, itemsFromCollection)) {
-    setItemsFromCollection(itemsFromStorage);
-  } else {
-    const categoriesFromStorage = JSON.parse(
-      sessionStorage.getItem("categories")
-    );
+  useEffect(() => {
+    const itemsFromStorage = JSON.parse(sessionStorage.getItem(collectionName));
+    if (
+      itemsFromStorage.length !== 0 &&
+      !isEqual(itemsFromStorage, itemsFromCollection)
+    ) {
+      setItemsFromCollection(itemsFromStorage);
+    } else {
+      const categoriesFromStorage = JSON.parse(
+        sessionStorage.getItem("categories")
+      );
 
-    const parentCollectionId = categoriesFromStorage.find(
-      (item) => item.slug === collectionName
-    ).id;
-    fetchCollections(parentCollectionId);
-  }
-  // }, [collectionName, fetchCollections, itemsFromCollection]);
+      const parentCollectionId = categoriesFromStorage.find(
+        (item) => item.slug === collectionName
+      ).id;
+      fetchCollections(parentCollectionId);
+    }
+  }, [collectionName, fetchCollections, itemsFromCollection]);
 
   useEffect(() => {
     if (collection.length && !isEqual(itemsFromCollection, collection)) {
@@ -72,7 +73,6 @@ function CollectionItemsArrowNavigation({
   };
 
   function ItemPreview({ className, item, side }) {
-    console.log("item: ", item);
     const imageUrl = item?._embedded["wp:featuredmedia"][0]?.source_url;
     const title = item?.title?.rendered;
     const itemsFromCollectionLength = itemsFromCollection.length;
@@ -80,68 +80,73 @@ function CollectionItemsArrowNavigation({
       .map((item) => item?.title?.rendered)
       .indexOf(title);
 
-    // if (showPreview) {
-    return (
-      <div
-        onMouseLeave={() => {
-          setShowItem({});
-        }}
-        className={`item-preview item-preview__${side}  ${className}`}
-      >
-        <div className="item-preview__image">
-          <img className="img-fluid" src={imageUrl} alt={item.title.rendered} />
+    if (showPreview) {
+      return (
+        <div
+          onMouseLeave={() => {
+            setShowItem({});
+          }}
+          className={`item-preview item-preview__${showItem.side} ${className}`}
+        >
+          <div className="item-preview__image">
+            <img
+              className="img-fluid"
+              src={imageUrl}
+              alt={item.title.rendered}
+            />
+          </div>
+          <h5 className="h5">{title}</h5>
+          <h5 className="h5">
+            {itemFromCollectionIndex + 1}/{itemsFromCollectionLength}
+          </h5>
         </div>
-        <h5 className="h5">{title}</h5>
-        <h5 className="h5">
-          {itemFromCollectionIndex + 1}/{itemsFromCollectionLength}
-        </h5>
-      </div>
-    );
-    // } else {
-    //   return null;
-    // }
+      );
+    } else {
+      return null;
+    }
   }
 
-  console.log("%c navItems", "color: orange", navItems);
-  if (navItems.prevIndex.length !== 0 || navItems.nextIndex.length !== 0) {
+  if (
+    navItems.prevIndex &&
+    navItems.nextItem &&
+    Object.keys(navItems.prevIndex).length !== 0 &&
+    Object.keys(navItems.nextItem).length !== 0
+  ) {
     return (
       <div className="collection-items-arrow-navigation">
         <a
           href={linkToTheItem}
-          className="left-arrow"
+          className={`left-arrow ${
+            showItem.side === "prevIndex" ? "show" : ""
+          }`}
           onMouseEnter={() => {
-            setShowItem({});
+            setShowItem({ item: navItems.prevIndex, side: "prevIndex" });
             generateHref(navItems.prevIndex);
           }}
         >
           <ArrowLeft
             width="21px"
-            color={`${showPreview ? "#fff" : "#272323"}`}
+            color={`${showItem.side === "prevIndex" ? "#fff" : "#272323"}`}
           />
         </a>
         <a
           href={linkToTheItem}
-          className="right-arrow"
+          className={`right-arrow ${
+            showItem.side === "nextItem" ? "show" : ""
+          }`}
           onMouseEnter={() => {
-            setShowItem({ item: navItems.nextItem, side: "nextIndex" });
+            setShowItem({ item: navItems.nextItem, side: "nextItem" });
             generateHref(navItems.nextItem);
           }}
         >
           <ArrowRight
             width="21px"
-            color={`${showPreview ? "#fff" : "#272323"}`}
+            color={`${showItem.side === "nextItem" ? "#fff" : "#272323"}`}
           />
         </a>
 
         <ItemPreview
-          item={navItems.prevIndex}
-          side="prevIndex"
-          className={showPreview ? "show" : ""}
-        />
-
-        <ItemPreview
-          item={navItems.nextIndex}
-          side="nextIndex"
+          item={showItem.item}
           className={showPreview ? "show" : ""}
         />
       </div>

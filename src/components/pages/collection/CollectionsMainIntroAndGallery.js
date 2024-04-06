@@ -1,22 +1,23 @@
 import React, { Component } from "react";
-import { injectIntl } from "react-intl";
-import HeroInner from "../../hero/HeroInner";
-import Container from "react-bootstrap/cjs/Container";
-import Col from "react-bootstrap/cjs/Col";
-import Row from "react-bootstrap/cjs/Row";
-import { connect } from "react-redux";
-import { fetchCollections } from "../../../actions";
-import CardCollections from "../../cards/cardCollections";
-import NotFound from "../NotFound";
-import Nav from "react-bootstrap/Nav";
-import Tab from "react-bootstrap/Tab";
-import HeroCollections from "../../hero/HeroCollections";
-import SocialsShare from "../../socials/socialsShare";
-import NavigateThroughCollections from "../../nav/NavigateThroughCollections";
 
-import { extarctIdAndCategories } from "../../../utilities/browser";
-import { isEqual } from "lodash";
+import CardCollections from "../../cards/cardCollections";
+import Col from "react-bootstrap/cjs/Col";
+import Container from "react-bootstrap/cjs/Container";
+import HeroCollections from "../../hero/HeroCollections";
+import HeroInner from "../../hero/HeroInner";
+import Nav from "react-bootstrap/Nav";
+import NavigateThroughCollections from "../../nav/NavigateThroughCollections";
+import NotFound from "../NotFound";
+import Row from "react-bootstrap/cjs/Row";
+import SocialsShare from "../../socials/socialsShare";
 import Spinner from "react-bootstrap/cjs/Spinner";
+import Tab from "react-bootstrap/Tab";
+import { connect } from "react-redux";
+import { extarctIdAndCategories } from "../../../utilities/browser";
+import { fetchCollections } from "../../../actions";
+import history from "../../../history";
+import { injectIntl } from "react-intl";
+import { isEqual } from "lodash";
 
 class CollectionsMainIntroAndGallery extends Component {
   constructor(props) {
@@ -91,6 +92,11 @@ class CollectionsMainIntroAndGallery extends Component {
   };
 
   componentDidUpdate() {
+    console.log(
+      "%c history.location.pathnam",
+      "color: blue",
+      history.location.pathname
+    );
     if (
       !sessionStorage.getItem("categories") &&
       this.props &&
@@ -159,7 +165,13 @@ class CollectionsMainIntroAndGallery extends Component {
           <main className="prices-page__main collections-page__intro-and-gallery">
             <section>
               <Container>
-                <Tab.Container defaultActiveKey="introduction">
+                <Tab.Container
+                  defaultActiveKey={
+                    window.location.hash === "#gallery"
+                      ? "gallery"
+                      : "introduction"
+                  }
+                >
                   <Row className="justify-content-between">
                     <Col sm={2}>
                       <Nav className="flex-column">
@@ -168,6 +180,11 @@ class CollectionsMainIntroAndGallery extends Component {
                           className="nae__filter__wrap flex-row justify-content-around justify-content-lg-start flex-lg-column"
                         >
                           <Nav.Link
+                            onSelect={() => {
+                              history.push(
+                                `${history.location.pathname}#introduction`
+                              );
+                            }}
                             className="tab_list-link"
                             eventKey="introduction"
                             dangerouslySetInnerHTML={{
@@ -177,6 +194,11 @@ class CollectionsMainIntroAndGallery extends Component {
                             }}
                           />
                           <Nav.Link
+                            onSelect={() => {
+                              history.push(
+                                `${history.location.pathname}#gallery`
+                              );
+                            }}
                             className="tab_list-link"
                             eventKey="gallery"
                             dangerouslySetInnerHTML={{

@@ -38,7 +38,7 @@ function CollectionsMainDetailItem({
             <div className="back-link">
               <Link
                 className="link cta_outline cta_outline__dark"
-                to={`/${item._embedded["wp:term"][0][1].slug}/intro/${item._embedded["wp:term"][0][0].slug}`}
+                to={`/${item._embedded["wp:term"][0][1].slug}/intro/${item._embedded["wp:term"][0][0].slug}#gallery`}
                 itemProp="url"
                 target=""
                 dangerouslySetInnerHTML={{

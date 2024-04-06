@@ -1,19 +1,20 @@
 import React, { Component } from "react";
-import heroImage from "../../../assets/images/baseHero.jpg";
-import aboutUsImage from "../../../assets/images/about_us_section_bg.png";
-import HeroInner from "../../hero/HeroInner";
-import Container from "react-bootstrap/cjs/Container";
-import Row from "react-bootstrap/cjs/Row";
-import Col from "react-bootstrap/cjs/Col";
-import Nav from "react-bootstrap/cjs/Nav";
-import Spinner from "react-bootstrap/Spinner";
-import NewsAndEventsListHorizontal from "../../newsAndEventsList/NewsAndEventsListHorizontal";
-import { connect } from "react-redux";
 import { fetchNews, resetFetchNews } from "../../../actions";
-import { withRouter } from "react-router";
-import { isEqual } from "lodash";
+
+import Col from "react-bootstrap/cjs/Col";
+import Container from "react-bootstrap/cjs/Container";
+import HeroInner from "../../hero/HeroInner";
+import Nav from "react-bootstrap/cjs/Nav";
+import NewsAndEventsListHorizontal from "../../newsAndEventsList/NewsAndEventsListHorizontal";
+import Row from "react-bootstrap/cjs/Row";
+import Spinner from "react-bootstrap/Spinner";
+import aboutUsImage from "../../../assets/images/about_us_section_bg.png";
+import { connect } from "react-redux";
 import { extarctIdAndCategories } from "../../../utilities/browser";
+import heroImage from "../../../assets/images/baseHero.jpg";
 import history from "../../../history";
+import { isEqual } from "lodash";
+import { withRouter } from "react-router";
 
 class NewsPage extends Component {
   navLinks = [

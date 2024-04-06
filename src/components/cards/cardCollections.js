@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+
 import { injectIntl } from "react-intl";
 
 function CardCollections(props) {

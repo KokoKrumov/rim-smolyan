@@ -1,34 +1,36 @@
-import React, { Component } from "react";
 import "../assets/styles/main.scss";
-import history from "../history";
-import { Router, Route, Switch } from "react-router-dom";
-import Header from "../components/header/Header";
-import Footer from "../components/footer/Footer";
-import HomePage from "./pages/homePage/HomePage";
-import FundsPage from "./pages/fundsPage/FundsPage";
-import NewsPage from "./pages/newsPage/NewsPage";
+
+import React, { Component } from "react";
+import { Route, Router, Switch } from "react-router-dom";
+import { fetchCategories, showModal } from "../actions";
+
 import AboutUs from "./pages/aboutUs/AboutUs";
-import NewsDetailPage from "./pages/newsDetailPage/NewsDetailPage";
-import ExhibitionsDetailPage from "./pages/ExhibitionsDetailPage/ExhibitionsDetailPage";
-import Contacts from "./pages/contacts/Contacts";
-import ModalComponent from "./modal/ModalComponent";
-import NotFound from "./pages/NotFound";
-import { injectIntl } from "react-intl";
-import { connect } from "react-redux";
-import { showModal, fetchCategories } from "../actions";
-import SupportUs from "./pages/supportUs/SupportUs";
 import Administrative from "./pages/administrative/Administrative";
-import Terms from "./pages/terms/Terms";
-import PrivacyPolicy from "./pages/privacyPolicy/PrivacyPolicy";
-import ExhibitionsPage from "./pages/exhibitions/Exhibitions";
-import Services from "./pages/services/Services";
-import Prices from "./pages/prices/Prices";
 import CollectionsMain from "./pages/collection/CollectionsMain";
-import CollectionsMainIntroAndGallery from "./pages/collection/CollectionsMainIntroAndGallery";
 import CollectionsMainDetailItem from "./pages/collection/CollectionsMainDetailItem";
-import LaszloNagyPage from "./pages/laszloNagyPage/LaszloNagyPage";
+import CollectionsMainIntroAndGallery from "./pages/collection/CollectionsMainIntroAndGallery";
+import Contacts from "./pages/contacts/Contacts";
+import ExhibitionsDetailPage from "./pages/ExhibitionsDetailPage/ExhibitionsDetailPage";
+import ExhibitionsPage from "./pages/exhibitions/Exhibitions";
+import Footer from "../components/footer/Footer";
+import FundsPage from "./pages/fundsPage/FundsPage";
 import Games from "./pages/games/Games";
+import Header from "../components/header/Header";
+import HomePage from "./pages/homePage/HomePage";
+import LaszloNagyPage from "./pages/laszloNagyPage/LaszloNagyPage";
+import ModalComponent from "./modal/ModalComponent";
+import NewsDetailPage from "./pages/newsDetailPage/NewsDetailPage";
+import NewsPage from "./pages/newsPage/NewsPage";
+import NotFound from "./pages/NotFound";
+import Prices from "./pages/prices/Prices";
+import PrivacyPolicy from "./pages/privacyPolicy/PrivacyPolicy";
 import Regulation from "./pages/games/Regulation";
+import Services from "./pages/services/Services";
+import SupportUs from "./pages/supportUs/SupportUs";
+import Terms from "./pages/terms/Terms";
+import { connect } from "react-redux";
+import history from "../history";
+import { injectIntl } from "react-intl";
 
 class App extends Component {
   componentDidMount() {

@@ -144,8 +144,6 @@ class NavigateThroughCollections extends Component {
         </div>
       );
     } else {
-      console.log("this.state.prevIndex: ", this.state.prevIndex);
-      console.log("this.state.nextIndex: ", this.state.nextIndex);
       return (
         <div className="nav-through-collections">
           <Container fluid>

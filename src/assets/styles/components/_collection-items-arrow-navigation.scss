@@ -14,6 +14,14 @@
         @include padding(20px, 20px, 20px, 20px);
         cursor: pointer;
         z-index: 2;
+
+        &.show {
+            path {
+                fill: $white;
+                transition-duration: 0.3s;
+                transition-timing-function: ease-out;
+                }
+        }
     }   
 }
 
@@ -21,24 +29,25 @@
     @include padding(25px, 20px, 25px, 20px);
     position: absolute;
     top: calc(50% - 100px);
-    transform: translate(100%);
-    transition: 3s ease-in;
+    transform: translate(0);
+    opacity: 0;
+    transition: opacity 0.5s ease-in;
     width: 260px;
     height: 210px;
     z-index: 1;
     background-color: $dark;
     color: $white;
 
-    &.show {
-        transform: translate(0);
+    &.show   {
+       opacity: 1;
     }
 
-    &__nextIndex {
+    &__nextItem {
         right: 0;
     }
 
     &__prevIndex {
-        left: 0;    
+        left: 0;
     }
 
     &__image {
