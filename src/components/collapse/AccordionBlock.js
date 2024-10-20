@@ -33,24 +33,21 @@ class AccordionBlock extends Component {
       <div className="row">
         <div className="col">
           <ul>
-            {
-              // console.log(block)
-              block.content.map((friend, index) => {
-                return (
-                  <li key={index}>
-                    <a
-                      className="links"
-                      href={friend.url}
-                      itemProp="url"
-                      target="_blank"
-                      rel="noopener nofollow noreferrer"
-                    >
-                      {friend.title}
-                    </a>
-                  </li>
-                );
-              })
-            }
+            {block.content.map((friend, index) => {
+              return (
+                <li key={index}>
+                  <a
+                    className="links"
+                    href={friend.url}
+                    itemProp="url"
+                    target="_blank"
+                    rel="noopener nofollow noreferrer"
+                  >
+                    {friend.title}
+                  </a>
+                </li>
+              );
+            })}
           </ul>
         </div>
       </div>
@@ -268,6 +265,8 @@ class AccordionBlock extends Component {
         return this.renderReports(block);
       case "docs":
         return this.renderDocs(block);
+      default:
+        return null;
     }
   };
 

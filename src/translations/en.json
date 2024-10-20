@@ -168,5 +168,6 @@
   "collection.item.sizes": "Sizes:",
   "collection.item.dating": "Dating:",
   "collection.item.location": "Location:",
-  "collection.item.inventory-number": "Inv. Number:"
+  "collection.item.inventory-number": "Inv. Number:",
+  "collection-not-exist": "A content about this colection still missing."
 }

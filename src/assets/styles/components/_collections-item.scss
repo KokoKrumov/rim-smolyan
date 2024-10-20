@@ -55,7 +55,10 @@
 
     &__img__wrap {
         background-color: $gray;
-        @include padding(10px, 136px, 65px, 136px);
+        @include padding(15px, 10px, 30px, 10px);
+        @include media-breakpoint-up(lg) {
+            @include padding(10px, 136px, 65px, 136px);
+        }
     }
 
     &__description {}

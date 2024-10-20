@@ -212,23 +212,20 @@ function Header({ showModal }) {
                   >
                     <NavDropdown.Item
                       className="nav__secondary-link"
-                      onClick={(e) => {
-                        handleShowModal("modal-redirect", "Z_fondove.html", e);
-                      }}
-                      href="#"
+                      href="/main-collections"
                     >
                       <FormattedMessage id="menu.main-collections" />
                     </NavDropdown.Item>
                     <NavDropdown.Item
                       className="nav__secondary-link"
-                      onClick={(e) => {
-                        handleShowModal(
-                          "modal-redirect",
-                          "Z_vir_fondove.html",
-                          e
-                        );
-                      }}
-                      href="#"
+                      // onClick={(e) => {
+                      //   handleShowModal(
+                      //     "modal-redirect",
+                      //     "Z_vir_fondove.html",
+                      //     e
+                      //   );
+                      // }}
+                      href="/virtual-collections"
                     >
                       <FormattedMessage id="menu.virtual-collections" />
                     </NavDropdown.Item>

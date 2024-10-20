@@ -1,8 +1,8 @@
-import React from "react";
 import Container from "react-bootstrap/cjs/Container";
-import { injectIntl } from "react-intl";
 import { Link } from "react-router-dom";
+import React from "react";
 import { checkIfValueExistInIntl } from "../../utilities/browser";
+import { injectIntl } from "react-intl";
 
 export default injectIntl(function HeroInner({
   intl,
@@ -38,11 +38,10 @@ export default injectIntl(function HeroInner({
                 </li>
                 <li
                   className="breadcrumb-item active"
-                  dangerouslySetInnerHTML={{
-                    __html: intl.formatMessage({
-                      id: breadcrumbs.child,
-                    }),
-                  }}
+                  dangerouslySetInnerHTML={checkIfValueExistInIntl(
+                    breadcrumbs.child,
+                    intl
+                  )}
                 />
               </ol>
             </div>

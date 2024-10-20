@@ -1,22 +1,23 @@
 import React, { Component } from "react";
-import { injectIntl } from "react-intl";
-import HeroInner from "../../hero/HeroInner";
-import Container from "react-bootstrap/cjs/Container";
-import Col from "react-bootstrap/cjs/Col";
-import Row from "react-bootstrap/cjs/Row";
-import Spinner from "react-bootstrap/cjs/Spinner";
-import photoArchiveBg from "../../../assets/images/photo-archive.png";
-import libraryBg from "../../../assets/images/library-bg.png";
-import scientificArchiveBg from "../../../assets/images/scientific-archive-bg.png";
-import { connect } from "react-redux";
 import {
-  extarctIdAndCategories,
+  extractIdAndCategories,
   slugSanitize,
 } from "../../../utilities/browser";
-import { fetchCollectionsMain } from "../../../actions";
-import InfoColumn from "../../infoColumn/InfoColumn";
+
+import Col from "react-bootstrap/cjs/Col";
 import CollectionsList from "./CollectionsList";
+import Container from "react-bootstrap/cjs/Container";
+import HeroInner from "../../hero/HeroInner";
+import InfoColumn from "../../infoColumn/InfoColumn";
+import Row from "react-bootstrap/cjs/Row";
+import Spinner from "react-bootstrap/cjs/Spinner";
+import { connect } from "react-redux";
+import { fetchCollectionsMain } from "../../../actions";
+import { injectIntl } from "react-intl";
 import { isEqual } from "lodash";
+import libraryBg from "../../../assets/images/library-bg.png";
+import photoArchiveBg from "../../../assets/images/photo-archive.png";
+import scientificArchiveBg from "../../../assets/images/scientific-archive-bg.png";
 import utilizeScroll from "../../../utilities/utilizeScroll";
 
 class Collections extends Component {
@@ -32,7 +33,7 @@ class Collections extends Component {
   location = this.props.location;
 
   fetchData = (id, listFrom, props, propsCategories) => {
-    const { slugId, pureSlug } = extarctIdAndCategories(
+    const { slugId, pureSlug } = extractIdAndCategories(
       id,
       listFrom,
       props,
@@ -115,7 +116,7 @@ class Collections extends Component {
           arrowBottom={true}
           scrollOnClick={this.elScroll.executeScroll}
         />
-        <main className="collections-page" ref={this.elScroll.elRef}>
+        <main className="collections-page">
           <section>
             <Container className="position-relative">
               <Row>
@@ -129,11 +130,13 @@ class Collections extends Component {
                       />
                     </div>
                   ) : (
-                    <CollectionsList
-                      collections={this.state.collectionsMain}
-                      collectionsType={"main"}
-                      cols={3}
-                    />
+                    <div ref={this.elScroll.elRef}>
+                      <CollectionsList
+                        collections={this.state.collectionsMain}
+                        collectionsType={"main"}
+                        cols={3}
+                      />
+                    </div>
                   )}
                 </Col>
               </Row>

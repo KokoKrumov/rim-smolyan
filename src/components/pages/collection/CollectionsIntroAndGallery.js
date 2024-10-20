@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { fetchCollectionDescription, fetchCollections } from "../../../actions";
 
 import CardCollections from "../../cards/cardCollections";
 import Col from "react-bootstrap/cjs/Col";
@@ -7,21 +8,21 @@ import HeroCollections from "../../hero/HeroCollections";
 import HeroInner from "../../hero/HeroInner";
 import Nav from "react-bootstrap/Nav";
 import NavigateThroughCollections from "../../nav/NavigateThroughCollections";
-import NotFound from "../NotFound";
 import Row from "react-bootstrap/cjs/Row";
 import SocialsShare from "../../socials/socialsShare";
 import Spinner from "react-bootstrap/cjs/Spinner";
 import Tab from "react-bootstrap/Tab";
 import { connect } from "react-redux";
-import { extarctIdAndCategories } from "../../../utilities/browser";
-import { fetchCollections } from "../../../actions";
+import { extractIdAndCategories } from "../../../utilities/browser";
 import history from "../../../history";
 import { injectIntl } from "react-intl";
 import { isEqual } from "lodash";
+import utilizeScroll from "../../../utilities/utilizeScroll";
 
-class CollectionsMainIntroAndGallery extends Component {
+class CollectionsIntroAndGallery extends Component {
   constructor(props) {
     super(props);
+    this.elScroll = utilizeScroll();
     this.state = {
       collectionsType: null,
       fetchType: null,
@@ -36,26 +37,37 @@ class CollectionsMainIntroAndGallery extends Component {
       collectionNextItem: null,
       collectionPrevItem: null,
       isInnerGallery: this.props.match.path.includes("intro"),
+      collectionDescription: "",
+      collectionTitle: "",
     };
   }
 
   location = this.props.location;
+  hostLocation = this.location.pathname.split("/")[1];
   bgArchImage = "../../images/collections-main/archeology/archeology-bg.png";
 
   fetchData = (id, listFrom, props, propsCategories) => {
-    const { slugId, pureSlug } = extarctIdAndCategories(
+    const { slugId, slugItemName, pureSlug } = extractIdAndCategories(
       id,
       listFrom,
       props,
       propsCategories
     );
-    console.log("slugId, pureSlug: ", slugId, pureSlug);
 
     this.setState({
       collectionsType: pureSlug,
-      title: pureSlug,
+      title: slugItemName,
     });
 
+    if (this.state.collectionDescription === "") {
+      this.props.fetchCollectionDescription(pureSlug).then(() => {
+        this.setState({
+          collectionDescription:
+            this.props.collectionDescription[0]?.content?.rendered,
+          collectionTitle: this.props.collectionDescription[0]?.title?.rendered,
+        });
+      });
+    }
     if (!sessionStorage.getItem(pureSlug)) {
       this.props
         .fetchCollections(slugId)
@@ -64,6 +76,7 @@ class CollectionsMainIntroAndGallery extends Component {
             this.setState({
               collection: this.props.collection,
               collectionExist: true,
+              title: slugItemName,
             });
             sessionStorage.setItem(
               pureSlug,
@@ -85,18 +98,12 @@ class CollectionsMainIntroAndGallery extends Component {
         collection: JSON.parse(sessionStorage.getItem(pureSlug)),
         collectionExist: true,
         isLoading: false,
-        title: pureSlug,
-        // collectionNavigation:
+        title: slugItemName,
       });
     }
   };
 
   componentDidUpdate() {
-    console.log(
-      "%c history.location.pathnam",
-      "color: blue",
-      history.location.pathname
-    );
     if (
       !sessionStorage.getItem("categories") &&
       this.props &&
@@ -133,37 +140,58 @@ class CollectionsMainIntroAndGallery extends Component {
         this.props,
         this.state.categories
       );
+
+      // this.hostLocation = this.location.pathname.split("/")[0];
     }
   }
 
-  pageContent = () => {
+  pageContentExist = (collectionExist) => {
     const { intl } = this.props;
     return (
       <>
-        {this.state.collection ? (
+        {collectionExist ? (
           <HeroCollections
             bgImage={this.bgArchImage}
-            title={this.state.title}
+            subtitleLg={
+              this.state.collectionTitle !== ""
+                ? this.state.collectionTitle
+                : this.state.title
+            }
             label={true}
           />
-        ) : null}
+        ) : (
+          <HeroCollections bgImage={this.bgArchImage} />
+        )}
         <div className="collections-page pt-0 pb-0">
-          {this.state.collection ? (
+          {collectionExist ? (
             <HeroInner
               breadcrumbs={{
-                parent: "main-collections",
-                parentLink: "main-collections",
+                parent: this.hostLocation,
+                parentLink: this.hostLocation,
                 child: this.state.title,
               }}
               subtitleLg={
-                this.state.collection &&
-                `collection.${this.state.title}.subtitle`
+                this.state.collectionTitle !== ""
+                  ? this.state.collectionTitle
+                  : this.state.title
               }
               arrowBottom={true}
+              scrollOnClick={this.elScroll.executeScroll}
             />
-          ) : null}
+          ) : (
+            <HeroInner
+              breadcrumbs={{
+                parent: this.hostLocation,
+                parentLink: this.hostLocation,
+                child: this.state.title,
+              }}
+              subtitleLg={this.state.title}
+              arrowBottom={true}
+              scrollOnClick={this.elScroll.executeScroll}
+            />
+          )}
           <main className="prices-page__main collections-page__intro-and-gallery">
-            <section>
+            <section ref={this.elScroll.elRef}>
               <Container>
                 <Tab.Container
                   defaultActiveKey={
@@ -180,6 +208,7 @@ class CollectionsMainIntroAndGallery extends Component {
                           className="nae__filter__wrap flex-row justify-content-around justify-content-lg-start flex-lg-column"
                         >
                           <Nav.Link
+                            disabled={!collectionExist}
                             onSelect={() => {
                               history.push(
                                 `${history.location.pathname}#introduction`
@@ -194,6 +223,7 @@ class CollectionsMainIntroAndGallery extends Component {
                             }}
                           />
                           <Nav.Link
+                            disabled={!collectionExist}
                             onSelect={() => {
                               history.push(
                                 `${history.location.pathname}#gallery`
@@ -207,7 +237,7 @@ class CollectionsMainIntroAndGallery extends Component {
                           />
                         </Nav>
                       </Nav>
-                      <div className="socials__wrap">
+                      <div className="socials__wrap pr-3 pl-3 p-md-0">
                         <p className="socials-label">Споделете страницата</p>
                         <SocialsShare page={"share-page"} />
                       </div>
@@ -218,26 +248,38 @@ class CollectionsMainIntroAndGallery extends Component {
                           <Container>
                             <Row className="justify-content-center">
                               <Col sm={12} md={9}>
-                                <h2
-                                  className="h2"
-                                  dangerouslySetInnerHTML={{
-                                    __html: intl.formatMessage({
-                                      id: "collection-introduction",
-                                    }),
-                                  }}
-                                />
-                                {this.state.collection ? (
-                                  <div
-                                    className="paragraph-2 paragraphs-with-mb-25"
+                                {collectionExist ? (
+                                  <h2
+                                    className="h2"
                                     dangerouslySetInnerHTML={{
                                       __html: intl.formatMessage({
-                                        id: "collection.description",
+                                        id: "collection-introduction",
                                       }),
                                     }}
                                   />
                                 ) : (
-                                  <p>Loading ...</p>
+                                  <h2
+                                    className="h2"
+                                    dangerouslySetInnerHTML={{
+                                      __html: intl.formatMessage({
+                                        id: "collection-not-exist",
+                                      }),
+                                    }}
+                                  />
                                 )}
+                                {collectionExist ? (
+                                  this.state.collectionDescription ? (
+                                    <div
+                                      className="paragraph-2 paragraphs-with-mb-25"
+                                      dangerouslySetInnerHTML={{
+                                        __html:
+                                          this.state.collectionDescription,
+                                      }}
+                                    />
+                                  ) : (
+                                    <p>Loading ...</p>
+                                  )
+                                ) : null}
                               </Col>
                             </Row>
                           </Container>
@@ -263,12 +305,13 @@ class CollectionsMainIntroAndGallery extends Component {
                                   }}
                                 />
                                 <div className="card-columns card-columns-3">
-                                  {this.state.collection ? (
+                                  {collectionExist ? (
                                     this.state.collection.map((item) => {
                                       return (
                                         <CardCollections
                                           key={item.title.rendered}
                                           item={item}
+                                          hostLocation={this.hostLocation}
                                           collectionsType={
                                             this.state.collectionsType
                                           }
@@ -301,7 +344,7 @@ class CollectionsMainIntroAndGallery extends Component {
             </section>
           </main>
           <NavigateThroughCollections
-            collectionType={"main-collections"}
+            collectionType={this.hostLocation}
             currentIndex={"this.location.pathname"}
           />
         </div>
@@ -310,6 +353,9 @@ class CollectionsMainIntroAndGallery extends Component {
   };
 
   renderContent = () => {
+    //null - loading
+    //true - collection exist
+    //false - collection not exist
     if (this.state.collectionExist === null) {
       return (
         <div className="spinner-wrap">
@@ -317,11 +363,7 @@ class CollectionsMainIntroAndGallery extends Component {
         </div>
       );
     } else {
-      if (this.state.collectionExist) {
-        return this.pageContent();
-      } else {
-        return <NotFound />;
-      }
+      return this.pageContentExist(this.state.collectionExist);
     }
   };
 
@@ -333,6 +375,7 @@ class CollectionsMainIntroAndGallery extends Component {
 const mapStateToProps = (state) => {
   return {
     collection: state.collections.byType,
+    collectionDescription: state.collections.description,
     collectionsError: state.collections.error,
     categories: Object.values(state.categories),
   };
@@ -340,8 +383,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
   fetchCollections: (parent) => dispatch(fetchCollections(parent)),
+  fetchCollectionDescription: (collectionSlug) =>
+    dispatch(fetchCollectionDescription(collectionSlug)),
 });
 
 export default injectIntl(
-  connect(mapStateToProps, mapDispatchToProps)(CollectionsMainIntroAndGallery)
+  connect(mapStateToProps, mapDispatchToProps)(CollectionsIntroAndGallery)
 );

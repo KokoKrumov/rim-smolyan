@@ -1,28 +1,29 @@
 import React, { Component, useEffect } from "react";
-import heroImage from "../../../assets/images/baseHero.jpg";
-import aboutUsImage from "../../../assets/images/about_us_section_bg.png";
-import Hero from "../../hero/Hero";
-import WorkInfoLine from "../../infoLine/WorkInfoLine";
-import NewsAndEventsList from "../../newsAndEventsList/NewsAndEventsList";
+import {
+  extractIdAndCategories,
+  isTabletScreen,
+} from "../../../utilities/browser";
+import { fetchNews, showModal } from "../../../actions";
+
+import CarouselMegatron from "../../carousel/carouselMegatron";
+import CarouselMegatronMobile from "../../carousel/CarouselMegatronMobile";
 import Container from "react-bootstrap/cjs/Container";
+import { FormattedMessage } from "react-intl";
+import Hero from "../../hero/Hero";
+import InfoColumn from "../../infoColumn/InfoColumn";
 import { Link } from "react-router-dom";
+import NewsAndEventsList from "../../newsAndEventsList/NewsAndEventsList";
 import Row from "react-bootstrap/cjs/Row";
+import WorkInfoLine from "../../infoLine/WorkInfoLine";
+import aboutUsImage from "../../../assets/images/about_us_section_bg.png";
+import bgCarousel2 from "../../../assets/images/bg-diskos.jpg";
+import bgCarousel3 from "../../../assets/images/bg-nakit.jpg";
+import bgCarousell from "../../../assets/images/bg-shlem.jpg";
+import { connect } from "react-redux";
+import heroImage from "../../../assets/images/baseHero.jpg";
 import imageItem_1 from "../../../assets/images/img-shlem.jpg";
 import imageItem_2 from "../../../assets/images/img-diskos.jpg";
 import imageItem_3 from "../../../assets/images/img-nakit.jpg";
-import bgCarousell from "../../../assets/images/bg-shlem.jpg";
-import bgCarousel2 from "../../../assets/images/bg-diskos.jpg";
-import bgCarousel3 from "../../../assets/images/bg-nakit.jpg";
-import CarouselMegatron from "../../carousel/carouselMegatron";
-import { connect } from "react-redux";
-import { fetchNews, showModal } from "../../../actions";
-import InfoColumn from "../../infoColumn/InfoColumn";
-import { FormattedMessage } from "react-intl";
-import {
-  isTabletScreen,
-  extarctIdAndCategories,
-} from "../../../utilities/browser";
-import CarouselMegatronMobile from "../../carousel/CarouselMegatronMobile";
 import { isEqual } from "lodash";
 
 let listMegatronCarousel = [
@@ -94,7 +95,7 @@ class HomePage extends Component {
   }
 
   fetchData = (id, page, perPage, listFrom, props, propsCategories) => {
-    const { slugId, categories } = extarctIdAndCategories(
+    const { slugId, categories } = extractIdAndCategories(
       id,
       listFrom,
       props,

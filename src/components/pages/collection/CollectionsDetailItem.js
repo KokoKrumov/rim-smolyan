@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+import { useMatchMedia } from "../../../utilities/useMatchMedia";
 import Col from "react-bootstrap/cjs/Col";
 import CollectionItemsArrowNavigation from "./CollectionItemsArrowNavigation";
 import Container from "react-bootstrap/cjs/Container";
@@ -11,16 +12,23 @@ import Spinner from "react-bootstrap/Spinner";
 import { connect } from "react-redux";
 import { fetchItemFromCollection } from "../../../actions";
 import { injectIntl } from "react-intl";
+import CollectionItemsArrowNavigationBottomFixed from "./CollectionItemsArrowNavigationBottomFixed";
 
-function CollectionsMainDetailItem({
+function CollectionsDetailItem({
   fetchItemFromCollection,
   match,
   itemFomCollection,
   intl,
 }) {
+  const noImage =
+    "https://api-staging.museumsmolyan.eu/wp-content/uploads/2024/10/no-image.png";
   const itemName = match.params.item;
   const [item, setItem] = useState({});
-
+  const backUrl =
+    match &&
+    match.url.replace("detail", "intro").split("/").slice(0, -1).join("/");
+  const isDesktopResolution = useMatchMedia("(min-width:992px)", true);
+  
   useEffect(() => {
     fetchItemFromCollection(itemName);
   }, [fetchItemFromCollection, itemName]);
@@ -31,14 +39,18 @@ function CollectionsMainDetailItem({
 
   function renderContent() {
     return (
-      <div className="collections-item collections-page__wrap">
+      <div
+        className={`collections-item ${
+          !isDesktopResolution && "pb-0"
+        } collections-page__wrap`}
+      >
         {/* BACK NAVIGATION AND SOCIAL SHARES */}
         <Container>
           <div className="hero-inner__wrap__sm collections-item-header-nav">
             <div className="back-link">
               <Link
                 className="link cta_outline cta_outline__dark"
-                to={`/${item._embedded["wp:term"][0][1].slug}/intro/${item._embedded["wp:term"][0][0].slug}#gallery`}
+                to={`${backUrl}#gallery`}
                 itemProp="url"
                 target=""
                 dangerouslySetInnerHTML={{
@@ -61,12 +73,29 @@ function CollectionsMainDetailItem({
         {/* ITEM SPECIFIC AND ARROWS */}
         <main>
           <section className="position-relative">
-            <CollectionItemsArrowNavigation match={match} />
+            {isDesktopResolution && (
+              <CollectionItemsArrowNavigation match={match} />
+            )}
+
             <Container>
               <Row>
-                <Col xs={5}>
+                <Col lg={5}>
                   <div className="collections-item__title-wrap">
                     <h2 className="h2">{item.title.rendered}</h2>
+                    {!isDesktopResolution && (
+                      <div className="collections-item__img__wrap">
+                        <img
+                          className="img-fluid"
+                          src={
+                            typeof item._embedded["wp:featuredmedia"] !==
+                            "undefined"
+                              ? item._embedded["wp:featuredmedia"][0].source_url
+                              : noImage
+                          }
+                          alt={item.title.rendered}
+                        />
+                      </div>
+                    )}
                   </div>
                   <div className="collections-item__tech-list__wrap">
                     <ul className="collections-item__tech-list">
@@ -138,20 +167,27 @@ function CollectionsMainDetailItem({
                     </ul>
                   </div>
                 </Col>
-                <Col xs={7}>
-                  <div className="collections-item__img__wrap">
-                    <img
-                      className="img-fluid"
-                      src={item._embedded["wp:featuredmedia"][0].source_url}
-                      alt={item.title.rendered}
-                    />
-                  </div>
-                </Col>
+                {isDesktopResolution && (
+                  <Col lg={7}>
+                    <div className="collections-item__img__wrap">
+                      <img
+                        className="img-fluid"
+                        src={
+                          typeof item._embedded["wp:featuredmedia"] !==
+                          "undefined"
+                            ? item._embedded["wp:featuredmedia"][0].source_url
+                            : noImage
+                        }
+                        alt={item.title.rendered}
+                      />
+                    </div>
+                  </Col>
+                )}
               </Row>
             </Container>
           </section>
           <hr className="mt-60" />
-          <section>
+          <section className={!isDesktopResolution && "collections-item"}>
             <Container>
               <Row>
                 <Col md={6}>
@@ -176,6 +212,11 @@ function CollectionsMainDetailItem({
               </Row>
             </Container>
           </section>
+          {!isDesktopResolution && (
+            <section>
+              <CollectionItemsArrowNavigationBottomFixed match={match} />
+            </section>
+          )}
         </main>
       </div>
     );
@@ -202,5 +243,5 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default injectIntl(
-  connect(mapStateToProps, mapDispatchToProps)(CollectionsMainDetailItem)
+  connect(mapStateToProps, mapDispatchToProps)(CollectionsDetailItem)
 );

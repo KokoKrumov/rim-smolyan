@@ -1,6 +1,7 @@
-import React from "react";
-import { injectIntl } from "react-intl";
 import Container from "react-bootstrap/Container";
+import React from "react";
+import { checkIfValueExistInIntl } from "../../utilities/browser";
+import { injectIntl } from "react-intl";
 
 function HeroCollections(props) {
   const { intl } = props;
@@ -24,9 +25,7 @@ function HeroCollections(props) {
 
           <h1
             className="h1"
-            dangerouslySetInnerHTML={{
-              __html: intl.formatMessage({ id: props.title }),
-            }}
+            dangerouslySetInnerHTML={checkIfValueExistInIntl(props.title, intl)}
           />
         </Container>
       </div>

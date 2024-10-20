@@ -24,8 +24,6 @@ function CollectionItemsArrowNavigation({
   const [showItem, setShowItem] = useState({});
   const [linkToTheItem, setLinkToTheItem] = useState("");
   const showPreview = Boolean(Object.keys(showItem).length);
-  const noImage =
-    "https://api-staging.museumsmolyan.eu/wp-content/uploads/2024/10/no-image.png";
 
   useEffect(() => {
     const itemsFromStorage = JSON.parse(sessionStorage.getItem(collectionName));
@@ -67,49 +65,66 @@ function CollectionItemsArrowNavigation({
       ":item": item.slug,
     };
     const path = match.path;
-    const generateNewUrl = path.replace(/:type|:item/gi, function (matched) {
+    const generatedNewUrl = path.replace(/:type|:item/gi, function (matched) {
       return replacedMatches[matched];
     });
-    return setLinkToTheItem(generateNewUrl);
+    return generatedNewUrl;
   };
 
-  function ItemPreview({ className, item, side }) {
+  function ItemPreview({ className, item, side, type = "desktop" }) {
+    const noImage =
+      "https://api-staging.museumsmolyan.eu/wp-content/uploads/2024/10/no-image.png";
     const imageUrl =
       typeof item?._embedded["wp:featuredmedia"] !== "undefined"
         ? item?._embedded["wp:featuredmedia"][0]?.source_url
         : noImage;
+
     const title = item?.title?.rendered;
     const itemsFromCollectionLength = itemsFromCollection.length;
     const itemFromCollectionIndex = itemsFromCollection
       .map((item) => item?.title?.rendered)
       .indexOf(title);
 
-    if (showPreview) {
-      return (
+    // if (showPreview) {
+    return (
+      <a
+        className="collection-items-arrow-navigation_link-block"
+        href={generateHref(item)}
+      >
         <div
-          onMouseLeave={() => {
-            setShowItem({});
-          }}
-          className={`item-preview item-preview_top item-preview__${side} ${className}`}
+          className={`item-preview item-preview__show show ${side}`}
         >
           <div className="item-preview_inner">
-            <div className="item-preview__image">
-              <img
-                className="img-fluid"
-                src={imageUrl}
-                alt={item.title.rendered}
+            <div
+              href={generateHref(item)}
+              className={`left-arrow show `}
+            >
+              <ArrowLeft
+                width="21px"
+                color={`${
+                  showItem.side === "prevIndex" || type === "mobile"
+                    ? "#fff"
+                    : "#272323"
+                }`}
               />
             </div>
-            <h5 className="h5">{title}</h5>
-            <p className="item-preview__counter">
-              {itemFromCollectionIndex + 1}/{itemsFromCollectionLength}
-            </p>
+            <div className="item-preview_inner_content">
+              <div className="item-preview__image">
+                <img
+                  className="img-fluid"
+                  src={imageUrl}
+                  alt={item.title.rendered}
+                />
+              </div>
+              <h5 className="h5">{title}</h5>
+              <p className="item-preview__counter">
+                {itemFromCollectionIndex + 1}/{itemsFromCollectionLength}
+              </p>
+            </div>
           </div>
         </div>
-      );
-    } else {
-      return null;
-    }
+      </a>
+    );
   }
 
   if (
@@ -119,42 +134,19 @@ function CollectionItemsArrowNavigation({
     Object.keys(navItems.nextItem).length !== 0
   ) {
     return (
-      <div className="collection-items-arrow-navigation">
-        <a
-          href={linkToTheItem}
-          className={`left-arrow ${
-            showItem.side === "prevIndex" ? "show" : ""
-          }`}
-          onMouseEnter={() => {
-            setShowItem({ item: navItems.prevIndex, side: "prevIndex" });
-            generateHref(navItems.prevIndex);
-          }}
-        >
-          <ArrowLeft
-            width="21px"
-            color={`${showItem.side === "prevIndex" ? "#fff" : "#272323"}`}
-          />
-        </a>
-        <a
-          href={linkToTheItem}
-          className={`right-arrow ${
-            showItem.side === "nextItem" ? "show" : ""
-          }`}
-          onMouseEnter={() => {
-            setShowItem({ item: navItems.nextItem, side: "nextItem" });
-            generateHref(navItems.nextItem);
-          }}
-        >
-          <ArrowRight
-            width="21px"
-            color={`${showItem.side === "nextItem" ? "#fff" : "#272323"}`}
-          />
-        </a>
-
+      <div className="collection-items-arrow-navigation_bottom">
         <ItemPreview
-          side={showItem.side}
-          item={showItem.item}
+          side={"prevIndex"}
+          item={navItems.prevIndex}
           className={"show"}
+          type="mobile"
+          // className={showPreview ? "show" : ""}
+        />
+        <ItemPreview
+          side={"nextItem"}
+          item={navItems.nextItem}
+          className={"show"}
+          type="mobile"
           // className={showPreview ? "show" : ""}
         />
       </div>

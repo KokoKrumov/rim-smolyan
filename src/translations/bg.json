@@ -169,5 +169,6 @@
   "collection.item.sizes": "Rазмери:",
   "collection.item.dating": "Датировка:",
   "collection.item.location": "Селище:",
-  "collection.item.inventory-number": "Инв. номер:"
+  "collection.item.inventory-number": "Инв. номер:",
+  "collection-not-exist": "Съдържание за колекцията все още липсва."
 }

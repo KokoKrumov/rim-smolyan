@@ -77,8 +77,11 @@ export function escapeHtml(unsafeHtml: string) {
 
 export function checkIfValueExistInIntl(val: any, intl: any) {
   if (!!intl.messages[`${val}`]) {
+    //if there is key:value in the translations
     return { __html: intl.formatMessage({ id: val }) };
   } else {
+    // if there isn't values in the translations then the default state is the given value
+    // probably will return the raw key, slug, etc.
     return { __html: val };
   }
 }
@@ -159,25 +162,24 @@ export function slugSanitize(string: string) {
   return lastParam;
 }
 
-export function extarctIdAndCategories(
+export function extractIdAndCategories(
   slug: string,
   listFrom: string,
   props: any,
   propsCategories: any
 ): any {
   if (props) {
-    let categories, slugItem, slugId, pureSlug, removeChar, regex;
+    let categories, slugItem, slugId, slugItemName, pureSlug, removeChar, regex;
     pureSlug = slugSanitize(slug);
     if (listFrom === "storage") {
       const categoriesFromStorage = sessionStorage.getItem("categories");
       categories = JSON.parse(categoriesFromStorage || "{}");
-      slugItem = getItemBySlug(pureSlug, categories);
-      slugId = slugItem && slugItem.id;
     } else {
       categories = propsCategories;
-      slugItem = getItemBySlug(pureSlug, categories);
-      slugId = slugItem && slugItem.id;
     }
-    return { slugId, categories, pureSlug };
+    slugItem = getItemBySlug(pureSlug, categories);
+    slugId = slugItem && slugItem.id;
+    slugItemName = slugItem && slugItem.name;
+    return { slugId, slugItemName, categories, pureSlug };
   }
 }

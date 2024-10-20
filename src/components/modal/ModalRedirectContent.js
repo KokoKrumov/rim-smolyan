@@ -10,7 +10,6 @@ class ModalRedirectContent extends Component {
     }
 
     handleCloseModal = (e, data) => {
-        // e.preventDefault();
         this.props.closeModal(data);
     }
 

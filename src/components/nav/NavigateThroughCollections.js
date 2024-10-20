@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { extarctIdAndCategories, slugSanitize } from "../../utilities/browser";
+import { extractIdAndCategories, slugSanitize } from "../../utilities/browser";
 
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
@@ -7,6 +7,7 @@ import Row from "react-bootstrap/Row";
 import Spinner from "react-bootstrap/cjs/Spinner";
 import arrowLeftLong from "../../assets/images/arrow-left-long.svg";
 import arrowRightLong from "../../assets/images/arrow-right-long.svg";
+import { checkIfValueExistInIntl } from "../../utilities/browser";
 import { connect } from "react-redux";
 import { fetchCollectionsMain } from "../../actions";
 import { injectIntl } from "react-intl";
@@ -30,7 +31,7 @@ class NavigateThroughCollections extends Component {
   location = this.props.location;
 
   fetchData = (id, listFrom, props, propsCategories) => {
-    const { slugId, pureSlug } = extarctIdAndCategories(
+    const { slugId, slugItemName, pureSlug } = extractIdAndCategories(
       id,
       listFrom,
       props,
@@ -150,7 +151,7 @@ class NavigateThroughCollections extends Component {
             <Row>
               <Col md={6}>
                 <a
-                  href={`/${this.state.collectionType}/intro/${this.state.prevIndex.slug}`}
+                  href={`/${this.state.collectionType}/intro/${this.state.prevIndex?.slug}`}
                 >
                   <Row className="nav-through-collections__first-half">
                     <Col md={5} />
@@ -163,14 +164,9 @@ class NavigateThroughCollections extends Component {
                           <p className="nav-through-collections__direction">
                             Назад
                           </p>
-                          <p
-                            className="nav-through-collections__direction__item"
-                            dangerouslySetInnerHTML={{
-                              __html: intl.formatMessage({
-                                id: `collection.${this.state.prevIndex.slug}`,
-                              }),
-                            }}
-                          />
+                          <p className="nav-through-collections__direction__item">
+                            {this.state.prevIndex?.name}
+                          </p>
                         </div>
                       </div>
                     </Col>
@@ -186,16 +182,11 @@ class NavigateThroughCollections extends Component {
                       <div className="d-flex align-items-center justify-content-between">
                         <div>
                           <p className="nav-through-collections__direction">
-                            Назад
+                            Напред
                           </p>
-                          <p
-                            className="nav-through-collections__direction__item"
-                            dangerouslySetInnerHTML={{
-                              __html: intl.formatMessage({
-                                id: `collection.${this.state.nextIndex.slug}`,
-                              }),
-                            }}
-                          />
+                          <p className="nav-through-collections__direction__item">
+                            {this.state.nextIndex?.name}
+                          </p>
                         </div>
                         <div>
                           <img className="img" src={arrowRightLong} alt="" />

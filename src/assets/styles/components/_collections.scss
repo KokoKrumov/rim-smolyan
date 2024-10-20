@@ -29,6 +29,13 @@
     &__intro-and-gallery {
         .socials__wrap {
             margin-top: 3.75rem;
+
+            @include media-breakpoint-down(md) {
+                display: flex;
+                justify-content: space-between;
+                margin-top: 1.75rem;
+                margin-bottom: 3.75rem;
+            }
         }
     }
 }

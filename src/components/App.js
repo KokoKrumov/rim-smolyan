@@ -6,9 +6,10 @@ import { fetchCategories, showModal } from "../actions";
 
 import AboutUs from "./pages/aboutUs/AboutUs";
 import Administrative from "./pages/administrative/Administrative";
+import CollectionsDetailItem from "./pages/collection/CollectionsDetailItem";
+import CollectionsIntroAndGallery from "./pages/collection/CollectionsIntroAndGallery";
 import CollectionsMain from "./pages/collection/CollectionsMain";
-import CollectionsMainDetailItem from "./pages/collection/CollectionsMainDetailItem";
-import CollectionsMainIntroAndGallery from "./pages/collection/CollectionsMainIntroAndGallery";
+import CollectionsVirtual from "./pages/collection/CollectionsVirtual";
 import Contacts from "./pages/contacts/Contacts";
 import ExhibitionsDetailPage from "./pages/ExhibitionsDetailPage/ExhibitionsDetailPage";
 import ExhibitionsPage from "./pages/exhibitions/Exhibitions";
@@ -76,17 +77,27 @@ class App extends Component {
               <Route
                 path="/main-collections/intro/:type"
                 exact
-                component={CollectionsMainIntroAndGallery}
+                component={CollectionsIntroAndGallery}
               />
               <Route
                 path="/main-collections/detail/:type/:item"
                 exact
-                component={CollectionsMainDetailItem}
+                component={CollectionsDetailItem}
               />
               <Route
                 path="/virtual-collections"
                 exact
-                component={CollectionsMain}
+                component={CollectionsVirtual}
+              />
+              <Route
+                path="/virtual-collections/intro/:type"
+                exact
+                component={CollectionsIntroAndGallery}
+              />
+              <Route
+                path="/virtual-collections/detail/:type/:item"
+                exact
+                component={CollectionsDetailItem}
               />
               <Route
                 path="/house-museum-laszlo-nagy"

@@ -78,13 +78,11 @@ class Administrative extends Component {
       (project) => project.parentId === projectId
     );
     let article = project.projects.find((article) => article.id === articleId);
-    // return article
     return article;
   };
 
   componentDidMount() {
     this.updateActiveItem();
-    // console.log(this.props.intl);
   }
 
   componentDidUpdate() {
@@ -154,6 +152,5 @@ class Administrative extends Component {
 
 export default injectIntl(
   connect(null, {
-    // showModal
   })(Administrative)
 );

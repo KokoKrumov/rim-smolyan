@@ -10,7 +10,7 @@ import Row from "react-bootstrap/cjs/Row";
 import Spinner from "react-bootstrap/Spinner";
 import aboutUsImage from "../../../assets/images/about_us_section_bg.png";
 import { connect } from "react-redux";
-import { extarctIdAndCategories } from "../../../utilities/browser";
+import { extractIdAndCategories } from "../../../utilities/browser";
 import heroImage from "../../../assets/images/baseHero.jpg";
 import history from "../../../history";
 import { isEqual } from "lodash";
@@ -78,7 +78,7 @@ class NewsPage extends Component {
         isLoading: true,
       });
 
-      const { slugId, categories } = extarctIdAndCategories(
+      const { slugId, categories } = extractIdAndCategories(
         slug,
         listFrom,
         props,

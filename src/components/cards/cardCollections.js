@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { injectIntl } from "react-intl";
 
 function CardCollections(props) {
-  const { intl, item } = props;
+  const { intl, item, hostLocation } = props;
   const [itemObj, setItemObj] = useState({
     title: "",
     itemImg: "",
@@ -11,25 +11,32 @@ function CardCollections(props) {
   });
 
   useEffect(() => {
-    if (item.hasOwnProperty("description")) {
-      setItemObj({
-        title: item.name,
-        itemImg: JSON.parse(item.description).image,
-        itemImgAlt: item.slug,
-      });
-    } else {
-      setItemObj({
-        title: item.title.rendered,
-        itemImg: item["_embedded"]["wp:featuredmedia"][0]["source_url"],
-        itemImgAlt: item["_embedded"]["wp:featuredmedia"][0]["title"],
-      });
+    try {
+      if (item.hasOwnProperty("description")) {
+        setItemObj({
+          title: item.name,
+          itemImg: JSON.parse(item.description).image,
+          itemImgAlt: item.slug,
+        });
+      } else {
+        setItemObj({
+          title: item.title.rendered,
+          itemImg: item["_embedded"]["wp:featuredmedia"]
+            ? item["_embedded"]["wp:featuredmedia"][0]["source_url"]
+            : "",
+          itemImgAlt: item["_embedded"]["wp:featuredmedia"]
+            ? item["_embedded"]["wp:featuredmedia"][0]["title"]
+            : "",
+        });
+      }
+    } catch (e) {
+      console.error(e);
     }
   }, []);
 
   function generateHref() {
     if (props.isInnerGallery) {
-      //@ToDo should think about main-collections and virtual collections
-      return `/main-collections/detail/${props.collectionsType}/${item.slug}`;
+      return `/${hostLocation}/detail/${props.collectionsType}/${item.slug}`;
     } else {
       return `/${props.collectionsType}-collections/intro/${item.slug}`;
     }

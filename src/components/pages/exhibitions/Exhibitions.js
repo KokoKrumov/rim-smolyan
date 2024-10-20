@@ -1,20 +1,21 @@
 import React, { Component } from "react";
-import HeroInner from "../../hero/HeroInner";
-import Container from "react-bootstrap/cjs/Container";
-import { connect } from "react-redux";
 import { fetchExhibitions, resetFetchExhibitions } from "../../../actions";
-import exhibitionPermanentHero from "../../../assets/images/exhibition-permanent-hero.png";
-import { injectIntl } from "react-intl";
-import { extarctIdAndCategories } from "../../../utilities/browser";
-import utilizeScroll from "../../../utilities/utilizeScroll";
-import Image from "react-bootstrap/Image";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
-import NewsAndEventsListHorizontal from "../../newsAndEventsList/NewsAndEventsListHorizontal";
+
 import AccordionBlockExhibitionsArchive from "../../collapse/AccordionBlockExhibitionsArchive";
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/cjs/Container";
+import HeroInner from "../../hero/HeroInner";
+import Image from "react-bootstrap/Image";
+import NewsAndEventsListHorizontal from "../../newsAndEventsList/NewsAndEventsListHorizontal";
+import Row from "react-bootstrap/Row";
+import { connect } from "react-redux";
+import exhibitionPermanentHero from "../../../assets/images/exhibition-permanent-hero.png";
 import exhibitionsArchiveBG from "../../../translations/exhibitionsArchiveBG.json";
 import exhibitionsArchiveEN from "../../../translations/exhibitionsArchiveEN.json";
+import { extractIdAndCategories } from "../../../utilities/browser";
+import { injectIntl } from "react-intl";
 import { isEqual } from "lodash";
+import utilizeScroll from "../../../utilities/utilizeScroll";
 
 class ExhibitionsPage extends Component {
   constructor(props) {
@@ -34,7 +35,7 @@ class ExhibitionsPage extends Component {
   };
 
   fetchData = (id, page, perPage, listFrom, props, propsCategories) => {
-    const { slugId, categories } = extarctIdAndCategories(
+    const { slugId, categories } = extractIdAndCategories(
       id,
       listFrom,
       props,
@@ -43,7 +44,6 @@ class ExhibitionsPage extends Component {
 
     this.props.fetchExhibitions(slugId, page, perPage).then(() => {
       this.setState({
-        // exhibitions: this.props.exhibitions,
         categories: categories,
       });
     });

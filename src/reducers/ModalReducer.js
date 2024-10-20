@@ -9,7 +9,6 @@ import {
 
 
 export default (state = {}, action) => {
-    // console.log(action)
     switch (action.type) {
         case FETCH_REDIRECT_MODAL:
             return {...state, type: action.data, url: action.url, modalIsOpen: true}

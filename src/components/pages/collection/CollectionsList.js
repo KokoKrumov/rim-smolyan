@@ -1,7 +1,7 @@
-import React from "react";
-import { injectIntl } from "react-intl";
 import CardCollections from "../../cards/cardCollections";
+import React from "react";
 import Spinner from "react-bootstrap/Spinner";
+import { injectIntl } from "react-intl";
 
 function CollectionsList(props) {
   return (

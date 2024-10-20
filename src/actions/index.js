@@ -8,6 +8,8 @@ import {
   FETCH_COLLECTIONS_BYTYPE_ERROR,
   FETCH_COLLECTIONS_MAIN,
   FETCH_COLLECTIONS_VIRTUAL,
+  FETCH_COLLECTION_DESCRIPTION,
+  FETCH_COLLECTION_DESCRIPTION_ERROR,
   FETCH_EXHIBITIONS,
   FETCH_EXHIBITIONS_ERROR,
   FETCH_EXHIBITION_ARTICLE,
@@ -33,7 +35,7 @@ import streams from "../api/streams";
 //Create Actions
 
 export const fetchNews =
-  (id, page = 1, number = 10) =>
+  (id, page = 1, number = 100) =>
   async (dispatch) => {
     try {
       const response = await streams.get(
@@ -73,24 +75,25 @@ export const fetchCategories = () => async (dispatch) => {
 };
 
 export const fetchCollectionsMain = (parent) => async (dispatch) => {
-  console.log("parent: ", parent);
   const response = await streams.get(
     `/categories?parent=${parent}&_fields=id,name,slug,description&page=1&per_page=50`
   );
   dispatch({ type: FETCH_COLLECTIONS_MAIN, payload: response.data });
 };
 
-export const fetchCollectionsVirtual = () => async (dispatch) => {
-  const response = await streams.get("/collections-virtual.json");
+export const fetchCollectionsVirtual = (parent) => async (dispatch) => {
+  const response = await streams.get(
+    `/categories?parent=${parent}&_fields=id,name,slug,description&page=1&per_page=50`
+  );
   dispatch({ type: FETCH_COLLECTIONS_VIRTUAL, payload: response.data });
 };
 
 export const fetchCollections =
-  (slugId, page = 1, number = 10) =>
+  (slugId, page = 1, number = 100) =>
   async (dispatch) => {
     try {
       const response = await streams.get(
-        `/posts?categories=${slugId}&_fields=id,date_gmt,slug,title,_links,_embedded&_embed&page=${page}&per_page=${number}`
+        `/posts?categories=${slugId}&_fields=id,date_gmt,slug,title,content,_links,_embedded&_embed&page=${page}&per_page=${number}`
       );
       dispatch({ type: FETCH_COLLECTIONS_BYTYPE, payload: response.data });
     } catch (error) {
@@ -98,8 +101,20 @@ export const fetchCollections =
     }
   };
 
+export const fetchCollectionDescription =
+  (collectionSlug) => async (dispatch) => {
+    try {
+      const response = await streams.get(
+        `/posts?slug=${collectionSlug}&_fields=id,title,content`
+      );
+      dispatch({ type: FETCH_COLLECTION_DESCRIPTION, payload: response.data });
+    } catch (error) {
+      dispatch({ type: FETCH_COLLECTION_DESCRIPTION_ERROR, payload: error });
+    }
+  };
+// api-staging.museumsmolyan.eu/wp-json/wp/v2/posts?categories=32&_fields=id,date_gmt,slug,title,content,_links,_embedded&_embed&page=1&per_page=10
 export const fetchExhibitions =
-  (id, page = 1, number = 10) =>
+  (id, page = 1, number = 100) =>
   async (dispatch) => {
     try {
       const response = await streams.get(
@@ -136,14 +151,6 @@ export const fetchTeam = () => async (dispatch) => {
   const response = await publicStreams.get("/team.json");
   dispatch({ type: FETCH_TEAM, payload: response.data });
 };
-
-// export const fetchArticle = (id) => async (dispatch) => {
-//   // const response = await streams.get(`/streamy/${id}`);
-//   const response = await streams.get(
-//     `/posts?slug={url-slug}&_fields=id,date_gmt,slug,title,content,excerpt,event_date,event_place,archive,_links,_embedded&_embed`
-//   );
-//   dispatch({ type: FETCH_ARTICLE, payload: response.data });
-// };
 
 export const fetchArticle = (urlSlug) => async (dispatch) => {
   try {
