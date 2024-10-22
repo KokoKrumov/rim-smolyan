@@ -40,7 +40,7 @@ class Games extends Component {
                                     <p className='mt-60'>
                                         <Link
                                             className="link cta_outline cta_outline__dark link-underline m-0 d-inline-block"
-                                            to={'/regulation'}
+                                            to={'/museum-games/regulation'}
                                             itemProp="url"
                                             target=""
                                             rel="noopener nofollow noreferrer"

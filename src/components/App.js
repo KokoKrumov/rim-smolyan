@@ -113,7 +113,7 @@ class App extends Component {
               <Route path="/services" exact component={Services} />
               <Route path="/prices" exact component={Prices} />
               <Route path="/museum-games" exact component={Games} />
-              <Route path="/regulation" exact component={Regulation} />
+              <Route path="/museum-games/regulation" exact component={Regulation} />
               <Route
                 path="/administrative/:parentId/:id"
                 exact
