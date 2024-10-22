@@ -1,34 +1,41 @@
 import {
-  FETCH_NEWS,
-  FETCH_ARTICLE,
-  FETCH_REDIRECT_MODAL,
-  FETCH_NEDELOV_MODAL,
   CLOSE_NEDELOV_MODAL,
   CLOSE_REDIRECT_MODAL,
-  FETCH_RIM_BUILDING_IMAGES,
-  FETCH_TEAM_MODAL,
   CLOSE_TEAM_MODAL,
-  FETCH_TEAM,
-  FETCH_EXHIBITIONS,
-  FETCH_EXHIBITIONS_ERROR,
-  FETCH_ROUTES,
-  FETCH_SERVICES,
+  FETCH_ARTICLE,
+  FETCH_CATEGORIES,
+  FETCH_COLLECTIONS_BYTYPE,
+  FETCH_COLLECTIONS_BYTYPE_ERROR,
   FETCH_COLLECTIONS_MAIN,
   FETCH_COLLECTIONS_VIRTUAL,
-  FETCH_CATEGORIES,
-  FETCH_NEWS_ERROR,
-  RESET_FETCH_NEWS,
-  RESET_FETCH_EXHIBITIONS,
+  FETCH_COLLECTION_DESCRIPTION,
+  FETCH_COLLECTION_DESCRIPTION_ERROR,
+  FETCH_EXHIBITIONS,
+  FETCH_EXHIBITIONS_ERROR,
   FETCH_EXHIBITION_ARTICLE,
   FETCH_EXHIBITION_ARTICLE_ERROR,
+  FETCH_ITEM_FROM_COLLECTION,
+  FETCH_ITEM_FROM_COLLECTION_ERROR,
+  FETCH_NEDELOV_MODAL,
+  FETCH_NEWS,
+  FETCH_NEWS_ERROR,
+  FETCH_REDIRECT_MODAL,
+  FETCH_RIM_BUILDING_IMAGES,
+  FETCH_ROUTES,
+  FETCH_SERVICES,
+  FETCH_TEAM,
+  FETCH_TEAM_MODAL,
+  RESET_FETCH_EXHIBITIONS,
+  RESET_FETCH_NEWS,
 } from "./types";
 
-import streams from "../api/streams";
 import publicStreams from "../api/public";
+import streams from "../api/streams";
+
 //Create Actions
 
 export const fetchNews =
-  (id, page = 1, number = 10) =>
+  (id, page = 1, number = 100) =>
   async (dispatch) => {
     try {
       const response = await streams.get(
@@ -61,28 +68,53 @@ export const fetchRoutes = () => async (dispatch) => {
 
 export const fetchCategories = () => async (dispatch) => {
   const response = await streams.get(
-    "/categories?_fields=id,name,slug,parent&per_page=100"
+    // "/categories?_fields=id,name,slug,parent,count&per_page=100"
+    "/categories?_fields=id,name,slug,parent,count&per_page=100"
   );
   dispatch({ type: FETCH_CATEGORIES, payload: response.data });
 };
 
-export const fetchCollectionsMain = () => async (dispatch) => {
-  const response = await streams.get("/collections-main.json");
+export const fetchCollectionsMain = (parent) => async (dispatch) => {
+  const response = await streams.get(
+    `/categories?parent=${parent}&_fields=id,name,slug,description&page=1&per_page=50`
+  );
   dispatch({ type: FETCH_COLLECTIONS_MAIN, payload: response.data });
 };
 
-export const fetchCollectionsVirtual = () => async (dispatch) => {
-  const response = await streams.get("/collections-virtual.json");
+export const fetchCollectionsVirtual = (parent) => async (dispatch) => {
+  const response = await streams.get(
+    `/categories?parent=${parent}&_fields=id,name,slug,description&page=1&per_page=50`
+  );
   dispatch({ type: FETCH_COLLECTIONS_VIRTUAL, payload: response.data });
 };
 
-export const fetchCollections = (collectionsType) => async (dispatch) => {
-  const response = await streams.get(`/collections-${collectionsType}.json`);
-  dispatch({ type: `FETCH_COLLECTIONS_BYTYPE`, payload: response.data });
-};
+export const fetchCollections =
+  (slugId, page = 1, number = 100) =>
+  async (dispatch) => {
+    try {
+      const response = await streams.get(
+        `/posts?categories=${slugId}&_fields=id,date_gmt,slug,title,content,_links,_embedded&_embed&page=${page}&per_page=${number}`
+      );
+      dispatch({ type: FETCH_COLLECTIONS_BYTYPE, payload: response.data });
+    } catch (error) {
+      dispatch({ type: FETCH_COLLECTIONS_BYTYPE_ERROR, payload: error });
+    }
+  };
 
+export const fetchCollectionDescription =
+  (collectionSlug) => async (dispatch) => {
+    try {
+      const response = await streams.get(
+        `/posts?slug=${collectionSlug}&_fields=id,title,content`
+      );
+      dispatch({ type: FETCH_COLLECTION_DESCRIPTION, payload: response.data });
+    } catch (error) {
+      dispatch({ type: FETCH_COLLECTION_DESCRIPTION_ERROR, payload: error });
+    }
+  };
+// api-staging.museumsmolyan.eu/wp-json/wp/v2/posts?categories=32&_fields=id,date_gmt,slug,title,content,_links,_embedded&_embed&page=1&per_page=10
 export const fetchExhibitions =
-  (id, page = 1, number = 10) =>
+  (id, page = 1, number = 100) =>
   async (dispatch) => {
     try {
       const response = await streams.get(
@@ -120,14 +152,6 @@ export const fetchTeam = () => async (dispatch) => {
   dispatch({ type: FETCH_TEAM, payload: response.data });
 };
 
-// export const fetchArticle = (id) => async (dispatch) => {
-//   // const response = await streams.get(`/streamy/${id}`);
-//   const response = await streams.get(
-//     `/posts?slug={url-slug}&_fields=id,date_gmt,slug,title,content,excerpt,event_date,event_place,archive,_links,_embedded&_embed`
-//   );
-//   dispatch({ type: FETCH_ARTICLE, payload: response.data });
-// };
-
 export const fetchArticle = (urlSlug) => async (dispatch) => {
   try {
     const response = await streams.get(
@@ -136,6 +160,17 @@ export const fetchArticle = (urlSlug) => async (dispatch) => {
     dispatch({ type: FETCH_ARTICLE, payload: response.data });
   } catch (error) {
     dispatch({ type: FETCH_NEWS_ERROR, payload: error });
+  }
+};
+
+export const fetchItemFromCollection = (urlSlug) => async (dispatch) => {
+  try {
+    const response = await streams.get(
+      `/posts?slug=${urlSlug}&_fields=id,date_gmt,slug,title,content,excerpt,collection_item_dating,collection_item_inventory_number,collection_item_location,collection_item_material,collection_item_size,_links,_embedded&_embed`
+    );
+    dispatch({ type: FETCH_ITEM_FROM_COLLECTION, payload: response.data[0] });
+  } catch (error) {
+    dispatch({ type: FETCH_ITEM_FROM_COLLECTION_ERROR, payload: error });
   }
 };
 

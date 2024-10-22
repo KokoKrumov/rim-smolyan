@@ -75,11 +75,13 @@ export function escapeHtml(unsafeHtml: string) {
     .replace("'", "&#039;");
 }
 
-export function checkIfValueExistInIntl(val: any, props: any) {
-  const { intl } = props;
-  if (!!props.intl.messages[`${val}`]) {
+export function checkIfValueExistInIntl(val: any, intl: any) {
+  if (!!intl.messages[`${val}`]) {
+    //if there is key:value in the translations
     return { __html: intl.formatMessage({ id: val }) };
   } else {
+    // if there isn't values in the translations then the default state is the given value
+    // probably will return the raw key, slug, etc.
     return { __html: val };
   }
 }
@@ -116,7 +118,7 @@ export function setPrevCollectionFromMain(collections: any, type: string) {
   }
 }
 
-export function getItemBySlug(slug: string, list: any) {
+export function getItemBySlug(slug: any, list: any) {
   return list.find((item: { slug: string }) => item.slug === slug);
 }
 
@@ -154,25 +156,30 @@ export function getDateMonthForArticleCard(date: string, isISO = false) {
   return month;
 }
 
-export function extarctIdAndCategories(
+export function slugSanitize(string: string) {
+  const paramsInURl = string.split("/");
+  const lastParam = paramsInURl.pop() || paramsInURl.pop();
+  return lastParam;
+}
+
+export function extractIdAndCategories(
   slug: string,
   listFrom: string,
   props: any,
   propsCategories: any
 ): any {
   if (props) {
-    let categories, slugItem, slugId, slugSanatize;
-    slugSanatize = slug.replace("/", "");
+    let categories, slugItem, slugId, slugItemName, pureSlug, removeChar, regex;
+    pureSlug = slugSanitize(slug);
     if (listFrom === "storage") {
       const categoriesFromStorage = sessionStorage.getItem("categories");
       categories = JSON.parse(categoriesFromStorage || "{}");
-      slugItem = getItemBySlug(slugSanatize, categories);
-      slugId = slugItem.id;
     } else {
       categories = propsCategories;
-      slugItem = getItemBySlug(slugSanatize, categories);
-      slugId = slugItem.id;
     }
-    return { slugId, categories };
+    slugItem = getItemBySlug(pureSlug, categories);
+    slugId = slugItem && slugItem.id;
+    slugItemName = slugItem && slugItem.name;
+    return { slugId, slugItemName, categories, pureSlug };
   }
 }

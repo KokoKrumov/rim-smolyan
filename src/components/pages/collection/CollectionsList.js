@@ -1,10 +1,9 @@
-import React, { Component } from "react";
-import { injectIntl } from "react-intl";
 import CardCollections from "../../cards/cardCollections";
+import React from "react";
 import Spinner from "react-bootstrap/Spinner";
+import { injectIntl } from "react-intl";
 
 function CollectionsList(props) {
-  const { intl } = props;
   return (
     <div className={`card-columns card-columns-${props.cols}`}>
       {props.collections ? (

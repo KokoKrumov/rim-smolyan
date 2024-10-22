@@ -10,6 +10,7 @@ import CategoriesReducer from "./CategoriesReducer";
 import CollectionsReducer from "./CollectionsReducer";
 import exhibitionsReducer from "./ExhibitionsReducer";
 import exhibitionsErrorReducer from "./ExhibitionsErrorReducer";
+import itemFomCollectionReducer from "./ItemFomCollectionReducer";
 import exhibitionArticleReducer from "./ExhibitionArticleReducer";
 import RimBuildingImagesReducer from "./RimBuildingImagesReducer";
 
@@ -27,4 +28,5 @@ export default combineReducers({
   exhibitionsError: exhibitionsErrorReducer,
   rimBuildingImages: RimBuildingImagesReducer,
   exhibitionArticle: exhibitionArticleReducer,
+  itemFomCollection: itemFomCollectionReducer,
 });

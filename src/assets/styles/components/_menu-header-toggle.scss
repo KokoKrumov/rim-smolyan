@@ -1,7 +1,4 @@
 .navbar-toggler {
-	&.collapsed {
-		//margin-top: -1rem;
-	}
 
 	margin-top: -0.8rem;
 	margin-right: -1rem;
@@ -98,11 +95,6 @@
 	&--slider.is-active &-inner {
 		transform: translate3d(0, 17px, 0) rotate(45deg);
 	}
-
-	//&--slider.is-active &-inner:after {
-	//	top: auto;
-	//	bottom: -20px;
-	//}
 
 	&.is-active &-inner, &.is-active &-inner:after, &.is-active &-inner:before {
 		background-color: #fff;

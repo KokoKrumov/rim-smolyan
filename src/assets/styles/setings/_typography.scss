@@ -40,8 +40,6 @@
 }
 
 .h2 {
-    /* H2 */
-
     font-family: $font-cormorant-regular;
     @include font-size(48px);
     @include line-height(52px);
@@ -106,12 +104,6 @@
     font-family: $font-cormorant-regular;
     @include font-size(38px);
     @include line-height(52px);
-
-
-    @include media-breakpoint-down(md) {
-        //@include font-size(15px);
-        //@include line-height(25px);
-    }
 }
 
 .paragraph-2 {
@@ -121,11 +113,17 @@
     letter-spacing: 0.01em;
     opacity: 0.9;
 
+    strong {
+        font-family: $font-acari-bold;
+    }
+
 
     @include media-breakpoint-down(md) {
         @include font-size(15px);
         @include line-height(25px);
     }
+
+
 }
 
 .paragraph-3 {

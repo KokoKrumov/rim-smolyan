@@ -62,7 +62,6 @@ function CarouselImages({ listImages }) {
         <div className="carousel-images__wrap">
           <Carousel
             ref={(ref) => (carousel = ref)}
-            // isRTL={false}
             itemsToShow={1}
             initialActiveIndex={0}
             showArrows={false}

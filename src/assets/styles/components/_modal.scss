@@ -109,10 +109,6 @@
 				column-gap: 30px;
 			}
 
-			@include media-breakpoint-down(md) {
-				//margin-right: 0;
-			}
-
 		}
 
 		@include media-breakpoint-down(md) {

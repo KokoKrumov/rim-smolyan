@@ -42,11 +42,7 @@
 		}
 
 		@include media-breakpoint-down(md) {
-
-			@include padding(100px, 0px, 130px, 0px);
-			.hero-bg {
-				//@include padding()
-			}
+		@include padding(100px, 0px, 130px, 0px);
 		}
 	}
 

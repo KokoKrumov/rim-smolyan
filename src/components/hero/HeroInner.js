@@ -1,55 +1,68 @@
-import React, { Component } from "react";
 import Container from "react-bootstrap/cjs/Container";
-import { injectIntl } from "react-intl";
 import { Link } from "react-router-dom";
+import React from "react";
 import { checkIfValueExistInIntl } from "../../utilities/browser";
+import { injectIntl } from "react-intl";
 
-export default injectIntl(function HeroInner(props) {
-  const { intl } = props;
+export default injectIntl(function HeroInner({
+  intl,
+  breadcrumbs,
+  backLinkToUrl,
+  labelTitle,
+  subtitle,
+  title,
+  subtitleLg,
+  scrollOnClick,
+  arrowBottom,
+}) {
   return (
-    <div className={`hero-inner__wrap${props.backLink ? "__sm" : ""}`}>
+    <div className={`hero-inner__wrap${backLinkToUrl ? "__sm" : ""}`}>
       <Container>
-        {props.breadcrumbs ? (
+        {breadcrumbs ? (
           <Container>
             <div className="breadcrumb__wrap">
               <ol className="breadcrumb">
                 <li className="breadcrumb-item">
                   <a
                     className="link"
-                    href={`/${props.breadcrumbs.parentLink}`}
+                    href={`/${breadcrumbs.parentLink}`}
                     itemProp="url"
                     target=""
                     rel="noopener nofollow noreferrer"
                     dangerouslySetInnerHTML={{
                       __html: intl.formatMessage({
-                        id: props.breadcrumbs.parent,
+                        id: breadcrumbs.parent,
                       }),
                     }}
                   />
                 </li>
-                <li className="breadcrumb-item active">
-                  {props.breadcrumbs.child.title}
-                </li>
+                <li
+                  className="breadcrumb-item active"
+                  dangerouslySetInnerHTML={checkIfValueExistInIntl(
+                    breadcrumbs.child,
+                    intl
+                  )}
+                />
               </ol>
             </div>
           </Container>
         ) : null}
-        {props.labelTitle ? (
+        {labelTitle ? (
           <div>
             <p
               className="h-sup"
               dangerouslySetInnerHTML={checkIfValueExistInIntl(
-                props.labelTitle,
-                props
+                labelTitle,
+                intl
               )}
             />
           </div>
         ) : null}
-        {props.backLink ? (
+        {backLinkToUrl ? (
           <div className="back-link">
             <Link
               className="link cta_outline cta_outline__dark"
-              to="/about-us"
+              to={`/${backLinkToUrl}`}
               itemProp="url"
               target=""
               dangerouslySetInnerHTML={{
@@ -66,38 +79,38 @@ export default injectIntl(function HeroInner(props) {
         ) : null}
 
         <div>
-          {props.title ? (
+          {title ? (
             <h1
               className="h1"
               dangerouslySetInnerHTML={{
-                __html: intl.formatMessage({ id: props.title }),
+                __html: intl.formatMessage({ id: title }),
               }}
             />
           ) : null}
 
-          {props.subtitle ? (
+          {subtitle ? (
             <p
               className="subtitle"
               dangerouslySetInnerHTML={{
-                __html: intl.formatMessage({ id: props.subtitle }),
+                __html: intl.formatMessage({ id: subtitle }),
               }}
             ></p>
           ) : null}
-          {props.subtitleLg ? (
+          {subtitleLg ? (
             <p
               className="paragraph-1"
               dangerouslySetInnerHTML={checkIfValueExistInIntl(
-                props.subtitleLg,
-                props
+                subtitleLg,
+                intl
               )}
             />
           ) : null}
         </div>
-        {props.arrowBottom && (
+        {arrowBottom && (
           <div className="back-link arrow-bottom__wrap">
             <div
               className="link cta_outline cta_outline__dark cursor-pointer arrow-bottom"
-              onClick={props.scrollOnClick}
+              onClick={scrollOnClick}
               dangerouslySetInnerHTML={{
                 __html:
                   "<spam>" +

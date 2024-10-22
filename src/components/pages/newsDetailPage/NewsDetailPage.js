@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import { fetchArticle, fetchNews } from "../../../actions";
+
 import Article from "../../Article/Article";
-import { injectIntl } from "react-intl";
 import NotFound from "../NotFound";
-import { extarctIdAndCategories } from "../../../utilities/browser";
 import Spinner from "react-bootstrap/Spinner";
+import { connect } from "react-redux";
+import { extractIdAndCategories } from "../../../utilities/browser";
+import { injectIntl } from "react-intl";
 
 class NewsDetailPage extends Component {
   state = {
@@ -37,7 +38,7 @@ class NewsDetailPage extends Component {
         }
       })
       .then(() => {
-        const { slugId } = extarctIdAndCategories(
+        const { slugId } = extractIdAndCategories(
           id,
           listFrom,
           props,
