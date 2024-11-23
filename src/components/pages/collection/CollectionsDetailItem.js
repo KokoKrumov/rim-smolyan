@@ -28,7 +28,7 @@ function CollectionsDetailItem({
     match &&
     match.url.replace("detail", "intro").split("/").slice(0, -1).join("/");
   const isDesktopResolution = useMatchMedia("(min-width:992px)", true);
-  
+
   useEffect(() => {
     fetchItemFromCollection(itemName);
   }, [fetchItemFromCollection, itemName]);
@@ -187,7 +187,7 @@ function CollectionsDetailItem({
             </Container>
           </section>
           <hr className="mt-60" />
-          <section className={!isDesktopResolution && "collections-item"}>
+          <section className={!isDesktopResolution ? "collections-item" : ""}>
             <Container>
               <Row>
                 <Col md={6}>

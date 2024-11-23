@@ -35,12 +35,12 @@ import { injectIntl } from "react-intl";
 
 class App extends Component {
   componentDidMount() {
-    if (!sessionStorage.getItem("categories")) {
+    // if (!sessionStorage.getItem("categories")) {
       this.props.fetchCategories().then(() => {
         const categoriesValues = this.props.categories;
         sessionStorage.setItem("categories", JSON.stringify(categoriesValues));
       });
-    }
+    // }
   }
 
   render() {

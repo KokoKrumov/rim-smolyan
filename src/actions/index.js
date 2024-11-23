@@ -76,14 +76,14 @@ export const fetchCategories = () => async (dispatch) => {
 
 export const fetchCollectionsMain = (parent) => async (dispatch) => {
   const response = await streams.get(
-    `/categories?parent=${parent}&_fields=id,name,slug,description&page=1&per_page=50`
+    `/categories?parent=${parent}&_fields=id,name,slug,description&page=1&per_page=100`
   );
   dispatch({ type: FETCH_COLLECTIONS_MAIN, payload: response.data });
 };
 
 export const fetchCollectionsVirtual = (parent) => async (dispatch) => {
   const response = await streams.get(
-    `/categories?parent=${parent}&_fields=id,name,slug,description&page=1&per_page=50`
+    `/categories?parent=${parent}&_fields=id,name,slug,description&page=1&per_page=100`
   );
   dispatch({ type: FETCH_COLLECTIONS_VIRTUAL, payload: response.data });
 };

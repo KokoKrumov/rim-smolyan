@@ -37,7 +37,7 @@ class NavigateThroughCollections extends Component {
       props,
       propsCategories
     );
-    if (!sessionStorage.getItem(pureSlug)) {
+    if (typeof slugId !== "undefined") {
       this.props
         .fetchCollectionsMain(slugId)
         .then(() => {
@@ -55,52 +55,53 @@ class NavigateThroughCollections extends Component {
             isLoading: false,
           });
         });
-    } else {
-      this.setState({
-        collection: sortById(JSON.parse(sessionStorage.getItem(pureSlug))),
-        isLoading: false,
-      });
     }
+    // else {
+    //   this.setState({
+    //     collection: sortById(JSON.parse(sessionStorage.getItem(pureSlug))),
+    //     isLoading: false,
+    //   });
+    // }
   };
 
-  componentDidMount() {
-    if (
-      sessionStorage.getItem("categories") &&
-      !isEqual(
-        JSON.parse(sessionStorage.getItem("categories")),
-        this.state.categories
-      )
-    ) {
-      this.setState({
-        isLoading: true,
-      });
-      this.fetchData(
-        this.state.collectionType,
-        "storage",
-        this.props,
-        this.state.categories
-      );
-    }
+  // componentDidMount() {
+  //   if (
+  //     sessionStorage.getItem("categories") &&
+  //     !isEqual(
+  //       JSON.parse(sessionStorage.getItem("categories")),
+  //       this.state.categories
+  //     )
+  //   ) {
+  //     this.setState({
+  //       isLoading: true,
+  //     });
+  //     this.fetchData(
+  //       this.state.collectionType,
+  //       "storage",
+  //       this.props,
+  //       this.state.categories
+  //     );
+  //   }
 
-    if (
-      this.state.currentIndex === undefined &&
-      this.state.collection.length !== 0
-    ) {
-      const { currentIndex, prevIndex, nextItem } = navigationCollectionItems(
-        this.state.collection,
-        slugSanitize(window.location.pathname)
-      );
-      this.setState({
-        currentIndex,
-        prevIndex,
-        nextItem,
-      });
-    }
-  }
+  //   if (
+  //     this.state.currentIndex === undefined &&
+  //     this.state.collection.length !== 0
+  //   ) {
+  //     const { currentIndex, prevIndex, nextItem } = navigationCollectionItems(
+  //       this.state.collection,
+  //       slugSanitize(window.location.pathname)
+  //     );
+  //     this.setState({
+  //       currentIndex,
+  //       prevIndex,
+  //       nextItem,
+  //     });
+  //   }
+  // }
 
   componentDidUpdate() {
     if (
-      !sessionStorage.getItem("categories") &&
+      // !sessionStorage.getItem("categories") &&
       this.props &&
       this.props.categories &&
       !isEqual(this.props.categories, this.state.categories)

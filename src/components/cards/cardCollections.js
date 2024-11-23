@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 
 import { injectIntl } from "react-intl";
 
+const noImage =
+  "https://api-staging.museumsmolyan.eu/wp-content/uploads/2024/10/no-image.png";
+
 function CardCollections(props) {
   const { intl, item, hostLocation } = props;
   const [itemObj, setItemObj] = useState({
@@ -15,7 +18,10 @@ function CardCollections(props) {
       if (item.hasOwnProperty("description")) {
         setItemObj({
           title: item.name,
-          itemImg: JSON.parse(item.description).image,
+          itemImg:
+            item.description.length !== 0
+              ? JSON.parse(item.description).image
+              : noImage,
           itemImgAlt: item.slug,
         });
       } else {

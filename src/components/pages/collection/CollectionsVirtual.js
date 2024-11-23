@@ -39,7 +39,7 @@ class Collections extends Component {
       props,
       propsCategories
     );
-    if (!sessionStorage.getItem(pureSlug)) {
+    // if (!sessionStorage.getItem(pureSlug)) {
       this.props
         .fetchCollectionsVirtual(slugId)
         .then(() => {
@@ -57,37 +57,44 @@ class Collections extends Component {
             isLoading: false,
           });
         });
-    } else {
-      this.setState({
-        collectionsVirtual: JSON.parse(sessionStorage.getItem(pureSlug)),
-        isLoading: false,
-      });
-    }
+    // } else {
+    //   this.setState({
+    //     collectionsVirtual: JSON.parse(sessionStorage.getItem(pureSlug)),
+    //     isLoading: false,
+    //   });
+    // }
   };
 
-  componentDidMount() {
-    if (
-      sessionStorage.getItem("categories") &&
-      !isEqual(
-        JSON.parse(sessionStorage.getItem("categories")),
-        this.state.categories
-      )
-    ) {
-      this.setState({
-        isLoading: true,
-      });
-      this.fetchData(
-        this.location.pathname,
-        "storage",
-        this.props,
-        this.state.categories
-      );
-    }
-  }
+  // componentDidMount() {
+  //   if (
+  //     this.props &&
+  //     this.props.categories
+  //     //   sessionStorage.getItem("categories") &&
+  //     //   !isEqual(
+  //     //     JSON.parse(sessionStorage.getItem("categories")),
+  //     //     this.state.categories
+  //     //   )
+  //   ) {
+  //     this.setState({
+  //       isLoading: true,
+  //     });
+  //     console.log("%c this.props,", "color: orange", this.props);
+  //     console.log("%c this.state", "color: orange", this.state);
+  //     this.fetchData(
+  //       this.location.pathname,
+  //       "props",
+  //       this.props,
+  //       this.props.categories
+  //     );
+  //     this.setState({
+  //       isLoading: false,
+  //     });
+  //   }
+  // }
 
   componentDidUpdate() {
     if (
-      !sessionStorage.getItem("categories") &&
+      // !sessionStorage.getItem("categories") &&
       this.props &&
       this.props.categories &&
       !isEqual(this.props.categories, this.state.categories)

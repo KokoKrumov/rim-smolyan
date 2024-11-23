@@ -89,6 +89,8 @@ class NewsPage extends Component {
         .then(() => {
           this.setState({
             categories: categories,
+            currentNews: this.props.news,
+            news: [...this.state.news, ...this.props.news],
           });
         })
         .then(() => {

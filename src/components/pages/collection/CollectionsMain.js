@@ -39,55 +39,55 @@ class Collections extends Component {
       props,
       propsCategories
     );
-    if (!sessionStorage.getItem(pureSlug)) {
-      this.props
-        .fetchCollectionsMain(slugId)
-        .then(() => {
-          this.setState({
-            collectionsMain: this.props.collectionsMain,
-          });
-
-          sessionStorage.setItem(
-            pureSlug,
-            JSON.stringify(this.props.collectionsMain)
-          );
-        })
-        .then(() => {
-          this.setState({
-            isLoading: false,
-          });
+    // if (!sessionStorage.getItem(pureSlug)) {
+    this.props
+      .fetchCollectionsMain(slugId)
+      .then(() => {
+        this.setState({
+          collectionsMain: this.props.collectionsMain,
         });
-    } else {
-      this.setState({
-        collectionsMain: JSON.parse(sessionStorage.getItem(pureSlug)),
-        isLoading: false,
+
+        sessionStorage.setItem(
+          pureSlug,
+          JSON.stringify(this.props.collectionsMain)
+        );
+      })
+      .then(() => {
+        this.setState({
+          isLoading: false,
+        });
       });
-    }
+    // } else {
+    //   this.setState({
+    //     collectionsMain: JSON.parse(sessionStorage.getItem(pureSlug)),
+    //     isLoading: false,
+    //   });
+    // }
   };
 
-  componentDidMount() {
-    if (
-      sessionStorage.getItem("categories") &&
-      !isEqual(
-        JSON.parse(sessionStorage.getItem("categories")),
-        this.state.categories
-      )
-    ) {
-      this.setState({
-        isLoading: true,
-      });
-      this.fetchData(
-        this.location.pathname,
-        "storage",
-        this.props,
-        this.state.categories
-      );
-    }
-  }
+  // componentDidMount() {
+  //   if (
+  //     sessionStorage.getItem("categories") &&
+  //     !isEqual(
+  //       JSON.parse(sessionStorage.getItem("categories")),
+  //       this.state.categories
+  //     )
+  //   ) {
+  //     this.setState({
+  //       isLoading: true,
+  //     });
+  //     this.fetchData(
+  //       this.location.pathname,
+  //       "storage",
+  //       this.props,
+  //       this.state.categories
+  //     );
+  //   }
+  // }
 
   componentDidUpdate() {
     if (
-      !sessionStorage.getItem("categories") &&
+      // !sessionStorage.getItem("categories") &&
       this.props &&
       this.props.categories &&
       !isEqual(this.props.categories, this.state.categories)

@@ -45,41 +45,46 @@ class ExhibitionsPage extends Component {
     this.props.fetchExhibitions(slugId, page, perPage).then(() => {
       this.setState({
         categories: categories,
+        currentExhibitions: this.props.exhibitions,
+        exhibitions: this.props.exhibitions,
       });
     });
   };
 
-  componentDidMount() {
-    this.props.resetFetchExhibitions();
-    // this.elScroll.executeScroll();
-    // react can't update when there are changes in storage,
-    // however, the storage contains "categories" from the first load,
-    // so we have to check the storage when component is mounting
-    if (
-      sessionStorage.getItem("categories") &&
-      !isEqual(
-        JSON.parse(sessionStorage.getItem("categories")),
-        this.state.categories
-      )
-    ) {
-      this.fetchData(
-        "/temporary-exhibitions",
-        1,
-        100,
-        "storage",
-        this.props,
-        this.state.categories
-      );
-    }
-  }
+  // componentDidMount() {
+  //   this.props.resetFetchExhibitions();
+  //   // this.elScroll.executeScroll();
+  //   // react can't update when there are changes in storage,
+  //   // however, the storage contains "categories" from the first load,
+  //   // so we have to check the storage when component is mounting
+  //   if (
+  //     !this.state.categories
+  //     //   sessionStorage.getItem("categories") &&
+  //     // !isEqual(
+  //     //   JSON.parse(sessionStorage.getItem("categories")),
+
+  //     // )
+  //   ) {
+  //     console.log("%c ping", "color: blue");
+  //     this.fetchData(
+  //       "/temporary-exhibitions",
+  //       1,
+  //       100,
+  //       "storage",
+  //       this.props,
+  //       this.state.categories
+  //     );
+  //   }
+  // }
 
   componentDidUpdate() {
     if (
-      !sessionStorage.getItem("categories") &&
+      // !sessionStorage.getItem("categories") &&
       this.props &&
       this.props.categories &&
       !isEqual(this.props.categories, this.state.categories)
     ) {
+      console.log("%c ping", "color: yellow");
       this.fetchData(
         "/temporary-exhibitions",
         1,
@@ -90,15 +95,15 @@ class ExhibitionsPage extends Component {
       );
     }
 
-    if (
-      this.props.exhibitions &&
-      !isEqual(this.props.exhibitions, this.state.currentExhibitions)
-    ) {
-      this.setState({
-        currentExhibitions: this.props.exhibitions,
-        exhibitions: this.props.exhibitions,
-      });
-    }
+    // if (
+    //   this.props.exhibitions &&
+    //   !isEqual(this.props.exhibitions, this.state.currentExhibitions)
+    // ) {
+    //   this.setState({
+    //     currentExhibitions: this.props.exhibitions,
+    //     exhibitions: this.props.exhibitions,
+    //   });
+    // }
   }
 
   render() {

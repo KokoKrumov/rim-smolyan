@@ -105,7 +105,7 @@ class CollectionsIntroAndGallery extends Component {
 
   componentDidUpdate() {
     if (
-      !sessionStorage.getItem("categories") &&
+      // !sessionStorage.getItem("categories") &&
       this.props &&
       this.props.categories &&
       !isEqual(this.props.categories, this.state.categories)
@@ -123,27 +123,27 @@ class CollectionsIntroAndGallery extends Component {
     }
   }
 
-  componentDidMount() {
-    if (
-      sessionStorage.getItem("categories") &&
-      !isEqual(
-        JSON.parse(sessionStorage.getItem("categories")),
-        this.state.categories
-      )
-    ) {
-      this.setState({
-        isLoading: true,
-      });
-      this.fetchData(
-        this.location.pathname,
-        "storage",
-        this.props,
-        this.state.categories
-      );
+  // componentDidMount() {
+  //   if (
+  //     sessionStorage.getItem("categories") &&
+  //     !isEqual(
+  //       JSON.parse(sessionStorage.getItem("categories")),
+  //       this.state.categories
+  //     )
+  //   ) {
+  //     this.setState({
+  //       isLoading: true,
+  //     });
+  //     this.fetchData(
+  //       this.location.pathname,
+  //       "storage",
+  //       this.props,
+  //       this.state.categories
+  //     );
 
-      // this.hostLocation = this.location.pathname.split("/")[0];
-    }
-  }
+  //     // this.hostLocation = this.location.pathname.split("/")[0];
+  //   }
+  // }
 
   pageContentExist = (collectionExist) => {
     const { intl } = this.props;
@@ -343,6 +343,7 @@ class CollectionsIntroAndGallery extends Component {
               </Container>
             </section>
           </main>
+
           <NavigateThroughCollections
             collectionType={this.hostLocation}
             currentIndex={"this.location.pathname"}
