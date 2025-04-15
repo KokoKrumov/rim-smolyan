@@ -52,7 +52,8 @@
     "start:dev": "env-cmd -f ./environments/.dev.env react-scripts start",
     "build:dev": "env-cmd -f ./environments/.dev.env npm run-script build",
     "start:prod": "env-cmd -f ./environments/.prod.env react-scripts --openssl-legacy-provider start",
-    "build:prod": "env-cmd -f ./environments/.prod.env npm run-script --openssl-legacy-provider build"
+    "build:prod": "env-cmd -f ./environments/.prod.env npm run-script --openssl-legacy-provider build",
+    "build:staging": "env-cmd -f ./environments/.staging.env npm run-script --openssl-legacy-provider build"
   },
   "eslintConfig": {
     "extends": "react-app"
