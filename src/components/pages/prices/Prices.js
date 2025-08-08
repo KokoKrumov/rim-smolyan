@@ -20,19 +20,8 @@ class Prices extends Component {
                             <Row>
                                 <Col xs={12} sm={8}>
                                     <h5 className='prices-title'
-                                        dangerouslySetInnerHTML={{__html: intl.formatMessage({id: 'prices-entrance-tours'})}}
+                                        dangerouslySetInnerHTML={{__html: intl.formatMessage({id: 'prices-content'})}}
                                     />
-                                    <div
-                                        dangerouslySetInnerHTML={{__html: intl.formatMessage({id: 'prices-entrance-tours-text'})}}
-                                    />
-
-                                    <h5 className='prices-title'
-                                        dangerouslySetInnerHTML={{__html: intl.formatMessage({id: 'prices-services-charges'})}}
-                                    />
-                                    <div
-                                        dangerouslySetInnerHTML={{__html: intl.formatMessage({id: 'prices-services-charges-text'})}}
-                                    />
-
                                 </Col>
                             </Row>
                         </Container>
