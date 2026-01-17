@@ -7,7 +7,6 @@ import Row from "react-bootstrap/Row";
 import Spinner from "react-bootstrap/cjs/Spinner";
 import arrowLeftLong from "../../assets/images/arrow-left-long.svg";
 import arrowRightLong from "../../assets/images/arrow-right-long.svg";
-import { checkIfValueExistInIntl } from "../../utilities/browser";
 import { connect } from "react-redux";
 import { fetchCollectionsMain } from "../../actions";
 import { injectIntl } from "react-intl";
@@ -30,6 +29,33 @@ class NavigateThroughCollections extends Component {
 
   location = this.props.location;
 
+  calculateNavigation = () => {
+    if (this.state.collection.length !== 0) {
+      const currentItemSlug = slugSanitize(window.location.pathname);
+      const { currentIndex, prevIndex, nextItem } = navigationCollectionItems(
+        this.state.collection,
+        currentItemSlug
+      );
+      
+      // If current item not found (currentIndex === -1), navigationCollectionItems 
+      // may return undefined values, so we handle this gracefully
+      if (currentIndex === -1 && this.state.collection.length > 0) {
+        // If current item not found, show first and last items as navigation
+        this.setState({
+          currentIndex: -1,
+          prevIndex: this.state.collection[this.state.collection.length - 1],
+          nextIndex: this.state.collection[0],
+        });
+      } else {
+        this.setState({
+          currentIndex: currentIndex,
+          prevIndex: prevIndex,
+          nextIndex: nextItem,
+        });
+      }
+    }
+  };
+
   fetchData = (id, listFrom, props, propsCategories) => {
     const { slugId, slugItemName, pureSlug } = extractIdAndCategories(
       id,
@@ -38,121 +64,169 @@ class NavigateThroughCollections extends Component {
       propsCategories
     );
     if (typeof slugId !== "undefined") {
+      this.setState({
+        isLoading: true,
+      });
       this.props
         .fetchCollectionsMain(slugId)
         .then(() => {
+          const sortedCollection = sortById(this.props.collectionsMain);
           this.setState({
-            collection: sortById(this.props.collectionsMain),
+            collection: sortedCollection,
           });
 
           sessionStorage.setItem(
             pureSlug,
             JSON.stringify(this.props.collectionsMain)
           );
+
+          // Calculate navigation after collection is set
+          this.calculateNavigation();
         })
         .then(() => {
           this.setState({
             isLoading: false,
           });
+        })
+        .catch(() => {
+          this.setState({
+            isLoading: false,
+          });
         });
     }
-    // else {
-    //   this.setState({
-    //     collection: sortById(JSON.parse(sessionStorage.getItem(pureSlug))),
-    //     isLoading: false,
-    //   });
-    // }
   };
 
-  // componentDidMount() {
-  //   if (
-  //     sessionStorage.getItem("categories") &&
-  //     !isEqual(
-  //       JSON.parse(sessionStorage.getItem("categories")),
-  //       this.state.categories
-  //     )
-  //   ) {
-  //     this.setState({
-  //       isLoading: true,
-  //     });
-  //     this.fetchData(
-  //       this.state.collectionType,
-  //       "storage",
-  //       this.props,
-  //       this.state.categories
-  //     );
-  //   }
+  loadCollectionsData = () => {
+    const { collectionType } = this.state;
+    const pureSlug = slugSanitize(collectionType);
 
-  //   if (
-  //     this.state.currentIndex === undefined &&
-  //     this.state.collection.length !== 0
-  //   ) {
-  //     const { currentIndex, prevIndex, nextItem } = navigationCollectionItems(
-  //       this.state.collection,
-  //       slugSanitize(window.location.pathname)
-  //     );
-  //     this.setState({
-  //       currentIndex,
-  //       prevIndex,
-  //       nextItem,
-  //     });
-  //   }
-  // }
+    // Check sessionStorage for cached collectionsMain (this is the source of truth)
+    // Redux state.collections.main can be overwritten by other components
+    const cachedCollections = sessionStorage.getItem(pureSlug);
+    if (cachedCollections) {
+      try {
+        const parsedCollections = JSON.parse(cachedCollections);
+        const sortedCollection = sortById(parsedCollections);
+        if (!isEqual(sortedCollection, this.state.collection)) {
+          this.setState({
+            collection: sortedCollection,
+          });
+          this.calculateNavigation();
+        }
+        return;
+      } catch (e) {
+        // Invalid cache, continue to fetch
+      }
+    }
 
-  componentDidUpdate() {
+    // Get categories from props or sessionStorage
+    let categories = this.props.categories;
+    if (!categories || categories.length === 0) {
+      const categoriesFromStorage = sessionStorage.getItem("categories");
+      if (categoriesFromStorage) {
+        try {
+          categories = Object.values(JSON.parse(categoriesFromStorage));
+        } catch (e) {
+          // Invalid cache, return early
+          return;
+        }
+      } else {
+        // No categories available yet, wait for componentDidUpdate
+        return;
+      }
+    }
+
+    // Fetch from API if categories are available
+    if (categories && categories.length > 0) {
+      this.fetchData(collectionType, "props", this.props, categories);
+    }
+  };
+
+  componentDidMount() {
+    this.loadCollectionsData();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    // Handle collectionType prop changes
+    if (prevProps.collectionType !== this.props.collectionType) {
+      this.setState({
+        collectionType: this.props.collectionType,
+        collection: [],
+        currentIndex: undefined,
+        nextIndex: undefined,
+        prevIndex: undefined,
+      });
+      this.loadCollectionsData();
+    } else if (prevState.collectionType !== this.state.collectionType) {
+      this.setState({
+        collection: [],
+        currentIndex: undefined,
+        nextIndex: undefined,
+        prevIndex: undefined,
+      });
+      this.loadCollectionsData();
+    }
+
+    // Handle categories changes (from Redux)
     if (
-      // !sessionStorage.getItem("categories") &&
       this.props &&
       this.props.categories &&
       !isEqual(this.props.categories, this.state.categories)
     ) {
       this.setState({
         categories: this.props.categories,
-        isLoading: true,
       });
-      this.fetchData(
-        this.state.collectionType,
-        "props",
-        this.props,
-        this.props.categories
-      );
+      // Only fetch if we don't have collection data yet
+      if (this.state.collection.length === 0) {
+        this.loadCollectionsData();
+      }
     }
 
+    // Calculate navigation when collection changes
     if (
       this.state.currentIndex === undefined &&
-      this.state.collection.length !== 0
+      this.state.collection.length !== 0 &&
+      this.state.collection.length !== prevState.collection.length
     ) {
-      const { currentIndex, prevIndex, nextItem } = navigationCollectionItems(
-        this.state.collection,
-        slugSanitize(window.location.pathname)
-      );
-      this.setState({
-        currentIndex: currentIndex,
-        prevIndex: prevIndex,
-        nextIndex: nextItem,
-      });
+      this.calculateNavigation();
+    }
+
+    // Update navigation if pathname changed but collection is loaded
+    if (
+      prevProps.location?.pathname !== this.props.location?.pathname &&
+      this.state.collection.length > 0
+    ) {
+      this.calculateNavigation();
     }
   }
 
   render() {
-    const { intl } = this.props;
-    if (
-      this.state.prevIndex === undefined &&
-      this.state.nextIndex === undefined
-    ) {
+    const { prevIndex, nextIndex, collection, isLoading } = this.state;
+
+    // Only show spinner if actively loading AND no collection data available
+    if (isLoading && collection.length === 0) {
       return (
         <div className="spinner-wrap">
           <Spinner className="spinner" animation="border" role="status" />
         </div>
       );
-    } else {
-      return (
-        <div className="nav-through-collections">
-          <Container fluid>
-            <Row>
-              <Col md={6}>
+    }
+
+    // If collection is empty after loading, don't show navigation
+    if (!isLoading && collection.length === 0) {
+      return null;
+    }
+
+    // Show navigation if we have collection data, even if prevIndex/nextIndex are being calculated
+    // Fallback to showing navigation with undefined values if calculation hasn't happened yet
+    return (
+      <div className="nav-through-collections">
+        <Container fluid>
+          <Row>
+            <Col md={6}>
+              {prevIndex ? (
                 <a
-                  href={`/${this.state.collectionType}/intro/${this.state.prevIndex?.slug}`}
+                  href={`/${this.state.collectionType}/intro/${prevIndex.slug}`}
                 >
                   <Row className="nav-through-collections__first-half">
                     <Col md={5} />
@@ -166,17 +240,24 @@ class NavigateThroughCollections extends Component {
                             Назад
                           </p>
                           <p className="nav-through-collections__direction__item">
-                            {this.state.prevIndex?.name}
+                            {prevIndex.name}
                           </p>
                         </div>
                       </div>
                     </Col>
                   </Row>
                 </a>
-              </Col>
-              <Col md={6}>
+              ) : (
+                <div className="nav-through-collections__first-half">
+                  <Col md={5} />
+                  <Col md={7} />
+                </div>
+              )}
+            </Col>
+            <Col md={6}>
+              {nextIndex ? (
                 <a
-                  href={`/${this.state.collectionType}/intro/${this.state.nextIndex.slug}`}
+                  href={`/${this.state.collectionType}/intro/${nextIndex.slug}`}
                 >
                   <Row className="nav-through-collections__second-half">
                     <Col md={7}>
@@ -186,7 +267,7 @@ class NavigateThroughCollections extends Component {
                             Напред
                           </p>
                           <p className="nav-through-collections__direction__item">
-                            {this.state.nextIndex?.name}
+                            {nextIndex.name}
                           </p>
                         </div>
                         <div>
@@ -197,12 +278,17 @@ class NavigateThroughCollections extends Component {
                     <Col md={5} />
                   </Row>
                 </a>
-              </Col>
-            </Row>
-          </Container>
-        </div>
-      );
-    }
+              ) : (
+                <div className="nav-through-collections__second-half">
+                  <Col md={7} />
+                  <Col md={5} />
+                </div>
+              )}
+            </Col>
+          </Row>
+        </Container>
+      </div>
+    );
   }
 }
 

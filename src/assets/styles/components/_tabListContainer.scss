@@ -6,6 +6,7 @@
     }
 
     &_content-dark {
+
         .h1,
         .h3,
         .content,
@@ -34,8 +35,9 @@
 }
 
 .nae__filter__wrap {
-    @include media-breakpoint-down(md) {
+    @include media-breakpoint-down(lg) {
         padding-bottom: 30px;
+        margin-bottom: 3rem;
 
         .tab_list-link {
             @include padding(5px, 0px, 5px, 0px);
@@ -44,9 +46,18 @@
             @include font-size(16px)
         }
 
-        .tab_list-link + .tab_list-link {
+
+    }
+
+    @include media-breakpoint-down(sm) {
+        .tab_list-link+.tab_list-link {
             border-left: 1px solid rgba(39, 35, 35, 0.2);
             border-top: none;
         }
+    }
+
+    // Ensure margin-bottom on tablet range as well
+    @media (min-width: 576px) and (max-width: 1199px) {
+        margin-bottom: 3rem;
     }
 }
