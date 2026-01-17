@@ -19,7 +19,6 @@ export default injectIntl(function HeroInner({
     <div className={`hero-inner__wrap${backLinkToUrl ? "__sm" : ""}`}>
       <Container>
         {breadcrumbs ? (
-          <Container>
             <div className="breadcrumb__wrap">
               <ol className="breadcrumb">
                 <li className="breadcrumb-item">
@@ -45,7 +44,6 @@ export default injectIntl(function HeroInner({
                 />
               </ol>
             </div>
-          </Container>
         ) : null}
         {labelTitle ? (
           <div>

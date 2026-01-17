@@ -103,47 +103,81 @@ class CollectionsIntroAndGallery extends Component {
     }
   };
 
-  componentDidUpdate() {
+  loadCollectionData = () => {
+    // Get categories from props or sessionStorage
+    let categories = this.props.categories;
+    if (!categories || categories.length === 0) {
+      const categoriesFromStorage = sessionStorage.getItem("categories");
+      if (categoriesFromStorage) {
+        try {
+          categories = Object.values(JSON.parse(categoriesFromStorage));
+        } catch (e) {
+          // Invalid cache, wait for props
+          return;
+        }
+      } else {
+        // No categories available yet, wait for componentDidUpdate
+        return;
+      }
+    }
+
+    if (categories && categories.length > 0) {
+      this.setState({
+        isLoading: true,
+      });
+      this.fetchData(
+        this.location.pathname,
+        categories.length === this.props.categories?.length ? "props" : "storage",
+        this.props,
+        categories
+      );
+    }
+  };
+
+  componentDidMount() {
+    this.loadCollectionData();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    // Update location reference when pathname changes
+    if (prevProps.location.pathname !== this.props.location.pathname) {
+      this.location = this.props.location;
+      this.hostLocation = this.location.pathname.split("/")[1];
+    }
+
+    // Handle pathname or route param changes (e.g., when navigating back)
     if (
-      // !sessionStorage.getItem("categories") &&
+      prevProps.location.pathname !== this.props.location.pathname ||
+      prevProps.match.params.type !== this.props.match.params.type
+    ) {
+      // Reset state for new route
+      this.setState({
+        collectionExist: null,
+        collection: null,
+        collectionsType: null,
+        collectionDescription: "",
+        collectionTitle: "",
+        title: null,
+      });
+      this.loadCollectionData();
+      return;
+    }
+
+    // Handle categories changes (from Redux)
+    if (
       this.props &&
       this.props.categories &&
       !isEqual(this.props.categories, this.state.categories)
     ) {
       this.setState({
         categories: this.props.categories,
-        isLoading: true,
       });
-      this.fetchData(
-        this.location.pathname,
-        "props",
-        this.props,
-        this.props.categories
-      );
+      // Only fetch if we don't have collection data yet
+      if (this.state.collectionExist === null) {
+        this.loadCollectionData();
+      }
     }
   }
-
-  // componentDidMount() {
-  //   if (
-  //     sessionStorage.getItem("categories") &&
-  //     !isEqual(
-  //       JSON.parse(sessionStorage.getItem("categories")),
-  //       this.state.categories
-  //     )
-  //   ) {
-  //     this.setState({
-  //       isLoading: true,
-  //     });
-  //     this.fetchData(
-  //       this.location.pathname,
-  //       "storage",
-  //       this.props,
-  //       this.state.categories
-  //     );
-
-  //     // this.hostLocation = this.location.pathname.split("/")[0];
-  //   }
-  // }
 
   pageContentExist = (collectionExist) => {
     const { intl } = this.props;
@@ -152,7 +186,7 @@ class CollectionsIntroAndGallery extends Component {
         {collectionExist ? (
           <HeroCollections
             bgImage={this.bgArchImage}
-            subtitleLg={
+            title={
               this.state.collectionTitle !== ""
                 ? this.state.collectionTitle
                 : this.state.title
@@ -160,7 +194,10 @@ class CollectionsIntroAndGallery extends Component {
             label={true}
           />
         ) : (
-          <HeroCollections bgImage={this.bgArchImage} />
+          <HeroCollections 
+            bgImage={this.bgArchImage}
+            title={this.state.title || ""}
+          />
         )}
         <div className="collections-page pt-0 pb-0">
           {collectionExist ? (
@@ -201,7 +238,7 @@ class CollectionsIntroAndGallery extends Component {
                   }
                 >
                   <Row className="justify-content-between">
-                    <Col sm={2}>
+                    <Col md={2}>
                       <Nav className="flex-column">
                         <Nav
                           defaultActiveKey="/introduction"
@@ -242,7 +279,7 @@ class CollectionsIntroAndGallery extends Component {
                         <SocialsShare page={"share-page"} />
                       </div>
                     </Col>
-                    <Col sm={10}>
+                    <Col md={10}>
                       <Tab.Content>
                         <Tab.Pane eventKey="introduction">
                           <Container>
@@ -346,7 +383,7 @@ class CollectionsIntroAndGallery extends Component {
 
           <NavigateThroughCollections
             collectionType={this.hostLocation}
-            currentIndex={"this.location.pathname"}
+            currentIndex={this.location.pathname}
           />
         </div>
       </>
