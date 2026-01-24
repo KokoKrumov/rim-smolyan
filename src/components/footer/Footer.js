@@ -42,9 +42,9 @@ function Footer({showModal}) {
                         <Navbar.Collapse className="footer__main-nav" id="responsive-navbar-nav">
                             <Nav className="">
                                 <Nav.Link
-                                    onClick={(e) => {
-                                        handleShowModal('modal-redirect','Z_fondove.html', e)
-                                    }}
+                                    // onClick={(e) => {
+                                        // handleShowModal('modal-redirect','Z_fondove.html', e)
+                                    // }}
                                     href="#"
                                     className='nav__main-link'>
                                     <FormattedMessage id="menu.collections"/>

@@ -120,9 +120,9 @@ function CarouselMegatron({listMegatronCarousel, showModal}) {
                                                     itemProp="url"
                                                     target=""
                                                     rel="noopener nofollow noreferrer"
-                                                    onClick={(e) => {
-                                                        handleShowModal('modal-redirect', 'Z_fondove.html', e)
-                                                    }}
+                                                    // onClick={(e) => {
+                                                        // handleShowModal('modal-redirect', 'Z_fondove.html', e)
+                                                    // }}
                                                 >
                                                     към фондове
                                                 </Link>

@@ -177,9 +177,9 @@ function CarouselMegatron({listMegatronCarousel, showModal, isTableScreen}) {
                                                                 itemProp="url"
                                                                 target=""
                                                                 rel="noopener nofollow noreferrer"
-                                                                onClick={(e) => {
-                                                                    handleShowModal('modal-redirect', 'Z_fondove.html', e)
-                                                                }}
+                                                                // onClick={(e) => {
+                                                                    // handleShowModal('modal-redirect', 'Z_fondove.html', e)
+                                                                // }}
                                                             >
                                                                 към фондове
                                                             </Link>
@@ -211,9 +211,9 @@ function CarouselMegatron({listMegatronCarousel, showModal, isTableScreen}) {
                                                                     itemProp="url"
                                                                     target=""
                                                                     rel="noopener nofollow noreferrer"
-                                                                    onClick={(e) => {
-                                                                        handleShowModal('modal-redirect', 'Z_fondove.html', e)
-                                                                    }}
+                                                                    // onClick={(e) => {
+                                                                        // handleShowModal('modal-redirect', 'Z_fondove.html', e)
+                                                                    // }}
                                                                 >
                                                                     към фондове
                                                                 </Link>
