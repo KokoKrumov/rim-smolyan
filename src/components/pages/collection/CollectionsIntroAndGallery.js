@@ -25,21 +25,13 @@ class CollectionsIntroAndGallery extends Component {
     this.elScroll = utilizeScroll();
     this.state = {
       collectionsType: null,
-      fetchType: null,
       collectionExist: null,
-      //"COLLECTIONmAIN" are all MAIN COLLECTIONS LIST
-      collectionsMain: null,
-      // "COLLECTION" IS THE INFORMATION ABOUT current COLLECTION
       collection: null,
-      collectionNavigation: null,
-      // "COLLECTIONfrommain" IS THE INFORMATION from main collection json ABOUT current COLLECTION
-      collectionFromMain: null,
-      collectionNextItem: null,
-      collectionPrevItem: null,
       isInnerGallery: this.props.match.path.includes("intro"),
       collectionDescription: "",
       collectionTitle: "",
-      isFetchingDescription: false,
+      title: "",
+      isLoading: true,
     };
   }
 
@@ -47,105 +39,60 @@ class CollectionsIntroAndGallery extends Component {
   hostLocation = this.location.pathname.split("/")[1];
   bgArchImage = "../../images/collections-main/archeology/archeology-bg.png";
 
-  fetchData = (id, listFrom, props, propsCategories) => {
+  fetchData = async (id, listFrom, props, propsCategories) => {
     const { slugId, slugItemName, pureSlug } = extractIdAndCategories(
       id,
       listFrom,
       props,
-      propsCategories
+      propsCategories,
     );
 
     this.setState({
       collectionsType: pureSlug,
       title: slugItemName,
+      isLoading: true,
     });
 
-    // Check sessionStorage cache first for description
-    const cachedDescription = sessionStorage.getItem(`description_${pureSlug}`);
-    if (cachedDescription) {
-      const parsed = JSON.parse(cachedDescription);
-      this.setState({
-        collectionDescription: parsed.content,
-        collectionTitle: parsed.title,
-      });
-    } else if (
-      this.state.collectionDescription === "" &&
-      !this.state.isFetchingDescription
-    ) {
-      // Only fetch if not already fetching and no cached data
-      this.setState({ isFetchingDescription: true });
-      this.props.fetchCollectionDescription(pureSlug).then(() => {
-        const description =
-          this.props.collectionDescription[0]?.content?.rendered || "";
-        const title =
-          this.props.collectionDescription[0]?.title?.rendered || "";
+    let hasDescription = false;
+    let hasItems = false;
 
-        // Cache in sessionStorage
-        sessionStorage.setItem(
-          `description_${pureSlug}`,
-          JSON.stringify({ content: description, title: title })
-        );
-
+    // Fetch description - use returned data directly
+    try {
+      const descriptionData =
+        await this.props.fetchCollectionDescription(pureSlug);
+      if (descriptionData && descriptionData[0]) {
+        const description = descriptionData[0].content?.rendered || "";
+        const title = descriptionData[0].title?.rendered || "";
+        hasDescription = description !== "";
         this.setState({
           collectionDescription: description,
           collectionTitle: title,
-          isFetchingDescription: false,
         });
-      });
+      }
+    } catch (e) {
+      console.error("Error fetching collection description:", e);
     }
-    const cachedCollection = sessionStorage.getItem(pureSlug);
-    const isFetchingCollection = sessionStorage.getItem(`fetching_${pureSlug}`);
 
-    if (cachedCollection) {
-      // Data already cached - use it
+    // Fetch collection items - use returned data directly
+    try {
+      const collectionData = await this.props.fetchCollections(slugId);
+      hasItems = collectionData && collectionData.length > 0;
       this.setState({
-        collection: JSON.parse(cachedCollection),
-        collectionExist: true,
+        collection: collectionData,
+        collectionExist: hasDescription || hasItems,
         isLoading: false,
-        title: slugItemName,
       });
-    } else if (isFetchingCollection) {
-      // Another component is already fetching - wait for Redux to populate
-      // The data will arrive via Redux and componentDidUpdate will handle it
+    } catch (e) {
+      console.error("Error fetching collection:", e);
       this.setState({
-        isLoading: true,
+        collectionExist: hasDescription,
+        isLoading: false,
       });
-    } else {
-      // No cache and no one fetching - start fetch
-      sessionStorage.setItem(`fetching_${pureSlug}`, "true");
-      this.props
-        .fetchCollections(slugId)
-        .then(() => {
-          if (this.props.collection.length) {
-            this.setState({
-              collection: this.props.collection,
-              collectionExist: true,
-              title: slugItemName,
-            });
-            sessionStorage.setItem(
-              pureSlug,
-              JSON.stringify(this.props.collection)
-            );
-          } else {
-            this.setState({
-              collectionExist: false,
-            });
-          }
-        })
-        .then(() => {
-          sessionStorage.removeItem(`fetching_${pureSlug}`);
-          this.setState({
-            isLoading: false,
-          });
-        })
-        .catch(() => {
-          sessionStorage.removeItem(`fetching_${pureSlug}`);
-        });
     }
   };
 
   loadCollectionData = () => {
-    // Get categories from props or sessionStorage
+    // Get categories from props or sessionStorage (categories rarely change)
     let categories = this.props.categories;
     if (!categories || categories.length === 0) {
       const categoriesFromStorage = sessionStorage.getItem("categories");
@@ -153,24 +100,21 @@ class CollectionsIntroAndGallery extends Component {
         try {
           categories = Object.values(JSON.parse(categoriesFromStorage));
         } catch (e) {
-          // Invalid cache, wait for props
           return;
         }
       } else {
-        // No categories available yet, wait for componentDidUpdate
         return;
       }
     }
 
     if (categories && categories.length > 0) {
-      this.setState({
-        isLoading: true,
-      });
       this.fetchData(
         this.location.pathname,
-        categories.length === this.props.categories?.length ? "props" : "storage",
+        categories.length === this.props.categories?.length
+          ? "props"
+          : "storage",
         this.props,
-        categories
+        categories,
       );
     }
   };
@@ -179,7 +123,7 @@ class CollectionsIntroAndGallery extends Component {
     this.loadCollectionData();
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps) {
     // Update location reference when pathname changes
     if (prevProps.location.pathname !== this.props.location.pathname) {
       this.location = this.props.location;
@@ -198,47 +142,21 @@ class CollectionsIntroAndGallery extends Component {
         collectionsType: null,
         collectionDescription: "",
         collectionTitle: "",
-        title: null,
-        isFetchingDescription: false,
+        title: "",
+        isLoading: true,
       });
       this.loadCollectionData();
       return;
     }
 
-    // Handle categories changes (from Redux)
+    // Handle categories changes (from Redux) - only if we don't have data yet
     if (
-      this.props &&
       this.props.categories &&
-      !isEqual(this.props.categories, this.state.categories)
+      this.props.categories.length > 0 &&
+      !isEqual(this.props.categories, prevProps.categories) &&
+      this.state.collectionExist === null
     ) {
-      this.setState({
-        categories: this.props.categories,
-      });
-      // Only fetch if we don't have collection data yet
-      if (this.state.collectionExist === null) {
-        this.loadCollectionData();
-      }
-    }
-
-    // Handle collection data arriving from Redux (when another component fetched it)
-    if (
-      this.props.collection &&
-      this.props.collection.length > 0 &&
-      !isEqual(prevProps.collection, this.props.collection) &&
-      this.state.collectionExist === null &&
-      this.state.collectionsType
-    ) {
-      // Cache the data and update state
-      sessionStorage.setItem(
-        this.state.collectionsType,
-        JSON.stringify(this.props.collection)
-      );
-      sessionStorage.removeItem(`fetching_${this.state.collectionsType}`);
-      this.setState({
-        collection: this.props.collection,
-        collectionExist: true,
-        isLoading: false,
-      });
+      this.loadCollectionData();
     }
   }
 
@@ -257,7 +175,7 @@ class CollectionsIntroAndGallery extends Component {
             label={true}
           />
         ) : (
-          <HeroCollections 
+          <HeroCollections
             bgImage={this.bgArchImage}
             title={this.state.title || ""}
           />
@@ -311,7 +229,7 @@ class CollectionsIntroAndGallery extends Component {
                             disabled={!collectionExist}
                             onSelect={() => {
                               history.push(
-                                `${history.location.pathname}#introduction`
+                                `${history.location.pathname}#introduction`,
                               );
                             }}
                             className="tab_list-link"
@@ -326,7 +244,7 @@ class CollectionsIntroAndGallery extends Component {
                             disabled={!collectionExist}
                             onSelect={() => {
                               history.push(
-                                `${history.location.pathname}#gallery`
+                                `${history.location.pathname}#gallery`,
                               );
                             }}
                             className="tab_list-link"
@@ -367,8 +285,8 @@ class CollectionsIntroAndGallery extends Component {
                                     }}
                                   />
                                 )}
-                                {collectionExist ? (
-                                  this.state.collectionDescription ? (
+                                {collectionExist &&
+                                  this.state.collectionDescription && (
                                     <div
                                       className="paragraph-2 paragraphs-with-mb-25"
                                       dangerouslySetInnerHTML={{
@@ -376,10 +294,7 @@ class CollectionsIntroAndGallery extends Component {
                                           this.state.collectionDescription,
                                       }}
                                     />
-                                  ) : (
-                                    <p>Loading ...</p>
-                                  )
-                                ) : null}
+                                  )}
                               </Col>
                             </Row>
                           </Container>
@@ -405,7 +320,8 @@ class CollectionsIntroAndGallery extends Component {
                                   }}
                                 />
                                 <div className="card-columns card-columns-3">
-                                  {collectionExist ? (
+                                  {this.state.collection &&
+                                  this.state.collection.length > 0 ? (
                                     this.state.collection.map((item) => {
                                       return (
                                         <CardCollections
@@ -420,7 +336,15 @@ class CollectionsIntroAndGallery extends Component {
                                       );
                                     })
                                   ) : (
-                                    <p>Loading Collections...</p>
+                                    <p
+                                      dangerouslySetInnerHTML={{
+                                        __html: intl.formatMessage({
+                                          id: collectionExist
+                                            ? "gallery-empty"
+                                            : "collection-not-exist",
+                                        }),
+                                      }}
+                                    />
                                   )}
                                 </div>
                               </Col>
@@ -454,18 +378,16 @@ class CollectionsIntroAndGallery extends Component {
   };
 
   renderContent = () => {
-    //null - loading
-    //true - collection exist
-    //false - collection not exist
-    if (this.state.collectionExist === null) {
+    // Show spinner while loading
+    if (this.state.isLoading) {
       return (
         <div className="spinner-wrap">
           <Spinner className="spinner" animation="border" role="status" />
         </div>
       );
-    } else {
-      return this.pageContentExist(this.state.collectionExist);
     }
+    // After loading, show content based on whether collection exists
+    return this.pageContentExist(this.state.collectionExist);
   };
 
   render() {
@@ -489,5 +411,5 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default injectIntl(
-  connect(mapStateToProps, mapDispatchToProps)(CollectionsIntroAndGallery)
+  connect(mapStateToProps, mapDispatchToProps)(CollectionsIntroAndGallery),
 );

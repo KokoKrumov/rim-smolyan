@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import ArrowLeft from "../../../assets/icons/ArrowLeft";
 import ArrowRight from "../../../assets/icons/ArrowRight";
 import { connect } from "react-redux";
-import { isEqual } from "lodash";
 import navigationCollectionItems from "../../../utilities/navigationCollectionItems";
 import { slugSanitize } from "../../../utilities/browser";
 
@@ -12,7 +11,6 @@ function CollectionItemsArrowNavigation({
   collection,
 }) {
   const collectionName = match.params.type;
-  const [itemsFromCollection, setItemsFromCollection] = useState([]);
   const [navItems, setNavItems] = useState({
     currentIndex: {},
     prevIndex: {},
@@ -24,34 +22,15 @@ function CollectionItemsArrowNavigation({
   const noImage =
     "https://api-staging.museumsmolyan.eu/wp-content/uploads/2024/10/no-image.png";
 
-  // Load collection data from sessionStorage or Redux (fetched by parent)
+  // Update navigation items when collection data arrives from Redux
   useEffect(() => {
-    // First try sessionStorage
-    const cachedData = sessionStorage.getItem(collectionName);
-    if (cachedData) {
-      try {
-        const parsed = JSON.parse(cachedData);
-        if (parsed.length && !isEqual(parsed, itemsFromCollection)) {
-          setItemsFromCollection(parsed);
-        }
-      } catch (e) {
-        // Invalid cache, fall through to Redux
-      }
+    if (collection && collection.length > 0) {
+      const { currentIndex, prevIndex, nextItem } = navigationCollectionItems(
+        collection,
+        slugSanitize(window.location.pathname)
+      );
+      setNavItems({ currentIndex, prevIndex, nextItem });
     }
-    
-    // Then check Redux store (data fetched by parent component)
-    if (collection && collection.length && !isEqual(itemsFromCollection, collection)) {
-      setItemsFromCollection(collection);
-    }
-  }, [collectionName, collection, itemsFromCollection]);
-
-  useEffect(() => {
-    const { currentIndex, prevIndex, nextItem } = navigationCollectionItems(
-      collection,
-      slugSanitize(window.location.pathname)
-    );
-
-    setNavItems({ currentIndex, prevIndex, nextItem });
   }, [collection]);
 
   const generateHref = (item) => {
@@ -72,10 +51,10 @@ function CollectionItemsArrowNavigation({
         ? item?._embedded["wp:featuredmedia"][0]?.source_url
         : noImage;
     const title = item?.title?.rendered;
-    const itemsFromCollectionLength = itemsFromCollection.length;
-    const itemFromCollectionIndex = itemsFromCollection
-      .map((item) => item?.title?.rendered)
-      .indexOf(title);
+    const collectionLength = collection?.length || 0;
+    const itemIndex = collection
+      ? collection.map((item) => item?.title?.rendered).indexOf(title)
+      : -1;
 
     if (showPreview) {
       return (
@@ -95,7 +74,7 @@ function CollectionItemsArrowNavigation({
             </div>
             <h5 className="h5">{title}</h5>
             <p className="item-preview__counter">
-              {itemFromCollectionIndex + 1}/{itemsFromCollectionLength}
+              {itemIndex + 1}/{collectionLength}
             </p>
           </div>
         </div>
@@ -160,7 +139,6 @@ function CollectionItemsArrowNavigation({
 const mapStateToProps = (state) => {
   return {
     collection: state.collections.byType,
-    collectionsError: state.collections.error,
   };
 };
 

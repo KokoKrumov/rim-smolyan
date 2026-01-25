@@ -98,8 +98,10 @@ export const fetchCollections =
         `/posts?categories=${slugId}&_fields=id,date_gmt,slug,title,content,_links,_embedded&_embed&page=${page}&per_page=${number}`,
       );
       dispatch({ type: FETCH_COLLECTIONS_BYTYPE, payload: response.data });
+      return response.data;
     } catch (error) {
       dispatch({ type: FETCH_COLLECTIONS_BYTYPE_ERROR, payload: error });
+      throw error;
     }
   };
 
@@ -110,8 +112,10 @@ export const fetchCollectionDescription =
         `/posts?slug=${collectionSlug}&_fields=id,title,content`,
       );
       dispatch({ type: FETCH_COLLECTION_DESCRIPTION, payload: response.data });
+      return response.data;
     } catch (error) {
       dispatch({ type: FETCH_COLLECTION_DESCRIPTION_ERROR, payload: error });
+      throw error;
     }
   };
 // api-staging.museumsmolyan.eu/wp-json/wp/v2/posts?categories=32&_fields=id,date_gmt,slug,title,content,_links,_embedded&_embed&page=1&per_page=10

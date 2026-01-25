@@ -1,8 +1,9 @@
-import { useEffect, useState, useRef } from "react";
+import { fetchCollections, fetchItemFromCollection } from "../../../actions";
+import { useEffect, useRef, useState } from "react";
 
-import { useMatchMedia } from "../../../utilities/useMatchMedia";
 import Col from "react-bootstrap/cjs/Col";
 import CollectionItemsArrowNavigation from "./CollectionItemsArrowNavigation";
+import CollectionItemsArrowNavigationBottomFixed from "./CollectionItemsArrowNavigationBottomFixed";
 import Container from "react-bootstrap/cjs/Container";
 import { Link } from "react-router-dom";
 import React from "react";
@@ -10,9 +11,8 @@ import Row from "react-bootstrap/cjs/Row";
 import SocialsShare from "../../socials/socialsShare";
 import Spinner from "react-bootstrap/Spinner";
 import { connect } from "react-redux";
-import { fetchItemFromCollection, fetchCollections } from "../../../actions";
 import { injectIntl } from "react-intl";
-import CollectionItemsArrowNavigationBottomFixed from "./CollectionItemsArrowNavigationBottomFixed";
+import { useMatchMedia } from "../../../utilities/useMatchMedia";
 
 function CollectionsDetailItem({
   fetchItemFromCollection,
@@ -41,33 +41,19 @@ function CollectionsDetailItem({
     setItem(itemFomCollection);
   }, [itemFomCollection]);
 
-  // Fetch collection data once for arrow navigation components
+  // Fetch collection data for arrow navigation components
   useEffect(() => {
-    // Check if already cached in sessionStorage
-    const cached = sessionStorage.getItem(collectionName);
-    if (cached) {
-      return;
-    }
-
-    // Check if another component is already fetching (global flag in sessionStorage)
-    const isFetchingGlobally = sessionStorage.getItem(`fetching_${collectionName}`);
-    if (isFetchingGlobally) {
-      // Another component is fetching - wait for Redux to populate
-      return;
-    }
-
-    // Prevent duplicate fetches from this component
+    // Prevent duplicate fetches
     if (isFetchingCollection.current) {
       return;
     }
 
-    // Check if collection is already in Redux store
+    // Skip if collection is already in Redux store
     if (collection && collection.length > 0) {
-      sessionStorage.setItem(collectionName, JSON.stringify(collection));
       return;
     }
 
-    // Find category ID and fetch
+    // Find category ID and fetch (categories from sessionStorage - they rarely change)
     const categoriesFromStorage = sessionStorage.getItem("categories");
     if (categoriesFromStorage) {
       try {
@@ -75,33 +61,19 @@ function CollectionsDetailItem({
         const category = categories.find((c) => c.slug === collectionName);
         if (category) {
           isFetchingCollection.current = true;
-          sessionStorage.setItem(`fetching_${collectionName}`, "true");
           fetchCollections(category.id)
             .then(() => {
               isFetchingCollection.current = false;
-              sessionStorage.removeItem(`fetching_${collectionName}`);
             })
             .catch(() => {
               isFetchingCollection.current = false;
-              sessionStorage.removeItem(`fetching_${collectionName}`);
             });
         }
       } catch (e) {
-        // Invalid cache
+        console.error("Error parsing categories:", e);
       }
     }
   }, [collectionName, fetchCollections, collection]);
-
-  // Store collection in sessionStorage when it arrives from Redux
-  useEffect(() => {
-    if (collection && collection.length > 0) {
-      const cached = sessionStorage.getItem(collectionName);
-      if (!cached) {
-        sessionStorage.setItem(collectionName, JSON.stringify(collection));
-        sessionStorage.removeItem(`fetching_${collectionName}`);
-      }
-    }
-  }, [collection, collectionName]);
 
   function renderContent() {
     return (
