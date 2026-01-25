@@ -1,6 +1,7 @@
 <?php
 $path_beginings = [
     '/',
+    '/collections',
     '/main-collections',
     '/virtual-collections',
     '/exhibitions',
