@@ -4,19 +4,6 @@
     "type": "partnerships",
     "sub_types": [
       {
-        "id": 11,
-        "title": "Приятели",
-        "hash": "friends",
-        "type": "collapsable",
-        "content": [
-          {
-            "id": 1,
-            "title": "Клуб \"Приятели на РИМ-Смолян\"",
-            "url": "http://www.museum-friends.com/"
-          }
-        ]
-      },
-      {
         "id": 12,
         "title": "Връзки",
         "hash": "links",
