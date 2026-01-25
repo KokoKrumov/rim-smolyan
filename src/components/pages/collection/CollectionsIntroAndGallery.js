@@ -32,6 +32,7 @@ class CollectionsIntroAndGallery extends Component {
       collectionTitle: "",
       title: "",
       isLoading: true,
+      isFetching: false,
     };
   }
 
@@ -40,6 +41,11 @@ class CollectionsIntroAndGallery extends Component {
   bgArchImage = "../../images/collections-main/archeology/archeology-bg.png";
 
   fetchData = async (id, listFrom, props, propsCategories) => {
+    // Prevent duplicate fetches
+    if (this.state.isFetching) {
+      return;
+    }
+
     const { slugId, slugItemName, pureSlug } = extractIdAndCategories(
       id,
       listFrom,
@@ -51,6 +57,7 @@ class CollectionsIntroAndGallery extends Component {
       collectionsType: pureSlug,
       title: slugItemName,
       isLoading: true,
+      isFetching: true,
     });
 
     let hasDescription = false;
@@ -81,12 +88,14 @@ class CollectionsIntroAndGallery extends Component {
         collection: collectionData,
         collectionExist: hasDescription || hasItems,
         isLoading: false,
+        isFetching: false,
       });
     } catch (e) {
       console.error("Error fetching collection:", e);
       this.setState({
         collectionExist: hasDescription,
         isLoading: false,
+        isFetching: false,
       });
     }
   };
@@ -144,17 +153,19 @@ class CollectionsIntroAndGallery extends Component {
         collectionTitle: "",
         title: "",
         isLoading: true,
+        isFetching: false,
       });
       this.loadCollectionData();
       return;
     }
 
-    // Handle categories changes (from Redux) - only if we don't have data yet
+    // Handle categories changes (from Redux) - only if we don't have data yet and not already fetching
     if (
       this.props.categories &&
       this.props.categories.length > 0 &&
       !isEqual(this.props.categories, prevProps.categories) &&
-      this.state.collectionExist === null
+      this.state.collectionExist === null &&
+      !this.state.isFetching
     ) {
       this.loadCollectionData();
     }
