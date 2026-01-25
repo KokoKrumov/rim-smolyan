@@ -39,6 +39,7 @@ class CollectionsIntroAndGallery extends Component {
       isInnerGallery: this.props.match.path.includes("intro"),
       collectionDescription: "",
       collectionTitle: "",
+      isFetchingDescription: false,
     };
   }
 
@@ -59,16 +60,59 @@ class CollectionsIntroAndGallery extends Component {
       title: slugItemName,
     });
 
-    if (this.state.collectionDescription === "") {
+    // Check sessionStorage cache first for description
+    const cachedDescription = sessionStorage.getItem(`description_${pureSlug}`);
+    if (cachedDescription) {
+      const parsed = JSON.parse(cachedDescription);
+      this.setState({
+        collectionDescription: parsed.content,
+        collectionTitle: parsed.title,
+      });
+    } else if (
+      this.state.collectionDescription === "" &&
+      !this.state.isFetchingDescription
+    ) {
+      // Only fetch if not already fetching and no cached data
+      this.setState({ isFetchingDescription: true });
       this.props.fetchCollectionDescription(pureSlug).then(() => {
+        const description =
+          this.props.collectionDescription[0]?.content?.rendered || "";
+        const title =
+          this.props.collectionDescription[0]?.title?.rendered || "";
+
+        // Cache in sessionStorage
+        sessionStorage.setItem(
+          `description_${pureSlug}`,
+          JSON.stringify({ content: description, title: title })
+        );
+
         this.setState({
-          collectionDescription:
-            this.props.collectionDescription[0]?.content?.rendered,
-          collectionTitle: this.props.collectionDescription[0]?.title?.rendered,
+          collectionDescription: description,
+          collectionTitle: title,
+          isFetchingDescription: false,
         });
       });
     }
-    if (!sessionStorage.getItem(pureSlug)) {
+    const cachedCollection = sessionStorage.getItem(pureSlug);
+    const isFetchingCollection = sessionStorage.getItem(`fetching_${pureSlug}`);
+
+    if (cachedCollection) {
+      // Data already cached - use it
+      this.setState({
+        collection: JSON.parse(cachedCollection),
+        collectionExist: true,
+        isLoading: false,
+        title: slugItemName,
+      });
+    } else if (isFetchingCollection) {
+      // Another component is already fetching - wait for Redux to populate
+      // The data will arrive via Redux and componentDidUpdate will handle it
+      this.setState({
+        isLoading: true,
+      });
+    } else {
+      // No cache and no one fetching - start fetch
+      sessionStorage.setItem(`fetching_${pureSlug}`, "true");
       this.props
         .fetchCollections(slugId)
         .then(() => {
@@ -89,17 +133,14 @@ class CollectionsIntroAndGallery extends Component {
           }
         })
         .then(() => {
+          sessionStorage.removeItem(`fetching_${pureSlug}`);
           this.setState({
             isLoading: false,
           });
+        })
+        .catch(() => {
+          sessionStorage.removeItem(`fetching_${pureSlug}`);
         });
-    } else {
-      this.setState({
-        collection: JSON.parse(sessionStorage.getItem(pureSlug)),
-        collectionExist: true,
-        isLoading: false,
-        title: slugItemName,
-      });
     }
   };
 
@@ -158,6 +199,7 @@ class CollectionsIntroAndGallery extends Component {
         collectionDescription: "",
         collectionTitle: "",
         title: null,
+        isFetchingDescription: false,
       });
       this.loadCollectionData();
       return;
@@ -176,6 +218,27 @@ class CollectionsIntroAndGallery extends Component {
       if (this.state.collectionExist === null) {
         this.loadCollectionData();
       }
+    }
+
+    // Handle collection data arriving from Redux (when another component fetched it)
+    if (
+      this.props.collection &&
+      this.props.collection.length > 0 &&
+      !isEqual(prevProps.collection, this.props.collection) &&
+      this.state.collectionExist === null &&
+      this.state.collectionsType
+    ) {
+      // Cache the data and update state
+      sessionStorage.setItem(
+        this.state.collectionsType,
+        JSON.stringify(this.props.collection)
+      );
+      sessionStorage.removeItem(`fetching_${this.state.collectionsType}`);
+      this.setState({
+        collection: this.props.collection,
+        collectionExist: true,
+        isLoading: false,
+      });
     }
   }
 

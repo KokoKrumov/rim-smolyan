@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 import { useMatchMedia } from "../../../utilities/useMatchMedia";
 import Col from "react-bootstrap/cjs/Col";
@@ -10,24 +10,28 @@ import Row from "react-bootstrap/cjs/Row";
 import SocialsShare from "../../socials/socialsShare";
 import Spinner from "react-bootstrap/Spinner";
 import { connect } from "react-redux";
-import { fetchItemFromCollection } from "../../../actions";
+import { fetchItemFromCollection, fetchCollections } from "../../../actions";
 import { injectIntl } from "react-intl";
 import CollectionItemsArrowNavigationBottomFixed from "./CollectionItemsArrowNavigationBottomFixed";
 
 function CollectionsDetailItem({
   fetchItemFromCollection,
+  fetchCollections,
   match,
   itemFomCollection,
+  collection,
   intl,
 }) {
   const noImage =
     "https://api-staging.museumsmolyan.eu/wp-content/uploads/2024/10/no-image.png";
   const itemName = match.params.item;
+  const collectionName = match.params.type;
   const [item, setItem] = useState({});
   const backUrl =
     match &&
     match.url.replace("detail", "intro").split("/").slice(0, -1).join("/");
   const isDesktopResolution = useMatchMedia("(min-width:992px)", true);
+  const isFetchingCollection = useRef(false);
 
   useEffect(() => {
     fetchItemFromCollection(itemName);
@@ -36,6 +40,68 @@ function CollectionsDetailItem({
   useEffect(() => {
     setItem(itemFomCollection);
   }, [itemFomCollection]);
+
+  // Fetch collection data once for arrow navigation components
+  useEffect(() => {
+    // Check if already cached in sessionStorage
+    const cached = sessionStorage.getItem(collectionName);
+    if (cached) {
+      return;
+    }
+
+    // Check if another component is already fetching (global flag in sessionStorage)
+    const isFetchingGlobally = sessionStorage.getItem(`fetching_${collectionName}`);
+    if (isFetchingGlobally) {
+      // Another component is fetching - wait for Redux to populate
+      return;
+    }
+
+    // Prevent duplicate fetches from this component
+    if (isFetchingCollection.current) {
+      return;
+    }
+
+    // Check if collection is already in Redux store
+    if (collection && collection.length > 0) {
+      sessionStorage.setItem(collectionName, JSON.stringify(collection));
+      return;
+    }
+
+    // Find category ID and fetch
+    const categoriesFromStorage = sessionStorage.getItem("categories");
+    if (categoriesFromStorage) {
+      try {
+        const categories = JSON.parse(categoriesFromStorage);
+        const category = categories.find((c) => c.slug === collectionName);
+        if (category) {
+          isFetchingCollection.current = true;
+          sessionStorage.setItem(`fetching_${collectionName}`, "true");
+          fetchCollections(category.id)
+            .then(() => {
+              isFetchingCollection.current = false;
+              sessionStorage.removeItem(`fetching_${collectionName}`);
+            })
+            .catch(() => {
+              isFetchingCollection.current = false;
+              sessionStorage.removeItem(`fetching_${collectionName}`);
+            });
+        }
+      } catch (e) {
+        // Invalid cache
+      }
+    }
+  }, [collectionName, fetchCollections, collection]);
+
+  // Store collection in sessionStorage when it arrives from Redux
+  useEffect(() => {
+    if (collection && collection.length > 0) {
+      const cached = sessionStorage.getItem(collectionName);
+      if (!cached) {
+        sessionStorage.setItem(collectionName, JSON.stringify(collection));
+        sessionStorage.removeItem(`fetching_${collectionName}`);
+      }
+    }
+  }, [collection, collectionName]);
 
   function renderContent() {
     return (
@@ -235,11 +301,13 @@ function CollectionsDetailItem({
 const mapStateToProps = (state) => {
   return {
     itemFomCollection: state.itemFomCollection,
+    collection: state.collections.byType,
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
   fetchItemFromCollection: (item) => dispatch(fetchItemFromCollection(item)),
+  fetchCollections: (parent) => dispatch(fetchCollections(parent)),
 });
 
 export default injectIntl(

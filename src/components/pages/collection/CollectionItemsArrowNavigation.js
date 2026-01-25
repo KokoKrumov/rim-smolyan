@@ -2,16 +2,13 @@ import React, { useEffect, useState } from "react";
 
 import ArrowLeft from "../../../assets/icons/ArrowLeft";
 import ArrowRight from "../../../assets/icons/ArrowRight";
-import { ObjectFlags } from "typescript";
 import { connect } from "react-redux";
-import { fetchCollections } from "../../../actions";
 import { isEqual } from "lodash";
 import navigationCollectionItems from "../../../utilities/navigationCollectionItems";
 import { slugSanitize } from "../../../utilities/browser";
 
 function CollectionItemsArrowNavigation({
   match,
-  fetchCollections,
   collection,
 }) {
   const collectionName = match.params.type;
@@ -27,30 +24,26 @@ function CollectionItemsArrowNavigation({
   const noImage =
     "https://api-staging.museumsmolyan.eu/wp-content/uploads/2024/10/no-image.png";
 
+  // Load collection data from sessionStorage or Redux (fetched by parent)
   useEffect(() => {
-    const itemsFromStorage = JSON.parse(sessionStorage.getItem(collectionName));
-    if (
-      itemsFromStorage.length !== 0 &&
-      !isEqual(itemsFromStorage, itemsFromCollection)
-    ) {
-      setItemsFromCollection(itemsFromStorage);
-    } else {
-      const categoriesFromStorage = JSON.parse(
-        sessionStorage.getItem("categories")
-      );
-
-      const parentCollectionId = categoriesFromStorage.find(
-        (item) => item.slug === collectionName
-      ).id;
-      fetchCollections(parentCollectionId);
+    // First try sessionStorage
+    const cachedData = sessionStorage.getItem(collectionName);
+    if (cachedData) {
+      try {
+        const parsed = JSON.parse(cachedData);
+        if (parsed.length && !isEqual(parsed, itemsFromCollection)) {
+          setItemsFromCollection(parsed);
+        }
+      } catch (e) {
+        // Invalid cache, fall through to Redux
+      }
     }
-  }, [collectionName, fetchCollections, itemsFromCollection]);
-
-  useEffect(() => {
-    if (collection.length && !isEqual(itemsFromCollection, collection)) {
+    
+    // Then check Redux store (data fetched by parent component)
+    if (collection && collection.length && !isEqual(itemsFromCollection, collection)) {
       setItemsFromCollection(collection);
     }
-  }, [collection, itemsFromCollection]);
+  }, [collectionName, collection, itemsFromCollection]);
 
   useEffect(() => {
     const { currentIndex, prevIndex, nextItem } = navigationCollectionItems(
@@ -171,11 +164,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  fetchCollections: (parent) => dispatch(fetchCollections(parent)),
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CollectionItemsArrowNavigation);
+export default connect(mapStateToProps)(CollectionItemsArrowNavigation);
