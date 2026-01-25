@@ -239,12 +239,12 @@ function CollectionsDetailItem({
                         __html: item.content.rendered,
                       }}
                     />
-                    /*<p
+                    {/*<p
                       className="collections-item__description__author paragraph-2"
                       dangerouslySetInnerHTML={{
                         __html: item._embedded.author[0].name,
                       }}
-                    />*/
+                    />*/}
                   </div>
                 </Col>
               </Row>
