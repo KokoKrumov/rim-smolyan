@@ -1,15 +1,18 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import { injectIntl } from "react-intl";
-import { isEqual } from "lodash";
-import Spinner from "react-bootstrap/cjs/Spinner";
-
-import { extractIdAndCategories } from "../../../utilities/browser";
 import {
   fetchCollectionsMain,
   fetchCollectionsVirtual,
 } from "../../../actions";
+
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { extractIdAndCategories } from "../../../utilities/browser";
+import { injectIntl } from "react-intl";
+import { isEqual } from "lodash";
+
+// Default counts shown while loading actual data
+const DEFAULT_MAIN_COUNT = 13;
+const DEFAULT_VIRTUAL_COUNT = 27;
 
 class CollectionsIndex extends Component {
   constructor(props) {
@@ -29,7 +32,7 @@ class CollectionsIndex extends Component {
       "/main-collections",
       "props",
       this.props,
-      categories
+      categories,
     );
 
     if (slugId) {
@@ -48,7 +51,7 @@ class CollectionsIndex extends Component {
       "/virtual-collections",
       "props",
       this.props,
-      categories
+      categories,
     );
 
     if (slugId) {
@@ -89,18 +92,13 @@ class CollectionsIndex extends Component {
 
   render() {
     const { intl } = this.props;
-    const mainCount = this.state.collectionsMain.length;
-    const virtualCount = this.state.collectionsVirtual.length;
-
-    if (this.state.isLoading) {
-      return (
-        <div className="collections-index collections-index--loading">
-          <div className="spinner-wrap">
-            <Spinner className="spinner" animation="border" role="status" />
-          </div>
-        </div>
-      );
-    }
+    // Use default values until actual data loads
+    const mainCount = this.state.mainFetched
+      ? this.state.collectionsMain.length
+      : DEFAULT_MAIN_COUNT;
+    const virtualCount = this.state.virtualFetched
+      ? this.state.collectionsVirtual.length
+      : DEFAULT_VIRTUAL_COUNT;
 
     return (
       <div className="collections-index">
@@ -118,8 +116,7 @@ class CollectionsIndex extends Component {
           />
           <div className="collections-index__content">
             <span className="collections-index__count">
-              {mainCount}{" "}
-              {intl.formatMessage({ id: "funds-count-label" })}
+              {mainCount} {intl.formatMessage({ id: "funds-count-label" })}
             </span>
             <h1 className="collections-index__title">
               {intl.formatMessage({ id: "main-collections" })}
@@ -145,8 +142,7 @@ class CollectionsIndex extends Component {
           <div className="collections-index__bg-gradient" />
           <div className="collections-index__content">
             <span className="collections-index__count">
-              {virtualCount}{" "}
-              {intl.formatMessage({ id: "funds-count-label" })}
+              {virtualCount} {intl.formatMessage({ id: "funds-count-label" })}
             </span>
             <h1 className="collections-index__title">
               {intl.formatMessage({ id: "virtual-collections" })}
@@ -171,9 +167,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
   fetchCollectionsMain: (parent) => dispatch(fetchCollectionsMain(parent)),
-  fetchCollectionsVirtual: (parent) => dispatch(fetchCollectionsVirtual(parent)),
+  fetchCollectionsVirtual: (parent) =>
+    dispatch(fetchCollectionsVirtual(parent)),
 });
 
 export default injectIntl(
-  connect(mapStateToProps, mapDispatchToProps)(CollectionsIndex)
+  connect(mapStateToProps, mapDispatchToProps)(CollectionsIndex),
 );
