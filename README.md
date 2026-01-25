@@ -137,10 +137,5 @@ Private project
 
 ## 🔗 Полезни връзки
 
-- <a href="https://museumsmolyan.eu/" target="_blank" rel="noopener noreferrer">Официален сайт на РИМ - Смолян</a>
-- <a href="https://www.facebook.com/museum.smolyan" target="_blank" rel="noopener noreferrer">Facebook страница</a>
-
----
-
-**Версия:** 1.7.0
-**Последна актуализация:** 2026
+- [Официален сайт на РИМ - Смолян](https://museumsmolyan.eu/)
+- [Facebook страница](https://www.facebook.com/museum.smolyan)
