@@ -319,10 +319,10 @@ class CollectionsIntroAndGallery extends Component {
                                     }),
                                   }}
                                 />
-                                <div className="card-columns card-columns-3">
-                                  {this.state.collection &&
-                                  this.state.collection.length > 0 ? (
-                                    this.state.collection.map((item) => {
+                                {this.state.collection &&
+                                this.state.collection.length > 0 ? (
+                                  <div className="card-columns card-columns-3">
+                                    {this.state.collection.map((item) => {
                                       return (
                                         <CardCollections
                                           key={item.title.rendered}
@@ -334,19 +334,19 @@ class CollectionsIntroAndGallery extends Component {
                                           isInnerGallery
                                         />
                                       );
-                                    })
-                                  ) : (
-                                    <p
-                                      dangerouslySetInnerHTML={{
-                                        __html: intl.formatMessage({
-                                          id: collectionExist
-                                            ? "gallery-empty"
-                                            : "collection-not-exist",
-                                        }),
-                                      }}
-                                    />
-                                  )}
-                                </div>
+                                    })}
+                                  </div>
+                                ) : collectionExist ? (
+                                  <p>Галерията все още няма елементи.</p>
+                                ) : (
+                                  <p
+                                    dangerouslySetInnerHTML={{
+                                      __html: intl.formatMessage({
+                                        id: "collection-not-exist",
+                                      }),
+                                    }}
+                                  />
+                                )}
                               </Col>
                             </Row>
                           </Container>
