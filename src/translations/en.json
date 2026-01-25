@@ -9,6 +9,7 @@
   "menu.administrative": "Administrative",
   "menu.collections": "collections",
   "menu.main-collections": "main collections",
+  "main-collections": "main collections",
   "menu.virtual-collections": "virtual collections",
   "menu.exhibitions": "exhibitions",
   "menu.news": "news & events",
@@ -126,6 +127,7 @@
   "collections": "Collections",
   "collections-main": "Main collections",
   "virtual-collections": "Virtual collections",
+  "collections-virtual-subtitle": "Over the years, the museum in Smolyan has accumulated rich and diverse collections, amounting to over 150 thousand items in the main, auxiliary and exchange fund.",
   "pics": "pictures",
   "photo-archive": "Photo archive",
   "photo-archive-text": "The Museum's Photo archive stocks more than 100 000 negatives, slides, films and video cassettes that have captured moments from the life of the local community, have preserved the cultural and historical heritage of the Middle Rhodopes, and have stored moments from the typical museum work such as archaeological excavations, field work, displays and exhibitions, conferences, meetings etc. These photo materials were prepared by the museum photographers over the years as well as by renowned masters of the art of photography in Bulgaria such as Peter Frantz, Aleksi Aleksiev, Rumen Baykov, Yavor Popov, Toroz Horosyan, and Krum Yanev. There are also photos by Krum Savov, a well-known photographer from the beginning of the 20th century, who was the first photojournalist from the Rhodopes to be granted prestigious international awards. The Photo Archive contents data is being stored into an electronic file. The museum has the necessary equipment and has started the digitization of the negatives and slides.",
@@ -169,5 +171,6 @@
   "collection.item.dating": "Dating:",
   "collection.item.location": "Location:",
   "collection.item.inventory-number": "Inv. Number:",
-  "collection-not-exist": "Content about this collection is still missing."
+  "collection-not-exist": "Content about this collection is still missing.",
+  "gallery-empty": "The gallery has no items yet."
 }

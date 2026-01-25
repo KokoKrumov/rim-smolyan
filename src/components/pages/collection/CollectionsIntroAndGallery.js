@@ -337,7 +337,13 @@ class CollectionsIntroAndGallery extends Component {
                                     })}
                                   </div>
                                 ) : collectionExist ? (
-                                  <p>Галерията все още няма елементи.</p>
+                                  <p
+                                    dangerouslySetInnerHTML={{
+                                      __html: intl.formatMessage({
+                                        id: "gallery-empty",
+                                      }),
+                                    }}
+                                  />
                                 ) : (
                                   <p
                                     dangerouslySetInnerHTML={{
