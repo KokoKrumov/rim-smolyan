@@ -172,5 +172,7 @@
   "collection.item.location": "Location:",
   "collection.item.inventory-number": "Inv. Number:",
   "collection-not-exist": "Content about this collection is still missing.",
-  "gallery-empty": "The gallery has no items yet."
+  "gallery-empty": "The gallery has no items yet.",
+  "funds-count-label": "funds",
+  "explore": "Explore"
 }
