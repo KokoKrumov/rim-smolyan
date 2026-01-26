@@ -17,6 +17,10 @@ class Prices extends Component {
     const { prices } = this.props;
     const pricesData = prices?.[0];
 
+    if (!pricesData) {
+      return null;
+    }
+
     return (
       <div className="services-page">
         <HeroInner
