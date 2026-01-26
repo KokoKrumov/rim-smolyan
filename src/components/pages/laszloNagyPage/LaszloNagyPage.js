@@ -1,18 +1,27 @@
-import React from "react";
-import Container from "react-bootstrap/cjs/Container";
-import Row from "react-bootstrap/cjs/Row";
+import CarouselImages from "../../carousel/carouselImages";
 import Col from "react-bootstrap/cjs/Col";
+import Container from "react-bootstrap/cjs/Container";
 import HeroCollections from "../../hero/HeroCollections";
+import HeroInner from "../../hero/HeroInner";
+import InfoColumn from "../../infoColumn/InfoColumn";
+import React, { useEffect } from "react";
+import Row from "react-bootstrap/cjs/Row";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchPricesLaszloNagy } from "../../../actions";
 import { injectIntl } from "react-intl";
 import laszloNagyPageBG from "../../../translations/laszloNagyPageBG.json";
 import laszloNagyPageEN from "../../../translations/laszloNagyPageEN.json";
 
-import InfoColumn from "../../infoColumn/InfoColumn";
-import CarouselImages from "../../carousel/carouselImages";
-import HeroInner from "../../hero/HeroInner";
-
 const LaszloNagyPage = (props) => {
   const { intl } = props;
+  const dispatch = useDispatch();
+  const pricesLaszloNagy = useSelector((state) => state.pricesLaszloNagy);
+  const pricesData = pricesLaszloNagy?.[0];
+
+  useEffect(() => {
+    dispatch(fetchPricesLaszloNagy());
+  }, [dispatch]);
+
   let laszloNagyPageContent = {
     bgImage: "./images/laszloNagy/heroBg.png",
     aboutHouseBgImage: "./images/laszloNagy/aboutHouseBgImage.png",
@@ -146,45 +155,18 @@ const LaszloNagyPage = (props) => {
                   <Row className={"contacts__row"}>
                     <Col lg={5}>
                       <div>
-                        <p className={"title"}>
-                          <b>
-                            Ценоразпис за услуги в къща музей „Ласло Наги“
-                          </b>
-                        </p>
-                        <ul type={"decimal"} className={"list"}>
-                          <li>
-                            1. Входни такси:
-                            <ul className={"list"}>
-                              <li>- възрастни – 4.00 лв.</li>
-                              <li>- учащи и пенсионери – 3.00 лв.</li>
-                              <li>- деца до 7 години – безплатно</li>
-                              <li>- лица с трайни увреждания – безплатно</li>
-                              <li>- възрастни над 10 човека – 3.00 лв.</li>
-                              <li>- учащи и пенсионери над 10 човека – 2.00 лв.</li>
-                              <li>- безплатно посещение на постоянната експозиция – всяка последна сряда на месеца</li>
-                            </ul>
-                          </li>
-                          <li>
-                            2. Беседи:
-                            <ul className={"list"}>
-                              <li>- на български език – 15.00 лв.</li>
-                            </ul>
-                          </li>
-                          <li>
-                            3. Ползване под наем:
-                            <ul className={"list"}>
-                              <li>- експозиционни зали (за мероприятия и презентации) - 50.00 лв./ден</li>
-                              <li>- изложбен инвентар и технически пособия - 3.00 лв. за бр./ден</li>
-                              <li>- гостуващи изложби повече от 1 ден - 100.00 лв.</li>
-                            </ul>
-                          </li>
-                          <li>
-                            4. Такса за участие в музейни уроци и ателиета:
-                            <ul className={"list"}>
-                              <li>- един участник - 3.00 лв.</li>
-                            </ul>
-                          </li>
-                        </ul>
+                        <p
+                          className={"title"}
+                          dangerouslySetInnerHTML={{
+                            __html: pricesData?.title?.rendered || "",
+                          }}
+                        />
+                        <div
+                          id="prices-content"
+                          dangerouslySetInnerHTML={{
+                            __html: pricesData?.content?.rendered || "",
+                          }}
+                        />
                       </div>
                     </Col>
                     <Col lg={3}>

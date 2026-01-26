@@ -167,5 +167,8 @@
   "collection.item.dating": "Датировка:",
   "collection.item.location": "Селище:",
   "collection.item.inventory-number": "Инв. номер:",
-  "collection-not-exist": "Съдържание за колекцията все още липсва."
+  "collection-not-exist": "Съдържание за колекцията все още липсва.",
+  "gallery-empty": "Галерията все още няма елементи.",
+  "funds-count-label": "фонда",
+  "explore": "Разгледайте"
 }

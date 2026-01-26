@@ -30,8 +30,6 @@ class Collections extends Component {
       categories: [],
     };
   }
-  location = this.props.location;
-
   fetchData = (id, listFrom, props, propsCategories) => {
     const { slugId, pureSlug } = extractIdAndCategories(
       id,
@@ -65,46 +63,35 @@ class Collections extends Component {
     // }
   };
 
-  // componentDidMount() {
-  //   if (
-  //     this.props &&
-  //     this.props.categories
-  //     //   sessionStorage.getItem("categories") &&
-  //     //   !isEqual(
-  //     //     JSON.parse(sessionStorage.getItem("categories")),
-  //     //     this.state.categories
-  //     //   )
-  //   ) {
-  //     this.setState({
-  //       isLoading: true,
-  //     });
-  //     console.log("%c this.props,", "color: orange", this.props);
-  //     console.log("%c this.state", "color: orange", this.state);
-  //     this.fetchData(
-  //       this.location.pathname,
-  //       "props",
-  //       this.props,
-  //       this.props.categories
-  //     );
-  //     this.setState({
-  //       isLoading: false,
-  //     });
-  //   }
-  // }
+  componentDidMount() {
+    if (this.props && this.props.categories && this.props.categories.length > 0) {
+      this.setState({
+        categories: this.props.categories,
+        isLoading: true,
+      });
+      this.fetchData(
+        this.props.location.pathname,
+        "props",
+        this.props,
+        this.props.categories
+      );
+    }
+  }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
+    // Only fetch if categories changed and we haven't fetched yet
     if (
-      // !sessionStorage.getItem("categories") &&
       this.props &&
       this.props.categories &&
-      !isEqual(this.props.categories, this.state.categories)
+      this.props.categories.length > 0 &&
+      !isEqual(this.props.categories, prevProps.categories)
     ) {
       this.setState({
         categories: this.props.categories,
         isLoading: true,
       });
       this.fetchData(
-        this.location.pathname,
+        this.props.location.pathname,
         "props",
         this.props,
         this.props.categories
@@ -117,7 +104,7 @@ class Collections extends Component {
     return (
       <div className="collections-page__wrap">
         <HeroInner
-          labelTitle={slugSanitize(this.location.pathname, "/")}
+          labelTitle={slugSanitize(this.props.location.pathname, "/")}
           subtitleLg={"collections-virtual-subtitle"}
           title={"collections"}
           arrowBottom={true}
@@ -149,7 +136,7 @@ class Collections extends Component {
               </Row>
             </Container>
           </section>
-          {slugSanitize(this.location.pathname, "/") ===
+          {slugSanitize(this.props.location.pathname, "/") ===
             "virtual-collections" && (
             <>
               <section>

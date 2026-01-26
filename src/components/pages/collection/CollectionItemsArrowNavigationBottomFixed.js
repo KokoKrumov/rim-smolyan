@@ -1,62 +1,30 @@
 import React, { useEffect, useState } from "react";
 
 import ArrowLeft from "../../../assets/icons/ArrowLeft";
-import ArrowRight from "../../../assets/icons/ArrowRight";
-import { ObjectFlags } from "typescript";
 import { connect } from "react-redux";
-import { fetchCollections } from "../../../actions";
-import { isEqual } from "lodash";
 import navigationCollectionItems from "../../../utilities/navigationCollectionItems";
 import { slugSanitize } from "../../../utilities/browser";
 
-function CollectionItemsArrowNavigation({
+function CollectionItemsArrowNavigationBottomFixed({
   match,
-  fetchCollections,
   collection,
 }) {
   const collectionName = match.params.type;
-  const [itemsFromCollection, setItemsFromCollection] = useState([]);
   const [navItems, setNavItems] = useState({
     currentIndex: {},
     prevIndex: {},
     nextItem: {},
   });
-  const [showItem, setShowItem] = useState({});
-  const [linkToTheItem, setLinkToTheItem] = useState("");
-  const showPreview = Boolean(Object.keys(showItem).length);
 
+  // Update navigation items when collection data arrives from Redux
   useEffect(() => {
-    const itemsFromStorage = JSON.parse(sessionStorage.getItem(collectionName));
-    if (
-      itemsFromStorage.length !== 0 &&
-      !isEqual(itemsFromStorage, itemsFromCollection)
-    ) {
-      setItemsFromCollection(itemsFromStorage);
-    } else {
-      const categoriesFromStorage = JSON.parse(
-        sessionStorage.getItem("categories")
+    if (collection && collection.length > 0) {
+      const { currentIndex, prevIndex, nextItem } = navigationCollectionItems(
+        collection,
+        slugSanitize(window.location.pathname)
       );
-
-      const parentCollectionId = categoriesFromStorage.find(
-        (item) => item.slug === collectionName
-      ).id;
-      fetchCollections(parentCollectionId);
+      setNavItems({ currentIndex, prevIndex, nextItem });
     }
-  }, [collectionName, fetchCollections, itemsFromCollection]);
-
-  useEffect(() => {
-    if (collection.length && !isEqual(itemsFromCollection, collection)) {
-      setItemsFromCollection(collection);
-    }
-  }, [collection, itemsFromCollection]);
-
-  useEffect(() => {
-    const { currentIndex, prevIndex, nextItem } = navigationCollectionItems(
-      collection,
-      slugSanitize(window.location.pathname)
-    );
-
-    setNavItems({ currentIndex, prevIndex, nextItem });
   }, [collection]);
 
   const generateHref = (item) => {
@@ -80,10 +48,10 @@ function CollectionItemsArrowNavigation({
         : noImage;
 
     const title = item?.title?.rendered;
-    const itemsFromCollectionLength = itemsFromCollection.length;
-    const itemFromCollectionIndex = itemsFromCollection
-      .map((item) => item?.title?.rendered)
-      .indexOf(title);
+    const collectionLength = collection?.length || 0;
+    const itemIndex = collection
+      ? collection.map((item) => item?.title?.rendered).indexOf(title)
+      : -1;
 
     // if (showPreview) {
     return (
@@ -101,11 +69,7 @@ function CollectionItemsArrowNavigation({
             >
               <ArrowLeft
                 width="21px"
-                color={`${
-                  showItem.side === "prevIndex" || type === "mobile"
-                    ? "#fff"
-                    : "#272323"
-                }`}
+                color="#fff"
               />
             </div>
             <div className="item-preview_inner_content">
@@ -118,7 +82,7 @@ function CollectionItemsArrowNavigation({
               </div>
               <h5 className="h5">{title}</h5>
               <p className="item-preview__counter">
-                {itemFromCollectionIndex + 1}/{itemsFromCollectionLength}
+                {itemIndex + 1}/{collectionLength}
               </p>
             </div>
           </div>
@@ -159,15 +123,7 @@ function CollectionItemsArrowNavigation({
 const mapStateToProps = (state) => {
   return {
     collection: state.collections.byType,
-    collectionsError: state.collections.error,
   };
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  fetchCollections: (parent) => dispatch(fetchCollections(parent)),
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CollectionItemsArrowNavigation);
+export default connect(mapStateToProps)(CollectionItemsArrowNavigationBottomFixed);

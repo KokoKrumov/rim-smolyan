@@ -1,6 +1,6 @@
 {
   "name": "rim-smolyan",
-  "version": "1.6.9",
+  "version": "1.7.0",
   "private": false,
   "devDependencies": {
     "@babel/cli": "^7.2.3",
@@ -12,7 +12,6 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
-    "axios": "^0.21.1",
     "css-loader": "^3.6.0",
     "env-cmd": "^10.1.0",
     "redux-devtools": "^3.7.0",
@@ -26,12 +25,13 @@
   },
   "dependencies": {
     "@types/react-transition-group": "^1.1.6",
-    "bootstrap": "^4.5.3",
+    "axios": "^1.13.3",
+    "bootstrap": "^4.6.2",
     "ga-4-react": "^0.1.281",
     "lodash": "^4.17.20",
     "react": "^16.13.1",
     "react-alice-carousel": "^2.4.0",
-    "react-bootstrap": "^1.4.0",
+    "react-bootstrap": "^1.6.7",
     "react-css-transition-replace": "^4.0.4",
     "react-dom": "^16.13.1",
     "react-elastic-carousel": "^0.11.1",

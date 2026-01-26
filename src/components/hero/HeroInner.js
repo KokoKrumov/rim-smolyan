@@ -11,6 +11,7 @@ export default injectIntl(function HeroInner({
   labelTitle,
   subtitle,
   title,
+  rawTitle,
   subtitleLg,
   scrollOnClick,
   arrowBottom,
@@ -19,7 +20,6 @@ export default injectIntl(function HeroInner({
     <div className={`hero-inner__wrap${backLinkToUrl ? "__sm" : ""}`}>
       <Container>
         {breadcrumbs ? (
-          <Container>
             <div className="breadcrumb__wrap">
               <ol className="breadcrumb">
                 <li className="breadcrumb-item">
@@ -45,7 +45,6 @@ export default injectIntl(function HeroInner({
                 />
               </ol>
             </div>
-          </Container>
         ) : null}
         {labelTitle ? (
           <div>
@@ -79,11 +78,11 @@ export default injectIntl(function HeroInner({
         ) : null}
 
         <div>
-          {title ? (
+          {rawTitle || title ? (
             <h1
               className="h1"
               dangerouslySetInnerHTML={{
-                __html: intl.formatMessage({ id: title }),
+                __html: rawTitle || intl.formatMessage({ id: title }),
               }}
             />
           ) : null}

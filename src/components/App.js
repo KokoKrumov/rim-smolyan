@@ -7,6 +7,7 @@ import { fetchCategories, showModal } from "../actions";
 import AboutUs from "./pages/aboutUs/AboutUs";
 import Administrative from "./pages/administrative/Administrative";
 import CollectionsDetailItem from "./pages/collection/CollectionsDetailItem";
+import CollectionsIndex from "./pages/collection/CollectionsIndex";
 import CollectionsIntroAndGallery from "./pages/collection/CollectionsIntroAndGallery";
 import CollectionsMain from "./pages/collection/CollectionsMain";
 import CollectionsVirtual from "./pages/collection/CollectionsVirtual";
@@ -69,6 +70,7 @@ class App extends Component {
               />
               <Route path="/exhibitions" exact component={ExhibitionsPage} />
               <Route path="/about-us/:modalContent" exact component={AboutUs} />
+              <Route path="/collections" exact component={CollectionsIndex} />
               <Route
                 path="/main-collections"
                 exact

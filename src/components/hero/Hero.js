@@ -22,7 +22,7 @@ class Hero extends Component {
                             <p className='subtitle subtitle__sm '>
                                 <Link
                                     className="link cta_outline cta_outline__light hvr-underline-from-center"
-                                    to="#"
+                                    to={this.props.link || "#"}
                                     itemProp="url"
                                     target=""
                                     rel="noopener nofollow noreferrer">

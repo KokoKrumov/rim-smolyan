@@ -4,6 +4,8 @@ import TeamReducer from "./TeamReducer";
 import ModalReducer from "./ModalReducer";
 import routesReducer from "./RoutesReducer";
 import articleReducer from "./ArticleReducer";
+import pricesReducer from "./PricesReducer";
+import pricesLaszloNagyReducer from "./PricesLaszloNagyReducer";
 import servicesReducer from "./ServicesReducer";
 import newsErrorReducer from "./NewsErrorReducer";
 import CategoriesReducer from "./CategoriesReducer";
@@ -18,6 +20,8 @@ export default combineReducers({
   news: newsReducer,
   team: TeamReducer,
   modal: ModalReducer,
+  prices: pricesReducer,
+  pricesLaszloNagy: pricesLaszloNagyReducer,
   routes: routesReducer,
   article: articleReducer,
   services: servicesReducer,

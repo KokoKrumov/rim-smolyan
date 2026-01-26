@@ -113,6 +113,15 @@
       text-transform: uppercase;
       margin-bottom: 5px;
     }
+
+    .h1 {
+      max-width: 70%;
+
+      @include media-breakpoint-down(md) {
+        width: 100%;
+        max-width: 100%;
+      }
+    }
   }
 }
 

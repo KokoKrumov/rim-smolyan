@@ -1,0 +1,245 @@
+.collections-index {
+  display: flex;
+  width: 100%;
+  // Full viewport height minus header (~92px) and footer (~303px)
+  min-height: calc(100vh - 394px);
+
+  &--loading {
+    justify-content: center;
+    align-items: center;
+    background: $dark;
+  }
+
+  &__section {
+    position: relative;
+    width: 50%;
+    min-height: calc(100vh - 394px);
+    display: block;
+    text-decoration: none;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      text-decoration: none;
+
+      .collections-index__bg,
+      .collections-index__bg-image {
+        transform: scale(1.03);
+      }
+    }
+
+    &--main {
+      .collections-index__bg {
+        opacity: 0.2;
+        transform: scale(1.5);
+      }
+
+      .collections-index__count,
+      .collections-index__title,
+      .collections-index__link {
+        color: #272323;
+      }
+      .collections-index__link::after {
+        background: #272323;
+      }
+
+      &:hover .collections-index__bg {
+        transform: scale(1.55);
+      }
+    }
+
+    &--virtual {
+      .collections-index__count,
+      .collections-index__title,
+      .collections-index__link {
+        color: #ffffff;
+      }
+      .collections-index__link::after {
+        background: #ffffff;
+      }
+    }
+  }
+
+  &__bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.5s ease;
+  }
+
+  &__bg-base {
+    position: absolute;
+    inset: 0;
+    background: #272323;
+
+    &--light {
+      background: #ffffff;
+    }
+  }
+
+  &__bg-image {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.07;
+    transition: transform 0.5s ease;
+  }
+
+  &__bg-gradient {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      60% 58.33% at 51.86% 52.86%,
+      #ffffff 5.73%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    opacity: 0.1;
+  }
+
+  &__content {
+    position: absolute;
+    // Percentage-based positioning that scales with container
+    left: 10%;
+    bottom: 14%;
+    z-index: 1;
+    // Prevent content from overflowing
+    max-width: 80%;
+  }
+
+  &__count {
+    display: block;
+    font-family: $font-acari-bold;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    opacity: 0.8;
+    margin-bottom: 5px;
+  }
+
+  &__title {
+    font-family: $font-cormorant-regular;
+    font-weight: 500;
+    // Fluid typography that scales with viewport width
+    font-size: clamp(36px, 4vw, 58px);
+    line-height: 1.03;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    // Fluid margin bottom
+    margin: 0 0 clamp(30px, 6vh, 60px) 0;
+  }
+
+  &__link {
+    display: inline-block;
+    font-family: $font-acari-bold;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    position: relative;
+    transition: opacity 0.3s ease;
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 34px;
+      height: 2px;
+      transition: width 0.3s ease;
+    }
+
+    &:hover::after {
+      width: 100%;
+    }
+  }
+}
+
+// Large desktop (1400px+)
+@include media-breakpoint-up(xl) {
+  .collections-index {
+    &__content {
+      // Fixed left position for very large screens (matches Figma 144px)
+      left: max(10%, 144px);
+    }
+  }
+}
+
+// Tablet breakpoint (768px - 991px)
+@include media-breakpoint-down(lg) {
+  .collections-index {
+    &__content {
+      left: 8%;
+      bottom: 12%;
+    }
+
+    &__title {
+      font-size: clamp(32px, 4.5vw, 48px);
+    }
+  }
+}
+
+// Mobile breakpoint (below 768px)
+@include media-breakpoint-down(md) {
+  .collections-index {
+    flex-direction: column;
+
+    &__section {
+      width: 100%;
+      min-height: 50vh;
+    }
+
+    &__content {
+      left: 20px;
+      right: 20px;
+      bottom: 40px;
+      max-width: none;
+    }
+
+    &__title {
+      font-size: clamp(32px, 8vw, 42px);
+      line-height: 1.05;
+      margin-bottom: 25px;
+    }
+
+    &__count {
+      font-size: 12px;
+    }
+
+    &__link {
+      font-size: 13px;
+
+      &::after {
+        width: 28px;
+      }
+    }
+  }
+}
+
+// Small mobile (below 576px)
+@include media-breakpoint-down(sm) {
+  .collections-index {
+    &__section {
+      min-height: 45vh;
+    }
+
+    &__content {
+      left: 15px;
+      right: 15px;
+      bottom: 30px;
+    }
+
+    &__title {
+      font-size: clamp(28px, 7vw, 36px);
+      margin-bottom: 20px;
+    }
+  }
+}

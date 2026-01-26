@@ -19,6 +19,8 @@ import {
   FETCH_NEDELOV_MODAL,
   FETCH_NEWS,
   FETCH_NEWS_ERROR,
+  FETCH_PRICES,
+  FETCH_PRICES_LASZLO_NAGY,
   FETCH_REDIRECT_MODAL,
   FETCH_RIM_BUILDING_IMAGES,
   FETCH_ROUTES,
@@ -39,7 +41,7 @@ export const fetchNews =
   async (dispatch) => {
     try {
       const response = await streams.get(
-        `/posts?categories=${id}&_fields=id,date_gmt,slug,title,content,excerpt,event_date,event_place,_links,_embedded&_embed&page=${page}&per_page=${number}`
+        `/posts?categories=${id}&_fields=id,date_gmt,slug,title,content,excerpt,event_date,event_place,_links,_embedded&_embed&page=${page}&per_page=${number}`,
       );
       dispatch({ type: FETCH_NEWS, payload: response.data });
     } catch (error) {
@@ -69,21 +71,21 @@ export const fetchRoutes = () => async (dispatch) => {
 export const fetchCategories = () => async (dispatch) => {
   const response = await streams.get(
     // "/categories?_fields=id,name,slug,parent,count&per_page=100"
-    "/categories?_fields=id,name,slug,parent,count&per_page=100"
+    "/categories?_fields=id,name,slug,parent,count&per_page=100",
   );
   dispatch({ type: FETCH_CATEGORIES, payload: response.data });
 };
 
 export const fetchCollectionsMain = (parent) => async (dispatch) => {
   const response = await streams.get(
-    `/categories?parent=${parent}&_fields=id,name,slug,description&page=1&per_page=100`
+    `/categories?parent=${parent}&_fields=id,name,slug,description&page=1&per_page=100`,
   );
   dispatch({ type: FETCH_COLLECTIONS_MAIN, payload: response.data });
 };
 
 export const fetchCollectionsVirtual = (parent) => async (dispatch) => {
   const response = await streams.get(
-    `/categories?parent=${parent}&_fields=id,name,slug,description&page=1&per_page=100`
+    `/categories?parent=${parent}&_fields=id,name,slug,description&page=1&per_page=100`,
   );
   dispatch({ type: FETCH_COLLECTIONS_VIRTUAL, payload: response.data });
 };
@@ -93,11 +95,13 @@ export const fetchCollections =
   async (dispatch) => {
     try {
       const response = await streams.get(
-        `/posts?categories=${slugId}&_fields=id,date_gmt,slug,title,content,_links,_embedded&_embed&page=${page}&per_page=${number}`
+        `/posts?categories=${slugId}&_fields=id,date_gmt,slug,title,content,_links,_embedded&_embed&page=${page}&per_page=${number}`,
       );
       dispatch({ type: FETCH_COLLECTIONS_BYTYPE, payload: response.data });
+      return response.data;
     } catch (error) {
       dispatch({ type: FETCH_COLLECTIONS_BYTYPE_ERROR, payload: error });
+      throw error;
     }
   };
 
@@ -105,11 +109,13 @@ export const fetchCollectionDescription =
   (collectionSlug) => async (dispatch) => {
     try {
       const response = await streams.get(
-        `/posts?slug=${collectionSlug}&_fields=id,title,content`
+        `/posts?slug=${collectionSlug}&_fields=id,title,content`,
       );
       dispatch({ type: FETCH_COLLECTION_DESCRIPTION, payload: response.data });
+      return response.data;
     } catch (error) {
       dispatch({ type: FETCH_COLLECTION_DESCRIPTION_ERROR, payload: error });
+      throw error;
     }
   };
 // api-staging.museumsmolyan.eu/wp-json/wp/v2/posts?categories=32&_fields=id,date_gmt,slug,title,content,_links,_embedded&_embed&page=1&per_page=10
@@ -118,7 +124,7 @@ export const fetchExhibitions =
   async (dispatch) => {
     try {
       const response = await streams.get(
-        `/posts?categories=${id}&_fields=id,date_gmt,slug,title,content,excerpt,event_date,event_place,archive,_links,_embedded&_embed&page=${page}&per_page=${number}`
+        `/posts?categories=${id}&_fields=id,date_gmt,slug,title,content,excerpt,event_date,event_place,archive,_links,_embedded&_embed&page=${page}&per_page=${number}`,
       );
       dispatch({ type: FETCH_EXHIBITIONS, payload: response.data });
     } catch (error) {
@@ -129,7 +135,7 @@ export const fetchExhibitions =
 export const fetchExhibitionArticle = (slug) => async (dispatch) => {
   try {
     const response = await streams.get(
-      `/posts?slug=${slug}&_fields=id,date_gmt,slug,title,content,excerpt,event_date,event_place,archive,_links,_embedded&_embed `
+      `/posts?slug=${slug}&_fields=id,date_gmt,slug,title,content,excerpt,event_date,event_place,archive,_links,_embedded&_embed `,
     );
     dispatch({ type: FETCH_EXHIBITION_ARTICLE, payload: response.data });
   } catch (error) {
@@ -155,7 +161,7 @@ export const fetchTeam = () => async (dispatch) => {
 export const fetchArticle = (urlSlug) => async (dispatch) => {
   try {
     const response = await streams.get(
-      `/posts?slug=${urlSlug}&_fields=id,date_gmt,slug,title,content,excerpt,event_date,event_place,_links,_embedded&_embed`
+      `/posts?slug=${urlSlug}&_fields=id,date_gmt,slug,title,content,excerpt,event_date,event_place,_links,_embedded&_embed`,
     );
     dispatch({ type: FETCH_ARTICLE, payload: response.data });
   } catch (error) {
@@ -163,10 +169,24 @@ export const fetchArticle = (urlSlug) => async (dispatch) => {
   }
 };
 
+export const fetchPrices = () => async (dispatch) => {
+  const response = await streams.get(
+    `/posts?slug=prices&_fields=id,date_gmt,slug,title,content`,
+  );
+  dispatch({ type: FETCH_PRICES, payload: response.data });
+};
+
+export const fetchPricesLaszloNagy = () => async (dispatch) => {
+  const response = await streams.get(
+    `/posts?slug=prices-laslo-nagi&_fields=id,date_gmt,slug,title,content`,
+  );
+  dispatch({ type: FETCH_PRICES_LASZLO_NAGY, payload: response.data });
+};
+
 export const fetchItemFromCollection = (urlSlug) => async (dispatch) => {
   try {
     const response = await streams.get(
-      `/posts?slug=${urlSlug}&_fields=id,date_gmt,slug,title,content,excerpt,collection_item_dating,collection_item_inventory_number,collection_item_location,collection_item_material,collection_item_size,_links,_embedded&_embed`
+      `/posts?slug=${urlSlug}&_fields=id,date_gmt,slug,title,content,excerpt,collection_item_dating,collection_item_inventory_number,collection_item_location,collection_item_material,collection_item_size,_links,_embedded&_embed`,
     );
     dispatch({ type: FETCH_ITEM_FROM_COLLECTION, payload: response.data[0] });
   } catch (error) {

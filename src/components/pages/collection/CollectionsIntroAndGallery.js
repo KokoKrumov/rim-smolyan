@@ -25,20 +25,14 @@ class CollectionsIntroAndGallery extends Component {
     this.elScroll = utilizeScroll();
     this.state = {
       collectionsType: null,
-      fetchType: null,
       collectionExist: null,
-      //"COLLECTIONmAIN" are all MAIN COLLECTIONS LIST
-      collectionsMain: null,
-      // "COLLECTION" IS THE INFORMATION ABOUT current COLLECTION
       collection: null,
-      collectionNavigation: null,
-      // "COLLECTIONfrommain" IS THE INFORMATION from main collection json ABOUT current COLLECTION
-      collectionFromMain: null,
-      collectionNextItem: null,
-      collectionPrevItem: null,
       isInnerGallery: this.props.match.path.includes("intro"),
       collectionDescription: "",
       collectionTitle: "",
+      title: "",
+      isLoading: true,
+      isFetching: false,
     };
   }
 
@@ -46,104 +40,136 @@ class CollectionsIntroAndGallery extends Component {
   hostLocation = this.location.pathname.split("/")[1];
   bgArchImage = "../../images/collections-main/archeology/archeology-bg.png";
 
-  fetchData = (id, listFrom, props, propsCategories) => {
+  fetchData = async (id, listFrom, props, propsCategories) => {
+    // Prevent duplicate fetches
+    if (this.state.isFetching) {
+      return;
+    }
+
     const { slugId, slugItemName, pureSlug } = extractIdAndCategories(
       id,
       listFrom,
       props,
-      propsCategories
+      propsCategories,
     );
 
     this.setState({
       collectionsType: pureSlug,
       title: slugItemName,
+      isLoading: true,
+      isFetching: true,
     });
 
-    if (this.state.collectionDescription === "") {
-      this.props.fetchCollectionDescription(pureSlug).then(() => {
+    let hasDescription = false;
+    let hasItems = false;
+
+    // Fetch description - use returned data directly
+    try {
+      const descriptionData =
+        await this.props.fetchCollectionDescription(pureSlug);
+      if (descriptionData && descriptionData[0]) {
+        const description = descriptionData[0].content?.rendered || "";
+        const title = descriptionData[0].title?.rendered || "";
+        hasDescription = description !== "";
         this.setState({
-          collectionDescription:
-            this.props.collectionDescription[0]?.content?.rendered,
-          collectionTitle: this.props.collectionDescription[0]?.title?.rendered,
+          collectionDescription: description,
+          collectionTitle: title,
         });
-      });
+      }
+    } catch (e) {
+      console.error("Error fetching collection description:", e);
     }
-    if (!sessionStorage.getItem(pureSlug)) {
-      this.props
-        .fetchCollections(slugId)
-        .then(() => {
-          if (this.props.collection.length) {
-            this.setState({
-              collection: this.props.collection,
-              collectionExist: true,
-              title: slugItemName,
-            });
-            sessionStorage.setItem(
-              pureSlug,
-              JSON.stringify(this.props.collection)
-            );
-          } else {
-            this.setState({
-              collectionExist: false,
-            });
-          }
-        })
-        .then(() => {
-          this.setState({
-            isLoading: false,
-          });
-        });
-    } else {
+
+    // Fetch collection items - use returned data directly
+    try {
+      const collectionData = await this.props.fetchCollections(slugId);
+      hasItems = collectionData && collectionData.length > 0;
       this.setState({
-        collection: JSON.parse(sessionStorage.getItem(pureSlug)),
-        collectionExist: true,
+        collection: collectionData,
+        collectionExist: hasDescription || hasItems,
         isLoading: false,
-        title: slugItemName,
+        isFetching: false,
+      });
+    } catch (e) {
+      console.error("Error fetching collection:", e);
+      this.setState({
+        collectionExist: hasDescription,
+        isLoading: false,
+        isFetching: false,
       });
     }
   };
 
-  componentDidUpdate() {
-    if (
-      // !sessionStorage.getItem("categories") &&
-      this.props &&
-      this.props.categories &&
-      !isEqual(this.props.categories, this.state.categories)
-    ) {
-      this.setState({
-        categories: this.props.categories,
-        isLoading: true,
-      });
+  loadCollectionData = () => {
+    // Get categories from props or sessionStorage (categories rarely change)
+    let categories = this.props.categories;
+    if (!categories || categories.length === 0) {
+      const categoriesFromStorage = sessionStorage.getItem("categories");
+      if (categoriesFromStorage) {
+        try {
+          categories = Object.values(JSON.parse(categoriesFromStorage));
+        } catch (e) {
+          return;
+        }
+      } else {
+        return;
+      }
+    }
+
+    if (categories && categories.length > 0) {
       this.fetchData(
         this.location.pathname,
-        "props",
+        categories.length === this.props.categories?.length
+          ? "props"
+          : "storage",
         this.props,
-        this.props.categories
+        categories,
       );
     }
+  };
+
+  componentDidMount() {
+    this.loadCollectionData();
   }
 
-  // componentDidMount() {
-  //   if (
-  //     sessionStorage.getItem("categories") &&
-  //     !isEqual(
-  //       JSON.parse(sessionStorage.getItem("categories")),
-  //       this.state.categories
-  //     )
-  //   ) {
-  //     this.setState({
-  //       isLoading: true,
-  //     });
-  //     this.fetchData(
-  //       this.location.pathname,
-  //       "storage",
-  //       this.props,
-  //       this.state.categories
-  //     );
+  componentDidUpdate(prevProps) {
+    // Update location reference when pathname changes
+    if (prevProps.location.pathname !== this.props.location.pathname) {
+      this.location = this.props.location;
+      this.hostLocation = this.location.pathname.split("/")[1];
+    }
 
-  //     // this.hostLocation = this.location.pathname.split("/")[0];
-  //   }
-  // }
+    // Handle pathname or route param changes (e.g., when navigating back)
+    if (
+      prevProps.location.pathname !== this.props.location.pathname ||
+      prevProps.match.params.type !== this.props.match.params.type
+    ) {
+      // Reset state for new route
+      this.setState({
+        collectionExist: null,
+        collection: null,
+        collectionsType: null,
+        collectionDescription: "",
+        collectionTitle: "",
+        title: "",
+        isLoading: true,
+        isFetching: false,
+      });
+      this.loadCollectionData();
+      return;
+    }
+
+    // Handle categories changes (from Redux) - only if we don't have data yet and not already fetching
+    if (
+      this.props.categories &&
+      this.props.categories.length > 0 &&
+      !isEqual(this.props.categories, prevProps.categories) &&
+      this.state.collectionExist === null &&
+      !this.state.isFetching
+    ) {
+      this.loadCollectionData();
+    }
+  }
 
   pageContentExist = (collectionExist) => {
     const { intl } = this.props;
@@ -152,7 +178,7 @@ class CollectionsIntroAndGallery extends Component {
         {collectionExist ? (
           <HeroCollections
             bgImage={this.bgArchImage}
-            subtitleLg={
+            title={
               this.state.collectionTitle !== ""
                 ? this.state.collectionTitle
                 : this.state.title
@@ -160,7 +186,10 @@ class CollectionsIntroAndGallery extends Component {
             label={true}
           />
         ) : (
-          <HeroCollections bgImage={this.bgArchImage} />
+          <HeroCollections
+            bgImage={this.bgArchImage}
+            title={this.state.title || ""}
+          />
         )}
         <div className="collections-page pt-0 pb-0">
           {collectionExist ? (
@@ -201,7 +230,7 @@ class CollectionsIntroAndGallery extends Component {
                   }
                 >
                   <Row className="justify-content-between">
-                    <Col sm={2}>
+                    <Col md={2}>
                       <Nav className="flex-column">
                         <Nav
                           defaultActiveKey="/introduction"
@@ -211,7 +240,7 @@ class CollectionsIntroAndGallery extends Component {
                             disabled={!collectionExist}
                             onSelect={() => {
                               history.push(
-                                `${history.location.pathname}#introduction`
+                                `${history.location.pathname}#introduction`,
                               );
                             }}
                             className="tab_list-link"
@@ -226,7 +255,7 @@ class CollectionsIntroAndGallery extends Component {
                             disabled={!collectionExist}
                             onSelect={() => {
                               history.push(
-                                `${history.location.pathname}#gallery`
+                                `${history.location.pathname}#gallery`,
                               );
                             }}
                             className="tab_list-link"
@@ -242,7 +271,7 @@ class CollectionsIntroAndGallery extends Component {
                         <SocialsShare page={"share-page"} />
                       </div>
                     </Col>
-                    <Col sm={10}>
+                    <Col md={10}>
                       <Tab.Content>
                         <Tab.Pane eventKey="introduction">
                           <Container>
@@ -267,8 +296,8 @@ class CollectionsIntroAndGallery extends Component {
                                     }}
                                   />
                                 )}
-                                {collectionExist ? (
-                                  this.state.collectionDescription ? (
+                                {collectionExist &&
+                                  this.state.collectionDescription && (
                                     <div
                                       className="paragraph-2 paragraphs-with-mb-25"
                                       dangerouslySetInnerHTML={{
@@ -276,10 +305,7 @@ class CollectionsIntroAndGallery extends Component {
                                           this.state.collectionDescription,
                                       }}
                                     />
-                                  ) : (
-                                    <p>Loading ...</p>
-                                  )
-                                ) : null}
+                                  )}
                               </Col>
                             </Row>
                           </Container>
@@ -304,9 +330,10 @@ class CollectionsIntroAndGallery extends Component {
                                     }),
                                   }}
                                 />
-                                <div className="card-columns card-columns-3">
-                                  {collectionExist ? (
-                                    this.state.collection.map((item) => {
+                                {this.state.collection &&
+                                this.state.collection.length > 0 ? (
+                                  <div className="card-columns card-columns-3">
+                                    {this.state.collection.map((item) => {
                                       return (
                                         <CardCollections
                                           key={item.title.rendered}
@@ -318,11 +345,25 @@ class CollectionsIntroAndGallery extends Component {
                                           isInnerGallery
                                         />
                                       );
-                                    })
-                                  ) : (
-                                    <p>Loading Collections...</p>
-                                  )}
-                                </div>
+                                    })}
+                                  </div>
+                                ) : collectionExist ? (
+                                  <p
+                                    dangerouslySetInnerHTML={{
+                                      __html: intl.formatMessage({
+                                        id: "gallery-empty",
+                                      }),
+                                    }}
+                                  />
+                                ) : (
+                                  <p
+                                    dangerouslySetInnerHTML={{
+                                      __html: intl.formatMessage({
+                                        id: "collection-not-exist",
+                                      }),
+                                    }}
+                                  />
+                                )}
                               </Col>
                             </Row>
                           </Container>
@@ -346,7 +387,7 @@ class CollectionsIntroAndGallery extends Component {
 
           <NavigateThroughCollections
             collectionType={this.hostLocation}
-            currentIndex={"this.location.pathname"}
+            currentIndex={this.location.pathname}
           />
         </div>
       </>
@@ -354,18 +395,16 @@ class CollectionsIntroAndGallery extends Component {
   };
 
   renderContent = () => {
-    //null - loading
-    //true - collection exist
-    //false - collection not exist
-    if (this.state.collectionExist === null) {
+    // Show spinner while loading
+    if (this.state.isLoading) {
       return (
         <div className="spinner-wrap">
           <Spinner className="spinner" animation="border" role="status" />
         </div>
       );
-    } else {
-      return this.pageContentExist(this.state.collectionExist);
     }
+    // After loading, show content based on whether collection exists
+    return this.pageContentExist(this.state.collectionExist);
   };
 
   render() {
@@ -389,5 +428,5 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default injectIntl(
-  connect(mapStateToProps, mapDispatchToProps)(CollectionsIntroAndGallery)
+  connect(mapStateToProps, mapDispatchToProps)(CollectionsIntroAndGallery),
 );

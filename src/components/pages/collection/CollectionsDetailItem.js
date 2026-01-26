@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { fetchCollections, fetchItemFromCollection } from "../../../actions";
+import { useEffect, useRef, useState } from "react";
 
-import { useMatchMedia } from "../../../utilities/useMatchMedia";
 import Col from "react-bootstrap/cjs/Col";
 import CollectionItemsArrowNavigation from "./CollectionItemsArrowNavigation";
+import CollectionItemsArrowNavigationBottomFixed from "./CollectionItemsArrowNavigationBottomFixed";
 import Container from "react-bootstrap/cjs/Container";
 import { Link } from "react-router-dom";
 import React from "react";
@@ -10,24 +11,27 @@ import Row from "react-bootstrap/cjs/Row";
 import SocialsShare from "../../socials/socialsShare";
 import Spinner from "react-bootstrap/Spinner";
 import { connect } from "react-redux";
-import { fetchItemFromCollection } from "../../../actions";
 import { injectIntl } from "react-intl";
-import CollectionItemsArrowNavigationBottomFixed from "./CollectionItemsArrowNavigationBottomFixed";
+import { useMatchMedia } from "../../../utilities/useMatchMedia";
 
 function CollectionsDetailItem({
   fetchItemFromCollection,
+  fetchCollections,
   match,
   itemFomCollection,
+  collection,
   intl,
 }) {
   const noImage =
     "https://api-staging.museumsmolyan.eu/wp-content/uploads/2024/10/no-image.png";
   const itemName = match.params.item;
+  const collectionName = match.params.type;
   const [item, setItem] = useState({});
   const backUrl =
     match &&
     match.url.replace("detail", "intro").split("/").slice(0, -1).join("/");
   const isDesktopResolution = useMatchMedia("(min-width:992px)", true);
+  const isFetchingCollection = useRef(false);
 
   useEffect(() => {
     fetchItemFromCollection(itemName);
@@ -36,6 +40,40 @@ function CollectionsDetailItem({
   useEffect(() => {
     setItem(itemFomCollection);
   }, [itemFomCollection]);
+
+  // Fetch collection data for arrow navigation components
+  useEffect(() => {
+    // Prevent duplicate fetches
+    if (isFetchingCollection.current) {
+      return;
+    }
+
+    // Skip if collection is already in Redux store
+    if (collection && collection.length > 0) {
+      return;
+    }
+
+    // Find category ID and fetch (categories from sessionStorage - they rarely change)
+    const categoriesFromStorage = sessionStorage.getItem("categories");
+    if (categoriesFromStorage) {
+      try {
+        const categories = JSON.parse(categoriesFromStorage);
+        const category = categories.find((c) => c.slug === collectionName);
+        if (category) {
+          isFetchingCollection.current = true;
+          fetchCollections(category.id)
+            .then(() => {
+              isFetchingCollection.current = false;
+            })
+            .catch(() => {
+              isFetchingCollection.current = false;
+            });
+        }
+      } catch (e) {
+        console.error("Error parsing categories:", e);
+      }
+    }
+  }, [collectionName, fetchCollections, collection]);
 
   function renderContent() {
     return (
@@ -201,12 +239,12 @@ function CollectionsDetailItem({
                         __html: item.content.rendered,
                       }}
                     />
-                    <p
+                    {/*<p
                       className="collections-item__description__author paragraph-2"
                       dangerouslySetInnerHTML={{
                         __html: item._embedded.author[0].name,
                       }}
-                    />
+                    />*/}
                   </div>
                 </Col>
               </Row>
@@ -235,11 +273,13 @@ function CollectionsDetailItem({
 const mapStateToProps = (state) => {
   return {
     itemFomCollection: state.itemFomCollection,
+    collection: state.collections.byType,
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
   fetchItemFromCollection: (item) => dispatch(fetchItemFromCollection(item)),
+  fetchCollections: (parent) => dispatch(fetchCollections(parent)),
 });
 
 export default injectIntl(

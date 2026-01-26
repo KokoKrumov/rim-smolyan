@@ -4,19 +4,6 @@
     "type": "partnerships",
     "sub_types": [
       {
-        "id": 11,
-        "title": "Friends",
-        "hash": "friends",
-        "type": "collapsable",
-        "content": [
-          {
-            "id": 1,
-            "title": "The Club of Friends to the Regional Museum of History  Stoyu Shishkov, Smolyan”",
-            "url": "http://www.museum-friends.com/"
-          }
-        ]
-      },
-      {
         "id": 12,
         "title": "Links",
         "hash": "links",
