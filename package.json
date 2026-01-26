@@ -17,7 +17,7 @@
     "sass": "^1.30.0",
     "sass-loader": "^10.1.0",
     "style-loader": "^1.1.2",
-    "typescript": "^4.0.5",
+    "typescript": "^5.9.3",
     "url-loader": "^4.1.0",
     "webpack": "4.42.0",
     "webpack-cli": "^4.2.0"
@@ -48,9 +48,9 @@
     "build": "react-scripts --openssl-legacy-provider build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "start:dev": "env-cmd -f ./environments/.dev.env react-scripts start",
+    "start:dev": "set NODE_OPTIONS=--no-deprecation&& env-cmd -f ./environments/.dev.env react-scripts start",
     "build:dev": "env-cmd -f ./environments/.dev.env npm run-script build",
-    "start:prod": "env-cmd -f ./environments/.prod.env react-scripts --openssl-legacy-provider start",
+    "start:prod": "set NODE_OPTIONS=--no-deprecation&& env-cmd -f ./environments/.prod.env react-scripts --openssl-legacy-provider start",
     "build:prod": "env-cmd -f ./environments/.prod.env npm run-script --openssl-legacy-provider build",
     "build:staging": "env-cmd -f ./environments/.staging.env npm run-script --openssl-legacy-provider build"
   },
