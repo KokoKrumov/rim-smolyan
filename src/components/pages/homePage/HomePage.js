@@ -171,7 +171,8 @@ class HomePage extends Component {
           Image={heroImage}
           title={"Средните Родопи"}
           subtitle={"от праисторическите времена до съвременността"}
-          subtitleSm={"Рaзгледайте нашите фондове"}
+          subtitleSm={"Разгледайте нашите фондове"}
+          link="/collections"
         />
         <WorkInfoLine />
 
