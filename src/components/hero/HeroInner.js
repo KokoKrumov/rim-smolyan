@@ -11,6 +11,7 @@ export default injectIntl(function HeroInner({
   labelTitle,
   subtitle,
   title,
+  rawTitle,
   subtitleLg,
   scrollOnClick,
   arrowBottom,
@@ -77,11 +78,11 @@ export default injectIntl(function HeroInner({
         ) : null}
 
         <div>
-          {title ? (
+          {rawTitle || title ? (
             <h1
               className="h1"
               dangerouslySetInnerHTML={{
-                __html: intl.formatMessage({ id: title }),
+                __html: rawTitle || intl.formatMessage({ id: title }),
               }}
             />
           ) : null}

@@ -19,18 +19,21 @@ class Prices extends Component {
 
     return (
       <div className="services-page">
-        <HeroInner title={"prices"} />
+        <HeroInner
+          title={"prices"}
+          rawTitle={pricesData?.title?.rendered}
+        />
         <main className="prices-page__main">
           <section>
             <Container className="position-relative">
               <Row>
                 <Col xs={12} sm={8}>
-                  <h5
+                  {/* <h5
                     className="prices-title"
                     dangerouslySetInnerHTML={{
                       __html: pricesData?.title?.rendered || "",
                     }}
-                  />
+                  /> */}
                   <div
                     id="prices-content"
                     dangerouslySetInnerHTML={{
