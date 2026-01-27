@@ -6,7 +6,7 @@ import { injectIntl } from "react-intl";
 function CollectionsList(props) {
   return (
     <div className={`card-columns card-columns-${props.cols}`}>
-      {props.collections ? (
+      {Array.isArray(props.collections) ? (
         props.collections.map((item) => {
           return (
             <CardCollections
