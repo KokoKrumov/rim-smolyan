@@ -25,7 +25,7 @@ import NewsDetailPage from "./pages/newsDetailPage/NewsDetailPage";
 import NewsPage from "./pages/newsPage/NewsPage";
 import NotFound from "./pages/NotFound";
 import Prices from "./pages/prices/Prices";
-import PrivacyPolicy from "./pages/privacyPolicy/PrivacyPolicy";
+import PrivacyPolicy from "./pages/legal/PrivacyPolicy";
 import Regulation from "./pages/games/Regulation";
 import Services from "./pages/services/Services";
 import SupportUs from "./pages/supportUs/SupportUs";

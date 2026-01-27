@@ -2,25 +2,16 @@
   "name": "rim-smolyan",
   "version": "1.7.0",
   "private": false,
+  "type": "module",
   "devDependencies": {
-    "@babel/cli": "^7.2.3",
-    "@babel/core": "^7.12.10",
-    "@babel/plugin-proposal-class-properties": "^7.7.4",
-    "@babel/plugin-transform-react-jsx": "^7.10.4",
-    "@babel/preset-env": "^7.4.2",
-    "@babel/preset-react": "^7.0.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^12.1.5",
     "@testing-library/user-event": "^14.4.3",
-    "css-loader": "^3.6.0",
-    "env-cmd": "^10.1.0",
+    "@vitejs/plugin-react": "^4.2.1",
     "sass": "^1.30.0",
-    "sass-loader": "^10.1.0",
-    "style-loader": "^1.1.2",
-    "typescript": "^5.9.3",
-    "url-loader": "^4.1.0",
-    "webpack": "4.42.0",
-    "webpack-cli": "^4.2.0"
+    "typescript": "^4.9.5",
+    "vite": "^5.4.2",
+    "vitest": "^2.0.5"
   },
   "dependencies": {
     "@types/react-transition-group": "^4.4.5",
@@ -37,38 +28,21 @@
     "react-intl": "^5.8.4",
     "react-redux": "^7.2.9",
     "react-router-dom": "^5.3.4",
-    "react-scripts": "^5.0.1",
     "react-share": "^4.4.0",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "styled-components": "^5.2.1"
   },
   "scripts": {
-    "start": "react-scripts --openssl-legacy-provider start",
-    "build": "react-scripts --openssl-legacy-provider build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "start:dev": "set NODE_OPTIONS=--no-deprecation&& env-cmd -f ./environments/.dev.env react-scripts start",
-    "build:dev": "env-cmd -f ./environments/.dev.env npm run-script build",
-    "start:prod": "set NODE_OPTIONS=--no-deprecation&& env-cmd -f ./environments/.prod.env react-scripts --openssl-legacy-provider start",
-    "build:prod": "env-cmd -f ./environments/.prod.env npm run-script --openssl-legacy-provider build",
-    "build:staging": "env-cmd -f ./environments/.staging.env npm run-script --openssl-legacy-provider build"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "last 2 versions",
-      "Firefox ESR",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "start": "vite",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest",
+    "start:dev": "vite --mode dev",
+    "build:dev": "vite build --mode dev",
+    "start:prod": "vite --mode prod",
+    "build:prod": "vite build --mode prod",
+    "build:staging": "vite build --mode staging"
   }
 }
