@@ -7,7 +7,6 @@ import { connect } from "react-redux";
 import { fetchNews } from "../../../actions";
 import Socials from "../../socials/socials";
 import Form from "react-bootstrap/Form";
-import mapShot from "../../../assets/images/map-shot.png";
 import { OverlayTrigger } from "react-bootstrap";
 import Tooltip from "react-bootstrap/Tooltip";
 import { FormattedMessage } from "react-intl";
@@ -160,24 +159,20 @@ class Contacts extends Component {
               </Col>
             </Row>
             <Row className="contacts__row">
-              <Col lg={7}>
+              <Col lg={12}>
                 <div className="contacts__map__wrap">
-                  <a
-                    className="link"
-                    target="_blank"
-                    href="https://www.google.com/maps/place/Regional+History+Museum+Stoyu+Shishkov/@41.5760979,24.7144959,18z/data=!4m5!3m4!1s0x14ac5a06dc1240f7:0x35e14604588eb47d!8m2!3d41.5762665!4d24.7147483?hl=en-GB"
-                    rel="noopener nofollow noreferrer"
-                  >
-                    <img
-                      className="img-fluid"
-                      src={mapShot}
-                      alt=""
-                      itemProp="image"
-                    />
-                  </a>
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1476.8!2d24.7144959!3d41.5760979!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14ac5a06dc1240f7%3A0x35e14604588eb47d!2sRegional%20History%20Museum%20Stoyu%20Shishkov!5e0!3m2!1sen!2sbg!4v1700000000000!5m2!1sen!2sbg"
+                    width="100%"
+                    height="400"
+                    style={{ border: 0 }}
+                    allowFullScreen=""
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="Regional History Museum Stoyu Shishkov Location"
+                  ></iframe>
                 </div>
               </Col>
-              <Col lg={4}></Col>
             </Row>
           </Container>
         </div>
