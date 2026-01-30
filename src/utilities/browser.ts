@@ -1,4 +1,4 @@
-const variables = require("../styles/variables");
+import variables from "../styles/variables";
 
 export function isMobileScreen(): boolean {
   return (
