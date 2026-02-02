@@ -153,16 +153,15 @@ const LaszloNagyPage = (props) => {
               <Row className="">
                 <Col lg={11}>
                   <Row className={"contacts__row"}>
-                    <Col lg={5}>
-                      <div>
-                        <p
+                    <Col lg={6}>
+                      <div id="prices-content">
+                        <h4
                           className={"title"}
                           dangerouslySetInnerHTML={{
                             __html: pricesData?.title?.rendered || "",
                           }}
                         />
                         <div
-                          id="prices-content"
                           dangerouslySetInnerHTML={{
                             __html: pricesData?.content?.rendered || "",
                           }}
@@ -197,6 +196,49 @@ const LaszloNagyPage = (props) => {
                         <li className="address__list-item">
                           <p className="paragraph-3">
                             Неделя и понеделник са почивни дни.
+                          </p>
+                        </li>
+                      </ul>
+                      <ul className="address__list mt-4">
+                        <li className="address__list-item">
+                          <h4 className="h4 contacts__address-label">
+                            Контакти:
+                          </h4>
+                          <p className="contacts__address-text">
+                            гр. Смолян 4700 <br />
+                            ул. „Дичо Петров" №3
+                          </p>
+                        </li>
+                        <li className="address__list-item">
+                          <h4 className="h4 contacts__address-label">
+                            Телефон:
+                          </h4>
+                          <ul className="contacts__address-text">
+                            <li>
+                              <a
+                                className="link"
+                                href="tel:+35930162727"
+                                itemProp="url"
+                                rel="noopener nofollow noreferrer"
+                              >
+                                0301/6 27 27
+                              </a>
+                            </li>
+                          </ul>
+                        </li>
+                        <li className="address__list-item">
+                          <h4 className="h4 contacts__address-label">
+                            Имейл:
+                          </h4>
+                          <p className="contacts__address-text">
+                            <a
+                              className="link"
+                              href="mailto:rim_smolyan@abv.bg"
+                              itemProp="url"
+                              rel="noopener nofollow noreferrer"
+                            >
+                              rim_smolyan@abv.bg
+                            </a>
                           </p>
                         </li>
                       </ul>

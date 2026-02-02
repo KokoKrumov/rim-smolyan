@@ -18,3 +18,58 @@
 		margin-top: 4rem;
 	}
 }
+
+#prices-content {
+	.title {
+		font-family: $font-cormorant-bold;
+		@include font-size(28px);
+		@include line-height(30px);
+		margin: 0;
+		margin-bottom: 10px;
+		color: $dark;
+	}
+
+	p {
+		font-family: $font-acari-regular;
+		@include font-size(17px);
+		@include line-height(27px);
+		letter-spacing: 0.01em;
+		color: $dark;
+		margin-bottom: 1.5rem;
+
+		@include media-breakpoint-down(md) {
+			@include font-size(15px);
+			@include line-height(25px);
+		}
+
+		strong {
+			font-family: $font-acari-bold;
+		}
+	}
+
+	ol, ul {
+		font-family: $font-acari-regular;
+		@include font-size(17px);
+		@include line-height(27px);
+		letter-spacing: 0.01em;
+		color: $dark;
+		padding-left: 1.5rem;
+		margin-bottom: 1.5rem;
+		list-style-type: disc !important;
+
+		@include media-breakpoint-down(md) {
+			@include font-size(15px);
+			@include line-height(25px);
+		}
+
+		li {
+			margin-bottom: 0.75rem;
+			padding-left: 0.5rem;
+			list-style: disc !important;
+
+			&::marker {
+				color: $dark;
+			}
+		}
+	}
+}
