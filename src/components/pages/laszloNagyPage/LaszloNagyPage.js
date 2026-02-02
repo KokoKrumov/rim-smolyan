@@ -199,11 +199,9 @@ const LaszloNagyPage = (props) => {
                             Неделя и понеделник са почивни дни.
                           </p>
                         </li>
-                      </ul>
-                      <ul className="address__list mt-4">
                         <li className="address__list-item">
                           <h4 className="h4 contacts__address-label">
-                            Контакти:
+                            Адрес:
                           </h4>
                           <p className="contacts__address-text">
                             гр. Смолян 4701 <br />
