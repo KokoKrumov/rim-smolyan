@@ -210,7 +210,7 @@ const LaszloNagyPage = (props) => {
                         </li>
                         <li className="address__list-item">
                           <h4 className="h4 contacts__address-label">
-                            Телефон:
+                            Информация::
                           </h4>
                           <ul className="contacts__address-text">
                             <li>
