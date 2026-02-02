@@ -1,7 +1,7 @@
 import React from "react";
 import { FacebookShareButton, TwitterShareButton } from "react-share";
 
-function SocialButton({ buttonType, articleTitle, url, hashtag = null }) {
+function SocialButton({ buttonType, articleTitle, url, hashtag = null, link = null }) {
   const facebookShareButton = () => {
     return (
       <FacebookShareButton
@@ -31,7 +31,7 @@ function SocialButton({ buttonType, articleTitle, url, hashtag = null }) {
   const facebookLinkButton = () => {
     return (
       <a
-        href="https://www.facebook.com/museum.smolyan"
+        href={link || "https://www.facebook.com/museum.smolyan"}
         target="_blank"
         rel="noopener noreferrer"
       >

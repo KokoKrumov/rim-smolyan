@@ -8,6 +8,7 @@ import React, { useEffect } from "react";
 import Row from "react-bootstrap/cjs/Row";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPricesLaszloNagy } from "../../../actions";
+import SocialButton from "../../socials/socialsButton";
 import { injectIntl } from "react-intl";
 import laszloNagyPageBG from "../../../translations/laszloNagyPageBG.json";
 import laszloNagyPageEN from "../../../translations/laszloNagyPageEN.json";
@@ -205,8 +206,8 @@ const LaszloNagyPage = (props) => {
                             Контакти:
                           </h4>
                           <p className="contacts__address-text">
-                            гр. Смолян 4700 <br />
-                            ул. „Дичо Петров" №3
+                            гр. Смолян 4701 <br />
+                            ул. „Чешитска“ №4
                           </p>
                         </li>
                         <li className="address__list-item">
@@ -217,29 +218,36 @@ const LaszloNagyPage = (props) => {
                             <li>
                               <a
                                 className="link"
-                                href="tel:+35930162727"
+                                href="tel:+359879111926"
                                 itemProp="url"
                                 rel="noopener nofollow noreferrer"
                               >
-                                0301/6 27 27
+                                0879 111 926
                               </a>
                             </li>
                           </ul>
                         </li>
                         <li className="address__list-item">
                           <h4 className="h4 contacts__address-label">
-                            Имейл:
+                            Пишете ни на:
                           </h4>
                           <p className="contacts__address-text">
                             <a
                               className="link"
-                              href="mailto:rim_smolyan@abv.bg"
+                              href="mailto:rim.smolyan@gmail.com"
                               itemProp="url"
                               rel="noopener nofollow noreferrer"
                             >
-                              rim_smolyan@abv.bg
+                              rim.smolyan@gmail.com
                             </a>
                           </p>
+                        </li>
+                        <li className="address__list-item">
+                          <div className='socials'>
+                            <div className='socials-item'>
+                                <SocialButton buttonType={'facebook-link'} link={'https://www.facebook.com/Laslo.Nagy.Smolyan'} />
+                            </div>
+                          </div>
                         </li>
                       </ul>
                     </Col>
