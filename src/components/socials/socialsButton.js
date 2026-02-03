@@ -84,7 +84,7 @@ function SocialButton({ buttonType, articleTitle, url, hashtag = null, link = nu
   const twitterLinkButton = () => {
     return (
       <a
-        href="https://twitter.com/museum_sm"
+        href="https://x.com/museum_sm"
         target="_blank"
         rel="noopener noreferrer"
       >
