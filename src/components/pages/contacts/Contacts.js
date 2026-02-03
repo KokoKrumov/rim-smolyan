@@ -29,7 +29,8 @@ class Contacts extends Component {
                       <h4 className="h4 contacts__address-label">Адрес:</h4>
                       <p className="contacts__address-text">
                         гр. Смолян 4700 <br />
-                        ул.”Дичо Петров” №5
+                        ул.”Дичо Петров” №5 (Експозиция) <br />
+                        ул.”Дичо Петров” №3 (Администрация)
                       </p>
                     </li>
                     <li className="address__list-item">
