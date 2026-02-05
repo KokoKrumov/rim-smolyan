@@ -8,7 +8,7 @@ import {Button} from "react-bootstrap";
 import history from "../../../history";
 import {injectIntl} from "react-intl";
 
-class PrivacyPolicy extends Component {
+class LegalInfo extends Component {
 
     state = {}
 
@@ -677,4 +677,4 @@ const mapStateToProps = (state) => {
 export default injectIntl(connect(
     mapStateToProps,
     {}
-)(PrivacyPolicy));
+)(LegalInfo));
