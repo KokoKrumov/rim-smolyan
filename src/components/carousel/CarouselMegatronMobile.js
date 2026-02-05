@@ -116,7 +116,7 @@ function CarouselMegatron({listMegatronCarousel, showModal}) {
                                                 <Link
                                                     style={{marginTop: '2rem'}}
                                                     className="link cta_outline cta_outline__light hvr-underline-from-left"
-                                                    to="#"
+                                                    to="/collections"
                                                     itemProp="url"
                                                     target=""
                                                     rel="noopener nofollow noreferrer"
