@@ -48,18 +48,19 @@
 		}
 	}
 
-	// Card: each direct ol is one section body
-	> ol.wp-block-list {
+	// Card: each main ol is one section body (direct child on Prices page, or inside div on Laszlo Nagy)
+	> ol.wp-block-list,
+	> div > ol.wp-block-list {
 		background: $white;
-		border: 1px solid $dark-02;
+		border-top: 1px solid $dark-02;
 		border-radius: 0;
-		padding: 2rem 2.25rem;
+		padding: 2rem 0rem 2rem 1.5rem;
 		margin-bottom: 2.5rem;
 		list-style-position: outside;
 		list-style-type: decimal;
 
 		@include media-breakpoint-down(md) {
-			padding: 1.5rem 1.75rem;
+			padding: 1.5rem 0rem 1.5rem 1.5rem;
 			margin-bottom: 2rem;
 		}
 	}
@@ -91,7 +92,8 @@
 	}
 
 	// Direct children of the main ol: category blocks
-	> ol.wp-block-list > li {
+	> ol.wp-block-list > li,
+	> div > ol.wp-block-list > li {
 		list-style-type: decimal;
 		margin-bottom: 1.25rem;
 

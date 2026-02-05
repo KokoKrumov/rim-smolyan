@@ -8,6 +8,7 @@ import React, { useEffect } from "react";
 import Row from "react-bootstrap/cjs/Row";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPricesLaszloNagy } from "../../../actions";
+import { wrapPricesInSpans } from "../../../utilities/wrapPricesInSpans";
 import SocialButton from "../../socials/socialsButton";
 import { injectIntl } from "react-intl";
 import laszloNagyPageBG from "../../../translations/laszloNagyPageBG.json";
@@ -164,7 +165,7 @@ const LaszloNagyPage = (props) => {
                         />
                         <div
                           dangerouslySetInnerHTML={{
-                            __html: pricesData?.content?.rendered || "",
+                            __html: wrapPricesInSpans(pricesData?.content?.rendered || ""),
                           }}
                         />
                       </div>
