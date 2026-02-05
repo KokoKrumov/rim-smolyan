@@ -620,7 +620,7 @@ class PrivacyPolicy extends Component {
                                     <p className='paragraph-3'>
                                         - Twitter widgets:<a target='_blank'
                                                              className='link link-underline link-default'
-                                                             href="https://twitter.com/en/privacy">https://twitter.com/en/privacy</a>
+                                                             href="https://x.com/en/privacy">https://x.com/en/privacy</a>
                                     </p>
 
                                     <div className='mt-5 mb-3'>
