@@ -1,7 +1,7 @@
-.prices-page__main{
+.prices-page__main {
 	@include padding(90px, 0px, 120px, 0px);
 
-	@include media-breakpoint-down(md){
+	@include media-breakpoint-down(md) {
 		@include padding(45px, 0px, 60px, 0px);
 	}
 
@@ -16,5 +16,114 @@
 
 	.prices-title:not(:first-child) {
 		margin-top: 4rem;
+	}
+}
+
+#prices-content {
+	.title {
+		font-family: $font-cormorant-bold;
+		@include font-size(28px);
+		@include line-height(30px);
+		margin: 0;
+		margin-bottom: 10px;
+		color: $dark;
+	}
+
+	// Section header (museum name)
+	> p {
+		font-family: $font-acari-bold;
+		@include font-size(20px);
+		@include line-height(28px);
+		letter-spacing: 0.01em;
+		color: $dark;
+		margin: 0 0 1rem 0;
+
+		@include media-breakpoint-down(md) {
+			@include font-size(18px);
+			@include line-height(26px);
+		}
+
+		strong {
+			font-family: $font-acari-bold;
+		}
+	}
+
+	// Card: each main ol is one section body (direct child on Prices page, or inside div on Laszlo Nagy)
+	> ol.wp-block-list,
+	> div > ol.wp-block-list {
+		background: $white;
+		border-top: 1px solid $dark-02;
+		border-radius: 0;
+		padding: 2rem 0rem 2rem 1.5rem;
+		margin-bottom: 2.5rem;
+		list-style-position: outside;
+		list-style-type: decimal;
+
+		@include media-breakpoint-down(md) {
+			padding: 1.5rem 0rem 1.5rem 1.5rem;
+			margin-bottom: 2rem;
+		}
+	}
+
+	ol,
+	ul {
+		font-family: $font-acari-regular;
+		@include font-size(17px);
+		@include line-height(27px);
+		letter-spacing: 0.01em;
+		color: $dark;
+		padding-left: 1.5rem;
+		margin-bottom: 1rem;
+		list-style-type: disc;
+
+		@include media-breakpoint-down(md) {
+			@include font-size(15px);
+			@include line-height(25px);
+		}
+
+		li {
+			margin-bottom: 0.75rem;
+			padding-left: 0.5rem;
+
+			&::marker {
+				color: $dark;
+			}
+		}
+	}
+
+	// Direct children of the main ol: category blocks
+	> ol.wp-block-list > li,
+	> div > ol.wp-block-list > li {
+		list-style-type: decimal;
+		margin-bottom: 1.25rem;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	// Nested ul: sub-items
+	ul.wp-block-list {
+		list-style-type: disc;
+		margin-top: 0.5rem;
+		margin-bottom: 0.5rem;
+		padding-left: 1.25rem;
+	}
+
+	// Price row: leaf li (no nested ul) — flex so .price-value goes right
+	li:not(:has(ul)) {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		align-items: baseline;
+		gap: 0.5rem;
+		list-style: disc;
+	}
+
+	.price-value {
+		font-family: $font-acari-bold;
+		font-weight: bold;
+		flex-shrink: 0;
+		text-align: right;
 	}
 }

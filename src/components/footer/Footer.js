@@ -104,14 +104,8 @@ function Footer({ showModal }) {
               <FormattedMessage id="copyright" />
             </p>
             <p className="nav__secondary-link">
-              <FormattedMessage id="design" />
-              <img
-                className=""
-                style={{ marginLeft: "5px" }}
-                src={jltLogo}
-                alt=""
-                itemProp="image"
-              />
+              <FormattedMessage id="design" />:
+              Destopia
             </p>
           </div>
         </Container>

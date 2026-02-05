@@ -4,9 +4,11 @@ import Col from "react-bootstrap/cjs/Col";
 import Container from "react-bootstrap/cjs/Container";
 import HeroInner from "../../hero/HeroInner";
 import Row from "react-bootstrap/cjs/Row";
+import Spinner from "react-bootstrap/Spinner";
 import { connect } from "react-redux";
 import { fetchPrices } from "../../../actions";
 import { injectIntl } from "react-intl";
+import { wrapPricesInSpans } from "../../../utilities/wrapPricesInSpans";
 
 class Prices extends Component {
   componentDidMount() {
@@ -16,6 +18,14 @@ class Prices extends Component {
   render() {
     const { prices } = this.props;
     const pricesData = prices?.[0];
+
+    if (!pricesData) {
+      return (
+        <div className="spinner-wrap">
+          <Spinner className="spinner" animation="border" role="status" />
+        </div>
+      );
+    }
 
     return (
       <div className="services-page">
@@ -27,7 +37,7 @@ class Prices extends Component {
           <section>
             <Container className="position-relative">
               <Row>
-                <Col xs={12} sm={8}>
+                <Col xs={12} md={10}>
                   {/* <h5
                     className="prices-title"
                     dangerouslySetInnerHTML={{
@@ -37,7 +47,7 @@ class Prices extends Component {
                   <div
                     id="prices-content"
                     dangerouslySetInnerHTML={{
-                      __html: pricesData?.content?.rendered || "",
+                      __html: wrapPricesInSpans(pricesData?.content?.rendered || ""),
                     }}
                   />
                 </Col>

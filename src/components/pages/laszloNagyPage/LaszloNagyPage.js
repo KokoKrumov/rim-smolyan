@@ -8,6 +8,8 @@ import React, { useEffect } from "react";
 import Row from "react-bootstrap/cjs/Row";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPricesLaszloNagy } from "../../../actions";
+import { wrapPricesInSpans } from "../../../utilities/wrapPricesInSpans";
+import SocialButton from "../../socials/socialsButton";
 import { injectIntl } from "react-intl";
 import laszloNagyPageBG from "../../../translations/laszloNagyPageBG.json";
 import laszloNagyPageEN from "../../../translations/laszloNagyPageEN.json";
@@ -153,18 +155,17 @@ const LaszloNagyPage = (props) => {
               <Row className="">
                 <Col lg={11}>
                   <Row className={"contacts__row"}>
-                    <Col lg={5}>
-                      <div>
-                        <p
+                    <Col lg={6}>
+                      <div id="prices-content">
+                        <h4
                           className={"title"}
                           dangerouslySetInnerHTML={{
                             __html: pricesData?.title?.rendered || "",
                           }}
                         />
                         <div
-                          id="prices-content"
                           dangerouslySetInnerHTML={{
-                            __html: pricesData?.content?.rendered || "",
+                            __html: wrapPricesInSpans(pricesData?.content?.rendered || ""),
                           }}
                         />
                       </div>
@@ -198,6 +199,54 @@ const LaszloNagyPage = (props) => {
                           <p className="paragraph-3">
                             Неделя и понеделник са почивни дни.
                           </p>
+                        </li>
+                        <li className="address__list-item">
+                          <h4 className="h4 contacts__address-label">
+                            Адрес:
+                          </h4>
+                          <p className="contacts__address-text">
+                            гр. Смолян 4701 <br />
+                            ул. ”Чешитска“ №4
+                          </p>
+                        </li>
+                        <li className="address__list-item">
+                          <h4 className="h4 contacts__address-label">
+                            Информация::
+                          </h4>
+                          <ul className="contacts__address-text">
+                            <li>
+                              <a
+                                className="link"
+                                href="tel:+359879111926"
+                                itemProp="url"
+                                rel="noopener nofollow noreferrer"
+                              >
+                                0879 111 926
+                              </a>
+                            </li>
+                          </ul>
+                        </li>
+                        <li className="address__list-item">
+                          <h4 className="h4 contacts__address-label">
+                            Пишете ни на:
+                          </h4>
+                          <p className="contacts__address-text">
+                            <a
+                              className="link"
+                              href="mailto:rim.smolyan@gmail.com"
+                              itemProp="url"
+                              rel="noopener nofollow noreferrer"
+                            >
+                              rim.smolyan@gmail.com
+                            </a>
+                          </p>
+                        </li>
+                        <li className="address__list-item">
+                          <div className='socials'>
+                            <div className='socials-item'>
+                                <SocialButton buttonType={'facebook-link'} link={'https://www.facebook.com/Laslo.Nagy.Smolyan'} />
+                            </div>
+                          </div>
                         </li>
                       </ul>
                     </Col>
