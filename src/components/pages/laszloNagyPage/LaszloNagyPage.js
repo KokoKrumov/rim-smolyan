@@ -206,7 +206,7 @@ const LaszloNagyPage = (props) => {
                           </h4>
                           <p className="contacts__address-text">
                             гр. Смолян 4701 <br />
-                            ул. ”Чешитска“ №6
+                            ул. ”Чешитска“ №4
                           </p>
                         </li>
                         <li className="address__list-item">
