@@ -247,10 +247,26 @@ const LaszloNagyPage = (props) => {
                                 <SocialButton buttonType={'facebook-link'} link={'https://www.facebook.com/Laslo.Nagy.Smolyan'} />
                             </div>
                           </div>
-                        </li>
+36958f72cabf16f4b8ccef5d210603a0223104cb                        </li>
                       </ul>
                     </Col>
                   </Row>
+                </Col>
+              </Row>
+              <Row className="contacts__row">
+                <Col lg={12}>
+                  <div className="contacts__map__wrap">
+                    <iframe
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2954.0!2d24.7078!3d41.5743!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14ac517f3c63c611%3A0xb9e72702c5ce9fa7!2z0JrRitGJ0LAg0LzRg9C30LXQuSDQm9Cw0YHQu9C-INCd0LDQs9C4!5e0!3m2!1sbg!2sbg!4v1700000000000!5m2!1sbg!2sbg"
+                      width="100%"
+                      height="400"
+                      style={{ border: 0 }}
+                      allowFullScreen=""
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      title="House Museum László Nagy Location"
+                    ></iframe>
+                  </div>
                 </Col>
               </Row>
             </Container>
