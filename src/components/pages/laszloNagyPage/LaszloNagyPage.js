@@ -247,7 +247,7 @@ const LaszloNagyPage = (props) => {
                                 <SocialButton buttonType={'facebook-link'} link={'https://www.facebook.com/Laslo.Nagy.Smolyan'} />
                             </div>
                           </div>
-36958f72cabf16f4b8ccef5d210603a0223104cb                        </li>
+                        </li>
                       </ul>
                     </Col>
                   </Row>
