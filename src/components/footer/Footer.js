@@ -8,7 +8,6 @@ import Socials from "../socials/socials";
 import { connect } from "react-redux";
 import fbLogo from "../../assets/images/facebook1.svg";
 import instagramLogo from "../../assets/images/instagram.svg";
-import jltLogo from "../../assets/images/JLTLogo.svg";
 import rimLogo from "../../assets/images/rim-logo.svg";
 import { showModal } from "../../actions";
 import twitterLogo from "../../assets/images/twitter.svg";
