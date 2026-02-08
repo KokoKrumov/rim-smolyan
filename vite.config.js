@@ -12,7 +12,7 @@ function jsxPlugin() {
     enforce: 'pre',
     async transform(code, id) {
       if (!id.match(/src\/.*\.js$/)) return null;
-      
+
       // Use esbuild to transform JSX
       const esbuild = await import('esbuild');
       const result = await esbuild.transform(code, {
@@ -31,7 +31,7 @@ function jsxPlugin() {
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, path.resolve(__dirname, 'environments'), '');
-  
+
   return {
     plugins: [
       jsxPlugin(),
@@ -77,16 +77,6 @@ export default defineConfig(({ mode }) => {
           quietDeps: true,
         },
       },
-    },
-    define: {
-      // Support for process.env (for backwards compatibility during migration)
-      'process.env': Object.keys(env).reduce((acc, key) => {
-        if (key.startsWith('REACT_APP_')) {
-          // Map REACT_APP_ to VITE_ equivalent
-          acc[key] = JSON.stringify(env[key]);
-        }
-        return acc;
-      }, {}),
     },
   };
 });
