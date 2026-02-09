@@ -140,7 +140,7 @@ const zIndices = {
   '--z-index-tooltip': 303
 }
 
-module.exports = Object.assign(
+export default Object.assign(
   {},
   fonts,
   fontSizes,

@@ -14,10 +14,10 @@ function NewsAndEventsList({ listOfNewsAndEvents }) {
                   <ArticleDate date={article.event_date} />
                 ) : null}
                 <div className="nae-item__img">
-                  {article._embedded["wp:featuredmedia"] && (
+                  {article._embedded?.["wp:featuredmedia"] && (
                     <img
                       className="img-fluid img"
-                      src={article._embedded["wp:featuredmedia"][0].source_url}
+                      src={article._embedded["wp:featuredmedia"][0]?.source_url}
                       alt=""
                       itemProp="image"
                     />
@@ -27,7 +27,7 @@ function NewsAndEventsList({ listOfNewsAndEvents }) {
               <h5
                 className="h5"
                 dangerouslySetInnerHTML={{
-                  __html: article.title.rendered,
+                  __html: article.title?.rendered || "",
                 }}
               />
             </a>

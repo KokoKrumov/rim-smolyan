@@ -25,7 +25,7 @@ import NewsDetailPage from "./pages/newsDetailPage/NewsDetailPage";
 import NewsPage from "./pages/newsPage/NewsPage";
 import NotFound from "./pages/NotFound";
 import Prices from "./pages/prices/Prices";
-import PrivacyPolicy from "./pages/privacyPolicy/PrivacyPolicy";
+import LegalInfo from "./pages/legal/LegalInfo";
 import Regulation from "./pages/games/Regulation";
 import Services from "./pages/services/Services";
 import SupportUs from "./pages/supportUs/SupportUs";
@@ -109,7 +109,7 @@ class App extends Component {
               <Route path="/about-us" exact component={AboutUs} />
               <Route path="/contact-us" exact component={Contacts} />
               <Route path="/support-us" exact component={SupportUs} />
-              <Route path="/privacy-policy" exact component={PrivacyPolicy} />
+              <Route path="/privacy-policy" exact component={LegalInfo} />
               <Route path="/terms" exact component={Terms} />
               <Route path="/administrative" exact component={Administrative} />
               <Route path="/services" exact component={Services} />
