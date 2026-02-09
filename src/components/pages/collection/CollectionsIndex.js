@@ -17,6 +17,7 @@ const DEFAULT_VIRTUAL_COUNT = 27;
 class CollectionsIndex extends Component {
   constructor(props) {
     super(props);
+    this.collectionsRef = React.createRef();
     this.state = {
       collectionsMain: [],
       collectionsVirtual: [],
@@ -25,6 +26,12 @@ class CollectionsIndex extends Component {
       mainFetched: false,
       virtualFetched: false,
     };
+  }
+
+  componentDidMount() {
+    if (this.collectionsRef.current) {
+      this.collectionsRef.current.scrollIntoView({ behavior: "smooth" });
+    }
   }
 
   fetchMainCollections = (categories) => {
@@ -101,7 +108,7 @@ class CollectionsIndex extends Component {
       : DEFAULT_VIRTUAL_COUNT;
 
     return (
-      <div className="collections-index">
+      <div ref={this.collectionsRef} className="collections-index">
         {/* Left - Main Collections */}
         <Link
           to="/main-collections"
