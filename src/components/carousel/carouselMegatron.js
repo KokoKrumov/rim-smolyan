@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import Col from "react-bootstrap/cjs/Col";
 import AliceCarousel from 'react-alice-carousel'
 import Row from "react-bootstrap/cjs/Row";
@@ -10,12 +10,11 @@ import {connect} from "react-redux";
 import {showModal} from "../../actions";
 import {isMobileScreen} from "../../utilities/browser";
 import {isTabletScreen} from "../../utilities/browser";
-import Carousel from 'react-elastic-carousel';
 
 function CarouselMegatron({listMegatronCarousel, showModal, isTableScreen}) {
     const handleOnDragStart = (e) => e.preventDefault()
-    const [item, setItem] = useState(1);
-    let carousel = React.createRef();
+    const [item, setItem] = useState(0);
+    const carousel = useRef(null);
     const [isMobileScreenV, setIsMobileScreen] = React.useState(isMobileScreen())
     const [isTabletScreenV, setIsTabletScreen] = React.useState(isTabletScreen())
 
@@ -33,8 +32,8 @@ function CarouselMegatron({listMegatronCarousel, showModal, isTableScreen}) {
         }
     })
 
-    function onSlideChanged(item) {
-        setItem(item + 1)
+    function onSlideChanged(e) {
+        setItem(e.item)
     }
 
     function handleShowModal(data, url, e) {
@@ -55,19 +54,19 @@ function CarouselMegatron({listMegatronCarousel, showModal, isTableScreen}) {
                                         <div className='carousel-megatron__controls'>
                                             <div>
                                                 <p className='carousel-megatron__controls-index'>
-                                                    {item}/{listMegatronCarousel.length}
+                                                    {item + 1}/{listMegatronCarousel.length}
                                                 </p>
                                             </div>
 
                                             <div className='carousel-megatron__controls__wrap'>
                                                 <button className='btn carousel__controls-btn'
-                                                        onClick={() => carousel.slidePrev()}>
+                                                        onClick={() => carousel.current?.slidePrev()}>
                                                     <img className="carousel-megatron__controls-btn__img"
                                                          src={carouselMegatronArrowLeft} alt=""
                                                          itemProp="image"/>
                                                 </button>
                                                 <button className='btn carousel__controls-btn'
-                                                        onClick={() => carousel.slideNext()}>
+                                                        onClick={() => carousel.current?.slideNext()}>
                                                     <img className="carousel-megatron__controls-btn__img"
                                                          src={carouselMegatronArrowRight} alt=""
                                                          itemProp="image"/>
@@ -85,18 +84,14 @@ function CarouselMegatron({listMegatronCarousel, showModal, isTableScreen}) {
                         null
 
                 }
-                <Carousel
-                    ref={ref => (carousel = ref)}
-                    isRTL={false}
-                    itemsToShow={1}
-                    showArrows={false}
-                    pagination={false}
-                    onChange={(currentItem, pageIndex) =>
-                        onSlideChanged(pageIndex)
-                    }
-                >
-                    {listMegatronCarousel.map(item => {
-                        return (
+                <AliceCarousel
+                    ref={carousel}
+                    activeIndex={item}
+                    disableButtonsControls
+                    disableDotsControls
+                    mouseTracking
+                    onSlideChanged={onSlideChanged}
+                    items={listMegatronCarousel.map(item => (
                             <div
                                 key={item.id}
                                 className='carousel carousel__dark carousel-megatron hero-bg'
@@ -225,7 +220,7 @@ function CarouselMegatron({listMegatronCarousel, showModal, isTableScreen}) {
                                                                         className='carousel-megatron__controls__wrap'>
                                                                         <button
                                                                             className='btn carousel__controls-btn'
-                                                                            onClick={() => carousel.slidePrev()}>
+                                                                            onClick={() => carousel.current?.slidePrev()}>
                                                                             <img
                                                                                 className="carousel-megatron__controls-btn__img"
                                                                                 src={carouselMegatronArrowLeft}
@@ -234,7 +229,7 @@ function CarouselMegatron({listMegatronCarousel, showModal, isTableScreen}) {
                                                                         </button>
                                                                         <button
                                                                             className='btn carousel__controls-btn'
-                                                                            onClick={() => carousel.slideNext()}>
+                                                                            onClick={() => carousel.current?.slideNext()}>
                                                                             <img
                                                                                 className="carousel-megatron__controls-btn__img"
                                                                                 src={carouselMegatronArrowRight}
@@ -255,12 +250,8 @@ function CarouselMegatron({listMegatronCarousel, showModal, isTableScreen}) {
 
                                 </Container>
                             </div>
-                        )
-                    })}
-                </Carousel>
-
-
-                {/*</AliceCarousel>*/}
+                    ))}
+                />
             </div>
         )
     } else {
