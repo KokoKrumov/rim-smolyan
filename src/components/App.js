@@ -30,7 +30,6 @@ import Regulation from "./pages/games/Regulation";
 import Services from "./pages/services/Services";
 import SupportUs from "./pages/supportUs/SupportUs";
 import Terms from "./pages/terms/Terms";
-import ScrollToTop from "./ScrollToTop";
 import { connect } from "react-redux";
 import history from "../history";
 import { injectIntl } from "react-intl";
@@ -48,7 +47,6 @@ class App extends Component {
   render() {
     return (
       <Router history={history}>
-        <ScrollToTop />
         <div className="wrapper">
           <Header />
           <main>
