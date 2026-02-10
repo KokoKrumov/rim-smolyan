@@ -322,14 +322,14 @@ class CollectionsIntroAndGallery extends Component {
                                     }),
                                   }}
                                 />
-                                <p
+                                {/* <p
                                   className="paragraph-2 mb-5"
                                   dangerouslySetInnerHTML={{
                                     __html: intl.formatMessage({
                                       id: "gallery-intro",
                                     }),
                                   }}
-                                />
+                                /> */}
                                 {this.state.collection &&
                                 this.state.collection.length > 0 ? (
                                   <div className="card-columns card-columns-3">
