@@ -18,6 +18,7 @@ function jsxPlugin() {
       const result = await esbuild.transform(code, {
         loader: 'jsx',
         jsx: 'automatic',
+        target: 'es2022',
         sourcemap: true,
         sourcefile: id,
       });
@@ -50,12 +51,14 @@ export default defineConfig(({ mode }) => {
     },
     build: {
       outDir: 'build',
+      target: 'es2022',
       sourcemap: true,
     },
     envDir: './environments',
     envPrefix: 'VITE_',
     optimizeDeps: {
       esbuildOptions: {
+        target: 'es2022',
         loader: {
           '.js': 'jsx',
           '.jsx': 'jsx',
