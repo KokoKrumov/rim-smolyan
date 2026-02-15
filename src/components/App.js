@@ -1,35 +1,35 @@
 import "../assets/styles/main.scss";
 
-import React, { Component } from "react";
+import React, { Component, Suspense, lazy } from "react";
 import { Route, Router, Switch } from "react-router-dom";
 import { fetchCategories, showModal } from "../actions";
 
-import AboutUs from "./pages/aboutUs/AboutUs";
-import Administrative from "./pages/administrative/Administrative";
-import CollectionsDetailItem from "./pages/collection/CollectionsDetailItem";
-import CollectionsIndex from "./pages/collection/CollectionsIndex";
-import CollectionsIntroAndGallery from "./pages/collection/CollectionsIntroAndGallery";
-import CollectionsMain from "./pages/collection/CollectionsMain";
-import CollectionsVirtual from "./pages/collection/CollectionsVirtual";
-import Contacts from "./pages/contacts/Contacts";
-import ExhibitionsDetailPage from "./pages/ExhibitionsDetailPage/ExhibitionsDetailPage";
-import ExhibitionsPage from "./pages/exhibitions/Exhibitions";
+const AboutUs = lazy(() => import("./pages/aboutUs/AboutUs"));
+const Administrative = lazy(() => import("./pages/administrative/Administrative"));
+const CollectionsDetailItem = lazy(() => import("./pages/collection/CollectionsDetailItem"));
+const CollectionsIndex = lazy(() => import("./pages/collection/CollectionsIndex"));
+const CollectionsIntroAndGallery = lazy(() => import("./pages/collection/CollectionsIntroAndGallery"));
+const CollectionsMain = lazy(() => import("./pages/collection/CollectionsMain"));
+const CollectionsVirtual = lazy(() => import("./pages/collection/CollectionsVirtual"));
+const Contacts = lazy(() => import("./pages/contacts/Contacts"));
+const ExhibitionsDetailPage = lazy(() => import("./pages/ExhibitionsDetailPage/ExhibitionsDetailPage"));
+const ExhibitionsPage = lazy(() => import("./pages/exhibitions/Exhibitions"));
 import Footer from "../components/footer/Footer";
-import FundsPage from "./pages/fundsPage/FundsPage";
-import Games from "./pages/games/Games";
+const FundsPage = lazy(() => import("./pages/fundsPage/FundsPage"));
+const Games = lazy(() => import("./pages/games/Games"));
 import Header from "../components/header/Header";
-import HomePage from "./pages/homePage/HomePage";
-import LaszloNagyPage from "./pages/laszloNagyPage/LaszloNagyPage";
+const HomePage = lazy(() => import("./pages/homePage/HomePage"));
+const LaszloNagyPage = lazy(() => import("./pages/laszloNagyPage/LaszloNagyPage"));
 import ModalComponent from "./modal/ModalComponent";
-import NewsDetailPage from "./pages/newsDetailPage/NewsDetailPage";
-import NewsPage from "./pages/newsPage/NewsPage";
-import NotFound from "./pages/NotFound";
-import Prices from "./pages/prices/Prices";
-import LegalInfo from "./pages/legal/LegalInfo";
-import Regulation from "./pages/games/Regulation";
-import Services from "./pages/services/Services";
-import SupportUs from "./pages/supportUs/SupportUs";
-import Terms from "./pages/terms/Terms";
+const NewsDetailPage = lazy(() => import("./pages/newsDetailPage/NewsDetailPage"));
+const NewsPage = lazy(() => import("./pages/newsPage/NewsPage"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+const Prices = lazy(() => import("./pages/prices/Prices"));
+const LegalInfo = lazy(() => import("./pages/legal/LegalInfo"));
+const Regulation = lazy(() => import("./pages/games/Regulation"));
+const Services = lazy(() => import("./pages/services/Services"));
+const SupportUs = lazy(() => import("./pages/supportUs/SupportUs"));
+const Terms = lazy(() => import("./pages/terms/Terms"));
 import { connect } from "react-redux";
 import history from "../history";
 import { injectIntl } from "react-intl";
@@ -50,6 +50,7 @@ class App extends Component {
         <div className="wrapper">
           <Header />
           <main>
+            <Suspense fallback={<div style={{ minHeight: '60vh' }} />}>
             <Switch>
               <Route path="/" exact component={HomePage} />
               <Route path="/funds" exact component={FundsPage} />
@@ -123,6 +124,7 @@ class App extends Component {
               />
               <Route path="*" component={NotFound} />
             </Switch>
+            </Suspense>
           </main>
           <Footer />
           <ModalComponent />

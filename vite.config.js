@@ -53,6 +53,17 @@ export default defineConfig(({ mode }) => {
       outDir: 'build',
       target: 'es2022',
       sourcemap: true,
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            'react-vendor': ['react', 'react-dom', 'react-redux', 'redux', 'redux-thunk'],
+            'react-router': ['react-router-dom'],
+            'react-intl': ['react-intl'],
+            'ui-vendor': ['bootstrap', 'react-bootstrap', 'styled-components', 'react-alice-carousel', 'react-css-transition-replace', 'react-share'],
+            'utils': ['lodash', 'axios'],
+          },
+        },
+      },
     },
     envDir: './environments',
     envPrefix: 'VITE_',
