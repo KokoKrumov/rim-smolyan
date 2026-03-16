@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import Col from "react-bootstrap/cjs/Col";
 import Row from "react-bootstrap/cjs/Row";
 import Container from "react-bootstrap/cjs/Container";
@@ -7,7 +7,7 @@ import {connect} from "react-redux";
 import {showModal} from "../../actions";
 import {isMobileScreen} from "../../utilities/browser";
 import {isTabletScreen} from "../../utilities/browser";
-import Carousel from 'react-elastic-carousel';
+import AliceCarousel from 'react-alice-carousel';
 import ReactCSSTransitionReplace from 'react-css-transition-replace';
 
 function CarouselMegatron({listMegatronCarousel, showModal}) {
@@ -16,7 +16,7 @@ function CarouselMegatron({listMegatronCarousel, showModal}) {
     const [carouselTitle, setCarouselTitle] = useState('')
     const [carouselDescription, setCarouselDescription] = useState('')
     const [carouselType, setCarouselType] = useState('')
-    let carousel1 = React.createRef();
+    const carousel1 = useRef(null);
 
     useEffect(() => {
 
@@ -35,6 +35,14 @@ function CarouselMegatron({listMegatronCarousel, showModal}) {
         e.preventDefault();
         showModal(data, url)
     }
+
+    const carouselItems = listMegatronCarousel
+        ? listMegatronCarousel.map((item, index) => (
+            <div className='carousel-megatron__img-wrap' key={index} style={{ padding: '0 15px' }}>
+                <img className="w-100" src={item.image} alt="" itemProp="image"/>
+            </div>
+        ))
+        : [];
 
     if (listMegatronCarousel) {
 
@@ -81,30 +89,18 @@ function CarouselMegatron({listMegatronCarousel, showModal}) {
                                     <Col lg={5}>
 
 
-                                      <div className="row">
-                                          <Carousel
-                                              ref={ref => (carousel1 = ref)}
-                                              isRTL={false}
-                                              itemsToShow={1}
-                                              initialActiveIndex={item}
-                                              showArrows={false}
-                                              pagination={false}
-                                              onChange={(currentItem, pageIndex) => {
-                                                  goto(pageIndex)
+                                      <div className="row" style={{ padding: '0 30px' }}>
+                                          <AliceCarousel
+                                              ref={carousel1}
+                                              items={carouselItems}
+                                              activeIndex={item}
+                                              disableButtonsControls
+                                              disableDotsControls
+                                              mouseTracking
+                                              onSlideChanged={(e) => {
+                                                  goto(e.item)
                                               }}
-
-                                              outerSpacing={30}
-                                              itemPadding={[0, 15]}
-                                          >
-                                              {listMegatronCarousel.map((item, index) => {
-                                                  return (
-                                                      <div className='carousel-megatron__img-wrap' key={index}>
-                                                          <img className="w-100" src={item.image} alt="" itemProp="image"/>
-
-                                                      </div>
-                                                  )
-                                              })}
-                                          </Carousel>
+                                          />
                                       </div>
                                         <p className='carousel-megatron__description paragraph-3'>
                                             {carouselDescription}

@@ -17,7 +17,7 @@ class RegularPrograms extends Component {
         <HeroInner
           title={"regular-programs"}
           subtitle={""}
-          backLinkToUrl="/about-us"
+          backLinkToUrl="about-us"
         />
         <main>
           <Container className="position-relative">
