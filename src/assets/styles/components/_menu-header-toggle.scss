@@ -120,10 +120,10 @@
 }
 
 
-.cross-fade-leave {
+.cross-fade-exit {
 	opacity: 1;
 }
-.cross-fade-leave.cross-fade-leave-active {
+.cross-fade-exit-active {
 	opacity: 0;
 	transition: opacity 1s ease-in;
 }
@@ -131,11 +131,7 @@
 .cross-fade-enter {
 	opacity: 0;
 }
-.cross-fade-enter.cross-fade-enter-active {
+.cross-fade-enter-active {
 	opacity: 1;
 	transition: opacity 1s ease-in;
-}
-
-.cross-fade-height {
-	transition: height 0.5s ease-in-out;
 }

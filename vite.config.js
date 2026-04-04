@@ -43,6 +43,7 @@ export default defineConfig(({ mode }) => {
         '@': path.resolve(__dirname, './src'),
         '~bootstrap': path.resolve(__dirname, 'node_modules/bootstrap'),
         '~react-alice-carousel': path.resolve(__dirname, 'node_modules/react-alice-carousel'),
+        'fonts': path.resolve(__dirname, 'src/assets/fonts'),
       },
     },
     server: {
@@ -59,7 +60,7 @@ export default defineConfig(({ mode }) => {
             'react-vendor': ['react', 'react-dom', 'react-redux', 'redux', 'redux-thunk'],
             'react-router': ['react-router-dom'],
             'react-intl': ['react-intl'],
-            'ui-vendor': ['bootstrap', 'react-bootstrap', 'styled-components', 'react-alice-carousel', 'react-css-transition-replace', 'react-share'],
+            'ui-vendor': ['bootstrap', 'react-bootstrap', 'styled-components', 'react-alice-carousel', 'react-transition-group', 'react-share'],
             'utils': ['lodash', 'axios'],
           },
         },

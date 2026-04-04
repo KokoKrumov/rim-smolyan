@@ -42,40 +42,33 @@ class ExhibitionsPage extends Component {
       propsCategories
     );
 
+    // Set categories immediately to prevent componentDidUpdate re-entry
+    this.setState({ categories: categories });
+
     this.props.fetchExhibitions(slugId, page, perPage).then(() => {
       this.setState({
-        categories: categories,
         currentExhibitions: this.props.exhibitions,
         exhibitions: this.props.exhibitions,
       });
     });
   };
 
-  // componentDidMount() {
-  //   this.props.resetFetchExhibitions();
-  //   // this.elScroll.executeScroll();
-  //   // react can't update when there are changes in storage,
-  //   // however, the storage contains "categories" from the first load,
-  //   // so we have to check the storage when component is mounting
-  //   if (
-  //     !this.state.categories
-  //     //   sessionStorage.getItem("categories") &&
-  //     // !isEqual(
-  //     //   JSON.parse(sessionStorage.getItem("categories")),
-
-  //     // )
-  //   ) {
-  //     console.log("%c ping", "color: blue");
-  //     this.fetchData(
-  //       "/temporary-exhibitions",
-  //       1,
-  //       100,
-  //       "storage",
-  //       this.props,
-  //       this.state.categories
-  //     );
-  //   }
-  // }
+  componentDidMount() {
+    this.props.resetFetchExhibitions();
+    if (
+      this.props.categories &&
+      this.props.categories.length > 0
+    ) {
+      this.fetchData(
+        "/temporary-exhibitions",
+        1,
+        100,
+        "props",
+        this.props,
+        this.props.categories
+      );
+    }
+  }
 
   componentDidUpdate() {
     if (

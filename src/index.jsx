@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import {IntlProvider} from "react-intl";
 import App from './components/App';
 import messages_bg from "./translations/bg.json";
@@ -23,6 +23,8 @@ const language = localStorage.getItem('lang') ??
     'bg' ??
     navigator.languages[0].split(/[-_]/)[0];  // language without region code
 
+const root = createRoot(document.getElementById('root'));
+
 (async _ => {
     await ga4react.initialize()
         .then((ga4) => {
@@ -32,13 +34,11 @@ const language = localStorage.getItem('lang') ??
             console.error(err)
         });
 
-    ReactDOM.render(
+    root.render(
         <IntlProvider locale={language} messages={messages[language]}>
             <Provider store={store}>
                 <App/>
             </Provider>
-        </IntlProvider>,
-
-        document.getElementById('root')
+        </IntlProvider>
     );
 })();
