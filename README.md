@@ -18,12 +18,12 @@
 
 ## 🛠️ Технологичен стек
 
-- **Frontend Framework:** React 17.0.2
+- **Frontend Framework:** React
 - **State Management:** Redux + Redux Thunk
-- **Routing:** React Router DOM 5.3.4
+- **Routing:** React Router DOM
 - **UI Components:** React Bootstrap, Styled Components
 - **Интернационализация:** React Intl
-- **Build Tool:** Webpack 4.42.0
+- **Build Tool:** Vite
 - **Стилове:** SCSS/SASS
 - **Други:** Axios, Lodash, React Share
 

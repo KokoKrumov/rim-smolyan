@@ -8,7 +8,7 @@ import {showModal} from "../../actions";
 import {isMobileScreen} from "../../utilities/browser";
 import {isTabletScreen} from "../../utilities/browser";
 import AliceCarousel from 'react-alice-carousel';
-import ReactCSSTransitionReplace from 'react-css-transition-replace';
+import { SwitchTransition, CSSTransition } from 'react-transition-group';
 
 function CarouselMegatron({listMegatronCarousel, showModal}) {
     const [item, setItem] = useState(0);
@@ -48,11 +48,9 @@ function CarouselMegatron({listMegatronCarousel, showModal}) {
 
         return (
             <div className='carousel-megatron__mobile__bg'>
-                <ReactCSSTransitionReplace
-                    transitionName="cross-fade"
-                    transitionEnterTimeout={500}
-                    transitionLeaveTimeout={500}>
-                    <div className='carousel-megatron__wrap carousel-megatron__mobile' key={item} >
+                <SwitchTransition mode="out-in">
+                    <CSSTransition key={item} classNames="cross-fade" timeout={500}>
+                    <div className='carousel-megatron__wrap carousel-megatron__mobile' >
                         <div
                             key={item.id}
                             className='carousel carousel__dark carousel-megatron hero-bg'
@@ -70,15 +68,14 @@ function CarouselMegatron({listMegatronCarousel, showModal}) {
 
                                         <div className='carousel__title-wrap__mobile'>
                                             <h3 className='carousel__title'>
-                                                <ReactCSSTransitionReplace
-                                                    transitionName="cross-fade"
-                                                    transitionEnterTimeout={500}
-                                                    transitionLeaveTimeout={500}>
-                                            <span key={item}>
+                                                <SwitchTransition mode="out-in">
+                                                    <CSSTransition key={item} classNames="cross-fade" timeout={500}>
+                                            <span>
                                                 {carouselTitle}
 
                                             </span>
-                                                </ReactCSSTransitionReplace>
+                                                    </CSSTransition>
+                                                </SwitchTransition>
                                             </h3>
                                             <p className='carousel__type'>
                                                 {carouselType}
@@ -130,7 +127,8 @@ function CarouselMegatron({listMegatronCarousel, showModal}) {
                             </Container>
                         </div>
                     </div>
-                </ReactCSSTransitionReplace>
+                    </CSSTransition>
+                </SwitchTransition>
             </div>
         )
     } else {
