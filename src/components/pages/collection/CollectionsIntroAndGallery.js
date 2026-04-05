@@ -189,6 +189,7 @@ class CollectionsIntroAndGallery extends Component {
           <HeroCollections
             bgImage={this.props.location.state?.imageHero || this.bgArchImage}
             title={this.state.title || ""}
+            label={true}
           />
         )}
         <div className="collections-page pt-0 pb-0">
