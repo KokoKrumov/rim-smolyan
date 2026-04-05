@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import history from "../../history";
 import { injectIntl } from "react-intl";
@@ -8,28 +8,22 @@ const noImage =
 
 function CardCollections(props) {
   const { intl, item, hostLocation } = props;
-  const [itemObj, setItemObj] = useState({
-    title: "",
-    itemImg: "",
-    itemImgAlt: "",
-    imageHero: "",
-  });
 
-  useEffect(() => {
+  const itemObj = React.useMemo(() => {
     try {
       if (item.hasOwnProperty("description")) {
         const parsed =
           item.description.length !== 0
             ? JSON.parse(item.description)
             : {};
-        setItemObj({
+        return {
           title: item.name,
           itemImg: parsed.image || noImage,
           itemImgAlt: item.slug,
           imageHero: parsed.image_hero || "",
-        });
+        };
       } else {
-        setItemObj({
+        return {
           title: item.title.rendered,
           itemImg: item["_embedded"]["wp:featuredmedia"]
             ? item["_embedded"]["wp:featuredmedia"][0]["source_url"]
@@ -37,12 +31,14 @@ function CardCollections(props) {
           itemImgAlt: item["_embedded"]["wp:featuredmedia"]
             ? item["_embedded"]["wp:featuredmedia"][0]["title"]
             : "",
-        });
+          imageHero: "",
+        };
       }
     } catch (e) {
       console.error(e);
+      return { title: "", itemImg: "", itemImgAlt: "", imageHero: "" };
     }
-  }, []);
+  }, [item]);
 
   function generateHref() {
     if (props.isInnerGallery) {
