@@ -7,13 +7,13 @@ import { fetchNews, showModal } from "../../../actions";
 
 import CarouselMegatron from "../../carousel/carouselMegatron";
 import CarouselMegatronMobile from "../../carousel/CarouselMegatronMobile";
-import Container from "react-bootstrap/cjs/Container";
+import Container from "react-bootstrap/Container";
 import { FormattedMessage } from "react-intl";
 import Hero from "../../hero/Hero";
 import InfoColumn from "../../infoColumn/InfoColumn";
 import { Link } from "react-router-dom";
 import NewsAndEventsList from "../../newsAndEventsList/NewsAndEventsList";
-import Row from "react-bootstrap/cjs/Row";
+import Row from "react-bootstrap/Row";
 import WorkInfoLine from "../../infoLine/WorkInfoLine";
 import aboutUsImage from "../../../assets/images/about_us_section_bg.png";
 import bgCarousel2 from "../../../assets/images/bg-diskos.jpg";

@@ -14,7 +14,7 @@
 		align-items: flex-start;
 		justify-content: space-between;
 
-		@include media-breakpoint-down(lg) {
+		@include media-breakpoint-down(xl) {
 			&.navbar-collapse {
 				@include padding(40px, 0px, 0px, 0px);
 				flex-direction: column;
@@ -66,7 +66,7 @@
 	}
 
 	.navbar-expand {
-		@include media-breakpoint-down(lg) {
+		@include media-breakpoint-down(xl) {
 			flex-direction: column;
 
 
@@ -81,7 +81,7 @@
 		display: flex;
 		flex-direction: column;
 
-		@include media-breakpoint-down(lg) {
+		@include media-breakpoint-down(xl) {
 			flex-direction: row;
 
 			.socials {
@@ -92,7 +92,7 @@
 	}
 
 	&__bottom__inner {
-		@include media-breakpoint-down(sm) {
+		@include media-breakpoint-down(md) {
 			.nav__secondary-link {
 				width: 100%;
 				text-align: center;

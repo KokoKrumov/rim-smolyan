@@ -1,5 +1,5 @@
 import React from "react";
-import Col from "react-bootstrap/cjs/Col";
+import Col from "react-bootstrap/Col";
 import ArticleDate from "../Article/ArticleDate";
 
 function NewsAndEventsList({ listOfNewsAndEvents }) {

@@ -1,7 +1,7 @@
 .administrative-page {
 	@include padding(0px, 0px, 100px, 0px);
 
-	@include media-breakpoint-down(md) {
+	@include media-breakpoint-down(lg) {
 		.list__default {
 			li + li {
 				margin-top: 15px;

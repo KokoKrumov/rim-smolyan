@@ -4,13 +4,13 @@ import {
   slugSanitize,
 } from "../../../utilities/browser";
 
-import Col from "react-bootstrap/cjs/Col";
+import Col from "react-bootstrap/Col";
 import CollectionsList from "./CollectionsList";
-import Container from "react-bootstrap/cjs/Container";
+import Container from "react-bootstrap/Container";
 import HeroInner from "../../hero/HeroInner";
 import InfoColumn from "../../infoColumn/InfoColumn";
-import Row from "react-bootstrap/cjs/Row";
-import Spinner from "react-bootstrap/cjs/Spinner";
+import Row from "react-bootstrap/Row";
+import Spinner from "react-bootstrap/Spinner";
 import { connect } from "react-redux";
 import { fetchCollectionsVirtual } from "../../../actions";
 import { injectIntl } from "react-intl";

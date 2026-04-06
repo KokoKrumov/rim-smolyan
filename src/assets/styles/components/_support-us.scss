@@ -9,7 +9,7 @@
 		}
 
 		.title {
-			@include media-breakpoint-down(md) {
+			@include media-breakpoint-down(lg) {
 				margin-bottom: 5px;
 			}
 		}
@@ -24,7 +24,7 @@
 		.links + .links {
 			@include margin(20px, 0px, 0px, 0px);
 
-			@include media-breakpoint-down(md) {
+			@include media-breakpoint-down(lg) {
 				&:first-child {
 					@include margin(20px, 0px, 55px, 0px);
 				}
@@ -36,12 +36,12 @@
 			text-transform: uppercase;
 			text-decoration: underline;
 
-			@include media-breakpoint-down(md) {
+			@include media-breakpoint-down(lg) {
 				line-height: 1.9;
 			}
 		}
 
-		@include media-breakpoint-down(md) {
+		@include media-breakpoint-down(lg) {
 		@include padding(100px, 0px, 130px, 0px);
 		}
 	}
@@ -49,7 +49,7 @@
 	&__main-content {
 		@include padding(100px, 0px, 100px, 0px);
 
-		@include media-breakpoint-down(md) {
+		@include media-breakpoint-down(lg) {
 			@include padding(70px, 0px, 100px, 0px);
 		}
 	}
@@ -59,7 +59,7 @@
 	}
 
 
-	@include media-breakpoint-down(md) {
+	@include media-breakpoint-down(lg) {
 
 		.modal_tabs-wrap {
 			@include margin(50px, 0px, 0px, 0px)
@@ -97,7 +97,7 @@
 		}
 	}
 
-	@include media-breakpoint-down(sm) {
+	@include media-breakpoint-down(md) {
 		.modal_tabs-wrap .nav-tabs .nav-link {
 			margin-right: 0;
 		}

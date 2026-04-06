@@ -2,15 +2,15 @@ import React, { Component } from "react";
 import { fetchCollectionDescription, fetchCollections } from "../../../actions";
 
 import CardCollections from "../../cards/cardCollections";
-import Col from "react-bootstrap/cjs/Col";
-import Container from "react-bootstrap/cjs/Container";
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
 import HeroCollections from "../../hero/HeroCollections";
 import HeroInner from "../../hero/HeroInner";
 import Nav from "react-bootstrap/Nav";
 import NavigateThroughCollections from "../../nav/NavigateThroughCollections";
-import Row from "react-bootstrap/cjs/Row";
+import Row from "react-bootstrap/Row";
 import SocialsShare from "../../socials/socialsShare";
-import Spinner from "react-bootstrap/cjs/Spinner";
+import Spinner from "react-bootstrap/Spinner";
 import Tab from "react-bootstrap/Tab";
 import { connect } from "react-redux";
 import { extractIdAndCategories } from "../../../utilities/browser";
@@ -267,7 +267,7 @@ class CollectionsIntroAndGallery extends Component {
                           />
                         </Nav>
                       </Nav>
-                      <div className="socials__wrap pr-3 pl-3 p-md-0">
+                      <div className="socials__wrap pe-3 ps-3 p-md-0">
                         <p className="socials-label">Споделете страницата</p>
                         <SocialsShare page={"share-page"} />
                       </div>

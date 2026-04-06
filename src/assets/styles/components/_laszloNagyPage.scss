@@ -9,7 +9,7 @@
 	.section-carousel {
 		@include padding(120px, 0px, 40px, 0px);
 		
-		@include media-breakpoint-down(md) {
+		@include media-breakpoint-down(lg) {
 			@include padding(60px, 0px, 40px, 0px);
 		}
 	

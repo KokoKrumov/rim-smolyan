@@ -24,7 +24,7 @@
         }
 
 
-        @include media-breakpoint-down(md) {
+        @include media-breakpoint-down(lg) {
             &:not(:first-child) {
                 display: none;
             }

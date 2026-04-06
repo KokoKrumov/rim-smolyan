@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { fetchNews, resetFetchNews } from "../../../actions";
 
-import Col from "react-bootstrap/cjs/Col";
-import Container from "react-bootstrap/cjs/Container";
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
 import HeroInner from "../../hero/HeroInner";
-import Nav from "react-bootstrap/cjs/Nav";
+import Nav from "react-bootstrap/Nav";
 import NewsAndEventsListHorizontal from "../../newsAndEventsList/NewsAndEventsListHorizontal";
-import Row from "react-bootstrap/cjs/Row";
+import Row from "react-bootstrap/Row";
 import Spinner from "react-bootstrap/Spinner";
 import aboutUsImage from "../../../assets/images/about_us_section_bg.png";
 import { connect } from "react-redux";

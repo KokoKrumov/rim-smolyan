@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Container from "react-bootstrap/cjs/Container";
+import Container from "react-bootstrap/Container";
 import { connect } from "react-redux";
 import { fetchRimBuildingImages, fetchTeam, showModal } from "../../../actions";
 import HeroInner from "../../hero/HeroInner";

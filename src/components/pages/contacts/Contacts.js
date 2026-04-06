@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import HeroInner from "../../hero/HeroInner";
-import Container from "react-bootstrap/cjs/Container";
-import Row from "react-bootstrap/cjs/Row";
-import Col from "react-bootstrap/cjs/Col";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import { connect } from "react-redux";
 import { fetchNews } from "../../../actions";
 import Socials from "../../socials/socials";

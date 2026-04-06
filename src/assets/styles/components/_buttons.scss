@@ -105,7 +105,7 @@ button.cta_outline {
 
 .about-us-page,
 .support-us-page {
-	@include media-breakpoint-down(md) {
+	@include media-breakpoint-down(lg) {
 		.cta_outline__border-overflow {
 			@include padding(0px, 50px, 0px, 0px);
 		}

@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import heroSupportUsBg from "../../../assets/images/heroSupportUsBg.jpg";
-import Container from "react-bootstrap/cjs/Container";
-import Row from "react-bootstrap/cjs/Row";
-import Col from "react-bootstrap/cjs/Col";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import {connect} from "react-redux";
 import {showModal} from "../../../actions";
 import Tab from "react-bootstrap/Tab";
