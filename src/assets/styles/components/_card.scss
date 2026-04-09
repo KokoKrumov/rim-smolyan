@@ -1,7 +1,15 @@
 .card {
 
     &-columns {
+        column-count: 3;
         column-gap: 3.8rem;
+        orphans: 1;
+        widows: 1;
+
+        > .card {
+            break-inside: avoid;
+            margin-bottom: 0.75rem;
+        }
     }
 
     &__white-bordered {

@@ -19,7 +19,7 @@
 			@include line-height(28px);
 			@include margin(0px, 0px, 10px, 0px);
 
-			@include media-breakpoint-down(md) {
+			@include media-breakpoint-down(lg) {
 				@include font-size(22px);
 			}
 		}

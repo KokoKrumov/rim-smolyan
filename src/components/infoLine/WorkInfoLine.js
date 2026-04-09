@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Container from "react-bootstrap/cjs/Container";
+import Container from "react-bootstrap/Container";
 import arrowRight from "../../assets/images/arrow-right.svg";
 import infoIcon from "../../assets/images/info.svg";
 import Tooltip from 'react-bootstrap/Tooltip';

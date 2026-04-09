@@ -4,7 +4,7 @@ import { extractIdAndCategories, slugSanitize } from "../../utilities/browser";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-import Spinner from "react-bootstrap/cjs/Spinner";
+import Spinner from "react-bootstrap/Spinner";
 import arrowLeftLong from "../../assets/images/arrow-left-long.svg";
 import arrowRightLong from "../../assets/images/arrow-right-long.svg";
 import { connect } from "react-redux";

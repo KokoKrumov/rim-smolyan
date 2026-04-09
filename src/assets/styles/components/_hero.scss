@@ -6,7 +6,7 @@
       @include padding(100px, 0px, 60px, 0px);
       border-bottom: 1px solid $red;
 
-      @include media-breakpoint-down(md) {
+      @include media-breakpoint-down(lg) {
         @include padding(60px, 0px, 30px, 0px);
       }
 
@@ -51,7 +51,7 @@
     height: calc(100vh - (5.8125rem + 3.5625rem));
     min-height: 25rem;
 
-    @include media-breakpoint-down(md) {
+    @include media-breakpoint-down(lg) {
       height: calc(100vh - (7.75rem + 4rem));
     }
 
@@ -61,7 +61,7 @@
       justify-content: center;
       flex-direction: column;
 
-      @include media-breakpoint-down(sm) {
+      @include media-breakpoint-down(md) {
         align-items: flex-start;
       }
     }
@@ -73,7 +73,7 @@
       color: $white;
       text-align: center;
 
-      @include media-breakpoint-down(sm) {
+      @include media-breakpoint-down(md) {
         margin-bottom: 0;
         text-align: left;
       }
@@ -83,14 +83,14 @@
       @include padding(10px, 15px, 45px, 15px);
       color: $white;
 
-      @include media-breakpoint-down(md) {
+      @include media-breakpoint-down(lg) {
         @include padding(0px, 15px, 45px, 15px);
         @include font-size(15px);
         text-align: left;
       }
 
       &__sm {
-        @include media-breakpoint-down(md) {
+        @include media-breakpoint-down(lg) {
           width: 100%;
           text-align: center;
         }
@@ -117,7 +117,7 @@
     .h1 {
       max-width: 70%;
 
-      @include media-breakpoint-down(md) {
+      @include media-breakpoint-down(lg) {
         width: 100%;
         max-width: 100%;
       }
@@ -130,7 +130,7 @@
   justify-content: space-between;
   align-items: flex-end;
 
-  @include media-breakpoint-down(sm) {
+  @include media-breakpoint-down(md) {
     flex-direction: column;
 
     .h1 {

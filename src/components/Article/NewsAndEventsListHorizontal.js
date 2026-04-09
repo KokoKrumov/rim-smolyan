@@ -1,6 +1,6 @@
 import React from "react";
-import Col from "react-bootstrap/cjs/Col";
-import Row from "react-bootstrap/cjs/Row";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
 import { FormattedMessage } from "react-intl";
 
 function NewsAndEventsListHorizontal({ listOfNewsAndEvents }) {

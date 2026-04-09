@@ -1,8 +1,8 @@
 import React, {useEffect, useRef, useState} from 'react';
-import Col from "react-bootstrap/cjs/Col";
+import Col from "react-bootstrap/Col";
 import AliceCarousel from 'react-alice-carousel'
-import Row from "react-bootstrap/cjs/Row";
-import Container from "react-bootstrap/cjs/Container";
+import Row from "react-bootstrap/Row";
+import Container from "react-bootstrap/Container";
 import {Link} from "react-router-dom";
 import carouselMegatronArrowRight from "../../assets/images/carousel__right-arrow.svg";
 import carouselMegatronArrowLeft from "../../assets/images/carousel__left-arrow.svg";

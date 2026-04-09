@@ -1,7 +1,7 @@
 import React from "react";
-import Col from "react-bootstrap/cjs/Col";
-import Row from "react-bootstrap/cjs/Row";
-import Spinner from "react-bootstrap/cjs/Spinner";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+import Spinner from "react-bootstrap/Spinner";
 import { FormattedMessage } from "react-intl";
 import ArticleDate from "../Article/ArticleDate";
 import ExhibitionDate from "../Exhibition/ExhibitionDate";
@@ -59,10 +59,10 @@ function NewsAndEventsListHorizontal({ listOfNewsAndEvents, isExhibition }) {
 
                 {isExhibition && event.event_date && event.event_place ? (
                   <div className="h-sup d-flex align-center mb-4">
-                    <div className="mr-2">
+                    <div className="me-2">
                       <ExhibitionDate date={event.event_date} />
                     </div>{" "}
-                    |<div className="ml-2">{event.event_place}</div>
+                    |<div className="ms-2">{event.event_place}</div>
                   </div>
                 ) : null}
                 {/*!DATE*/}

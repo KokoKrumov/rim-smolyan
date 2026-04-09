@@ -2,12 +2,21 @@ import { FormattedMessage, injectIntl } from "react-intl";
 import React, { Component } from "react";
 
 import Accordion from "react-bootstrap/Accordion";
-import Card from "react-bootstrap/cjs/Card";
+import { useAccordionButton } from "react-bootstrap/AccordionButton";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import { connect } from "react-redux";
 import { showModal } from "../../actions";
+
+function AccordionToggle({ children, eventKey, onClick }) {
+  const decoratedOnClick = useAccordionButton(eventKey, onClick);
+  return (
+    <div className="accordion-toggle" onClick={decoratedOnClick}>
+      {children}
+    </div>
+  );
+}
 
 class AccordionBlock extends Component {
   state = {
@@ -278,7 +287,8 @@ class AccordionBlock extends Component {
         {this.state.content.map((block) => {
           return (
             <React.Fragment key={block.title}>
-              <Card
+              <Accordion.Item
+                eventKey={block.id}
                 id={block.id}
                 className={`accordion__wrap ${
                   this.props.openAccordionItemPured === block.id
@@ -288,8 +298,7 @@ class AccordionBlock extends Component {
               >
                 {block.type === "collapsable" ? (
                   <React.Fragment>
-                    <Accordion.Toggle
-                      as={Card.Header}
+                    <AccordionToggle
                       eventKey={block.id}
                       onClick={() => {
                         this.props.handleInitialHash(block);
@@ -323,19 +332,16 @@ class AccordionBlock extends Component {
                           </Col>
                         </Row>
                       </Container>
-                    </Accordion.Toggle>
+                    </AccordionToggle>
 
-                    <Accordion.Collapse eventKey={block.id}>
-                      <Card.Body>
-                        <Container>{this.renderContent(block)}</Container>
-                      </Card.Body>
-                    </Accordion.Collapse>
+                    <Accordion.Body>
+                      <Container>{this.renderContent(block)}</Container>
+                    </Accordion.Body>
                   </React.Fragment>
                 ) : (
                   <React.Fragment>
-                    <Accordion.Toggle
-                      as={Card.Header}
-                      eventKey={block.id}
+                    <div
+                      className="accordion-toggle"
                       onClick={() => {
                         this.docDownload(block.url);
                       }}
@@ -366,10 +372,10 @@ class AccordionBlock extends Component {
                           </Col>
                         </Row>
                       </Container>
-                    </Accordion.Toggle>
+                    </div>
                   </React.Fragment>
                 )}
-              </Card>
+              </Accordion.Item>
             </React.Fragment>
           );
         })}

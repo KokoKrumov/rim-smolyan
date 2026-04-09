@@ -9,7 +9,7 @@
 			flex-direction: column;
 
 
-			@include media-breakpoint-down(xl) {
+			@include media-breakpoint-down(xxl) {
 				&.container {
 					padding-right: 0;
 					padding-left: 0;
@@ -29,7 +29,7 @@
 			flex-direction: row;
 			align-items: center;
 
-			@include media-breakpoint-down(lg) {
+			@include media-breakpoint-down(xl) {
 				flex-direction: column;
 			}
 
@@ -42,7 +42,7 @@
 				&:last-child {
 					align-items: center;
 
-					@include media-breakpoint-down(lg) {
+					@include media-breakpoint-down(xl) {
 						width: 100%;
 						align-items: flex-start;
 
@@ -75,7 +75,7 @@
 					}
 				}
 
-				@include media-breakpoint-down(lg) {
+				@include media-breakpoint-down(xl) {
 					border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 				}
 
@@ -85,7 +85,7 @@
 					width: 100%;
 					padding-right: 60px;
 
-					@include media-breakpoint-down(xs) {
+					@include media-breakpoint-down(sm) {
 						padding-right: 26px;
 					}
 
@@ -103,13 +103,13 @@
 				border-top: 1px solid rgba(255, 255, 255, 0.1);
 			}
 
-			@include media-breakpoint-down(lg) {
+			@include media-breakpoint-down(xl) {
 				margin-top: 1.56rem;
 				margin-bottom: 1.56rem;
 			}
 
 			.nav__main-link__separate-line {
-				@include media-breakpoint-down(lg) {
+				@include media-breakpoint-down(xl) {
 					margin-top: 1.56rem;
 					margin-bottom: 1.56rem;
 					border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -152,7 +152,7 @@
 				color: rgba(255, 255, 255, 0.85);
 			}
 
-			@include media-breakpoint-down(lg) {
+			@include media-breakpoint-down(xl) {
 				@include padding(7px, 10px, 7px, 25px);
 			}
 
@@ -170,7 +170,7 @@
 	}
 
 
-	@include media-breakpoint-down(lg) {
+	@include media-breakpoint-down(xl) {
 
 		.dropdown-toggle::after {
 			border-top-color: #fff

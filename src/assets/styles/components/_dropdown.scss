@@ -34,7 +34,7 @@
       font-family: acari_sansregular, sans-serif;
       font-weight: 500;
 
-      @include media-breakpoint-down(lg) {
+      @include media-breakpoint-down(xl) {
         color: rgba(255, 255, 255, 0.85);
         @include width(23px);
       }

@@ -34,12 +34,12 @@
 		&.nae-container {
 			@include margin(-20px, 0px, 0px, 0px);
 			
-			@include media-breakpoint-down(md) {
+			@include media-breakpoint-down(lg) {
 				@include margin(20px, 0px, 0px, 0px);
 			}
 		}
 
-		@include media-breakpoint-down(md) {
+		@include media-breakpoint-down(lg) {
 
 			.carousel-images__wrap {
 				margin-left: -10px;
@@ -54,14 +54,14 @@
 	.section-building {
 		@include padding(120px, 0px, 100px, 0px);
 
-		@include media-breakpoint-down(md) {
+		@include media-breakpoint-down(lg) {
 			@include padding(60px, 0px, 100px, 0px);
 		}
 
 		.nae-container {
 			@include padding(0px, 0px, 10px, 0px);
 
-			@include media-breakpoint-down(md) {
+			@include media-breakpoint-down(lg) {
 				&.hero-bg {
 					padding-top: 0;
 				}
@@ -73,7 +73,7 @@
 		}
 
 		.info-line__bordered__white {
-			@include media-breakpoint-down(md) {
+			@include media-breakpoint-down(lg) {
 				@include padding(35px, 15px, 35px, 15px);
 
 
@@ -90,7 +90,7 @@
 	}
 
 
-	@include media-breakpoint-down(md) {
+	@include media-breakpoint-down(lg) {
 		.info-line__titled__item {
 			flex-direction: column;
 			align-items: flex-start;
@@ -129,7 +129,7 @@
 			.info-line {
 				@include padding(58px, 80px, 37px, 80px);
 
-				@include media-breakpoint-down(md) {
+				@include media-breakpoint-down(lg) {
 					@include padding(25px, 10px, 37px, 10px);
 				}
 			}

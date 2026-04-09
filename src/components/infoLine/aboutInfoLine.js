@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Container from "react-bootstrap/cjs/Container";
+import Container from "react-bootstrap/Container";
 import {FormattedMessage, injectIntl} from 'react-intl';
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
