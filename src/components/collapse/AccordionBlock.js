@@ -1,8 +1,7 @@
 import { FormattedMessage, injectIntl } from "react-intl";
-import React, { Component, useContext } from "react";
+import React, { Component } from "react";
 
 import Accordion from "react-bootstrap/Accordion";
-import AccordionContext from "react-bootstrap/AccordionContext";
 import { useAccordionButton } from "react-bootstrap/AccordionButton";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
@@ -11,18 +10,11 @@ import { connect } from "react-redux";
 import { showModal } from "../../actions";
 
 function AccordionToggle({ children, eventKey, onClick }) {
-  const { activeEventKey } = useContext(AccordionContext);
   const decoratedOnClick = useAccordionButton(eventKey, onClick);
-  const isExpanded = activeEventKey === eventKey;
   return (
-    <button
-      type="button"
-      className="accordion-toggle"
-      onClick={decoratedOnClick}
-      aria-expanded={isExpanded}
-    >
+    <div className="accordion-toggle" onClick={decoratedOnClick}>
       {children}
-    </button>
+    </div>
   );
 }
 
@@ -348,11 +340,11 @@ class AccordionBlock extends Component {
                   </React.Fragment>
                 ) : (
                   <React.Fragment>
-                    <a
+                    <div
                       className="accordion-toggle"
-                      href={block.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      onClick={() => {
+                        this.docDownload(block.url);
+                      }}
                     >
                       <Container>
                         <Row className="justify-content-between">
@@ -380,7 +372,7 @@ class AccordionBlock extends Component {
                           </Col>
                         </Row>
                       </Container>
-                    </a>
+                    </div>
                   </React.Fragment>
                 )}
               </Accordion.Item>
