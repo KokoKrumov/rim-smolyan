@@ -1,18 +1,26 @@
-import React, { Component } from "react";
+import React, { Component, useContext } from "react";
 import { FormattedMessage, injectIntl } from "react-intl";
 import { connect } from "react-redux";
 import { showModal } from "../../actions";
 import Container from "react-bootstrap/Container";
 import Accordion from "react-bootstrap/Accordion";
+import AccordionContext from "react-bootstrap/AccordionContext";
 import { useAccordionButton } from "react-bootstrap/AccordionButton";
 import CardExhibitionArchive from "../cards/cardExhibitionArchive";
 
 function AccordionToggle({ children, eventKey, onClick }) {
+  const { activeEventKey } = useContext(AccordionContext);
   const decoratedOnClick = useAccordionButton(eventKey, onClick);
+  const isExpanded = activeEventKey === eventKey;
   return (
-    <div className="accordion-toggle" onClick={decoratedOnClick}>
+    <button
+      type="button"
+      className="accordion-toggle"
+      onClick={decoratedOnClick}
+      aria-expanded={isExpanded}
+    >
       {children}
-    </div>
+    </button>
   );
 }
 
