@@ -58,6 +58,11 @@
 			@include line-height(14px);
 		}
 
+		.design-name {
+			font-family: $font-acari-bold;
+			color: rgba(255, 255, 255, 1);
+		}
+
 		&__inner {
 			display: flex;
 			flex-direction: row;
