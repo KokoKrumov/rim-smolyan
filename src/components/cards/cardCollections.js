@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 
+import history from "../../history";
 import { injectIntl } from "react-intl";
 
 const noImage =
@@ -11,18 +12,21 @@ function CardCollections(props) {
     title: "",
     itemImg: "",
     itemImgAlt: "",
+    imageHero: "",
   });
 
   useEffect(() => {
     try {
       if (item.hasOwnProperty("description")) {
+        const parsed =
+          item.description.length !== 0
+            ? JSON.parse(item.description)
+            : {};
         setItemObj({
           title: item.name,
-          itemImg:
-            item.description.length !== 0
-              ? JSON.parse(item.description).image
-              : noImage,
+          itemImg: parsed.image || noImage,
           itemImgAlt: item.slug,
+          imageHero: parsed.image_hero || "",
         });
       } else {
         setItemObj({
@@ -33,6 +37,7 @@ function CardCollections(props) {
           itemImgAlt: item["_embedded"]["wp:featuredmedia"]
             ? item["_embedded"]["wp:featuredmedia"][0]["title"]
             : "",
+          imageHero: "",
         });
       }
     } catch (e) {
@@ -52,7 +57,18 @@ function CardCollections(props) {
     <div className="card card-collections__wrap">
       <div className="card-collections__img">
         <figure>
-          <a href={generateHref()} className="card-collections__link">
+          <a
+            href={generateHref()}
+            className="card-collections__link"
+            onClick={(e) => {
+              if (!props.isInnerGallery && itemObj.imageHero) {
+                e.preventDefault();
+                history.push(generateHref(), {
+                  imageHero: itemObj.imageHero,
+                });
+              }
+            }}
+          >
             <img
               className="card-collections__image img-fluid"
               src={itemObj.itemImg}

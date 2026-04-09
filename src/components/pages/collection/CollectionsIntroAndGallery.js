@@ -177,7 +177,7 @@ class CollectionsIntroAndGallery extends Component {
       <>
         {collectionExist ? (
           <HeroCollections
-            bgImage={this.bgArchImage}
+            bgImage={this.props.location.state?.imageHero || this.bgArchImage}
             title={
               this.state.collectionTitle !== ""
                 ? this.state.collectionTitle
@@ -187,8 +187,9 @@ class CollectionsIntroAndGallery extends Component {
           />
         ) : (
           <HeroCollections
-            bgImage={this.bgArchImage}
+            bgImage={this.props.location.state?.imageHero || this.bgArchImage}
             title={this.state.title || ""}
+            label={true}
           />
         )}
         <div className="collections-page pt-0 pb-0">

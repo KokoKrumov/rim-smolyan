@@ -103,8 +103,9 @@ function Footer({ showModal }) {
               <FormattedMessage id="copyright" />
             </p>
             <p className="nav__secondary-link">
-              <FormattedMessage id="design" />:
-              Destopia
+              <FormattedMessage id="design" />
+              {":\u00a0"}
+              <span className="design-name">Destopia</span>
             </p>
           </div>
         </Container>
