@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import Container from "react-bootstrap/cjs/Container";
-import Row from "react-bootstrap/cjs/Row";
-import Col from "react-bootstrap/cjs/Col";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import { connect } from "react-redux";
 import { fetchRimBuildingImages, fetchTeam, showModal } from "../../../actions";
 import aboutUsBg from "../../../assets/images/about-us-page_bg.jpg";
@@ -274,7 +274,7 @@ class AboutUs extends Component {
                 </Col>
                 <Col lg={6}>
                   <Row>
-                    <Col className="pr-0 pl-0">
+                    <Col className="pe-0 ps-0">
                       <div className="about-us-page__building-carousel nae-container">
                         <CarouselImages
                           listImages={this.state.listBuildingImagesCarousel}

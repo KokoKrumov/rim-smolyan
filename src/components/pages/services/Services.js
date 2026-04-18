@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { injectIntl } from "react-intl";
 import HeroInner from "../../hero/HeroInner";
-import Container from "react-bootstrap/cjs/Container";
+import Container from "react-bootstrap/Container";
 import InfoColumn from "../../infoColumn/InfoColumn";
-import Col from "react-bootstrap/cjs/Col";
-import Row from "react-bootstrap/cjs/Row";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
 import imgTraveling from "../../../assets/images/traveling.png";
 import { fetchRoutes, fetchServices } from "../../../actions";
 import CardInfoLine from "../../infoLine/CardInfoLine";
@@ -123,7 +123,7 @@ class Services extends Component {
                   </div>
                 </Col>
                 <Col lg={6}>
-                  <div className="pr-0 pl-0">
+                  <div className="pe-0 ps-0">
                     <div className="nae-container">
                       <img
                         className="img-fluid"

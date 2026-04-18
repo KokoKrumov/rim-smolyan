@@ -174,7 +174,7 @@
 }
 
 // Tablet breakpoint (768px - 991px)
-@include media-breakpoint-down(lg) {
+@include media-breakpoint-down(xl) {
   .collections-index {
     &__content {
       left: 8%;
@@ -188,7 +188,7 @@
 }
 
 // Mobile breakpoint (below 768px)
-@include media-breakpoint-down(md) {
+@include media-breakpoint-down(lg) {
   .collections-index {
     flex-direction: column;
 
@@ -225,7 +225,7 @@
 }
 
 // Small mobile (below 576px)
-@include media-breakpoint-down(sm) {
+@include media-breakpoint-down(md) {
   .collections-index {
     &__section {
       min-height: 45vh;

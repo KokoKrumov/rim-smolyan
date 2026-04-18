@@ -96,16 +96,14 @@ function Header({ showModal }) {
                 {isTabletScreenV ? (
                   <div className="header-navigation__inner__child__mobile">
                     <InputGroup className="header-navigation__inner__child">
-                      <InputGroup.Prepend>
-                        <InputGroup.Text id="basic-addon1">
-                          <img
-                            className=""
-                            src={searchIcon}
-                            alt=""
-                            itemProp="image"
-                          />
-                        </InputGroup.Text>
-                      </InputGroup.Prepend>
+                      <InputGroup.Text id="basic-addon1">
+                        <img
+                          className=""
+                          src={searchIcon}
+                          alt=""
+                          itemProp="image"
+                        />
+                      </InputGroup.Text>
                       <FormControl
                         placeholder={intl.formatMessage({ id: "menu.search" })}
                         aria-label={intl.formatMessage({ id: "menu.search" })}
@@ -139,16 +137,14 @@ function Header({ showModal }) {
                   </div>
                 ) : (
                   <InputGroup className="header-navigation__inner__child">
-                    <InputGroup.Prepend>
-                      <InputGroup.Text id="basic-addon1">
-                        <img
-                          className=""
-                          src={searchIcon}
-                          alt=""
-                          itemProp="image"
-                        />
-                      </InputGroup.Text>
-                    </InputGroup.Prepend>
+                    <InputGroup.Text id="basic-addon1">
+                      <img
+                        className=""
+                        src={searchIcon}
+                        alt=""
+                        itemProp="image"
+                      />
+                    </InputGroup.Text>
                     <FormControl
                       placeholder={intl.formatMessage({ id: "menu.search" })}
                       aria-label={intl.formatMessage({ id: "menu.search" })}

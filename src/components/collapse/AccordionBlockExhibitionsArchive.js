@@ -4,8 +4,17 @@ import { connect } from "react-redux";
 import { showModal } from "../../actions";
 import Container from "react-bootstrap/Container";
 import Accordion from "react-bootstrap/Accordion";
-import Card from "react-bootstrap/cjs/Card";
+import { useAccordionButton } from "react-bootstrap/AccordionButton";
 import CardExhibitionArchive from "../cards/cardExhibitionArchive";
+
+function AccordionToggle({ children, eventKey, onClick }) {
+  const decoratedOnClick = useAccordionButton(eventKey, onClick);
+  return (
+    <div className="accordion-toggle" onClick={decoratedOnClick}>
+      {children}
+    </div>
+  );
+}
 
 class AccordionBlock extends Component {
   state = {
@@ -20,20 +29,20 @@ class AccordionBlock extends Component {
   render() {
     const { intl, content } = this.props;
     return (
-      <Accordion>
-        <Card
+      <Accordion activeKey={this.state.activeKey}>
+        <Accordion.Item
+          eventKey="0"
           className={`accordion__wrap accordion__wrap__exhibitions ${
             this.state.activeKey === "0" ? `accordion__wrap__active` : ``
           }`}
         >
           <React.Fragment>
-            <Accordion.Toggle
-              as={Card.Header}
+            <AccordionToggle
               eventKey="0"
               onClick={() => this.toggleActiveKey()}
             >
               <Container>
-                <div className="d-flex justify-content-start align-items-center pr-3 pl-3">
+                <div className="d-flex justify-content-start align-items-center pe-3 ps-3">
                   <h3
                     className="paragraph-3 btn-collapse"
                     dangerouslySetInnerHTML={{
@@ -58,36 +67,34 @@ class AccordionBlock extends Component {
                   </div>
                 </div>
               </Container>
-            </Accordion.Toggle>
+            </AccordionToggle>
 
-            <Accordion.Collapse eventKey="0">
-              <Card.Body>
-                <Container>
-                  <div className="pr-3 pl-3">
-                    <p
-                      className="paragraph-2 exhibitions__archive__subtitle"
-                      dangerouslySetInnerHTML={{
-                        __html: intl.formatMessage({ id: "archive-subtitle" }),
-                      }}
-                    />
-                  </div>
-                  <div className="pr-3 pl-3">
-                    {content &&
-                      content.map((item) => {
-                        return (
-                          <CardExhibitionArchive
-                            key={item.id}
-                            title={item.title.rendered}
-                            text={item.excerpt.rendered}
-                          />
-                        );
-                      })}
-                  </div>
-                </Container>
-              </Card.Body>
-            </Accordion.Collapse>
+            <Accordion.Body>
+              <Container>
+                <div className="pe-3 ps-3">
+                  <p
+                    className="paragraph-2 exhibitions__archive__subtitle"
+                    dangerouslySetInnerHTML={{
+                      __html: intl.formatMessage({ id: "archive-subtitle" }),
+                    }}
+                  />
+                </div>
+                <div className="pe-3 ps-3">
+                  {content &&
+                    content.map((item) => {
+                      return (
+                        <CardExhibitionArchive
+                          key={item.id}
+                          title={item.title.rendered}
+                          text={item.excerpt.rendered}
+                        />
+                      );
+                    })}
+                </div>
+              </Container>
+            </Accordion.Body>
           </React.Fragment>
-        </Card>
+        </Accordion.Item>
       </Accordion>
     );
   }

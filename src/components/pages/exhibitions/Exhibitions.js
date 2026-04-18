@@ -3,7 +3,7 @@ import { fetchExhibitions, resetFetchExhibitions } from "../../../actions";
 
 import AccordionBlockExhibitionsArchive from "../../collapse/AccordionBlockExhibitionsArchive";
 import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/cjs/Container";
+import Container from "react-bootstrap/Container";
 import HeroInner from "../../hero/HeroInner";
 import Image from "react-bootstrap/Image";
 import NewsAndEventsListHorizontal from "../../newsAndEventsList/NewsAndEventsListHorizontal";

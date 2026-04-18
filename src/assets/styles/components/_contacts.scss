@@ -47,7 +47,7 @@
   }
 
   .address__list {
-    @include media-breakpoint-down(md){
+    @include media-breakpoint-down(lg){
       @include margin(15px, 0px, 25px, 0px)
     }
   }

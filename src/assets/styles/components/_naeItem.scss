@@ -4,7 +4,7 @@
     position: relative;
     overflow: hidden;
 
-    @include media-breakpoint-down(md) {
+    @include media-breakpoint-down(lg) {
       @include margin(0px, 0px, 20px, 0px);
     }
   }
@@ -80,7 +80,7 @@
     }
 
     &__wrap {
-      @include media-breakpoint-down(sm) {
+      @include media-breakpoint-down(md) {
         &:not(:first-child) {
           @include margin(60px, 0px, 0px, 0px);
         }
@@ -145,7 +145,7 @@
     .a {
       margin-top: 2rem;
 
-      @include media-breakpoint-down(md) {
+      @include media-breakpoint-down(lg) {
         margin-top: 1rem;
       }
     }
@@ -154,7 +154,7 @@
   &__horizontal + &__horizontal {
     @include margin(40px, 0px, 0px, 0px);
 
-    @include media-breakpoint-down(md) {
+    @include media-breakpoint-down(lg) {
       @include margin(60px, 0px, 0px, 0px);
     }
   }
@@ -170,7 +170,7 @@
     &__wrap {
       @include margin(0px, 0px, 15px, 0px);
 
-      @include media-breakpoint-down(md) {
+      @include media-breakpoint-down(lg) {
         @include margin(0px, 0px, 10px, 0px);
       }
     }

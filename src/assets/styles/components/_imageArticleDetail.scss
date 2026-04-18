@@ -6,7 +6,7 @@
 			background-color: $red;
 		}
 
-		@include media-breakpoint-down(md) {
+		@include media-breakpoint-down(lg) {
 			@include margin(30px, 0px, 30px, 0px);
 		}
 	}

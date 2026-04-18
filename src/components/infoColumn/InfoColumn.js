@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Container from "react-bootstrap/cjs/Container";
+import Container from "react-bootstrap/Container";
 import { injectIntl } from "react-intl";
 import { connect } from "react-redux";
 import { showModal } from "../../actions";
