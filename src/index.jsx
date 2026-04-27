@@ -7,7 +7,7 @@ import messages_en from "./translations/en.json";
 import {Provider} from "react-redux";
 import {createStore, applyMiddleware, compose} from 'redux';
 import reducers from './reducers';
-import reduxThunk from 'redux-thunk'
+import { thunk as reduxThunk } from 'redux-thunk'
 import GA4React from "ga-4-react";
 
 const ga4react = new GA4React("G-Y09PXD41TG");
