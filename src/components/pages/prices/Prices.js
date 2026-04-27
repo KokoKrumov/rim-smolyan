@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 
-import Col from "react-bootstrap/cjs/Col";
-import Container from "react-bootstrap/cjs/Container";
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
 import HeroInner from "../../hero/HeroInner";
-import Row from "react-bootstrap/cjs/Row";
+import Row from "react-bootstrap/Row";
 import Spinner from "react-bootstrap/Spinner";
 import { connect } from "react-redux";
 import { fetchPrices } from "../../../actions";

@@ -5,7 +5,7 @@
     .h1 {
         margin-bottom: 2.5rem;
 
-        @include media-breakpoint-down(lg){
+        @include media-breakpoint-down(xl){
             text-align: center;
         }
     }

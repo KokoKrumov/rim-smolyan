@@ -1,11 +1,11 @@
 import CarouselImages from "../../carousel/carouselImages";
-import Col from "react-bootstrap/cjs/Col";
-import Container from "react-bootstrap/cjs/Container";
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
 import HeroCollections from "../../hero/HeroCollections";
 import HeroInner from "../../hero/HeroInner";
 import InfoColumn from "../../infoColumn/InfoColumn";
 import React, { useEffect } from "react";
-import Row from "react-bootstrap/cjs/Row";
+import Row from "react-bootstrap/Row";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPricesLaszloNagy } from "../../../actions";
 import { wrapPricesInSpans } from "../../../utilities/wrapPricesInSpans";
@@ -133,7 +133,7 @@ const LaszloNagyPage = (props) => {
               </Col>
               <Col lg={6}>
                 <Row>
-                  <Col className="pr-0 pl-0">
+                  <Col className="pe-0 ps-0">
                     <div className="about-us-page__building-carousel nae-container">
                       <CarouselImages
                         listImages={laszloNagyPageContent.laszloNagyCarouselImg}

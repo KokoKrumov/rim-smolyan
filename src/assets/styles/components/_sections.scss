@@ -14,7 +14,7 @@
 			@include margin(0px, 0px, 40px, 0px);
 			color: $dark;
 
-			@include media-breakpoint-down(md) {
+			@include media-breakpoint-down(lg) {
 				.h1	{
 				text-align: center;
 				}
@@ -46,7 +46,7 @@
 			justify-content: space-between;
 		}
 
-		@include media-breakpoint-down(md) {
+		@include media-breakpoint-down(lg) {
 			.card {
 				@include padding(50px, 25px, 40px, 25px);
 

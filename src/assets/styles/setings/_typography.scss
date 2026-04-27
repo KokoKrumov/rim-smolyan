@@ -10,7 +10,7 @@
         word-break: break-word;
     }
 
-    @include media-breakpoint-down(md) {
+    @include media-breakpoint-down(lg) {
         @include font-size(62px);
         @include line-height(58px);
     }
@@ -29,7 +29,7 @@
     text-transform: uppercase;
     margin: 0;
 
-    @include media-breakpoint-down(md) {
+    @include media-breakpoint-down(lg) {
         @include font-size(30px);
         @include line-height(36px);
     }
@@ -46,7 +46,7 @@
     letter-spacing: -0.01em;
     color: $dark;
 
-    @include media-breakpoint-down(md) {
+    @include media-breakpoint-down(lg) {
         @include font-size(40px);
         @include line-height(47px);
         margin-bottom: 15px;
@@ -64,7 +64,7 @@
     @include line-height(34px);
     margin: 0;
 
-    @include media-breakpoint-down(md) {
+    @include media-breakpoint-down(lg) {
         @include font-size(24px);
     }
 }
@@ -74,7 +74,7 @@
     @include font-size(30px);
     @include line-height(42px);
 
-    @include media-breakpoint-down(md) {
+    @include media-breakpoint-down(lg) {
         @include font-size(24px);
     }
 }
@@ -118,7 +118,7 @@
     }
 
 
-    @include media-breakpoint-down(md) {
+    @include media-breakpoint-down(lg) {
         @include font-size(15px);
         @include line-height(25px);
     }
@@ -195,20 +195,20 @@
 }
 
 html {
-    @include media-breakpoint-down(lg) {
+    @include media-breakpoint-down(xl) {
         //font-size: 85.7%;
     }
 }
 
 .col-count-2,
 .col-count-3 {
-    @include media-breakpoint-down(md) {
+    @include media-breakpoint-down(lg) {
         column-count: 1 !important;
     }
 }
 
 .col-count-15 {
-    @include media-breakpoint-down(md) {
+    @include media-breakpoint-down(lg) {
         column-count: 4 !important;
         grid-column-gap: calc(190px / 4) !important;
         column-gap: calc(190px / 4) !important;

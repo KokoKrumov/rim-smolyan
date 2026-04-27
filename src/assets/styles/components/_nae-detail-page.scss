@@ -1,6 +1,6 @@
 .news-detail-page__wrap {
 
-	@include media-breakpoint-down(md) {
+	@include media-breakpoint-down(lg) {
 		.h2 {
 			@include font-size(30px);
 			line-height: 1.4;

@@ -1,5 +1,5 @@
 import React from "react";
-import Col from "react-bootstrap/cjs/Col";
+import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import SocialsShare from "../socials/socialsShare";
 import ArticleDate from "../Article/ArticleDate";
@@ -35,10 +35,10 @@ function ArticleDetail({ article }) {
         <div>
           {article.event_place ? (
             <div className="h-sup d-flex align-center">
-              <div className="mr-2">
+              <div className="me-2">
                 <ExhibitionDate date={article.event_date} />
               </div>{" "}
-              |<div className="ml-2">{article.event_place}</div>
+              |<div className="ms-2">{article.event_place}</div>
             </div>
           ) : null}
         </div>
