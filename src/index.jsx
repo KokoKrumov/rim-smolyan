@@ -5,7 +5,7 @@ import App from './components/App';
 import messages_bg from "./translations/bg.json";
 import messages_en from "./translations/en.json";
 import {Provider} from "react-redux";
-import {createStore, applyMiddleware, compose} from 'redux';
+import {legacy_createStore as createStore, applyMiddleware, compose} from 'redux';
 import reducers from './reducers';
 import { thunk as reduxThunk } from 'redux-thunk'
 import GA4React from "ga-4-react";
