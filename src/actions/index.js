@@ -71,7 +71,7 @@ export const fetchRoutes = () => async (dispatch) => {
 export const fetchCategories = () => async (dispatch) => {
   const response = await streams.get(
     // "/categories?_fields=id,name,slug,parent,count&per_page=100"
-    "/categories?_fields=id,name,slug,parent,count&per_page=100",
+    "/categories?_fields=id,name,slug,parent,count,description&per_page=100",
   );
   dispatch({ type: FETCH_CATEGORIES, payload: response.data });
 };

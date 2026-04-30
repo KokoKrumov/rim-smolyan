@@ -31,6 +31,7 @@ class CollectionsIntroAndGallery extends Component {
       collectionDescription: "",
       collectionTitle: "",
       title: "",
+      imageHero: "",
       isLoading: true,
       isFetching: false,
     };
@@ -53,9 +54,23 @@ class CollectionsIntroAndGallery extends Component {
       propsCategories,
     );
 
+    let imageHero = "";
+    try {
+      const matchedCategory = propsCategories.find(
+        (cat) => cat.slug === pureSlug,
+      );
+      if (matchedCategory && matchedCategory.description) {
+        const parsed = JSON.parse(matchedCategory.description);
+        imageHero = parsed.image_hero || "";
+      }
+    } catch (e) {
+      // ignore parse errors
+    }
+
     this.setState({
       collectionsType: pureSlug,
       title: slugItemName,
+      imageHero,
       isLoading: true,
       isFetching: true,
     });
@@ -152,6 +167,7 @@ class CollectionsIntroAndGallery extends Component {
         collectionDescription: "",
         collectionTitle: "",
         title: "",
+        imageHero: "",
         isLoading: true,
         isFetching: false,
       });
@@ -175,51 +191,22 @@ class CollectionsIntroAndGallery extends Component {
     const { intl } = this.props;
     return (
       <>
-        {collectionExist ? (
-          <HeroCollections
-            bgImage={this.props.location.state?.imageHero || this.bgArchImage}
-            title={
-              this.state.collectionTitle !== ""
-                ? this.state.collectionTitle
-                : this.state.title
-            }
-            label={true}
-          />
-        ) : (
-          <HeroCollections
-            bgImage={this.props.location.state?.imageHero || this.bgArchImage}
-            title={this.state.title || ""}
-            label={true}
-          />
-        )}
+        <HeroCollections
+          bgImage={this.props.location.state?.imageHero || this.state.imageHero || this.bgArchImage}
+          title={collectionExist && this.state.collectionTitle ? this.state.collectionTitle : this.state.title || ""}
+          label={true}
+        />
         <div className="collections-page pt-0 pb-0">
-          {collectionExist ? (
-            <HeroInner
-              breadcrumbs={{
-                parent: this.hostLocation,
-                parentLink: this.hostLocation,
-                child: this.state.title,
-              }}
-              subtitleLg={
-                this.state.collectionTitle !== ""
-                  ? this.state.collectionTitle
-                  : this.state.title
-              }
-              arrowBottom={true}
-              scrollOnClick={this.elScroll.executeScroll}
-            />
-          ) : (
-            <HeroInner
-              breadcrumbs={{
-                parent: this.hostLocation,
-                parentLink: this.hostLocation,
-                child: this.state.title,
-              }}
-              subtitleLg={this.state.title}
-              arrowBottom={true}
-              scrollOnClick={this.elScroll.executeScroll}
-            />
-          )}
+          <HeroInner
+            breadcrumbs={{
+              parent: this.hostLocation,
+              parentLink: this.hostLocation,
+              child: this.state.title,
+            }}
+            subtitleLg={collectionExist && this.state.collectionTitle ? this.state.collectionTitle : this.state.title}
+            arrowBottom={true}
+            scrollOnClick={this.elScroll.executeScroll}
+          />
           <main className="prices-page__main collections-page__intro-and-gallery">
             <section ref={this.elScroll.elRef}>
               <Container>
