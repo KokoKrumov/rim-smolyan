@@ -1,12 +1,11 @@
 import React from "react";
-import { FacebookShareButton, TwitterShareButton } from "react-share";
+import { FacebookShareButton, XShareButton } from "react-share";
 
 function SocialButton({ buttonType, articleTitle, url, hashtag = null, link = null }) {
   const facebookShareButton = () => {
     return (
       <FacebookShareButton
         url={url}
-        quote={articleTitle}
         hashtag={hashtag ?? ""}
       >
         <svg
@@ -56,7 +55,7 @@ function SocialButton({ buttonType, articleTitle, url, hashtag = null, link = nu
 
   const twitterShareButton = () => {
     return (
-      <TwitterShareButton
+      <XShareButton
         windowWidth="800px"
         windowHeight="600px"
         url={url}
@@ -77,7 +76,7 @@ function SocialButton({ buttonType, articleTitle, url, hashtag = null, link = nu
             />
           </g>
         </svg>
-      </TwitterShareButton>
+      </XShareButton>
     );
   };
 

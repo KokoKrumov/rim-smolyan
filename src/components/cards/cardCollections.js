@@ -10,7 +10,7 @@ function CardCollections(props) {
   const { intl, item, hostLocation } = props;
   const [itemObj, setItemObj] = useState({
     title: "",
-    itemImg: "",
+    itemImg: noImage,
     itemImgAlt: "",
     imageHero: "",
   });
@@ -33,7 +33,7 @@ function CardCollections(props) {
           title: item.title.rendered,
           itemImg: item["_embedded"]["wp:featuredmedia"]
             ? item["_embedded"]["wp:featuredmedia"][0]["source_url"]
-            : "",
+            : noImage,
           itemImgAlt: item["_embedded"]["wp:featuredmedia"]
             ? item["_embedded"]["wp:featuredmedia"][0]["title"]
             : "",
