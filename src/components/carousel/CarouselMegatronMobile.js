@@ -7,7 +7,8 @@ import {connect} from "react-redux";
 import {showModal} from "../../actions";
 import {isMobileScreen} from "../../utilities/browser";
 import {isTabletScreen} from "../../utilities/browser";
-import AliceCarousel from 'react-alice-carousel';
+import _AliceCarousel from 'react-alice-carousel';
+const AliceCarousel = _AliceCarousel.default ?? _AliceCarousel;
 import { SwitchTransition, CSSTransition } from 'react-transition-group';
 
 function CarouselMegatron({listMegatronCarousel, showModal}) {

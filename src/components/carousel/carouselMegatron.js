@@ -1,6 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import Col from "react-bootstrap/Col";
-import AliceCarousel from 'react-alice-carousel'
+import _AliceCarousel from 'react-alice-carousel'
+const AliceCarousel = _AliceCarousel.default ?? _AliceCarousel;
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import {Link} from "react-router-dom";

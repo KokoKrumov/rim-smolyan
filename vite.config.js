@@ -1,31 +1,21 @@
-import { defineConfig, loadEnv } from 'vite';
+import { defineConfig, loadEnv, transformWithOxc } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-// Custom plugin to treat .js files as JSX
 function jsxPlugin() {
+  let sourcemap = false;
   return {
     name: 'treat-js-as-jsx',
     enforce: 'pre',
+    configResolved(config) {
+      sourcemap = !!config.build.sourcemap;
+    },
     async transform(code, id) {
       if (!id.match(/src\/.*\.js$/)) return null;
-
-      // Use esbuild to transform JSX
-      const esbuild = await import('esbuild');
-      const result = await esbuild.transform(code, {
-        loader: 'jsx',
-        jsx: 'automatic',
-        target: 'es2022',
-        sourcemap: true,
-        sourcefile: id,
-      });
-      return {
-        code: result.code,
-        map: result.map || null,
-      };
+      return transformWithOxc(code, id.replace(/\.js$/, '.jsx'), { sourcemap });
     },
   };
 }
@@ -53,27 +43,30 @@ export default defineConfig(({ mode }) => {
     build: {
       outDir: 'build',
       target: 'es2022',
-      sourcemap: true,
-      rollupOptions: {
+      sourcemap: mode !== 'prod',
+      rolldownOptions: {
         output: {
-          manualChunks: {
-            'react-vendor': ['react', 'react-dom', 'react-redux', 'redux', 'redux-thunk'],
-            'react-router': ['react-router-dom'],
-            'react-intl': ['react-intl'],
-            'ui-vendor': ['bootstrap', 'react-bootstrap', 'styled-components', 'react-alice-carousel', 'react-transition-group', 'react-share'],
-            'utils': ['lodash', 'axios'],
+          codeSplitting: {
+            groups: [
+              { name: 'react-vendor', test: /\/node_modules\/(react|react-dom|react-redux|redux|redux-thunk)\// },
+              { name: 'react-router', test: /\/node_modules\/react-router-dom\// },
+              { name: 'react-intl',   test: /\/node_modules\/react-intl\// },
+              { name: 'ui-vendor',   test: /\/node_modules\/(bootstrap|react-bootstrap|styled-components|react-alice-carousel|react-transition-group|react-share)\// },
+              { name: 'utils',       test: /\/node_modules\/(lodash|axios)\// },
+            ],
           },
         },
       },
     },
     envDir: './environments',
     envPrefix: 'VITE_',
+    oxc: {
+      include: /src\/.*\.js$/,
+    },
     optimizeDeps: {
-      esbuildOptions: {
-        target: 'es2022',
-        loader: {
+      rolldownOptions: {
+        moduleTypes: {
           '.js': 'jsx',
-          '.jsx': 'jsx',
         },
       },
     },
