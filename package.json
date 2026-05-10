@@ -1,12 +1,12 @@
 {
   "name": "rim-smolyan",
-  "version": "1.8.6",
+  "version": "1.8.7",
   "private": false,
   "type": "module",
   "devDependencies": {
     "@vitejs/plugin-react": "^6.0.0",
     "sass": "^1.99.0",
-    "typescript": "~5.7",
+    "typescript": "^5.9.3",
     "vite": "^8.0.0"
   },
   "dependencies": {
