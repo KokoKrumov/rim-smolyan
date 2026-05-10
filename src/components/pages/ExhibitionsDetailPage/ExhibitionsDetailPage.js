@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { fetchExhibitions, fetchExhibitionArticle } from "../../../actions";
 import Article from "../../Article/Article";
 import { withIntl } from "../../../utilities/withIntl";
+import { withRouter } from "../../../utilities/withRouter";
 import NotFound from "../NotFound";
 import Spinner from "react-bootstrap/Spinner";
 class ExhibitionsDetailPage extends Component {
@@ -75,8 +76,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default withIntl(
+export default withRouter(withIntl(
   connect(mapStateToProps, { fetchExhibitionArticle, fetchExhibitions })(
     ExhibitionsDetailPage
   )
-);
+));

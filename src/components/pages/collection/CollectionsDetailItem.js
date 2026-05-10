@@ -1,5 +1,6 @@
 import { fetchCollections, fetchItemFromCollection } from "../../../actions";
 import { useEffect, useRef, useState } from "react";
+import { useParams, useLocation } from "react-router-dom";
 
 import Col from "react-bootstrap/Col";
 import CollectionItemsArrowNavigation from "./CollectionItemsArrowNavigation";
@@ -17,19 +18,17 @@ import { useMatchMedia } from "../../../utilities/useMatchMedia";
 function CollectionsDetailItem({
   fetchItemFromCollection,
   fetchCollections,
-  match,
   itemFomCollection,
   collection,
   intl,
 }) {
+  const { item: itemName, type: collectionName } = useParams();
+  const location = useLocation();
   const noImage =
     "https://api-staging.museumsmolyan.eu/wp-content/uploads/2024/10/no-image.png";
-  const itemName = match.params.item;
-  const collectionName = match.params.type;
   const [item, setItem] = useState({});
   const backUrl =
-    match &&
-    match.url.replace("detail", "intro").split("/").slice(0, -1).join("/");
+    location.pathname.replace("detail", "intro").split("/").slice(0, -1).join("/");
   const isDesktopResolution = useMatchMedia("(min-width:992px)", true);
   const isFetchingCollection = useRef(false);
 

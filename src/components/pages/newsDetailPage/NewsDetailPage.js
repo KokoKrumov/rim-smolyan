@@ -7,6 +7,7 @@ import Spinner from "react-bootstrap/Spinner";
 import { connect } from "react-redux";
 import { extractIdAndCategories } from "../../../utilities/browser";
 import { withIntl } from "../../../utilities/withIntl";
+import { withRouter } from "../../../utilities/withRouter";
 
 class NewsDetailPage extends Component {
   state = {
@@ -102,6 +103,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default withIntl(
+export default withRouter(withIntl(
   connect(mapStateToProps, { fetchArticle, fetchNews })(NewsDetailPage)
-);
+));

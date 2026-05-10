@@ -5,7 +5,7 @@ import ModalNedelovContent from "./ModalShishkovContent";
 import {connect} from "react-redux";
 import {closeModal} from "../../actions";
 import ModalTeamContent from "./ModalTeamContent";
-import history from "../../history";
+import { withRouter } from "../../utilities/withRouter";
 
 class ModalComponent extends Component {
 
@@ -30,14 +30,14 @@ class ModalComponent extends Component {
             //if the modal was opened from cardTeamMember
             // so we have a nickname in the end of the location href
             //when we close the modal, then remove the nickname from there
-            const location = history.location.pathname;
+            const location = window.location.pathname;
             let resetLocation = location.replace(`/${this.props.modal.user.nickname}`, '')
-            history.push(resetLocation)
+            this.props.navigate(resetLocation)
         } else if (this.props.modal.type === "modal-shishkov") {
             //if the modal is from shiskov
-            const location = history.location.pathname;
+            const location = window.location.pathname;
             let resetLocation = location.replace(`/stoyu-shishkov`, '')
-            history.push(resetLocation)
+            this.props.navigate(resetLocation)
         }
     }
 
@@ -76,5 +76,5 @@ const mapDispatchToProps = dispatch => ({
     closeModal: data => dispatch(closeModal(data))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(ModalComponent);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ModalComponent));
 

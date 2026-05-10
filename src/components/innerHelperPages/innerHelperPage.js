@@ -6,7 +6,6 @@ import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import { withIntl } from "../../utilities/withIntl";
 import {Button} from "react-bootstrap";
-import history from "../../history";
 
 class InnerHelperPage extends Component {
 
@@ -36,7 +35,7 @@ class InnerHelperPage extends Component {
                                         variant="link"
                                         className="link cta_outline cta_outline__dark"
                                         onClick={() => {
-                                            history.goBack()
+                                            window.history.back()
                                         }}
                                         dangerouslySetInnerHTML={{
                                             __html:

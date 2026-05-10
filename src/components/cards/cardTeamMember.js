@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import {FormattedMessage} from 'react-intl';
 import { withIntl } from '../../utilities/withIntl';
+import { withRouter } from '../../utilities/withRouter';
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import {showModal} from "../../actions";
-import history from "../../history";
 
 class CardTeamMember extends Component {
 
@@ -18,7 +18,7 @@ class CardTeamMember extends Component {
         //when you open a modal with some of the members in /about-us page
         //then push the nick name in the location href, so an user has ability to copy the path
         //(at this point of time cardTeamMember exist only in /about-us page)
-        history.push(`/about-us/${this.state.user.nickname}`)
+        this.props.navigate(`/about-us/${this.state.user.nickname}`)
     }
 
 
@@ -100,10 +100,10 @@ class CardTeamMember extends Component {
 }
 
 
-export default withIntl(connect(
+export default withRouter(withIntl(connect(
     null,
     {
         showModal
     }
-)(CardTeamMember));
+)(CardTeamMember)));
 

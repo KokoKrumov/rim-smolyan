@@ -1,7 +1,7 @@
 import "../assets/styles/main.scss";
 
 import React, { Component, Suspense, lazy } from "react";
-import { Route, Router, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { fetchCategories, showModal } from "../actions";
 
 const AboutUs = lazy(() => import("./pages/aboutUs/AboutUs"));
@@ -31,7 +31,6 @@ const Services = lazy(() => import("./pages/services/Services"));
 const SupportUs = lazy(() => import("./pages/supportUs/SupportUs"));
 const Terms = lazy(() => import("./pages/terms/Terms"));
 import { connect } from "react-redux";
-import history from "../history";
 import { withIntl } from "../utilities/withIntl";
 
 class App extends Component {
@@ -46,90 +45,51 @@ class App extends Component {
 
   render() {
     return (
-      <Router history={history}>
+      <BrowserRouter>
         <div className="wrapper">
           <Header />
           <main>
             <Suspense fallback={<div style={{ minHeight: '60vh' }} />}>
-            <Switch>
-              <Route path="/" exact component={HomePage} />
-              <Route path="/funds" exact component={FundsPage} />
-              <Route
-                path="/news-and-events/:slug"
-                exact
-                component={NewsDetailPage}
-              />
-              <Route path="/news-and-events" exact component={NewsPage} />
-              <Route path="/news/:slug" exact component={NewsDetailPage} />
-              <Route path="/news" exact component={NewsPage} />
-              <Route path="/events/:slug" exact component={NewsDetailPage} />
-              <Route path="/events" exact component={NewsPage} />
-              <Route
-                path="/exhibitions/:articleSlug"
-                exact
-                component={ExhibitionsDetailPage}
-              />
-              <Route path="/exhibitions" exact component={ExhibitionsPage} />
-              <Route path="/about-us/:modalContent" exact component={AboutUs} />
-              <Route path="/collections" exact component={CollectionsIndex} />
-              <Route
-                path="/main-collections"
-                exact
-                component={CollectionsMain}
-              />
-              <Route
-                path="/main-collections/intro/:type"
-                exact
-                component={CollectionsIntroAndGallery}
-              />
-              <Route
-                path="/main-collections/detail/:type/:item"
-                exact
-                component={CollectionsDetailItem}
-              />
-              <Route
-                path="/virtual-collections"
-                exact
-                component={CollectionsVirtual}
-              />
-              <Route
-                path="/virtual-collections/intro/:type"
-                exact
-                component={CollectionsIntroAndGallery}
-              />
-              <Route
-                path="/virtual-collections/detail/:type/:item"
-                exact
-                component={CollectionsDetailItem}
-              />
-              <Route
-                path="/house-museum-laszlo-nagy"
-                exact
-                component={LaszloNagyPage}
-              />
-              <Route path="/about-us" exact component={AboutUs} />
-              <Route path="/contact-us" exact component={Contacts} />
-              <Route path="/support-us" exact component={SupportUs} />
-              <Route path="/privacy-policy" exact component={LegalInfo} />
-              <Route path="/terms" exact component={Terms} />
-              <Route path="/administrative" exact component={Administrative} />
-              <Route path="/services" exact component={Services} />
-              <Route path="/prices" exact component={Prices} />
-              <Route path="/museum-games" exact component={Games} />
-              <Route path="/museum-games/regulation" exact component={Regulation} />
-              <Route
-                path="/administrative/:parentId/:id"
-                exact
-                component={Administrative}
-              />
-              <Route path="*" component={NotFound} />
-            </Switch>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/funds" element={<FundsPage />} />
+              <Route path="/news-and-events/:slug" element={<NewsDetailPage />} />
+              <Route path="/news-and-events" element={<NewsPage />} />
+              <Route path="/news/:slug" element={<NewsDetailPage />} />
+              <Route path="/news" element={<NewsPage />} />
+              <Route path="/events/:slug" element={<NewsDetailPage />} />
+              <Route path="/events" element={<NewsPage />} />
+              <Route path="/exhibitions/:articleSlug" element={<ExhibitionsDetailPage />} />
+              <Route path="/exhibitions" element={<ExhibitionsPage />} />
+              <Route path="/about-us/regular-programs" element={<AboutUs />} />
+              <Route path="/about-us/:modalContent" element={<AboutUs />} />
+              <Route path="/about-us" element={<AboutUs />} />
+              <Route path="/collections" element={<CollectionsIndex />} />
+              <Route path="/main-collections" element={<CollectionsMain />} />
+              <Route path="/main-collections/intro/:type" element={<CollectionsIntroAndGallery />} />
+              <Route path="/main-collections/detail/:type/:item" element={<CollectionsDetailItem />} />
+              <Route path="/virtual-collections" element={<CollectionsVirtual />} />
+              <Route path="/virtual-collections/intro/:type" element={<CollectionsIntroAndGallery />} />
+              <Route path="/virtual-collections/detail/:type/:item" element={<CollectionsDetailItem />} />
+              <Route path="/house-museum-laszlo-nagy" element={<LaszloNagyPage />} />
+              <Route path="/contact-us" element={<Contacts />} />
+              <Route path="/support-us" element={<SupportUs />} />
+              <Route path="/privacy-policy" element={<LegalInfo />} />
+              <Route path="/terms" element={<Terms />} />
+              <Route path="/administrative/:parentId/:id" element={<Administrative />} />
+              <Route path="/administrative" element={<Administrative />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/prices" element={<Prices />} />
+              <Route path="/museum-games/regulation" element={<Regulation />} />
+              <Route path="/museum-games" element={<Games />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
             </Suspense>
           </main>
           <Footer />
           <ModalComponent />
         </div>
-      </Router>
+      </BrowserRouter>
     );
   }
 }

@@ -84,7 +84,7 @@ const LaszloNagyPage = (props) => {
   };
 
   const laszloNagyContent =
-    props.intl.locale === "en" ? laszloNagyPageEN : laszloNagyPageBG;
+    intl.locale === "en" ? laszloNagyPageEN : laszloNagyPageBG;
 
   return (
     <div className="laszlo-nagy__page">

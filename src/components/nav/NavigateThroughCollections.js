@@ -10,6 +10,7 @@ import arrowRightLong from "../../assets/images/arrow-right-long.svg";
 import { connect } from "react-redux";
 import { fetchCollectionsMain } from "../../actions";
 import { withIntl } from "../../utilities/withIntl";
+import { withRouter } from "../../utilities/withRouter";
 import { isEqual } from "lodash";
 import navigationCollectionItems from "../../utilities/navigationCollectionItems";
 import sortById from "../../utilities/sortById";
@@ -303,6 +304,6 @@ const mapDispatchToProps = (dispatch) => ({
   fetchCollectionsMain: (parent) => dispatch(fetchCollectionsMain(parent)),
 });
 
-export default withIntl(
+export default withRouter(withIntl(
   connect(mapStateToProps, mapDispatchToProps)(NavigateThroughCollections)
-);
+));
