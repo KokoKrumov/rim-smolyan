@@ -10,7 +10,7 @@ export const fetchItemFromCollection = createAsyncThunk(
       );
       return response.data[0];
     } catch (error) {
-      return rejectWithValue(error);
+      return rejectWithValue({ message: error.message, status: error.response?.status });
     }
   }
 );
@@ -22,7 +22,7 @@ const itemFromCollectionSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchItemFromCollection.fulfilled, (state, action) => action.payload)
-      .addCase(fetchItemFromCollection.rejected, (state, action) => action.payload);
+      .addCase(fetchItemFromCollection.rejected, () => ({}));
   },
 });
 

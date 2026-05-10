@@ -30,7 +30,7 @@ export const fetchCollectionDescription = createAsyncThunk(
       );
       return response.data;
     } catch (error) {
-      return rejectWithValue(error);
+      return rejectWithValue({ message: error.message, status: error.response?.status });
     }
   }
 );
@@ -73,7 +73,7 @@ export const fetchCollections =
       dispatch(setByType(response.data));
       return response.data;
     } catch (error) {
-      dispatch(setByTypeError(error));
+      dispatch(setByTypeError({ message: error.message, status: error.response?.status }));
       throw error;
     }
   };

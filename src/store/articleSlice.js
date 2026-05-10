@@ -10,7 +10,7 @@ export const fetchArticle = createAsyncThunk(
       );
       return response.data;
     } catch (error) {
-      return rejectWithValue(error);
+      return rejectWithValue({ message: error.message, status: error.response?.status });
     }
   }
 );

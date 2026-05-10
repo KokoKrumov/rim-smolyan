@@ -10,7 +10,7 @@ export const fetchExhibitionArticle = createAsyncThunk(
       );
       return response.data;
     } catch (error) {
-      return rejectWithValue(error);
+      return rejectWithValue({ message: error.message, status: error.response?.status });
     }
   }
 );
@@ -22,7 +22,7 @@ const exhibitionArticleSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchExhibitionArticle.fulfilled, (state, action) => action.payload)
-      .addCase(fetchExhibitionArticle.rejected, (state, action) => action.payload);
+      .addCase(fetchExhibitionArticle.rejected, () => ({}));
   },
 });
 

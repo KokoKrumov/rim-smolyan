@@ -11,7 +11,7 @@ const _fetchExhibitions = createAsyncThunk(
       );
       return response.data;
     } catch (error) {
-      return rejectWithValue(error);
+      return rejectWithValue({ message: error.message, status: error.response?.status });
     }
   }
 );
@@ -31,7 +31,9 @@ const exhibitionsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(_fetchExhibitions.fulfilled, (state, action) => {
-      // Properly push into Immer draft (fixes original INITIAL_STATE mutation bug)
+      // Clear before pushing to prevent duplicates on repeated fetches
+      state.activeExhibitions = [];
+      state.archiveExhibitions = [];
       action.payload.forEach((exhibition) => {
         if (exhibition.archive) {
           state.archiveExhibitions.push(exhibition);
