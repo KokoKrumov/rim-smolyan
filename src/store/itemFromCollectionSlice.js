@@ -1,0 +1,29 @@
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import streams from '../api/streams';
+
+export const fetchItemFromCollection = createAsyncThunk(
+  'itemFromCollection/fetch',
+  async (urlSlug, { rejectWithValue }) => {
+    try {
+      const response = await streams.get(
+        `/posts?slug=${urlSlug}&_fields=id,date_gmt,slug,title,content,excerpt,collection_item_dating,collection_item_inventory_number,collection_item_location,collection_item_material,collection_item_size,_links,_embedded&_embed`
+      );
+      return response.data[0];
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+const itemFromCollectionSlice = createSlice({
+  name: 'itemFomCollection', // preserving original key spelling
+  initialState: {},
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchItemFromCollection.fulfilled, (state, action) => action.payload)
+      .addCase(fetchItemFromCollection.rejected, (state, action) => action.payload);
+  },
+});
+
+export default itemFromCollectionSlice.reducer;
