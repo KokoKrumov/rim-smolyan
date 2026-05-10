@@ -1,10 +1,10 @@
 import Container from "react-bootstrap/Container";
 import React from "react";
 import { checkIfValueExistInIntl } from "../../utilities/browser";
-import { injectIntl } from "react-intl";
+import { useIntl } from "react-intl";
 
 function HeroCollections(props) {
-  const { intl } = props;
+  const intl = useIntl();
   return (
     <div className="hero-collection">
       <div
@@ -33,4 +33,4 @@ function HeroCollections(props) {
   );
 }
 
-export default injectIntl(HeroCollections);
+export default HeroCollections;

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchExhibitions, fetchExhibitionArticle } from "../../../actions";
 import Article from "../../Article/Article";
-import { injectIntl } from "react-intl";
+import { withIntl } from "../../../utilities/withIntl";
 import NotFound from "../NotFound";
 import Spinner from "react-bootstrap/Spinner";
 class ExhibitionsDetailPage extends Component {
@@ -75,7 +75,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default injectIntl(
+export default withIntl(
   connect(mapStateToProps, { fetchExhibitionArticle, fetchExhibitions })(
     ExhibitionsDetailPage
   )

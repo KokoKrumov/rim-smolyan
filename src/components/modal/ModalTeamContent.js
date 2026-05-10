@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {FormattedMessage, injectIntl} from 'react-intl';
+import {FormattedMessage} from 'react-intl';
+import { withIntl } from '../../utilities/withIntl';
 import {closeModal} from "../../actions";
 import {connect} from "react-redux";
 import Row from "react-bootstrap/Row";
@@ -332,4 +333,4 @@ const mapDispatchToProps = dispatch => ({
     closeModal: data => dispatch(closeModal(data))
 })
 
-export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(ModalTeamContent));
+export default withIntl(connect(mapStateToProps, mapDispatchToProps)(ModalTeamContent));

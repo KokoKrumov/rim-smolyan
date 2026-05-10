@@ -1,4 +1,5 @@
-import { FormattedMessage, injectIntl } from "react-intl";
+import { FormattedMessage } from "react-intl";
+import { withIntl } from "../../utilities/withIntl";
 import React, { Component } from "react";
 
 import Accordion from "react-bootstrap/Accordion";
@@ -384,7 +385,7 @@ class AccordionBlock extends Component {
   }
 }
 
-export default injectIntl(
+export default withIntl(
   connect(null, {
     showModal,
   })(AccordionBlock)

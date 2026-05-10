@@ -4,7 +4,7 @@ import {fetchRimBuildingImages, fetchTeam, showModal} from "../../actions";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
-import {injectIntl} from "react-intl";
+import { withIntl } from "../../utilities/withIntl";
 import {Button} from "react-bootstrap";
 import history from "../../history";
 
@@ -86,7 +86,7 @@ const mapStateToProps = (state) => {
     };
 }
 
-export default injectIntl(connect(
+export default withIntl(connect(
     mapStateToProps,
     {
         fetchTeam,

@@ -12,7 +12,8 @@ import CarouselImages from "../../carousel/carouselImages";
 import CardMediaHorizontal from "../../cards/cardMediaHorizontal";
 import CardInfoLine from "../../infoLine/CardInfoLine";
 import CardTeamHeadmaster from "../../cards/cardTeamHeadmaster";
-import { FormattedMessage, injectIntl } from "react-intl";
+import { FormattedMessage } from "react-intl";
+import { withIntl } from "../../../utilities/withIntl";
 import CardTeamMember from "../../cards/cardTeamMember";
 import { Route, Switch } from "react-router-dom";
 import RegularPrograms from "./RegularPrograms";
@@ -549,7 +550,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default injectIntl(
+export default withIntl(
   connect(mapStateToProps, {
     fetchTeam,
     showModal,

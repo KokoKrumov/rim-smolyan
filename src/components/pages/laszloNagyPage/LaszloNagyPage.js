@@ -10,12 +10,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchPricesLaszloNagy } from "../../../actions";
 import { wrapPricesInSpans } from "../../../utilities/wrapPricesInSpans";
 import SocialButton from "../../socials/socialsButton";
-import { injectIntl } from "react-intl";
+import { useIntl } from "react-intl";
 import laszloNagyPageBG from "../../../translations/laszloNagyPageBG.json";
 import laszloNagyPageEN from "../../../translations/laszloNagyPageEN.json";
 
 const LaszloNagyPage = (props) => {
-  const { intl } = props;
+  const intl = useIntl();
   const dispatch = useDispatch();
   const pricesLaszloNagy = useSelector((state) => state.pricesLaszloNagy);
   const pricesData = pricesLaszloNagy?.[0];
@@ -277,4 +277,4 @@ const LaszloNagyPage = (props) => {
   );
 };
 
-export default injectIntl(LaszloNagyPage);
+export default LaszloNagyPage;

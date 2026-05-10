@@ -13,7 +13,7 @@ import Row from "react-bootstrap/Row";
 import Spinner from "react-bootstrap/Spinner";
 import { connect } from "react-redux";
 import { fetchCollectionsMain } from "../../../actions";
-import { injectIntl } from "react-intl";
+import { withIntl } from "../../../utilities/withIntl";
 import { isEqual } from "lodash";
 import libraryBg from "../../../assets/images/library-bg.png";
 import photoArchiveBg from "../../../assets/images/photo-archive.png";
@@ -241,6 +241,6 @@ const mapDispatchToProps = (dispatch) => ({
   fetchCollectionsMain: (parent) => dispatch(fetchCollectionsMain(parent)),
 });
 
-export default injectIntl(
+export default withIntl(
   connect(mapStateToProps, mapDispatchToProps)(Collections)
 );

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { injectIntl } from "react-intl";
+import { withIntl } from "../../../utilities/withIntl";
 import HeroInner from "../../hero/HeroInner";
 import administrativeBG from "../../../translations/AdministrativeBG.json";
 import administrativeEN from "../../../translations/AdministrativeEN.json";
@@ -150,7 +150,7 @@ class Administrative extends Component {
   }
 }
 
-export default injectIntl(
+export default withIntl(
   connect(null, {
   })(Administrative)
 );

@@ -32,7 +32,7 @@ const SupportUs = lazy(() => import("./pages/supportUs/SupportUs"));
 const Terms = lazy(() => import("./pages/terms/Terms"));
 import { connect } from "react-redux";
 import history from "../history";
-import { injectIntl } from "react-intl";
+import { withIntl } from "../utilities/withIntl";
 
 class App extends Component {
   componentDidMount() {
@@ -140,7 +140,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default injectIntl(
+export default withIntl(
   connect(mapStateToProps, {
     showModal,
     fetchCategories,

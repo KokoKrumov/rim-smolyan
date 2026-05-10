@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 
 import history from "../../history";
-import { injectIntl } from "react-intl";
+import { useIntl } from "react-intl";
 
 const noImage =
   "https://api-staging.museumsmolyan.eu/wp-content/uploads/2024/10/no-image.png";
 
 function CardCollections(props) {
-  const { intl, item, hostLocation } = props;
+  const intl = useIntl();
+  const { item, hostLocation } = props;
   const [itemObj, setItemObj] = useState({
     title: "",
     itemImg: noImage,
@@ -105,4 +106,4 @@ function CardCollections(props) {
   );
 }
 
-export default injectIntl(CardCollections);
+export default CardCollections;

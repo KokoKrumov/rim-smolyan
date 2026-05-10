@@ -2,10 +2,9 @@ import Container from "react-bootstrap/Container";
 import { Link } from "react-router-dom";
 import React from "react";
 import { checkIfValueExistInIntl } from "../../utilities/browser";
-import { injectIntl } from "react-intl";
+import { useIntl } from "react-intl";
 
-export default injectIntl(function HeroInner({
-  intl,
+export default function HeroInner({
   breadcrumbs,
   backLinkToUrl,
   labelTitle,
@@ -16,6 +15,7 @@ export default injectIntl(function HeroInner({
   scrollOnClick,
   arrowBottom,
 }) {
+  const intl = useIntl();
   return (
     <div className={`hero-inner__wrap${backLinkToUrl ? "__sm" : ""}`}>
       <Container>
@@ -124,4 +124,4 @@ export default injectIntl(function HeroInner({
       </Container>
     </div>
   );
-});
+}

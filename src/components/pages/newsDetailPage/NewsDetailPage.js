@@ -6,7 +6,7 @@ import NotFound from "../NotFound";
 import Spinner from "react-bootstrap/Spinner";
 import { connect } from "react-redux";
 import { extractIdAndCategories } from "../../../utilities/browser";
-import { injectIntl } from "react-intl";
+import { withIntl } from "../../../utilities/withIntl";
 
 class NewsDetailPage extends Component {
   state = {
@@ -102,6 +102,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default injectIntl(
+export default withIntl(
   connect(mapStateToProps, { fetchArticle, fetchNews })(NewsDetailPage)
 );

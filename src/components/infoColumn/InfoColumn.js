@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Container from "react-bootstrap/Container";
-import { injectIntl } from "react-intl";
+import { withIntl } from "../../utilities/withIntl";
 import { connect } from "react-redux";
 import { showModal } from "../../actions";
 import Row from "react-bootstrap/Row";
@@ -120,7 +120,7 @@ class InfoColumn extends Component {
   }
 }
 
-export default injectIntl(
+export default withIntl(
   connect(null, {
     showModal,
   })(InfoColumn)

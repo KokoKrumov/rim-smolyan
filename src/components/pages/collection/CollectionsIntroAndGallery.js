@@ -15,7 +15,7 @@ import Tab from "react-bootstrap/Tab";
 import { connect } from "react-redux";
 import { extractIdAndCategories } from "../../../utilities/browser";
 import history from "../../../history";
-import { injectIntl } from "react-intl";
+import { withIntl } from "../../../utilities/withIntl";
 import { isEqual } from "lodash";
 import utilizeScroll from "../../../utilities/utilizeScroll";
 
@@ -415,6 +415,6 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(fetchCollectionDescription(collectionSlug)),
 });
 
-export default injectIntl(
+export default withIntl(
   connect(mapStateToProps, mapDispatchToProps)(CollectionsIntroAndGallery),
 );

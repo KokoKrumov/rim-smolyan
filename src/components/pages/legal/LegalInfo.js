@@ -6,7 +6,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import {Button} from "react-bootstrap";
 import history from "../../../history";
-import {injectIntl} from "react-intl";
+import { withIntl } from "../../../utilities/withIntl";
 
 class LegalInfo extends Component {
 
@@ -674,7 +674,7 @@ const mapStateToProps = (state) => {
     return {};
 }
 
-export default injectIntl(connect(
+export default withIntl(connect(
     mapStateToProps,
     {}
 )(LegalInfo));

@@ -11,7 +11,7 @@ import Row from "react-bootstrap/Row";
 import SocialsShare from "../../socials/socialsShare";
 import Spinner from "react-bootstrap/Spinner";
 import { connect } from "react-redux";
-import { injectIntl } from "react-intl";
+import { withIntl } from "../../../utilities/withIntl";
 import { useMatchMedia } from "../../../utilities/useMatchMedia";
 
 function CollectionsDetailItem({
@@ -282,6 +282,6 @@ const mapDispatchToProps = (dispatch) => ({
   fetchCollections: (parent) => dispatch(fetchCollections(parent)),
 });
 
-export default injectIntl(
+export default withIntl(
   connect(mapStateToProps, mapDispatchToProps)(CollectionsDetailItem)
 );
