@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import { showModal } from "../../actions";
 import carouselImagesArrowLeftDark from "../../assets/images/carousel__left-arrow__dark.svg";
 import carouselImagesArrowRightDark from "../../assets/images/carousel__right-arrow__dark.svg";
-import AliceCarousel from "react-alice-carousel";
+import _AliceCarousel from "react-alice-carousel";
+const AliceCarousel = _AliceCarousel.default ?? _AliceCarousel;
 import { isMobileScreen, isTabletScreen } from "../../utilities/browser";
 
 function CarouselImages({ listImages }) {

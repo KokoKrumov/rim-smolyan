@@ -1,17 +1,13 @@
 {
   "name": "rim-smolyan",
-  "version": "1.8.5",
+  "version": "1.8.6",
   "private": false,
   "type": "module",
   "devDependencies": {
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^16.0.0",
-    "@testing-library/user-event": "^14.4.3",
-    "@vitejs/plugin-react": "^4.7.0",
+    "@vitejs/plugin-react": "^6.0.0",
     "sass": "^1.99.0",
     "typescript": "~5.7",
-    "vite": "^7.3.1",
-    "vitest": "^3.2.4"
+    "vite": "^8.0.0"
   },
   "dependencies": {
     "@types/react-transition-group": "^4.4.5",
@@ -37,7 +33,6 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "vitest",
     "start:dev": "vite --mode dev",
     "build:dev": "vite build --mode dev",
     "start:prod": "vite --mode prod",
