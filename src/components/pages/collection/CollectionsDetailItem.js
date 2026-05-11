@@ -24,6 +24,7 @@ function CollectionsDetailItem({
 }) {
   const { item: itemName, type: collectionName } = useParams();
   const location = useLocation();
+  const match = { params: { item: itemName, type: collectionName } };
   const noImage =
     "https://api-staging.museumsmolyan.eu/wp-content/uploads/2024/10/no-image.png";
   const [item, setItem] = useState({});
