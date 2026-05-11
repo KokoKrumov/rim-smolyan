@@ -524,7 +524,7 @@ class AboutUs extends Component {
   };
 
   render() {
-    if (this.props.location.pathname.includes('regular-programs')) {
+    if (this.props.match.params.modalContent === 'regular-programs') {
       return this.renderRegularPrograms();
     }
     return this.renderMainAboutUsPage();
