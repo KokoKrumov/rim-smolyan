@@ -272,7 +272,7 @@ function CollectionsDetailItem({
 }
 const mapStateToProps = (state) => {
   return {
-    itemFomCollection: state.itemFomCollection,
+    itemFomCollection: state.itemFomCollection.data,
     collection: state.collections.byType,
   };
 };

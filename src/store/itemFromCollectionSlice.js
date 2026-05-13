@@ -17,12 +17,24 @@ export const fetchItemFromCollection = createAsyncThunk(
 
 const itemFromCollectionSlice = createSlice({
   name: 'itemFomCollection', // preserving original key spelling
-  initialState: {},
+  initialState: {
+    data: {},
+    error: null,
+  },
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchItemFromCollection.fulfilled, (state, action) => action.payload)
-      .addCase(fetchItemFromCollection.rejected, () => ({}));
+      .addCase(fetchItemFromCollection.fulfilled, (state, action) => {
+        state.data = action.payload || {};
+        state.error = null;
+      })
+      .addCase(fetchItemFromCollection.rejected, (state, action) => {
+        state.data = {};
+        state.error = action.payload || {
+          message: action.error?.message || 'Request failed',
+          status: null,
+        };
+      });
   },
 });
 
