@@ -111,7 +111,7 @@ function CollectionsDetailItem({
         <main>
           <section className="position-relative">
             {isDesktopResolution && (
-              <CollectionItemsArrowNavigation match={match} />
+              <CollectionItemsArrowNavigation />
             )}
 
             <Container>
@@ -251,7 +251,7 @@ function CollectionsDetailItem({
           </section>
           {!isDesktopResolution && (
             <section>
-              <CollectionItemsArrowNavigationBottomFixed match={match} />
+              <CollectionItemsArrowNavigationBottomFixed />
             </section>
           )}
         </main>
