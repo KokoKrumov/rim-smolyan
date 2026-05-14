@@ -61,7 +61,6 @@ class App extends Component {
               <Route path="/events" element={<NewsPage />} />
               <Route path="/exhibitions/:articleSlug" element={<ExhibitionsDetailPage />} />
               <Route path="/exhibitions" element={<ExhibitionsPage />} />
-              <Route path="/about-us/regular-programs" element={<AboutUs />} />
               <Route path="/about-us/:modalContent" element={<AboutUs />} />
               <Route path="/about-us" element={<AboutUs />} />
               <Route path="/collections" element={<CollectionsIndex />} />
