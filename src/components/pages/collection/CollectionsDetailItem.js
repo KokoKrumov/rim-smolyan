@@ -6,6 +6,9 @@ import CollectionItemsArrowNavigation from "./CollectionItemsArrowNavigation";
 import CollectionItemsArrowNavigationBottomFixed from "./CollectionItemsArrowNavigationBottomFixed";
 import Container from "react-bootstrap/Container";
 import { Link } from "react-router-dom";
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
+import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import React from "react";
 import Row from "react-bootstrap/Row";
 import SocialsShare from "../../socials/socialsShare";
@@ -27,6 +30,7 @@ function CollectionsDetailItem({
   const itemName = match.params.item;
   const collectionName = match.params.type;
   const [item, setItem] = useState({});
+  const [lightboxOpen, setLightboxOpen] = useState(false);
   const backUrl =
     match &&
     match.url.replace("detail", "intro").split("/").slice(0, -1).join("/");
@@ -121,9 +125,14 @@ function CollectionsDetailItem({
                   <div className="collections-item__title-wrap">
                     <h2 className="h2">{item.title.rendered}</h2>
                     {!isDesktopResolution && (
-                      <div className="collections-item__img__wrap">
+                      <div
+                        className="collections-item__img__wrap"
+                        style={{ cursor: "zoom-in" }}
+                        onClick={() => setLightboxOpen(true)}
+                      >
                         <img
                           className="img-fluid"
+                          style={{ pointerEvents: "none" }}
                           src={
                             typeof item._embedded["wp:featuredmedia"] !==
                             "undefined"
@@ -207,9 +216,14 @@ function CollectionsDetailItem({
                 </Col>
                 {isDesktopResolution && (
                   <Col lg={7}>
-                    <div className="collections-item__img__wrap">
+                    <div
+                      className="collections-item__img__wrap"
+                      style={{ cursor: "zoom-in" }}
+                      onClick={() => setLightboxOpen(true)}
+                    >
                       <img
                         className="img-fluid"
+                        style={{ pointerEvents: "none" }}
                         src={
                           typeof item._embedded["wp:featuredmedia"] !==
                           "undefined"
@@ -256,6 +270,20 @@ function CollectionsDetailItem({
             </section>
           )}
         </main>
+
+        <Lightbox
+          open={lightboxOpen}
+          close={() => setLightboxOpen(false)}
+          slides={[{
+            src:
+              typeof item._embedded["wp:featuredmedia"] !== "undefined"
+                ? item._embedded["wp:featuredmedia"][0].source_url
+                : noImage,
+          }]}
+          plugins={[Zoom]}
+          zoom={{ maxZoomPixelRatio: 4, scrollToZoom: true }}
+          render={{ buttonPrev: () => null, buttonNext: () => null }}
+        />
       </div>
     );
   }
