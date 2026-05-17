@@ -2,7 +2,8 @@
   display: flex;
   width: 100%;
   // Full viewport height minus header (~92px) and footer (~303px)
-  min-height: calc(100vh - 394px);
+  height: calc(100vh - 9.375rem);
+  min-height: 25rem;
 
   &--loading {
     justify-content: center;
@@ -190,6 +191,7 @@
 // Mobile breakpoint (below 768px)
 @include media-breakpoint-down(lg) {
   .collections-index {
+    height: auto;
     flex-direction: column;
 
     &__section {
