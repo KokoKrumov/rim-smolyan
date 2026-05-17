@@ -29,9 +29,9 @@ class CollectionsIndex extends Component {
   }
 
   componentDidMount() {
-    if (this.collectionsRef.current) {
+    /*if (this.collectionsRef.current) {
       this.collectionsRef.current.scrollIntoView({ behavior: "smooth" });
-    }
+    }*/
   }
 
   fetchMainCollections = (categories) => {
