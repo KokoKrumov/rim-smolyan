@@ -21,9 +21,9 @@
     }
 
     &__tech-list {
-        
+
     }
-    
+
     &__tech-list__item {
         display: flex;
         align-items: center;
@@ -55,10 +55,10 @@
 
     &__img__wrap {
         background-color: $gray;
-        @include padding(15px, 10px, 30px, 10px);
-        @include media-breakpoint-up(lg) {
-            @include padding(10px, 136px, 65px, 136px);
-        }
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 30px;
     }
 
     &__description {}
@@ -66,17 +66,17 @@
     &__description__title {
         @include margin(60px, 0px, 20px, 0px);
         @include font-size(24px);
-        font-family: $font-acari-regular;   
+        font-family: $font-acari-regular;
         font-style: normal;
         font-weight: 600;
         line-height: 1;
         color: #272323;
     }
-    
+
     &__description__text {
         margin-bottom: 20px;
     }
-    
+
     &__description__author {
         margin-bottom: 20px;
         font-family: $font-cormorant-bold;
