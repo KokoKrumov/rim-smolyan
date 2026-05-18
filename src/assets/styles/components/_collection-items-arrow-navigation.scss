@@ -8,12 +8,14 @@
         align-items: center;
         justify-content: space-between;
         z-index: 1;
+        pointer-events: none;
 
     .right-arrow,
     .left-arrow {
         @include padding(20px, 20px, 20px, 20px);
         cursor: pointer;
         z-index: 2;
+        pointer-events: auto;
 
         &.show {
             path {
@@ -22,8 +24,8 @@
                 transition-timing-function: ease-out;
                 }
         }
-    }  
-    
+    }
+
     &_link-block {
         margin-bottom: 1px;
         display: block;
@@ -39,7 +41,7 @@
 
                 .item-preview_inner {
                     flex-direction: row-reverse;
-                
+
                     svg {
                         transform: rotate(180deg);
                     }
@@ -63,7 +65,8 @@
 }
 
 .item-preview {
-    
+        pointer-events: auto;
+
         &_top{
             @include padding(25px, 20px, 25px, 20px);
             position: absolute;
@@ -77,7 +80,7 @@
     @media (min-width: 991px) {
         width: 260px;
     }
-   
+
     z-index: 1;
     background-color: $dark;
     color: $white;
