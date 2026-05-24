@@ -1,7 +1,7 @@
 import Container from "react-bootstrap/Container";
 import React from "react";
 import { checkIfValueExistInIntl } from "../../utilities/browser";
-import { useIntl } from "react-intl";
+import { useIntl } from "../../utilities/withIntl";
 
 function HeroCollections(props) {
   const intl = useIntl();

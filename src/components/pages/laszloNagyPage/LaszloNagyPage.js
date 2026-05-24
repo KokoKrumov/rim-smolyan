@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchPricesLaszloNagy } from "../../../actions";
 import { wrapPricesInSpans } from "../../../utilities/wrapPricesInSpans";
 import SocialButton from "../../socials/socialsButton";
-import { useIntl } from "react-intl";
+import { useIntl } from "../../../utilities/withIntl";
 import laszloNagyPageBG from "../../../translations/laszloNagyPageBG.json";
 import laszloNagyPageEN from "../../../translations/laszloNagyPageEN.json";
 
@@ -97,8 +97,8 @@ const LaszloNagyPage = (props) => {
       </div>
       <main>
         <InfoColumn
-          title={laszloNagyContent.aboutHouse}
-          text={laszloNagyContent.aboutHouseText}
+          rawTitle={laszloNagyContent.aboutHouse}
+          rawText={laszloNagyContent.aboutHouseText}
           backgroundImage={laszloNagyPageContent.aboutHouseBgImage}
           columns={2}
         />
@@ -112,9 +112,7 @@ const LaszloNagyPage = (props) => {
                     <h1
                       className="h1"
                       dangerouslySetInnerHTML={{
-                        __html: intl.formatMessage({
-                          id: laszloNagyContent.permanentExhibitionTitle,
-                        }),
+                        __html: laszloNagyContent.permanentExhibitionTitle,
                       }}
                     ></h1>
                   </div>
@@ -126,7 +124,7 @@ const LaszloNagyPage = (props) => {
               <Col lg={5}>
                 <Row>
                   <InfoColumn
-                    text={laszloNagyContent.permanentExhibitionText}
+                    rawText={laszloNagyContent.permanentExhibitionText}
                     columns={1}
                   />
                 </Row>
@@ -147,7 +145,7 @@ const LaszloNagyPage = (props) => {
         </section>
         <section className="section-building">
           <HeroInner
-            title={laszloNagyContent.priceAndWorkingHours}
+            rawTitle={laszloNagyContent.priceAndWorkingHours}
             subtitle={""}
           />
           <div className="contacts contacts__wrap laszlo-nagy__page__contact-section">

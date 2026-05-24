@@ -1,5 +1,19 @@
 import React from 'react';
-import { useIntl } from 'react-intl';
+import { useIntl as useReactIntl } from 'react-intl';
+
+/**
+ * Wraps react-intl's useIntl and defaults ignoreTag to true so that messages
+ * containing raw HTML (e.g. <p class="...">) are treated as literal text
+ * rather than ICU rich-text elements.
+ */
+export function useIntl() {
+  const intl = useReactIntl();
+  return {
+    ...intl,
+    formatMessage: (descriptor, values, opts) =>
+      intl.formatMessage(descriptor, values, { ignoreTag: true, ...opts }),
+  };
+}
 
 /**
  * Compatibility HOC replacing the removed `injectIntl` from react-intl v10.

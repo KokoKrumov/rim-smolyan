@@ -10,7 +10,8 @@ import InputGroup from "react-bootstrap/InputGroup";
 import FormControl from "react-bootstrap/FormControl";
 import { showModal } from "../../actions";
 import { connect } from "react-redux";
-import { FormattedMessage, useIntl } from "react-intl";
+import { FormattedMessage } from "react-intl";
+import { useIntl } from "../../utilities/withIntl";
 import { isTabletScreen } from "../../utilities/browser";
 import { useLocation } from "react-router-dom";
 

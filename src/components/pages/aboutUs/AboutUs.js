@@ -128,22 +128,23 @@ class AboutUs extends Component {
       });
       // Fetch and set team members
       this.props.fetchTeam().then(() => {
-        this.setState({ team: this.props.team });
-        //When team arrives, then check ifURL path includes a parameter
-        // and this parameter contain a nickname from the team
-        //if this is true, then show modal with the info for this member
-        if (
-          this.props.match.params.modalContent &&
-          this.isMemberExist(this.props.match.params.modalContent)
-        ) {
-          this.handleShowModal(
-            "modal-team",
-            "",
-            this.getMemberInformation(this.props.match.params.modalContent)
-          );
-        } else if (this.props.match.params.modalContent === "stoyu-shishkov") {
-          this.handleShowModal("modal-shishkov", "", "stoyu-shishkov");
-        }
+        this.setState({ team: this.props.team }, () => {
+          //When team arrives, then check ifURL path includes a parameter
+          // and this parameter contain a nickname from the team
+          //if this is true, then show modal with the info for this member
+          if (
+            this.props.match.params.modalContent &&
+            this.isMemberExist(this.props.match.params.modalContent)
+          ) {
+            this.handleShowModal(
+              "modal-team",
+              "",
+              this.getMemberInformation(this.props.match.params.modalContent)
+            );
+          } else if (this.props.match.params.modalContent === "stoyu-shishkov") {
+            this.handleShowModal("modal-shishkov", "", "stoyu-shishkov");
+          }
+        });
       });
     }
   }

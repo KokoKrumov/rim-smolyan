@@ -12,6 +12,8 @@ class InfoColumn extends Component {
     this.state = {
       title: this.props.title ? this.props.title : "",
       text: this.props.text ? this.props.text : "",
+      rawTitle: this.props.rawTitle,
+      rawText: this.props.rawText,
       backgroundImage: this.props.backgroundImage,
       showMoreLink: this.props.showMoreLink ? this.props.showMoreLink : false,
       showRulesForActivity: this.props.showRulesForActivity,
@@ -42,20 +44,20 @@ class InfoColumn extends Component {
       >
         <Container>
           <div>
-            {this.state.title && (
+            {(this.state.title || this.state.rawTitle) && (
               <div className="nae__title-line">
                 {this.state.isSmall ? (
                   <h2
                     className="h2"
                     dangerouslySetInnerHTML={{
-                      __html: intl.formatMessage({ id: this.state.title }),
+                      __html: this.state.rawTitle ?? intl.formatMessage({ id: this.state.title }),
                     }}
                   ></h2>
                 ) : (
                   <h1
                     className="h1"
                     dangerouslySetInnerHTML={{
-                      __html: intl.formatMessage({ id: this.state.title }),
+                      __html: this.state.rawTitle ?? intl.formatMessage({ id: this.state.title }),
                     }}
                   ></h1>
                 )}
@@ -65,7 +67,7 @@ class InfoColumn extends Component {
               <div
                 className={`paragraph-2 col-count-${this.state.columns}`}
                 dangerouslySetInnerHTML={{
-                  __html: intl.formatMessage({ id: this.state.text }),
+                  __html: this.state.rawText ?? intl.formatMessage({ id: this.state.text }),
                 }}
               ></div>
               <Row className="home-page__info-column">
@@ -78,9 +80,9 @@ class InfoColumn extends Component {
                         target="_blank"
                         rel="noopener noreferrer"
                         dangerouslySetInnerHTML={{
-                          __html: intl.formatMessage({
-                            id: this.state.rulesForActivity,
-                          }),
+                          __html: intl.formatMessage(
+                            { id: this.state.rulesForActivity }
+                          ),
                         }}
                       ></a>
                     </p>

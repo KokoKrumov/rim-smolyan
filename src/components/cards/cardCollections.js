@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { useIntl } from "react-intl";
+import { useIntl } from "../../utilities/withIntl";
 import { useNavigate } from "react-router-dom";
 
 const noImage =

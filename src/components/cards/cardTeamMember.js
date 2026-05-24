@@ -29,7 +29,7 @@ class CardTeamMember extends Component {
                 <div className='card  card__white-bordered card__media-vertical'>
                     <div className='card__main-info'>
                         <div className='card-avatar__wrap'>
-                            <img className="img-fluid" src={this.state.user.avatar} alt="" itemProp="image"/>
+                            <img className="img-fluid" src={this.state.user.avatar || null} alt="" itemProp="image"/>
                         </div>
                         <div className='card-body__wrap'>
                             <h3 className='card-body__title h3'>

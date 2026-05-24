@@ -2,7 +2,7 @@ import Container from "react-bootstrap/Container";
 import { Link } from "react-router-dom";
 import React from "react";
 import { checkIfValueExistInIntl } from "../../utilities/browser";
-import { useIntl } from "react-intl";
+import { useIntl } from "../../utilities/withIntl";
 
 export default function HeroInner({
   breadcrumbs,
