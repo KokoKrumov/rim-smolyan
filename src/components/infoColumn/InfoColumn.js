@@ -17,8 +17,6 @@ class InfoColumn extends Component {
       intl,
       title,
       text,
-      rawTitle,
-      rawText,
       backgroundImage,
       showMoreLink,
       showRulesForActivity,
@@ -38,20 +36,20 @@ class InfoColumn extends Component {
       >
         <Container>
           <div>
-            {(title || rawTitle) && (
+            {title && (
               <div className="nae__title-line">
                 {isSmall ? (
                   <h2
                     className="h2"
                     dangerouslySetInnerHTML={{
-                      __html: rawTitle ?? intl.formatMessage({ id: title }),
+                      __html: intl.formatMessage({ id: title }),
                     }}
                   ></h2>
                 ) : (
                   <h1
                     className="h1"
                     dangerouslySetInnerHTML={{
-                      __html: rawTitle ?? intl.formatMessage({ id: title }),
+                      __html: intl.formatMessage({ id: title }),
                     }}
                   ></h1>
                 )}
@@ -61,7 +59,7 @@ class InfoColumn extends Component {
               <div
                 className={`paragraph-2 col-count-${columns}`}
                 dangerouslySetInnerHTML={{
-                  __html: rawText ?? intl.formatMessage({ id: text }),
+                  __html: intl.formatMessage({ id: text }),
                 }}
               ></div>
               <Row className="home-page__info-column">
