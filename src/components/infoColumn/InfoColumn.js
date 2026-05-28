@@ -7,57 +7,51 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 class InfoColumn extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      title: this.props.title ? this.props.title : "",
-      text: this.props.text ? this.props.text : "",
-      rawTitle: this.props.rawTitle,
-      rawText: this.props.rawText,
-      backgroundImage: this.props.backgroundImage,
-      showMoreLink: this.props.showMoreLink ? this.props.showMoreLink : false,
-      showRulesForActivity: this.props.showRulesForActivity,
-      columns: this.props.columns,
-      rulesForActivity: "rules-for-activity",
-      seeMore: "see-more",
-      isSmall: this.props.isSmall ? this.props.isSmall : false,
-    };
-  }
-
   handleShowModal(data, url, e) {
     e.preventDefault();
     this.props.showModal(data, url);
   }
 
   render() {
-    const { intl } = this.props;
+    const {
+      intl,
+      title,
+      text,
+      rawTitle,
+      rawText,
+      backgroundImage,
+      showMoreLink,
+      showRulesForActivity,
+      columns,
+      isSmall,
+    } = this.props;
     return (
       <div
         className="nae-container info-column nae-container_content-dark hero-bg"
         style={
-          this.state.backgroundImage
+          backgroundImage
             ? {
-                backgroundImage: `url(${this.state.backgroundImage})`,
+                backgroundImage: `url(${backgroundImage})`,
               }
             : null
         }
       >
         <Container>
           <div>
-            {(this.state.title || this.state.rawTitle) && (
+            {(title || rawTitle) && (
               <div className="nae__title-line">
-                {this.state.isSmall ? (
+                {isSmall ? (
                   <h2
                     className="h2"
                     dangerouslySetInnerHTML={{
-                      __html: this.state.rawTitle ?? intl.formatMessage({ id: this.state.title }),
+                      __html: rawTitle ?? intl.formatMessage({ id: title }),
                     }}
                   ></h2>
                 ) : (
                   <h1
                     className="h1"
                     dangerouslySetInnerHTML={{
-                      __html: this.state.rawTitle ?? intl.formatMessage({ id: this.state.title }),
+                      __html: rawTitle ?? intl.formatMessage({ id: title }),
                     }}
                   ></h1>
                 )}
@@ -65,14 +59,14 @@ class InfoColumn extends Component {
             )}
             <div>
               <div
-                className={`paragraph-2 col-count-${this.state.columns}`}
+                className={`paragraph-2 col-count-${columns}`}
                 dangerouslySetInnerHTML={{
-                  __html: this.state.rawText ?? intl.formatMessage({ id: this.state.text }),
+                  __html: rawText ?? intl.formatMessage({ id: text }),
                 }}
               ></div>
               <Row className="home-page__info-column">
                 <Col>
-                  {this.state.showRulesForActivity ? (
+                  {showRulesForActivity ? (
                     <p style={{ marginTop: "2rem" }}>
                       <a
                         className="link cta_outline cta_outline__dark link-underline m-0 d-inline-block"
@@ -80,24 +74,22 @@ class InfoColumn extends Component {
                         target="_blank"
                         rel="noopener noreferrer"
                         dangerouslySetInnerHTML={{
-                          __html: intl.formatMessage(
-                            { id: this.state.rulesForActivity }
-                          ),
+                          __html: intl.formatMessage({ id: "rules-for-activity" }),
                         }}
                       ></a>
                     </p>
                   ) : null}
                 </Col>
                 <Col>
-                  {this.state.showMoreLink ? (
+                  {showMoreLink ? (
                     <p>
                       <a
                         className="link cta_outline cta_outline__dark hvr-underline-from-left"
-                        href={`${this.state.showMoreLink}`}
+                        href={`${showMoreLink}`}
                         itemProp="url"
                         target=""
                         onClick={
-                          this.state.showMoreLink
+                          showMoreLink
                             ? null
                             : (e) => {
                                 this.handleShowModal("modal-redirect", "", e);
@@ -105,9 +97,7 @@ class InfoColumn extends Component {
                         }
                         rel="noopener nofollow noreferrer"
                         dangerouslySetInnerHTML={{
-                          __html: intl.formatMessage({
-                            id: this.state.seeMore,
-                          }),
+                          __html: intl.formatMessage({ id: "see-more" }),
                         }}
                       ></a>
                     </p>
