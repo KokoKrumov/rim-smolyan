@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { injectIntl } from "react-intl";
+import { withIntl } from "../../utilities/withIntl";
 import { connect } from "react-redux";
 
 class CardExhibitionArchive extends Component {
@@ -17,4 +17,4 @@ class CardExhibitionArchive extends Component {
   }
 }
 
-export default injectIntl(connect(null)(CardExhibitionArchive));
+export default withIntl(connect(null)(CardExhibitionArchive));

@@ -5,12 +5,13 @@ import ArrowRight from "../../../assets/icons/ArrowRight";
 import { connect } from "react-redux";
 import navigationCollectionItems from "../../../utilities/navigationCollectionItems";
 import { slugSanitize } from "../../../utilities/browser";
+import { useParams, useLocation } from "react-router-dom";
 
 function CollectionItemsArrowNavigation({
-  match,
   collection,
 }) {
-  const collectionName = match.params.type;
+  const { type: collectionName } = useParams();
+  const location = useLocation();
   const [navItems, setNavItems] = useState({
     currentIndex: {},
     prevIndex: {},
@@ -34,15 +35,9 @@ function CollectionItemsArrowNavigation({
   }, [collection]);
 
   const generateHref = (item) => {
-    const replacedMatches = {
-      ":type": collectionName,
-      ":item": item.slug,
-    };
-    const path = match.path;
-    const generateNewUrl = path.replace(/:type|:item/gi, function (matched) {
-      return replacedMatches[matched];
-    });
-    return setLinkToTheItem(generateNewUrl);
+    const parts = location.pathname.split('/');
+    parts[parts.length - 1] = item.slug;
+    return setLinkToTheItem(parts.join('/'));
   };
 
   function ItemPreview({ className, item, side }) {

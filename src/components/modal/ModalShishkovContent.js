@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
-import {FormattedMessage, injectIntl} from 'react-intl';
+import {FormattedMessage} from 'react-intl';
+import { withIntl } from '../../utilities/withIntl';
+import { withRouter } from '../../utilities/withRouter';
 import {closeModal} from "../../actions";
 import {connect} from "react-redux";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import StShishkovBarelef from '../../assets/images/St_Shishkov_barelef.png';
-import history from "../../history";
 import {isMobileScreen} from "../../utilities/browser";
 
 
@@ -22,9 +23,9 @@ class ModalShishkovContent extends Component {
         //if the modal was opened from Stoyu Shishkov
         // so we have a his name in the end of the location href
         //when we close the modal, then remove the nickname from there
-        const location = history.location.pathname;
+        const location = window.location.pathname;
         let resetLocation = location.replace(`/stoyu-shishkov`, '')
-        history.push(resetLocation)
+        this.props.navigate(resetLocation)
         // }
     }
 
@@ -129,4 +130,4 @@ const mapDispatchToProps = dispatch => ({
     closeModal: data => dispatch(closeModal(data))
 })
 
-export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(ModalShishkovContent));
+export default withRouter(withIntl(connect(mapStateToProps, mapDispatchToProps)(ModalShishkovContent)));

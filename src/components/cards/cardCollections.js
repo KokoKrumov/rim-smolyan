@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 
-import history from "../../history";
-import { injectIntl } from "react-intl";
+import { useIntl } from "../../utilities/withIntl";
+import { useNavigate } from "react-router-dom";
 
 const noImage =
   "https://api-staging.museumsmolyan.eu/wp-content/uploads/2024/10/no-image.png";
 
 function CardCollections(props) {
-  const { intl, item, hostLocation } = props;
+  const intl = useIntl();
+  const navigate = useNavigate();
+  const { item, hostLocation } = props;
   const [itemObj, setItemObj] = useState({
     title: "",
     itemImg: noImage,
@@ -63,8 +65,8 @@ function CardCollections(props) {
             onClick={(e) => {
               if (!props.isInnerGallery && itemObj.imageHero) {
                 e.preventDefault();
-                history.push(generateHref(), {
-                  imageHero: itemObj.imageHero,
+                navigate(generateHref(), {
+                  state: { imageHero: itemObj.imageHero },
                 });
               }
             }}
@@ -105,4 +107,4 @@ function CardCollections(props) {
   );
 }
 
-export default injectIntl(CardCollections);
+export default CardCollections;

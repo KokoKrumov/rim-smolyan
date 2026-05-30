@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
-import {FormattedMessage, injectIntl} from 'react-intl';
+import {FormattedMessage} from 'react-intl';
+import { withIntl } from '../../utilities/withIntl';
+import { withRouter } from '../../utilities/withRouter';
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import {showModal} from "../../actions";
-import history from "../../history";
 
 class CardTeamMember extends Component {
 
@@ -17,7 +18,7 @@ class CardTeamMember extends Component {
         //when you open a modal with some of the members in /about-us page
         //then push the nick name in the location href, so an user has ability to copy the path
         //(at this point of time cardTeamMember exist only in /about-us page)
-        history.push(`/about-us/${this.state.user.nickname}`)
+        this.props.navigate(`/about-us/${this.state.user.nickname}`)
     }
 
 
@@ -28,7 +29,7 @@ class CardTeamMember extends Component {
                 <div className='card  card__white-bordered card__media-vertical'>
                     <div className='card__main-info'>
                         <div className='card-avatar__wrap'>
-                            <img className="img-fluid" src={this.state.user.avatar} alt="" itemProp="image"/>
+                            <img className="img-fluid" src={this.state.user.avatar || null} alt="" itemProp="image"/>
                         </div>
                         <div className='card-body__wrap'>
                             <h3 className='card-body__title h3'>
@@ -99,10 +100,10 @@ class CardTeamMember extends Component {
 }
 
 
-export default injectIntl(connect(
+export default withRouter(withIntl(connect(
     null,
     {
         showModal
     }
-)(CardTeamMember));
+)(CardTeamMember)));
 

@@ -1,14 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { injectIntl } from "react-intl";
+import { withIntl } from "../../../utilities/withIntl";
 import HeroInner from "../../hero/HeroInner";
 import administrativeBG from "../../../translations/AdministrativeBG.json";
 import administrativeEN from "../../../translations/AdministrativeEN.json";
 import administrativeProjectsBG from "../../../translations/AdministrativeProjetcsBG.json";
 import administrativeProjectsEN from "../../../translations/AdministrativeProjetcsEN.json";
 import AccordionBlock from "../../collapse/AccordionBlock";
-import history from "../../../history";
-import { Route, Switch } from "react-router-dom";
+import { withRouter } from "../../../utilities/withRouter";
 import InnerHelperPage from "../../innerHelperPages/innerHelperPage";
 import NotFound from "../NotFound";
 
@@ -53,10 +52,10 @@ class Administrative extends Component {
   // THE handleInitialHash METHOD REMOVES ITS HASH FROM THERE
   // IF NOT - THE METHOD ADD THE HASH IN THE URL
   handleInitialHash = (block) => {
-    if (history.location.hash === `#${block.id}`) {
-      history.push(`/administrative`);
+    if (window.location.hash === `#${block.id}`) {
+      this.props.navigate(`/administrative`);
     } else {
-      history.push(`/administrative/#${block.id}`);
+      this.props.navigate(`/administrative/#${block.id}`);
     }
   };
 
@@ -133,24 +132,14 @@ class Administrative extends Component {
   };
 
   render() {
-    return (
-      <Switch>
-        <Route
-          path="/administrative"
-          exact
-          component={this.renderMainAdministrativeUsPage}
-        />
-        <Route
-          path="/administrative/:parentId/:id"
-          exact
-          component={this.renderDetailAdministrativePage}
-        />
-      </Switch>
-    );
+    if (this.props.match.params.parentId) {
+      return this.renderDetailAdministrativePage();
+    }
+    return this.renderMainAdministrativeUsPage();
   }
 }
 
-export default injectIntl(
+export default withRouter(withIntl(
   connect(null, {
   })(Administrative)
-);
+));

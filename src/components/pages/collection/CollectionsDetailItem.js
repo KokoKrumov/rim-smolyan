@@ -1,5 +1,6 @@
 import { fetchCollections, fetchItemFromCollection } from "../../../actions";
 import { useEffect, useRef, useState } from "react";
+import { useParams, useLocation } from "react-router-dom";
 
 import Col from "react-bootstrap/Col";
 import CollectionItemsArrowNavigation from "./CollectionItemsArrowNavigation";
@@ -14,26 +15,24 @@ import Row from "react-bootstrap/Row";
 import SocialsShare from "../../socials/socialsShare";
 import Spinner from "react-bootstrap/Spinner";
 import { connect } from "react-redux";
-import { injectIntl } from "react-intl";
+import { withIntl } from "../../../utilities/withIntl";
 import { useMatchMedia } from "../../../utilities/useMatchMedia";
 
 function CollectionsDetailItem({
   fetchItemFromCollection,
   fetchCollections,
-  match,
   itemFomCollection,
   collection,
   intl,
 }) {
+  const { item: itemName, type: collectionName } = useParams();
+  const location = useLocation();
   const noImage =
     "https://api-staging.museumsmolyan.eu/wp-content/uploads/2024/10/no-image.png";
-  const itemName = match.params.item;
-  const collectionName = match.params.type;
   const [item, setItem] = useState({});
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const backUrl =
-    match &&
-    match.url.replace("detail", "intro").split("/").slice(0, -1).join("/");
+    location.pathname.replace("detail", "intro").split("/").slice(0, -1).join("/");
   const isDesktopResolution = useMatchMedia("(min-width:992px)", true);
   const isFetchingCollection = useRef(false);
 
@@ -116,7 +115,7 @@ function CollectionsDetailItem({
         <main>
           <section className="position-relative">
             {isDesktopResolution && (
-              <CollectionItemsArrowNavigation match={match} />
+              <CollectionItemsArrowNavigation />
             )}
 
             <Container>
@@ -266,7 +265,7 @@ function CollectionsDetailItem({
           </section>
           {!isDesktopResolution && (
             <section>
-              <CollectionItemsArrowNavigationBottomFixed match={match} />
+              <CollectionItemsArrowNavigationBottomFixed />
             </section>
           )}
         </main>
@@ -310,6 +309,6 @@ const mapDispatchToProps = (dispatch) => ({
   fetchCollections: (parent) => dispatch(fetchCollections(parent)),
 });
 
-export default injectIntl(
+export default withIntl(
   connect(mapStateToProps, mapDispatchToProps)(CollectionsDetailItem)
 );

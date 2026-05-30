@@ -9,7 +9,8 @@ import arrowLeftLong from "../../assets/images/arrow-left-long.svg";
 import arrowRightLong from "../../assets/images/arrow-right-long.svg";
 import { connect } from "react-redux";
 import { fetchCollectionsMain } from "../../actions";
-import { injectIntl } from "react-intl";
+import { withIntl } from "../../utilities/withIntl";
+import { withRouter } from "../../utilities/withRouter";
 import { isEqual } from "lodash";
 import navigationCollectionItems from "../../utilities/navigationCollectionItems";
 import sortById from "../../utilities/sortById";
@@ -36,8 +37,8 @@ class NavigateThroughCollections extends Component {
         this.state.collection,
         currentItemSlug
       );
-      
-      // If current item not found (currentIndex === -1), navigationCollectionItems 
+
+      // If current item not found (currentIndex === -1), navigationCollectionItems
       // may return undefined values, so we handle this gracefully
       if (currentIndex === -1 && this.state.collection.length > 0) {
         // If current item not found, show first and last items as navigation
@@ -303,6 +304,6 @@ const mapDispatchToProps = (dispatch) => ({
   fetchCollectionsMain: (parent) => dispatch(fetchCollectionsMain(parent)),
 });
 
-export default injectIntl(
+export default withRouter(withIntl(
   connect(mapStateToProps, mapDispatchToProps)(NavigateThroughCollections)
-);
+));

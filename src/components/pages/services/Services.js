@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { injectIntl } from "react-intl";
+import { withIntl } from "../../../utilities/withIntl";
 import HeroInner from "../../hero/HeroInner";
 import Container from "react-bootstrap/Container";
 import InfoColumn from "../../infoColumn/InfoColumn";
@@ -211,7 +211,7 @@ const mapStateToProps = (state) => ({
   services: Object.values(state.services),
 });
 
-export default injectIntl(
+export default withIntl(
   connect(mapStateToProps, {
     fetchRoutes,
     fetchServices,

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {injectIntl} from 'react-intl';
+import { withIntl } from '../../utilities/withIntl';
 import {connect} from "react-redux";
 
 class CardMediaHorizontal extends Component {
@@ -31,7 +31,7 @@ class CardMediaHorizontal extends Component {
 }
 
 
-export default injectIntl(connect(
+export default withIntl(connect(
     null
 )(CardMediaHorizontal));
 
