@@ -16,13 +16,18 @@ class InfoColumn extends Component {
     const {
       intl,
       title,
+      rawTitle,
       text,
+      rawText,
       backgroundImage,
       showMoreLink,
       showRulesForActivity,
       columns,
       isSmall,
     } = this.props;
+
+    const resolvedTitle = title ? intl.formatMessage({ id: title, defaultMessage: title }) : rawTitle ?? null;
+    const resolvedText = text ? intl.formatMessage({ id: text, defaultMessage: text }) : rawText ?? null;
     return (
       <div
         className="nae-container info-column nae-container_content-dark hero-bg"
@@ -36,32 +41,34 @@ class InfoColumn extends Component {
       >
         <Container>
           <div>
-            {title && (
+            {resolvedTitle && (
               <div className="nae__title-line">
                 {isSmall ? (
                   <h2
                     className="h2"
                     dangerouslySetInnerHTML={{
-                      __html: intl.formatMessage({ id: title }),
+                      __html: resolvedTitle,
                     }}
                   ></h2>
                 ) : (
                   <h1
                     className="h1"
                     dangerouslySetInnerHTML={{
-                      __html: intl.formatMessage({ id: title }),
+                      __html: resolvedTitle,
                     }}
                   ></h1>
                 )}
               </div>
             )}
             <div>
+              {resolvedText && (
               <div
                 className={`paragraph-2 col-count-${columns}`}
                 dangerouslySetInnerHTML={{
-                  __html: intl.formatMessage({ id: text }),
+                  __html: resolvedText,
                 }}
               ></div>
+              )}
               <Row className="home-page__info-column">
                 <Col>
                   {showRulesForActivity ? (
