@@ -163,6 +163,12 @@ export function slugSanitize(string: string) {
   return lastParam;
 }
 
+export function replaceSlugInPath(pathname: string, slug: string) {
+  const parts = pathname.replace(/\/+$/, "").split("/");
+  parts[parts.length - 1] = slug;
+  return parts.join("/");
+}
+
 export function extractIdAndCategories(
   slug: string,
   listFrom: string,

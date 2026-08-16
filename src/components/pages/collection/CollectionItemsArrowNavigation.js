@@ -4,8 +4,8 @@ import ArrowLeft from "../../../assets/icons/ArrowLeft";
 import ArrowRight from "../../../assets/icons/ArrowRight";
 import { connect } from "react-redux";
 import navigationCollectionItems from "../../../utilities/navigationCollectionItems";
-import { slugSanitize } from "../../../utilities/browser";
-import { useParams, useLocation } from "react-router-dom";
+import { slugSanitize, replaceSlugInPath } from "../../../utilities/browser";
+import { useParams, useLocation, Link } from "react-router-dom";
 
 function CollectionItemsArrowNavigation({
   collection,
@@ -27,17 +27,14 @@ function CollectionItemsArrowNavigation({
     if (collection && collection.length > 0) {
       const { currentIndex, prevIndex, nextItem } = navigationCollectionItems(
         collection,
-        slugSanitize(window.location.pathname)
+        slugSanitize(location.pathname)
       );
       setNavItems({ currentIndex, prevIndex, nextItem });
     }
-  }, [collection]);
+  }, [collection, location.pathname]);
 
-  const generateHref = (item) => {
-    const parts = location.pathname.replace(/\/+$/, "").split("/");
-    parts[parts.length - 1] = item.slug;
-    return parts.join("/");
-  };
+  const generateHref = (item) =>
+    replaceSlugInPath(location.pathname, item.slug);
 
   function ItemPreview({ className, item, side }) {
     const imageUrl =
@@ -86,8 +83,8 @@ function CollectionItemsArrowNavigation({
   ) {
     return (
       <div className="collection-items-arrow-navigation">
-        <a
-          href={generateHref(navItems.prevIndex)}
+        <Link
+          to={generateHref(navItems.prevIndex)}
           className={`left-arrow ${
             showItem.side === "prevIndex" ? "show" : ""
           }`}
@@ -99,9 +96,9 @@ function CollectionItemsArrowNavigation({
             width="21px"
             color={`${showItem.side === "prevIndex" ? "#fff" : "#272323"}`}
           />
-        </a>
-        <a
-          href={generateHref(navItems.nextItem)}
+        </Link>
+        <Link
+          to={generateHref(navItems.nextItem)}
           className={`right-arrow ${
             showItem.side === "nextItem" ? "show" : ""
           }`}
@@ -113,7 +110,7 @@ function CollectionItemsArrowNavigation({
             width="21px"
             color={`${showItem.side === "nextItem" ? "#fff" : "#272323"}`}
           />
-        </a>
+        </Link>
 
         <ItemPreview
           side={showItem.side}
