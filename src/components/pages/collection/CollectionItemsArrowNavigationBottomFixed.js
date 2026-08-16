@@ -29,9 +29,9 @@ function CollectionItemsArrowNavigationBottomFixed({
   }, [collection]);
 
   const generateHref = (item) => {
-    const parts = location.pathname.split('/');
+    const parts = location.pathname.replace(/\/+$/, "").split("/");
     parts[parts.length - 1] = item.slug;
-    return parts.join('/');
+    return parts.join("/");
   };
 
   function ItemPreview({ className, item, side, type = "desktop" }) {

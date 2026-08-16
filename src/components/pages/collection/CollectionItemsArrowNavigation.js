@@ -18,7 +18,6 @@ function CollectionItemsArrowNavigation({
     nextItem: {},
   });
   const [showItem, setShowItem] = useState({});
-  const [linkToTheItem, setLinkToTheItem] = useState("");
   const showPreview = Boolean(Object.keys(showItem).length);
   const noImage =
     "https://api-staging.museumsmolyan.eu/wp-content/uploads/2024/10/no-image.png";
@@ -35,9 +34,9 @@ function CollectionItemsArrowNavigation({
   }, [collection]);
 
   const generateHref = (item) => {
-    const parts = location.pathname.split('/');
+    const parts = location.pathname.replace(/\/+$/, "").split("/");
     parts[parts.length - 1] = item.slug;
-    return setLinkToTheItem(parts.join('/'));
+    return parts.join("/");
   };
 
   function ItemPreview({ className, item, side }) {
@@ -88,13 +87,12 @@ function CollectionItemsArrowNavigation({
     return (
       <div className="collection-items-arrow-navigation">
         <a
-          href={linkToTheItem}
+          href={generateHref(navItems.prevIndex)}
           className={`left-arrow ${
             showItem.side === "prevIndex" ? "show" : ""
           }`}
           onMouseEnter={() => {
             setShowItem({ item: navItems.prevIndex, side: "prevIndex" });
-            generateHref(navItems.prevIndex);
           }}
         >
           <ArrowLeft
@@ -103,13 +101,12 @@ function CollectionItemsArrowNavigation({
           />
         </a>
         <a
-          href={linkToTheItem}
+          href={generateHref(navItems.nextItem)}
           className={`right-arrow ${
             showItem.side === "nextItem" ? "show" : ""
           }`}
           onMouseEnter={() => {
             setShowItem({ item: navItems.nextItem, side: "nextItem" });
-            generateHref(navItems.nextItem);
           }}
         >
           <ArrowRight
