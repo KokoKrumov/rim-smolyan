@@ -17,8 +17,7 @@ function CollectionItemsArrowNavigation({
     prevIndex: {},
     nextItem: {},
   });
-  const [showItem, setShowItem] = useState({});
-  const showPreview = Boolean(Object.keys(showItem).length);
+  const [hoveredSide, setHoveredSide] = useState(null);
   const noImage =
     "https://api-staging.museumsmolyan.eu/wp-content/uploads/2024/10/no-image.png";
 
@@ -32,6 +31,9 @@ function CollectionItemsArrowNavigation({
       setNavItems({ currentIndex, prevIndex, nextItem });
     }
   }, [collection, location.pathname]);
+
+  const hoveredItem = hoveredSide ? navItems[hoveredSide] : null;
+  const showPreview = Boolean(hoveredItem && Object.keys(hoveredItem).length);
 
   const generateHref = (item) =>
     replaceSlugInPath(location.pathname, item.slug);
@@ -51,7 +53,7 @@ function CollectionItemsArrowNavigation({
       return (
         <div
           onMouseLeave={() => {
-            setShowItem({});
+            setHoveredSide(null);
           }}
           className={`item-preview item-preview_top item-preview__${side} ${className}`}
         >
@@ -85,36 +87,32 @@ function CollectionItemsArrowNavigation({
       <div className="collection-items-arrow-navigation">
         <Link
           to={generateHref(navItems.prevIndex)}
-          className={`left-arrow ${
-            showItem.side === "prevIndex" ? "show" : ""
-          }`}
+          className={`left-arrow ${hoveredSide === "prevIndex" ? "show" : ""}`}
           onMouseEnter={() => {
-            setShowItem({ item: navItems.prevIndex, side: "prevIndex" });
+            setHoveredSide("prevIndex");
           }}
         >
           <ArrowLeft
             width="21px"
-            color={`${showItem.side === "prevIndex" ? "#fff" : "#272323"}`}
+            color={`${hoveredSide === "prevIndex" ? "#fff" : "#272323"}`}
           />
         </Link>
         <Link
           to={generateHref(navItems.nextItem)}
-          className={`right-arrow ${
-            showItem.side === "nextItem" ? "show" : ""
-          }`}
+          className={`right-arrow ${hoveredSide === "nextItem" ? "show" : ""}`}
           onMouseEnter={() => {
-            setShowItem({ item: navItems.nextItem, side: "nextItem" });
+            setHoveredSide("nextItem");
           }}
         >
           <ArrowRight
             width="21px"
-            color={`${showItem.side === "nextItem" ? "#fff" : "#272323"}`}
+            color={`${hoveredSide === "nextItem" ? "#fff" : "#272323"}`}
           />
         </Link>
 
         <ItemPreview
-          side={showItem.side}
-          item={showItem.item}
+          side={hoveredSide}
+          item={hoveredItem}
           className={"show"}
           // className={showPreview ? "show" : ""}
         />
