@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useMemo, useRef, useState} from 'react';
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
@@ -18,6 +18,9 @@ function CarouselMegatron({listMegatronCarousel, showModal}) {
     const [carouselDescription, setCarouselDescription] = useState('')
     const [carouselType, setCarouselType] = useState('')
     const carousel1 = useRef(null);
+    // React 19 removed findDOMNode, so every CSSTransition needs its own nodeRef per key
+    const bgNodeRef = useMemo(() => React.createRef(), [item]);
+    const titleNodeRef = useMemo(() => React.createRef(), [item]);
 
     useEffect(() => {
 
@@ -49,18 +52,31 @@ function CarouselMegatron({listMegatronCarousel, showModal}) {
 
         return (
             <div className='carousel-megatron__mobile__bg'>
-                <SwitchTransition mode="out-in">
-                    <CSSTransition key={item} classNames="cross-fade" timeout={500}>
-                    <div className='carousel-megatron__wrap carousel-megatron__mobile' >
-                        <div
-                            key={item.id}
-                            className='carousel carousel__dark carousel-megatron hero-bg'
-                            style={{
-                                backgroundImage: `url(${carouselBg})`
-                                // backgroundColor: `#251A20`
-                            }}
-                        >
-                            <Container>
+                <div className='carousel-megatron__wrap carousel-megatron__mobile'>
+                    <div
+                        key={item.id}
+                        className='carousel carousel__dark carousel-megatron'
+                        style={{position: 'relative'}}
+                    >
+                        {/* only the background layer swaps, so the slide images stay mounted */}
+                        <SwitchTransition mode="in-out">
+                            <CSSTransition key={item} nodeRef={bgNodeRef} classNames="cross-fade" timeout={500}>
+                                <div
+                                    ref={bgNodeRef}
+                                    className='hero-bg'
+                                    style={{
+                                        position: 'absolute',
+                                        top: 0,
+                                        right: 0,
+                                        bottom: 0,
+                                        left: 0,
+                                        backgroundImage: `url(${carouselBg})`
+                                    }}
+                                />
+                            </CSSTransition>
+                        </SwitchTransition>
+
+                        <Container style={{position: 'relative', zIndex: 1}}>
                                 <Row
                                     key={item.id}
                                     className="carousel-megatron__row"
@@ -70,8 +86,8 @@ function CarouselMegatron({listMegatronCarousel, showModal}) {
                                         <div className='carousel__title-wrap__mobile'>
                                             <h3 className='carousel__title'>
                                                 <SwitchTransition mode="out-in">
-                                                    <CSSTransition key={item} classNames="cross-fade" timeout={500}>
-                                            <span>
+                                                    <CSSTransition key={item} nodeRef={titleNodeRef} classNames="cross-fade" timeout={500}>
+                                            <span ref={titleNodeRef}>
                                                 {carouselTitle}
 
                                             </span>
@@ -125,11 +141,9 @@ function CarouselMegatron({listMegatronCarousel, showModal}) {
                                     </Col>
                                 </Row>
 
-                            </Container>
-                        </div>
+                        </Container>
                     </div>
-                    </CSSTransition>
-                </SwitchTransition>
+                </div>
             </div>
         )
     } else {
