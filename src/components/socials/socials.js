@@ -1,15 +1,15 @@
 import React from 'react';
 import SocialButton from "./socialsButton";
 
-function Socials() {
+function Socials({ light = false }) {
 
     return (
-        <div className='socials'>
+        <div className={`socials ${light ? 'socials--light' : ''}`}>
             <div className='socials-item'>
                 <SocialButton buttonType={'facebook-link'} />
             </div>
             <div className='socials-item'>
-                <SocialButton buttonType={'twitter-link'} />
+                <SocialButton buttonType={'twitter-link'} light={light} />
             </div>
             <div className='socials-item'>
                 <SocialButton buttonType={'instagram-link'} />

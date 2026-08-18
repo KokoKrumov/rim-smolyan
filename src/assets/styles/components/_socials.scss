@@ -5,6 +5,13 @@
 
     &-item {
         @include margin(0px, 8px, 0px, 0px);
+        display: flex;
+        align-items: center;
+        height: 16px;
+
+        img {
+            display: block;
+        }
 
         svg {
             fill: $dark;
