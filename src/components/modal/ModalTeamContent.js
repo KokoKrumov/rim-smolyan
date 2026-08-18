@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
-import {FormattedMessage, injectIntl} from 'react-intl';
+import {FormattedMessage} from 'react-intl';
+import { withIntl } from '../../utilities/withIntl';
+import { withRouter } from '../../utilities/withRouter';
 import {closeModal} from "../../actions";
 import {connect} from "react-redux";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Tab from "react-bootstrap/Tab";
 import Nav from "react-bootstrap/Nav";
-import history from "../../history";
 import {isMobileScreen} from "../../utilities/browser";
 
 
@@ -23,9 +24,9 @@ class ModalTeamContent extends Component {
             //if the modal was opened from cardTeamMember
             // so we have a nickname in the end of the location href
             //when we close the modal, then remove the nickname from there
-            const location = history.location.pathname;
+            const location = window.location.pathname;
             let resetLocation = location.replace(`/${this.props.user.nickname}`, '')
-            history.push(resetLocation)
+            this.props.navigate(resetLocation)
         }
     }
 
@@ -64,7 +65,7 @@ class ModalTeamContent extends Component {
                         <div>
                             <figure className='figure'>
                                 <div className="img__wrap">
-                                    <img className="img-fluid" src={this.props.user.avatar}
+                                    <img className="img-fluid" src={this.props.user.avatar || null}
                                          itemProp="image" alt=''/>
                                 </div>
                             </figure>
@@ -332,4 +333,4 @@ const mapDispatchToProps = dispatch => ({
     closeModal: data => dispatch(closeModal(data))
 })
 
-export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(ModalTeamContent));
+export default withRouter(withIntl(connect(mapStateToProps, mapDispatchToProps)(ModalTeamContent)));

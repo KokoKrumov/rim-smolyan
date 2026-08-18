@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { injectIntl } from "react-intl";
+import { withIntl } from "../../utilities/withIntl";
 import NewsAndEventsList from "../newsAndEventsList/NewsAndEventsList";
 import ArticleDetail from "./ArticleDetail";
 
@@ -83,4 +83,4 @@ class Article extends Component {
   }
 }
 
-export default injectIntl(Article);
+export default withIntl(Article);

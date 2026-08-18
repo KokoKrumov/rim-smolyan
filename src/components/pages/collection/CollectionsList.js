@@ -1,8 +1,6 @@
 import CardCollections from "../../cards/cardCollections";
 import React from "react";
 import Spinner from "react-bootstrap/Spinner";
-import { injectIntl } from "react-intl";
-
 function CollectionsList(props) {
   return (
     <div className={`card-columns card-columns-${props.cols}`}>
@@ -26,4 +24,4 @@ function CollectionsList(props) {
   );
 }
 
-export default injectIntl(CollectionsList);
+export default CollectionsList;

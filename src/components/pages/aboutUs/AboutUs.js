@@ -12,11 +12,11 @@ import CarouselImages from "../../carousel/carouselImages";
 import CardMediaHorizontal from "../../cards/cardMediaHorizontal";
 import CardInfoLine from "../../infoLine/CardInfoLine";
 import CardTeamHeadmaster from "../../cards/cardTeamHeadmaster";
-import { FormattedMessage, injectIntl } from "react-intl";
+import { FormattedMessage } from "react-intl";
+import { withIntl } from "../../../utilities/withIntl";
 import CardTeamMember from "../../cards/cardTeamMember";
-import { Route, Switch } from "react-router-dom";
+import { withRouter } from "../../../utilities/withRouter";
 import RegularPrograms from "./RegularPrograms";
-import history from "../../../history";
 
 class AboutUs extends Component {
   state = {
@@ -128,22 +128,23 @@ class AboutUs extends Component {
       });
       // Fetch and set team members
       this.props.fetchTeam().then(() => {
-        this.setState({ team: this.props.team });
-        //When team arrives, then check ifURL path includes a parameter
-        // and this parameter contain a nickname from the team
-        //if this is true, then show modal with the info for this member
-        if (
-          this.props.match.params.modalContent &&
-          this.isMemberExist(this.props.match.params.modalContent)
-        ) {
-          this.handleShowModal(
-            "modal-team",
-            "",
-            this.getMemberInformation(this.props.match.params.modalContent)
-          );
-        } else if (this.props.match.params.modalContent === "stoyu-shishkov") {
-          this.handleShowModal("modal-shishkov", "", "stoyu-shishkov");
-        }
+        this.setState({ team: this.props.team }, () => {
+          //When team arrives, then check ifURL path includes a parameter
+          // and this parameter contain a nickname from the team
+          //if this is true, then show modal with the info for this member
+          if (
+            this.props.match.params.modalContent &&
+            this.isMemberExist(this.props.match.params.modalContent)
+          ) {
+            this.handleShowModal(
+              "modal-team",
+              "",
+              this.getMemberInformation(this.props.match.params.modalContent)
+            );
+          } else if (this.props.match.params.modalContent === "stoyu-shishkov") {
+            this.handleShowModal("modal-shishkov", "", "stoyu-shishkov");
+          }
+        });
       });
     }
   }
@@ -156,9 +157,9 @@ class AboutUs extends Component {
     this.props.showModal(data, url, user);
     //check if modal is shishkov or someone from the team
     if (user.nickname) {
-      history.push(`/about-us/${user.nickname}`);
+      this.props.navigate(`/about-us/${user.nickname}`);
     } else {
-      history.push(`/about-us/${user}`);
+      this.props.navigate(`/about-us/${user}`);
     }
   };
 
@@ -524,21 +525,10 @@ class AboutUs extends Component {
   };
 
   render() {
-    return (
-      <Switch>
-        <Route path="/about-us" exact component={this.renderMainAboutUsPage} />
-        <Route
-          path="/about-us/regular-programs"
-          exact
-          component={this.renderRegularPrograms}
-        />
-        <Route
-          path="/about-us/:modalContent"
-          exact
-          component={this.renderMainAboutUsPage}
-        />
-      </Switch>
-    );
+    if (this.props.match.params.modalContent === 'regular-programs') {
+      return this.renderRegularPrograms();
+    }
+    return this.renderMainAboutUsPage();
   }
 }
 
@@ -549,10 +539,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default injectIntl(
+export default withRouter(withIntl(
   connect(mapStateToProps, {
     fetchTeam,
     showModal,
     fetchRimBuildingImages,
   })(AboutUs)
-);
+));

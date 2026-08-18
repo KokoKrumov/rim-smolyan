@@ -13,7 +13,7 @@ import exhibitionPermanentHero from "../../../assets/images/exhibition-permanent
 import exhibitionsArchiveBG from "../../../translations/exhibitionsArchiveBG.json";
 import exhibitionsArchiveEN from "../../../translations/exhibitionsArchiveEN.json";
 import { extractIdAndCategories } from "../../../utilities/browser";
-import { injectIntl } from "react-intl";
+import { withIntl } from "../../../utilities/withIntl";
 import { isEqual } from "lodash";
 import utilizeScroll from "../../../utilities/utilizeScroll";
 
@@ -197,7 +197,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default injectIntl(
+export default withIntl(
   connect(mapStateToProps, {
     fetchExhibitions,
     resetFetchExhibitions,

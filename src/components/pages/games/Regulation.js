@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {injectIntl} from 'react-intl';
+import { withIntl } from '../../../utilities/withIntl';
 import HeroInner from "../../hero/HeroInner";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
@@ -37,4 +37,4 @@ class Regulation extends Component {
 
 
 
-export default injectIntl(Regulation);
+export default withIntl(Regulation);

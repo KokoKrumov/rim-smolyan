@@ -10,12 +10,14 @@ import InputGroup from "react-bootstrap/InputGroup";
 import FormControl from "react-bootstrap/FormControl";
 import { showModal } from "../../actions";
 import { connect } from "react-redux";
-import { FormattedMessage, useIntl } from "react-intl";
+import { FormattedMessage } from "react-intl";
+import { useIntl } from "../../utilities/withIntl";
 import { isTabletScreen } from "../../utilities/browser";
-import history from "../../history";
+import { useLocation } from "react-router-dom";
 
 function Header({ showModal }) {
   const intl = useIntl();
+  const location = useLocation();
 
   const [navIsOpen, setNavIsOpen] = useState(false);
   const [isTabletScreenV, setIsTabletScreen] = React.useState(isTabletScreen());
@@ -42,7 +44,7 @@ function Header({ showModal }) {
   }
 
   function isCurrentUrl(url) {
-    return history.location.pathname.includes(url);
+    return location.pathname.includes(url);
   }
 
   function handleShowModal(data, url, e) {
