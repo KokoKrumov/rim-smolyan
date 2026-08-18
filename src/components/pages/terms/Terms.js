@@ -1,12 +1,10 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
-import {Route, Switch} from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import {Button} from "react-bootstrap";
-import history from "../../../history";
-import {injectIntl} from "react-intl";
+import { withIntl } from "../../../utilities/withIntl";
 
 class PrivacyPolicy extends Component {
 
@@ -34,7 +32,7 @@ class PrivacyPolicy extends Component {
                                         variant="link"
                                         className="link cta_outline cta_outline__dark"
                                         onClick={() => {
-                                            history.goBack()
+                                            window.history.back()
                                         }}
                                         dangerouslySetInnerHTML={{
                                             __html:
@@ -345,12 +343,7 @@ class PrivacyPolicy extends Component {
 
     render() {
         const {intl} = this.props;
-        return (
-            <Switch>
-                <Route path='/terms' exact component={this.renderPage}/>
-            </Switch>
-
-        )
+        return this.renderPage();
     }
 }
 
@@ -358,7 +351,7 @@ const mapStateToProps = (state) => {
     return {};
 }
 
-export default injectIntl(connect(
+export default withIntl(connect(
     mapStateToProps,
     {}
 )(PrivacyPolicy));

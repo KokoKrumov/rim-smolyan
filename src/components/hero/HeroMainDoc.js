@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import vectors from '../../assets/images/Vector.png'
 import {Link} from "react-router-dom";
-import injectIntl from "react-intl/lib/src/components/injectIntl";
+import { withIntl } from "../../utilities/withIntl";
 
 class Hero extends Component {
 
@@ -44,4 +44,4 @@ class Hero extends Component {
     }
 }
 
-export default injectIntl(Hero);
+export default withIntl(Hero);

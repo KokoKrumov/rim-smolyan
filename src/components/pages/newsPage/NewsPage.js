@@ -12,9 +12,8 @@ import aboutUsImage from "../../../assets/images/about_us_section_bg.png";
 import { connect } from "react-redux";
 import { extractIdAndCategories } from "../../../utilities/browser";
 import heroImage from "../../../assets/images/baseHero.jpg";
-import history from "../../../history";
 import { isEqual } from "lodash";
-import { withRouter } from "react-router";
+import { withRouter } from "../../../utilities/withRouter";
 
 class NewsPage extends Component {
   navLinks = [
@@ -52,7 +51,7 @@ class NewsPage extends Component {
   };
 
   fetchArticles(href) {
-    history.push(href);
+    this.props.navigate(href);
     this.setState(
       {
         page: 1,
@@ -267,7 +266,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, {
+export default withRouter(connect(mapStateToProps, {
   fetchNews,
   resetFetchNews,
-})(withRouter(NewsPage));
+})(NewsPage));

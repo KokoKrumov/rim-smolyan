@@ -7,7 +7,7 @@ import {
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { extractIdAndCategories } from "../../../utilities/browser";
-import { injectIntl } from "react-intl";
+import { withIntl } from "../../../utilities/withIntl";
 import { isEqual } from "lodash";
 
 // Default counts shown while loading actual data
@@ -29,9 +29,9 @@ class CollectionsIndex extends Component {
   }
 
   componentDidMount() {
-    if (this.collectionsRef.current) {
+    /*if (this.collectionsRef.current) {
       this.collectionsRef.current.scrollIntoView({ behavior: "smooth" });
-    }
+    }*/
   }
 
   fetchMainCollections = (categories) => {
@@ -178,6 +178,6 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(fetchCollectionsVirtual(parent)),
 });
 
-export default injectIntl(
+export default withIntl(
   connect(mapStateToProps, mapDispatchToProps)(CollectionsIndex),
 );

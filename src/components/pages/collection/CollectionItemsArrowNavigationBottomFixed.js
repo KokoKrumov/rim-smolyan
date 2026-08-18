@@ -3,13 +3,14 @@ import React, { useEffect, useState } from "react";
 import ArrowLeft from "../../../assets/icons/ArrowLeft";
 import { connect } from "react-redux";
 import navigationCollectionItems from "../../../utilities/navigationCollectionItems";
-import { slugSanitize } from "../../../utilities/browser";
+import { slugSanitize, replaceSlugInPath } from "../../../utilities/browser";
+import { useParams, useLocation, Link } from "react-router-dom";
 
 function CollectionItemsArrowNavigationBottomFixed({
-  match,
   collection,
 }) {
-  const collectionName = match.params.type;
+  const { type: collectionName } = useParams();
+  const location = useLocation();
   const [navItems, setNavItems] = useState({
     currentIndex: {},
     prevIndex: {},
@@ -21,23 +22,14 @@ function CollectionItemsArrowNavigationBottomFixed({
     if (collection && collection.length > 0) {
       const { currentIndex, prevIndex, nextItem } = navigationCollectionItems(
         collection,
-        slugSanitize(window.location.pathname)
+        slugSanitize(location.pathname)
       );
       setNavItems({ currentIndex, prevIndex, nextItem });
     }
-  }, [collection]);
+  }, [collection, location.pathname]);
 
-  const generateHref = (item) => {
-    const replacedMatches = {
-      ":type": collectionName,
-      ":item": item.slug,
-    };
-    const path = match.path;
-    const generatedNewUrl = path.replace(/:type|:item/gi, function (matched) {
-      return replacedMatches[matched];
-    });
-    return generatedNewUrl;
-  };
+  const generateHref = (item) =>
+    replaceSlugInPath(location.pathname, item.slug);
 
   function ItemPreview({ className, item, side, type = "desktop" }) {
     const noImage =
@@ -55,18 +47,15 @@ function CollectionItemsArrowNavigationBottomFixed({
 
     // if (showPreview) {
     return (
-      <a
+      <Link
         className="collection-items-arrow-navigation_link-block"
-        href={generateHref(item)}
+        to={generateHref(item)}
       >
         <div
           className={`item-preview item-preview__show show ${side}`}
         >
           <div className="item-preview_inner">
-            <div
-              href={generateHref(item)}
-              className={`left-arrow show `}
-            >
+            <div className={`left-arrow show `}>
               <ArrowLeft
                 width="21px"
                 color="#fff"
@@ -87,7 +76,7 @@ function CollectionItemsArrowNavigationBottomFixed({
             </div>
           </div>
         </div>
-      </a>
+      </Link>
     );
   }
 

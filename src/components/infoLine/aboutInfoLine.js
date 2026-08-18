@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Container from "react-bootstrap/Container";
-import {FormattedMessage, injectIntl} from 'react-intl';
+import {FormattedMessage} from 'react-intl';
+import { withIntl } from '../../utilities/withIntl';
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import {showModal} from "../../actions";
@@ -37,7 +38,7 @@ class AboutInfoLine extends Component {
     }
 }
 
-export default injectIntl(connect(
+export default withIntl(connect(
     null,
     {
         showModal

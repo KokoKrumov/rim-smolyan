@@ -7,7 +7,7 @@ import Row from "react-bootstrap/Row";
 import Spinner from "react-bootstrap/Spinner";
 import { connect } from "react-redux";
 import { fetchPrices } from "../../../actions";
-import { injectIntl } from "react-intl";
+import { withIntl } from "../../../utilities/withIntl";
 import { wrapPricesInSpans } from "../../../utilities/wrapPricesInSpans";
 
 class Prices extends Component {
@@ -66,4 +66,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default injectIntl(connect(mapStateToProps, { fetchPrices })(Prices));
+export default withIntl(connect(mapStateToProps, { fetchPrices })(Prices));

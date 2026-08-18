@@ -7,7 +7,8 @@ import {connect} from "react-redux";
 import {showModal} from "../../../actions";
 import Tab from "react-bootstrap/Tab";
 import Nav from "react-bootstrap/Nav";
-import {FormattedMessage, injectIntl} from 'react-intl';
+import {FormattedMessage} from 'react-intl';
+import { withIntl } from '../../../utilities/withIntl';
 import CardInfoLine from "../../infoLine/CardInfoLine";
 import {isMobileScreen} from "../../../utilities/browser";
 
@@ -247,7 +248,7 @@ class SupportUs extends Component {
     }
 }
 
-export default injectIntl(connect(
+export default withIntl(connect(
     null,
     {
         showModal

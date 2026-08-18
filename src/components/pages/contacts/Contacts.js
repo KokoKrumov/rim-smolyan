@@ -118,7 +118,7 @@ class Contacts extends Component {
                       </ul>
                     </li>
                     <li className="address__list-item">
-                      <Socials />
+                      <Socials light />
                     </li>
                   </ul>
                 </address>

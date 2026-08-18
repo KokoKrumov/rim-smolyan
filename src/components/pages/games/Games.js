@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {injectIntl} from 'react-intl';
+import { withIntl } from '../../../utilities/withIntl';
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
@@ -53,7 +53,7 @@ class Games extends Component {
                                         />
                                         <div dangerouslySetInnerHTML={{__html: intl.formatMessage({id: 'museum-games-text'})}}/>
                                     </div>
-           
+
                                 </Col>
                             </Row>
                         </Container>
@@ -66,4 +66,4 @@ class Games extends Component {
 
 
 
-export default injectIntl(Games);
+export default withIntl(Games);

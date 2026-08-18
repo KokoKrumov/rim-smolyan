@@ -14,8 +14,8 @@ import Spinner from "react-bootstrap/Spinner";
 import Tab from "react-bootstrap/Tab";
 import { connect } from "react-redux";
 import { extractIdAndCategories } from "../../../utilities/browser";
-import history from "../../../history";
-import { injectIntl } from "react-intl";
+import { withIntl } from "../../../utilities/withIntl";
+import { withRouter } from "../../../utilities/withRouter";
 import { isEqual } from "lodash";
 import utilizeScroll from "../../../utilities/utilizeScroll";
 
@@ -27,7 +27,7 @@ class CollectionsIntroAndGallery extends Component {
       collectionsType: null,
       collectionExist: null,
       collection: null,
-      isInnerGallery: this.props.match.path.includes("intro"),
+      isInnerGallery: window.location.pathname.includes("intro"),
       collectionDescription: "",
       collectionTitle: "",
       title: "",
@@ -227,8 +227,8 @@ class CollectionsIntroAndGallery extends Component {
                           <Nav.Link
                             disabled={!collectionExist}
                             onSelect={() => {
-                              history.push(
-                                `${history.location.pathname}#introduction`,
+                              this.props.navigate(
+                                `${window.location.pathname}#introduction`,
                               );
                             }}
                             className="tab_list-link"
@@ -242,8 +242,8 @@ class CollectionsIntroAndGallery extends Component {
                           <Nav.Link
                             disabled={!collectionExist}
                             onSelect={() => {
-                              history.push(
-                                `${history.location.pathname}#gallery`,
+                              this.props.navigate(
+                                `${window.location.pathname}#gallery`,
                               );
                             }}
                             className="tab_list-link"
@@ -415,6 +415,6 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(fetchCollectionDescription(collectionSlug)),
 });
 
-export default injectIntl(
+export default withRouter(withIntl(
   connect(mapStateToProps, mapDispatchToProps)(CollectionsIntroAndGallery),
-);
+));

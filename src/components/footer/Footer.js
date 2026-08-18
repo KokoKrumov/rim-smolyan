@@ -10,7 +10,6 @@ import fbLogo from "../../assets/images/facebook1.svg";
 import instagramLogo from "../../assets/images/instagram.svg";
 import rimLogo from "../../assets/images/rim-logo.svg";
 import { showModal } from "../../actions";
-import twitterLogo from "../../assets/images/twitter.svg";
 
 function Footer({ showModal }) {
   function handleShowModal(data, url, e) {

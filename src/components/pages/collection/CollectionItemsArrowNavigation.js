@@ -4,21 +4,20 @@ import ArrowLeft from "../../../assets/icons/ArrowLeft";
 import ArrowRight from "../../../assets/icons/ArrowRight";
 import { connect } from "react-redux";
 import navigationCollectionItems from "../../../utilities/navigationCollectionItems";
-import { slugSanitize } from "../../../utilities/browser";
+import { slugSanitize, replaceSlugInPath } from "../../../utilities/browser";
+import { useParams, useLocation, Link } from "react-router-dom";
 
 function CollectionItemsArrowNavigation({
-  match,
   collection,
 }) {
-  const collectionName = match.params.type;
+  const { type: collectionName } = useParams();
+  const location = useLocation();
   const [navItems, setNavItems] = useState({
     currentIndex: {},
     prevIndex: {},
     nextItem: {},
   });
-  const [showItem, setShowItem] = useState({});
-  const [linkToTheItem, setLinkToTheItem] = useState("");
-  const showPreview = Boolean(Object.keys(showItem).length);
+  const [hoveredSide, setHoveredSide] = useState(null);
   const noImage =
     "https://api-staging.museumsmolyan.eu/wp-content/uploads/2024/10/no-image.png";
 
@@ -27,23 +26,17 @@ function CollectionItemsArrowNavigation({
     if (collection && collection.length > 0) {
       const { currentIndex, prevIndex, nextItem } = navigationCollectionItems(
         collection,
-        slugSanitize(window.location.pathname)
+        slugSanitize(location.pathname)
       );
       setNavItems({ currentIndex, prevIndex, nextItem });
     }
-  }, [collection]);
+  }, [collection, location.pathname]);
 
-  const generateHref = (item) => {
-    const replacedMatches = {
-      ":type": collectionName,
-      ":item": item.slug,
-    };
-    const path = match.path;
-    const generateNewUrl = path.replace(/:type|:item/gi, function (matched) {
-      return replacedMatches[matched];
-    });
-    return setLinkToTheItem(generateNewUrl);
-  };
+  const hoveredItem = hoveredSide ? navItems[hoveredSide] : null;
+  const showPreview = Boolean(hoveredItem && Object.keys(hoveredItem).length);
+
+  const generateHref = (item) =>
+    replaceSlugInPath(location.pathname, item.slug);
 
   function ItemPreview({ className, item, side }) {
     const imageUrl =
@@ -60,7 +53,7 @@ function CollectionItemsArrowNavigation({
       return (
         <div
           onMouseLeave={() => {
-            setShowItem({});
+            setHoveredSide(null);
           }}
           className={`item-preview item-preview_top item-preview__${side} ${className}`}
         >
@@ -92,40 +85,34 @@ function CollectionItemsArrowNavigation({
   ) {
     return (
       <div className="collection-items-arrow-navigation">
-        <a
-          href={linkToTheItem}
-          className={`left-arrow ${
-            showItem.side === "prevIndex" ? "show" : ""
-          }`}
+        <Link
+          to={generateHref(navItems.prevIndex)}
+          className={`left-arrow ${hoveredSide === "prevIndex" ? "show" : ""}`}
           onMouseEnter={() => {
-            setShowItem({ item: navItems.prevIndex, side: "prevIndex" });
-            generateHref(navItems.prevIndex);
+            setHoveredSide("prevIndex");
           }}
         >
           <ArrowLeft
             width="21px"
-            color={`${showItem.side === "prevIndex" ? "#fff" : "#272323"}`}
+            color={`${hoveredSide === "prevIndex" ? "#fff" : "#272323"}`}
           />
-        </a>
-        <a
-          href={linkToTheItem}
-          className={`right-arrow ${
-            showItem.side === "nextItem" ? "show" : ""
-          }`}
+        </Link>
+        <Link
+          to={generateHref(navItems.nextItem)}
+          className={`right-arrow ${hoveredSide === "nextItem" ? "show" : ""}`}
           onMouseEnter={() => {
-            setShowItem({ item: navItems.nextItem, side: "nextItem" });
-            generateHref(navItems.nextItem);
+            setHoveredSide("nextItem");
           }}
         >
           <ArrowRight
             width="21px"
-            color={`${showItem.side === "nextItem" ? "#fff" : "#272323"}`}
+            color={`${hoveredSide === "nextItem" ? "#fff" : "#272323"}`}
           />
-        </a>
+        </Link>
 
         <ItemPreview
-          side={showItem.side}
-          item={showItem.item}
+          side={hoveredSide}
+          item={hoveredItem}
           className={"show"}
           // className={showPreview ? "show" : ""}
         />
