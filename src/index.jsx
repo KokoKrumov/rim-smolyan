@@ -5,15 +5,10 @@ import App from './components/App';
 import messages_bg from "./translations/bg.json";
 import messages_en from "./translations/en.json";
 import {Provider} from "react-redux";
-import {legacy_createStore as createStore, applyMiddleware, compose} from 'redux';
-import reducers from './reducers';
-import { thunk as reduxThunk } from 'redux-thunk'
+import { store } from './store/store';
 import GA4React from "ga-4-react";
 
 const ga4react = new GA4React("G-Y09PXD41TG");
-
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(reducers, composeEnhancers(applyMiddleware(reduxThunk)))
 
 const messages = {
     'bg': messages_bg,

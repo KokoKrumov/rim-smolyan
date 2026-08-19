@@ -1,241 +1,49 @@
-import {
-  CLOSE_NEDELOV_MODAL,
-  CLOSE_REDIRECT_MODAL,
-  CLOSE_TEAM_MODAL,
-  FETCH_ARTICLE,
-  FETCH_CATEGORIES,
-  FETCH_COLLECTIONS_BYTYPE,
-  FETCH_COLLECTIONS_BYTYPE_ERROR,
-  FETCH_COLLECTIONS_MAIN,
-  FETCH_COLLECTIONS_VIRTUAL,
-  FETCH_COLLECTION_DESCRIPTION,
-  FETCH_COLLECTION_DESCRIPTION_ERROR,
-  FETCH_EXHIBITIONS,
-  FETCH_EXHIBITIONS_ERROR,
-  FETCH_EXHIBITION_ARTICLE,
-  FETCH_EXHIBITION_ARTICLE_ERROR,
-  FETCH_ITEM_FROM_COLLECTION,
-  FETCH_ITEM_FROM_COLLECTION_ERROR,
-  FETCH_NEDELOV_MODAL,
-  FETCH_NEWS,
-  FETCH_NEWS_ERROR,
-  FETCH_PRICES,
-  FETCH_PRICES_LASZLO_NAGY,
-  FETCH_REDIRECT_MODAL,
-  FETCH_RIM_BUILDING_IMAGES,
-  FETCH_ROUTES,
-  FETCH_SERVICES,
-  FETCH_TEAM,
-  FETCH_TEAM_MODAL,
-  RESET_FETCH_EXHIBITIONS,
-  RESET_FETCH_NEWS,
-} from "./types";
+// Re-exports from RTK slices — maintains backward compat with connect()-based components
 
-import publicStreams from "../api/public";
-import streams from "../api/streams";
+export { fetchNews, resetFetchNews } from '../store/newsSlice';
+export { fetchTeam } from '../store/teamSlice';
+export { fetchRoutes } from '../store/routesSlice';
+export { fetchArticle } from '../store/articleSlice';
+export { fetchPrices } from '../store/pricesSlice';
+export { fetchPricesLaszloNagy } from '../store/pricesLaszloNagySlice';
+export { fetchServices } from '../store/servicesSlice';
+export { fetchCategories } from '../store/categoriesSlice';
+export { fetchExhibitions, resetFetchExhibitions } from '../store/exhibitionsSlice';
+export {
+  fetchCollectionsMain,
+  fetchCollectionsVirtual,
+  fetchCollections,
+  fetchCollectionDescription,
+} from '../store/collectionsSlice';
+export { fetchRimBuildingImages } from '../store/rimBuildingImagesSlice';
+export { fetchExhibitionArticle } from '../store/exhibitionArticleSlice';
+export { fetchItemFromCollection } from '../store/itemFromCollectionSlice';
 
-//Create Actions
+import { modalActions } from '../store/modalSlice';
 
-export const fetchNews =
-  (id, page = 1, number = 100) =>
-  async (dispatch) => {
-    try {
-      const response = await streams.get(
-        `/posts?categories=${id}&_fields=id,date_gmt,slug,title,content,excerpt,event_date,event_place,_links,_embedded&_embed&page=${page}&per_page=${number}`,
-      );
-      dispatch({ type: FETCH_NEWS, payload: response.data });
-    } catch (error) {
-      dispatch({ type: FETCH_NEWS_ERROR, payload: error });
-    }
-  };
-
-export const resetFetchNews = () => {
-  return {
-    type: RESET_FETCH_NEWS,
-    data: [],
-  };
-};
-
-export const resetFetchExhibitions = () => {
-  return {
-    type: RESET_FETCH_EXHIBITIONS,
-    data: [],
-  };
-};
-
-export const fetchRoutes = () => async (dispatch) => {
-  const response = await publicStreams.get("/routes.json");
-  dispatch({ type: FETCH_ROUTES, payload: response.data });
-};
-
-export const fetchCategories = () => async (dispatch) => {
-  const response = await streams.get(
-    // "/categories?_fields=id,name,slug,parent,count&per_page=100"
-    "/categories?_fields=id,name,slug,parent,count,description&per_page=100",
-  );
-  dispatch({ type: FETCH_CATEGORIES, payload: response.data });
-};
-
-export const fetchCollectionsMain = (parent) => async (dispatch) => {
-  const response = await streams.get(
-    `/categories?parent=${parent}&_fields=id,name,slug,description&page=1&per_page=100`,
-  );
-  dispatch({ type: FETCH_COLLECTIONS_MAIN, payload: response.data });
-};
-
-export const fetchCollectionsVirtual = (parent) => async (dispatch) => {
-  const response = await streams.get(
-    `/categories?parent=${parent}&_fields=id,name,slug,description&page=1&per_page=100`,
-  );
-  dispatch({ type: FETCH_COLLECTIONS_VIRTUAL, payload: response.data });
-};
-
-export const fetchCollections =
-  (slugId, page = 1, number = 100) =>
-  async (dispatch) => {
-    try {
-      const response = await streams.get(
-        `/posts?categories=${slugId}&_fields=id,date_gmt,slug,title,content,_links,_embedded&_embed&page=${page}&per_page=${number}`,
-      );
-      dispatch({ type: FETCH_COLLECTIONS_BYTYPE, payload: response.data });
-      return response.data;
-    } catch (error) {
-      dispatch({ type: FETCH_COLLECTIONS_BYTYPE_ERROR, payload: error });
-      throw error;
-    }
-  };
-
-export const fetchCollectionDescription =
-  (collectionSlug) => async (dispatch) => {
-    try {
-      const response = await streams.get(
-        `/posts?slug=${collectionSlug}&_fields=id,title,content`,
-      );
-      dispatch({ type: FETCH_COLLECTION_DESCRIPTION, payload: response.data });
-      return response.data;
-    } catch (error) {
-      dispatch({ type: FETCH_COLLECTION_DESCRIPTION_ERROR, payload: error });
-      throw error;
-    }
-  };
-// api-staging.museumsmolyan.eu/wp-json/wp/v2/posts?categories=32&_fields=id,date_gmt,slug,title,content,_links,_embedded&_embed&page=1&per_page=10
-export const fetchExhibitions =
-  (id, page = 1, number = 100) =>
-  async (dispatch) => {
-    try {
-      const response = await streams.get(
-        `/posts?categories=${id}&_fields=id,date_gmt,slug,title,content,excerpt,event_date,event_place,archive,_links,_embedded&_embed&page=${page}&per_page=${number}`,
-      );
-      dispatch({ type: FETCH_EXHIBITIONS, payload: response.data });
-    } catch (error) {
-      dispatch({ type: FETCH_EXHIBITIONS_ERROR, payload: error });
-    }
-  };
-
-export const fetchExhibitionArticle = (slug) => async (dispatch) => {
-  try {
-    const response = await streams.get(
-      `/posts?slug=${slug}&_fields=id,date_gmt,slug,title,content,excerpt,event_date,event_place,archive,_links,_embedded&_embed `,
-    );
-    dispatch({ type: FETCH_EXHIBITION_ARTICLE, payload: response.data });
-  } catch (error) {
-    dispatch({ type: FETCH_EXHIBITION_ARTICLE_ERROR, payload: error });
-  }
-};
-
-export const fetchServices = () => async (dispatch) => {
-  const response = await publicStreams.get("/services.json");
-  dispatch({ type: FETCH_SERVICES, payload: response.data });
-};
-
-export const fetchRimBuildingImages = () => async (dispatch) => {
-  const response = await publicStreams.get("/rim-building-images.json");
-  dispatch({ type: FETCH_RIM_BUILDING_IMAGES, payload: response.data });
-};
-
-export const fetchTeam = () => async (dispatch) => {
-  const response = await publicStreams.get("/team.json");
-  dispatch({ type: FETCH_TEAM, payload: response.data });
-};
-
-export const fetchArticle = (urlSlug) => async (dispatch) => {
-  try {
-    const response = await streams.get(
-      `/posts?slug=${urlSlug}&_fields=id,date_gmt,slug,title,content,excerpt,event_date,event_place,_links,_embedded&_embed`,
-    );
-    dispatch({ type: FETCH_ARTICLE, payload: response.data });
-  } catch (error) {
-    dispatch({ type: FETCH_NEWS_ERROR, payload: error });
-  }
-};
-
-export const fetchPrices = () => async (dispatch) => {
-  const response = await streams.get(
-    `/posts?slug=prices&_fields=id,date_gmt,slug,title,content`,
-  );
-  dispatch({ type: FETCH_PRICES, payload: response.data });
-};
-
-export const fetchPricesLaszloNagy = () => async (dispatch) => {
-  const response = await streams.get(
-    `/posts?slug=prices-laslo-nagi&_fields=id,date_gmt,slug,title,content`,
-  );
-  dispatch({ type: FETCH_PRICES_LASZLO_NAGY, payload: response.data });
-};
-
-export const fetchItemFromCollection = (urlSlug) => async (dispatch) => {
-  try {
-    const response = await streams.get(
-      `/posts?slug=${urlSlug}&_fields=id,date_gmt,slug,title,content,excerpt,collection_item_dating,collection_item_inventory_number,collection_item_location,collection_item_material,collection_item_size,_links,_embedded&_embed`,
-    );
-    dispatch({ type: FETCH_ITEM_FROM_COLLECTION, payload: response.data[0] });
-  } catch (error) {
-    dispatch({ type: FETCH_ITEM_FROM_COLLECTION_ERROR, payload: error });
-  }
-};
-
-export const showModal = (data, url, user) => {
+// Thunk wrappers for showModal/closeModal — preserve the (data, url, user) API used by components
+export const showModal = (data, url, user) => (dispatch) => {
   switch (data) {
-    case "modal-redirect":
-      return {
-        type: FETCH_REDIRECT_MODAL,
-        data: data,
-        url: url,
-      };
-    case "modal-shishkov":
-      return {
-        type: FETCH_NEDELOV_MODAL,
-        data: data,
-      };
-    case "modal-team":
-      return {
-        type: FETCH_TEAM_MODAL,
-        data: data,
-        user: user,
-      };
+    case 'modal-redirect':
+      return dispatch(modalActions.showRedirect({ data, url }));
+    case 'modal-shishkov':
+      return dispatch(modalActions.showNedelov({ data }));
+    case 'modal-team':
+      return dispatch(modalActions.showTeam({ data, user }));
     default:
-      return data;
+      break;
   }
 };
 
-export const closeModal = (data) => {
+export const closeModal = (data) => (dispatch) => {
   switch (data) {
-    case "modal-redirect":
-      return {
-        type: CLOSE_REDIRECT_MODAL,
-        data: data,
-      };
-    case "modal-shishkov":
-      return {
-        type: CLOSE_NEDELOV_MODAL,
-        data: data,
-      };
-    case "modal-team":
-      return {
-        type: CLOSE_TEAM_MODAL,
-        data: data,
-      };
+    case 'modal-redirect':
+      return dispatch(modalActions.closeRedirect({ data }));
+    case 'modal-shishkov':
+      return dispatch(modalActions.closeNedelov({ data }));
+    case 'modal-team':
+      return dispatch(modalActions.closeTeam({ data }));
     default:
-      return data;
+      break;
   }
 };
