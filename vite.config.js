@@ -1,3 +1,4 @@
+/// <reference types="vitest/config" />
 import { defineConfig, loadEnv, transformWithOxc } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
@@ -85,6 +86,13 @@ export default defineConfig(({ mode }) => {
           quietDeps: true,
         },
       },
+    },
+    test: {
+      environment: 'jsdom',
+      globals: true,
+      setupFiles: './src/setupTests.js',
+      include: ['src/**/*.{test,spec}.{js,jsx,ts,tsx}'],
+      css: false,
     },
   };
 });
