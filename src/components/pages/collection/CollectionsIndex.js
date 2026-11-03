@@ -173,9 +173,10 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchCollectionsMain: (parent) => dispatch(fetchCollectionsMain(parent)),
+  // unwrap() so a failed request rejects instead of marking the data as fetched
+  fetchCollectionsMain: (parent) => dispatch(fetchCollectionsMain(parent)).unwrap(),
   fetchCollectionsVirtual: (parent) =>
-    dispatch(fetchCollectionsVirtual(parent)),
+    dispatch(fetchCollectionsVirtual(parent)).unwrap(),
 });
 
 export default withIntl(
