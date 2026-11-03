@@ -7,7 +7,8 @@ export { fetchArticle } from '../store/articleSlice';
 export { fetchPrices } from '../store/pricesSlice';
 export { fetchPricesLaszloNagy } from '../store/pricesLaszloNagySlice';
 export { fetchServices } from '../store/servicesSlice';
-export { fetchCategories } from '../store/categoriesSlice';
+import { fetchCategories as fetchCategoriesThunk } from '../store/categoriesSlice';
+export const fetchCategories = () => (dispatch) => dispatch(fetchCategoriesThunk()).unwrap();
 export { fetchExhibitions, resetFetchExhibitions } from '../store/exhibitionsSlice';
 export {
   fetchCollectionsMain,
