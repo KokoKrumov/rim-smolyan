@@ -71,7 +71,7 @@ class NavigateThroughCollections extends Component {
       this.props
         .fetchCollectionsMain(slugId)
         .then(() => {
-          const sortedCollection = sortById(this.props.collectionsMain);
+          const sortedCollection = sortById([...this.props.collectionsMain]);
           this.setState({
             collection: sortedCollection,
           });
