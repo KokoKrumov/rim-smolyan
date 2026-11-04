@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import streams from '../api/streams';
-import newsReducer, { fetchNews, resetFetchNews } from './newsSlice';
-import newsErrorReducer, { resetNewsError } from './newsErrorSlice';
-import { fetchArticle } from './articleSlice';
+import streams from '../../api/streams';
+import newsReducer, { fetchNews, resetFetchNews } from '../newsSlice';
+import newsErrorReducer, { resetNewsError } from '../newsErrorSlice';
+import { fetchArticle } from '../articleSlice';
 
-vi.mock('../api/streams', () => ({ default: { get: vi.fn() } }));
+vi.mock('../../api/streams', () => ({ default: { get: vi.fn() } }));
 
 const makeStore = () =>
   configureStore({ reducer: { news: newsReducer, newsError: newsErrorReducer } });

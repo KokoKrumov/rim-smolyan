@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import ArticleDate from './ArticleDate';
+import ArticleDate from '../ArticleDate';
 
 describe('ArticleDate', () => {
   it('renders a single date', () => {

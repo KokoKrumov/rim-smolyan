@@ -19,7 +19,7 @@ import {
   setPrevCollectionFromMain,
   slugSanitize,
   standartTheDate,
-} from './browser';
+} from '../browser';
 
 const setClientWidth = (width: number) => {
   vi.spyOn(document.documentElement, 'clientWidth', 'get').mockReturnValue(width);

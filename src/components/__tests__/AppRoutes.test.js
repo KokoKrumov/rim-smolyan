@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter, useParams } from 'react-router-dom';
-import AppRoutes from './AppRoutes';
+import AppRoutes from '../AppRoutes';
 
 const { stub } = vi.hoisted(() => ({
   // Each page is replaced with a stub that renders its name and the route params it received
@@ -17,29 +17,29 @@ const { stub } = vi.hoisted(() => ({
   }),
 }));
 
-vi.mock('./pages/aboutUs/AboutUs', () => stub('AboutUs'));
-vi.mock('./pages/administrative/Administrative', () => stub('Administrative'));
-vi.mock('./pages/collection/CollectionsDetailItem', () => stub('CollectionsDetailItem'));
-vi.mock('./pages/collection/CollectionsIndex', () => stub('CollectionsIndex'));
-vi.mock('./pages/collection/CollectionsIntroAndGallery', () => stub('CollectionsIntroAndGallery'));
-vi.mock('./pages/collection/CollectionsMain', () => stub('CollectionsMain'));
-vi.mock('./pages/collection/CollectionsVirtual', () => stub('CollectionsVirtual'));
-vi.mock('./pages/contacts/Contacts', () => stub('Contacts'));
-vi.mock('./pages/ExhibitionsDetailPage/ExhibitionsDetailPage', () => stub('ExhibitionsDetailPage'));
-vi.mock('./pages/exhibitions/Exhibitions', () => stub('ExhibitionsPage'));
-vi.mock('./pages/fundsPage/FundsPage', () => stub('FundsPage'));
-vi.mock('./pages/games/Games', () => stub('Games'));
-vi.mock('./pages/homePage/HomePage', () => stub('HomePage'));
-vi.mock('./pages/laszloNagyPage/LaszloNagyPage', () => stub('LaszloNagyPage'));
-vi.mock('./pages/newsDetailPage/NewsDetailPage', () => stub('NewsDetailPage'));
-vi.mock('./pages/newsPage/NewsPage', () => stub('NewsPage'));
-vi.mock('./pages/NotFound', () => stub('NotFound'));
-vi.mock('./pages/prices/Prices', () => stub('Prices'));
-vi.mock('./pages/legal/LegalInfo', () => stub('LegalInfo'));
-vi.mock('./pages/games/Regulation', () => stub('Regulation'));
-vi.mock('./pages/services/Services', () => stub('Services'));
-vi.mock('./pages/supportUs/SupportUs', () => stub('SupportUs'));
-vi.mock('./pages/terms/Terms', () => stub('Terms'));
+vi.mock('../pages/aboutUs/AboutUs', () => stub('AboutUs'));
+vi.mock('../pages/administrative/Administrative', () => stub('Administrative'));
+vi.mock('../pages/collection/CollectionsDetailItem', () => stub('CollectionsDetailItem'));
+vi.mock('../pages/collection/CollectionsIndex', () => stub('CollectionsIndex'));
+vi.mock('../pages/collection/CollectionsIntroAndGallery', () => stub('CollectionsIntroAndGallery'));
+vi.mock('../pages/collection/CollectionsMain', () => stub('CollectionsMain'));
+vi.mock('../pages/collection/CollectionsVirtual', () => stub('CollectionsVirtual'));
+vi.mock('../pages/contacts/Contacts', () => stub('Contacts'));
+vi.mock('../pages/ExhibitionsDetailPage/ExhibitionsDetailPage', () => stub('ExhibitionsDetailPage'));
+vi.mock('../pages/exhibitions/Exhibitions', () => stub('ExhibitionsPage'));
+vi.mock('../pages/fundsPage/FundsPage', () => stub('FundsPage'));
+vi.mock('../pages/games/Games', () => stub('Games'));
+vi.mock('../pages/homePage/HomePage', () => stub('HomePage'));
+vi.mock('../pages/laszloNagyPage/LaszloNagyPage', () => stub('LaszloNagyPage'));
+vi.mock('../pages/newsDetailPage/NewsDetailPage', () => stub('NewsDetailPage'));
+vi.mock('../pages/newsPage/NewsPage', () => stub('NewsPage'));
+vi.mock('../pages/NotFound', () => stub('NotFound'));
+vi.mock('../pages/prices/Prices', () => stub('Prices'));
+vi.mock('../pages/legal/LegalInfo', () => stub('LegalInfo'));
+vi.mock('../pages/games/Regulation', () => stub('Regulation'));
+vi.mock('../pages/services/Services', () => stub('Services'));
+vi.mock('../pages/supportUs/SupportUs', () => stub('SupportUs'));
+vi.mock('../pages/terms/Terms', () => stub('Terms'));
 
 const renderAt = (path) => {
   render(

@@ -1,4 +1,4 @@
-import utilizeScroll from './utilizeScroll';
+import utilizeScroll from '../utilizeScroll';
 
 describe('utilizeScroll', () => {
   it('scrolls the referenced element into view', () => {

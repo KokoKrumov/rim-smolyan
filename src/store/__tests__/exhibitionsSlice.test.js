@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import streams from '../api/streams';
-import exhibitionsReducer, { fetchExhibitions, resetFetchExhibitions } from './exhibitionsSlice';
-import exhibitionsErrorReducer, { resetExhibitionsError } from './exhibitionsErrorSlice';
+import streams from '../../api/streams';
+import exhibitionsReducer, { fetchExhibitions, resetFetchExhibitions } from '../exhibitionsSlice';
+import exhibitionsErrorReducer, { resetExhibitionsError } from '../exhibitionsErrorSlice';
 
-vi.mock('../api/streams', () => ({ default: { get: vi.fn() } }));
+vi.mock('../../api/streams', () => ({ default: { get: vi.fn() } }));
 
 const exhibitions = [
   { id: 1, archive: false },

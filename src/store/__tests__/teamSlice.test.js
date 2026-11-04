@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import publicStreams from '../api/public';
-import teamReducer, { fetchTeam } from './teamSlice';
+import publicStreams from '../../api/public';
+import teamReducer, { fetchTeam } from '../teamSlice';
 
-vi.mock('../api/public', () => ({ default: { get: vi.fn() } }));
+vi.mock('../../api/public', () => ({ default: { get: vi.fn() } }));
 
 const members = [
   { id: 1, name: 'A', department: 'headmaster' },

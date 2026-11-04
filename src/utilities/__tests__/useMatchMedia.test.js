@@ -1,5 +1,5 @@
 import { act, renderHook } from '@testing-library/react';
-import { useMatchMedia } from './useMatchMedia';
+import { useMatchMedia } from '../useMatchMedia';
 
 const createMatchMedia = ({ matches, legacy = false }) => {
   const listeners = new Set();

@@ -1,17 +1,17 @@
 import { configureStore } from '@reduxjs/toolkit';
-import streams from '../api/streams';
-import publicStreams from '../api/public';
-import routesReducer, { fetchRoutes } from './routesSlice';
-import servicesReducer, { fetchServices } from './servicesSlice';
-import rimBuildingImagesReducer, { fetchRimBuildingImages } from './rimBuildingImagesSlice';
-import categoriesReducer, { fetchCategories } from './categoriesSlice';
-import articleReducer, { fetchArticle } from './articleSlice';
-import exhibitionArticleReducer, { fetchExhibitionArticle } from './exhibitionArticleSlice';
-import pricesReducer, { fetchPrices } from './pricesSlice';
-import pricesLaszloNagyReducer, { fetchPricesLaszloNagy } from './pricesLaszloNagySlice';
+import streams from '../../api/streams';
+import publicStreams from '../../api/public';
+import routesReducer, { fetchRoutes } from '../routesSlice';
+import servicesReducer, { fetchServices } from '../servicesSlice';
+import rimBuildingImagesReducer, { fetchRimBuildingImages } from '../rimBuildingImagesSlice';
+import categoriesReducer, { fetchCategories } from '../categoriesSlice';
+import articleReducer, { fetchArticle } from '../articleSlice';
+import exhibitionArticleReducer, { fetchExhibitionArticle } from '../exhibitionArticleSlice';
+import pricesReducer, { fetchPrices } from '../pricesSlice';
+import pricesLaszloNagyReducer, { fetchPricesLaszloNagy } from '../pricesLaszloNagySlice';
 
-vi.mock('../api/streams', () => ({ default: { get: vi.fn() } }));
-vi.mock('../api/public', () => ({ default: { get: vi.fn() } }));
+vi.mock('../../api/streams', () => ({ default: { get: vi.fn() } }));
+vi.mock('../../api/public', () => ({ default: { get: vi.fn() } }));
 
 const makeStore = (reducer) => configureStore({ reducer: { slice: reducer } });
 

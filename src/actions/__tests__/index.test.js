@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import streams from '../api/streams';
-import modalReducer from '../store/modalSlice';
-import categoriesReducer from '../store/categoriesSlice';
-import { showModal, closeModal, fetchCategories } from './index';
+import streams from '../../api/streams';
+import modalReducer from '../../store/modalSlice';
+import categoriesReducer from '../../store/categoriesSlice';
+import { showModal, closeModal, fetchCategories } from '../index';
 
-vi.mock('../api/streams', () => ({ default: { get: vi.fn() } }));
+vi.mock('../../api/streams', () => ({ default: { get: vi.fn() } }));
 
 const makeStore = () =>
   configureStore({ reducer: { modal: modalReducer, categories: categoriesReducer } });

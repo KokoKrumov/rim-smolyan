@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import streams from '../api/streams';
-import itemFromCollectionReducer, { fetchItemFromCollection } from './itemFromCollectionSlice';
+import streams from '../../api/streams';
+import itemFromCollectionReducer, { fetchItemFromCollection } from '../itemFromCollectionSlice';
 
-vi.mock('../api/streams', () => ({ default: { get: vi.fn() } }));
+vi.mock('../../api/streams', () => ({ default: { get: vi.fn() } }));
 
 const makeStore = () =>
   configureStore({ reducer: { itemFomCollection: itemFromCollectionReducer } });

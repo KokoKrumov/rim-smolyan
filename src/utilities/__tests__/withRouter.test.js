@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
-import { withRouter } from './withRouter';
+import { withRouter } from '../withRouter';
 
 class ArticlePage extends React.Component {
   render() {

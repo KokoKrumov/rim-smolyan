@@ -1,4 +1,4 @@
-import { wrapPricesInSpans } from './wrapPricesInSpans';
+import { wrapPricesInSpans } from '../wrapPricesInSpans';
 
 const wrap = (inner) => `<span class="price-value">${inner}</span>`;
 

@@ -1,4 +1,4 @@
-import navigationCollectionItems from './navigationCollectionItems';
+import navigationCollectionItems from '../navigationCollectionItems';
 
 describe('navigationCollectionItems', () => {
   const collection = [{ slug: 'a' }, { slug: 'b' }, { slug: 'c' }];

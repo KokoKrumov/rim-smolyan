@@ -1,4 +1,4 @@
-import modalReducer, { modalActions } from './modalSlice';
+import modalReducer, { modalActions } from '../modalSlice';
 
 describe('modalSlice', () => {
   it('returns the initial state for unknown actions', () => {

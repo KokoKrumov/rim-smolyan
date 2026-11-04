@@ -1,4 +1,4 @@
-import { store } from './store';
+import { store } from '../store';
 
 describe('store', () => {
   it('keeps the same top-level keys as the legacy combineReducers root', () => {

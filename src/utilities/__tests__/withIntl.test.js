@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, renderHook, screen } from '@testing-library/react';
 import { IntlProvider } from 'react-intl';
-import { useIntl, withIntl } from './withIntl';
+import { useIntl, withIntl } from '../withIntl';
 
 const messages = {
   greeting: 'Здравейте, {name}!',

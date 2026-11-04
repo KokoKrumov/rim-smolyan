@@ -1,4 +1,4 @@
-import sortById from './sortById';
+import sortById from '../sortById';
 
 describe('sortById', () => {
   it('sorts ascending by default', () => {

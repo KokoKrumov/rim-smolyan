@@ -1,13 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
-import streams from '../api/streams';
+import streams from '../../api/streams';
 import collectionsReducer, {
   fetchCollections,
   fetchCollectionsMain,
   fetchCollectionsVirtual,
   fetchCollectionDescription,
-} from './collectionsSlice';
+} from '../collectionsSlice';
 
-vi.mock('../api/streams', () => ({ default: { get: vi.fn() } }));
+vi.mock('../../api/streams', () => ({ default: { get: vi.fn() } }));
 
 const makeStore = () => configureStore({ reducer: { collections: collectionsReducer } });
 
