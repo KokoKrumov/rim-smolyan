@@ -11,11 +11,38 @@ describe('modalSlice', () => {
     expect(opened).toEqual({ type: 'team', user, modalIsOpen: true });
 
     const closed = modalReducer(opened, modalActions.closeTeam({ data: 'team' }));
-    expect(closed.modalIsOpen).toBe(false);
+    expect(closed).toEqual({ type: 'team', user, modalIsOpen: false });
   });
 
-  it('opens the redirect modal with a url', () => {
-    const state = modalReducer({}, modalActions.showRedirect({ data: 'redirect', url: 'https://example.com' }));
-    expect(state).toEqual({ type: 'redirect', url: 'https://example.com', modalIsOpen: true });
+  it('opens and closes the redirect modal with the supplied url', () => {
+    const opened = modalReducer(
+      { retained: true },
+      modalActions.showRedirect({ data: 'redirect', url: 'https://example.com' })
+    );
+    expect(opened).toEqual({
+      retained: true,
+      type: 'redirect',
+      url: 'https://example.com',
+      modalIsOpen: true,
+    });
+
+    const closed = modalReducer(
+      opened,
+      modalActions.closeRedirect({ data: 'redirect', url: 'https://example.com/next' })
+    );
+    expect(closed).toEqual({
+      retained: true,
+      type: 'redirect',
+      url: 'https://example.com/next',
+      modalIsOpen: false,
+    });
+  });
+
+  it('opens and closes the Shishkov modal without dropping existing state', () => {
+    const opened = modalReducer({ retained: true }, modalActions.showNedelov({ data: 'modal-shishkov' }));
+    expect(opened).toEqual({ retained: true, type: 'modal-shishkov', modalIsOpen: true });
+
+    const closed = modalReducer(opened, modalActions.closeNedelov({ data: 'modal-shishkov' }));
+    expect(closed).toEqual({ retained: true, type: 'modal-shishkov', modalIsOpen: false });
   });
 });

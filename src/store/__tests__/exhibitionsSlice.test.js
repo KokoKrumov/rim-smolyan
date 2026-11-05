@@ -49,15 +49,18 @@ describe('exhibitionsSlice', () => {
     expect(state.archiveExhibitions.map((e) => e.id)).toEqual([2]);
   });
 
-  it('replaces instead of appending on repeated fetches', async () => {
-    streams.get.mockResolvedValue({ data: exhibitions });
+  it('replaces both lists instead of retaining entries from an earlier fetch', async () => {
+    streams.get.mockResolvedValueOnce({ data: exhibitions });
+    streams.get.mockResolvedValueOnce({ data: [{ id: 4, archive: true }] });
     const store = makeStore();
 
     await store.dispatch(fetchExhibitions(1));
     await store.dispatch(fetchExhibitions(1));
 
-    expect(store.getState().exhibitions.activeExhibitions).toHaveLength(2);
-    expect(store.getState().exhibitions.archiveExhibitions).toHaveLength(1);
+    expect(store.getState().exhibitions).toEqual({
+      activeExhibitions: [],
+      archiveExhibitions: [{ id: 4, archive: true }],
+    });
   });
 
   it('resets to empty lists', async () => {
@@ -70,16 +73,34 @@ describe('exhibitionsSlice', () => {
     expect(store.getState().exhibitions).toEqual({ activeExhibitions: [], archiveExhibitions: [] });
   });
 
-  it('sets and resets the exhibitions error flag', async () => {
-    streams.get.mockRejectedValue(Object.assign(new Error('Server Error'), { response: { status: 500 } }));
+  it('retains existing exhibitions and sets and resets the error flag on failure', async () => {
+    streams.get.mockResolvedValueOnce({ data: exhibitions });
+    streams.get.mockRejectedValueOnce(Object.assign(new Error('Server Error'), { response: { status: 500 } }));
     const store = makeStore();
+    await store.dispatch(fetchExhibitions(1));
+    const previousExhibitions = store.getState().exhibitions;
 
-    const action = await store.dispatch(fetchExhibitions(1));
+    const request = store.dispatch(fetchExhibitions(1));
+    const action = await request;
 
+    expect(fetchExhibitions.rejected.match(action)).toBe(true);
     expect(action.payload).toEqual({ message: 'Server Error', status: 500 });
+    await expect(request.unwrap()).rejects.toEqual({ message: 'Server Error', status: 500 });
+    expect(store.getState().exhibitions).toEqual(previousExhibitions);
     expect(store.getState().exhibitionsError).toEqual({ exhibitionsError: true });
 
     store.dispatch(resetExhibitionsError());
     expect(store.getState().exhibitionsError).toEqual({ exhibitionsError: false });
+    expect(store.getState().exhibitions).toEqual(previousExhibitions);
+  });
+
+  it('rejects with a serializable payload when the response has no HTTP status', async () => {
+    streams.get.mockRejectedValue(new Error('Network Error'));
+    const store = makeStore();
+
+    const action = await store.dispatch(fetchExhibitions(1));
+
+    expect(action.payload).toEqual({ message: 'Network Error', status: undefined });
+    expect(store.getState().exhibitionsError).toEqual({ exhibitionsError: true });
   });
 });

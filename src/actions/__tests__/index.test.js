@@ -54,12 +54,15 @@ describe('legacy action creators', () => {
       expect(store.getState().modal).toMatchObject({ type: 'modal-team', modalIsOpen: false });
     });
 
-    it('ignores unknown modal types', () => {
+    it('ignores unknown modal types without changing an open modal', () => {
       const store = makeStore();
+      const user = { id: 1 };
+      store.dispatch(showModal('modal-team', undefined, user));
+      const previousModal = store.getState().modal;
 
       expect(store.dispatch(showModal('modal-unknown'))).toBeUndefined();
       expect(store.dispatch(closeModal('modal-unknown'))).toBeUndefined();
-      expect(store.getState().modal).toEqual({});
+      expect(store.getState().modal).toEqual(previousModal);
     });
   });
 

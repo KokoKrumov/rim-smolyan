@@ -19,7 +19,7 @@
 ## 🛠️ Технологичен стек
 
 - **Frontend Framework:** React
-- **State Management:** Redux + Redux Thunk
+- **State Management:** Redux Toolkit
 - **Routing:** React Router DOM
 - **UI Components:** React Bootstrap, Styled Components
 - **Интернационализация:** React Intl
@@ -78,6 +78,16 @@ npm run build:staging
 npm run build
 ```
 
+## 🧪 Тестове
+
+```bash
+npm run test:run
+npm run test:run -- store actions
+npm run test:coverage
+```
+
+Тестовете за Redux Toolkit и съвместимите Redux actions са съответно в `src/store/__tests__/` и `src/actions/__tests__/`.
+
 ## 📁 Структура на проекта
 
 ```
@@ -93,6 +103,7 @@ rim-smolyan/
 │   │   ├── modal/       # Модални прозорци
 │   │   └── ...
 │   ├── reducers/        # Redux reducers
+│   ├── store/           # Redux Toolkit store и slices
 │   ├── translations/    # Файлове за превод (BG/EN)
 │   ├── utilities/       # Помощни функции
 │   └── styles/          # Глобални стилове

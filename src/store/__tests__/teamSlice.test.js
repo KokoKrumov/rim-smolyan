@@ -33,6 +33,26 @@ describe('teamSlice', () => {
     expect(team.defaultTeam).toEqual(members);
   });
 
+  it('groups every supported department while retaining unknown members in the full team', async () => {
+    const departments = [
+      'headmaster', 'archeology', 'history', 'ethnography', 'scientific',
+      'publicRelations', 'administration', 'fundsAndScientificArchives',
+    ];
+    const allMembers = departments.map((department, id) => ({ id, department }));
+    allMembers.push({ id: 20, department: 'unknown' }, { id: 21 });
+    publicStreams.get.mockResolvedValue({ data: allMembers });
+    const store = makeStore();
+
+    await store.dispatch(fetchTeam());
+
+    const team = store.getState().team;
+    departments.forEach((department, index) => {
+      expect(team[department]).toEqual([allMembers[index]]);
+    });
+    expect(team.defaultTeam).toEqual(allMembers);
+    expect(team).not.toHaveProperty('unknown');
+  });
+
   it('does not duplicate members on repeated fetches', async () => {
     publicStreams.get.mockResolvedValue({ data: members });
     const store = makeStore();
@@ -48,5 +68,41 @@ describe('teamSlice', () => {
     await makeStore().dispatch(fetchTeam());
 
     expect(makeStore().getState().team.history).toEqual([]);
+  });
+
+  it('clears stale departments when a later response changes or empties the team', async () => {
+    const replacement = { id: 5, department: 'ethnography' };
+    publicStreams.get.mockResolvedValueOnce({ data: members });
+    publicStreams.get.mockResolvedValueOnce({ data: [replacement] });
+    publicStreams.get.mockResolvedValueOnce({ data: [] });
+    const store = makeStore();
+
+    await store.dispatch(fetchTeam());
+    await store.dispatch(fetchTeam());
+
+    expect(store.getState().team.headmaster).toEqual([]);
+    expect(store.getState().team.history).toEqual([]);
+    expect(store.getState().team.ethnography).toEqual([replacement]);
+    expect(store.getState().team.defaultTeam).toEqual([replacement]);
+
+    await store.dispatch(fetchTeam());
+
+    Object.values(store.getState().team).forEach((department) => {
+      expect(department).toEqual([]);
+    });
+  });
+
+  it('keeps the existing team when the request fails', async () => {
+    publicStreams.get.mockResolvedValueOnce({ data: members });
+    publicStreams.get.mockRejectedValueOnce(new Error('Network Error'));
+    const store = makeStore();
+    await store.dispatch(fetchTeam());
+    const previousTeam = store.getState().team;
+
+    const action = await store.dispatch(fetchTeam());
+
+    expect(fetchTeam.rejected.match(action)).toBe(true);
+    expect(action.error.message).toBe('Network Error');
+    expect(store.getState().team).toEqual(previousTeam);
   });
 });
