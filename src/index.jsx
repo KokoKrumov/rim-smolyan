@@ -20,20 +20,19 @@ const language = localStorage.getItem('lang') ??
 
 const root = createRoot(document.getElementById('root'));
 
-(async _ => {
-    await ga4react.initialize()
-        .then((ga4) => {
-            ga4.pageview('path')
-            ga4.gtag('event', 'pageview', 'path')
-        }, (err) => {
-            console.error(err)
-        });
+root.render(
+    <IntlProvider locale={language} messages={messages[language]}>
+        <Provider store={store}>
+            <App/>
+        </Provider>
+    </IntlProvider>
+);
 
-    root.render(
-        <IntlProvider locale={language} messages={messages[language]}>
-            <Provider store={store}>
-                <App/>
-            </Provider>
-        </IntlProvider>
-    );
-})();
+ga4react.initialize()
+    .then((ga4) => {
+        ga4.pageview('path')
+        ga4.gtag('event', 'pageview', 'path')
+    })
+    .catch((err) => {
+        console.error(err)
+    });
