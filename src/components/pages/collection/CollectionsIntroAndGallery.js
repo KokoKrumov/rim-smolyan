@@ -411,8 +411,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
   fetchCollections: (parent) => dispatch(fetchCollections(parent)),
+  // unwrap() so the caller gets the raw payload and failures reject
   fetchCollectionDescription: (collectionSlug) =>
-    dispatch(fetchCollectionDescription(collectionSlug)),
+    dispatch(fetchCollectionDescription(collectionSlug)).unwrap(),
 });
 
 export default withRouter(withIntl(

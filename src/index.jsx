@@ -5,15 +5,10 @@ import App from './components/App';
 import messages_bg from "./translations/bg.json";
 import messages_en from "./translations/en.json";
 import {Provider} from "react-redux";
-import {legacy_createStore as createStore, applyMiddleware, compose} from 'redux';
-import reducers from './reducers';
-import { thunk as reduxThunk } from 'redux-thunk'
+import { store } from './store/store';
 import GA4React from "ga-4-react";
 
 const ga4react = new GA4React("G-Y09PXD41TG");
-
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(reducers, composeEnhancers(applyMiddleware(reduxThunk)))
 
 const messages = {
     'bg': messages_bg,
@@ -25,20 +20,19 @@ const language = localStorage.getItem('lang') ??
 
 const root = createRoot(document.getElementById('root'));
 
-(async _ => {
-    await ga4react.initialize()
-        .then((ga4) => {
-            ga4.pageview('path')
-            ga4.gtag('event', 'pageview', 'path')
-        }, (err) => {
-            console.error(err)
-        });
+root.render(
+    <IntlProvider locale={language} messages={messages[language]}>
+        <Provider store={store}>
+            <App/>
+        </Provider>
+    </IntlProvider>
+);
 
-    root.render(
-        <IntlProvider locale={language} messages={messages[language]}>
-            <Provider store={store}>
-                <App/>
-            </Provider>
-        </IntlProvider>
-    );
-})();
+ga4react.initialize()
+    .then((ga4) => {
+        ga4.pageview('path')
+        ga4.gtag('event', 'pageview', 'path')
+    })
+    .catch((err) => {
+        console.error(err)
+    });

@@ -540,9 +540,10 @@ const mapStateToProps = (state) => {
 };
 
 export default withRouter(withIntl(
-  connect(mapStateToProps, {
-    fetchTeam,
-    showModal,
-    fetchRimBuildingImages,
-  })(AboutUs)
+  connect(mapStateToProps, (dispatch) => ({
+    // unwrap() so a failed request rejects and skips the success callbacks
+    fetchTeam: () => dispatch(fetchTeam()).unwrap(),
+    showModal: (data, url, user) => dispatch(showModal(data, url, user)),
+    fetchRimBuildingImages: () => dispatch(fetchRimBuildingImages()).unwrap(),
+  }))(AboutUs)
 ));

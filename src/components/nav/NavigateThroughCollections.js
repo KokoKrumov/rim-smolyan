@@ -71,7 +71,7 @@ class NavigateThroughCollections extends Component {
       this.props
         .fetchCollectionsMain(slugId)
         .then(() => {
-          const sortedCollection = sortById(this.props.collectionsMain);
+          const sortedCollection = sortById([...this.props.collectionsMain]);
           this.setState({
             collection: sortedCollection,
           });
@@ -301,7 +301,8 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchCollectionsMain: (parent) => dispatch(fetchCollectionsMain(parent)),
+  // unwrap() so a failed request rejects and the caller's catch runs
+  fetchCollectionsMain: (parent) => dispatch(fetchCollectionsMain(parent)).unwrap(),
 });
 
 export default withRouter(withIntl(
