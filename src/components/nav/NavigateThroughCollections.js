@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import { selectCategories } from "../../store/selectors";
 import { extractIdAndCategories, slugSanitize } from "../../utilities/browser";
 
 import Col from "react-bootstrap/Col";
@@ -226,8 +228,8 @@ class NavigateThroughCollections extends Component {
           <Row>
             <Col md={6}>
               {prevIndex ? (
-                <a
-                  href={`/${this.state.collectionType}/intro/${prevIndex.slug}`}
+                <Link
+                  to={`/${this.state.collectionType}/intro/${prevIndex.slug}`}
                 >
                   <Row className="nav-through-collections__first-half">
                     <Col md={5} />
@@ -247,7 +249,7 @@ class NavigateThroughCollections extends Component {
                       </div>
                     </Col>
                   </Row>
-                </a>
+                </Link>
               ) : (
                 <div className="nav-through-collections__first-half">
                   <Col md={5} />
@@ -257,8 +259,8 @@ class NavigateThroughCollections extends Component {
             </Col>
             <Col md={6}>
               {nextIndex ? (
-                <a
-                  href={`/${this.state.collectionType}/intro/${nextIndex.slug}`}
+                <Link
+                  to={`/${this.state.collectionType}/intro/${nextIndex.slug}`}
                 >
                   <Row className="nav-through-collections__second-half">
                     <Col md={7}>
@@ -278,7 +280,7 @@ class NavigateThroughCollections extends Component {
                     </Col>
                     <Col md={5} />
                   </Row>
-                </a>
+                </Link>
               ) : (
                 <div className="nav-through-collections__second-half">
                   <Col md={7} />
@@ -296,7 +298,7 @@ class NavigateThroughCollections extends Component {
 const mapStateToProps = (state) => {
   return {
     collectionsMain: state.collections.main,
-    categories: Object.values(state.categories),
+    categories: selectCategories(state),
   };
 };
 

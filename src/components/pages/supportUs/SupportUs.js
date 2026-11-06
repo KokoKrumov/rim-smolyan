@@ -11,6 +11,7 @@ import {FormattedMessage} from 'react-intl';
 import { withIntl } from '../../../utilities/withIntl';
 import CardInfoLine from "../../infoLine/CardInfoLine";
 import {isMobileScreen} from "../../../utilities/browser";
+import { Link } from "react-router-dom";
 
 class SupportUs extends Component {
 
@@ -18,23 +19,20 @@ class SupportUs extends Component {
         isMobileScreenV: isMobileScreen(),
     }
 
-    handleResize() {
-        this.setState({
-            isMobileScreenV: isMobileScreen()
-        })
+    handleResize = () => {
+        const isMobileScreenV = isMobileScreen();
+        if (isMobileScreenV !== this.state.isMobileScreenV) {
+            this.setState({ isMobileScreenV });
+        }
     }
 
     componentDidMount() {
-        window.addEventListener('resize', () => {
-            this.handleResize()
-        })
+        window.addEventListener('resize', this.handleResize)
     }
 
 
     componentWillUnmount() {
-        window.removeEventListener('resize', () => {
-            this.handleResize()
-        })
+        window.removeEventListener('resize', this.handleResize)
     }
 
     handleShowModal(data, url, e) {
@@ -73,24 +71,24 @@ class SupportUs extends Component {
                                 </Col>
                                 <Col lg={5}>
                                     <p>
-                                        <a
+                                        <Link
                                             className='links'
-                                            href="/administrative/#13"
+                                            to="/administrative/#13"
                                         >
                                             <span
                                                 dangerouslySetInnerHTML={{__html: intl.formatMessage({id: "status-for-awarding"})}}
                                             >
                                             </span>
-                                        </a>
-                                        <a
+                                        </Link>
+                                        <Link
                                             className='links'
-                                            href="/administrative/#14"
+                                            to="/administrative/#14"
                                         >
                                             <span
                                                 dangerouslySetInnerHTML={{__html: intl.formatMessage({id: "donors-for-enrichment"})}}
                                             >
                                             </span>
-                                        </a>
+                                        </Link>
 
                                     </p>
                                 </Col>

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { selectCategories } from "../../../store/selectors";
 import {
   fetchCollectionsMain,
   fetchCollectionsVirtual,
@@ -168,7 +169,7 @@ const mapStateToProps = (state) => {
   return {
     collectionsMain: state.collections.main,
     collectionsVirtual: state.collections.virtual,
-    categories: Object.values(state.categories),
+    categories: selectCategories(state),
   };
 };
 

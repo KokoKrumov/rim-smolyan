@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { selectNews } from "../../../store/selectors";
 import { fetchArticle, fetchNews } from "../../../actions";
 
 import Article from "../../Article/Article";
@@ -99,7 +100,7 @@ class NewsDetailPage extends Component {
 const mapStateToProps = (state) => {
   return {
     article: state.article,
-    news: Object.values(state.news),
+    news: selectNews(state),
   };
 };
 

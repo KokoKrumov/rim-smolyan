@@ -24,7 +24,7 @@ function CarouselImages({ listImages }) {
     return (_) => {
       window.removeEventListener("resize", handleResize);
     };
-  });
+  }, []);
 
   function onSlideChanged(e) {
     setItem(e.item);
@@ -41,6 +41,8 @@ function CarouselImages({ listImages }) {
           <img
             className="img-fluid"
             src={item.image}
+            loading="lazy"
+            decoding="async"
             alt=""
             itemProp="image"
           />

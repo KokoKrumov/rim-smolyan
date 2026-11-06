@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { selectNews } from "../../store/selectors";
 import HeroInner from "../hero/HeroInner";
 import { connect } from "react-redux";
 
@@ -14,7 +15,7 @@ class NotFound extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    news: Object.values(state.news),
+    news: selectNews(state),
   };
 };
 

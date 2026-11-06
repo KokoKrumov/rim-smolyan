@@ -7,6 +7,8 @@ import messages_en from "./translations/en.json";
 import {Provider} from "react-redux";
 import { store } from './store/store';
 import GA4React from "ga-4-react";
+import { preload } from 'react-dom';
+import heroImage from './assets/images/baseHero.jpg';
 
 const ga4react = new GA4React("G-Y09PXD41TG");
 
@@ -20,6 +22,10 @@ const language = localStorage.getItem('lang') ??
 
 const root = createRoot(document.getElementById('root'));
 
+if (window.location.pathname === '/') {
+    preload(heroImage, { as: 'image', fetchPriority: 'high' });
+}
+
 root.render(
     <IntlProvider locale={language} messages={messages[language]}>
         <Provider store={store}>
@@ -30,8 +36,7 @@ root.render(
 
 ga4react.initialize()
     .then((ga4) => {
-        ga4.pageview('path')
-        ga4.gtag('event', 'pageview', 'path')
+        ga4.pageview(window.location.pathname + window.location.search, window.location.href, document.title)
     })
     .catch((err) => {
         console.error(err)

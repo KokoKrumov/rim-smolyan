@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { selectRoutes, selectServices } from "../../../store/selectors";
 import { connect } from "react-redux";
 import { withIntl } from "../../../utilities/withIntl";
 import HeroInner from "../../hero/HeroInner";
@@ -207,8 +208,8 @@ class Services extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  routes: Object.values(state.routes),
-  services: Object.values(state.services),
+  routes: selectRoutes(state),
+  services: selectServices(state),
 });
 
 export default withIntl(

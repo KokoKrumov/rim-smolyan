@@ -1,4 +1,5 @@
-import React, { Component, useEffect } from "react";
+import React, { Component } from "react";
+import { selectNews, selectCategories } from "../../../store/selectors";
 import {
   extractIdAndCategories,
   isTabletScreen,
@@ -88,11 +89,12 @@ class HomePage extends Component {
     },
   };
 
-  handleResize() {
-    this.setState({
-      isTabletScreenV: isTabletScreen(),
-    });
-  }
+  handleResize = () => {
+    const isTabletScreenV = isTabletScreen();
+    if (isTabletScreenV !== this.state.isTabletScreenV) {
+      this.setState({ isTabletScreenV });
+    }
+  };
 
   fetchData = (id, page, perPage, listFrom, props, propsCategories) => {
     const { slugId, categories } = extractIdAndCategories(
@@ -101,6 +103,7 @@ class HomePage extends Component {
       props,
       propsCategories
     );
+    this.setState({ categories });
     this.props.fetchNews(slugId, page, perPage).then(() => {
       this.setState({
         listOfNewsAndEvents: this.props.news,
@@ -113,7 +116,9 @@ class HomePage extends Component {
     // react can't update when there are changes in storage,
     // however, the storage contains "categories" from the first load,
     // so we have to check the storage when component is mounting
-    if (
+    if (this.props.categories.length > 0) {
+      this.fetchData("news-and-events", 1, 3, "props", this.props, this.props.categories);
+    } else if (
       sessionStorage.getItem("categories") &&
       !isEqual(
         JSON.parse(sessionStorage.getItem("categories")),
@@ -130,16 +135,13 @@ class HomePage extends Component {
       );
     }
 
-    window.addEventListener("resize", () => {
-      this.handleResize();
-    });
+    window.addEventListener("resize", this.handleResize);
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     if (
-      !sessionStorage.getItem("categories") &&
-      this.props &&
-      this.props.categories &&
+      prevProps.categories !== this.props.categories &&
+      this.props.categories.length > 0 &&
       !isEqual(this.props.categories, this.state.categories)
     ) {
       this.fetchData(
@@ -154,9 +156,7 @@ class HomePage extends Component {
   }
 
   componentWillUnmount() {
-    window.removeEventListener("resize", () => {
-      this.handleResize();
-    });
+    window.removeEventListener("resize", this.handleResize);
   }
 
   handleShowModal(data, url, e) {
@@ -217,7 +217,7 @@ class HomePage extends Component {
           </Container>
         </div>
 
-        {!isTabletScreen() ? (
+        {!this.state.isTabletScreenV ? (
           <CarouselMegatron
             listMegatronCarousel={listMegatronCarousel}
             isTableScreen={this.state.isTabletScreenV}
@@ -242,8 +242,8 @@ class HomePage extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    news: Object.values(state.news),
-    categories: Object.values(state.categories),
+    news: selectNews(state),
+    categories: selectCategories(state),
   };
 };
 
