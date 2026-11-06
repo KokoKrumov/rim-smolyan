@@ -68,7 +68,7 @@ export const fetchCollections =
   async (dispatch) => {
     try {
       const response = await streams.get(
-        `/posts?categories=${slugId}&_fields=id,date_gmt,slug,title,content,_links,_embedded&_embed&page=${page}&per_page=${number}`
+        `/posts?categories=${slugId}&_fields=id,date_gmt,slug,title,_links,_embedded&_embed&page=${page}&per_page=${number}`
       );
       dispatch(setByType(response.data));
       return response.data;

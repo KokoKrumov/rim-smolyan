@@ -98,7 +98,7 @@ describe('collectionsSlice', () => {
       const result = await store.dispatch(fetchCollections(9, 3, 10));
 
       expect(streams.get).toHaveBeenCalledWith(
-        '/posts?categories=9&_fields=id,date_gmt,slug,title,content,_links,_embedded&_embed&page=3&per_page=10'
+        '/posts?categories=9&_fields=id,date_gmt,slug,title,_links,_embedded&_embed&page=3&per_page=10'
       );
       expect(result).toEqual([{ id: 6 }]);
       expect(store.getState().collections.byType).toEqual([{ id: 6 }]);

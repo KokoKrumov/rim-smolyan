@@ -7,7 +7,7 @@ const _fetchExhibitions = createAsyncThunk(
   async ({ id, page = 1, number = 100 }, { rejectWithValue }) => {
     try {
       const response = await streams.get(
-        `/posts?categories=${id}&_fields=id,date_gmt,slug,title,content,excerpt,event_date,event_place,archive,_links,_embedded&_embed&page=${page}&per_page=${number}`
+        `/posts?categories=${id}&_fields=id,date_gmt,slug,title,excerpt,event_date,event_place,archive,_links,_embedded&_embed&page=${page}&per_page=${number}`
       );
       return response.data;
     } catch (error) {
