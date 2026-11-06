@@ -41,7 +41,7 @@ export const fetchNews =
   async (dispatch) => {
     try {
       const response = await streams.get(
-        `/posts?categories=${id}&_fields=id,date_gmt,slug,title,content,excerpt,event_date,event_place,_links,_embedded&_embed&page=${page}&per_page=${number}`,
+        `/posts?categories=${id}&_fields=id,date_gmt,slug,title,excerpt,event_date,event_place,_links,_embedded&_embed&page=${page}&per_page=${number}`,
       );
       dispatch({ type: FETCH_NEWS, payload: response.data });
     } catch (error) {
@@ -124,7 +124,7 @@ export const fetchExhibitions =
   async (dispatch) => {
     try {
       const response = await streams.get(
-        `/posts?categories=${id}&_fields=id,date_gmt,slug,title,content,excerpt,event_date,event_place,archive,_links,_embedded&_embed&page=${page}&per_page=${number}`,
+        `/posts?categories=${id}&_fields=id,date_gmt,slug,title,excerpt,event_date,event_place,archive,_links,_embedded&_embed&page=${page}&per_page=${number}`,
       );
       dispatch({ type: FETCH_EXHIBITIONS, payload: response.data });
     } catch (error) {
