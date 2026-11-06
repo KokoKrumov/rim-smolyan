@@ -1,5 +1,8 @@
-import { render, screen, within } from '@testing-library/react';
+import { render as renderWithoutRouter, screen, within } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import NewsAndEventsList from '../NewsAndEventsList';
+
+const render = ui => renderWithoutRouter(ui, { wrapper: MemoryRouter });
 
 const newsItem = {
   id: 1,
@@ -58,6 +61,8 @@ describe('NewsAndEventsList', () => {
     expect(within(eventLink).getByText('март')).toBeInTheDocument();
     expect(within(eventLink).getByText('2024')).toBeInTheDocument();
     expect(within(eventLink).getByAltText('')).toHaveAttribute('src', 'https://example.test/event.jpg');
+    expect(within(eventLink).getByAltText('')).toHaveAttribute('loading', 'lazy');
+    expect(within(eventLink).getByAltText('')).toHaveAttribute('decoding', 'async');
   });
 
   it('omits the date and image when optional event data is absent', () => {

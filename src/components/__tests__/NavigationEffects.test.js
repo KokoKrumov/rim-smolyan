@@ -1,0 +1,77 @@
+import React from 'react';
+import { act, render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { Link, MemoryRouter } from 'react-router-dom';
+import NavigationEffects from '../NavigationEffects';
+
+const { pageview, getGA4React, isInitialized } = vi.hoisted(() => ({
+  pageview: vi.fn(),
+  getGA4React: vi.fn(),
+  isInitialized: vi.fn(),
+}));
+vi.mock('ga-4-react', () => ({ default: { getGA4React, isInitialized } }));
+
+function renderNavigation(path = '/') {
+  const root = document.createElement('div');
+  root.id = 'root';
+  document.body.appendChild(root);
+  return render(
+    <MemoryRouter initialEntries={[path]}>
+      <NavigationEffects />
+      <Link to="/news?page=2">News</Link>
+      <Link to="/administrative/#13">Support</Link>
+    </MemoryRouter>,
+    { container: root },
+  );
+}
+
+describe('navigation effects', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    getGA4React.mockReturnValue({ pageview });
+    isInitialized.mockReturnValue(true);
+    vi.spyOn(window, 'scrollTo').mockImplementation(() => {});
+  });
+  afterEach(() => vi.restoreAllMocks());
+
+  it('scrolls to the top and tracks router navigation without duplicating the initial view', async () => {
+    const user = userEvent.setup();
+    renderNavigation();
+    expect(pageview).not.toHaveBeenCalled();
+    window.scrollTo.mockClear();
+
+    await user.click(screen.getByRole('link', { name: 'News' }));
+
+    expect(window.scrollTo).toHaveBeenCalledWith(0, 0);
+    expect(pageview).toHaveBeenCalledOnce();
+    expect(pageview).toHaveBeenCalledWith('/news?page=2', window.location.href, document.title);
+  });
+
+  it('does not wait for analytics to navigate or scroll', async () => {
+    isInitialized.mockReturnValue(false);
+    const user = userEvent.setup();
+    renderNavigation();
+    await user.click(screen.getByRole('link', { name: 'News' }));
+    expect(window.scrollTo).toHaveBeenCalledWith(0, 0);
+    expect(pageview).not.toHaveBeenCalled();
+    expect(getGA4React).not.toHaveBeenCalled();
+  });
+
+  it('scrolls to hash targets that mount after a lazy route resolves', async () => {
+    const { container } = renderNavigation('/administrative/#13');
+    const target = document.createElement('div');
+    target.id = '13';
+    target.scrollIntoView = vi.fn();
+    act(() => container.appendChild(target));
+    await waitFor(() => expect(target.scrollIntoView).toHaveBeenCalledOnce());
+    expect(window.scrollTo).not.toHaveBeenCalled();
+  });
+
+  it('disconnects a pending hash observer when the route changes', async () => {
+    const disconnect = vi.spyOn(MutationObserver.prototype, 'disconnect');
+    const user = userEvent.setup();
+    renderNavigation('/administrative/#missing');
+    await user.click(screen.getByRole('link', { name: 'News' }));
+    expect(disconnect).toHaveBeenCalled();
+  });
+});

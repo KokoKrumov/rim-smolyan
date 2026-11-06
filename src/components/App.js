@@ -10,13 +10,13 @@ import Header from "../components/header/Header";
 import ModalComponent from "./modal/ModalComponent";
 import { connect } from "react-redux";
 import { withIntl } from "../utilities/withIntl";
+import NavigationEffects from "./NavigationEffects";
 
 class App extends Component {
   componentDidMount() {
     // if (!sessionStorage.getItem("categories")) {
-      this.props.fetchCategories().then(() => {
-        const categoriesValues = this.props.categories;
-        sessionStorage.setItem("categories", JSON.stringify(categoriesValues));
+      this.props.fetchCategories().then((categories) => {
+        sessionStorage.setItem("categories", JSON.stringify(categories));
       });
     // }
   }
@@ -24,6 +24,7 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
+        <NavigationEffects />
         <div className="wrapper">
           <Header />
           <main>
@@ -37,14 +38,8 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    categories: Object.values(state.categories),
-  };
-};
-
 export default withIntl(
-  connect(mapStateToProps, {
+  connect(null, {
     showModal,
     fetchCategories,
   })(App)

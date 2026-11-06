@@ -5,7 +5,7 @@ import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import streams from '../../../../api/streams';
-import categoriesReducer from '../../../../store/categoriesSlice';
+import categoriesReducer, { fetchCategories } from '../../../../store/categoriesSlice';
 import newsErrorReducer from '../../../../store/newsErrorSlice';
 import newsReducer from '../../../../store/newsSlice';
 import messages from '../../../../translations/en.json';
@@ -34,18 +34,19 @@ class TestIntersectionObserver {
     this.callback = callback;
     this.options = options;
     this.observe = vi.fn();
+    this.disconnect = vi.fn();
     observer = this;
   }
 }
 
-function renderNewsPage({ path = '/news-and-events', storedCategories = true, initialNews = {} } = {}) {
+function renderNewsPage({ path = '/news-and-events', storedCategories = true, initialNews = {}, initialCategories = categories } = {}) {
   window.history.replaceState(null, '', path);
   if (storedCategories) {
     sessionStorage.setItem('categories', JSON.stringify(categories));
   }
   const store = configureStore({
     reducer: { news: newsReducer, newsError: newsErrorReducer, categories: categoriesReducer },
-    preloadedState: { categories, news: initialNews },
+    preloadedState: { categories: initialCategories, news: initialNews },
   });
   const result = render(
     <Provider store={store}>
@@ -137,6 +138,24 @@ describe('NewsPage', () => {
 
     expect(await screen.findByRole('link', { name: 'News story' })).toBeInTheDocument();
     expect(streams.get).toHaveBeenCalledWith(expect.stringMatching(/categories=11&.*&page=1&per_page=10$/));
+  });
+
+  it('loads a cold route when categories arrive after storage is populated', async () => {
+    streams.get.mockResolvedValue({ data: [article('news-story', 'News story')] });
+    const { store } = renderNewsPage({ path: '/news', storedCategories: false, initialCategories: [] });
+    sessionStorage.setItem('categories', JSON.stringify(categories));
+    act(() => store.dispatch(fetchCategories.fulfilled(categories, 'request')));
+
+    expect(await screen.findByRole('link', { name: 'News story' })).toBeInTheDocument();
+    expect(streams.get).toHaveBeenCalledOnce();
+    expect(streams.get).toHaveBeenCalledWith(expect.stringMatching(/categories=11&.*&page=1&per_page=10$/));
+  });
+
+  it('disconnects pagination observation when the page unmounts', () => {
+    streams.get.mockResolvedValue({ data: [] });
+    const { unmount } = renderNewsPage();
+    unmount();
+    expect(observer.disconnect).toHaveBeenCalledOnce();
   });
 
   it('hides the pagination spinner after a news request fails', async () => {

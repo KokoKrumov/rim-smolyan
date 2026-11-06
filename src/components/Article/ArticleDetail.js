@@ -5,13 +5,11 @@ import SocialsShare from "../socials/socialsShare";
 import ArticleDate from "../Article/ArticleDate";
 import ExhibitionDate from "../Exhibition/ExhibitionDate";
 import NewsDateAndYear from "../pages/newsDetailPage/NewsDateAndYear";
+import { featuredImageProps } from "../../utilities/featuredImageProps";
 
 function ArticleDetail({ article }) {
   const articleType = article._embedded["wp:term"][0][1].slug;
-  const articleImg = article._embedded["wp:featuredmedia"]
-    ? article._embedded["wp:featuredmedia"][0]?.media_details?.sizes?.full ||
-      article._embedded["wp:featuredmedia"][0]?.media_details?.sizes?.medium_large
-    : "";
+  const media = article._embedded["wp:featuredmedia"]?.[0];
 
   const articleText = article.content.rendered;
 
@@ -83,7 +81,10 @@ function ArticleDetail({ article }) {
               ) : null}
               <img
                 className="img-fluid"
-                src={articleImg.source_url}
+                {...(media ? featuredImageProps(media, "(min-width: 1200px) 760px, (min-width: 992px) 650px, 100vw") : {})}
+                loading="eager"
+                fetchPriority="high"
+                decoding="async"
                 alt=""
                 itemProp="image"
               />

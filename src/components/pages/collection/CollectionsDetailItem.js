@@ -132,6 +132,9 @@ function CollectionsDetailItem({
                         <img
                           className="img-fluid"
                           style={{ pointerEvents: "none" }}
+                          loading="eager"
+                          fetchPriority="high"
+                          decoding="async"
                           src={
                             typeof item._embedded["wp:featuredmedia"] !==
                             "undefined"
@@ -223,6 +226,9 @@ function CollectionsDetailItem({
                       <img
                         className="img-fluid"
                         style={{ pointerEvents: "none" }}
+                        loading="eager"
+                        fetchPriority="high"
+                        decoding="async"
                         src={
                           typeof item._embedded["wp:featuredmedia"] !==
                           "undefined"

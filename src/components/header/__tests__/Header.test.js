@@ -3,7 +3,7 @@ import { fireEvent, render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter, useLocation } from 'react-router-dom';
 import modalReducer from '../../../store/modalSlice';
 import Header from '../Header';
 
@@ -31,6 +31,11 @@ function setWidth(width) {
   Object.defineProperty(document.documentElement, 'clientWidth', { configurable: true, value: width });
 }
 
+function LocationProbe() {
+  const location = useLocation();
+  return <output data-testid="location">{location.pathname}</output>;
+}
+
 function renderHeader(path = '/') {
   const store = configureStore({ reducer: { modal: modalReducer } });
   return render(
@@ -38,6 +43,7 @@ function renderHeader(path = '/') {
       <IntlProvider locale="en" messages={messages}>
         <MemoryRouter initialEntries={[path]}>
           <Header />
+          <LocationProbe />
         </MemoryRouter>
       </IntlProvider>
     </Provider>
@@ -104,6 +110,32 @@ describe('Header', () => {
     expect(hamburger).toHaveClass('is-active');
     await user.click(toggle);
     expect(hamburger).not.toHaveClass('is-active');
+  });
+
+  it('navigates within the router and collapses mobile navigation after selection', async () => {
+    setWidth(600);
+    const user = userEvent.setup();
+    const { container } = renderHeader();
+    await user.click(screen.getByRole('button', { name: 'Toggle navigation' }));
+    await user.click(screen.getByRole('link', { name: 'Contact' }));
+
+    expect(screen.getByTestId('location')).toHaveTextContent('/contact-us');
+    expect(screen.getByRole('link', { name: 'Contact' })).toHaveClass('active');
+    expect(container.querySelector('.hamburger')).not.toHaveClass('is-active');
+  });
+
+  it('does not reinstall the resize listener on rerender and removes it on unmount', async () => {
+    const add = vi.spyOn(window, 'addEventListener');
+    const remove = vi.spyOn(window, 'removeEventListener');
+    const user = userEvent.setup();
+    const { unmount } = renderHeader();
+    const resizeCalls = () => add.mock.calls.filter(([event]) => event === 'resize');
+    const handler = resizeCalls()[0][1];
+    await user.click(screen.getByRole('button', { name: 'Toggle navigation' }));
+    expect(resizeCalls()).toHaveLength(1);
+    unmount();
+    expect(remove).toHaveBeenCalledWith('resize', handler);
+    vi.restoreAllMocks();
   });
 
   it('moves the language controls on resize and shows the saved language', async () => {

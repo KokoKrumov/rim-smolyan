@@ -3,6 +3,7 @@ import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
+import { MemoryRouter } from 'react-router-dom';
 import modalReducer from '../../../store/modalSlice';
 import AccordionBlock from '../AccordionBlock';
 
@@ -28,7 +29,7 @@ function renderAccordion(blocks, openId = blocks[0].id, onToggle = vi.fn()) {
       </IntlProvider>
     </Provider>
   );
-  const result = render(renderWithOpenId(openId));
+  const result = render(renderWithOpenId(openId), { wrapper: MemoryRouter });
   return {
     ...result,
     onToggle,

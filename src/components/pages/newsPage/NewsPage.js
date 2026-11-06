@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { selectNews, selectCategories } from "../../../store/selectors";
 import { fetchNews, resetFetchNews } from "../../../actions";
 
 import Col from "react-bootstrap/Col";
@@ -52,37 +53,17 @@ class NewsPage extends Component {
 
   fetchArticles(href) {
     this.props.navigate(href);
-    this.setState(
-      {
-        page: 1,
-        news: [],
-        newsError: false,
-      },
-      () => {
-        this.fetchData(
-          href,
-          this.state.page,
-          10,
-          "storage",
-          this.props,
-          this.props.categories
-        );
-      }
-    );
   }
 
   fetchData = (slug, page, per_page, listFrom, props, propsCategories) => {
     if (!this.state.isLoading) {
-      this.setState({
-        isLoading: true,
-      });
-
       const { slugId, categories } = extractIdAndCategories(
         slug,
         listFrom,
         props,
         propsCategories
       );
+      this.setState({ isLoading: true, categories });
       this.props
         .fetchNews(slugId, page, per_page)
         .then(() => {
@@ -110,9 +91,9 @@ class NewsPage extends Component {
         location.pathname,
         curPage,
         10,
-        "storage",
+        "props",
         this.props,
-        this.state.listOfNewsAndEvents
+        this.props.categories
       );
       this.setState({ page: curPage });
     }
@@ -131,7 +112,9 @@ class NewsPage extends Component {
     // react can't update when there are changes in storage,
     // however, the storage contains "categories" from the first load,
     // so we have to check the storage when component is mounting
-    if (
+    if (this.props.categories.length > 0) {
+      this.fetchData(location.pathname, this.state.page, 10, "props", this.props, this.props.categories);
+    } else if (
       sessionStorage.getItem("categories") &&
       !isEqual(
         JSON.parse(sessionStorage.getItem("categories")),
@@ -161,10 +144,16 @@ class NewsPage extends Component {
     this.observer.observe(this.loadingRef);
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
+    if (prevProps.location.pathname !== this.props.location.pathname) {
+      this.setState({ page: 1, news: [], newsError: false, isLoading: false }, () => {
+        this.fetchData(this.props.location.pathname, 1, 10, "props", this.props, this.props.categories);
+      });
+      return;
+    }
     if (
-      !sessionStorage.getItem("categories") &&
-      this.props?.categories &&
+      prevProps.categories !== this.props.categories &&
+      this.props.categories.length > 0 &&
       !isEqual(this.props.categories, this.state.categories)
     ) {
       const { location } = this.props;
@@ -198,6 +187,7 @@ class NewsPage extends Component {
   }
 
   componentWillUnmount() {
+    this.observer.disconnect();
     document.body.style.overflow = "scroll";
   }
 
@@ -260,9 +250,9 @@ class NewsPage extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    news: Object.values(state.news),
+    news: selectNews(state),
     newsError: state.newsError.newsError,
-    categories: Object.values(state.categories),
+    categories: selectCategories(state),
   };
 };
 
