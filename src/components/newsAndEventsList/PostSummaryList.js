@@ -7,7 +7,7 @@ import ArticleDate from "../Article/ArticleDate";
 import ExhibitionDate from "../Exhibition/ExhibitionDate";
 import NewsDateAndYear from "../pages/newsDetailPage/NewsDateAndYear";
 
-function NewsAndEventsListHorizontal({ listOfNewsAndEvents, isExhibition }) {
+function PostSummaryList({ listOfNewsAndEvents, isExhibition }) {
   if (listOfNewsAndEvents) {
     return listOfNewsAndEvents.map((event) => {
       return (
@@ -116,4 +116,4 @@ function NewsAndEventsListHorizontal({ listOfNewsAndEvents, isExhibition }) {
   }
 }
 
-export default NewsAndEventsListHorizontal;
+export default PostSummaryList;

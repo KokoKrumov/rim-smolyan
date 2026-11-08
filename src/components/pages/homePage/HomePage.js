@@ -12,7 +12,7 @@ import { FormattedMessage } from "react-intl";
 import Hero from "../../hero/Hero";
 import InfoColumn from "../../infoColumn/InfoColumn";
 import { Link } from "react-router-dom";
-import NewsAndEventsList from "../../newsAndEventsList/NewsAndEventsList";
+import NewsAndEventsCards from "../../newsAndEventsList/NewsAndEventsCards";
 import Row from "react-bootstrap/Row";
 import WorkInfoLine from "../../infoLine/WorkInfoLine";
 import aboutUsImage from "../../../assets/images/about_us_section_bg.png";
@@ -76,6 +76,7 @@ class HomePage extends Component {
     bgHero: null,
     bgAboutUs: null,
     listOfNewsAndEvents: [],
+    isLoadingNews: false,
     listMegatronCarousel: null,
     isTabletScreenV: isTabletScreen(),
     categories: [],
@@ -114,6 +115,7 @@ class HomePage extends Component {
       return;
     }
     this.newsCategoryId = slugId;
+    this.setState({ isLoadingNews: true });
 
     const request = this.props.fetchNews(slugId, page, perPage);
     this.newsRequest = request;
@@ -122,9 +124,13 @@ class HomePage extends Component {
         return;
       }
       if (fetchNews.fulfilled.match(action)) {
-        this.setState({ listOfNewsAndEvents: Object.values(action.payload) });
+        this.setState({
+          listOfNewsAndEvents: Object.values(action.payload),
+          isLoadingNews: false,
+        });
       } else {
         console.error("Failed to load news", action.error);
+        this.setState({ isLoadingNews: false });
       }
     });
   };
@@ -222,8 +228,12 @@ class HomePage extends Component {
                 ) : null}
               </div>
               <Row>
-                <NewsAndEventsList
-                  listOfNewsAndEvents={this.state.listOfNewsAndEvents}
+                <NewsAndEventsCards
+                  listOfNewsAndEvents={
+                    this.state.isLoadingNews
+                      ? null
+                      : this.state.listOfNewsAndEvents
+                  }
                 />
               </Row>
               {this.state.isTabletScreenV ? (

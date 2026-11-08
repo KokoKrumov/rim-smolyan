@@ -1,8 +1,9 @@
 import React from "react";
 import Col from "react-bootstrap/Col";
+import Spinner from "react-bootstrap/Spinner";
 import ArticleDate from "../Article/ArticleDate";
 
-function NewsAndEventsList({ listOfNewsAndEvents }) {
+function NewsAndEventsCards({ listOfNewsAndEvents }) {
   if (listOfNewsAndEvents) {
     return listOfNewsAndEvents.map((article, index) => {
       return (
@@ -37,11 +38,13 @@ function NewsAndEventsList({ listOfNewsAndEvents }) {
     });
   } else {
     return (
-      <div>
-        <p>Loading ...</p>
+      <div className="spinner-wrap">
+        <Spinner className="spinner" animation="border" role="status">
+          <span className="visually-hidden">Loading ...</span>
+        </Spinner>
       </div>
     );
   }
 }
 
-export default NewsAndEventsList;
+export default NewsAndEventsCards;

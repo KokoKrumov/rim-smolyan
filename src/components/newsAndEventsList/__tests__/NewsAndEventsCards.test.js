@@ -1,5 +1,5 @@
 import { render, screen, within } from '@testing-library/react';
-import NewsAndEventsList from '../NewsAndEventsList';
+import NewsAndEventsCards from '../NewsAndEventsCards';
 
 const newsItem = {
   id: 1,
@@ -20,23 +20,36 @@ const eventItem = {
   },
 };
 
-describe('NewsAndEventsList', () => {
-  it('shows loading when articles have not been provided', () => {
-    render(<NewsAndEventsList />);
+describe('NewsAndEventsCards', () => {
+  it.each([undefined, null])('shows a loading spinner when the list is %s', (listOfNewsAndEvents) => {
+    render(<NewsAndEventsCards listOfNewsAndEvents={listOfNewsAndEvents} />);
 
-    expect(screen.getByText('Loading ...')).toBeInTheDocument();
+    const spinner = screen.getByRole('status');
+    expect(spinner).toHaveClass('spinner', 'spinner-border');
+    expect(spinner.parentElement).toHaveClass('spinner-wrap');
+    expect(within(spinner).getByText('Loading ...')).toHaveClass('visually-hidden');
     expect(screen.queryByRole('link')).not.toBeInTheDocument();
   });
 
-  it('renders an empty list without a loading message', () => {
-    const { container } = render(<NewsAndEventsList listOfNewsAndEvents={[]} />);
+  it('renders an empty list without a loading spinner', () => {
+    const { container } = render(<NewsAndEventsCards listOfNewsAndEvents={[]} />);
 
     expect(container).toBeEmptyDOMElement();
-    expect(screen.queryByText('Loading ...')).not.toBeInTheDocument();
+    expect(screen.queryByRole('status')).not.toBeInTheDocument();
+  });
+
+  it('replaces the spinner when articles arrive', () => {
+    const { rerender } = render(<NewsAndEventsCards />);
+
+    expect(screen.getByRole('status')).toBeInTheDocument();
+    rerender(<NewsAndEventsCards listOfNewsAndEvents={[newsItem]} />);
+
+    expect(screen.queryByRole('status')).not.toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Museum news' })).toBeInTheDocument();
   });
 
   it('renders article titles and links for every entry', () => {
-    render(<NewsAndEventsList listOfNewsAndEvents={[newsItem, eventItem]} />);
+    render(<NewsAndEventsCards listOfNewsAndEvents={[newsItem, eventItem]} />);
 
     const newsLink = screen.getByRole('link', { name: 'Museum news' });
     const eventLink = screen.getByRole('link', { name: /Spring event/ });
@@ -50,7 +63,7 @@ describe('NewsAndEventsList', () => {
   });
 
   it('renders an event date and its first featured image', () => {
-    render(<NewsAndEventsList listOfNewsAndEvents={[eventItem]} />);
+    render(<NewsAndEventsCards listOfNewsAndEvents={[eventItem]} />);
 
     const eventLink = screen.getByRole('link', { name: /Spring event/ });
 
@@ -61,7 +74,7 @@ describe('NewsAndEventsList', () => {
   });
 
   it('omits the date and image when optional event data is absent', () => {
-    render(<NewsAndEventsList listOfNewsAndEvents={[newsItem]} />);
+    render(<NewsAndEventsCards listOfNewsAndEvents={[newsItem]} />);
 
     const newsLink = screen.getByRole('link', { name: 'Museum news' });
 
@@ -70,7 +83,7 @@ describe('NewsAndEventsList', () => {
   });
 
   it('renders a link even when the title is absent', () => {
-    render(<NewsAndEventsList listOfNewsAndEvents={[{ id: 3, slug: 'untitled' }]} />);
+    render(<NewsAndEventsCards listOfNewsAndEvents={[{ id: 3, slug: 'untitled' }]} />);
 
     expect(screen.getByRole('link')).toHaveAttribute('href', '/news-and-events/untitled');
     expect(screen.getByRole('heading')).toBeEmptyDOMElement();

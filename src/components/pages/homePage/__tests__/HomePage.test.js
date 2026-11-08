@@ -27,8 +27,9 @@ const newsUrl = '/posts?categories=2&_fields=id,date_gmt,slug,title,excerpt,even
 
 function deferred() {
   let resolve;
-  const promise = new Promise((res) => { resolve = res; });
-  return { promise, resolve };
+  let reject;
+  const promise = new Promise((res, rej) => { resolve = res; reject = rej; });
+  return { promise, resolve, reject };
 }
 
 function renderHomePage(initialCategories = [], strictMode = false) {
@@ -74,6 +75,7 @@ describe('HomePage news', () => {
 
     expect(streams.get).toHaveBeenCalledTimes(1);
     expect(streams.get).toHaveBeenCalledWith(newsUrl);
+    expect(screen.getByRole('status')).toHaveClass('spinner-border');
 
     act(() => store.dispatch(resetFetchNews()));
     expect(streams.get).toHaveBeenCalledTimes(1);
@@ -84,7 +86,20 @@ describe('HomePage news', () => {
         'href', `/news-and-events/${article.slug}`
       );
     }
+    expect(screen.queryByRole('status')).not.toBeInTheDocument();
     expect(streams.get).toHaveBeenCalledTimes(1);
+  });
+
+  it('stops loading when the news response is empty', async () => {
+    const response = deferred();
+    streams.get.mockReturnValue(response.promise);
+    renderHomePage(categories);
+
+    expect(screen.getByRole('status')).toHaveClass('spinner-border');
+    await act(async () => response.resolve({ data: [] }));
+
+    expect(screen.queryByRole('status')).not.toBeInTheDocument();
+    expect(screen.queryByRole('link', { name: 'First story' })).not.toBeInTheDocument();
   });
 
   it('loads on mount when Redux already has categories but storage is empty', async () => {
@@ -166,22 +181,70 @@ describe('HomePage news', () => {
     expect(screen.queryByRole('link', { name: 'First story' })).not.toBeInTheDocument();
   });
 
+  it('keeps loading until the newest category request finishes', async () => {
+    const cachedResponse = deferred();
+    const freshResponse = deferred();
+    sessionStorage.setItem('categories', JSON.stringify(categories));
+    streams.get.mockImplementation((url) => {
+      if (url === newsUrl) return cachedResponse.promise;
+      if (url === newsUrl.replace('categories=2', 'categories=99')) return freshResponse.promise;
+      throw new Error(`Unexpected request: ${url}`);
+    });
+    const store = renderHomePage();
+
+    expect(screen.getByRole('status')).toBeInTheDocument();
+    act(() => store.dispatch(fetchCategories.fulfilled([{ ...categories[0], id: 99 }], 'categories')));
+
+    await act(async () => cachedResponse.resolve({ data: [articles[0]] }));
+    expect(screen.getByRole('status')).toBeInTheDocument();
+    expect(screen.queryByRole('link', { name: 'First story' })).not.toBeInTheDocument();
+
+    await act(async () => freshResponse.resolve({ data: [articles[1]] }));
+    expect(screen.queryByRole('status')).not.toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Second story' })).toBeInTheDocument();
+  });
+
   it('reports a missing category without requesting an undefined category', () => {
     const log = vi.spyOn(console, 'error').mockImplementation(() => {});
     renderHomePage([{ id: 8, slug: 'exhibitions', name: 'Exhibitions' }]);
 
     expect(streams.get).not.toHaveBeenCalled();
     expect(log).toHaveBeenCalledWith('Category not found: news-and-events');
+    expect(screen.queryByRole('status')).not.toBeInTheDocument();
   });
 
   it('reports a failed news request', async () => {
     const log = vi.spyOn(console, 'error').mockImplementation(() => {});
-    streams.get.mockRejectedValue(new Error('Network unavailable'));
+    const response = deferred();
+    streams.get.mockReturnValue(response.promise);
     renderHomePage(categories);
 
+    expect(screen.getByRole('status')).toBeInTheDocument();
+    await act(async () => response.reject(new Error('Network unavailable')));
     await waitFor(() => expect(log).toHaveBeenCalledWith(
       'Failed to load news', expect.objectContaining({ message: 'Network unavailable' })
     ));
+    expect(screen.queryByRole('status')).not.toBeInTheDocument();
     expect(screen.queryByRole('link', { name: 'First story' })).not.toBeInTheDocument();
+  });
+
+  it('keeps previously loaded news after a refresh fails', async () => {
+    const log = vi.spyOn(console, 'error').mockImplementation(() => {});
+    const freshResponse = deferred();
+    streams.get
+      .mockResolvedValueOnce({ data: [articles[0]] })
+      .mockReturnValueOnce(freshResponse.promise);
+    const store = renderHomePage(categories);
+
+    expect(await screen.findByRole('link', { name: 'First story' })).toBeInTheDocument();
+    act(() => store.dispatch(fetchCategories.fulfilled([{ ...categories[0], id: 99 }], 'categories')));
+    expect(screen.getByRole('status')).toBeInTheDocument();
+
+    await act(async () => freshResponse.reject(new Error('Network unavailable')));
+    expect(log).toHaveBeenCalledWith(
+      'Failed to load news', expect.objectContaining({ message: 'Network unavailable' })
+    );
+    expect(screen.queryByRole('status')).not.toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'First story' })).toBeInTheDocument();
   });
 });
