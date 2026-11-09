@@ -3,7 +3,8 @@ import { act, render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
-import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Link, Route, Routes, useLocation } from 'react-router-dom';
+import Spinner from 'react-bootstrap/Spinner';
 import streams from '../../../../api/streams';
 import collectionsReducer from '../../../../store/collectionsSlice';
 import itemReducer from '../../../../store/itemFromCollectionSlice';
@@ -11,6 +12,9 @@ import messages from '../../../../translations/en.json';
 import CollectionsDetailItem from '../CollectionsDetailItem';
 
 vi.mock('../../../../api/streams', () => ({ default: { get: vi.fn() } }));
+vi.mock('react-bootstrap/Spinner', () => ({
+  default: vi.fn(() => <div role="status" />),
+}));
 vi.mock('yet-another-react-lightbox', () => ({
   default: ({ open, close, slides }) => open ? (
     <div role="dialog" aria-label="Image preview">
@@ -48,6 +52,11 @@ const next = {
   _embedded: { 'wp:featuredmedia': [{ source_url: 'https://example.test/chalice.jpg' }] },
 };
 
+function KeyedDetail() {
+  const { pathname } = useLocation();
+  return <CollectionsDetailItem key={pathname} />;
+}
+
 function renderDetail({ desktop = true, collection = [], path = '/main-collections/detail/ethnography/vase' } = {}) {
   window.history.replaceState(null, '', path);
   const media = {
@@ -66,7 +75,7 @@ function renderDetail({ desktop = true, collection = [], path = '/main-collectio
         <BrowserRouter>
           <Link to="/main-collections/detail/ethnography/chalice">Next item</Link>
           <Routes>
-            <Route path="/:host/detail/:type/:item" element={<CollectionsDetailItem />} />
+            <Route path="/:host/detail/:type/:item" element={<KeyedDetail />} />
           </Routes>
         </BrowserRouter>
       </IntlProvider>
@@ -79,11 +88,13 @@ describe('CollectionsDetailItem', () => {
   beforeEach(() => {
     sessionStorage.clear();
     vi.resetAllMocks();
+    Element.prototype.scrollIntoView = vi.fn();
   });
 
   afterEach(() => {
     vi.restoreAllMocks();
     vi.unstubAllGlobals();
+    delete Element.prototype.scrollIntoView;
     sessionStorage.clear();
     window.history.replaceState(null, '', '/');
   });
@@ -215,5 +226,55 @@ describe('CollectionsDetailItem', () => {
       'https://example.test/chalice.jpg'
     );
     expect(streams.get).toHaveBeenCalledWith(expect.stringContaining('/posts?slug=chalice'));
+  });
+
+  it.each([
+    ['virtual-collections', true],
+    ['virtual-collections', false],
+    ['main-collections', true],
+    ['main-collections', false],
+  ])('does not flash a spinner during %s arrow navigation (desktop: %s)', async (host, desktop) => {
+    let resolveRequest;
+    const request = new Promise((resolve) => {
+      resolveRequest = resolve;
+    });
+    streams.get.mockImplementation((url) => {
+      if (url.startsWith('/posts?slug=vase')) return Promise.resolve({ data: [vase] });
+      if (url.startsWith('/posts?slug=chalice')) return request;
+      throw new Error(`Unexpected request: ${url}`);
+    });
+    const user = userEvent.setup();
+    const { container } = renderDetail({
+      desktop,
+      collection: [previous, vase, next],
+      path: `/${host}/detail/ethnography/vase`,
+    });
+    await screen.findByRole('heading', { name: 'Ancient vase' });
+    await waitFor(() => {
+      expect(desktop
+        ? container.querySelector('.collection-items-arrow-navigation .right-arrow')
+        : screen.getByRole('link', { name: /Silver chalice/ })
+      ).toHaveAttribute('href', `/${host}/detail/ethnography/chalice`);
+    });
+    Spinner.mockClear();
+
+    await user.click(desktop
+      ? container.querySelector('.collection-items-arrow-navigation .right-arrow')
+      : screen.getByRole('link', { name: /Silver chalice/ }));
+
+    expect(window.location.pathname).toBe(`/${host}/detail/ethnography/chalice`);
+    expect(Spinner).not.toHaveBeenCalled();
+    expect(screen.queryByRole('status')).not.toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Ancient vase', level: 2 })).toBeInTheDocument();
+
+    await act(async () => {
+      resolveRequest({ data: [next] });
+      await request;
+    });
+    expect(await screen.findByRole('heading', { name: 'Silver chalice' })).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: 'Silver chalice' })).toHaveAttribute(
+      'src',
+      'https://example.test/chalice.jpg'
+    );
   });
 });

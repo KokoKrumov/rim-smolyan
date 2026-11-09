@@ -29,7 +29,7 @@ function CollectionsDetailItem({
   const location = useLocation();
   const noImage =
     "https://api-staging.museumsmolyan.eu/wp-content/uploads/2024/10/no-image.png";
-  const [item, setItem] = useState({});
+  const item = itemFomCollection;
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const backUrl =
     location.pathname.replace("detail", "intro").split("/").slice(0, -1).join("/");
@@ -45,10 +45,6 @@ function CollectionsDetailItem({
   useEffect(() => {
     fetchItemFromCollection(itemName);
   }, [fetchItemFromCollection, itemName]);
-
-  useEffect(() => {
-    setItem(itemFomCollection);
-  }, [itemFomCollection]);
 
   // Runs after the newly fetched item has rendered, so the image position is final
   useEffect(() => {
