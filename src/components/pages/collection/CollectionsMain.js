@@ -239,7 +239,8 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchCollectionsMain: (parent) => dispatch(fetchCollectionsMain(parent)),
+  // unwrap() so a failed request rejects and the cache isn't overwritten
+  fetchCollectionsMain: (parent) => dispatch(fetchCollectionsMain(parent)).unwrap(),
 });
 
 export default withRouter(withIntl(

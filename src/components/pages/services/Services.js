@@ -212,8 +212,9 @@ const mapStateToProps = (state) => ({
 });
 
 export default withIntl(
-  connect(mapStateToProps, {
-    fetchRoutes,
-    fetchServices,
-  })(Services)
+  connect(mapStateToProps, (dispatch) => ({
+    // unwrap() so a failed request rejects and skips the success callbacks
+    fetchRoutes: () => dispatch(fetchRoutes()).unwrap(),
+    fetchServices: () => dispatch(fetchServices()).unwrap(),
+  }))(Services)
 );

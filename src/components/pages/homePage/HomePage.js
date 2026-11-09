@@ -12,7 +12,7 @@ import { FormattedMessage } from "react-intl";
 import Hero from "../../hero/Hero";
 import InfoColumn from "../../infoColumn/InfoColumn";
 import { Link } from "react-router-dom";
-import NewsAndEventsList from "../../newsAndEventsList/NewsAndEventsList";
+import NewsAndEventsCards from "../../newsAndEventsList/NewsAndEventsCards";
 import Row from "react-bootstrap/Row";
 import WorkInfoLine from "../../infoLine/WorkInfoLine";
 import aboutUsImage from "../../../assets/images/about_us_section_bg.png";
@@ -76,6 +76,7 @@ class HomePage extends Component {
     bgHero: null,
     bgAboutUs: null,
     listOfNewsAndEvents: [],
+    isLoadingNews: false,
     listMegatronCarousel: null,
     isTabletScreenV: isTabletScreen(),
     categories: [],
@@ -101,19 +102,50 @@ class HomePage extends Component {
       props,
       propsCategories
     );
-    this.props.fetchNews(slugId, page, perPage).then(() => {
-      this.setState({
-        listOfNewsAndEvents: this.props.news,
-        categories: categories,
-      });
+
+    this.setState({ categories: categories });
+    if (slugId == null) {
+      if (categories.length > 0) {
+        console.error(`Category not found: ${id}`);
+      }
+      return;
+    }
+
+    if (this.newsCategoryId === slugId) {
+      return;
+    }
+    this.newsCategoryId = slugId;
+    this.setState({ isLoadingNews: true });
+
+    const request = this.props.fetchNews(slugId, page, perPage);
+    this.newsRequest = request;
+    request.then((action) => {
+      if (this.newsRequest !== request) {
+        return;
+      }
+      if (fetchNews.fulfilled.match(action)) {
+        this.setState({
+          listOfNewsAndEvents: Object.values(action.payload),
+          isLoadingNews: false,
+        });
+      } else {
+        console.error("Failed to load news", action.error);
+        this.setState({ isLoadingNews: false });
+      }
     });
   };
 
   componentDidMount() {
-    // react can't update when there are changes in storage,
-    // however, the storage contains "categories" from the first load,
-    // so we have to check the storage when component is mounting
-    if (
+    if (this.props.categories.length > 0) {
+      this.fetchData(
+        "news-and-events",
+        1,
+        3,
+        "props",
+        this.props,
+        this.props.categories
+      );
+    } else if (
       sessionStorage.getItem("categories") &&
       !isEqual(
         JSON.parse(sessionStorage.getItem("categories")),
@@ -137,9 +169,7 @@ class HomePage extends Component {
 
   componentDidUpdate() {
     if (
-      !sessionStorage.getItem("categories") &&
-      this.props &&
-      this.props.categories &&
+      this.props.categories.length > 0 &&
       !isEqual(this.props.categories, this.state.categories)
     ) {
       this.fetchData(
@@ -154,6 +184,8 @@ class HomePage extends Component {
   }
 
   componentWillUnmount() {
+    this.newsRequest = null;
+    this.newsCategoryId = null;
     window.removeEventListener("resize", () => {
       this.handleResize();
     });
@@ -196,8 +228,12 @@ class HomePage extends Component {
                 ) : null}
               </div>
               <Row>
-                <NewsAndEventsList
-                  listOfNewsAndEvents={this.state.listOfNewsAndEvents}
+                <NewsAndEventsCards
+                  listOfNewsAndEvents={
+                    this.state.isLoadingNews
+                      ? null
+                      : this.state.listOfNewsAndEvents
+                  }
                 />
               </Row>
               {this.state.isTabletScreenV ? (
@@ -242,7 +278,6 @@ class HomePage extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    news: Object.values(state.news),
     categories: Object.values(state.categories),
   };
 };

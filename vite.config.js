@@ -16,7 +16,8 @@ function jsxPlugin() {
     },
     async transform(code, id) {
       if (!id.match(/src\/.*\.js$/)) return null;
-      return transformWithOxc(code, id.replace(/\.js$/, '.jsx'), { sourcemap });
+      // Keep the real filename so source maps (and test coverage) point at the .js file
+      return transformWithOxc(code, id, { lang: 'jsx', sourcemap });
     },
   };
 }
@@ -93,6 +94,14 @@ export default defineConfig(({ mode }) => {
       setupFiles: './src/setupTests.js',
       include: ['src/**/*.{test,spec}.{js,jsx,ts,tsx}'],
       css: false,
+      // Date helpers parse ISO dates as UTC; pin the zone so results don't depend on the machine
+      env: { TZ: 'UTC' },
+      coverage: {
+        provider: 'v8',
+        reporter: ['text', 'html', 'lcov'],
+        include: ['src/**/*.{js,jsx,ts,tsx}'],
+        exclude: ['src/**/*.{test,spec}.{js,jsx,ts,tsx}', 'src/setupTests.js', 'src/**/*.d.ts'],
+      },
     },
   };
 });

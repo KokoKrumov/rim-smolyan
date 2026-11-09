@@ -3,7 +3,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { withIntl } from "../../utilities/withIntl";
-import NewsAndEventsList from "../newsAndEventsList/NewsAndEventsList";
+import NewsAndEventsCards from "../newsAndEventsList/NewsAndEventsCards";
 import ArticleDetail from "./ArticleDetail";
 
 class Article extends Component {
@@ -70,7 +70,7 @@ class Article extends Component {
                 </Col>
               </Row>
               <Row>
-                <NewsAndEventsList
+                <NewsAndEventsCards
                   listOfNewsAndEvents={data.listOfNewsAndEvents}
                 />
               </Row>

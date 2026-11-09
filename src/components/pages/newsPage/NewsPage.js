@@ -5,7 +5,7 @@ import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import HeroInner from "../../hero/HeroInner";
 import Nav from "react-bootstrap/Nav";
-import NewsAndEventsListHorizontal from "../../newsAndEventsList/NewsAndEventsListHorizontal";
+import PostSummaryList from "../../newsAndEventsList/PostSummaryList";
 import Row from "react-bootstrap/Row";
 import Spinner from "react-bootstrap/Spinner";
 import aboutUsImage from "../../../assets/images/about_us_section_bg.png";
@@ -63,9 +63,9 @@ class NewsPage extends Component {
           href,
           this.state.page,
           10,
-          "storage",
+          "props",
           this.props,
-          this.props.categories
+          this.state.categories
         );
       }
     );
@@ -73,29 +73,32 @@ class NewsPage extends Component {
 
   fetchData = (slug, page, per_page, listFrom, props, propsCategories) => {
     if (!this.state.isLoading) {
-      this.setState({
-        isLoading: true,
-      });
-
       const { slugId, categories } = extractIdAndCategories(
         slug,
         listFrom,
         props,
         propsCategories
       );
+      if (slugId == null) {
+        if (categories.length > 0) {
+          console.error(`Category not found: ${slug}`);
+          this.setState({ categories: categories });
+        }
+        return;
+      }
+
+      this.setState({ isLoading: true, categories: categories });
       this.props
         .fetchNews(slugId, page, per_page)
-        .then(() => {
-          this.setState({
-            categories: categories,
-            currentNews: this.props.news,
-            news: [...this.state.news, ...this.props.news],
-          });
-        })
-        .then(() => {
-          this.setState({
-            isLoading: false,
-          });
+        .then((action) => {
+          if (fetchNews.fulfilled.match(action)) {
+            const news = Object.values(action.payload);
+            this.setState((state) => ({
+              currentNews: news,
+              news: page === 1 ? news : [...state.news, ...news],
+            }));
+          }
+          this.setState({ isLoading: false });
         });
     }
   };
@@ -104,15 +107,19 @@ class NewsPage extends Component {
   handleObserver(entities, observer) {
     const { location } = this.props;
     const y = entities[0].boundingClientRect.y;
-    if (this.state.prevY > y) {
+    if (
+      this.state.prevY > y &&
+      this.state.categories.length > 0 &&
+      !this.state.isLoading
+    ) {
       const curPage = this.state.page + 1;
       this.fetchData(
         location.pathname,
         curPage,
         10,
-        "storage",
+        "props",
         this.props,
-        this.state.listOfNewsAndEvents
+        this.state.categories
       );
       this.setState({ page: curPage });
     }
@@ -128,10 +135,16 @@ class NewsPage extends Component {
     // this.setState({listOfNewsAndEvents: this.props.news})
 
     const { location } = this.props;
-    // react can't update when there are changes in storage,
-    // however, the storage contains "categories" from the first load,
-    // so we have to check the storage when component is mounting
-    if (
+    if (this.props.categories.length > 0) {
+      this.fetchData(
+        location.pathname,
+        this.state.page,
+        10,
+        "props",
+        this.props,
+        this.props.categories
+      );
+    } else if (
       sessionStorage.getItem("categories") &&
       !isEqual(
         JSON.parse(sessionStorage.getItem("categories")),
@@ -163,31 +176,34 @@ class NewsPage extends Component {
 
   componentDidUpdate() {
     if (
-      !sessionStorage.getItem("categories") &&
-      this.props?.categories &&
+      this.props.categories.length > 0 &&
       !isEqual(this.props.categories, this.state.categories)
     ) {
-      const { location } = this.props;
-      const { pathname } = location;
-      this.fetchData(
+      const { pathname } = this.props.location;
+      const { slugId } = extractIdAndCategories(
         pathname,
-        1,
-        10,
         "props",
         this.props,
         this.props.categories
       );
-    }
-
-    if (
-      this.props.news &&
-      !isEqual(this.props.categories, this.state.categories)
-    ) {
-      this.setState({
-        currentNews: this.props.news,
-        news: [...this.state.news, ...this.props.news],
-        categories: this.props.categories,
-      });
+      const { slugId: currentSlugId } = extractIdAndCategories(
+        pathname,
+        "props",
+        this.props,
+        this.state.categories
+      );
+      if (slugId != null && slugId === currentSlugId) {
+        this.setState({ categories: this.props.categories });
+      } else {
+        this.fetchData(
+          pathname,
+          1,
+          10,
+          "props",
+          this.props,
+          this.props.categories
+        );
+      }
     }
 
     if (this.props.newsError && this.props.newsError !== this.state.newsError) {
@@ -235,7 +251,7 @@ class NewsPage extends Component {
               </Col>
               <Col lg={9}>
                 <div style={{ minHeight: "1000px" }}>
-                  <NewsAndEventsListHorizontal
+                  <PostSummaryList
                     listOfNewsAndEvents={this.state.news}
                   />
                   {!this.state.newsError && (
@@ -260,7 +276,6 @@ class NewsPage extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    news: Object.values(state.news),
     newsError: state.newsError.newsError,
     categories: Object.values(state.categories),
   };
