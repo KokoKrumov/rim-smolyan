@@ -50,6 +50,7 @@ function CollectionItemsArrowNavigationBottomFixed({
       <Link
         className="collection-items-arrow-navigation_link-block"
         to={generateHref(item)}
+        state={{ scrollToImage: true }}
       >
         <div
           className={`item-preview item-preview__show show ${side}`}

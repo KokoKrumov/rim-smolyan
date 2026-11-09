@@ -186,6 +186,34 @@ describe('CollectionsDetailItem', () => {
     expect(streams.get).toHaveBeenCalledWith(expect.stringContaining('/posts?categories=42'));
   });
 
+  it('scrolls to the new item image after mobile bottom arrow navigation only', async () => {
+    sessionStorage.setItem('categories', JSON.stringify([{ id: 42, slug: 'ethnography' }]));
+    const scrollIntoView = vi.fn();
+    Element.prototype.scrollIntoView = scrollIntoView;
+    streams.get.mockImplementation((url) => {
+      if (url.startsWith('/posts?slug=vase')) return Promise.resolve({ data: [vase] });
+      if (url.startsWith('/posts?slug=chalice')) return Promise.resolve({ data: [next] });
+      if (url.startsWith('/posts?categories=42')) return Promise.resolve({ data: [previous, vase, next] });
+      throw new Error(`Unexpected request: ${url}`);
+    });
+    const user = userEvent.setup();
+    renderDetail({ desktop: false });
+
+    await screen.findByRole('heading', { name: 'Ancient vase' });
+    const nextLink = await screen.findByRole('link', { name: /Silver chalice/ });
+    expect(scrollIntoView).not.toHaveBeenCalled();
+
+    await user.click(nextLink);
+
+    expect(await screen.findByRole('heading', { name: 'Silver chalice' })).toBeInTheDocument();
+    await waitFor(() => expect(scrollIntoView).toHaveBeenCalledTimes(1));
+    expect(scrollIntoView).toHaveBeenCalledWith({ behavior: 'smooth', block: 'start' });
+    expect(scrollIntoView.mock.contexts[0]).toBe(
+      screen.getByRole('img', { name: 'Silver chalice' }).closest('.collections-item__img__wrap')
+    );
+    delete Element.prototype.scrollIntoView;
+  });
+
   it('reports invalid cached categories while still loading the requested item', async () => {
     sessionStorage.setItem('categories', 'invalid JSON');
     streams.get.mockResolvedValue({ data: [vase] });
