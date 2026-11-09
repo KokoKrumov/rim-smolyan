@@ -9,7 +9,7 @@ import NewsDateAndYear from "../pages/newsDetailPage/NewsDateAndYear";
 import { Link } from "react-router-dom";
 import { featuredImageProps } from "../../utilities/featuredImageProps";
 
-function NewsAndEventsListHorizontal({ listOfNewsAndEvents, isExhibition }) {
+function PostSummaryList({ listOfNewsAndEvents, isExhibition }) {
   if (listOfNewsAndEvents) {
     return listOfNewsAndEvents.map((event) => {
       return (
@@ -120,4 +120,4 @@ function NewsAndEventsListHorizontal({ listOfNewsAndEvents, isExhibition }) {
   }
 }
 
-export default NewsAndEventsListHorizontal;
+export default PostSummaryList;

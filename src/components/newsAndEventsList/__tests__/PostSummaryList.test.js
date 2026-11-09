@@ -1,7 +1,7 @@
 import { render, screen, within } from '@testing-library/react';
 import { IntlProvider } from 'react-intl';
 import { MemoryRouter } from 'react-router-dom';
-import NewsAndEventsListHorizontal from '../NewsAndEventsListHorizontal';
+import PostSummaryList from '../PostSummaryList';
 
 const news = {
   slug: 'museum-news',
@@ -24,20 +24,20 @@ const event = {
 function renderList(props = {}) {
   return render(
     <IntlProvider locale="en" messages={{ 'see-more': 'Read more' }}>
-      <NewsAndEventsListHorizontal {...props} />
+      <PostSummaryList {...props} />
     </IntlProvider>,
     { wrapper: MemoryRouter },
   );
 }
 
-describe('NewsAndEventsListHorizontal', () => {
+describe('PostSummaryList', () => {
   it('shows a loading indicator for a missing list and an empty list for no entries', () => {
     const { rerender, container } = renderList();
     expect(screen.getByRole('status')).toBeInTheDocument();
 
     rerender(
       <IntlProvider locale="en" messages={{ 'see-more': 'Read more' }}>
-        <NewsAndEventsListHorizontal listOfNewsAndEvents={[]} />
+        <PostSummaryList listOfNewsAndEvents={[]} />
       </IntlProvider>
     );
     expect(container).toBeEmptyDOMElement();

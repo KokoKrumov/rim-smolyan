@@ -35,6 +35,12 @@ function CollectionsDetailItem({
     location.pathname.replace("detail", "intro").split("/").slice(0, -1).join("/");
   const isDesktopResolution = useMatchMedia("(min-width:992px)", true);
   const isFetchingCollection = useRef(false);
+  const mobileImageRef = useRef(null);
+  const pendingImageScroll = useRef(false);
+
+  useEffect(() => {
+    pendingImageScroll.current = Boolean(location.state?.scrollToImage);
+  }, [location.key, location.state]);
 
   useEffect(() => {
     fetchItemFromCollection(itemName);
@@ -43,6 +49,13 @@ function CollectionsDetailItem({
   useEffect(() => {
     setItem(itemFomCollection);
   }, [itemFomCollection]);
+
+  // Runs after the newly fetched item has rendered, so the image position is final
+  useEffect(() => {
+    if (!pendingImageScroll.current || !mobileImageRef.current) return;
+    pendingImageScroll.current = false;
+    mobileImageRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [item]);
 
   // Fetch collection data for arrow navigation components
   useEffect(() => {
@@ -125,6 +138,7 @@ function CollectionsDetailItem({
                     <h2 className="h2">{item.title.rendered}</h2>
                     {!isDesktopResolution && (
                       <div
+                        ref={mobileImageRef}
                         className="collections-item__img__wrap"
                         style={{ cursor: "zoom-in" }}
                         onClick={() => setLightboxOpen(true)}

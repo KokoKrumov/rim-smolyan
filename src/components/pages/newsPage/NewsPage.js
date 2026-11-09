@@ -6,7 +6,7 @@ import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import HeroInner from "../../hero/HeroInner";
 import Nav from "react-bootstrap/Nav";
-import NewsAndEventsListHorizontal from "../../newsAndEventsList/NewsAndEventsListHorizontal";
+import PostSummaryList from "../../newsAndEventsList/PostSummaryList";
 import Row from "react-bootstrap/Row";
 import Spinner from "react-bootstrap/Spinner";
 import aboutUsImage from "../../../assets/images/about_us_section_bg.png";
@@ -225,7 +225,7 @@ class NewsPage extends Component {
               </Col>
               <Col lg={9}>
                 <div style={{ minHeight: "1000px" }}>
-                  <NewsAndEventsListHorizontal
+                  <PostSummaryList
                     listOfNewsAndEvents={this.state.news}
                   />
                   {!this.state.newsError && (

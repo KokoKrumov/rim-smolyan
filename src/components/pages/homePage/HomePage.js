@@ -13,7 +13,7 @@ import { FormattedMessage } from "react-intl";
 import Hero from "../../hero/Hero";
 import InfoColumn from "../../infoColumn/InfoColumn";
 import { Link } from "react-router-dom";
-import NewsAndEventsList from "../../newsAndEventsList/NewsAndEventsList";
+import NewsAndEventsCards from "../../newsAndEventsList/NewsAndEventsCards";
 import Row from "react-bootstrap/Row";
 import WorkInfoLine from "../../infoLine/WorkInfoLine";
 import aboutUsImage from "../../../assets/images/about_us_section_bg.png";
@@ -196,7 +196,7 @@ class HomePage extends Component {
                 ) : null}
               </div>
               <Row>
-                <NewsAndEventsList
+                <NewsAndEventsCards
                   listOfNewsAndEvents={this.state.listOfNewsAndEvents}
                 />
               </Row>

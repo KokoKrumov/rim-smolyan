@@ -4,7 +4,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Nav from "react-bootstrap/Nav";
-import NewsAndEventsListHorizontal from "../../newsAndEventsList/NewsAndEventsListHorizontal";
+import PostSummaryList from "../../newsAndEventsList/PostSummaryList";
 import {connect} from 'react-redux'
 
 class FundsPage extends Component {
@@ -51,7 +51,7 @@ class FundsPage extends Component {
                             </Col>
                             <Col lg={9}>
                                 <Row>
-                                    <NewsAndEventsListHorizontal listOfNewsAndEvents={this.state.news}/>
+                                    <PostSummaryList listOfNewsAndEvents={this.state.news}/>
                                 </Row>
                             </Col>
                         </Row>

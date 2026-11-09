@@ -7,7 +7,7 @@ import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import HeroInner from "../../hero/HeroInner";
 import Image from "react-bootstrap/Image";
-import NewsAndEventsListHorizontal from "../../newsAndEventsList/NewsAndEventsListHorizontal";
+import PostSummaryList from "../../newsAndEventsList/PostSummaryList";
 import Row from "react-bootstrap/Row";
 import { connect } from "react-redux";
 import exhibitionPermanentHero from "../../../assets/images/exhibition-permanent-hero.png";
@@ -151,7 +151,7 @@ class ExhibitionsPage extends Component {
           </section>
           <section className="exhibitions__temporary">
             <Container>
-              {/*no Row (negative margin) because "NewsAndEventsListHorizontal" has container inside*/}
+              {/*no Row (negative margin) because "PostSummaryList" has container inside*/}
               <Col>
                 <h1
                   className="h1"
@@ -171,7 +171,7 @@ class ExhibitionsPage extends Component {
                 />
               </Col>
               <div>
-                <NewsAndEventsListHorizontal
+                <PostSummaryList
                   listOfNewsAndEvents={this.state.exhibitions.activeExhibitions}
                   isExhibition
                 />
