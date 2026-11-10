@@ -73,7 +73,7 @@ function renderDetail({ desktop = true, collection = [], path = '/main-collectio
     <Provider store={store}>
       <IntlProvider locale="en" messages={messages}>
         <BrowserRouter>
-          <Link to="/main-collections/detail/ethnography/chalice">Next item</Link>
+          <Link to="/main-collections/detail/ethnography/chalice" state={{ scrollToImage: true }}>Next item</Link>
           <Routes>
             <Route path="/:host/detail/:type/:item" element={<KeyedDetail />} />
           </Routes>
@@ -226,6 +226,41 @@ describe('CollectionsDetailItem', () => {
       'https://example.test/chalice.jpg'
     );
     expect(streams.get).toHaveBeenCalledWith(expect.stringContaining('/posts?slug=chalice'));
+  });
+
+  it('keeps the mobile image scroll pending until the requested item is rendered', async () => {
+    let resolveRequest;
+    const request = new Promise((resolve) => {
+      resolveRequest = resolve;
+    });
+    streams.get.mockImplementation((url) => {
+      if (url.startsWith('/posts?slug=vase')) return Promise.resolve({ data: [vase] });
+      if (url.startsWith('/posts?slug=chalice')) return request;
+      throw new Error(`Unexpected request: ${url}`);
+    });
+    const user = userEvent.setup();
+    const { container } = renderDetail({
+      desktop: false,
+      collection: [previous, vase, next],
+    });
+    await screen.findByRole('heading', { name: 'Ancient vase' });
+    const nextLink = await screen.findByRole('link', { name: /Silver chalice/ });
+    const scrollIntoView = Element.prototype.scrollIntoView;
+    scrollIntoView.mockClear();
+
+    await user.click(nextLink);
+    expect(screen.getByRole('heading', { name: 'Ancient vase', level: 2 })).toBeInTheDocument();
+    expect(scrollIntoView).not.toHaveBeenCalled();
+
+    await act(async () => {
+      resolveRequest({ data: [next] });
+      await request;
+    });
+    expect(await screen.findByRole('heading', { name: 'Silver chalice' })).toBeInTheDocument();
+    await waitFor(() => expect(scrollIntoView).toHaveBeenCalledOnce());
+    expect(scrollIntoView.mock.contexts[0]).toBe(
+      container.querySelector('.collections-item__img__wrap')
+    );
   });
 
   it.each([

@@ -17,6 +17,8 @@ import { isEqual } from "lodash";
 import { withRouter } from "../../../utilities/withRouter";
 
 class NewsPage extends Component {
+  newsRequest = null;
+
   navLinks = [
     {
       href: "/news-and-events",
@@ -56,38 +58,62 @@ class NewsPage extends Component {
   }
 
   fetchData = (slug, page, per_page, listFrom, props, propsCategories) => {
-    if (!this.state.isLoading) {
-      const { slugId, categories } = extractIdAndCategories(
-        slug,
-        listFrom,
-        props,
-        propsCategories
-      );
-      this.setState({ isLoading: true, categories });
-      this.props
-        .fetchNews(slugId, page, per_page)
-        .then(() => {
-          this.setState({
-            categories: categories,
-            currentNews: this.props.news,
-            news: [...this.state.news, ...this.props.news],
-          });
-        })
-        .then(() => {
-          this.setState({
-            isLoading: false,
-          });
-        });
+    const { slugId, categories } = extractIdAndCategories(
+      slug,
+      listFrom,
+      props,
+      propsCategories
+    );
+    this.setState({ categories });
+    if (slugId == null) {
+      this.newsRequest = null;
+      if (categories.length > 0) {
+        console.error(`Category not found: ${slug}`);
+        this.setState({ isLoading: false, newsError: true });
+      }
+      return false;
     }
+
+    this.setState({ isLoading: true });
+    const request = this.props.fetchNews(slugId, page, per_page);
+    this.newsRequest = request;
+    request
+      .then((action) => {
+        if (this.newsRequest !== request) return;
+        if (fetchNews.fulfilled.match(action)) {
+          this.setState((state) => ({
+            currentNews: action.payload,
+            news: page === 1 ? action.payload : [...state.news, ...action.payload],
+          }));
+        } else if (page > 1) {
+          this.setState((state) => ({ page: Math.min(state.page, page - 1) }));
+        }
+        this.newsRequest = null;
+        this.setState({ isLoading: false });
+      })
+      .catch((error) => {
+        if (this.newsRequest !== request) return;
+        this.newsRequest = null;
+        this.setState((state) => ({
+          isLoading: false,
+          page: page > 1 ? Math.min(state.page, page - 1) : state.page,
+        }));
+        console.error("Failed to load news", error);
+      });
+    return true;
   };
 
   //FETCH DATA WHEN SCROLL TO THE BOTTOM
   handleObserver(entities, observer) {
     const { location } = this.props;
     const y = entities[0].boundingClientRect.y;
-    if (this.state.prevY > y) {
+    if (
+      this.state.prevY > y &&
+      !this.state.isLoading &&
+      !this.newsRequest
+    ) {
       const curPage = this.state.page + 1;
-      this.fetchData(
+      const requestStarted = this.fetchData(
         location.pathname,
         curPage,
         10,
@@ -95,7 +121,7 @@ class NewsPage extends Component {
         this.props,
         this.props.categories
       );
-      this.setState({ page: curPage });
+      if (requestStarted) this.setState({ page: curPage });
     }
     this.setState({ prevY: y });
   }
@@ -146,6 +172,7 @@ class NewsPage extends Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.location.pathname !== this.props.location.pathname) {
+      this.newsRequest = null;
       this.setState({ page: 1, news: [], newsError: false, isLoading: false }, () => {
         this.fetchData(this.props.location.pathname, 1, 10, "props", this.props, this.props.categories);
       });
@@ -158,24 +185,16 @@ class NewsPage extends Component {
     ) {
       const { location } = this.props;
       const { pathname } = location;
-      this.fetchData(
-        pathname,
-        1,
-        10,
-        "props",
-        this.props,
-        this.props.categories
-      );
-    }
-
-    if (
-      this.props.news &&
-      !isEqual(this.props.categories, this.state.categories)
-    ) {
-      this.setState({
-        currentNews: this.props.news,
-        news: [...this.state.news, ...this.props.news],
-        categories: this.props.categories,
+      this.newsRequest = null;
+      this.setState({ page: 1 }, () => {
+        this.fetchData(
+          pathname,
+          1,
+          10,
+          "props",
+          this.props,
+          this.props.categories
+        );
       });
     }
 
@@ -187,6 +206,7 @@ class NewsPage extends Component {
   }
 
   componentWillUnmount() {
+    this.newsRequest = null;
     this.observer.disconnect();
     document.body.style.overflow = "scroll";
   }

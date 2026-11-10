@@ -20,6 +20,8 @@ function renderNavigation(path = '/') {
       <NavigationEffects />
       <Link to="/news?page=2">News</Link>
       <Link to="/administrative/#13">Support</Link>
+      <Link to="/administrative">Close panel</Link>
+      <Link to="/administrative/">Trailing slash</Link>
     </MemoryRouter>,
     { container: root },
   );
@@ -64,6 +66,18 @@ describe('navigation effects', () => {
     target.scrollIntoView = vi.fn();
     act(() => container.appendChild(target));
     await waitFor(() => expect(target.scrollIntoView).toHaveBeenCalledOnce());
+    expect(window.scrollTo).not.toHaveBeenCalled();
+  });
+
+  it('does not reset scroll when an accordion hash is cleared or a trailing slash changes', async () => {
+    const user = userEvent.setup();
+    renderNavigation('/administrative/#13');
+    window.scrollTo.mockClear();
+
+    await user.click(screen.getByRole('link', { name: 'Close panel' }));
+    expect(window.scrollTo).not.toHaveBeenCalled();
+
+    await user.click(screen.getByRole('link', { name: 'Trailing slash' }));
     expect(window.scrollTo).not.toHaveBeenCalled();
   });
 

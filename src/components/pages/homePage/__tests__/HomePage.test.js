@@ -19,10 +19,10 @@ function setWidth(width) {
   Object.defineProperty(document.documentElement, 'clientWidth', { configurable: true, value: width });
 }
 
-function renderHome(initialCategories = []) {
+function renderHome(initialCategories = [], initialNews = {}) {
   const store = configureStore({
     reducer: { categories: categoriesReducer, news: newsReducer },
-    preloadedState: { categories: initialCategories },
+    preloadedState: { categories: initialCategories, news: initialNews },
   });
   const result = render(
     <Provider store={store}>
@@ -68,5 +68,53 @@ describe('HomePage', () => {
     expect(screen.getByTestId('mobile-carousel')).toBeInTheDocument();
     unmount();
     expect(remove).toHaveBeenCalledWith('resize', handler);
+  });
+
+  it('does not request news when the selected category is missing', () => {
+    const error = vi.spyOn(console, 'error').mockImplementation(() => {});
+    renderHome([{ id: 8, slug: 'exhibitions', name: 'Exhibitions' }]);
+
+    expect(streams.get).not.toHaveBeenCalled();
+    expect(error).toHaveBeenCalledWith('Category not found: news-and-events');
+  });
+
+  it('keeps the latest fulfilled request when cached categories finish late', async () => {
+    let resolveCached;
+    let resolveFresh;
+    const cachedRequest = new Promise((resolve) => { resolveCached = resolve; });
+    const freshRequest = new Promise((resolve) => { resolveFresh = resolve; });
+    const cachedCategories = categories;
+    const freshCategories = [{ ...categories[0], id: 99 }];
+    const cachedStory = { id: 1, slug: 'cached', title: { rendered: 'Cached story' } };
+    const freshStory = { id: 2, slug: 'fresh', title: { rendered: 'Fresh story' } };
+    sessionStorage.setItem('categories', JSON.stringify(cachedCategories));
+    streams.get.mockImplementation((url) => (
+      url.includes('categories=10') ? cachedRequest : freshRequest
+    ));
+    const { store } = renderHome();
+
+    act(() => store.dispatch(fetchCategories.fulfilled(freshCategories, 'refresh')));
+    await act(async () => {
+      resolveFresh({ data: [freshStory] });
+      await freshRequest;
+    });
+    await act(async () => {
+      resolveCached({ data: [cachedStory] });
+      await cachedRequest;
+    });
+
+    expect(await screen.findByRole('link', { name: 'Fresh story' })).toBeInTheDocument();
+    expect(screen.queryByRole('link', { name: 'Cached story' })).not.toBeInTheDocument();
+  });
+
+  it('does not display retained Redux news when a request is rejected', async () => {
+    const retainedStory = { id: 1, slug: 'retained', title: { rendered: 'Retained story' } };
+    const error = vi.spyOn(console, 'error').mockImplementation(() => {});
+    streams.get.mockRejectedValue(new Error('Network unavailable'));
+    renderHome(categories, { 0: retainedStory });
+
+    await screen.findByText('Новини и Събития');
+    expect(screen.queryByRole('link', { name: 'Retained story' })).not.toBeInTheDocument();
+    expect(error).toHaveBeenCalledWith('Failed to load news', expect.any(Object));
   });
 });

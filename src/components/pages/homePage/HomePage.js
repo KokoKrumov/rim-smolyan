@@ -73,6 +73,8 @@ let listMegatronCarousel = [
 ];
 
 class HomePage extends Component {
+  newsRequest = null;
+
   state = {
     bgHero: null,
     bgAboutUs: null,
@@ -104,12 +106,32 @@ class HomePage extends Component {
       propsCategories
     );
     this.setState({ categories });
-    this.props.fetchNews(slugId, page, perPage).then(() => {
-      this.setState({
-        listOfNewsAndEvents: this.props.news,
-        categories: categories,
+    if (slugId == null) {
+      this.newsRequest = null;
+      if (categories.length > 0) console.error(`Category not found: ${id}`);
+      return;
+    }
+
+    const request = this.props.fetchNews(slugId, page, perPage);
+    this.newsRequest = request;
+    request
+      .then((action) => {
+        if (this.newsRequest !== request) return;
+        if (fetchNews.fulfilled.match(action)) {
+          this.setState({
+            listOfNewsAndEvents: action.payload,
+            categories,
+          });
+        } else {
+          console.error("Failed to load news", action.error);
+        }
+        this.newsRequest = null;
+      })
+      .catch((error) => {
+        if (this.newsRequest !== request) return;
+        this.newsRequest = null;
+        console.error("Failed to load news", error);
       });
-    });
   };
 
   componentDidMount() {
@@ -156,6 +178,7 @@ class HomePage extends Component {
   }
 
   componentWillUnmount() {
+    this.newsRequest = null;
     window.removeEventListener("resize", this.handleResize);
   }
 

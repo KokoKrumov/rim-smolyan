@@ -48,10 +48,14 @@ function CollectionsDetailItem({
 
   // Runs after the newly fetched item has rendered, so the image position is final
   useEffect(() => {
-    if (!pendingImageScroll.current || !mobileImageRef.current) return;
+    if (
+      !pendingImageScroll.current ||
+      item?.slug !== itemName ||
+      !mobileImageRef.current
+    ) return;
     pendingImageScroll.current = false;
     mobileImageRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
-  }, [item]);
+  }, [item, itemName]);
 
   // Fetch collection data for arrow navigation components
   useEffect(() => {

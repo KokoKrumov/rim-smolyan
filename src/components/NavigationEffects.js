@@ -5,6 +5,7 @@ import GA4React from 'ga-4-react';
 export default function NavigationEffects() {
   const { pathname, search, hash } = useLocation();
   const previousPage = useRef(pathname + search);
+  const previousPathname = useRef(pathname.replace(/\/+$/, '') || '/');
 
   useEffect(() => {
     const page = pathname + search;
@@ -17,8 +18,12 @@ export default function NavigationEffects() {
   }, [pathname, search]);
 
   useEffect(() => {
+    const normalizedPathname = pathname.replace(/\/+$/, '') || '/';
+    const isDifferentPage = previousPathname.current !== normalizedPathname;
+    previousPathname.current = normalizedPathname;
+
     if (!hash) {
-      window.scrollTo(0, 0);
+      if (isDifferentPage) window.scrollTo(0, 0);
       return;
     }
 
