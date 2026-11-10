@@ -118,9 +118,18 @@ class HomePage extends Component {
       .then((action) => {
         if (this.newsRequest !== request) return;
         if (fetchNews.fulfilled.match(action)) {
+          const currentCategories = this.props.categories.length > 0
+            ? this.props.categories
+            : categories;
+          const currentCategoryId = extractIdAndCategories(
+            id,
+            "props",
+            this.props,
+            currentCategories
+          )?.slugId;
           this.setState({
             listOfNewsAndEvents: action.payload,
-            categories,
+            categories: currentCategoryId === slugId ? currentCategories : categories,
           });
         } else {
           console.error("Failed to load news", action.error);
@@ -166,14 +175,31 @@ class HomePage extends Component {
       this.props.categories.length > 0 &&
       !isEqual(this.props.categories, this.state.categories)
     ) {
-      this.fetchData(
+      const currentCategoryId = extractIdAndCategories(
         "news-and-events",
-        1,
-        3,
+        "props",
+        this.props,
+        this.state.categories
+      )?.slugId;
+      const nextCategoryId = extractIdAndCategories(
+        "news-and-events",
         "props",
         this.props,
         this.props.categories
-      );
+      )?.slugId;
+
+      if (currentCategoryId !== nextCategoryId) {
+        this.fetchData(
+          "news-and-events",
+          1,
+          3,
+          "props",
+          this.props,
+          this.props.categories
+        );
+      } else {
+        this.setState({ categories: this.props.categories });
+      }
     }
   }
 

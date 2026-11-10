@@ -146,6 +146,22 @@ describe('NewsPage', () => {
     expect(streams.get).toHaveBeenCalledWith(expect.stringMatching(/categories=11&.*&page=1&per_page=10$/));
   });
 
+  it('continues pagination using cached categories while Redux categories are unavailable', async () => {
+    streams.get.mockImplementation((url) => (
+      url.includes('page=1&')
+        ? Promise.resolve({ data: [article('first', 'First story')] })
+        : Promise.resolve({ data: [article('second', 'Second story')] })
+    ));
+    renderNewsPage({ initialCategories: [] });
+
+    expect(await screen.findByRole('link', { name: 'First story' })).toBeInTheDocument();
+    act(() => observer.callback([{ boundingClientRect: { y: 100 } }]));
+    act(() => observer.callback([{ boundingClientRect: { y: 50 } }]));
+
+    expect(await screen.findByRole('link', { name: 'Second story' })).toBeInTheDocument();
+    expect(streams.get).toHaveBeenCalledWith(expect.stringMatching(/categories=10&.*&page=2&per_page=10$/));
+  });
+
   it('does not request news when the selected category is unavailable', () => {
     const error = vi.spyOn(console, 'error').mockImplementation(() => {});
     renderNewsPage({
@@ -227,7 +243,7 @@ describe('NewsPage', () => {
   it('updates the visible list only from the latest fulfilled category request', async () => {
     const cachedPage = deferred();
     const refreshedPage = deferred();
-    const refreshedCategories = categories.map((category) => ({ ...category, count: 10 }));
+    const refreshedCategories = categories.map((category) => ({ ...category, id: category.id + 100 }));
     const cachedStory = article('cached', 'Cached story');
     const refreshedStory = article('refreshed', 'Refreshed story');
     streams.get.mockImplementation((url) => (
@@ -248,6 +264,26 @@ describe('NewsPage', () => {
     });
     expect(await screen.findByRole('link', { name: 'Refreshed story' })).toBeInTheDocument();
     expect(screen.queryByRole('link', { name: 'Cached story' })).not.toBeInTheDocument();
+  });
+
+  it('keeps the cached-category request when Redux refresh changes only metadata', async () => {
+    const page = deferred();
+    streams.get.mockReturnValue(page.promise);
+    const { store } = renderNewsPage({ initialCategories: [] });
+
+    act(() => store.dispatch(fetchCategories.fulfilled(
+      categories.map((category) => ({ ...category, count: 10 })),
+      'refresh',
+    )));
+
+    expect(streams.get).toHaveBeenCalledOnce();
+    await act(async () => {
+      page.resolve({ data: [article('cached-story', 'Cached story')] });
+      await page.promise;
+    });
+
+    expect(await screen.findByRole('link', { name: 'Cached story' })).toBeInTheDocument();
+    expect(streams.get).toHaveBeenCalledOnce();
   });
 
   it('hides the pagination spinner after a news request fails', async () => {

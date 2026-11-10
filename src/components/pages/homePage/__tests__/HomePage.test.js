@@ -107,6 +107,27 @@ describe('HomePage', () => {
     expect(screen.queryByRole('link', { name: 'Cached story' })).not.toBeInTheDocument();
   });
 
+  it('keeps a pending request when refreshed categories only change metadata', async () => {
+    let resolveRequest;
+    const pendingRequest = new Promise((resolve) => { resolveRequest = resolve; });
+    streams.get.mockReturnValue(pendingRequest);
+    const { store } = renderHome(categories);
+
+    act(() => store.dispatch(fetchCategories.fulfilled(
+      [{ ...categories[0], count: 10 }],
+      'refresh',
+    )));
+
+    expect(streams.get).toHaveBeenCalledOnce();
+    await act(async () => {
+      resolveRequest({ data: [{ id: 2, slug: 'pending', title: { rendered: 'Pending story' } }] });
+      await pendingRequest;
+    });
+
+    expect(await screen.findByRole('link', { name: 'Pending story' })).toBeInTheDocument();
+    expect(streams.get).toHaveBeenCalledOnce();
+  });
+
   it('does not display retained Redux news when a request is rejected', async () => {
     const retainedStory = { id: 1, slug: 'retained', title: { rendered: 'Retained story' } };
     const error = vi.spyOn(console, 'error').mockImplementation(() => {});

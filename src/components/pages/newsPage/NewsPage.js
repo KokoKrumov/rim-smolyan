@@ -107,6 +107,9 @@ class NewsPage extends Component {
   handleObserver(entities, observer) {
     const { location } = this.props;
     const y = entities[0].boundingClientRect.y;
+    const categories = this.props.categories.length > 0
+      ? this.props.categories
+      : this.state.categories;
     if (
       this.state.prevY > y &&
       !this.state.isLoading &&
@@ -119,7 +122,7 @@ class NewsPage extends Component {
         10,
         "props",
         this.props,
-        this.props.categories
+        categories
       );
       if (requestStarted) this.setState({ page: curPage });
     }
@@ -174,7 +177,10 @@ class NewsPage extends Component {
     if (prevProps.location.pathname !== this.props.location.pathname) {
       this.newsRequest = null;
       this.setState({ page: 1, news: [], newsError: false, isLoading: false }, () => {
-        this.fetchData(this.props.location.pathname, 1, 10, "props", this.props, this.props.categories);
+        const categories = this.props.categories.length > 0
+          ? this.props.categories
+          : this.state.categories;
+        this.fetchData(this.props.location.pathname, 1, 10, "props", this.props, categories);
       });
       return;
     }
@@ -185,17 +191,34 @@ class NewsPage extends Component {
     ) {
       const { location } = this.props;
       const { pathname } = location;
-      this.newsRequest = null;
-      this.setState({ page: 1 }, () => {
-        this.fetchData(
-          pathname,
-          1,
-          10,
-          "props",
-          this.props,
-          this.props.categories
-        );
-      });
+      const currentCategoryId = extractIdAndCategories(
+        pathname,
+        "props",
+        this.props,
+        this.state.categories
+      )?.slugId;
+      const nextCategoryId = extractIdAndCategories(
+        pathname,
+        "props",
+        this.props,
+        this.props.categories
+      )?.slugId;
+
+      if (currentCategoryId === nextCategoryId) {
+        this.setState({ categories: this.props.categories });
+      } else {
+        this.newsRequest = null;
+        this.setState({ page: 1 }, () => {
+          this.fetchData(
+            pathname,
+            1,
+            10,
+            "props",
+            this.props,
+            this.props.categories
+          );
+        });
+      }
     }
 
     if (this.props.newsError && this.props.newsError !== this.state.newsError) {
