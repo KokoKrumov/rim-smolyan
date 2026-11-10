@@ -28,7 +28,8 @@
 
   &-text {
     color: $white;
-    font-family: $font-fira-bold;
+    font-family: $font-sofia-bold;
+    font-weight: 700;
     @include font-size(14px);
     @include line-height(19px);
     @include width(183px);
