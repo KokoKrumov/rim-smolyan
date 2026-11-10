@@ -3,6 +3,9 @@
   "version": "1.10.0",
   "private": false,
   "type": "module",
+  "engines": {
+    "node": "^22.22.2 || ^24.15.0 || >=26.0.0"
+  },
   "devDependencies": {
     "@testing-library/dom": "^10.4.2",
     "@testing-library/jest-dom": "^7.0.1",
