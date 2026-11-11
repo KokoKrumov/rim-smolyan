@@ -18,6 +18,15 @@ import { connect } from "react-redux";
 import { withIntl } from "../../../utilities/withIntl";
 import { useMatchMedia } from "../../../utilities/useMatchMedia";
 
+function matchesRouteSlug(itemSlug, routeSlug) {
+  if (typeof itemSlug !== "string") return false;
+  try {
+    return decodeURIComponent(itemSlug) === routeSlug;
+  } catch {
+    return itemSlug === routeSlug;
+  }
+}
+
 function CollectionsDetailItem({
   fetchItemFromCollection,
   fetchCollections,
@@ -50,7 +59,7 @@ function CollectionsDetailItem({
   useEffect(() => {
     if (
       !pendingImageScroll.current ||
-      item?.slug !== itemName ||
+      !matchesRouteSlug(item?.slug, itemName) ||
       !mobileImageRef.current
     ) return;
     pendingImageScroll.current = false;

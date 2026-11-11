@@ -274,6 +274,50 @@ describe('CollectionsDetailItem', () => {
     expect(scrollTo).not.toHaveBeenCalled();
   });
 
+  it('scrolls the mobile image when the requested item slug is percent-encoded', async () => {
+    const encodedVase = {
+      ...next,
+      slug: '%d0%b2%d0%b0%d0%b7%d0%b0',
+      title: { rendered: 'Bulgarian vase' },
+    };
+    let resolveRequest;
+    const request = new Promise((resolve) => {
+      resolveRequest = resolve;
+    });
+    streams.get.mockImplementation((url) => {
+      if (url.startsWith('/posts?slug=vase')) return Promise.resolve({ data: [vase] });
+      if (url.startsWith('/posts?slug=ваза')) return request;
+      throw new Error(`Unexpected request: ${url}`);
+    });
+    const user = userEvent.setup();
+    const { container } = renderDetail({
+      desktop: false,
+      collection: [previous, vase, encodedVase],
+      includeNavigationEffects: true,
+    });
+    await screen.findByRole('heading', { name: 'Ancient vase' });
+    const nextLink = await screen.findByRole('link', { name: /Bulgarian vase/ });
+    const scrollIntoView = Element.prototype.scrollIntoView;
+    scrollIntoView.mockClear();
+    const scrollTo = vi.spyOn(window, 'scrollTo').mockImplementation(() => {});
+
+    await user.click(nextLink);
+    expect(scrollIntoView).not.toHaveBeenCalled();
+    expect(scrollTo).not.toHaveBeenCalled();
+
+    await act(async () => {
+      resolveRequest({ data: [encodedVase] });
+      await request;
+    });
+    expect(await screen.findByRole('heading', { name: 'Bulgarian vase' })).toBeInTheDocument();
+    await waitFor(() => expect(scrollIntoView).toHaveBeenCalledOnce());
+    expect(scrollIntoView.mock.contexts[0]).toBe(
+      container.querySelector('.collections-item__img__wrap')
+    );
+    expect(streams.get).toHaveBeenCalledWith(expect.stringContaining('/posts?slug=ваза'));
+    expect(scrollTo).not.toHaveBeenCalled();
+  });
+
   it.each([
     ['virtual-collections', true],
     ['virtual-collections', false],
