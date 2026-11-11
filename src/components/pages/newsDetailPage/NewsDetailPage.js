@@ -72,6 +72,12 @@ class NewsDetailPage extends Component {
     this.relatedNewsCategoryId = slugId;
     const request = this.props.fetchNews(slugId, Math.ceil(Math.random() * 11), 3);
     this.relatedNewsRequest = request;
+    const finishWithError = () => {
+      this.relatedNewsCategoryId = null;
+      this.setState((state) => ({
+        listOfNewsAndEvents: state.listOfNewsAndEvents ?? [],
+      }));
+    };
     request
       .then((action) => {
         if (this.relatedNewsRequest !== request) return;
@@ -80,14 +86,14 @@ class NewsDetailPage extends Component {
             listOfNewsAndEvents: action.payload,
           });
         } else {
-          this.relatedNewsCategoryId = null;
+          finishWithError();
           console.error("Failed to load related news", action.payload || action.error);
         }
         this.relatedNewsRequest = null;
       })
       .catch((error) => {
         if (this.relatedNewsRequest !== request) return;
-        this.relatedNewsCategoryId = null;
+        finishWithError();
         this.relatedNewsRequest = null;
         console.error("Failed to load related news", error);
       });

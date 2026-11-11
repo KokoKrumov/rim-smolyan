@@ -359,6 +359,7 @@ describe("NewsDetailPage", () => {
       "Failed to load related news",
       expect.objectContaining({ message: "Network unavailable" }),
     ));
+    expect(screen.queryByRole("status")).not.toBeInTheDocument();
     expect(screen.queryByRole("link", { name: "Retained story" })).not.toBeInTheDocument();
 
     act(() => store.dispatch(fetchCategories.fulfilled(
@@ -367,6 +368,28 @@ describe("NewsDetailPage", () => {
     )));
     expect(await screen.findByRole("link", { name: "Related story" })).toBeInTheDocument();
     expect(relatedRequests).toBe(2);
+  });
+
+  it("preserves previously loaded related news when a refresh fails", async () => {
+    const error = vi.spyOn(console, "error").mockImplementation(() => {});
+    const refreshedCategories = [{ ...categories[0], id: 99 }];
+    streams.get.mockImplementation((url) => {
+      if (url.includes("slug=article-a")) return Promise.resolve({ data: [articleA] });
+      if (url.includes("categories=10&")) return Promise.resolve({ data: [relatedStory] });
+      if (url.includes("categories=99&")) return Promise.reject(new Error("Network unavailable"));
+      throw new Error(`Unexpected request: ${url}`);
+    });
+    const { store } = renderNewsDetail({ initialCategories: categories });
+
+    expect(await screen.findByRole("link", { name: "Related story" })).toBeInTheDocument();
+    act(() => store.dispatch(fetchCategories.fulfilled(refreshedCategories, "refresh")));
+
+    await waitFor(() => expect(error).toHaveBeenCalledWith(
+      "Failed to load related news",
+      expect.objectContaining({ message: "Network unavailable" }),
+    ));
+    expect(screen.getByRole("link", { name: "Related story" })).toBeInTheDocument();
+    expect(screen.queryByRole("status")).not.toBeInTheDocument();
   });
 
   it("loads related news after a StrictMode remount while requests are pending", async () => {

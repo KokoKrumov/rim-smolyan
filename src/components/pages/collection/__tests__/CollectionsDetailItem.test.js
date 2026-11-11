@@ -10,6 +10,7 @@ import collectionsReducer from '../../../../store/collectionsSlice';
 import itemReducer from '../../../../store/itemFromCollectionSlice';
 import messages from '../../../../translations/en.json';
 import CollectionsDetailItem from '../CollectionsDetailItem';
+import NavigationEffects from '../../../NavigationEffects';
 
 vi.mock('../../../../api/streams', () => ({ default: { get: vi.fn() } }));
 vi.mock('react-bootstrap/Spinner', () => ({
@@ -57,7 +58,12 @@ function KeyedDetail() {
   return <CollectionsDetailItem key={pathname} />;
 }
 
-function renderDetail({ desktop = true, collection = [], path = '/main-collections/detail/ethnography/vase' } = {}) {
+function renderDetail({
+  desktop = true,
+  collection = [],
+  includeNavigationEffects = false,
+  path = '/main-collections/detail/ethnography/vase',
+} = {}) {
   window.history.replaceState(null, '', path);
   const media = {
     matches: desktop,
@@ -73,6 +79,7 @@ function renderDetail({ desktop = true, collection = [], path = '/main-collectio
     <Provider store={store}>
       <IntlProvider locale="en" messages={messages}>
         <BrowserRouter>
+          {includeNavigationEffects && <NavigationEffects />}
           <Link to="/main-collections/detail/ethnography/chalice" state={{ scrollToImage: true }}>Next item</Link>
           <Routes>
             <Route path="/:host/detail/:type/:item" element={<KeyedDetail />} />
@@ -242,15 +249,18 @@ describe('CollectionsDetailItem', () => {
     const { container } = renderDetail({
       desktop: false,
       collection: [previous, vase, next],
+      includeNavigationEffects: true,
     });
     await screen.findByRole('heading', { name: 'Ancient vase' });
     const nextLink = await screen.findByRole('link', { name: /Silver chalice/ });
     const scrollIntoView = Element.prototype.scrollIntoView;
     scrollIntoView.mockClear();
+    const scrollTo = vi.spyOn(window, 'scrollTo').mockImplementation(() => {});
 
     await user.click(nextLink);
     expect(screen.getByRole('heading', { name: 'Ancient vase', level: 2 })).toBeInTheDocument();
     expect(scrollIntoView).not.toHaveBeenCalled();
+    expect(scrollTo).not.toHaveBeenCalled();
 
     await act(async () => {
       resolveRequest({ data: [next] });
@@ -261,6 +271,7 @@ describe('CollectionsDetailItem', () => {
     expect(scrollIntoView.mock.contexts[0]).toBe(
       container.querySelector('.collections-item__img__wrap')
     );
+    expect(scrollTo).not.toHaveBeenCalled();
   });
 
   it.each([

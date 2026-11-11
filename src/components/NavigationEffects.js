@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import GA4React from 'ga-4-react';
 
 export default function NavigationEffects() {
-  const { pathname, search, hash } = useLocation();
+  const { pathname, search, hash, state } = useLocation();
   const previousPage = useRef(pathname + search);
   const previousPathname = useRef(pathname.replace(/\/+$/, '') || '/');
 
@@ -23,7 +23,7 @@ export default function NavigationEffects() {
     previousPathname.current = normalizedPathname;
 
     if (!hash) {
-      if (isDifferentPage) window.scrollTo(0, 0);
+      if (isDifferentPage && !state?.scrollToImage) window.scrollTo(0, 0);
       return;
     }
 
@@ -35,13 +35,14 @@ export default function NavigationEffects() {
     };
 
     if (scrollToHash()) return;
+    if (isDifferentPage && !state?.scrollToImage) window.scrollTo(0, 0);
     // Lazy routes may not have mounted the hash target yet.
     const observer = new MutationObserver(() => {
       if (scrollToHash()) observer.disconnect();
     });
     observer.observe(document.getElementById('root'), { childList: true, subtree: true });
     return () => observer.disconnect();
-  }, [pathname, hash]);
+  }, [pathname, hash, state]);
 
   return null;
 }

@@ -22,6 +22,10 @@ function renderNavigation(path = '/') {
       <Link to="/administrative/#13">Support</Link>
       <Link to="/administrative">Close panel</Link>
       <Link to="/administrative/">Trailing slash</Link>
+      <Link to="/main-collections/detail/ethnography/chalice" state={{ scrollToImage: true }}>
+        Next collection item
+      </Link>
+      <Link to="/main-collections/intro/ethnography#gallery">Back to gallery</Link>
     </MemoryRouter>,
     { container: root },
   );
@@ -79,6 +83,33 @@ describe('navigation effects', () => {
 
     await user.click(screen.getByRole('link', { name: 'Trailing slash' }));
     expect(window.scrollTo).not.toHaveBeenCalled();
+  });
+
+  it('lets collection detail navigation handle its image scroll', async () => {
+    const user = userEvent.setup();
+    renderNavigation('/main-collections/detail/ethnography/vase');
+    window.scrollTo.mockClear();
+
+    await user.click(screen.getByRole('link', { name: 'Next collection item' }));
+
+    expect(window.scrollTo).not.toHaveBeenCalled();
+  });
+
+  it('resets scroll for a missing hash target and observes for it to mount later', async () => {
+    const user = userEvent.setup();
+    const { container } = renderNavigation('/main-collections/detail/ethnography/vase');
+    window.scrollTo.mockClear();
+
+    await user.click(screen.getByRole('link', { name: 'Back to gallery' }));
+
+    expect(window.scrollTo).toHaveBeenCalledOnce();
+    expect(window.scrollTo).toHaveBeenCalledWith(0, 0);
+    const target = document.createElement('div');
+    target.id = 'gallery';
+    target.scrollIntoView = vi.fn();
+    act(() => container.appendChild(target));
+    await waitFor(() => expect(target.scrollIntoView).toHaveBeenCalledOnce());
+    expect(window.scrollTo).toHaveBeenCalledOnce();
   });
 
   it('disconnects a pending hash observer when the route changes', async () => {
