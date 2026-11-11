@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { selectNews } from "../../../store/selectors";
+import { selectCategories } from "../../../store/selectors";
 import { fetchArticle, fetchNews } from "../../../actions";
 
 import Article from "../../Article/Article";
@@ -11,6 +11,9 @@ import { withIntl } from "../../../utilities/withIntl";
 import { withRouter } from "../../../utilities/withRouter";
 
 class NewsDetailPage extends Component {
+  relatedNewsCategoryId = null;
+  relatedNewsRequest = null;
+
   state = {
     articleId: null,
     article: null,
@@ -20,7 +23,7 @@ class NewsDetailPage extends Component {
     isLoading: true,
   };
 
-  fetchData = (id, listFrom, props, propsCategories) => {
+  fetchArticleData = () => {
     this.props
       .fetchArticle(this.props.match.params.slug)
       .then((action) => {
@@ -49,38 +52,87 @@ class NewsDetailPage extends Component {
           isLoading: false,
         });
       });
+  };
 
+  fetchRelatedNews = (categories) => {
     const { slugId } = extractIdAndCategories(
-      id,
-      listFrom,
-      props,
-      propsCategories
+      "news-and-events",
+      "props",
+      this.props,
+      categories
     );
-    if (slugId == null) return;
+    if (slugId == null) {
+      this.relatedNewsCategoryId = null;
+      this.relatedNewsRequest = null;
+      if (categories.length > 0) console.error("Category not found: news-and-events");
+      return;
+    }
+    if (slugId === this.relatedNewsCategoryId) return;
 
-    this.props
-      .fetchNews(slugId, Math.ceil(Math.random() * 11), 3)
+    this.relatedNewsCategoryId = slugId;
+    const request = this.props.fetchNews(slugId, Math.ceil(Math.random() * 11), 3);
+    this.relatedNewsRequest = request;
+    request
       .then((action) => {
+        if (this.relatedNewsRequest !== request) return;
         if (fetchNews.fulfilled.match(action)) {
           this.setState({
             listOfNewsAndEvents: action.payload,
           });
         } else {
-          console.error("Failed to load related news", action.error);
+          this.relatedNewsCategoryId = null;
+          console.error("Failed to load related news", action.payload || action.error);
         }
+        this.relatedNewsRequest = null;
       })
       .catch((error) => {
+        if (this.relatedNewsRequest !== request) return;
+        this.relatedNewsCategoryId = null;
+        this.relatedNewsRequest = null;
         console.error("Failed to load related news", error);
       });
   };
 
   componentDidMount() {
-    this.fetchData(
-      "news-and-events",
-      "storage",
-      this.props,
-      this.state.categories
-    );
+    this.fetchArticleData();
+
+    if (this.props.categories.length > 0) {
+      this.fetchRelatedNews(this.props.categories);
+      return;
+    }
+
+    const cachedCategories = sessionStorage.getItem("categories");
+    if (cachedCategories === null) return;
+
+    let categories;
+    try {
+      categories = JSON.parse(cachedCategories);
+    } catch (error) {
+      console.error("Error parsing categories:", error);
+      return;
+    }
+    if (
+      !Array.isArray(categories) ||
+      categories.some((category) => !category || typeof category !== "object" || Array.isArray(category))
+    ) {
+      console.error("Invalid cached categories:", "expected an array of category objects");
+      return;
+    }
+    this.fetchRelatedNews(categories);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (
+      prevProps.categories !== this.props.categories &&
+      this.props.categories.length > 0
+    ) {
+      this.fetchRelatedNews(this.props.categories);
+    }
+  }
+
+  componentWillUnmount() {
+    this.relatedNewsCategoryId = null;
+    this.relatedNewsRequest = null;
   }
 
   setBreadcrumbs = () => {
@@ -120,7 +172,7 @@ class NewsDetailPage extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    news: selectNews(state),
+    categories: selectCategories(state),
   };
 };
 
