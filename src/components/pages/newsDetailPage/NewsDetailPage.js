@@ -23,36 +23,54 @@ class NewsDetailPage extends Component {
   fetchData = (id, listFrom, props, propsCategories) => {
     this.props
       .fetchArticle(this.props.match.params.slug)
-      .then(() => {
-        if (this.props?.article) {
-          const article = this.props.article[0];
+      .then((action) => {
+        if (fetchArticle.fulfilled.match(action) && action.payload?.[0]) {
+          const article = action.payload[0];
           this.setState({
             articleId: Number(article.id),
-            article: article,
+            article,
             articleSection: "news-and-events",
             isLoading: false,
           });
         } else {
+          if (fetchArticle.rejected.match(action)) {
+            console.error("Failed to load article", action.payload || action.error);
+          }
           this.setState({
             isPageExist: false,
             isLoading: false,
           });
         }
       })
-      .then(() => {
-        const { slugId } = extractIdAndCategories(
-          id,
-          listFrom,
-          props,
-          propsCategories
-        );
-        this.props
-          .fetchNews(slugId, Math.ceil(Math.random() * 11), 3)
-          .then(() => {
-            this.setState({
-              listOfNewsAndEvents: this.props.news,
-            });
+      .catch((error) => {
+        console.error("Failed to load article", error);
+        this.setState({
+          isPageExist: false,
+          isLoading: false,
+        });
+      });
+
+    const { slugId } = extractIdAndCategories(
+      id,
+      listFrom,
+      props,
+      propsCategories
+    );
+    if (slugId == null) return;
+
+    this.props
+      .fetchNews(slugId, Math.ceil(Math.random() * 11), 3)
+      .then((action) => {
+        if (fetchNews.fulfilled.match(action)) {
+          this.setState({
+            listOfNewsAndEvents: action.payload,
           });
+        } else {
+          console.error("Failed to load related news", action.error);
+        }
+      })
+      .catch((error) => {
+        console.error("Failed to load related news", error);
       });
   };
 
@@ -85,7 +103,10 @@ class NewsDetailPage extends Component {
   };
 
   render() {
-    if (!this.state.isLoading && this.props.article) {
+    if (
+      !this.state.isLoading &&
+      (this.state.article || this.state.isPageExist === false)
+    ) {
       return this.provideContentByType();
     } else {
       return (
@@ -99,7 +120,6 @@ class NewsDetailPage extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    article: state.article,
     news: selectNews(state),
   };
 };

@@ -30,10 +30,22 @@ class CollectionsIndex extends Component {
   }
 
   componentDidMount() {
-    /*if (this.collectionsRef.current) {
-      this.collectionsRef.current.scrollIntoView({ behavior: "smooth" });
-    }*/
+    if (this.props.categories.length > 0) {
+      this.loadCollections(this.props.categories);
+    }
   }
+
+  loadCollections = (categories) => {
+    this.setState({
+      categories,
+      isLoading: true,
+      mainFetched: false,
+      virtualFetched: false,
+    });
+
+    this.fetchMainCollections(categories);
+    this.fetchVirtualCollections(categories);
+  };
 
   fetchMainCollections = (categories) => {
     const { slugId } = extractIdAndCategories(
@@ -86,15 +98,7 @@ class CollectionsIndex extends Component {
       this.props.categories.length > 0 &&
       !isEqual(this.props.categories, this.state.categories)
     ) {
-      this.setState({
-        categories: this.props.categories,
-        isLoading: true,
-        mainFetched: false,
-        virtualFetched: false,
-      });
-
-      this.fetchMainCollections(this.props.categories);
-      this.fetchVirtualCollections(this.props.categories);
+      this.loadCollections(this.props.categories);
     }
   }
 
