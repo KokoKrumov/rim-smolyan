@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { selectNews, selectCategories } from "../../../store/selectors";
+import { selectCategories } from "../../../store/selectors";
 import {
   extractIdAndCategories,
   isTabletScreen,
@@ -79,6 +79,7 @@ class HomePage extends Component {
     bgHero: null,
     bgAboutUs: null,
     listOfNewsAndEvents: [],
+    isLoadingNews: false,
     listMegatronCarousel: null,
     isTabletScreenV: isTabletScreen(),
     categories: [],
@@ -105,13 +106,14 @@ class HomePage extends Component {
       props,
       propsCategories
     );
-    this.setState({ categories });
     if (slugId == null) {
       this.newsRequest = null;
+      this.setState({ categories, isLoadingNews: false });
       if (categories.length > 0) console.error(`Category not found: ${id}`);
       return;
     }
 
+    this.setState({ categories, isLoadingNews: true });
     const request = this.props.fetchNews(slugId, page, perPage);
     this.newsRequest = request;
     request
@@ -130,15 +132,18 @@ class HomePage extends Component {
           this.setState({
             listOfNewsAndEvents: action.payload,
             categories: currentCategoryId === slugId ? currentCategories : categories,
+            isLoadingNews: false,
           });
         } else {
           console.error("Failed to load news", action.error);
+          this.setState({ isLoadingNews: false });
         }
         this.newsRequest = null;
       })
       .catch((error) => {
         if (this.newsRequest !== request) return;
         this.newsRequest = null;
+        this.setState({ isLoadingNews: false });
         console.error("Failed to load news", error);
       });
   };
@@ -246,7 +251,11 @@ class HomePage extends Component {
               </div>
               <Row>
                 <NewsAndEventsCards
-                  listOfNewsAndEvents={this.state.listOfNewsAndEvents}
+                  listOfNewsAndEvents={
+                    this.state.isLoadingNews
+                      ? null
+                      : this.state.listOfNewsAndEvents
+                  }
                 />
               </Row>
               {this.state.isTabletScreenV ? (
@@ -291,7 +300,6 @@ class HomePage extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    news: selectNews(state),
     categories: selectCategories(state),
   };
 };

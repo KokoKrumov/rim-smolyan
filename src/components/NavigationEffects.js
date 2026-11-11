@@ -1,21 +1,11 @@
 import { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
-import GA4React from 'ga-4-react';
 
+// Page views are not sent from here: the Google tag already records one for
+// every history change (Enhanced Measurement), so a manual one would be a duplicate.
 export default function NavigationEffects() {
-  const { pathname, search, hash, state } = useLocation();
-  const previousPage = useRef(pathname + search);
+  const { pathname, hash, state } = useLocation();
   const previousPathname = useRef(pathname.replace(/\/+$/, '') || '/');
-
-  useEffect(() => {
-    const page = pathname + search;
-    if (previousPage.current !== page) {
-      previousPage.current = page;
-      if (GA4React.isInitialized()) {
-        GA4React.getGA4React().pageview(page, window.location.href, document.title);
-      }
-    }
-  }, [pathname, search]);
 
   useEffect(() => {
     const normalizedPathname = pathname.replace(/\/+$/, '') || '/';

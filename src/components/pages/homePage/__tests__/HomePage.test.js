@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { act, render, screen } from '@testing-library/react';
+import { act, render, screen, waitFor } from '@testing-library/react';
 import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
@@ -14,6 +14,13 @@ vi.mock('../../../carousel/carouselMegatron', () => ({ default: () => <div data-
 vi.mock('../../../carousel/CarouselMegatronMobile', () => ({ default: () => <div data-testid="mobile-carousel" /> }));
 
 const categories = [{ id: 10, slug: 'news-and-events', name: 'News' }];
+
+function deferred() {
+  let resolve;
+  let reject;
+  const promise = new Promise((res, rej) => { resolve = res; reject = rej; });
+  return { promise, resolve, reject };
+}
 
 function setWidth(width) {
   Object.defineProperty(document.documentElement, 'clientWidth', { configurable: true, value: width });
@@ -76,6 +83,79 @@ describe('HomePage', () => {
 
     expect(streams.get).not.toHaveBeenCalled();
     expect(error).toHaveBeenCalledWith('Category not found: news-and-events');
+    expect(screen.queryByRole('status')).not.toBeInTheDocument();
+  });
+
+  it('shows a spinner from the moment categories arrive until the stories are rendered', async () => {
+    const response = deferred();
+    streams.get.mockReturnValue(response.promise);
+    const { store } = renderHome();
+
+    expect(screen.queryByRole('status')).not.toBeInTheDocument();
+    act(() => store.dispatch(fetchCategories.fulfilled(categories, 'request')));
+    expect(screen.getByRole('status')).toHaveClass('spinner-border');
+
+    await act(async () => response.resolve({ data: [{ id: 1, slug: 'story', title: { rendered: 'Story' } }] }));
+    expect(screen.getByRole('link', { name: 'Story' })).toHaveAttribute('href', '/news-and-events/story');
+    expect(screen.queryByRole('status')).not.toBeInTheDocument();
+    expect(streams.get).toHaveBeenCalledOnce();
+  });
+
+  it('stops loading when the news response is empty', async () => {
+    const response = deferred();
+    streams.get.mockReturnValue(response.promise);
+    renderHome(categories);
+
+    expect(screen.getByRole('status')).toBeInTheDocument();
+    await act(async () => response.resolve({ data: [] }));
+
+    expect(screen.queryByRole('status')).not.toBeInTheDocument();
+    expect(screen.queryByRole('link', { name: 'Story' })).not.toBeInTheDocument();
+  });
+
+  it('keeps loading until the newest category request finishes', async () => {
+    const cachedResponse = deferred();
+    const freshResponse = deferred();
+    sessionStorage.setItem('categories', JSON.stringify(categories));
+    streams.get.mockImplementation((url) => (
+      url.includes('categories=10') ? cachedResponse.promise : freshResponse.promise
+    ));
+    const { store } = renderHome();
+
+    expect(screen.getByRole('status')).toBeInTheDocument();
+    act(() => store.dispatch(fetchCategories.fulfilled([{ ...categories[0], id: 99 }], 'refresh')));
+
+    await act(async () => cachedResponse.resolve({
+      data: [{ id: 1, slug: 'cached', title: { rendered: 'Cached story' } }],
+    }));
+    expect(screen.getByRole('status')).toBeInTheDocument();
+    expect(screen.queryByRole('link', { name: 'Cached story' })).not.toBeInTheDocument();
+
+    await act(async () => freshResponse.resolve({
+      data: [{ id: 2, slug: 'fresh', title: { rendered: 'Fresh story' } }],
+    }));
+    expect(screen.queryByRole('status')).not.toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Fresh story' })).toBeInTheDocument();
+  });
+
+  it('keeps previously loaded news and stops loading after a refresh fails', async () => {
+    const error = vi.spyOn(console, 'error').mockImplementation(() => {});
+    const freshResponse = deferred();
+    streams.get
+      .mockResolvedValueOnce({ data: [{ id: 1, slug: 'story', title: { rendered: 'Story' } }] })
+      .mockReturnValueOnce(freshResponse.promise);
+    const { store } = renderHome(categories);
+
+    expect(await screen.findByRole('link', { name: 'Story' })).toBeInTheDocument();
+    act(() => store.dispatch(fetchCategories.fulfilled([{ ...categories[0], id: 99 }], 'refresh')));
+    expect(screen.getByRole('status')).toBeInTheDocument();
+
+    await act(async () => freshResponse.reject(new Error('Network unavailable')));
+    expect(error).toHaveBeenCalledWith(
+      'Failed to load news', expect.objectContaining({ message: 'Network unavailable' })
+    );
+    expect(screen.queryByRole('status')).not.toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Story' })).toBeInTheDocument();
   });
 
   it('keeps the latest fulfilled request when cached categories finish late', async () => {
@@ -135,7 +215,8 @@ describe('HomePage', () => {
     renderHome(categories, { 0: retainedStory });
 
     await screen.findByText('Новини и Събития');
+    await waitFor(() => expect(error).toHaveBeenCalledWith('Failed to load news', expect.any(Object)));
+    expect(screen.queryByRole('status')).not.toBeInTheDocument();
     expect(screen.queryByRole('link', { name: 'Retained story' })).not.toBeInTheDocument();
-    expect(error).toHaveBeenCalledWith('Failed to load news', expect.any(Object));
   });
 });

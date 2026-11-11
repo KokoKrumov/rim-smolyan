@@ -4,12 +4,12 @@ import userEvent from '@testing-library/user-event';
 import { Link, MemoryRouter } from 'react-router-dom';
 import NavigationEffects from '../NavigationEffects';
 
-const { pageview, getGA4React, isInitialized } = vi.hoisted(() => ({
-  pageview: vi.fn(),
-  getGA4React: vi.fn(),
-  isInitialized: vi.fn(),
+const { send, event, gtag } = vi.hoisted(() => ({
+  send: vi.fn(),
+  event: vi.fn(),
+  gtag: vi.fn(),
 }));
-vi.mock('ga-4-react', () => ({ default: { getGA4React, isInitialized } }));
+vi.mock('react-ga4', () => ({ default: { send, event, gtag } }));
 
 function renderNavigation(path = '/') {
   const root = document.createElement('div');
@@ -34,33 +34,21 @@ function renderNavigation(path = '/') {
 describe('navigation effects', () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    getGA4React.mockReturnValue({ pageview });
-    isInitialized.mockReturnValue(true);
     vi.spyOn(window, 'scrollTo').mockImplementation(() => {});
   });
   afterEach(() => vi.restoreAllMocks());
 
-  it('scrolls to the top and tracks router navigation without duplicating the initial view', async () => {
+  it('scrolls to the top on router navigation and leaves page views to the Google tag', async () => {
     const user = userEvent.setup();
     renderNavigation();
-    expect(pageview).not.toHaveBeenCalled();
     window.scrollTo.mockClear();
 
     await user.click(screen.getByRole('link', { name: 'News' }));
 
     expect(window.scrollTo).toHaveBeenCalledWith(0, 0);
-    expect(pageview).toHaveBeenCalledOnce();
-    expect(pageview).toHaveBeenCalledWith('/news?page=2', window.location.href, document.title);
-  });
-
-  it('does not wait for analytics to navigate or scroll', async () => {
-    isInitialized.mockReturnValue(false);
-    const user = userEvent.setup();
-    renderNavigation();
-    await user.click(screen.getByRole('link', { name: 'News' }));
-    expect(window.scrollTo).toHaveBeenCalledWith(0, 0);
-    expect(pageview).not.toHaveBeenCalled();
-    expect(getGA4React).not.toHaveBeenCalled();
+    expect(send).not.toHaveBeenCalled();
+    expect(event).not.toHaveBeenCalled();
+    expect(gtag).not.toHaveBeenCalled();
   });
 
   it('scrolls to hash targets that mount after a lazy route resolves', async () => {

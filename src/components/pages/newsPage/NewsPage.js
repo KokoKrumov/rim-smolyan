@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { selectNews, selectCategories } from "../../../store/selectors";
+import { selectCategories } from "../../../store/selectors";
 import { fetchNews, resetFetchNews } from "../../../actions";
 
 import Col from "react-bootstrap/Col";
@@ -293,7 +293,6 @@ class NewsPage extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    news: selectNews(state),
     newsError: state.newsError.newsError,
     categories: selectCategories(state),
   };

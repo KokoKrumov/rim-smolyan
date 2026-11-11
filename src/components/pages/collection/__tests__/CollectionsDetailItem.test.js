@@ -81,6 +81,7 @@ function renderDetail({
         <BrowserRouter>
           {includeNavigationEffects && <NavigationEffects />}
           <Link to="/main-collections/detail/ethnography/chalice" state={{ scrollToImage: true }}>Next item</Link>
+          <Link to="/main-collections/detail/ethnography/plate">Other item</Link>
           <Routes>
             <Route path="/:host/detail/:type/:item" element={<KeyedDetail />} />
           </Routes>
@@ -233,6 +234,78 @@ describe('CollectionsDetailItem', () => {
       'https://example.test/chalice.jpg'
     );
     expect(streams.get).toHaveBeenCalledWith(expect.stringContaining('/posts?slug=chalice'));
+  });
+
+  it('shows a spinner instead of the previous item when another item is opened without arrow navigation', async () => {
+    let resolveRequest;
+    const request = new Promise((resolve) => {
+      resolveRequest = resolve;
+    });
+    streams.get.mockImplementation((url) => {
+      if (url.startsWith('/posts?slug=vase')) return Promise.resolve({ data: [vase] });
+      if (url.startsWith('/posts?slug=plate')) return request;
+      throw new Error(`Unexpected request: ${url}`);
+    });
+    const user = userEvent.setup();
+    renderDetail();
+    await screen.findByRole('heading', { name: 'Ancient vase' });
+
+    await user.click(screen.getByRole('link', { name: 'Other item' }));
+
+    expect(window.location.pathname).toBe('/main-collections/detail/ethnography/plate');
+    expect(screen.getByRole('status')).toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: 'Ancient vase' })).not.toBeInTheDocument();
+
+    await act(async () => {
+      resolveRequest({ data: [previous] });
+      await request;
+    });
+    expect(await screen.findByRole('heading', { name: 'Ceramic plate' })).toBeInTheDocument();
+    expect(screen.queryByRole('status')).not.toBeInTheDocument();
+  });
+
+  it('does not keep another item on screen when history returns to an arrow-navigated item', async () => {
+    let resolveRequest;
+    const request = new Promise((resolve) => {
+      resolveRequest = resolve;
+    });
+    let chaliceRequests = 0;
+    streams.get.mockImplementation((url) => {
+      if (url.startsWith('/posts?slug=vase')) return Promise.resolve({ data: [vase] });
+      if (url.startsWith('/posts?slug=plate')) return Promise.resolve({ data: [previous] });
+      if (url.startsWith('/posts?slug=chalice')) {
+        chaliceRequests += 1;
+        return chaliceRequests === 1 ? Promise.resolve({ data: [next] }) : request;
+      }
+      throw new Error(`Unexpected request: ${url}`);
+    });
+    const user = userEvent.setup();
+    const { container } = renderDetail({ collection: [previous, vase, next] });
+    await screen.findByRole('heading', { name: 'Ancient vase', level: 2 });
+    await waitFor(() => {
+      expect(container.querySelector('.collection-items-arrow-navigation .right-arrow')).toHaveAttribute(
+        'href',
+        '/main-collections/detail/ethnography/chalice'
+      );
+    });
+
+    await user.click(container.querySelector('.collection-items-arrow-navigation .right-arrow'));
+    await screen.findByRole('heading', { name: 'Silver chalice', level: 2 });
+    await user.click(screen.getByRole('link', { name: 'Other item' }));
+    await screen.findByRole('heading', { name: 'Ceramic plate', level: 2 });
+
+    act(() => window.history.back());
+    await waitFor(() => {
+      expect(window.location.pathname).toBe('/main-collections/detail/ethnography/chalice');
+      expect(screen.getByRole('status')).toBeInTheDocument();
+    });
+    expect(screen.queryByRole('heading', { name: 'Ceramic plate', level: 2 })).not.toBeInTheDocument();
+
+    await act(async () => {
+      resolveRequest({ data: [next] });
+      await request;
+    });
+    expect(await screen.findByRole('heading', { name: 'Silver chalice', level: 2 })).toBeInTheDocument();
   });
 
   it('keeps the mobile image scroll pending until the requested item is rendered', async () => {

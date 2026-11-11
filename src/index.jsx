@@ -6,11 +6,9 @@ import messages_bg from "./translations/bg.json";
 import messages_en from "./translations/en.json";
 import {Provider} from "react-redux";
 import { store } from './store/store';
-import GA4React from "ga-4-react";
+import ReactGA from "react-ga4";
 import { preload } from 'react-dom';
 import heroImage from './assets/images/baseHero.jpg';
-
-const ga4react = new GA4React("G-Y09PXD41TG");
 
 const messages = {
     'bg': messages_bg,
@@ -34,10 +32,10 @@ root.render(
     </IntlProvider>
 );
 
-ga4react.initialize()
-    .then((ga4) => {
-        ga4.pageview(window.location.pathname + window.location.search, window.location.href, document.title)
-    })
-    .catch((err) => {
-        console.error(err)
-    });
+// The Google tag sends the initial page view when it is configured and one for each
+// history change (Enhanced Measurement), so no page views are sent manually.
+try {
+    ReactGA.initialize("G-Y09PXD41TG");
+} catch (err) {
+    console.error(err)
+}

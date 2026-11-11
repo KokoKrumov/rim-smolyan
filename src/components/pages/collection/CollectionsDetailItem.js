@@ -1,6 +1,6 @@
 import { fetchCollections, fetchItemFromCollection } from "../../../actions";
 import { useEffect, useRef, useState } from "react";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation, useNavigationType } from "react-router-dom";
 
 import Col from "react-bootstrap/Col";
 import CollectionItemsArrowNavigation from "./CollectionItemsArrowNavigation";
@@ -36,9 +36,11 @@ function CollectionsDetailItem({
 }) {
   const { item: itemName, type: collectionName } = useParams();
   const location = useLocation();
+  const navigationType = useNavigationType();
   const noImage =
     "https://api-staging.museumsmolyan.eu/wp-content/uploads/2024/10/no-image.png";
   const item = itemFomCollection;
+  const [loadedItemName, setLoadedItemName] = useState(null);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const backUrl =
     location.pathname.replace("detail", "intro").split("/").slice(0, -1).join("/");
@@ -52,8 +54,23 @@ function CollectionsDetailItem({
   }, [location.key, location.state]);
 
   useEffect(() => {
-    fetchItemFromCollection(itemName);
+    let isCurrentRequest = true;
+    Promise.resolve(fetchItemFromCollection(itemName)).finally(() => {
+      if (isCurrentRequest) setLoadedItemName(itemName);
+    });
+    return () => {
+      isCurrentRequest = false;
+    };
   }, [fetchItemFromCollection, itemName]);
+
+  // Redux retains the last viewed item. Arrow navigation keeps it on screen until
+  // the next one arrives; any other navigation must not show it under the new URL.
+  const keepsPreviousItem =
+    navigationType === "PUSH" && Boolean(location.state?.keepPreviousItem);
+  const canShowItem =
+    loadedItemName === itemName ||
+    keepsPreviousItem ||
+    matchesRouteSlug(item?.slug, itemName);
 
   // Runs after the newly fetched item has rendered, so the image position is final
   useEffect(() => {
@@ -324,7 +341,9 @@ function CollectionsDetailItem({
     );
   }
 
-  return Object.keys(item).length ? renderContent() : renderLoading();
+  return canShowItem && Object.keys(item).length
+    ? renderContent()
+    : renderLoading();
 }
 const mapStateToProps = (state) => {
   return {
