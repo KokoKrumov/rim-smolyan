@@ -32,10 +32,16 @@ root.render(
     </IntlProvider>
 );
 
+// Analytics runs only for the prod and dev modes (build:prod/start:prod, build:dev/start:dev);
+// staging and the other modes skip it.
+const isAnalyticsEnabled = import.meta.env.MODE === 'prod' || import.meta.env.MODE === 'dev';
+
 // The Google tag sends the initial page view when it is configured and one for each
 // history change (Enhanced Measurement), so no page views are sent manually.
-try {
-    ReactGA.initialize("G-Y09PXD41TG");
-} catch (err) {
-    console.error(err)
+if (isAnalyticsEnabled) {
+    try {
+        ReactGA.initialize("G-Y09PXD41TG");
+    } catch (err) {
+        console.error(err)
+    }
 }
