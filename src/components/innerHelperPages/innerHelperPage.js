@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { selectRimBuildingImages } from "../../store/selectors";
 import {connect} from 'react-redux';
 import {fetchRimBuildingImages, fetchTeam, showModal} from "../../actions";
 import Col from "react-bootstrap/Col";
@@ -80,7 +81,7 @@ class InnerHelperPage extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        rimBuildingImages: Object.values(state.rimBuildingImages),
+        rimBuildingImages: selectRimBuildingImages(state),
         team: state.team
     };
 }

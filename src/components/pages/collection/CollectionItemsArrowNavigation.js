@@ -87,6 +87,7 @@ function CollectionItemsArrowNavigation({
       <div className="collection-items-arrow-navigation">
         <Link
           to={generateHref(navItems.prevIndex)}
+          state={{ keepPreviousItem: true }}
           className={`left-arrow ${hoveredSide === "prevIndex" ? "show" : ""}`}
           onMouseEnter={() => {
             setHoveredSide("prevIndex");
@@ -99,6 +100,7 @@ function CollectionItemsArrowNavigation({
         </Link>
         <Link
           to={generateHref(navItems.nextItem)}
+          state={{ keepPreviousItem: true }}
           className={`right-arrow ${hoveredSide === "nextItem" ? "show" : ""}`}
           onMouseEnter={() => {
             setHoveredSide("nextItem");

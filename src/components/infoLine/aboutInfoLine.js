@@ -25,10 +25,10 @@ class AboutInfoLine extends Component {
                                 <FormattedMessage id="about-us.info-line.support"/>
                             </p>
                             <p className='info-line__titled__text info-line__text-bold'>
-                                <a href="/support-us"
+                                <Link to="/support-us"
                                     dangerouslySetInnerHTML={{__html: intl.formatMessage({id: 'see-here'})}}
                                     className="link cta_outline cta_outline__light cta_outline__border-overflow"
-                                ></a>
+                                ></Link>
                             </p>
                         </div>
                     </div>

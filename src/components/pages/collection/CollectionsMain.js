@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { selectCategories } from "../../../store/selectors";
 import {
   extractIdAndCategories,
   slugSanitize,
@@ -234,7 +235,7 @@ class Collections extends Component {
 const mapStateToProps = (state) => {
   return {
     collectionsMain: state.collections.main,
-    categories: Object.values(state.categories),
+    categories: selectCategories(state),
   };
 };
 

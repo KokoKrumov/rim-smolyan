@@ -1,4 +1,5 @@
-import React, { Component, useEffect } from "react";
+import React, { Component } from "react";
+import { selectCategories } from "../../../store/selectors";
 import {
   extractIdAndCategories,
   isTabletScreen,
@@ -72,6 +73,8 @@ let listMegatronCarousel = [
 ];
 
 class HomePage extends Component {
+  newsRequest = null;
+
   state = {
     bgHero: null,
     bgAboutUs: null,
@@ -89,11 +92,12 @@ class HomePage extends Component {
     },
   };
 
-  handleResize() {
-    this.setState({
-      isTabletScreenV: isTabletScreen(),
-    });
-  }
+  handleResize = () => {
+    const isTabletScreenV = isTabletScreen();
+    if (isTabletScreenV !== this.state.isTabletScreenV) {
+      this.setState({ isTabletScreenV });
+    }
+  };
 
   fetchData = (id, page, perPage, listFrom, props, propsCategories) => {
     const { slugId, categories } = extractIdAndCategories(
@@ -102,49 +106,54 @@ class HomePage extends Component {
       props,
       propsCategories
     );
-
-    this.setState({ categories: categories });
     if (slugId == null) {
-      if (categories.length > 0) {
-        console.error(`Category not found: ${id}`);
-      }
+      this.newsRequest = null;
+      this.setState({ categories, isLoadingNews: false });
+      if (categories.length > 0) console.error(`Category not found: ${id}`);
       return;
     }
 
-    if (this.newsCategoryId === slugId) {
-      return;
-    }
-    this.newsCategoryId = slugId;
-    this.setState({ isLoadingNews: true });
-
+    this.setState({ categories, isLoadingNews: true });
     const request = this.props.fetchNews(slugId, page, perPage);
     this.newsRequest = request;
-    request.then((action) => {
-      if (this.newsRequest !== request) {
-        return;
-      }
-      if (fetchNews.fulfilled.match(action)) {
-        this.setState({
-          listOfNewsAndEvents: Object.values(action.payload),
-          isLoadingNews: false,
-        });
-      } else {
-        console.error("Failed to load news", action.error);
+    request
+      .then((action) => {
+        if (this.newsRequest !== request) return;
+        if (fetchNews.fulfilled.match(action)) {
+          const currentCategories = this.props.categories.length > 0
+            ? this.props.categories
+            : categories;
+          const currentCategoryId = extractIdAndCategories(
+            id,
+            "props",
+            this.props,
+            currentCategories
+          )?.slugId;
+          this.setState({
+            listOfNewsAndEvents: action.payload,
+            categories: currentCategoryId === slugId ? currentCategories : categories,
+            isLoadingNews: false,
+          });
+        } else {
+          console.error("Failed to load news", action.error);
+          this.setState({ isLoadingNews: false });
+        }
+        this.newsRequest = null;
+      })
+      .catch((error) => {
+        if (this.newsRequest !== request) return;
+        this.newsRequest = null;
         this.setState({ isLoadingNews: false });
-      }
-    });
+        console.error("Failed to load news", error);
+      });
   };
 
   componentDidMount() {
+    // react can't update when there are changes in storage,
+    // however, the storage contains "categories" from the first load,
+    // so we have to check the storage when component is mounting
     if (this.props.categories.length > 0) {
-      this.fetchData(
-        "news-and-events",
-        1,
-        3,
-        "props",
-        this.props,
-        this.props.categories
-      );
+      this.fetchData("news-and-events", 1, 3, "props", this.props, this.props.categories);
     } else if (
       sessionStorage.getItem("categories") &&
       !isEqual(
@@ -162,33 +171,46 @@ class HomePage extends Component {
       );
     }
 
-    window.addEventListener("resize", () => {
-      this.handleResize();
-    });
+    window.addEventListener("resize", this.handleResize);
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     if (
+      prevProps.categories !== this.props.categories &&
       this.props.categories.length > 0 &&
       !isEqual(this.props.categories, this.state.categories)
     ) {
-      this.fetchData(
+      const currentCategoryId = extractIdAndCategories(
         "news-and-events",
-        1,
-        3,
+        "props",
+        this.props,
+        this.state.categories
+      )?.slugId;
+      const nextCategoryId = extractIdAndCategories(
+        "news-and-events",
         "props",
         this.props,
         this.props.categories
-      );
+      )?.slugId;
+
+      if (currentCategoryId !== nextCategoryId) {
+        this.fetchData(
+          "news-and-events",
+          1,
+          3,
+          "props",
+          this.props,
+          this.props.categories
+        );
+      } else {
+        this.setState({ categories: this.props.categories });
+      }
     }
   }
 
   componentWillUnmount() {
     this.newsRequest = null;
-    this.newsCategoryId = null;
-    window.removeEventListener("resize", () => {
-      this.handleResize();
-    });
+    window.removeEventListener("resize", this.handleResize);
   }
 
   handleShowModal(data, url, e) {
@@ -253,7 +275,7 @@ class HomePage extends Component {
           </Container>
         </div>
 
-        {!isTabletScreen() ? (
+        {!this.state.isTabletScreenV ? (
           <CarouselMegatron
             listMegatronCarousel={listMegatronCarousel}
             isTableScreen={this.state.isTabletScreenV}
@@ -278,7 +300,7 @@ class HomePage extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    categories: Object.values(state.categories),
+    categories: selectCategories(state),
   };
 };
 

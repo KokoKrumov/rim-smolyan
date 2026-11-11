@@ -3,14 +3,19 @@ import { act, render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
-import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Link, Route, Routes, useLocation } from 'react-router-dom';
+import Spinner from 'react-bootstrap/Spinner';
 import streams from '../../../../api/streams';
 import collectionsReducer from '../../../../store/collectionsSlice';
 import itemReducer from '../../../../store/itemFromCollectionSlice';
 import messages from '../../../../translations/en.json';
 import CollectionsDetailItem from '../CollectionsDetailItem';
+import NavigationEffects from '../../../NavigationEffects';
 
 vi.mock('../../../../api/streams', () => ({ default: { get: vi.fn() } }));
+vi.mock('react-bootstrap/Spinner', () => ({
+  default: vi.fn(() => <div role="status" />),
+}));
 vi.mock('yet-another-react-lightbox', () => ({
   default: ({ open, close, slides }) => open ? (
     <div role="dialog" aria-label="Image preview">
@@ -48,7 +53,17 @@ const next = {
   _embedded: { 'wp:featuredmedia': [{ source_url: 'https://example.test/chalice.jpg' }] },
 };
 
-function renderDetail({ desktop = true, collection = [], path = '/main-collections/detail/ethnography/vase' } = {}) {
+function KeyedDetail() {
+  const { pathname } = useLocation();
+  return <CollectionsDetailItem key={pathname} />;
+}
+
+function renderDetail({
+  desktop = true,
+  collection = [],
+  includeNavigationEffects = false,
+  path = '/main-collections/detail/ethnography/vase',
+} = {}) {
   window.history.replaceState(null, '', path);
   const media = {
     matches: desktop,
@@ -64,9 +79,11 @@ function renderDetail({ desktop = true, collection = [], path = '/main-collectio
     <Provider store={store}>
       <IntlProvider locale="en" messages={messages}>
         <BrowserRouter>
-          <Link to="/main-collections/detail/ethnography/chalice">Next item</Link>
+          {includeNavigationEffects && <NavigationEffects />}
+          <Link to="/main-collections/detail/ethnography/chalice" state={{ scrollToImage: true }}>Next item</Link>
+          <Link to="/main-collections/detail/ethnography/plate">Other item</Link>
           <Routes>
-            <Route path="/:host/detail/:type/:item" element={<CollectionsDetailItem />} />
+            <Route path="/:host/detail/:type/:item" element={<KeyedDetail />} />
           </Routes>
         </BrowserRouter>
       </IntlProvider>
@@ -79,11 +96,13 @@ describe('CollectionsDetailItem', () => {
   beforeEach(() => {
     sessionStorage.clear();
     vi.resetAllMocks();
+    Element.prototype.scrollIntoView = vi.fn();
   });
 
   afterEach(() => {
     vi.restoreAllMocks();
     vi.unstubAllGlobals();
+    delete Element.prototype.scrollIntoView;
     sessionStorage.clear();
     window.history.replaceState(null, '', '/');
   });
@@ -186,34 +205,6 @@ describe('CollectionsDetailItem', () => {
     expect(streams.get).toHaveBeenCalledWith(expect.stringContaining('/posts?categories=42'));
   });
 
-  it('scrolls to the new item image after mobile bottom arrow navigation only', async () => {
-    sessionStorage.setItem('categories', JSON.stringify([{ id: 42, slug: 'ethnography' }]));
-    const scrollIntoView = vi.fn();
-    Element.prototype.scrollIntoView = scrollIntoView;
-    streams.get.mockImplementation((url) => {
-      if (url.startsWith('/posts?slug=vase')) return Promise.resolve({ data: [vase] });
-      if (url.startsWith('/posts?slug=chalice')) return Promise.resolve({ data: [next] });
-      if (url.startsWith('/posts?categories=42')) return Promise.resolve({ data: [previous, vase, next] });
-      throw new Error(`Unexpected request: ${url}`);
-    });
-    const user = userEvent.setup();
-    renderDetail({ desktop: false });
-
-    await screen.findByRole('heading', { name: 'Ancient vase' });
-    const nextLink = await screen.findByRole('link', { name: /Silver chalice/ });
-    expect(scrollIntoView).not.toHaveBeenCalled();
-
-    await user.click(nextLink);
-
-    expect(await screen.findByRole('heading', { name: 'Silver chalice' })).toBeInTheDocument();
-    await waitFor(() => expect(scrollIntoView).toHaveBeenCalledTimes(1));
-    expect(scrollIntoView).toHaveBeenCalledWith({ behavior: 'smooth', block: 'start' });
-    expect(scrollIntoView.mock.contexts[0]).toBe(
-      screen.getByRole('img', { name: 'Silver chalice' }).closest('.collections-item__img__wrap')
-    );
-    delete Element.prototype.scrollIntoView;
-  });
-
   it('reports invalid cached categories while still loading the requested item', async () => {
     sessionStorage.setItem('categories', 'invalid JSON');
     streams.get.mockResolvedValue({ data: [vase] });
@@ -243,5 +234,210 @@ describe('CollectionsDetailItem', () => {
       'https://example.test/chalice.jpg'
     );
     expect(streams.get).toHaveBeenCalledWith(expect.stringContaining('/posts?slug=chalice'));
+  });
+
+  it('shows a spinner instead of the previous item when another item is opened without arrow navigation', async () => {
+    let resolveRequest;
+    const request = new Promise((resolve) => {
+      resolveRequest = resolve;
+    });
+    streams.get.mockImplementation((url) => {
+      if (url.startsWith('/posts?slug=vase')) return Promise.resolve({ data: [vase] });
+      if (url.startsWith('/posts?slug=plate')) return request;
+      throw new Error(`Unexpected request: ${url}`);
+    });
+    const user = userEvent.setup();
+    renderDetail();
+    await screen.findByRole('heading', { name: 'Ancient vase' });
+
+    await user.click(screen.getByRole('link', { name: 'Other item' }));
+
+    expect(window.location.pathname).toBe('/main-collections/detail/ethnography/plate');
+    expect(screen.getByRole('status')).toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: 'Ancient vase' })).not.toBeInTheDocument();
+
+    await act(async () => {
+      resolveRequest({ data: [previous] });
+      await request;
+    });
+    expect(await screen.findByRole('heading', { name: 'Ceramic plate' })).toBeInTheDocument();
+    expect(screen.queryByRole('status')).not.toBeInTheDocument();
+  });
+
+  it('does not keep another item on screen when history returns to an arrow-navigated item', async () => {
+    let resolveRequest;
+    const request = new Promise((resolve) => {
+      resolveRequest = resolve;
+    });
+    let chaliceRequests = 0;
+    streams.get.mockImplementation((url) => {
+      if (url.startsWith('/posts?slug=vase')) return Promise.resolve({ data: [vase] });
+      if (url.startsWith('/posts?slug=plate')) return Promise.resolve({ data: [previous] });
+      if (url.startsWith('/posts?slug=chalice')) {
+        chaliceRequests += 1;
+        return chaliceRequests === 1 ? Promise.resolve({ data: [next] }) : request;
+      }
+      throw new Error(`Unexpected request: ${url}`);
+    });
+    const user = userEvent.setup();
+    const { container } = renderDetail({ collection: [previous, vase, next] });
+    await screen.findByRole('heading', { name: 'Ancient vase', level: 2 });
+    await waitFor(() => {
+      expect(container.querySelector('.collection-items-arrow-navigation .right-arrow')).toHaveAttribute(
+        'href',
+        '/main-collections/detail/ethnography/chalice'
+      );
+    });
+
+    await user.click(container.querySelector('.collection-items-arrow-navigation .right-arrow'));
+    await screen.findByRole('heading', { name: 'Silver chalice', level: 2 });
+    await user.click(screen.getByRole('link', { name: 'Other item' }));
+    await screen.findByRole('heading', { name: 'Ceramic plate', level: 2 });
+
+    act(() => window.history.back());
+    await waitFor(() => {
+      expect(window.location.pathname).toBe('/main-collections/detail/ethnography/chalice');
+      expect(screen.getByRole('status')).toBeInTheDocument();
+    });
+    expect(screen.queryByRole('heading', { name: 'Ceramic plate', level: 2 })).not.toBeInTheDocument();
+
+    await act(async () => {
+      resolveRequest({ data: [next] });
+      await request;
+    });
+    expect(await screen.findByRole('heading', { name: 'Silver chalice', level: 2 })).toBeInTheDocument();
+  });
+
+  it('keeps the mobile image scroll pending until the requested item is rendered', async () => {
+    let resolveRequest;
+    const request = new Promise((resolve) => {
+      resolveRequest = resolve;
+    });
+    streams.get.mockImplementation((url) => {
+      if (url.startsWith('/posts?slug=vase')) return Promise.resolve({ data: [vase] });
+      if (url.startsWith('/posts?slug=chalice')) return request;
+      throw new Error(`Unexpected request: ${url}`);
+    });
+    const user = userEvent.setup();
+    const { container } = renderDetail({
+      desktop: false,
+      collection: [previous, vase, next],
+      includeNavigationEffects: true,
+    });
+    await screen.findByRole('heading', { name: 'Ancient vase' });
+    const nextLink = await screen.findByRole('link', { name: /Silver chalice/ });
+    const scrollIntoView = Element.prototype.scrollIntoView;
+    scrollIntoView.mockClear();
+    const scrollTo = vi.spyOn(window, 'scrollTo').mockImplementation(() => {});
+
+    await user.click(nextLink);
+    expect(screen.getByRole('heading', { name: 'Ancient vase', level: 2 })).toBeInTheDocument();
+    expect(scrollIntoView).not.toHaveBeenCalled();
+    expect(scrollTo).not.toHaveBeenCalled();
+
+    await act(async () => {
+      resolveRequest({ data: [next] });
+      await request;
+    });
+    expect(await screen.findByRole('heading', { name: 'Silver chalice' })).toBeInTheDocument();
+    await waitFor(() => expect(scrollIntoView).toHaveBeenCalledOnce());
+    expect(scrollIntoView.mock.contexts[0]).toBe(
+      container.querySelector('.collections-item__img__wrap')
+    );
+    expect(scrollTo).not.toHaveBeenCalled();
+  });
+
+  it('scrolls the mobile image when the requested item slug is percent-encoded', async () => {
+    const encodedVase = {
+      ...next,
+      slug: '%d0%b2%d0%b0%d0%b7%d0%b0',
+      title: { rendered: 'Bulgarian vase' },
+    };
+    let resolveRequest;
+    const request = new Promise((resolve) => {
+      resolveRequest = resolve;
+    });
+    streams.get.mockImplementation((url) => {
+      if (url.startsWith('/posts?slug=vase')) return Promise.resolve({ data: [vase] });
+      if (url.startsWith('/posts?slug=ваза')) return request;
+      throw new Error(`Unexpected request: ${url}`);
+    });
+    const user = userEvent.setup();
+    const { container } = renderDetail({
+      desktop: false,
+      collection: [previous, vase, encodedVase],
+      includeNavigationEffects: true,
+    });
+    await screen.findByRole('heading', { name: 'Ancient vase' });
+    const nextLink = await screen.findByRole('link', { name: /Bulgarian vase/ });
+    const scrollIntoView = Element.prototype.scrollIntoView;
+    scrollIntoView.mockClear();
+    const scrollTo = vi.spyOn(window, 'scrollTo').mockImplementation(() => {});
+
+    await user.click(nextLink);
+    expect(scrollIntoView).not.toHaveBeenCalled();
+    expect(scrollTo).not.toHaveBeenCalled();
+
+    await act(async () => {
+      resolveRequest({ data: [encodedVase] });
+      await request;
+    });
+    expect(await screen.findByRole('heading', { name: 'Bulgarian vase' })).toBeInTheDocument();
+    await waitFor(() => expect(scrollIntoView).toHaveBeenCalledOnce());
+    expect(scrollIntoView.mock.contexts[0]).toBe(
+      container.querySelector('.collections-item__img__wrap')
+    );
+    expect(streams.get).toHaveBeenCalledWith(expect.stringContaining('/posts?slug=ваза'));
+    expect(scrollTo).not.toHaveBeenCalled();
+  });
+
+  it.each([
+    ['virtual-collections', true],
+    ['virtual-collections', false],
+    ['main-collections', true],
+    ['main-collections', false],
+  ])('does not flash a spinner during %s arrow navigation (desktop: %s)', async (host, desktop) => {
+    let resolveRequest;
+    const request = new Promise((resolve) => {
+      resolveRequest = resolve;
+    });
+    streams.get.mockImplementation((url) => {
+      if (url.startsWith('/posts?slug=vase')) return Promise.resolve({ data: [vase] });
+      if (url.startsWith('/posts?slug=chalice')) return request;
+      throw new Error(`Unexpected request: ${url}`);
+    });
+    const user = userEvent.setup();
+    const { container } = renderDetail({
+      desktop,
+      collection: [previous, vase, next],
+      path: `/${host}/detail/ethnography/vase`,
+    });
+    await screen.findByRole('heading', { name: 'Ancient vase' });
+    await waitFor(() => {
+      expect(desktop
+        ? container.querySelector('.collection-items-arrow-navigation .right-arrow')
+        : screen.getByRole('link', { name: /Silver chalice/ })
+      ).toHaveAttribute('href', `/${host}/detail/ethnography/chalice`);
+    });
+    Spinner.mockClear();
+
+    await user.click(desktop
+      ? container.querySelector('.collection-items-arrow-navigation .right-arrow')
+      : screen.getByRole('link', { name: /Silver chalice/ }));
+
+    expect(window.location.pathname).toBe(`/${host}/detail/ethnography/chalice`);
+    expect(Spinner).not.toHaveBeenCalled();
+    expect(screen.queryByRole('status')).not.toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Ancient vase', level: 2 })).toBeInTheDocument();
+
+    await act(async () => {
+      resolveRequest({ data: [next] });
+      await request;
+    });
+    expect(await screen.findByRole('heading', { name: 'Silver chalice' })).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: 'Silver chalice' })).toHaveAttribute(
+      'src',
+      'https://example.test/chalice.jpg'
+    );
   });
 });

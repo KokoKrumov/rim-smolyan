@@ -2,6 +2,8 @@ import React from "react";
 import Col from "react-bootstrap/Col";
 import Spinner from "react-bootstrap/Spinner";
 import ArticleDate from "../Article/ArticleDate";
+import { Link } from "react-router-dom";
+import { featuredImageProps } from "../../utilities/featuredImageProps";
 
 function NewsAndEventsCards({ listOfNewsAndEvents }) {
   if (listOfNewsAndEvents) {
@@ -9,16 +11,18 @@ function NewsAndEventsCards({ listOfNewsAndEvents }) {
       return (
         <Col md={4} key={article.id} className="nae-item__vertical__wrap">
           <div className="nae-item nae-item__vertical">
-            <a href={`/news-and-events/${article.slug}`}>
+            <Link to={`/news-and-events/${article.slug}`}>
               <div className="nae-item__img__wrap">
                 {article.event_date ? (
                   <ArticleDate date={article.event_date} />
                 ) : null}
                 <div className="nae-item__img">
-                  {article._embedded?.["wp:featuredmedia"] && (
+                  {article._embedded?.["wp:featuredmedia"]?.[0] && (
                     <img
                       className="img-fluid img"
-                      src={article._embedded["wp:featuredmedia"][0]?.source_url}
+                      {...featuredImageProps(article._embedded["wp:featuredmedia"][0], "(min-width: 768px) 380px, 100vw")}
+                      loading="lazy"
+                      decoding="async"
                       alt=""
                       itemProp="image"
                     />
@@ -31,7 +35,7 @@ function NewsAndEventsCards({ listOfNewsAndEvents }) {
                   __html: article.title?.rendered || "",
                 }}
               />
-            </a>
+            </Link>
           </div>
         </Col>
       );

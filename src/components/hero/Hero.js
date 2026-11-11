@@ -1,10 +1,14 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
 import Container from "react-bootstrap/Container";
+import { preload } from "react-dom";
 
 class Hero extends Component {
 
     renderHero = () => {
+            if (this.props.Image) {
+                preload(this.props.Image, { as: 'image', fetchPriority: 'high' });
+            }
             return (
                 <div className='hero__wrap'>
                     <div

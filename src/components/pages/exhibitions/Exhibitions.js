@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { selectCategories } from "../../../store/selectors";
 import { fetchExhibitions, resetFetchExhibitions } from "../../../actions";
 
 import AccordionBlockExhibitionsArchive from "../../collapse/AccordionBlockExhibitionsArchive";
@@ -193,7 +194,7 @@ class ExhibitionsPage extends Component {
 const mapStateToProps = (state) => {
   return {
     exhibitions: state.exhibitions,
-    categories: Object.values(state.categories),
+    categories: selectCategories(state),
   };
 };
 

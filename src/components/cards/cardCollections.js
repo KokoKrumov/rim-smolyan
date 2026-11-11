@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 
 import { useIntl } from "../../utilities/withIntl";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const noImage =
   "https://api-staging.museumsmolyan.eu/wp-content/uploads/2024/10/no-image.png";
 
 function CardCollections(props) {
   const intl = useIntl();
-  const navigate = useNavigate();
   const { item, hostLocation } = props;
   const [itemObj, setItemObj] = useState({
     title: "",
@@ -59,22 +58,17 @@ function CardCollections(props) {
     <div className="card card-collections__wrap">
       <div className="card-collections__img">
         <figure>
-          <a
-            href={generateHref()}
+          <Link
+            to={generateHref()}
+            state={!props.isInnerGallery && itemObj.imageHero ? { imageHero: itemObj.imageHero } : undefined}
             className="card-collections__link"
-            onClick={(e) => {
-              if (!props.isInnerGallery && itemObj.imageHero) {
-                e.preventDefault();
-                navigate(generateHref(), {
-                  state: { imageHero: itemObj.imageHero },
-                });
-              }
-            }}
           >
             <img
               className="card-collections__image img-fluid"
               src={itemObj.itemImg}
               alt={itemObj.itemImgAlt}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption className="card-collections__text">
               <h4
@@ -100,7 +94,7 @@ function CardCollections(props) {
                 </>
               ) : null}
             </figcaption>
-          </a>
+          </Link>
         </figure>
       </div>
     </div>
