@@ -4,6 +4,7 @@ import ArrowLeft from "../../../assets/icons/ArrowLeft";
 import { connect } from "react-redux";
 import navigationCollectionItems from "../../../utilities/navigationCollectionItems";
 import { slugSanitize, replaceSlugInPath } from "../../../utilities/browser";
+import { featuredImageProps } from "../../../utilities/featuredImageProps";
 import { useParams, useLocation, Link } from "react-router-dom";
 
 function CollectionItemsArrowNavigationBottomFixed({
@@ -34,10 +35,7 @@ function CollectionItemsArrowNavigationBottomFixed({
   function ItemPreview({ className, item, side, type = "desktop" }) {
     const noImage =
       "https://api-staging.museumsmolyan.eu/wp-content/uploads/2024/10/no-image.png";
-    const imageUrl =
-      typeof item?._embedded["wp:featuredmedia"] !== "undefined"
-        ? item?._embedded["wp:featuredmedia"][0]?.source_url
-        : noImage;
+    const media = item?._embedded?.["wp:featuredmedia"]?.[0];
 
     const title = item?.title?.rendered;
     const collectionLength = collection?.length || 0;
@@ -66,7 +64,7 @@ function CollectionItemsArrowNavigationBottomFixed({
               <div className="item-preview__image">
                 <img
                   className="img-fluid"
-                  src={imageUrl}
+                  {...(media ? featuredImageProps(media, "110px") : { src: noImage })}
                   alt={item.title.rendered}
                 />
               </div>

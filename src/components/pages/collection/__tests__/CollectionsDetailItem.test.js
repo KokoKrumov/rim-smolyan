@@ -26,6 +26,19 @@ vi.mock('yet-another-react-lightbox', () => ({
 }));
 
 const noImage = 'https://api-staging.museumsmolyan.eu/wp-content/uploads/2024/10/no-image.png';
+const makeMedia = (name) => ({
+  source_url: `https://example.test/${name}.jpg`,
+  media_details: {
+    width: 1200,
+    height: 800,
+    sizes: {
+      medium: { source_url: `https://example.test/${name}-300.jpg`, width: 300, height: 200 },
+      medium_large: { source_url: `https://example.test/${name}-768.jpg`, width: 768, height: 512 },
+      thumbnail: { source_url: `https://example.test/${name}-square.jpg`, width: 150, height: 150 },
+    },
+  },
+});
+const media = makeMedia('vase');
 const vase = {
   id: 2,
   slug: 'vase',
@@ -36,7 +49,7 @@ const vase = {
   collection_item_dating: 'First century',
   collection_item_location: 'Smolyan',
   collection_item_inventory_number: 'A-42',
-  _embedded: { 'wp:featuredmedia': [{ source_url: 'https://example.test/vase.jpg' }] },
+  _embedded: { 'wp:featuredmedia': [media] },
 };
 const previous = {
   ...vase,
@@ -50,8 +63,9 @@ const next = {
   id: 3,
   slug: 'chalice',
   title: { rendered: 'Silver chalice' },
-  _embedded: { 'wp:featuredmedia': [{ source_url: 'https://example.test/chalice.jpg' }] },
+  _embedded: { 'wp:featuredmedia': [makeMedia('chalice')] },
 };
+const responsiveSources = 'https://example.test/vase-300.jpg 300w, https://example.test/vase-768.jpg 768w, https://example.test/vase.jpg 1200w';
 
 function KeyedDetail() {
   const { pathname } = useLocation();
@@ -152,8 +166,21 @@ describe('CollectionsDetailItem', () => {
 
     const image = await screen.findByRole('img', { name: 'Ancient vase' });
     expect(image).toHaveAttribute('src', noImage);
+    expect(image).not.toHaveAttribute('srcset');
     await user.click(image.closest('.collections-item__img__wrap'));
     expect(screen.getByAltText('Enlarged item')).toHaveAttribute('src', noImage);
+  });
+
+  it.each([true, false])('uses responsive item images with the full-sized lightbox (desktop: %s)', async (desktop) => {
+    streams.get.mockResolvedValue({ data: [vase] });
+    const user = userEvent.setup();
+    renderDetail({ desktop });
+
+    const image = await screen.findByRole('img', { name: 'Ancient vase' });
+    expect(image).toHaveAttribute('srcset', responsiveSources);
+    expect(image.getAttribute('sizes')).toContain('(min-width: 1200px) 590px');
+    await user.click(image.closest('.collections-item__img__wrap'));
+    expect(screen.getByAltText('Enlarged item')).toHaveAttribute('src', media.source_url);
   });
 
   it('uses an existing collection for desktop arrow navigation without fetching it again', async () => {
@@ -179,6 +206,11 @@ describe('CollectionsDetailItem', () => {
     expect(screen.getByRole('heading', { name: 'Ceramic plate' })).toBeInTheDocument();
     expect(screen.getByText('1/3')).toBeInTheDocument();
     expect(screen.getByRole('img', { name: 'Ceramic plate' })).toHaveAttribute('src', noImage);
+    await user.hover(container.querySelector('.collection-items-arrow-navigation .right-arrow'));
+    const nextImage = screen.getByRole('img', { name: 'Silver chalice' });
+    expect(nextImage).toHaveAttribute('sizes', '110px');
+    expect(nextImage.getAttribute('srcset')).toContain('https://example.test/chalice-300.jpg 300w');
+    expect(nextImage.getAttribute('srcset')).not.toContain('chalice-square.jpg');
     expect(streams.get).toHaveBeenCalledTimes(1);
   });
 
@@ -202,6 +234,10 @@ describe('CollectionsDetailItem', () => {
     );
     expect(container.querySelector('.collection-items-arrow-navigation')).not.toBeInTheDocument();
     expect(container.querySelector('.collection-items-arrow-navigation_bottom')).toBeInTheDocument();
+    const nextImage = screen.getByRole('img', { name: 'Silver chalice' });
+    expect(nextImage).toHaveAttribute('sizes', '110px');
+    expect(nextImage.getAttribute('srcset')).toContain('https://example.test/chalice-300.jpg 300w');
+    expect(nextImage.getAttribute('srcset')).not.toContain('chalice-square.jpg');
     expect(streams.get).toHaveBeenCalledWith(expect.stringContaining('/posts?categories=42'));
   });
 

@@ -17,6 +17,7 @@ import Spinner from "react-bootstrap/Spinner";
 import { connect } from "react-redux";
 import { withIntl } from "../../../utilities/withIntl";
 import { useMatchMedia } from "../../../utilities/useMatchMedia";
+import { featuredImageProps } from "../../../utilities/featuredImageProps";
 
 function matchesRouteSlug(itemSlug, routeSlug) {
   if (typeof itemSlug !== "string") return false;
@@ -118,6 +119,11 @@ function CollectionsDetailItem({
   }, [collectionName, fetchCollections, collection]);
 
   function renderContent() {
+    const media = item._embedded["wp:featuredmedia"]?.[0];
+    const imageProps = media
+      ? featuredImageProps(media, "(min-width: 1200px) 590px, (min-width: 992px) 500px, (min-width: 768px) 660px, (min-width: 576px) 440px, calc(100vw - 84px)")
+      : { src: noImage };
+
     return (
       <div
         className={`collections-item ${
@@ -175,12 +181,7 @@ function CollectionsDetailItem({
                           loading="eager"
                           fetchPriority="high"
                           decoding="async"
-                          src={
-                            typeof item._embedded["wp:featuredmedia"] !==
-                            "undefined"
-                              ? item._embedded["wp:featuredmedia"][0].source_url
-                              : noImage
-                          }
+                          {...imageProps}
                           alt={item.title.rendered}
                         />
                       </div>
@@ -269,12 +270,7 @@ function CollectionsDetailItem({
                         loading="eager"
                         fetchPriority="high"
                         decoding="async"
-                        src={
-                          typeof item._embedded["wp:featuredmedia"] !==
-                          "undefined"
-                            ? item._embedded["wp:featuredmedia"][0].source_url
-                            : noImage
-                        }
+                        {...imageProps}
                         alt={item.title.rendered}
                       />
                     </div>
@@ -320,10 +316,7 @@ function CollectionsDetailItem({
           open={lightboxOpen}
           close={() => setLightboxOpen(false)}
           slides={[{
-            src:
-              typeof item._embedded["wp:featuredmedia"] !== "undefined"
-                ? item._embedded["wp:featuredmedia"][0].source_url
-                : noImage,
+            src: media ? media.source_url : noImage,
           }]}
           plugins={[Zoom]}
           zoom={{ maxZoomPixelRatio: 4, scrollToZoom: true }}

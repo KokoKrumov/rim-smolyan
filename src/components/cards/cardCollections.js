@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { useIntl } from "../../utilities/withIntl";
 import { Link } from "react-router-dom";
+import { featuredImageProps } from "../../utilities/featuredImageProps";
 
 const noImage =
   "https://api-staging.museumsmolyan.eu/wp-content/uploads/2024/10/no-image.png";
@@ -14,6 +15,7 @@ function CardCollections(props) {
     itemImg: noImage,
     itemImgAlt: "",
     imageHero: "",
+    media: null,
   });
 
   useEffect(() => {
@@ -28,17 +30,16 @@ function CardCollections(props) {
           itemImg: parsed.image || noImage,
           itemImgAlt: item.slug,
           imageHero: parsed.image_hero || "",
+          media: null,
         });
       } else {
+        const media = item["_embedded"]["wp:featuredmedia"]?.[0];
         setItemObj({
           title: item.title.rendered,
-          itemImg: item["_embedded"]["wp:featuredmedia"]
-            ? item["_embedded"]["wp:featuredmedia"][0]["source_url"]
-            : noImage,
-          itemImgAlt: item["_embedded"]["wp:featuredmedia"]
-            ? item["_embedded"]["wp:featuredmedia"][0]["title"]
-            : "",
+          itemImg: media ? media.source_url : noImage,
+          itemImgAlt: media ? media.title : "",
           imageHero: "",
+          media,
         });
       }
     } catch (e) {
@@ -65,7 +66,9 @@ function CardCollections(props) {
           >
             <img
               className="card-collections__image img-fluid"
-              src={itemObj.itemImg}
+              {...(itemObj.media
+                ? featuredImageProps(itemObj.media, "(min-width: 1200px) 250px, (min-width: 992px) 330px, (min-width: 768px) 240px, (min-width: 576px) 480px, 100vw")
+                : { src: itemObj.itemImg })}
               alt={itemObj.itemImgAlt}
               loading="lazy"
               decoding="async"
