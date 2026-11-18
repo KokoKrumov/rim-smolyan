@@ -88,6 +88,14 @@ npm run test:coverage
 
 Тестовете за Redux Toolkit и съвместимите Redux actions са съответно в `src/store/__tests__/` и `src/actions/__tests__/`.
 
+### Collection preview images
+
+Category descriptions provide preview URLs without dimensions. Intrinsic sizes for the
+static main/virtual collection previews are maintained in
+[`collectionPreviewImageProps.js`](src/utilities/collectionPreviewImageProps.js).
+Update the matching entry when adding or replacing a preview asset so its space is
+reserved before loading, without changing its aspect ratio.
+
 ## 📁 Структура на проекта
 
 ```
