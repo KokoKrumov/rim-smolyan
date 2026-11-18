@@ -1,5 +1,6 @@
 import { render, screen, within } from '@testing-library/react';
 import { IntlProvider } from 'react-intl';
+import { MemoryRouter } from 'react-router-dom';
 import PostSummaryList from '../PostSummaryList';
 
 const news = {
@@ -24,7 +25,8 @@ function renderList(props = {}) {
   return render(
     <IntlProvider locale="en" messages={{ 'see-more': 'Read more' }}>
       <PostSummaryList {...props} />
-    </IntlProvider>
+    </IntlProvider>,
+    { wrapper: MemoryRouter },
   );
 }
 
@@ -61,6 +63,7 @@ describe('PostSummaryList', () => {
     expect(screen.getByText('2024')).toBeInTheDocument();
     expect(screen.queryByText('1 март 2024')).not.toBeInTheDocument();
     expect(screen.getByAltText('')).toHaveAttribute('src', 'https://example.test/event.jpg');
+    expect(screen.getByAltText('')).toHaveAttribute('loading', 'lazy');
     expect(screen.getByRole('link', { name: 'Spring event' })).toHaveAttribute('href', '/news-and-events/spring-event');
   });
 

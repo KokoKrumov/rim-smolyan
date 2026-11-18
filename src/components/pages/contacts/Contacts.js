@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { selectNews } from "../../../store/selectors";
 import HeroInner from "../../hero/HeroInner";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -184,7 +185,7 @@ class Contacts extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    news: Object.values(state.news),
+    news: selectNews(state),
   };
 };
 

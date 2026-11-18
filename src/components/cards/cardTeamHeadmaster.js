@@ -13,22 +13,19 @@ class CardTeamHeadmaster extends Component {
         isMobileScreenV: isMobileScreen(),
     }
 
-    handleResize() {
-        this.setState({
-            isMobileScreenV: isMobileScreen()
-        })
+    handleResize = () => {
+        const isMobileScreenV = isMobileScreen();
+        if (isMobileScreenV !== this.state.isMobileScreenV) {
+            this.setState({ isMobileScreenV });
+        }
     }
 
     componentDidMount() {
-        window.addEventListener('resize', () => {
-            this.handleResize()
-        })
+        window.addEventListener('resize', this.handleResize)
     }
 
     componentWillUnmount() {
-        window.removeEventListener('resize', () => {
-            this.handleResize()
-        })
+        window.removeEventListener('resize', this.handleResize)
     }
 
     handleShowModal = (data, url, user, e) => {
@@ -120,4 +117,3 @@ export default withRouter(withIntl(connect(
         showModal
     }
 )(CardTeamHeadmaster)));
-

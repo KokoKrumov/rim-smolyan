@@ -5,6 +5,7 @@ import Col from "react-bootstrap/Col";
 import { withIntl } from "../../utilities/withIntl";
 import NewsAndEventsCards from "../newsAndEventsList/NewsAndEventsCards";
 import ArticleDetail from "./ArticleDetail";
+import { Link } from "react-router-dom";
 
 class Article extends Component {
   render() {
@@ -23,9 +24,9 @@ class Article extends Component {
             {data.articleSection && (
               <ol className="breadcrumb">
                 <li className="breadcrumb-item">
-                  <a
+                  <Link
                     className="link"
-                    href={`/${host}`}
+                    to={`/${host}`}
                     itemProp="url"
                     target=""
                     rel="noopener nofollow noreferrer"

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { selectCategories } from "../../../store/selectors";
 import { fetchCollectionDescription, fetchCollections } from "../../../actions";
 
 import CardCollections from "../../cards/cardCollections";
@@ -405,7 +406,7 @@ const mapStateToProps = (state) => {
     collection: state.collections.byType,
     collectionDescription: state.collections.description,
     collectionsError: state.collections.error,
-    categories: Object.values(state.categories),
+    categories: selectCategories(state),
   };
 };
 

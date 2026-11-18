@@ -1,6 +1,6 @@
 import { fetchCollections, fetchItemFromCollection } from "../../../actions";
 import { useEffect, useRef, useState } from "react";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation, useNavigationType } from "react-router-dom";
 
 import Col from "react-bootstrap/Col";
 import CollectionItemsArrowNavigation from "./CollectionItemsArrowNavigation";
@@ -17,6 +17,16 @@ import Spinner from "react-bootstrap/Spinner";
 import { connect } from "react-redux";
 import { withIntl } from "../../../utilities/withIntl";
 import { useMatchMedia } from "../../../utilities/useMatchMedia";
+import { featuredImageProps } from "../../../utilities/featuredImageProps";
+
+function matchesRouteSlug(itemSlug, routeSlug) {
+  if (typeof itemSlug !== "string") return false;
+  try {
+    return decodeURIComponent(itemSlug) === routeSlug;
+  } catch {
+    return itemSlug === routeSlug;
+  }
+}
 
 function CollectionsDetailItem({
   fetchItemFromCollection,
@@ -27,9 +37,11 @@ function CollectionsDetailItem({
 }) {
   const { item: itemName, type: collectionName } = useParams();
   const location = useLocation();
+  const navigationType = useNavigationType();
   const noImage =
     "https://api-staging.museumsmolyan.eu/wp-content/uploads/2024/10/no-image.png";
-  const [item, setItem] = useState({});
+  const item = itemFomCollection;
+  const [loadedItemName, setLoadedItemName] = useState(null);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const backUrl =
     location.pathname.replace("detail", "intro").split("/").slice(0, -1).join("/");
@@ -43,19 +55,34 @@ function CollectionsDetailItem({
   }, [location.key, location.state]);
 
   useEffect(() => {
-    fetchItemFromCollection(itemName);
+    let isCurrentRequest = true;
+    Promise.resolve(fetchItemFromCollection(itemName)).finally(() => {
+      if (isCurrentRequest) setLoadedItemName(itemName);
+    });
+    return () => {
+      isCurrentRequest = false;
+    };
   }, [fetchItemFromCollection, itemName]);
 
-  useEffect(() => {
-    setItem(itemFomCollection);
-  }, [itemFomCollection]);
+  // Redux retains the last viewed item. Arrow navigation keeps it on screen until
+  // the next one arrives; any other navigation must not show it under the new URL.
+  const keepsPreviousItem =
+    navigationType === "PUSH" && Boolean(location.state?.keepPreviousItem);
+  const canShowItem =
+    loadedItemName === itemName ||
+    keepsPreviousItem ||
+    matchesRouteSlug(item?.slug, itemName);
 
   // Runs after the newly fetched item has rendered, so the image position is final
   useEffect(() => {
-    if (!pendingImageScroll.current || !mobileImageRef.current) return;
+    if (
+      !pendingImageScroll.current ||
+      !matchesRouteSlug(item?.slug, itemName) ||
+      !mobileImageRef.current
+    ) return;
     pendingImageScroll.current = false;
     mobileImageRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
-  }, [item]);
+  }, [item, itemName]);
 
   // Fetch collection data for arrow navigation components
   useEffect(() => {
@@ -92,6 +119,11 @@ function CollectionsDetailItem({
   }, [collectionName, fetchCollections, collection]);
 
   function renderContent() {
+    const media = item._embedded["wp:featuredmedia"]?.[0];
+    const imageProps = media
+      ? featuredImageProps(media, "(min-width: 1200px) 590px, (min-width: 992px) 500px, (min-width: 768px) 660px, (min-width: 576px) 440px, calc(100vw - 84px)")
+      : { src: noImage };
+
     return (
       <div
         className={`collections-item ${
@@ -146,12 +178,10 @@ function CollectionsDetailItem({
                         <img
                           className="img-fluid"
                           style={{ pointerEvents: "none" }}
-                          src={
-                            typeof item._embedded["wp:featuredmedia"] !==
-                            "undefined"
-                              ? item._embedded["wp:featuredmedia"][0].source_url
-                              : noImage
-                          }
+                          loading="eager"
+                          fetchPriority="high"
+                          decoding="async"
+                          {...imageProps}
                           alt={item.title.rendered}
                         />
                       </div>
@@ -237,12 +267,10 @@ function CollectionsDetailItem({
                       <img
                         className="img-fluid"
                         style={{ pointerEvents: "none" }}
-                        src={
-                          typeof item._embedded["wp:featuredmedia"] !==
-                          "undefined"
-                            ? item._embedded["wp:featuredmedia"][0].source_url
-                            : noImage
-                        }
+                        loading="eager"
+                        fetchPriority="high"
+                        decoding="async"
+                        {...imageProps}
                         alt={item.title.rendered}
                       />
                     </div>
@@ -288,10 +316,7 @@ function CollectionsDetailItem({
           open={lightboxOpen}
           close={() => setLightboxOpen(false)}
           slides={[{
-            src:
-              typeof item._embedded["wp:featuredmedia"] !== "undefined"
-                ? item._embedded["wp:featuredmedia"][0].source_url
-                : noImage,
+            src: media ? media.source_url : noImage,
           }]}
           plugins={[Zoom]}
           zoom={{ maxZoomPixelRatio: 4, scrollToZoom: true }}
@@ -309,7 +334,9 @@ function CollectionsDetailItem({
     );
   }
 
-  return Object.keys(item).length ? renderContent() : renderLoading();
+  return canShowItem && Object.keys(item).length
+    ? renderContent()
+    : renderLoading();
 }
 const mapStateToProps = (state) => {
   return {

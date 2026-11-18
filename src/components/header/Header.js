@@ -13,7 +13,7 @@ import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { useIntl } from "../../utilities/withIntl";
 import { isTabletScreen } from "../../utilities/browser";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 function Header({ showModal }) {
   const intl = useIntl();
@@ -33,9 +33,9 @@ function Header({ showModal }) {
     return (_) => {
       window.removeEventListener("resize", handleResize);
     };
-  });
+  }, []);
 
-  const toggleHeaderNavigation = () => setNavIsOpen(!navIsOpen);
+  const toggleHeaderNavigation = (expanded) => setNavIsOpen(expanded);
 
   function setLanguage(lang, e) {
     e.preventDefault();
@@ -57,10 +57,11 @@ function Header({ showModal }) {
         collapseOnSelect
         expand="xl"
         variant="dark"
+        expanded={navIsOpen}
         onToggle={toggleHeaderNavigation}
       >
         <Container className="header__container">
-          <Navbar.Brand href="/">
+          <Navbar.Brand as={Link} to="/" onClick={() => setNavIsOpen(false)}>
             <div className="brand__wrap">
               <div className="brand-logo__wrap">
                 <Image src={rimLogo} fluid />
@@ -162,13 +163,17 @@ function Header({ showModal }) {
                     className={`nav__secondary-link ${
                       isCurrentUrl("support-us") && "active"
                     }`}
-                    href="/support-us"
+                    as={Link}
+                    to="/support-us"
+                    eventKey="/support-us"
                   >
                     <FormattedMessage id="menu.support" />
                   </Nav.Link>
                   <p className="nav__main-link d-none d-xl-block">|</p>
                   <Nav.Link
-                    href="/administrative"
+                    as={Link}
+                    to="/administrative"
+                    eventKey="/administrative"
                     className={`nav__secondary-link ${
                       isCurrentUrl("administrative") && "active"
                     }`}
@@ -213,7 +218,9 @@ function Header({ showModal }) {
                       // onClick={(e) => {
                         // handleShowModal("modal-redirect", "Z_fondove.html", e);
                       // }}
-                      href="/main-collections"
+                      as={Link}
+                      to="/main-collections"
+                      eventKey="/main-collections"
                     >
                       <FormattedMessage id="menu.main-collections" />
                     </NavDropdown.Item>
@@ -222,13 +229,16 @@ function Header({ showModal }) {
                       // onClick={(e) => {
                         // handleShowModal("modal-redirect", "Z_vir_fondove.html", e);
                       // }}
-                      href="/virtual-collections"
+                      as={Link}
+                      to="/virtual-collections"
+                      eventKey="/virtual-collections"
                     >
                       <FormattedMessage id="menu.virtual-collections" />
                     </NavDropdown.Item>
                   </NavDropdown>
                   <Nav.Link
-                    href="/exhibitions"
+                    as={Link}
+                    to="/exhibitions"
                     eventKey="exhibitions"
                     className={`nav__main-link ${
                       isCurrentUrl("exhibitions") && "active"
@@ -237,7 +247,8 @@ function Header({ showModal }) {
                     <FormattedMessage id="menu.exhibitions" />
                   </Nav.Link>
                   <Nav.Link
-                    href="/news-and-events"
+                    as={Link}
+                    to="/news-and-events"
                     eventKey="news"
                     className={`nav__main-link ${
                       isCurrentUrl("news-and-events") ||
@@ -265,7 +276,9 @@ function Header({ showModal }) {
                       className={`nav__secondary-link ${
                         isCurrentUrl("about-us") && "active"
                       }`}
-                      href="/about-us"
+                      as={Link}
+                      to="/about-us"
+                      eventKey="/about-us"
                     >
                       <FormattedMessage id="menu.about-museum" />
                     </NavDropdown.Item>
@@ -273,7 +286,9 @@ function Header({ showModal }) {
                       className={`nav__secondary-link ${
                         isCurrentUrl("museum-games") && "active"
                       }`}
-                      href="/museum-games"
+                      as={Link}
+                      to="/museum-games"
+                      eventKey="/museum-games"
                     >
                       <FormattedMessage id="games" />
                     </NavDropdown.Item>
@@ -281,7 +296,9 @@ function Header({ showModal }) {
                       className={`nav__secondary-link ${
                         isCurrentUrl("services") && "active"
                       }`}
-                      href="/services"
+                      as={Link}
+                      to="/services"
+                      eventKey="/services"
                     >
                       <FormattedMessage id="services" />
                     </NavDropdown.Item>
@@ -289,13 +306,17 @@ function Header({ showModal }) {
                       className={`nav__secondary-link ${
                         isCurrentUrl("prices") && "active"
                       }`}
-                      href="/prices"
+                      as={Link}
+                      to="/prices"
+                      eventKey="/prices"
                     >
                       <FormattedMessage id="prices" />
                     </NavDropdown.Item>
                   </NavDropdown>
                   <Nav.Link
-                    href="/contact-us"
+                    as={Link}
+                    to="/contact-us"
+                    eventKey="/contact-us"
                     className={`nav__main-link ${
                       isCurrentUrl("contact-us") && "active"
                     }`}
@@ -306,7 +327,9 @@ function Header({ showModal }) {
                     <span className="d-none d-xl-block">|</span>
                   </p>
                   <Nav.Link
-                    href="/house-museum-laszlo-nagy"
+                    as={Link}
+                    to="/house-museum-laszlo-nagy"
+                    eventKey="/house-museum-laszlo-nagy"
                     className={`nav__main-link ${
                       isCurrentUrl("house-museum-laszlo-nagy") && "active"
                     }`}

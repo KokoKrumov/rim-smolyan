@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { selectRimBuildingImages } from "../../../store/selectors";
 import Container from "react-bootstrap/Container";
 import { connect } from "react-redux";
 import { fetchRimBuildingImages, fetchTeam, showModal } from "../../../actions";
@@ -44,7 +45,7 @@ class RegularPrograms extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    rimBuildingImages: Object.values(state.rimBuildingImages),
+    rimBuildingImages: selectRimBuildingImages(state),
     team: state.team,
   };
 };

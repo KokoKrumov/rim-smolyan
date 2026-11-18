@@ -31,7 +31,7 @@
 
 ### Предварителни изисквания
 
-- Node.js (версия 14 или по-нова)
+- Node.js
 - npm
 
 ### Стъпки за инсталация
@@ -53,8 +53,6 @@ npm start
 ```
 
 Приложението ще бъде достъпно на `http://localhost:3000`
-
-Google Analytics се инициализира независимо от първоначалното рендериране. Бавен или недостъпен analytics скрипт не блокира зареждането на сайта; грешките се записват в browser console.
 
 ## 📦 Build команди
 
@@ -89,6 +87,14 @@ npm run test:coverage
 ```
 
 Тестовете за Redux Toolkit и съвместимите Redux actions са съответно в `src/store/__tests__/` и `src/actions/__tests__/`.
+
+### Collection preview images
+
+Category descriptions provide preview URLs without dimensions. Intrinsic sizes for the
+static main/virtual collection previews are maintained in
+[`collectionPreviewImageProps.js`](src/utilities/collectionPreviewImageProps.js).
+Update the matching entry when adding or replacing a preview asset so its space is
+reserved before loading, without changing its aspect ratio.
 
 ## 📁 Структура на проекта
 

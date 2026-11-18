@@ -11,8 +11,10 @@ import {connect} from "react-redux";
 import {showModal} from "../../actions";
 import {isMobileScreen} from "../../utilities/browser";
 import {isTabletScreen} from "../../utilities/browser";
+import { useInView } from "../../utilities/useInView";
 
 function CarouselMegatron({listMegatronCarousel, showModal, isTableScreen}) {
+    const [viewportRef, visible] = useInView();
     const handleOnDragStart = (e) => e.preventDefault()
     const [item, setItem] = useState(0);
     const carousel = useRef(null);
@@ -31,7 +33,7 @@ function CarouselMegatron({listMegatronCarousel, showModal, isTableScreen}) {
         return _ => {
             window.removeEventListener('resize', handleResize)
         }
-    })
+    }, [])
 
     function onSlideChanged(e) {
         setItem(e.item)
@@ -44,7 +46,7 @@ function CarouselMegatron({listMegatronCarousel, showModal, isTableScreen}) {
 
     if (listMegatronCarousel) {
         return (
-            <div className='carousel-megatron__wrap'>
+            <div ref={viewportRef} className='carousel-megatron__wrap'>
                 {
                     !isMobileScreenV
                         ?
@@ -97,7 +99,7 @@ function CarouselMegatron({listMegatronCarousel, showModal, isTableScreen}) {
                                 key={item.id}
                                 className='carousel carousel__dark carousel-megatron hero-bg'
                                 style={{
-                                    backgroundImage: `url(${item.bgImage})`
+                                    backgroundImage: visible ? `url(${item.bgImage})` : undefined
                                 }}
                             >
 
@@ -189,7 +191,7 @@ function CarouselMegatron({listMegatronCarousel, showModal, isTableScreen}) {
                                         </Col>
                                         <Col lg={5}>
                                             <div className='carousel-megatron__img-wrap'>
-                                                <img className="w-100" src={item.image} alt="" itemProp="image"/>
+                                                <img className="w-100" src={item.image} alt="" itemProp="image" loading="lazy" decoding="async"/>
                                             </div>
                                             {
                                                 isTabletScreenV
@@ -257,7 +259,7 @@ function CarouselMegatron({listMegatronCarousel, showModal, isTableScreen}) {
         )
     } else {
         return (
-            <div>
+            <div ref={viewportRef}>
                 <p>
                     Loading ...
                 </p>

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { selectRimBuildingImages } from "../../../store/selectors";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -534,7 +535,7 @@ class AboutUs extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    rimBuildingImages: Object.values(state.rimBuildingImages),
+    rimBuildingImages: selectRimBuildingImages(state),
     team: state.team,
   };
 };

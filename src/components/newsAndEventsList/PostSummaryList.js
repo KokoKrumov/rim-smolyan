@@ -6,6 +6,8 @@ import { FormattedMessage } from "react-intl";
 import ArticleDate from "../Article/ArticleDate";
 import ExhibitionDate from "../Exhibition/ExhibitionDate";
 import NewsDateAndYear from "../pages/newsDetailPage/NewsDateAndYear";
+import { Link } from "react-router-dom";
+import { featuredImageProps } from "../../utilities/featuredImageProps";
 
 function PostSummaryList({ listOfNewsAndEvents, isExhibition }) {
   if (listOfNewsAndEvents) {
@@ -18,9 +20,9 @@ function PostSummaryList({ listOfNewsAndEvents, isExhibition }) {
           <Row>
             <Col lg={5}>
               {/*IMAGE AND DATE*/}
-              <a
+              <Link
                 className="link link-img"
-                href={`/${isExhibition ? "exhibitions" : "news-and-events"}/${
+                to={`/${isExhibition ? "exhibitions" : "news-and-events"}/${
                   event.slug
                 }`}
                 itemProp="url"
@@ -32,17 +34,19 @@ function PostSummaryList({ listOfNewsAndEvents, isExhibition }) {
                     <ArticleDate date={event.event_date} />
                   ) : null}
                   <div className="nae-item__img">
-                    {event._embedded["wp:featuredmedia"] ? (
+                    {event._embedded?.["wp:featuredmedia"]?.[0] ? (
                       <img
                         className="img"
-                        src={event._embedded["wp:featuredmedia"][0].source_url}
+                        {...featuredImageProps(event._embedded["wp:featuredmedia"][0], "(min-width: 992px) 460px, 100vw")}
+                        loading="lazy"
+                        decoding="async"
                         alt=""
                         itemProp="image"
                       />
                     ) : null}
                   </div>
                 </div>
-              </a>
+              </Link>
               {/*!IMAGE AND DATE*/}
             </Col>
 
@@ -69,9 +73,9 @@ function PostSummaryList({ listOfNewsAndEvents, isExhibition }) {
 
                 {/*TITLE*/}
                 <h3 className="h3">
-                  <a
+                  <Link
                     className="link a-title"
-                    href={`/${
+                    to={`/${
                       isExhibition ? "exhibitions" : "news-and-events"
                     }/${event.slug}`}
                     itemProp="url"
@@ -89,9 +93,9 @@ function PostSummaryList({ listOfNewsAndEvents, isExhibition }) {
                 )}
 
                 {/*LINK TO SEE MORE*/}
-                <a
+                <Link
                   className="a cta_outline cta_outline__dark hvr-underline-from-left"
-                  href={`/${isExhibition ? "exhibitions" : "news-and-events"}/${
+                  to={`/${isExhibition ? "exhibitions" : "news-and-events"}/${
                     event.slug
                   }`}
                   itemProp="url"
@@ -99,7 +103,7 @@ function PostSummaryList({ listOfNewsAndEvents, isExhibition }) {
                   rel="noopener nofollow noreferrer"
                 >
                   <FormattedMessage id="see-more" />
-                </a>
+                </Link>
                 {/*!LINK TO SEE MORE*/}
               </div>
             </Col>

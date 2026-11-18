@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { withIntl } from '../../utilities/withIntl';
 import {connect} from "react-redux";
 import {showModal} from "../../actions";
+import { Link } from "react-router-dom";
 
 class CardInfoLine extends Component {
 
@@ -24,6 +25,8 @@ class CardInfoLine extends Component {
     render() {
 
         const {intl} = this.props;
+        const isInternal = this.state.link.startsWith('/') && !this.state.link.startsWith('//');
+        const LinkComponent = isInternal ? Link : 'a';
         return (
             <div
                 className={`info-line info-line__card info-line__bordered__white info-line__titled ${this.state.isSmall ? 'is-small' : ''}`}>
@@ -62,10 +65,10 @@ class CardInfoLine extends Component {
                                 </h2>
                         }
                         <p className='info-line__titled__text info-line__text-bold'>
-                            <a
+                            <LinkComponent
 
                                 className="link cta_outline cta_outline__red cta_outline__border-overflow"
-                                href={this.state.link}
+                                {...(isInternal ? { to: this.state.link } : { href: this.state.link })}
                                 itemProp="url"
                                 target=""
                                 onClick={(e) => {
@@ -74,7 +77,7 @@ class CardInfoLine extends Component {
                                 rel="noopener nofollow noreferrer"
                                 dangerouslySetInnerHTML={{__html: intl.formatMessage({id: this.state.linkText})}}
                             >
-                            </a>
+                            </LinkComponent>
                         </p>
                     </div>
                 </div>
