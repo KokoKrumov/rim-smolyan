@@ -300,6 +300,33 @@ describe('CollectionsDetailItem', () => {
     expect(screen.queryByRole('status')).not.toBeInTheDocument();
   });
 
+  it('keeps showing the requested item when an earlier request finishes after it', async () => {
+    let resolveEarlierRequest;
+    const earlierRequest = new Promise((resolve) => {
+      resolveEarlierRequest = resolve;
+    });
+    streams.get.mockImplementation((url) => {
+      if (url.startsWith('/posts?slug=vase')) return earlierRequest;
+      if (url.startsWith('/posts?slug=plate')) return Promise.resolve({ data: [previous] });
+      throw new Error(`Unexpected request: ${url}`);
+    });
+    const user = userEvent.setup();
+    const { store } = renderDetail();
+
+    await user.click(screen.getByRole('link', { name: 'Other item' }));
+    expect(await screen.findByRole('heading', { name: 'Ceramic plate' })).toBeInTheDocument();
+
+    await act(async () => {
+      resolveEarlierRequest({ data: [vase] });
+      await earlierRequest;
+    });
+    await waitFor(() => expect(store.getState().itemFomCollection.data.slug).toBe('vase'));
+
+    expect(window.location.pathname).toBe('/main-collections/detail/ethnography/plate');
+    expect(screen.getByRole('heading', { name: 'Ceramic plate' })).toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: 'Ancient vase' })).not.toBeInTheDocument();
+  });
+
   it('does not keep another item on screen when history returns to an arrow-navigated item', async () => {
     let resolveRequest;
     const request = new Promise((resolve) => {

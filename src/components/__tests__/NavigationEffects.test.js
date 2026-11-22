@@ -1,7 +1,7 @@
 import React from 'react';
-import { act, render, screen, waitFor } from '@testing-library/react';
+import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Link, MemoryRouter } from 'react-router-dom';
+import { Link, MemoryRouter, useNavigate } from 'react-router-dom';
 import NavigationEffects from '../NavigationEffects';
 
 const { send, event, gtag } = vi.hoisted(() => ({
@@ -11,6 +11,11 @@ const { send, event, gtag } = vi.hoisted(() => ({
 }));
 vi.mock('react-ga4', () => ({ default: { send, event, gtag } }));
 
+function BackButton() {
+  const navigate = useNavigate();
+  return <button onClick={() => navigate(-1)}>Back</button>;
+}
+
 function renderNavigation(path = '/') {
   const root = document.createElement('div');
   root.id = 'root';
@@ -18,6 +23,7 @@ function renderNavigation(path = '/') {
   return render(
     <MemoryRouter initialEntries={[path]}>
       <NavigationEffects />
+      <BackButton />
       <Link to="/news?page=2">News</Link>
       <Link to="/administrative/#13">Support</Link>
       <Link to="/administrative">Close panel</Link>
@@ -31,12 +37,78 @@ function renderNavigation(path = '/') {
   );
 }
 
+// jsdom has no layout, so the page height and scroll offset are set by hand
+function setPageHeight(height) {
+  Object.defineProperty(document.documentElement, 'scrollHeight', { configurable: true, value: height });
+}
+
+function scrollPageTo(position) {
+  Object.defineProperty(window, 'scrollY', { configurable: true, value: position });
+  fireEvent.scroll(window);
+}
+
+// Leaves /news scrolled to 1200px for /administrative, where the next step is going back
+async function leaveScrolledNewsPage(user) {
+  const view = renderNavigation('/news');
+  scrollPageTo(1200);
+  await user.click(screen.getByRole('link', { name: 'Close panel' }));
+  scrollPageTo(0);
+  window.scrollTo.mockClear();
+  return view;
+}
+
+const savedPosition = { top: 1200, left: 0, behavior: 'instant' };
+
 describe('navigation effects', () => {
   beforeEach(() => {
     vi.clearAllMocks();
     vi.spyOn(window, 'scrollTo').mockImplementation(() => {});
   });
-  afterEach(() => vi.restoreAllMocks());
+  afterEach(() => {
+    vi.restoreAllMocks();
+    delete document.documentElement.scrollHeight;
+    scrollPageTo(0);
+  });
+
+  it('restores the saved position on back navigation instead of scrolling to the top', async () => {
+    const user = userEvent.setup();
+    await leaveScrolledNewsPage(user);
+    setPageHeight(5000);
+
+    await user.click(screen.getByRole('button', { name: 'Back' }));
+
+    expect(window.scrollTo).toHaveBeenCalledExactlyOnceWith(savedPosition);
+  });
+
+  it('finishes restoring the position once the remounted content is tall enough', async () => {
+    const user = userEvent.setup();
+    const { container } = await leaveScrolledNewsPage(user);
+    setPageHeight(600);
+
+    await user.click(screen.getByRole('button', { name: 'Back' }));
+    expect(window.scrollTo).toHaveBeenCalledExactlyOnceWith(savedPosition);
+
+    setPageHeight(5000);
+    await act(async () => container.appendChild(document.createElement('div')));
+    expect(window.scrollTo).toHaveBeenCalledTimes(2);
+    expect(window.scrollTo).toHaveBeenLastCalledWith(savedPosition);
+
+    await act(async () => container.appendChild(document.createElement('div')));
+    expect(window.scrollTo).toHaveBeenCalledTimes(2);
+  });
+
+  it('stops restoring the position when the visitor starts scrolling', async () => {
+    const user = userEvent.setup();
+    const { container } = await leaveScrolledNewsPage(user);
+    setPageHeight(600);
+    await user.click(screen.getByRole('button', { name: 'Back' }));
+
+    fireEvent.wheel(window);
+    setPageHeight(5000);
+    await act(async () => container.appendChild(document.createElement('div')));
+
+    expect(window.scrollTo).toHaveBeenCalledOnce();
+  });
 
   it('scrolls to the top on router navigation and leaves page views to the Google tag', async () => {
     const user = userEvent.setup();

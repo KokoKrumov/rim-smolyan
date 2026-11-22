@@ -40,8 +40,7 @@ function CollectionsDetailItem({
   const navigationType = useNavigationType();
   const noImage =
     "https://api-staging.museumsmolyan.eu/wp-content/uploads/2024/10/no-image.png";
-  const item = itemFomCollection;
-  const [loadedItemName, setLoadedItemName] = useState(null);
+  const [loaded, setLoaded] = useState(null);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const backUrl =
     location.pathname.replace("detail", "intro").split("/").slice(0, -1).join("/");
@@ -56,22 +55,27 @@ function CollectionsDetailItem({
 
   useEffect(() => {
     let isCurrentRequest = true;
-    Promise.resolve(fetchItemFromCollection(itemName)).finally(() => {
-      if (isCurrentRequest) setLoadedItemName(itemName);
-    });
+    fetchItemFromCollection(itemName)
+      .then((payload) => payload || {}, () => ({}))
+      .then((item) => {
+        if (isCurrentRequest) setLoaded({ itemName, item });
+      });
     return () => {
       isCurrentRequest = false;
     };
   }, [fetchItemFromCollection, itemName]);
 
-  // Redux retains the last viewed item. Arrow navigation keeps it on screen until
-  // the next one arrives; any other navigation must not show it under the new URL.
+  // Redux holds the item of whichever request finished last, which can be a slower
+  // request for another item, so it is only shown until this URL's request settles.
+  // Arrow navigation keeps it on screen until the next one arrives; any other
+  // navigation must not show it under the new URL.
   const keepsPreviousItem =
     navigationType === "PUSH" && Boolean(location.state?.keepPreviousItem);
-  const canShowItem =
-    loadedItemName === itemName ||
-    keepsPreviousItem ||
-    matchesRouteSlug(item?.slug, itemName);
+  const storedItem =
+    keepsPreviousItem || matchesRouteSlug(itemFomCollection?.slug, itemName)
+      ? itemFomCollection
+      : {};
+  const item = loaded?.itemName === itemName ? loaded.item : storedItem;
 
   // Runs after the newly fetched item has rendered, so the image position is final
   useEffect(() => {
@@ -334,9 +338,7 @@ function CollectionsDetailItem({
     );
   }
 
-  return canShowItem && Object.keys(item).length
-    ? renderContent()
-    : renderLoading();
+  return Object.keys(item).length ? renderContent() : renderLoading();
 }
 const mapStateToProps = (state) => {
   return {
@@ -346,7 +348,9 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchItemFromCollection: (item) => dispatch(fetchItemFromCollection(item)),
+  // unwrap() so the caller gets the raw payload and failures reject
+  fetchItemFromCollection: (item) =>
+    dispatch(fetchItemFromCollection(item)).unwrap(),
   fetchCollections: (parent) => dispatch(fetchCollections(parent)),
 });
 

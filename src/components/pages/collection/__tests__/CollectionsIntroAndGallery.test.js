@@ -154,9 +154,11 @@ describe('CollectionsIntroAndGallery', () => {
     renderGallery({ path: '/main-collections/intro/ethnography#gallery' });
 
     expect(await screen.findByRole('tab', { name: 'Gallery' })).toHaveAttribute('aria-selected', 'true');
-    expect(await screen.findByRole('link', { name: /Ancient vase/ })).toHaveAttribute(
-      'href',
-      '/main-collections/detail/ethnography/vase'
+    const galleryItem = await screen.findByRole('link', { name: /Ancient vase/ });
+    expect(galleryItem).toHaveAttribute('href', '/main-collections/detail/ethnography/vase');
+    expect(document.getElementById('gallery')).toContainElement(galleryItem);
+    expect(document.getElementById('introduction')).toContainElement(
+      screen.getByRole('heading', { name: 'Collection introduction', hidden: true })
     );
   });
 

@@ -263,7 +263,7 @@ class CollectionsIntroAndGallery extends Component {
                     <Col md={10}>
                       <Tab.Content>
                         <Tab.Pane eventKey="introduction">
-                          <Container>
+                          <Container id="introduction">
                             <Row className="justify-content-center">
                               <Col sm={12} md={9}>
                                 {collectionExist ? (
@@ -300,7 +300,7 @@ class CollectionsIntroAndGallery extends Component {
                           </Container>
                         </Tab.Pane>
                         <Tab.Pane eventKey="gallery">
-                          <Container>
+                          <Container id="gallery">
                             <Row className="justify-content-end">
                               <Col md={11}>
                                 <h2
