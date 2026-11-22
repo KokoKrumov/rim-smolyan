@@ -88,6 +88,22 @@ npm run test:coverage
 
 Тестовете за Redux Toolkit и съвместимите Redux actions са съответно в `src/store/__tests__/` и `src/actions/__tests__/`.
 
+### End-to-end тестове (Playwright)
+
+```bash
+npx playwright install chromium webkit   # еднократно – сваля браузърите
+npm run test:e2e
+npm run test:e2e -- prices --project=chromium
+npm run test:e2e -- --ui
+```
+
+Тестовете са в `e2e/` и се изпълняват в Chromium и WebKit. Playwright сам стартира Vite в режим `e2e`
+([`environments/.env.e2e`](environments/.env.e2e)) на порт 3100.
+
+Тестовете не достигат до WordPress: заявките към API-то се подменят с фикстурите в `e2e/fixtures/`, а всички
+останали външни заявки се блокират. Тест, който направи API заявка без фикстура, се проваля – добавете
+фикстурата в [`e2e/support/test.js`](e2e/support/test.js) и импортирайте `test` и `expect` от този файл.
+
 ### Collection preview images
 
 Category descriptions provide preview URLs without dimensions. Intrinsic sizes for the
@@ -118,6 +134,9 @@ rim-smolyan/
 ├── public/              # Публични файлове
 │   ├── images/          # Изображения
 │   └── *.json           # JSON данни
+├── e2e/                 # End-to-end тестове (Playwright)
+│   ├── fixtures/        # Записани отговори от WordPress API
+│   └── support/         # Общи помощни функции и подмяна на API-то
 ├── build/               # Production build файлове
 └── environments/        # Environment конфигурации
 ```

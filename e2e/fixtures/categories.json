@@ -1,0 +1,418 @@
+[
+  {
+    "id": 32,
+    "count": 9,
+    "description": "{\r\n  \"image\": \"https://static.museumsmolyan.eu/collections/images/virtual/ship-shaped-fibulae.png\"\r\n}",
+    "name": "“Ладиевидни” фибули",
+    "slug": "ship-shaped-fibulae",
+    "parent": 12
+  },
+  {
+    "id": 1,
+    "count": 0,
+    "description": "",
+    "name": "Uncategorized",
+    "slug": "uncategorized",
+    "parent": 0
+  },
+  {
+    "id": 2,
+    "count": 62,
+    "description": "",
+    "name": "Актуално",
+    "slug": "news-and-events",
+    "parent": 0
+  },
+  {
+    "id": 52,
+    "count": 40,
+    "description": "{\r\n  \"image\": \"https://static.museumsmolyan.eu/collections/images/virtual/anastas-ivanov-bai-taso.png\"\r\n}",
+    "name": "Анастас Иванов (бай Тасо)",
+    "slug": "anastas-ivanov-bai-taso",
+    "parent": 12
+  },
+  {
+    "id": 33,
+    "count": 8,
+    "description": "{\r\n  \"image\": \"https://static.museumsmolyan.eu/collections/images/virtual/ancient-glass-iv-vi.png\"\r\n}\r\n",
+    "name": "Антично стъкло (IV-VI в.)",
+    "slug": "ancient-glass-iv-vi",
+    "parent": 12
+  },
+  {
+    "id": 16,
+    "count": 1,
+    "description": "{\r\n  \"image\": \"https://static.museumsmolyan.eu/collections/images/main/archeology.png\",\r\n  \"image_hero\": \"https://static.museumsmolyan.eu/collections/images/main/archeology-hero.png\"\r\n}",
+    "name": "Археология",
+    "slug": "archeology",
+    "parent": 13
+  },
+  {
+    "id": 60,
+    "count": 20,
+    "description": "",
+    "name": "Биографии",
+    "slug": "biographies",
+    "parent": 0
+  },
+  {
+    "id": 47,
+    "count": 14,
+    "description": "{\r\n  \"image\": \"https://static.museumsmolyan.eu/collections/images/virtual/bulgarian-women-awards.png\"\r\n}",
+    "name": "Български наградни отличия за жени",
+    "slug": "bulgarian-women-awards",
+    "parent": 12
+  },
+  {
+    "id": 12,
+    "count": 321,
+    "description": "",
+    "name": "Виртуални колекции",
+    "slug": "virtual-collections",
+    "parent": 11
+  },
+  {
+    "id": 56,
+    "count": 17,
+    "description": "",
+    "name": "Временни експозиции",
+    "slug": "temporary-exhibitions",
+    "parent": 14
+  },
+  {
+    "id": 29,
+    "count": 0,
+    "description": "{\r\n  \"image\": \"https://static.museumsmolyan.eu/collections/images/main/dicho-petrov.png\"\r\n}\r\n",
+    "name": "Дичо Петров",
+    "slug": "dicho-petrov",
+    "parent": 13
+  },
+  {
+    "id": 14,
+    "count": 17,
+    "description": "",
+    "name": "Експозиции",
+    "slug": "exhibitions",
+    "parent": 0
+  },
+  {
+    "id": 23,
+    "count": 0,
+    "description": "{\r\n  \"image\": \"https://static.museumsmolyan.eu/collections/images/main/ethnography-and-ritual-props.png\",\r\n  \"image_hero\": \"https://static.museumsmolyan.eu/collections/images/main/ethnography-and-ritual-props-hero.png\"\r\n}",
+    "name": "Етнография и обреден реквизит",
+    "slug": "ethnography-and-ritual-props",
+    "parent": 13
+  },
+  {
+    "id": 72,
+    "count": 2,
+    "description": "",
+    "name": "За нас",
+    "slug": "about-us",
+    "parent": 0
+  },
+  {
+    "id": 24,
+    "count": 0,
+    "description": "{\r\n  \"image\": \"https://static.museumsmolyan.eu/collections/images/main/art.png\",\r\n  \"image_hero\": \"https://static.museumsmolyan.eu/collections/images/main/art-hero.png\"\r\n}\r\n",
+    "name": "Изкуство",
+    "slug": "art",
+    "parent": 13
+  },
+  {
+    "id": 53,
+    "count": 20,
+    "description": "{\r\n  \"image\": \"https://static.museumsmolyan.eu/collections/images/virtual/art-inspired-by-myths-and-legends.png\"\r\n}",
+    "name": "Изкуство, вдъхновено от митове и легенди",
+    "slug": "art-inspired-by-myths-and-legends",
+    "parent": 12
+  },
+  {
+    "id": 19,
+    "count": 0,
+    "description": "{\r\n  \"image\": \"https://static.museumsmolyan.eu/collections/images/main/history-of-bulgaria-xv-xix.png\"\r\n}\r\n",
+    "name": "История на България ХV-ХІХ в.",
+    "slug": "history-of-bulgaria-xv-xix",
+    "parent": 13
+  },
+  {
+    "id": 28,
+    "count": 0,
+    "description": "{\r\n  \"image\": \"https://static.museumsmolyan.eu/collections/images/main/kiril-madzharov.png\"\r\n}\r\n",
+    "name": "Кирил Маджаров",
+    "slug": "kiril-madzharov",
+    "parent": 13
+  },
+  {
+    "id": 27,
+    "count": 0,
+    "description": "{\r\n  \"image\": \"https://static.museumsmolyan.eu/collections/images/laszlo-nagy.png\"\r\n}\r\n",
+    "name": "Ласло Наги",
+    "slug": "laszlo-nagy",
+    "parent": 13
+  },
+  {
+    "id": 54,
+    "count": 25,
+    "description": "{\r\n  \"image\": \"https://static.museumsmolyan.eu/collections/images/laszlo-nagy.png\"\r\n}",
+    "name": "Ласло Наги в творчеството на българските художници",
+    "slug": "laszlo-nagy-virtual-collections",
+    "parent": 12
+  },
+  {
+    "id": 39,
+    "count": 51,
+    "description": "{\r\n  \"image\": \"https://static.museumsmolyan.eu/collections/images/virtual/copper-bowls.png\"\r\n}",
+    "name": "Медни съдове",
+    "slug": "copper-bowls",
+    "parent": 12
+  },
+  {
+    "id": 49,
+    "count": 37,
+    "description": "{\r\n  \"image\": \"https://static.museumsmolyan.eu/collections/images/virtual/local-emblems-and-coats-of-arms.png\"\r\n}",
+    "name": "Местни емблеми и гербове",
+    "slug": "local-emblems-and-coats-of-arms",
+    "parent": 12
+  },
+  {
+    "id": 50,
+    "count": 16,
+    "description": "{\r\n  \"image\": \"https://static.museumsmolyan.eu/collections/images/virtual/mladen-koynarov.png\"\r\n}",
+    "name": "Младен Койнаров",
+    "slug": "mladen-koynarov",
+    "parent": 12
+  },
+  {
+    "id": 46,
+    "count": 0,
+    "description": "{\r\n\"image\": \"https://static.museumsmolyan.eu/collections/images/virtual/monarchical-orders-in-the-nulgarian-reward-system.png\"\r\n}",
+    "name": "Монархическите ордени в българската наградна система от „Дарение о. з. полк. Р. П. Харбалиев“",
+    "slug": "monarchical-orders-in-the-nulgarian-reward-system",
+    "parent": 12
+  },
+  {
+    "id": 35,
+    "count": 0,
+    "description": "{\r\n\"image\": \"https://static.museumsmolyan.eu/collections/images/virtual/coins-of-the-macedonian-kings-and-cities-iv-i.png\"\r\n}",
+    "name": "Монети на македонските царе и градове (ІV в.пр.ХР. - І в.)",
+    "slug": "coins-of-the-macedonian-kings-and-cities-iv-i",
+    "parent": 12
+  },
+  {
+    "id": 34,
+    "count": 0,
+    "description": "{\r\n\"image\": \"https://static.museumsmolyan.eu/collections/images/virtual/coins-of-thracian-cities-tribes-and-kings-v-i.png\"\r\n}",
+    "name": "Монети на тракийските градове, племена и царе (V в. пр.Хр. - І в.)",
+    "slug": "coins-of-thracian-cities-tribes-and-kings-v-i",
+    "parent": 12
+  },
+  {
+    "id": 17,
+    "count": 38,
+    "description": "{\r\n\"image\": \"https://static.museumsmolyan.eu/collections/images/virtual/jewelry-and-ornaments.png\"\r\n}",
+    "name": "Мъниста, мънистени накити и украси",
+    "slug": "jewelry-and-ornaments",
+    "parent": 12
+  },
+  {
+    "id": 48,
+    "count": 13,
+    "description": "{\r\n\"image\": \"https://static.museumsmolyan.eu/collections/images/virtual/awards-and-diplomas-of-col-vladimir-serafimov.png\"\r\n}",
+    "name": "Наградни отличия и грамоти на полк. Владимир Серафимов",
+    "slug": "awards-and-diplomas-of-col-vladimir-serafimov",
+    "parent": 12
+  },
+  {
+    "id": 22,
+    "count": 0,
+    "description": "{\r\n  \"image\": \"https://static.museumsmolyan.eu/collections/images/main/recent-history-of-bulgaria.png\"\r\n}\r\n",
+    "name": "Най-нова история на България",
+    "slug": "recent-history-of-bulgaria",
+    "parent": 13
+  },
+  {
+    "id": 58,
+    "count": 0,
+    "description": "{\r\n\"image\": \"https://static.museumsmolyan.eu/collections/images/virtual/scientific-archive-drawings.png\"\r\n}",
+    "name": "Научен архив към РИМ \"Стою Шишков\" - Смолян (рисунки)",
+    "slug": "scientific-archive-drawings",
+    "parent": 12
+  },
+  {
+    "id": 21,
+    "count": 0,
+    "description": "{\r\n  \"image\": \"https://static.museumsmolyan.eu/collections/images/main/new-history-of-bulgaria.png\"\r\n}\r\n",
+    "name": "Нова история на България",
+    "slug": "new-history-of-bulgaria",
+    "parent": 13
+  },
+  {
+    "id": 3,
+    "count": 38,
+    "description": "",
+    "name": "Новини",
+    "slug": "news",
+    "parent": 2
+  },
+  {
+    "id": 18,
+    "count": 0,
+    "description": "{\r\n  \"image\": \"https://static.museumsmolyan.eu/collections/images/main/numismatics.png\",\r\n  \"image_hero\": \"https://static.museumsmolyan.eu/collections/images/main/numismatics-hero.png\"\r\n}",
+    "name": "Нумизматика",
+    "slug": "numismatics",
+    "parent": 13
+  },
+  {
+    "id": 26,
+    "count": 0,
+    "description": "{\r\n  \"image\": \"https://static.museumsmolyan.eu/collections/images/main/col-raycho-peev-harbaliev.png\"\r\n}\r\n",
+    "name": "О.з. полк. Райчо Пеев Харбалиев",
+    "slug": "col-raycho-peev-harbaliev",
+    "parent": 13
+  },
+  {
+    "id": 51,
+    "count": 1,
+    "description": "{\r\n\"image\": \"https://static.museumsmolyan.eu/collections/images/virtual/olympic.png\"\r\n}",
+    "name": "Олимпийска",
+    "slug": "olympic",
+    "parent": 12
+  },
+  {
+    "id": 20,
+    "count": 0,
+    "description": "{\r\n  \"image\": \"https://static.museumsmolyan.eu/collections/images/main/weapon.png\",\r\n  \"image_hero\": \"https://static.museumsmolyan.eu/collections/images/main/weapon-hero.png\"\r\n}\r\n",
+    "name": "Оръжие",
+    "slug": "weapon-main-collections",
+    "parent": 13
+  },
+  {
+    "id": 43,
+    "count": 0,
+    "description": "{\r\n  \"image\": \"https://static.museumsmolyan.eu/collections/images/virtual/weapon.png\"\r\n}\r\n",
+    "name": "Оръжие",
+    "slug": "weapon-virtual-collections",
+    "parent": 12
+  },
+  {
+    "id": 13,
+    "count": 1,
+    "description": "",
+    "name": "Основни фондове",
+    "slug": "main-collections",
+    "parent": 11
+  },
+  {
+    "id": 44,
+    "count": 0,
+    "description": "{\r\n  \"image\": \"https://static.museumsmolyan.eu/collections/images/virtual/shepherds-carving.png\"\r\n}",
+    "name": "Пастирска дърворезба",
+    "slug": "shepherds-carving",
+    "parent": 12
+  },
+  {
+    "id": 63,
+    "count": 33,
+    "description": "",
+    "name": "Представяне на фондовете",
+    "slug": "collection-intros",
+    "parent": 0
+  },
+  {
+    "id": 40,
+    "count": 0,
+    "description": "{\r\n  \"image\": \"https://static.museumsmolyan.eu/collections/images/virtual/relics-from-the-ilinden-preobrazhensko-uprising.png\"\r\n}\r\n",
+    "name": "Реликви от Илинденско-Преображенско въстание 1903 година в Средните Родопи",
+    "slug": "relics-from-the-ilinden-preobrazhensko-uprising",
+    "parent": 12
+  },
+  {
+    "id": 42,
+    "count": 0,
+    "description": "{\r\n  \"image\": \"https://static.museumsmolyan.eu/collections/images/virtual/relics-of-the-first-world-war.png\"\r\n}\r\n",
+    "name": "Реликви от Първата световна война",
+    "slug": "relics-of-the-first-world-war",
+    "parent": 12
+  },
+  {
+    "id": 38,
+    "count": 0,
+    "description": "{\r\n  \"image\": \"https://static.museumsmolyan.eu/collections/images/virtual/roman-imperial-coins.png\"\r\n}",
+    "name": "Римски императорски денари",
+    "slug": "roman-imperial-coins",
+    "parent": 12
+  },
+  {
+    "id": 37,
+    "count": 0,
+    "description": "{\r\n  \"image\": \"https://static.museumsmolyan.eu/collections/images/virtual/roman-provincial-coins.png\"\r\n}",
+    "name": "Римски провинциални монети",
+    "slug": "roman-provincial-coins",
+    "parent": 12
+  },
+  {
+    "id": 36,
+    "count": 0,
+    "description": "{\r\n  \"image\": \"https://static.museumsmolyan.eu/collections/images/virtual/roman-republican-coins.png\"\r\n}\r\n",
+    "name": "Римски републикански монети",
+    "slug": "roman-republican-coins",
+    "parent": 12
+  },
+  {
+    "id": 55,
+    "count": 34,
+    "description": "{\r\n  \"image\": \"https://static.museumsmolyan.eu/collections/images/virtual/revival-architecture-and-art.png\"\r\n}",
+    "name": "Родопската възрожденска архитектура в изкуството",
+    "slug": "revival-architecture-and-art",
+    "parent": 12
+  },
+  {
+    "id": 45,
+    "count": 0,
+    "description": "{\r\n  \"image\": \"https://static.museumsmolyan.eu/collections/images/virtual/rhodope-carpets.png\"\r\n}",
+    "name": "Родопски халища",
+    "slug": "rhodope-carpets",
+    "parent": 12
+  },
+  {
+    "id": 31,
+    "count": 16,
+    "description": "{\r\n  \"image\": \"https://static.museumsmolyan.eu/collections/images/virtual/medieval-jewelry-earrings-x-xiv.png\"\r\n}\r\n",
+    "name": "Средновековни накити - наушници (X-XIV в.)",
+    "slug": "medieval-jewelry-earrings-x-xiv",
+    "parent": 12
+  },
+  {
+    "id": 4,
+    "count": 24,
+    "description": "",
+    "name": "Събития",
+    "slug": "events",
+    "parent": 2
+  },
+  {
+    "id": 25,
+    "count": 0,
+    "description": "{\r\n  \"image\": \"https://static.museumsmolyan.eu/collections/images/main/folklore.png\",\r\n  \"image_hero\": \"https://static.museumsmolyan.eu/collections/images/main/folklore-hero.png\"\r\n}\r\n",
+    "name": "Фолклор",
+    "slug": "folklore",
+    "parent": 13
+  },
+  {
+    "id": 11,
+    "count": 323,
+    "description": "",
+    "name": "Фондове",
+    "slug": "collections",
+    "parent": 0
+  },
+  {
+    "id": 41,
+    "count": 0,
+    "description": "{\r\n  \"image\": \"https://static.museumsmolyan.eu/collections/images/virtual/watches.png\"\r\n}\r\n",
+    "name": "Часовници",
+    "slug": "watches",
+    "parent": 12
+  }
+]
