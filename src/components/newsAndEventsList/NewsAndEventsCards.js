@@ -20,7 +20,7 @@ function NewsAndEventsCards({ listOfNewsAndEvents }) {
                   {article._embedded?.["wp:featuredmedia"]?.[0] && (
                     <img
                       className="img-fluid img"
-                      {...featuredImageProps(article._embedded["wp:featuredmedia"][0], "(min-width: 768px) 380px, 100vw")}
+                      {...featuredImageProps(article._embedded["wp:featuredmedia"][0], "(min-width: 1200px) 356px, (min-width: 992px) 296px, (min-width: 768px) 216px, (min-width: 576px) 476px, calc(100vw - 24px)")}
                       loading="lazy"
                       decoding="async"
                       alt=""

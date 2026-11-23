@@ -9,7 +9,7 @@ import NewsDateAndYear from "../pages/newsDetailPage/NewsDateAndYear";
 import { Link } from "react-router-dom";
 import { featuredImageProps } from "../../utilities/featuredImageProps";
 
-function PostSummaryList({ listOfNewsAndEvents, isExhibition }) {
+function PostSummaryList({ listOfNewsAndEvents, isExhibition, imageSizes }) {
   if (listOfNewsAndEvents) {
     return listOfNewsAndEvents.map((event) => {
       return (
@@ -37,7 +37,7 @@ function PostSummaryList({ listOfNewsAndEvents, isExhibition }) {
                     {event._embedded?.["wp:featuredmedia"]?.[0] ? (
                       <img
                         className="img"
-                        {...featuredImageProps(event._embedded["wp:featuredmedia"][0], "(min-width: 992px) 460px, 100vw")}
+                        {...featuredImageProps(event._embedded["wp:featuredmedia"][0], imageSizes)}
                         loading="lazy"
                         decoding="async"
                         alt=""

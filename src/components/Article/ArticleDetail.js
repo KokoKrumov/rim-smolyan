@@ -81,7 +81,7 @@ function ArticleDetail({ article }) {
               ) : null}
               <img
                 className="img-fluid"
-                {...(media ? featuredImageProps(media, "(min-width: 1200px) 760px, (min-width: 992px) 650px, 100vw") : {})}
+                {...(media ? featuredImageProps(media, "(min-width: 1200px) 736px, (min-width: 992px) 536px, (min-width: 768px) 696px, (min-width: 576px) 476px, calc(100vw - 24px)") : {})}
                 loading="eager"
                 fetchPriority="high"
                 decoding="async"

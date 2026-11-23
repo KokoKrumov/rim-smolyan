@@ -174,6 +174,7 @@ class ExhibitionsPage extends Component {
                 <PostSummaryList
                   listOfNewsAndEvents={this.state.exhibitions.activeExhibitions}
                   isExhibition
+                  imageSizes="(min-width: 1200px) 431px, (min-width: 992px) 356px, (min-width: 768px) 648px, (min-width: 576px) 428px, calc(100vw - 72px)"
                 />
               </div>
             </Container>

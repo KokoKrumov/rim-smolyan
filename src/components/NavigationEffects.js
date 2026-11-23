@@ -13,19 +13,24 @@ export default function NavigationEffects() {
     previousPathname.current = normalizedPathname;
 
     if (!hash) {
-      if (isDifferentPage && !state?.scrollToImage) window.scrollTo(0, 0);
+      if (isDifferentPage && !state?.scrollToImage && !state?.preserveScroll) {
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+      }
       return;
     }
 
     const scrollToHash = () => {
       const target = document.getElementById(hash.slice(1));
       if (!target) return false;
-      target.scrollIntoView();
+      if (isDifferentPage) target.scrollIntoView({ behavior: 'instant' });
+      else target.scrollIntoView();
       return true;
     };
 
     if (scrollToHash()) return;
-    if (isDifferentPage && !state?.scrollToImage) window.scrollTo(0, 0);
+    if (isDifferentPage && !state?.scrollToImage && !state?.preserveScroll) {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    }
     // Lazy routes may not have mounted the hash target yet.
     const observer = new MutationObserver(() => {
       if (scrollToHash()) observer.disconnect();

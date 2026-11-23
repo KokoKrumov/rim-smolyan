@@ -34,7 +34,7 @@ class CardTeamHeadmaster extends Component {
         //when you open a modal with some of the members in /about-us page
         //then push the nick name in the location href, so an user has ability to copy the path
         //(at this point of time cardTeamMember exist only in /about-us page)
-        this.props.navigate(`/about-us/${this.state.user.nickname}`)
+        this.props.navigate(`/about-us/${this.state.user.nickname}`, { state: { preserveScroll: true } })
     }
 
     render() {

@@ -74,7 +74,10 @@ class NewsPage extends Component {
       return false;
     }
 
-    this.setState({ isLoading: true });
+    this.setState({
+      isLoading: true,
+      ...(page === 1 ? { newsError: false } : {}),
+    });
     const request = this.props.fetchNews(slugId, page, per_page);
     this.newsRequest = request;
     request
@@ -82,11 +85,16 @@ class NewsPage extends Component {
         if (this.newsRequest !== request) return;
         if (fetchNews.fulfilled.match(action)) {
           this.setState((state) => ({
+            page,
             currentNews: action.payload,
             news: page === 1 ? action.payload : [...state.news, ...action.payload],
+            newsError: false,
           }));
-        } else if (page > 1) {
-          this.setState((state) => ({ page: Math.min(state.page, page - 1) }));
+        } else {
+          this.setState((state) => ({
+            page: page === 1 ? 0 : Math.min(state.page, page - 1),
+            newsError: true,
+          }));
         }
         this.newsRequest = null;
         this.setState({ isLoading: false });
@@ -96,7 +104,8 @@ class NewsPage extends Component {
         this.newsRequest = null;
         this.setState((state) => ({
           isLoading: false,
-          page: page > 1 ? Math.min(state.page, page - 1) : state.page,
+          page: page === 1 ? 0 : Math.min(state.page, page - 1),
+          newsError: true,
         }));
         console.error("Failed to load news", error);
       });
@@ -116,7 +125,7 @@ class NewsPage extends Component {
       !this.newsRequest
     ) {
       const curPage = this.state.page + 1;
-      const requestStarted = this.fetchData(
+      this.fetchData(
         location.pathname,
         curPage,
         10,
@@ -124,7 +133,6 @@ class NewsPage extends Component {
         this.props,
         categories
       );
-      if (requestStarted) this.setState({ page: curPage });
     }
     this.setState({ prevY: y });
   }
@@ -204,7 +212,7 @@ class NewsPage extends Component {
         this.props.categories
       )?.slugId;
 
-      if (currentCategoryId === nextCategoryId) {
+      if (nextCategoryId != null && currentCategoryId === nextCategoryId) {
         this.setState({ categories: this.props.categories });
       } else {
         this.newsRequest = null;
@@ -221,11 +229,6 @@ class NewsPage extends Component {
       }
     }
 
-    if (this.props.newsError && this.props.newsError !== this.state.newsError) {
-      this.setState({
-        newsError: this.props.newsError,
-      });
-    }
   }
 
   componentWillUnmount() {
@@ -270,6 +273,7 @@ class NewsPage extends Component {
                 <div style={{ minHeight: "1000px" }}>
                   <PostSummaryList
                     listOfNewsAndEvents={this.state.news}
+                    imageSizes="(min-width: 1200px) 322px, (min-width: 992px) 266px, (min-width: 768px) 672px, (min-width: 576px) 452px, calc(100vw - 48px)"
                   />
                   {!this.state.newsError && (
                     <div className="spinner-wrap">
@@ -293,7 +297,6 @@ class NewsPage extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    newsError: state.newsError.newsError,
     categories: selectCategories(state),
   };
 };

@@ -75,6 +75,7 @@ function KeyedDetail() {
 function renderDetail({
   desktop = true,
   collection = [],
+  collectionCategoryId = collection.length ? 42 : null,
   includeNavigationEffects = false,
   path = '/main-collections/detail/ethnography/vase',
 } = {}) {
@@ -87,7 +88,16 @@ function renderDetail({
   vi.stubGlobal('matchMedia', vi.fn(() => media));
   const store = configureStore({
     reducer: { collections: collectionsReducer, itemFomCollection: itemReducer },
-    preloadedState: { collections: { main: [], virtual: [], byType: collection, description: [], error: [] } },
+    preloadedState: {
+      collections: {
+        main: [],
+        virtual: [],
+        byType: collection,
+        byTypeCategoryId: collectionCategoryId,
+        description: [],
+        error: [],
+      },
+    },
   });
   const result = render(
     <Provider store={store}>
@@ -214,6 +224,26 @@ describe('CollectionsDetailItem', () => {
     expect(streams.get).toHaveBeenCalledTimes(1);
   });
 
+  it('refetches arrow-navigation items when Redux holds a different collection', async () => {
+    sessionStorage.setItem('categories', JSON.stringify([{ id: 42, slug: 'ethnography' }]));
+    streams.get.mockImplementation((url) => {
+      if (url.startsWith('/posts?slug=vase')) return Promise.resolve({ data: [vase] });
+      if (url.startsWith('/posts?categories=42')) return Promise.resolve({ data: [previous, vase, next] });
+      throw new Error(`Unexpected request: ${url}`);
+    });
+    const { store } = renderDetail({
+      collection: [{ ...previous, slug: 'another-collection-item' }],
+      collectionCategoryId: 99,
+    });
+
+    expect(await screen.findByRole('heading', { name: 'Ancient vase' })).toBeInTheDocument();
+    await waitFor(() => {
+      expect(store.getState().collections.byTypeCategoryId).toBe(42);
+      expect(store.getState().collections.byType).toEqual([previous, vase, next]);
+    });
+    expect(streams.get).toHaveBeenCalledWith(expect.stringContaining('/posts?categories=42'));
+  });
+
   it('fetches the collection from cached categories for mobile navigation', async () => {
     sessionStorage.setItem('categories', JSON.stringify([{ id: 42, slug: 'ethnography' }]));
     streams.get.mockImplementation((url) => {
@@ -302,16 +332,24 @@ describe('CollectionsDetailItem', () => {
 
   it('keeps showing the requested item when an earlier request finishes after it', async () => {
     let resolveEarlierRequest;
+    let resolveNextRequest;
     const earlierRequest = new Promise((resolve) => {
       resolveEarlierRequest = resolve;
     });
+    const nextRequest = new Promise((resolve) => {
+      resolveNextRequest = resolve;
+    });
+    let vaseRequests = 0;
     streams.get.mockImplementation((url) => {
-      if (url.startsWith('/posts?slug=vase')) return earlierRequest;
+      if (url.startsWith('/posts?slug=vase')) {
+        vaseRequests += 1;
+        return vaseRequests === 1 ? earlierRequest : nextRequest;
+      }
       if (url.startsWith('/posts?slug=plate')) return Promise.resolve({ data: [previous] });
       throw new Error(`Unexpected request: ${url}`);
     });
     const user = userEvent.setup();
-    const { store } = renderDetail();
+    const { container, store } = renderDetail({ collection: [vase, previous, next] });
 
     await user.click(screen.getByRole('link', { name: 'Other item' }));
     expect(await screen.findByRole('heading', { name: 'Ceramic plate' })).toBeInTheDocument();
@@ -325,6 +363,16 @@ describe('CollectionsDetailItem', () => {
     expect(window.location.pathname).toBe('/main-collections/detail/ethnography/plate');
     expect(screen.getByRole('heading', { name: 'Ceramic plate' })).toBeInTheDocument();
     expect(screen.queryByRole('heading', { name: 'Ancient vase' })).not.toBeInTheDocument();
+
+    await user.click(container.querySelector('.collection-items-arrow-navigation .left-arrow'));
+    expect(screen.getByRole('heading', { name: 'Ceramic plate' })).toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: 'Ancient vase' })).not.toBeInTheDocument();
+
+    await act(async () => {
+      resolveNextRequest({ data: [vase] });
+      await nextRequest;
+    });
+    expect(await screen.findByRole('heading', { name: 'Ancient vase' })).toBeInTheDocument();
   });
 
   it('does not keep another item on screen when history returns to an arrow-navigated item', async () => {

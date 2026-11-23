@@ -33,6 +33,7 @@ function CollectionsDetailItem({
   fetchCollections,
   itemFomCollection,
   collection,
+  collectionCategoryId,
   intl,
 }) {
   const { item: itemName, type: collectionName } = useParams();
@@ -71,10 +72,13 @@ function CollectionsDetailItem({
   // navigation must not show it under the new URL.
   const keepsPreviousItem =
     navigationType === "PUSH" && Boolean(location.state?.keepPreviousItem);
+  const previousRouteItem =
+    keepsPreviousItem && location.state?.previousItem
+      ? location.state.previousItem
+      : null;
   const storedItem =
-    keepsPreviousItem || matchesRouteSlug(itemFomCollection?.slug, itemName)
-      ? itemFomCollection
-      : {};
+    previousRouteItem ||
+    (matchesRouteSlug(itemFomCollection?.slug, itemName) ? itemFomCollection : {});
   const item = loaded?.itemName === itemName ? loaded.item : storedItem;
 
   // Runs after the newly fetched item has rendered, so the image position is final
@@ -95,11 +99,6 @@ function CollectionsDetailItem({
       return;
     }
 
-    // Skip if collection is already in Redux store
-    if (collection && collection.length > 0) {
-      return;
-    }
-
     // Find category ID and fetch (categories from sessionStorage - they rarely change)
     const categoriesFromStorage = sessionStorage.getItem("categories");
     if (categoriesFromStorage) {
@@ -107,6 +106,7 @@ function CollectionsDetailItem({
         const categories = JSON.parse(categoriesFromStorage);
         const category = categories.find((c) => c.slug === collectionName);
         if (category) {
+          if (collectionCategoryId === category.id) return;
           isFetchingCollection.current = true;
           fetchCollections(category.id)
             .then(() => {
@@ -120,7 +120,7 @@ function CollectionsDetailItem({
         console.error("Error parsing categories:", e);
       }
     }
-  }, [collectionName, fetchCollections, collection]);
+  }, [collectionName, fetchCollections, collection, collectionCategoryId]);
 
   function renderContent() {
     const media = item._embedded["wp:featuredmedia"]?.[0];
@@ -164,7 +164,7 @@ function CollectionsDetailItem({
         <main>
           <section className="position-relative">
             {isDesktopResolution && (
-              <CollectionItemsArrowNavigation />
+              <CollectionItemsArrowNavigation currentItem={item} />
             )}
 
             <Container>
@@ -311,7 +311,7 @@ function CollectionsDetailItem({
           </section>
           {!isDesktopResolution && (
             <section>
-              <CollectionItemsArrowNavigationBottomFixed />
+              <CollectionItemsArrowNavigationBottomFixed currentItem={item} />
             </section>
           )}
         </main>
@@ -344,6 +344,7 @@ const mapStateToProps = (state) => {
   return {
     itemFomCollection: state.itemFomCollection.data,
     collection: state.collections.byType,
+    collectionCategoryId: state.collections.byTypeCategoryId,
   };
 };
 

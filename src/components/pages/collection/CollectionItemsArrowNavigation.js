@@ -10,6 +10,7 @@ import { useParams, useLocation, Link } from "react-router-dom";
 
 function CollectionItemsArrowNavigation({
   collection,
+  currentItem,
 }) {
   const { type: collectionName } = useParams();
   const location = useLocation();
@@ -85,7 +86,7 @@ function CollectionItemsArrowNavigation({
       <div className="collection-items-arrow-navigation">
         <Link
           to={generateHref(navItems.prevIndex)}
-          state={{ keepPreviousItem: true }}
+          state={{ keepPreviousItem: true, previousItem: currentItem }}
           className={`left-arrow ${hoveredSide === "prevIndex" ? "show" : ""}`}
           onMouseEnter={() => {
             setHoveredSide("prevIndex");
@@ -98,7 +99,7 @@ function CollectionItemsArrowNavigation({
         </Link>
         <Link
           to={generateHref(navItems.nextItem)}
-          state={{ keepPreviousItem: true }}
+          state={{ keepPreviousItem: true, previousItem: currentItem }}
           className={`right-arrow ${hoveredSide === "nextItem" ? "show" : ""}`}
           onMouseEnter={() => {
             setHoveredSide("nextItem");

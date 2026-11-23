@@ -38,7 +38,14 @@ describe('store', () => {
     expect(state.categories).toEqual({});
     expect(state.exhibitions).toEqual({ activeExhibitions: [], archiveExhibitions: [] });
     expect(state.exhibitionsError).toEqual({});
-    expect(state.collections).toEqual({ main: [], virtual: [], byType: [], description: [], error: [] });
+    expect(state.collections).toEqual({
+      main: [],
+      virtual: [],
+      byType: [],
+      byTypeCategoryId: null,
+      description: [],
+      error: [],
+    });
     expect(state.rimBuildingImages).toEqual({});
     expect(state.exhibitionArticle).toEqual({});
     expect(state.itemFomCollection).toEqual({ data: {}, error: null });

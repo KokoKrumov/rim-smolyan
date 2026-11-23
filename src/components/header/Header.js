@@ -158,7 +158,10 @@ function Header({ showModal }) {
                   </InputGroup>
                 )}
 
-                <Nav className={`header-navigation__inner__child ${flag}`}>
+                <Nav
+                  activeKey={location.pathname}
+                  className={`header-navigation__inner__child ${flag}`}
+                >
                   <Nav.Link
                     className={`nav__secondary-link ${
                       isCurrentUrl("support-us") && "active"

@@ -7,7 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 import streams from '../../../../api/streams';
 import categoriesReducer, { fetchCategories } from '../../../../store/categoriesSlice';
 import newsErrorReducer from '../../../../store/newsErrorSlice';
-import newsReducer from '../../../../store/newsSlice';
+import newsReducer, { fetchNews } from '../../../../store/newsSlice';
 import messages from '../../../../translations/en.json';
 import NewsPage from '../NewsPage';
 
@@ -174,6 +174,19 @@ describe('NewsPage', () => {
     expect(screen.queryByRole('status')).not.toBeInTheDocument();
   });
 
+  it('reports a category that arrives after mount without the selected slug', async () => {
+    const error = vi.spyOn(console, 'error').mockImplementation(() => {});
+    const { store } = renderNewsPage({ path: '/news', storedCategories: false, initialCategories: [] });
+    act(() => store.dispatch(fetchCategories.fulfilled(
+      [{ id: 8, slug: 'exhibitions', name: 'Exhibitions' }],
+      'request',
+    )));
+
+    await waitFor(() => expect(error).toHaveBeenCalledWith('Category not found: /news'));
+    expect(streams.get).not.toHaveBeenCalled();
+    expect(screen.queryByRole('status')).not.toBeInTheDocument();
+  });
+
   it('loads a cold route when categories arrive after storage is populated', async () => {
     streams.get.mockResolvedValue({ data: [article('news-story', 'News story')] });
     const { store } = renderNewsPage({ path: '/news', storedCategories: false, initialCategories: [] });
@@ -214,6 +227,47 @@ describe('NewsPage', () => {
 
     expect(await screen.findByRole('link', { name: 'Second story' })).toBeInTheDocument();
     expect(streams.get).toHaveBeenCalledWith(expect.stringMatching(/page=2&per_page=10$/));
+  });
+
+  it('retries a failed first page before requesting page two', async () => {
+    let firstPageRequests = 0;
+    streams.get.mockImplementation((url) => {
+      if (url.includes('page=1&')) {
+        firstPageRequests += 1;
+        return firstPageRequests === 1
+          ? Promise.reject(new Error('Network unavailable'))
+          : Promise.resolve({ data: [article('first', 'First story')] });
+      }
+      return Promise.resolve({ data: [article('second', 'Second story')] });
+    });
+    const { store } = renderNewsPage();
+    await waitFor(() => expect(store.getState().newsError.newsError).toBe(true));
+    await waitFor(() => expect(screen.queryByRole('status')).not.toBeInTheDocument());
+
+    act(() => observer.callback([{ boundingClientRect: { y: 100 } }]));
+    act(() => observer.callback([{ boundingClientRect: { y: 50 } }]));
+    expect(await screen.findByRole('link', { name: 'First story' })).toBeInTheDocument();
+    expect(firstPageRequests).toBe(2);
+    expect(streams.get).toHaveBeenLastCalledWith(expect.stringMatching(/page=1&per_page=10$/));
+
+    act(() => observer.callback([{ boundingClientRect: { y: 25 } }]));
+    expect(await screen.findByRole('link', { name: 'Second story' })).toBeInTheDocument();
+    expect(streams.get).toHaveBeenLastCalledWith(expect.stringMatching(/page=2&per_page=10$/));
+  });
+
+  it('does not hide the list spinner for an unrelated request failure', async () => {
+    streams.get.mockImplementation((url) => (
+      url.includes('categories=10')
+        ? Promise.resolve({ data: [article('first', 'First story')] })
+        : Promise.reject(new Error('Network unavailable'))
+    ));
+    const { store } = renderNewsPage();
+    expect(await screen.findByRole('link', { name: 'First story' })).toBeInTheDocument();
+
+    await store.dispatch(fetchNews(99));
+
+    expect(store.getState().newsError.newsError).toBe(true);
+    expect(screen.getByRole('status')).toBeInTheDocument();
   });
 
   it('does not duplicate the previous page after a failed pagination request', async () => {

@@ -89,6 +89,7 @@ describe('collectionsSlice', () => {
       expect(streams.get.mock.calls[0][0]).toMatch(/categories=9&.*&page=1&per_page=100$/);
       expect(result).toEqual([{ id: 5 }]);
       expect(store.getState().collections.byType).toEqual([{ id: 5 }]);
+      expect(store.getState().collections.byTypeCategoryId).toBe(9);
     });
 
     it('forwards custom pagination parameters', async () => {
@@ -102,6 +103,23 @@ describe('collectionsSlice', () => {
       );
       expect(result).toEqual([{ id: 6 }]);
       expect(store.getState().collections.byType).toEqual([{ id: 6 }]);
+      expect(store.getState().collections.byTypeCategoryId).toBe(9);
+    });
+
+    it('does not replace a newer collection when an older request finishes later', async () => {
+      let resolveOlder;
+      streams.get
+        .mockImplementationOnce(() => new Promise((resolve) => { resolveOlder = resolve; }))
+        .mockResolvedValueOnce({ data: [{ id: 2 }] });
+      const store = makeStore();
+      const olderRequest = store.dispatch(fetchCollections(9));
+
+      await store.dispatch(fetchCollections(10));
+      resolveOlder({ data: [{ id: 1 }] });
+      await olderRequest;
+
+      expect(store.getState().collections.byType).toEqual([{ id: 2 }]);
+      expect(store.getState().collections.byTypeCategoryId).toBe(10);
     });
 
     it('keeps existing data, stores the error and rethrows it', async () => {

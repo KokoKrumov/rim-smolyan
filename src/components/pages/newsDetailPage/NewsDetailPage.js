@@ -64,7 +64,12 @@ class NewsDetailPage extends Component {
     if (slugId == null) {
       this.relatedNewsCategoryId = null;
       this.relatedNewsRequest = null;
-      if (categories.length > 0) console.error("Category not found: news-and-events");
+      if (categories.length > 0) {
+        console.error("Category not found: news-and-events");
+        this.setState((state) => ({
+          listOfNewsAndEvents: state.listOfNewsAndEvents ?? [],
+        }));
+      }
       return;
     }
     if (slugId === this.relatedNewsCategoryId) return;

@@ -3,7 +3,7 @@ import { fireEvent, render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
-import { MemoryRouter, useLocation } from 'react-router-dom';
+import { Link, MemoryRouter, useLocation } from 'react-router-dom';
 import modalReducer from '../../../store/modalSlice';
 import Header from '../Header';
 
@@ -43,6 +43,7 @@ function renderHeader(path = '/') {
       <IntlProvider locale="en" messages={messages}>
         <MemoryRouter initialEntries={[path]}>
           <Header />
+          <Link to="/contact-us">Navigate away</Link>
           <LocationProbe />
         </MemoryRouter>
       </IntlProvider>
@@ -122,6 +123,18 @@ describe('Header', () => {
     expect(screen.getByTestId('location')).toHaveTextContent('/contact-us');
     expect(screen.getByRole('link', { name: 'Contact' })).toHaveClass('active');
     expect(container.querySelector('.hamburger')).not.toHaveClass('is-active');
+  });
+
+  it('clears the Support selection when navigating to another route', async () => {
+    const user = userEvent.setup();
+    renderHeader();
+
+    await user.click(screen.getByRole('link', { name: 'Support us' }));
+    expect(screen.getByRole('link', { name: 'Support us' })).toHaveClass('active');
+
+    await user.click(screen.getByRole('link', { name: 'Navigate away' }));
+    expect(screen.getByTestId('location')).toHaveTextContent('/contact-us');
+    expect(screen.getByRole('link', { name: 'Support us' })).not.toHaveClass('active');
   });
 
   it('does not reinstall the resize listener on rerender and removes it on unmount', async () => {

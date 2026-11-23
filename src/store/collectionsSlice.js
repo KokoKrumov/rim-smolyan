@@ -37,10 +37,13 @@ export const fetchCollectionDescription = createAsyncThunk(
 
 const collectionsSlice = createSlice({
   name: 'collections',
-  initialState: { main: [], virtual: [], byType: [], description: [], error: [] },
+  initialState: { main: [], virtual: [], byType: [], byTypeCategoryId: null, description: [], error: [] },
   reducers: {
     // Used by the manual fetchCollections thunk below
-    setByType: (state, action) => { state.byType = action.payload; },
+    setByType: (state, action) => {
+      state.byType = action.payload.data;
+      state.byTypeCategoryId = action.payload.categoryId;
+    },
     setByTypeError: (state, action) => { state.error = action.payload; },
   },
   extraReducers: (builder) => {
@@ -63,17 +66,23 @@ const collectionsSlice = createSlice({
 export const { setByType, setByTypeError } = collectionsSlice.actions;
 
 // Manual thunk: kept as-is because components await its return value directly
+let latestByTypeRequestId = 0;
 export const fetchCollections =
   (slugId, page = 1, number = 100) =>
   async (dispatch) => {
+    const requestId = ++latestByTypeRequestId;
     try {
       const response = await streams.get(
         `/posts?categories=${slugId}&_fields=id,date_gmt,slug,title,_links,_embedded&_embed&page=${page}&per_page=${number}`
       );
-      dispatch(setByType(response.data));
+      if (requestId === latestByTypeRequestId) {
+        dispatch(setByType({ data: response.data, categoryId: slugId }));
+      }
       return response.data;
     } catch (error) {
-      dispatch(setByTypeError({ message: error.message, status: error.response?.status }));
+      if (requestId === latestByTypeRequestId) {
+        dispatch(setByTypeError({ message: error.message, status: error.response?.status }));
+      }
       throw error;
     }
   };

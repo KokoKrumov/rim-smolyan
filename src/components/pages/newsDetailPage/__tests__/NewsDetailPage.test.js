@@ -290,6 +290,7 @@ describe("NewsDetailPage", () => {
     expect(await screen.findByRole("heading", { name: "Article A" })).toBeInTheDocument();
     expect(streams.get).toHaveBeenCalledOnce();
     expect(error).toHaveBeenCalledWith("Category not found: news-and-events");
+    expect(screen.queryByRole("status")).not.toBeInTheDocument();
 
     act(() => store.dispatch(fetchCategories.fulfilled(categories, "categories")));
     expect(await screen.findByRole("link", { name: "Related story" })).toBeInTheDocument();

@@ -18,7 +18,16 @@ const event = {
   date_gmt: '2024-03-01T12:00:00',
   event_date: '15.03.2024 - 17.03.2024',
   event_place: 'Museum hall',
-  _embedded: { 'wp:featuredmedia': [{ source_url: 'https://example.test/event.jpg' }] },
+  _embedded: {
+    'wp:featuredmedia': [{
+      source_url: 'https://example.test/event.jpg',
+      media_details: {
+        width: 1200,
+        height: 800,
+        sizes: { medium: { source_url: 'https://example.test/event-600.jpg', width: 600, height: 400 } },
+      },
+    }],
+  },
 };
 
 function renderList(props = {}) {
@@ -56,7 +65,10 @@ describe('PostSummaryList', () => {
   });
 
   it('renders an event date and its featured image instead of the publication date', () => {
-    renderList({ listOfNewsAndEvents: [event] });
+    renderList({
+      listOfNewsAndEvents: [event],
+      imageSizes: '(min-width: 1200px) 441px, (min-width: 992px) 366px, 100vw',
+    });
 
     expect(screen.getByText('15-17')).toBeInTheDocument();
     expect(screen.getByText('март')).toBeInTheDocument();
@@ -64,6 +76,10 @@ describe('PostSummaryList', () => {
     expect(screen.queryByText('1 март 2024')).not.toBeInTheDocument();
     expect(screen.getByAltText('')).toHaveAttribute('src', 'https://example.test/event.jpg');
     expect(screen.getByAltText('')).toHaveAttribute('loading', 'lazy');
+    expect(screen.getByAltText('')).toHaveAttribute(
+      'sizes',
+      '(min-width: 1200px) 441px, (min-width: 992px) 366px, 100vw'
+    );
     expect(screen.getByRole('link', { name: 'Spring event' })).toHaveAttribute('href', '/news-and-events/spring-event');
   });
 

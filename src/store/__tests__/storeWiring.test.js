@@ -16,7 +16,7 @@ const reducerCases = [
   [
     'collections',
     actions.fetchCollectionsMain.fulfilled([entry], 'request', 1),
-    { main: [entry], virtual: [], byType: [], description: [], error: [] },
+    { main: [entry], virtual: [], byType: [], byTypeCategoryId: null, description: [], error: [] },
   ],
   ['exhibitionArticle', actions.fetchExhibitionArticle.fulfilled([entry], 'request', 'exhibition'), [entry]],
   [

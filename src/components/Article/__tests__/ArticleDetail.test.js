@@ -25,4 +25,8 @@ it('prioritizes the main article image and reserves its aspect ratio', () => {
   expect(image).toHaveAttribute('srcset', '/medium.jpg 600w, /full.jpg 1200w');
   expect(image).toHaveAttribute('width', '1200');
   expect(image).toHaveAttribute('height', '800');
+  expect(image).toHaveAttribute(
+    'sizes',
+    '(min-width: 1200px) 736px, (min-width: 992px) 536px, (min-width: 768px) 696px, (min-width: 576px) 476px, calc(100vw - 24px)'
+  );
 });

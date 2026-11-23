@@ -20,8 +20,11 @@ function renderNavigation(path = '/') {
       <NavigationEffects />
       <Link to="/news?page=2">News</Link>
       <Link to="/administrative/#13">Support</Link>
+      <Link to="#13">Same-page hash</Link>
       <Link to="/administrative">Close panel</Link>
       <Link to="/administrative/">Trailing slash</Link>
+      <Link to="/about-us/maya" state={{ preserveScroll: true }}>Open team profile</Link>
+      <Link to="/about-us" state={{ preserveScroll: true }}>Close team profile</Link>
       <Link to="/main-collections/detail/ethnography/chalice" state={{ scrollToImage: true }}>
         Next collection item
       </Link>
@@ -45,7 +48,7 @@ describe('navigation effects', () => {
 
     await user.click(screen.getByRole('link', { name: 'News' }));
 
-    expect(window.scrollTo).toHaveBeenCalledWith(0, 0);
+    expect(window.scrollTo).toHaveBeenCalledWith({ top: 0, left: 0, behavior: 'instant' });
     expect(send).not.toHaveBeenCalled();
     expect(event).not.toHaveBeenCalled();
     expect(gtag).not.toHaveBeenCalled();
@@ -58,6 +61,37 @@ describe('navigation effects', () => {
     target.scrollIntoView = vi.fn();
     act(() => container.appendChild(target));
     await waitFor(() => expect(target.scrollIntoView).toHaveBeenCalledOnce());
+    expect(window.scrollTo).not.toHaveBeenCalled();
+  });
+
+  it('scrolls cross-page hash targets instantly', async () => {
+    const user = userEvent.setup();
+    const { container } = renderNavigation();
+    const target = document.createElement('div');
+    target.id = '13';
+    target.scrollIntoView = vi.fn();
+
+    await user.click(screen.getByRole('link', { name: 'Support' }));
+    expect(window.scrollTo).toHaveBeenCalledWith({ top: 0, left: 0, behavior: 'instant' });
+
+    act(() => container.appendChild(target));
+    await waitFor(() => expect(target.scrollIntoView).toHaveBeenCalledWith({ behavior: 'instant' }));
+  });
+
+  it('keeps same-page hash scrolling smooth and preserves scroll for team modal routes', async () => {
+    const user = userEvent.setup();
+    const { container } = renderNavigation('/administrative');
+    const target = document.createElement('div');
+    target.id = '13';
+    target.scrollIntoView = vi.fn();
+    act(() => container.appendChild(target));
+
+    await user.click(screen.getByRole('link', { name: 'Same-page hash' }));
+    expect(target.scrollIntoView).toHaveBeenCalledWith();
+
+    await user.click(screen.getByRole('link', { name: 'Open team profile' }));
+    expect(window.scrollTo).not.toHaveBeenCalled();
+    await user.click(screen.getByRole('link', { name: 'Close team profile' }));
     expect(window.scrollTo).not.toHaveBeenCalled();
   });
 
@@ -91,7 +125,7 @@ describe('navigation effects', () => {
     await user.click(screen.getByRole('link', { name: 'Back to gallery' }));
 
     expect(window.scrollTo).toHaveBeenCalledOnce();
-    expect(window.scrollTo).toHaveBeenCalledWith(0, 0);
+    expect(window.scrollTo).toHaveBeenCalledWith({ top: 0, left: 0, behavior: 'instant' });
     const target = document.createElement('div');
     target.id = 'gallery';
     target.scrollIntoView = vi.fn();

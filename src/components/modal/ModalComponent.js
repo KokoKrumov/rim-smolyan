@@ -32,12 +32,12 @@ class ModalComponent extends Component {
             //when we close the modal, then remove the nickname from there
             const location = window.location.pathname;
             let resetLocation = location.replace(`/${this.props.modal.user.nickname}`, '')
-            this.props.navigate(resetLocation)
+            this.props.navigate(resetLocation, { state: { preserveScroll: true } })
         } else if (this.props.modal.type === "modal-shishkov") {
             //if the modal is from shiskov
             const location = window.location.pathname;
             let resetLocation = location.replace(`/stoyu-shishkov`, '')
-            this.props.navigate(resetLocation)
+            this.props.navigate(resetLocation, { state: { preserveScroll: true } })
         }
     }
 

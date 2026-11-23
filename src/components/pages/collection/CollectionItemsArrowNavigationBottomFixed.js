@@ -9,6 +9,7 @@ import { useParams, useLocation, Link } from "react-router-dom";
 
 function CollectionItemsArrowNavigationBottomFixed({
   collection,
+  currentItem,
 }) {
   const { type: collectionName } = useParams();
   const location = useLocation();
@@ -48,7 +49,11 @@ function CollectionItemsArrowNavigationBottomFixed({
       <Link
         className="collection-items-arrow-navigation_link-block"
         to={generateHref(item)}
-        state={{ scrollToImage: true, keepPreviousItem: true }}
+        state={{
+          scrollToImage: true,
+          keepPreviousItem: true,
+          previousItem: currentItem,
+        }}
       >
         <div
           className={`item-preview item-preview__show show ${side}`}
