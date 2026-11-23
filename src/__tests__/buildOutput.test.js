@@ -93,7 +93,7 @@ describe('build HTML entry', () => {
     }
   });
 
-  it('copies the PHP front controller as index.php into the build', async () => {
+  it('builds the PHP entry and required building data without unused collection data', async () => {
     const publicDir = fileURLToPath(new URL('../../public', import.meta.url));
     const deploymentDir = path.join(root, 'deployment-build');
     await build({
@@ -110,6 +110,8 @@ describe('build HTML entry', () => {
     expect(php).toContain("include('react.html')");
     await expect(stat(path.join(deploymentDir, 'react.html'))).resolves.toBeDefined();
     await expect(stat(path.join(deploymentDir, 'router.php'))).rejects.toMatchObject({ code: 'ENOENT' });
+    await expect(stat(path.join(deploymentDir, 'rim-building-images.json'))).resolves.toBeDefined();
+    await expect(stat(path.join(deploymentDir, 'collection-container.json'))).rejects.toMatchObject({ code: 'ENOENT' });
   }, 30000);
 
   it('replaces react.html on subsequent builds without emptying the output', async () => {
