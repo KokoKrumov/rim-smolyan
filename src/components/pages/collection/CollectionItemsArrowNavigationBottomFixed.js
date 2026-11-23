@@ -34,8 +34,7 @@ function CollectionItemsArrowNavigationBottomFixed({
     replaceSlugInPath(location.pathname, item.slug);
 
   function ItemPreview({ className, item, side, type = "desktop" }) {
-    const noImage =
-      "https://api-staging.museumsmolyan.eu/wp-content/uploads/2024/10/no-image.png";
+    const noImage = "/images/no-image.png";
     const media = item?._embedded?.["wp:featuredmedia"]?.[0];
 
     const title = item?.title?.rendered;

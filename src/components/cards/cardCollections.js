@@ -5,8 +5,7 @@ import { Link } from "react-router-dom";
 import { featuredImageProps } from "../../utilities/featuredImageProps";
 import { collectionPreviewImageProps } from "../../utilities/collectionPreviewImageProps";
 
-const noImage =
-  "https://api-staging.museumsmolyan.eu/wp-content/uploads/2024/10/no-image.png";
+const noImage = "/images/no-image.png";
 
 function CardCollections(props) {
   const intl = useIntl();

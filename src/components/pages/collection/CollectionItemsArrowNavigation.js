@@ -20,8 +20,7 @@ function CollectionItemsArrowNavigation({
     nextItem: {},
   });
   const [hoveredSide, setHoveredSide] = useState(null);
-  const noImage =
-    "https://api-staging.museumsmolyan.eu/wp-content/uploads/2024/10/no-image.png";
+  const noImage = "/images/no-image.png";
 
   // Update navigation items when collection data arrives from Redux
   useEffect(() => {

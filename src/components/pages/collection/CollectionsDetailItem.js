@@ -39,8 +39,7 @@ function CollectionsDetailItem({
   const { item: itemName, type: collectionName } = useParams();
   const location = useLocation();
   const navigationType = useNavigationType();
-  const noImage =
-    "https://api-staging.museumsmolyan.eu/wp-content/uploads/2024/10/no-image.png";
+  const noImage = "/images/no-image.png";
   const [loaded, setLoaded] = useState(null);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const backUrl =

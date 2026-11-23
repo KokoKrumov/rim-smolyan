@@ -184,7 +184,7 @@ describe('CollectionsIntroAndGallery', () => {
     expect(image).toHaveAttribute('src', 'https://example.test/plate.jpg');
     expect(image).not.toHaveAttribute('srcset');
     const fallback = (await screen.findByRole('link', { name: /Bowl/ })).querySelector('img');
-    expect(fallback).toHaveAttribute('src', 'https://api-staging.museumsmolyan.eu/wp-content/uploads/2024/10/no-image.png');
+    expect(fallback).toHaveAttribute('src', '/images/no-image.png');
     expect(fallback).not.toHaveAttribute('srcset');
   });
 

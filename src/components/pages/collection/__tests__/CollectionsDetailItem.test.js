@@ -25,7 +25,7 @@ vi.mock('yet-another-react-lightbox', () => ({
   ) : null,
 }));
 
-const noImage = 'https://api-staging.museumsmolyan.eu/wp-content/uploads/2024/10/no-image.png';
+const noImage = '/images/no-image.png';
 const makeMedia = (name) => ({
   source_url: `https://example.test/${name}.jpg`,
   media_details: {

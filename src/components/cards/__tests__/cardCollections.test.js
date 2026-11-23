@@ -42,7 +42,7 @@ describe('CardCollections image sizing', () => {
     render(card({ name: 'Empty', slug: 'empty', description: '' }, 'main'));
 
     const image = screen.getByRole('img');
-    expect(image).toHaveAttribute('src', expect.stringContaining('/no-image.png'));
+    expect(image).toHaveAttribute('src', '/images/no-image.png');
     expect(image).toHaveAttribute('width', '1920');
     expect(image).toHaveAttribute('height', '1080');
   });

@@ -41,7 +41,7 @@ const previewSizes = {
   [`${imageBase}virtual/rhodope-carpets.png`]: [240, 273],
   [`${imageBase}virtual/medieval-jewelry-earrings-x-xiv.png`]: [240, 261],
   [`${imageBase}virtual/watches.png`]: [240, 273],
-  "https://api-staging.museumsmolyan.eu/wp-content/uploads/2024/10/no-image.png": [1920, 1080],
+  "/images/no-image.png": [1920, 1080],
 };
 
 export function collectionPreviewImageProps(src) {
