@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 
 const AboutUs = lazy(() => import("./pages/aboutUs/AboutUs"));
 const Administrative = lazy(() => import("./pages/administrative/Administrative"));
@@ -26,34 +26,35 @@ const SupportUs = lazy(() => import("./pages/supportUs/SupportUs"));
 const Terms = lazy(() => import("./pages/terms/Terms"));
 
 export default function AppRoutes() {
+  const { pathname } = useLocation();
   return (
     <Suspense fallback={<div style={{ minHeight: '60vh' }} />}>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/funds" element={<FundsPage />} />
-        <Route path="/news-and-events/:slug" element={<NewsDetailPage />} />
-        <Route path="/news-and-events" element={<NewsPage />} />
-        <Route path="/news/:slug" element={<NewsDetailPage />} />
-        <Route path="/news" element={<NewsPage />} />
-        <Route path="/events/:slug" element={<NewsDetailPage />} />
-        <Route path="/events" element={<NewsPage />} />
-        <Route path="/exhibitions/:articleSlug" element={<ExhibitionsDetailPage />} />
+        <Route path="/news-and-events/:slug" element={<NewsDetailPage key={pathname} />} />
+        <Route path="/news-and-events" element={<NewsPage key={pathname} />} />
+        <Route path="/news/:slug" element={<NewsDetailPage key={pathname} />} />
+        <Route path="/news" element={<NewsPage key={pathname} />} />
+        <Route path="/events/:slug" element={<NewsDetailPage key={pathname} />} />
+        <Route path="/events" element={<NewsPage key={pathname} />} />
+        <Route path="/exhibitions/:articleSlug" element={<ExhibitionsDetailPage key={pathname} />} />
         <Route path="/exhibitions" element={<ExhibitionsPage />} />
         <Route path="/about-us/:modalContent" element={<AboutUs />} />
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/collections" element={<CollectionsIndex />} />
         <Route path="/main-collections" element={<CollectionsMain />} />
-        <Route path="/main-collections/intro/:type" element={<CollectionsIntroAndGallery />} />
-        <Route path="/main-collections/detail/:type/:item" element={<CollectionsDetailItem />} />
+        <Route path="/main-collections/intro/:type" element={<CollectionsIntroAndGallery key={pathname} />} />
+        <Route path="/main-collections/detail/:type/:item" element={<CollectionsDetailItem key={pathname} />} />
         <Route path="/virtual-collections" element={<CollectionsVirtual />} />
-        <Route path="/virtual-collections/intro/:type" element={<CollectionsIntroAndGallery />} />
-        <Route path="/virtual-collections/detail/:type/:item" element={<CollectionsDetailItem />} />
+        <Route path="/virtual-collections/intro/:type" element={<CollectionsIntroAndGallery key={pathname} />} />
+        <Route path="/virtual-collections/detail/:type/:item" element={<CollectionsDetailItem key={pathname} />} />
         <Route path="/house-museum-laszlo-nagy" element={<LaszloNagyPage />} />
         <Route path="/contact-us" element={<Contacts />} />
         <Route path="/support-us" element={<SupportUs />} />
         <Route path="/privacy-policy" element={<LegalInfo />} />
         <Route path="/terms" element={<Terms />} />
-        <Route path="/administrative/:parentId/:id" element={<Administrative />} />
+        <Route path="/administrative/:parentId/:id" element={<Administrative key={pathname} />} />
         <Route path="/administrative" element={<Administrative />} />
         <Route path="/services" element={<Services />} />
         <Route path="/prices" element={<Prices />} />

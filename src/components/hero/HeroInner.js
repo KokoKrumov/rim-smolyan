@@ -23,9 +23,9 @@ export default function HeroInner({
             <div className="breadcrumb__wrap">
               <ol className="breadcrumb">
                 <li className="breadcrumb-item">
-                  <a
+                  <Link
                     className="link"
-                    href={`/${breadcrumbs.parentLink}`}
+                    to={`/${breadcrumbs.parentLink}`}
                     itemProp="url"
                     target=""
                     rel="noopener nofollow noreferrer"

@@ -153,7 +153,7 @@ const LaszloNagyPage = (props) => {
               <Row className="">
                 <Col lg={11}>
                   <Row className={"contacts__row"}>
-                    <Col lg={6}>
+                    <Col lg={8}>
                       <div id="prices-content">
                         <h4
                           className={"title"}

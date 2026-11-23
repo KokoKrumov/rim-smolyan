@@ -1,3 +1,33 @@
+@mixin compact-price-list {
+	overflow-wrap: anywhere;
+
+	> ol.wp-block-list,
+	> div > ol.wp-block-list {
+		padding-left: 1.25rem;
+	}
+
+	ul.wp-block-list {
+		padding-left: 1rem;
+	}
+
+	li {
+		padding-left: 0.25rem;
+	}
+
+	ul > li {
+		list-style-type: disc;
+	}
+
+	li:not(:has(ul)) {
+		display: list-item;
+	}
+
+	.price-value {
+		display: block;
+		text-align: left;
+	}
+}
+
 .prices-page__main {
 	@include padding(90px, 0px, 120px, 0px);
 
@@ -17,6 +47,11 @@
 	.prices-title:not(:first-child) {
 		margin-top: 4rem;
 	}
+}
+
+.prices-page__main #prices-content,
+.laszlo-nagy__page__contact-section #prices-content {
+	@include compact-price-list;
 }
 
 #prices-content {

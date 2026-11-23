@@ -58,10 +58,8 @@ function SocialButton({ buttonType, articleTitle, url, hashtag = null, link = nu
   const twitterShareButton = () => {
     return (
       <XShareButton
-        windowWidth="800px"
-        windowHeight="600px"
         url={url}
-        title={articleTitle}
+        text={articleTitle}
       >
         <img src={xDarkLogo} width="17" height="16" alt="" />
       </XShareButton>

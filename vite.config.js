@@ -1,6 +1,8 @@
 /// <reference types="vitest/config" />
 import { defineConfig, loadEnv, transformWithOxc } from 'vite';
 import react from '@vitejs/plugin-react';
+import { existsSync } from 'node:fs';
+import { rename } from 'node:fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -29,6 +31,25 @@ export default defineConfig(({ mode }) => {
     plugins: [
       jsxPlugin(),
       react(),
+      {
+        name: 'rename-build-html',
+        async writeBundle({ dir }) {
+          await rename(path.join(dir, 'index.html'), path.join(dir, 'react.html'));
+        },
+        configurePreviewServer(server) {
+          // A preview hook disables Vite's normal missing-output check.
+          const outDir = server.config.environments.client.build.outDir;
+          if (!existsSync(path.resolve(server.config.root, outDir))) {
+            throw new Error(`The directory "${outDir}" does not exist. Did you build your project?`);
+          }
+          return () => {
+            server.middlewares.use((req, _res, next) => {
+              if (req.url === '/index.html') req.url = '/react.html';
+              next();
+            });
+          };
+        },
+      },
     ],
     resolve: {
       alias: {

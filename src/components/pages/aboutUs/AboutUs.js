@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { selectRimBuildingImages } from "../../../store/selectors";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -157,9 +158,9 @@ class AboutUs extends Component {
     this.props.showModal(data, url, user);
     //check if modal is shishkov or someone from the team
     if (user.nickname) {
-      this.props.navigate(`/about-us/${user.nickname}`);
+      this.props.navigate(`/about-us/${user.nickname}`, { state: { preserveScroll: true } });
     } else {
-      this.props.navigate(`/about-us/${user}`);
+      this.props.navigate(`/about-us/${user}`, { state: { preserveScroll: true } });
     }
   };
 
@@ -534,7 +535,7 @@ class AboutUs extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    rimBuildingImages: Object.values(state.rimBuildingImages),
+    rimBuildingImages: selectRimBuildingImages(state),
     team: state.team,
   };
 };

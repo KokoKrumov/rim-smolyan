@@ -19,8 +19,8 @@ const member = {
 };
 
 function CurrentLocation() {
-  const { pathname } = useLocation();
-  return <p data-testid="location">{pathname}</p>;
+  const { pathname, state } = useLocation();
+  return <p data-testid="location" data-state={JSON.stringify(state)}>{pathname}</p>;
 }
 
 function renderCard(user = member) {
@@ -83,5 +83,9 @@ describe('CardTeamMember', () => {
       modalIsOpen: true,
     });
     expect(screen.getByTestId('location')).toHaveTextContent(/^\/about-us\/alex-example$/);
+    expect(screen.getByTestId('location')).toHaveAttribute(
+      'data-state',
+      JSON.stringify({ preserveScroll: true })
+    );
   });
 });

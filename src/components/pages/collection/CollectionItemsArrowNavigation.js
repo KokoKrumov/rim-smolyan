@@ -5,10 +5,12 @@ import ArrowRight from "../../../assets/icons/ArrowRight";
 import { connect } from "react-redux";
 import navigationCollectionItems from "../../../utilities/navigationCollectionItems";
 import { slugSanitize, replaceSlugInPath } from "../../../utilities/browser";
+import { featuredImageProps } from "../../../utilities/featuredImageProps";
 import { useParams, useLocation, Link } from "react-router-dom";
 
 function CollectionItemsArrowNavigation({
   collection,
+  currentItem,
 }) {
   const { type: collectionName } = useParams();
   const location = useLocation();
@@ -18,8 +20,7 @@ function CollectionItemsArrowNavigation({
     nextItem: {},
   });
   const [hoveredSide, setHoveredSide] = useState(null);
-  const noImage =
-    "https://api-staging.museumsmolyan.eu/wp-content/uploads/2024/10/no-image.png";
+  const noImage = "/images/no-image.png";
 
   // Update navigation items when collection data arrives from Redux
   useEffect(() => {
@@ -39,10 +40,7 @@ function CollectionItemsArrowNavigation({
     replaceSlugInPath(location.pathname, item.slug);
 
   function ItemPreview({ className, item, side }) {
-    const imageUrl =
-      typeof item?._embedded["wp:featuredmedia"] !== "undefined"
-        ? item?._embedded["wp:featuredmedia"][0]?.source_url
-        : noImage;
+    const media = item?._embedded?.["wp:featuredmedia"]?.[0];
     const title = item?.title?.rendered;
     const collectionLength = collection?.length || 0;
     const itemIndex = collection
@@ -61,7 +59,7 @@ function CollectionItemsArrowNavigation({
             <div className="item-preview__image">
               <img
                 className="img-fluid"
-                src={imageUrl}
+                {...(media ? featuredImageProps(media, "110px") : { src: noImage })}
                 alt={item.title.rendered}
               />
             </div>
@@ -87,6 +85,7 @@ function CollectionItemsArrowNavigation({
       <div className="collection-items-arrow-navigation">
         <Link
           to={generateHref(navItems.prevIndex)}
+          state={{ keepPreviousItem: true, previousItem: currentItem }}
           className={`left-arrow ${hoveredSide === "prevIndex" ? "show" : ""}`}
           onMouseEnter={() => {
             setHoveredSide("prevIndex");
@@ -99,6 +98,7 @@ function CollectionItemsArrowNavigation({
         </Link>
         <Link
           to={generateHref(navItems.nextItem)}
+          state={{ keepPreviousItem: true, previousItem: currentItem }}
           className={`right-arrow ${hoveredSide === "nextItem" ? "show" : ""}`}
           onMouseEnter={() => {
             setHoveredSide("nextItem");

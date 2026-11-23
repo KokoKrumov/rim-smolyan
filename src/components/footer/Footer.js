@@ -10,6 +10,7 @@ import fbLogo from "../../assets/images/facebook1.svg";
 import instagramLogo from "../../assets/images/instagram.svg";
 import rimLogo from "../../assets/images/rim-logo.svg";
 import { showModal } from "../../actions";
+import { Link } from "react-router-dom";
 
 function Footer({ showModal }) {
   function handleShowModal(data, url, e) {
@@ -23,7 +24,7 @@ function Footer({ showModal }) {
         <Container>
           <Navbar variant="dark">
             <div className="footer__navbar-brand__wrap">
-              <Navbar.Brand href="/">
+              <Navbar.Brand as={Link} to="/">
                 <div className="brand__wrap">
                   <div className="brand-logo__wrap">
                     <Image src={rimLogo} fluid />
@@ -45,47 +46,51 @@ function Footer({ showModal }) {
                   // onClick={(e) => {
                   // handleShowModal('modal-redirect','Z_fondove.html', e)
                   // }}
-                  href="/collections"
+                  as={Link}
+                  to="/collections"
                   className="nav__main-link"
                 >
                   <FormattedMessage id="menu.collections" />
                 </Nav.Link>
-                <Nav.Link href="/exhibitions" className="nav__main-link">
+                <Nav.Link as={Link} to="/exhibitions" className="nav__main-link">
                   <FormattedMessage id="menu.exhibitions" />
                 </Nav.Link>
-                <Nav.Link href="/news-and-events" className="nav__main-link">
+                <Nav.Link as={Link} to="/news-and-events" className="nav__main-link">
                   <FormattedMessage id="menu.news" />
                 </Nav.Link>
-                <Nav.Link href="/about-us" className="nav__main-link">
+                <Nav.Link as={Link} to="/about-us" className="nav__main-link">
                   <FormattedMessage id="menu.about-us" />
                 </Nav.Link>
-                <Nav.Link href="/contact-us" className="nav__main-link">
+                <Nav.Link as={Link} to="/contact-us" className="nav__main-link">
                   <FormattedMessage id="menu.contact-us" />
                 </Nav.Link>
               </Nav>
               <Nav className="">
-                <Nav.Link href="/support-us" className="nav__secondary-link">
+                <Nav.Link as={Link} to="/support-us" className="nav__secondary-link">
                   <FormattedMessage id="menu.support" />
                 </Nav.Link>
                 <Nav.Link
-                  href="/administrative"
+                  as={Link}
+                  to="/administrative"
                   className="nav__secondary-link"
                 >
                   <FormattedMessage id="menu.administrative" />
                 </Nav.Link>
                 <Nav.Link
-                  href="/privacy-policy"
+                  as={Link}
+                  to="/privacy-policy"
                   className="nav__secondary-link"
                 >
                   <FormattedMessage id="menu.privacy-policy" />
                 </Nav.Link>
-                <Nav.Link href="/terms" className="nav__secondary-link">
+                <Nav.Link as={Link} to="/terms" className="nav__secondary-link">
                   <FormattedMessage id="menu.terms" />
                 </Nav.Link>
               </Nav>
               <Nav className="">
                 <Nav.Link
-                  href="/house-museum-laszlo-nagy"
+                  as={Link}
+                  to="/house-museum-laszlo-nagy"
                   className="nav__main-link"
                 >
                   <FormattedMessage id="menu.house-museum" />

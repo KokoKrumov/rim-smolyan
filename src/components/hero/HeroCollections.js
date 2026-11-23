@@ -2,9 +2,13 @@ import Container from "react-bootstrap/Container";
 import React from "react";
 import { checkIfValueExistInIntl } from "../../utilities/browser";
 import { useIntl } from "../../utilities/withIntl";
+import { preload } from "react-dom";
 
 function HeroCollections(props) {
   const intl = useIntl();
+  if (props.bgImage) {
+    preload(props.bgImage, { as: 'image', fetchPriority: 'high' });
+  }
   return (
     <div className="hero-collection">
       <div

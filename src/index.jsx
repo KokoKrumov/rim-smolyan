@@ -6,9 +6,9 @@ import messages_bg from "./translations/bg.json";
 import messages_en from "./translations/en.json";
 import {Provider} from "react-redux";
 import { store } from './store/store';
-import GA4React from "ga-4-react";
-
-const ga4react = new GA4React("G-Y09PXD41TG");
+import ReactGA from "react-ga4";
+import { preload } from 'react-dom';
+import heroImage from './assets/images/baseHero.jpg';
 
 const messages = {
     'bg': messages_bg,
@@ -20,6 +20,10 @@ const language = localStorage.getItem('lang') ??
 
 const root = createRoot(document.getElementById('root'));
 
+if (window.location.pathname === '/') {
+    preload(heroImage, { as: 'image', fetchPriority: 'high' });
+}
+
 root.render(
     <IntlProvider locale={language} messages={messages[language]}>
         <Provider store={store}>
@@ -28,11 +32,16 @@ root.render(
     </IntlProvider>
 );
 
-ga4react.initialize()
-    .then((ga4) => {
-        ga4.pageview('path')
-        ga4.gtag('event', 'pageview', 'path')
-    })
-    .catch((err) => {
+// Analytics runs only for the prod and dev modes (build:prod/start:prod, build:dev/start:dev);
+// staging and the other modes skip it.
+const isAnalyticsEnabled = import.meta.env.MODE === 'prod' || import.meta.env.MODE === 'dev';
+
+// The Google tag sends the initial page view when it is configured and one for each
+// history change (Enhanced Measurement), so no page views are sent manually.
+if (isAnalyticsEnabled) {
+    try {
+        ReactGA.initialize("G-Y09PXD41TG");
+    } catch (err) {
         console.error(err)
-    });
+    }
+}

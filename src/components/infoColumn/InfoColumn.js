@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import { showModal } from "../../actions";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import { Link } from "react-router-dom";
+import DeferredBackground from "../DeferredBackground";
 
 class InfoColumn extends Component {
   handleShowModal(data, url, e) {
@@ -29,15 +31,9 @@ class InfoColumn extends Component {
     const resolvedTitle = title ? intl.formatMessage({ id: title, defaultMessage: title }) : rawTitle ?? null;
     const resolvedText = text ? intl.formatMessage({ id: text, defaultMessage: text }) : rawText ?? null;
     return (
-      <div
+      <DeferredBackground
         className="nae-container info-column nae-container_content-dark hero-bg"
-        style={
-          backgroundImage
-            ? {
-                backgroundImage: `url(${backgroundImage})`,
-              }
-            : null
-        }
+        image={backgroundImage}
       >
         <Container>
           <div>
@@ -88,9 +84,9 @@ class InfoColumn extends Component {
                 <Col>
                   {showMoreLink ? (
                     <p>
-                      <a
+                      <Link
                         className="link cta_outline cta_outline__dark hvr-underline-from-left"
-                        href={`${showMoreLink}`}
+                        to={showMoreLink}
                         itemProp="url"
                         target=""
                         onClick={
@@ -104,7 +100,7 @@ class InfoColumn extends Component {
                         dangerouslySetInnerHTML={{
                           __html: intl.formatMessage({ id: "see-more" }),
                         }}
-                      ></a>
+                      ></Link>
                     </p>
                   ) : null}
                 </Col>
@@ -112,7 +108,7 @@ class InfoColumn extends Component {
             </div>
           </div>
         </Container>
-      </div>
+      </DeferredBackground>
     );
   }
 }

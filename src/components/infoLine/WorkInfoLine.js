@@ -5,6 +5,7 @@ import infoIcon from "../../assets/images/info.svg";
 import Tooltip from 'react-bootstrap/Tooltip';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import {FormattedMessage} from 'react-intl';
+import { Link } from "react-router-dom";
 
 class WorkInfoLine extends Component {
     getWorkingTime() {
@@ -54,9 +55,9 @@ class WorkInfoLine extends Component {
                             <p className='info-line__text'>
                                 <FormattedMessage id={this.getWorkingTime().months.inactive}/>
                                 <span style={{marginLeft: '11px'}}>
-                                    <a href="/contact-us">
+                                    <Link to="/contact-us">
                                         <img className="" src={arrowRight} alt=""itemProp="image"/>
-                                    </a>
+                                    </Link>
                                 </span>
                                 <OverlayTrigger
                                     key='top'

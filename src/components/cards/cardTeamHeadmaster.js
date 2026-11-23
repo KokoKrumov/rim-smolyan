@@ -13,22 +13,19 @@ class CardTeamHeadmaster extends Component {
         isMobileScreenV: isMobileScreen(),
     }
 
-    handleResize() {
-        this.setState({
-            isMobileScreenV: isMobileScreen()
-        })
+    handleResize = () => {
+        const isMobileScreenV = isMobileScreen();
+        if (isMobileScreenV !== this.state.isMobileScreenV) {
+            this.setState({ isMobileScreenV });
+        }
     }
 
     componentDidMount() {
-        window.addEventListener('resize', () => {
-            this.handleResize()
-        })
+        window.addEventListener('resize', this.handleResize)
     }
 
     componentWillUnmount() {
-        window.removeEventListener('resize', () => {
-            this.handleResize()
-        })
+        window.removeEventListener('resize', this.handleResize)
     }
 
     handleShowModal = (data, url, user, e) => {
@@ -37,7 +34,7 @@ class CardTeamHeadmaster extends Component {
         //when you open a modal with some of the members in /about-us page
         //then push the nick name in the location href, so an user has ability to copy the path
         //(at this point of time cardTeamMember exist only in /about-us page)
-        this.props.navigate(`/about-us/${this.state.user.nickname}`)
+        this.props.navigate(`/about-us/${this.state.user.nickname}`, { state: { preserveScroll: true } })
     }
 
     render() {
@@ -120,4 +117,3 @@ export default withRouter(withIntl(connect(
         showModal
     }
 )(CardTeamHeadmaster)));
-

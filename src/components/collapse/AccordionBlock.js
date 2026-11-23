@@ -9,6 +9,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import { connect } from "react-redux";
 import { showModal } from "../../actions";
+import { Link } from "react-router-dom";
 
 function AccordionToggle({ children, eventKey, onClick }) {
   const decoratedOnClick = useAccordionButton(eventKey, onClick);
@@ -176,14 +177,14 @@ class AccordionBlock extends Component {
           {block.content.map((project, index) => {
             return (
               <p className="text-block__wrap" key={index}>
-                <a
+                <Link
                   className="links"
                   onClick={(e) => {
                     e.stopPropagation();
                   }}
-                  href={`/administrative/${block.id}/${project.id}`}
+                  to={`/administrative/${block.id}/${project.id}`}
                   dangerouslySetInnerHTML={{ __html: project.content }}
-                ></a>
+                ></Link>
               </p>
             );
           })}
@@ -206,15 +207,15 @@ class AccordionBlock extends Component {
                     __html: project.content,
                   }}
                 />
-                <a
+                <Link
                   className="mt-4 link cta_outline cta_outline__dark hvr-underline-from-left"
                   onClick={(e) => {
                     e.stopPropagation();
                   }}
-                  href={`/administrative/${block.id}/${project.id}`}
+                  to={`/administrative/${block.id}/${project.id}`}
                 >
                   <FormattedMessage id="see-more" />
-                </a>
+                </Link>
               </div>
             );
           })}

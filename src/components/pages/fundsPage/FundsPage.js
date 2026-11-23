@@ -51,7 +51,10 @@ class FundsPage extends Component {
                             </Col>
                             <Col lg={9}>
                                 <Row>
-                                    <PostSummaryList listOfNewsAndEvents={this.state.news}/>
+                                    <PostSummaryList
+                                        listOfNewsAndEvents={this.state.news}
+                                        imageSizes="(min-width: 1200px) 322px, (min-width: 992px) 266px, (min-width: 768px) 672px, (min-width: 576px) 452px, calc(100vw - 48px)"
+                                    />
                                 </Row>
                             </Col>
                         </Row>

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { selectCategories } from "../../../store/selectors";
 import { fetchNews, resetFetchNews } from "../../../actions";
 
 import Col from "react-bootstrap/Col";
@@ -16,6 +17,8 @@ import { isEqual } from "lodash";
 import { withRouter } from "../../../utilities/withRouter";
 
 class NewsPage extends Component {
+  newsRequest = null;
+
   navLinks = [
     {
       href: "/news-and-events",
@@ -52,65 +55,74 @@ class NewsPage extends Component {
 
   fetchArticles(href) {
     this.props.navigate(href);
-    this.setState(
-      {
-        page: 1,
-        news: [],
-        newsError: false,
-      },
-      () => {
-        this.fetchData(
-          href,
-          this.state.page,
-          10,
-          "props",
-          this.props,
-          this.state.categories
-        );
-      }
-    );
   }
 
   fetchData = (slug, page, per_page, listFrom, props, propsCategories) => {
-    if (!this.state.isLoading) {
-      const { slugId, categories } = extractIdAndCategories(
-        slug,
-        listFrom,
-        props,
-        propsCategories
-      );
-      if (slugId == null) {
-        if (categories.length > 0) {
-          console.error(`Category not found: ${slug}`);
-          this.setState({ categories: categories });
-        }
-        return;
+    const { slugId, categories } = extractIdAndCategories(
+      slug,
+      listFrom,
+      props,
+      propsCategories
+    );
+    this.setState({ categories });
+    if (slugId == null) {
+      this.newsRequest = null;
+      if (categories.length > 0) {
+        console.error(`Category not found: ${slug}`);
+        this.setState({ isLoading: false, newsError: true });
       }
-
-      this.setState({ isLoading: true, categories: categories });
-      this.props
-        .fetchNews(slugId, page, per_page)
-        .then((action) => {
-          if (fetchNews.fulfilled.match(action)) {
-            const news = Object.values(action.payload);
-            this.setState((state) => ({
-              currentNews: news,
-              news: page === 1 ? news : [...state.news, ...news],
-            }));
-          }
-          this.setState({ isLoading: false });
-        });
+      return false;
     }
+
+    this.setState({
+      isLoading: true,
+      ...(page === 1 ? { newsError: false } : {}),
+    });
+    const request = this.props.fetchNews(slugId, page, per_page);
+    this.newsRequest = request;
+    request
+      .then((action) => {
+        if (this.newsRequest !== request) return;
+        if (fetchNews.fulfilled.match(action)) {
+          this.setState((state) => ({
+            page,
+            currentNews: action.payload,
+            news: page === 1 ? action.payload : [...state.news, ...action.payload],
+            newsError: false,
+          }));
+        } else {
+          this.setState((state) => ({
+            page: page === 1 ? 0 : Math.min(state.page, page - 1),
+            newsError: true,
+          }));
+        }
+        this.newsRequest = null;
+        this.setState({ isLoading: false });
+      })
+      .catch((error) => {
+        if (this.newsRequest !== request) return;
+        this.newsRequest = null;
+        this.setState((state) => ({
+          isLoading: false,
+          page: page === 1 ? 0 : Math.min(state.page, page - 1),
+          newsError: true,
+        }));
+        console.error("Failed to load news", error);
+      });
+    return true;
   };
 
   //FETCH DATA WHEN SCROLL TO THE BOTTOM
   handleObserver(entities, observer) {
     const { location } = this.props;
     const y = entities[0].boundingClientRect.y;
+    const categories = this.props.categories.length > 0
+      ? this.props.categories
+      : this.state.categories;
     if (
       this.state.prevY > y &&
-      this.state.categories.length > 0 &&
-      !this.state.isLoading
+      !this.state.isLoading &&
+      !this.newsRequest
     ) {
       const curPage = this.state.page + 1;
       this.fetchData(
@@ -119,9 +131,8 @@ class NewsPage extends Component {
         10,
         "props",
         this.props,
-        this.state.categories
+        categories
       );
-      this.setState({ page: curPage });
     }
     this.setState({ prevY: y });
   }
@@ -135,15 +146,11 @@ class NewsPage extends Component {
     // this.setState({listOfNewsAndEvents: this.props.news})
 
     const { location } = this.props;
+    // react can't update when there are changes in storage,
+    // however, the storage contains "categories" from the first load,
+    // so we have to check the storage when component is mounting
     if (this.props.categories.length > 0) {
-      this.fetchData(
-        location.pathname,
-        this.state.page,
-        10,
-        "props",
-        this.props,
-        this.props.categories
-      );
+      this.fetchData(location.pathname, this.state.page, 10, "props", this.props, this.props.categories);
     } else if (
       sessionStorage.getItem("categories") &&
       !isEqual(
@@ -174,46 +181,59 @@ class NewsPage extends Component {
     this.observer.observe(this.loadingRef);
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
+    if (prevProps.location.pathname !== this.props.location.pathname) {
+      this.newsRequest = null;
+      this.setState({ page: 1, news: [], newsError: false, isLoading: false }, () => {
+        const categories = this.props.categories.length > 0
+          ? this.props.categories
+          : this.state.categories;
+        this.fetchData(this.props.location.pathname, 1, 10, "props", this.props, categories);
+      });
+      return;
+    }
     if (
+      prevProps.categories !== this.props.categories &&
       this.props.categories.length > 0 &&
       !isEqual(this.props.categories, this.state.categories)
     ) {
-      const { pathname } = this.props.location;
-      const { slugId } = extractIdAndCategories(
-        pathname,
-        "props",
-        this.props,
-        this.props.categories
-      );
-      const { slugId: currentSlugId } = extractIdAndCategories(
+      const { location } = this.props;
+      const { pathname } = location;
+      const currentCategoryId = extractIdAndCategories(
         pathname,
         "props",
         this.props,
         this.state.categories
-      );
-      if (slugId != null && slugId === currentSlugId) {
+      )?.slugId;
+      const nextCategoryId = extractIdAndCategories(
+        pathname,
+        "props",
+        this.props,
+        this.props.categories
+      )?.slugId;
+
+      if (nextCategoryId != null && currentCategoryId === nextCategoryId) {
         this.setState({ categories: this.props.categories });
       } else {
-        this.fetchData(
-          pathname,
-          1,
-          10,
-          "props",
-          this.props,
-          this.props.categories
-        );
+        this.newsRequest = null;
+        this.setState({ page: 1 }, () => {
+          this.fetchData(
+            pathname,
+            1,
+            10,
+            "props",
+            this.props,
+            this.props.categories
+          );
+        });
       }
     }
 
-    if (this.props.newsError && this.props.newsError !== this.state.newsError) {
-      this.setState({
-        newsError: this.props.newsError,
-      });
-    }
   }
 
   componentWillUnmount() {
+    this.newsRequest = null;
+    this.observer.disconnect();
     document.body.style.overflow = "scroll";
   }
 
@@ -253,6 +273,7 @@ class NewsPage extends Component {
                 <div style={{ minHeight: "1000px" }}>
                   <PostSummaryList
                     listOfNewsAndEvents={this.state.news}
+                    imageSizes="(min-width: 1200px) 322px, (min-width: 992px) 266px, (min-width: 768px) 672px, (min-width: 576px) 452px, calc(100vw - 48px)"
                   />
                   {!this.state.newsError && (
                     <div className="spinner-wrap">
@@ -276,8 +297,7 @@ class NewsPage extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    newsError: state.newsError.newsError,
-    categories: Object.values(state.categories),
+    categories: selectCategories(state),
   };
 };
 

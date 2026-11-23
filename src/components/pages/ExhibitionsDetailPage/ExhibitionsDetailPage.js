@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { selectExhibitionArticle } from "../../../store/selectors";
 import { connect } from "react-redux";
 import { fetchExhibitions, fetchExhibitionArticle } from "../../../actions";
 import Article from "../../Article/Article";
@@ -71,7 +72,7 @@ class ExhibitionsDetailPage extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    exhibitionArticle: Object.values(state.exhibitionArticle),
+    exhibitionArticle: selectExhibitionArticle(state),
     exhibitions: state.exhibitions,
   };
 };

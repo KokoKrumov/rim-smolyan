@@ -26,7 +26,7 @@ class ModalTeamContent extends Component {
             //when we close the modal, then remove the nickname from there
             const location = window.location.pathname;
             let resetLocation = location.replace(`/${this.props.user.nickname}`, '')
-            this.props.navigate(resetLocation)
+            this.props.navigate(resetLocation, { state: { preserveScroll: true } })
         }
     }
 

@@ -1,13 +1,16 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { MemoryRouter, useParams } from 'react-router-dom';
+import userEvent from '@testing-library/user-event';
+import { Link, MemoryRouter, useNavigate, useParams } from 'react-router-dom';
 import AppRoutes from '../AppRoutes';
 
-const { stub } = vi.hoisted(() => ({
+const { stub, mounted } = vi.hoisted(() => ({
+  mounted: vi.fn(),
   // Each page is replaced with a stub that renders its name and the route params it received
   stub: (name) => ({
     default: function StubPage() {
       const params = useParams();
+      React.useEffect(() => { mounted(name); }, []);
       return (
         <div data-testid="page" data-params={JSON.stringify(params)}>
           {name}
@@ -51,7 +54,52 @@ const renderAt = (path) => {
   return screen.findByTestId('page');
 };
 
+function NavigationControls({ next }) {
+  const navigate = useNavigate();
+  return <><Link to={next}>Next</Link><button onClick={() => navigate(-1)}>Back</button></>;
+}
+
 describe('AppRoutes', () => {
+  it.each([
+    ['/news/first', '/news/second'],
+    ['/exhibitions/first', '/exhibitions/second'],
+    ['/main-collections/intro/first', '/main-collections/intro/second'],
+    ['/virtual-collections/detail/icons/first', '/virtual-collections/detail/icons/second'],
+    ['/administrative/3/1', '/administrative/3/2'],
+    ['/news', '/events'],
+  ])('mounts fresh page state when navigating from %s to %s and back', async (first, next) => {
+    mounted.mockClear();
+    const user = userEvent.setup();
+    render(
+      <MemoryRouter initialEntries={[first]}>
+        <AppRoutes />
+        <NavigationControls next={next} />
+      </MemoryRouter>,
+    );
+    await screen.findByTestId('page');
+    expect(mounted).toHaveBeenCalledOnce();
+    await user.click(screen.getByRole('link', { name: 'Next' }));
+    await screen.findByTestId('page');
+    expect(mounted).toHaveBeenCalledTimes(2);
+    await user.click(screen.getByRole('button', { name: 'Back' }));
+    await screen.findByTestId('page');
+    expect(mounted).toHaveBeenCalledTimes(3);
+  });
+
+  it('keeps page state when only query or hash changes', async () => {
+    mounted.mockClear();
+    const user = userEvent.setup();
+    render(
+      <MemoryRouter initialEntries={['/news/story']}>
+        <AppRoutes />
+        <NavigationControls next="/news/story?view=full#content" />
+      </MemoryRouter>,
+    );
+    await screen.findByTestId('page');
+    await user.click(screen.getByRole('link', { name: 'Next' }));
+    expect(mounted).toHaveBeenCalledOnce();
+  });
+
   it.each([
     ['/', 'HomePage', {}],
     ['/funds', 'FundsPage', {}],

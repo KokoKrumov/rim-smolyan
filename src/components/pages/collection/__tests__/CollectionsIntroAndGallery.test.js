@@ -38,7 +38,18 @@ const vase = {
   id: 1,
   slug: 'vase',
   title: { rendered: 'Ancient vase' },
-  _embedded: { 'wp:featuredmedia': [{ source_url: 'https://example.test/vase.jpg', title: 'Vase' }] },
+  _embedded: { 'wp:featuredmedia': [{
+    source_url: 'https://example.test/vase.jpg',
+    title: 'Vase',
+    media_details: {
+      width: 1200,
+      height: 800,
+      sizes: {
+        medium: { source_url: 'https://example.test/vase-300.jpg', width: 300, height: 200 },
+        thumbnail: { source_url: 'https://example.test/vase-square.jpg', width: 150, height: 150 },
+      },
+    },
+  }] },
 };
 
 function mockCollectionResponses({ descriptions = {}, items = {} } = {}) {
@@ -130,7 +141,10 @@ describe('CollectionsIntroAndGallery', () => {
       'href',
       '/main-collections/detail/ethnography/vase'
     );
-    expect(screen.getByAltText('Vase')).toHaveAttribute('src', 'https://example.test/vase.jpg');
+    const image = screen.getByAltText('Vase');
+    expect(image).toHaveAttribute('src', 'https://example.test/vase.jpg');
+    expect(image).toHaveAttribute('srcset', 'https://example.test/vase-300.jpg 300w, https://example.test/vase.jpg 1200w');
+    expect(image.getAttribute('sizes')).toContain('(min-width: 1200px) 250px');
     await user.click(screen.getByRole('tab', { name: 'Introduction' }));
     expect(screen.getByRole('tab', { name: 'Introduction' })).toHaveAttribute('aria-selected', 'true');
   });
@@ -140,10 +154,38 @@ describe('CollectionsIntroAndGallery', () => {
     renderGallery({ path: '/main-collections/intro/ethnography#gallery' });
 
     expect(await screen.findByRole('tab', { name: 'Gallery' })).toHaveAttribute('aria-selected', 'true');
-    expect(await screen.findByRole('link', { name: /Ancient vase/ })).toHaveAttribute(
-      'href',
-      '/main-collections/detail/ethnography/vase'
+    const galleryItem = await screen.findByRole('link', { name: /Ancient vase/ });
+    expect(galleryItem).toHaveAttribute('href', '/main-collections/detail/ethnography/vase');
+    expect(document.getElementById('gallery')).toContainElement(galleryItem);
+    expect(document.getElementById('introduction')).toContainElement(
+      screen.getByRole('heading', { name: 'Collection introduction', hidden: true })
     );
+  });
+
+  it('keeps gallery images without responsive metadata or featured media', async () => {
+    const simpleImage = {
+      ...vase,
+      id: 2,
+      slug: 'plate',
+      title: { rendered: 'Plate' },
+      _embedded: { 'wp:featuredmedia': [{ source_url: 'https://example.test/plate.jpg', title: 'Plate image' }] },
+    };
+    const missingImage = {
+      ...vase,
+      id: 3,
+      slug: 'bowl',
+      title: { rendered: 'Bowl' },
+      _embedded: {},
+    };
+    mockCollectionResponses({ descriptions: { ethnography: [] }, items: { 42: [simpleImage, missingImage] } });
+    renderGallery({ path: '/main-collections/intro/ethnography#gallery' });
+
+    const image = await screen.findByAltText('Plate image');
+    expect(image).toHaveAttribute('src', 'https://example.test/plate.jpg');
+    expect(image).not.toHaveAttribute('srcset');
+    const fallback = (await screen.findByRole('link', { name: /Bowl/ })).querySelector('img');
+    expect(fallback).toHaveAttribute('src', '/images/no-image.png');
+    expect(fallback).not.toHaveAttribute('srcset');
   });
 
   it('shows an empty gallery when only a description exists', async () => {

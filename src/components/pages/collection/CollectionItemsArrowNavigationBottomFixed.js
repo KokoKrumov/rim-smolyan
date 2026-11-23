@@ -4,10 +4,12 @@ import ArrowLeft from "../../../assets/icons/ArrowLeft";
 import { connect } from "react-redux";
 import navigationCollectionItems from "../../../utilities/navigationCollectionItems";
 import { slugSanitize, replaceSlugInPath } from "../../../utilities/browser";
+import { featuredImageProps } from "../../../utilities/featuredImageProps";
 import { useParams, useLocation, Link } from "react-router-dom";
 
 function CollectionItemsArrowNavigationBottomFixed({
   collection,
+  currentItem,
 }) {
   const { type: collectionName } = useParams();
   const location = useLocation();
@@ -32,12 +34,8 @@ function CollectionItemsArrowNavigationBottomFixed({
     replaceSlugInPath(location.pathname, item.slug);
 
   function ItemPreview({ className, item, side, type = "desktop" }) {
-    const noImage =
-      "https://api-staging.museumsmolyan.eu/wp-content/uploads/2024/10/no-image.png";
-    const imageUrl =
-      typeof item?._embedded["wp:featuredmedia"] !== "undefined"
-        ? item?._embedded["wp:featuredmedia"][0]?.source_url
-        : noImage;
+    const noImage = "/images/no-image.png";
+    const media = item?._embedded?.["wp:featuredmedia"]?.[0];
 
     const title = item?.title?.rendered;
     const collectionLength = collection?.length || 0;
@@ -50,7 +48,11 @@ function CollectionItemsArrowNavigationBottomFixed({
       <Link
         className="collection-items-arrow-navigation_link-block"
         to={generateHref(item)}
-        state={{ scrollToImage: true }}
+        state={{
+          scrollToImage: true,
+          keepPreviousItem: true,
+          previousItem: currentItem,
+        }}
       >
         <div
           className={`item-preview item-preview__show show ${side}`}
@@ -66,7 +68,7 @@ function CollectionItemsArrowNavigationBottomFixed({
               <div className="item-preview__image">
                 <img
                   className="img-fluid"
-                  src={imageUrl}
+                  {...(media ? featuredImageProps(media, "110px") : { src: noImage })}
                   alt={item.title.rendered}
                 />
               </div>

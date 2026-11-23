@@ -7,11 +7,15 @@
 
 # testing
 /coverage
+/test-results
+/playwright-report
+/blob-report
 
 # production
 /build
 
 # misc
+.tsbuildinfo
 .DS_Store
 .env
 .prod.env

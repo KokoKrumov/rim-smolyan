@@ -1,5 +1,8 @@
-import { render, screen, within } from '@testing-library/react';
+import { render as renderWithoutRouter, screen, within } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import NewsAndEventsCards from '../NewsAndEventsCards';
+
+const render = ui => renderWithoutRouter(ui, { wrapper: MemoryRouter });
 
 const newsItem = {
   id: 1,
@@ -14,7 +17,14 @@ const eventItem = {
   event_date: '15.03.2024 - 17.03.2024',
   _embedded: {
     'wp:featuredmedia': [
-      { source_url: 'https://example.test/event.jpg' },
+      {
+        source_url: 'https://example.test/event.jpg',
+        media_details: {
+          width: 1200,
+          height: 800,
+          sizes: { medium: { source_url: 'https://example.test/event-600.jpg', width: 600, height: 400 } },
+        },
+      },
       { source_url: 'https://example.test/other.jpg' },
     ],
   },
@@ -71,6 +81,12 @@ describe('NewsAndEventsCards', () => {
     expect(within(eventLink).getByText('март')).toBeInTheDocument();
     expect(within(eventLink).getByText('2024')).toBeInTheDocument();
     expect(within(eventLink).getByAltText('')).toHaveAttribute('src', 'https://example.test/event.jpg');
+    expect(within(eventLink).getByAltText('')).toHaveAttribute('loading', 'lazy');
+    expect(within(eventLink).getByAltText('')).toHaveAttribute('decoding', 'async');
+    expect(within(eventLink).getByAltText('')).toHaveAttribute(
+      'sizes',
+      '(min-width: 1200px) 356px, (min-width: 992px) 296px, (min-width: 768px) 216px, (min-width: 576px) 476px, calc(100vw - 24px)'
+    );
   });
 
   it('omits the date and image when optional event data is absent', () => {
